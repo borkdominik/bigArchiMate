@@ -1,0 +1,21 @@
+archiMateDiagram:
+    id: Demo
+    name: "Demo"
+    nodes:
+      - id: PeterNode
+        element: Peter
+        x: 198
+        y: 187
+        width: 121
+        height: 103.5
+      - id: PaulNode
+        element: Paul
+        x: 660
+        y: 209
+        width: 143
+        height: 111
+    edges:
+      - id: PaulToPeterEdge
+        relation: unknown.PaulToPeter
+        sourceNode: PaulNode
+        targetNode: PeterNode

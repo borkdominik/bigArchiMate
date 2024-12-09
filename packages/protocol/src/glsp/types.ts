@@ -17,6 +17,11 @@ export const TARGET_OBJECT_NODE_TYPE = DefaultTypes.NODE + ':target-object';
 export const TARGET_ATTRIBUTE_MAPPING_EDGE_TYPE = DefaultTypes.EDGE + ':target-attribute-mapping';
 export const ATTRIBUTE_COMPARTMENT_TYPE = DefaultTypes.COMPARTMENT + ':attribute';
 
+// ArchiMate Diagram
+export const ELEMENT_NODE_TYPE = DefaultTypes.NODE + ':element';
+export const RELATION_EDGE_TYPE = DefaultTypes.EDGE + ':relation';
+export const ELEMENT_LABEL_TYPE = DefaultTypes.LABEL + ':element';
+
 // Args
 export const REFERENCE_CONTAINER_TYPE = 'reference-container-type';
 export const REFERENCE_PROPERTY = 'reference-property';

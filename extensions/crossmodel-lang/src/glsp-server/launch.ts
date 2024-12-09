@@ -17,6 +17,7 @@ import { AddressInfo } from 'net';
 import { URI } from 'vscode-uri';
 import { CrossModelLSPServices } from '../integration.js';
 import { CrossModelServices, CrossModelSharedServices } from '../language-server/cross-model-module.js';
+import { ArchiMateDiagramModule } from './archimate-diagram/archimate-diagram-module.js';
 import { MappingDiagramModule } from './mapping-diagram/mapping-diagram-module.js';
 import { SystemDiagramModule } from './system-diagram/system-diagram-module.js';
 
@@ -41,7 +42,8 @@ export function startGLSPServer(services: CrossModelLSPServices, workspaceFolder
    // create server module with our cross model diagram
    const serverModule = new ServerModule()
       .configureDiagramModule(new SystemDiagramModule())
-      .configureDiagramModule(new MappingDiagramModule());
+      .configureDiagramModule(new MappingDiagramModule())
+      .configureDiagramModule(new ArchiMateDiagramModule());
 
    const logger = appContainer.get<LoggerFactory>(LoggerFactory)('CrossModelServer');
    const launcher = appContainer.resolve<SocketServerLauncher>(SocketServerLauncher);

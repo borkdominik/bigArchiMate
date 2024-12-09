@@ -7,7 +7,10 @@ const ModelFileTypeValues = {
    Entity: 'Entity',
    Relationship: 'Relationship',
    Mapping: 'Mapping',
-   SystemDiagram: 'SystemDiagram'
+   SystemDiagram: 'SystemDiagram',
+   Element: 'Element',
+   Relation: 'Relation',
+   ArchiMateDiagram: 'ArchiMateDiagram'
 } as const;
 
 export const ModelFileType = {
@@ -22,6 +25,12 @@ export const ModelFileType = {
             return ModelStructure.SystemDiagram.ICON_CLASS;
          case 'Mapping':
             return ModelStructure.Mapping.ICON_CLASS;
+         case 'Element':
+            return ModelStructure.Element.ICON_CLASS;
+         case 'Relation':
+            return ModelStructure.Relation.ICON_CLASS;
+         case 'ArchiMateDiagram':
+            return ModelStructure.ArchiMateDiagram.ICON_CLASS;
          default:
             return undefined;
       }
@@ -38,6 +47,12 @@ export const ModelFileType = {
             return ModelFileExtensions.Relationship;
          case 'SystemDiagram':
             return ModelFileExtensions.SystemDiagram;
+         case 'Element':
+            return ModelFileExtensions.Element;
+         case 'Relation':
+            return ModelFileExtensions.Relation;
+         case 'ArchiMateDiagram':
+            return ModelFileExtensions.ArchiMateDiagram;
       }
    }
 } as const;
@@ -49,6 +64,9 @@ export const ModelFileExtensions = {
    Relationship: '.relationship.cm',
    Mapping: '.mapping.cm',
    SystemDiagram: '.system-diagram.cm',
+   Element: '.element.cm',
+   Relation: '.relation.cm',
+   ArchiMateDiagram: '.archimate-diagram.cm',
    /* @deprecated Use SystemDiagram instead */
    Diagram: '.diagram.cm',
 
@@ -72,6 +90,18 @@ export const ModelFileExtensions = {
       return uri.endsWith(this.SystemDiagram) || uri.endsWith(this.Diagram);
    },
 
+   isElementFilr(uri: string): boolean {
+      return uri.endsWith(this.Element);
+   },
+
+   isRelationFile(uri: string): boolean {
+      return uri.endsWith(this.Relation);
+   },
+
+   isArchiMateDiagramFile(uri: string): boolean {
+      return uri.endsWith(this.ArchiMateDiagram);
+   },
+
    getName(uri: string): string {
       // since we have file extensions with two '.', we cannot use the default implementation that only works for one '.'
       if (uri.endsWith(this.Entity)) {
@@ -88,6 +118,15 @@ export const ModelFileExtensions = {
       }
       if (uri.endsWith(this.Diagram)) {
          return uri.substring(0, uri.length - this.Diagram.length);
+      }
+      if (uri.endsWith(this.Element)) {
+         return uri.substring(0, uri.length - this.Element.length);
+      }
+      if (uri.endsWith(this.Relation)) {
+         return uri.substring(0, uri.length - this.Relation.length);
+      }
+      if (uri.endsWith(this.ArchiMateDiagram)) {
+         return uri.substring(0, uri.length - this.ArchiMateDiagram.length);
       }
       const lastIndex = uri.lastIndexOf('/');
       const extIndex = uri.lastIndexOf('.');
@@ -106,6 +145,15 @@ export const ModelFileExtensions = {
       }
       if (this.isEntityFile(uri)) {
          return 'Entity';
+      }
+      if (this.isElementFilr(uri)) {
+         return 'Element';
+      }
+      if (this.isRelationFile(uri)) {
+         return 'Relation';
+      }
+      if (this.isArchiMateDiagramFile(uri)) {
+         return 'ArchiMateDiagram';
       }
       if (this.isModelFile(uri)) {
          return 'Generic';
@@ -127,6 +175,12 @@ export const ModelFileExtensions = {
             return ModelStructure.SystemDiagram.ICON_CLASS;
          case 'Mapping':
             return ModelStructure.Mapping.ICON_CLASS;
+         case 'Element':
+            return ModelStructure.Element.ICON_CLASS;
+         case 'Relation':
+            return ModelStructure.Relation.ICON_CLASS;
+         case 'ArchiMateDiagram':
+            return ModelStructure.ArchiMateDiagram.ICON_CLASS;
          default:
             return '';
       }
@@ -144,6 +198,15 @@ export const ModelFileExtensions = {
       }
       if (content.startsWith('mapping')) {
          return 'Mapping';
+      }
+      if (content.startsWith('element')) {
+         return 'Element';
+      }
+      if (content.startsWith('relation')) {
+         return 'Relation';
+      }
+      if (content.startsWith('archiMateDiagram')) {
+         return 'ArchiMateDiagram';
       }
       return undefined;
    },
@@ -181,5 +244,23 @@ export const ModelStructure = {
       FOLDER: 'mappings',
       ICON_CLASS: 'codicon codicon-group-by-ref-type',
       ICON: 'group-by-ref-type'
+   },
+
+   Element: {
+      FOLDER: 'elements',
+      ICON_CLASS: 'codicon codicon-git-commit',
+      ICON: 'git-commit'
+   },
+
+   Relation: {
+      FOLDER: 'relations',
+      ICON_CLASS: 'codicon codicon-git-compare',
+      ICON: 'git-compare'
+   },
+
+   ArchiMateDiagram: {
+      FOLDER: 'archimate-diagrams',
+      ICON_CLASS: 'codicon codicon-type-hierarchy-sub',
+      ICON: 'type-hierarchy-sub'
    }
 };

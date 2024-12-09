@@ -45,6 +45,12 @@ const INITIAL_MAPPING_CONTENT = `mapping:
       entity: 
       mappings: `;
 
+const INITIAL_ARCHIMATE_DIAGRAM_CONTENT = `archiMateDiagram:
+   id: \${id}
+   name: \${name}
+   nodes:
+   edges:`;
+
 const TEMPLATE_CATEGORY = 'New Element';
 
 const NEW_ELEMENT_TEMPLATES: NewElementTemplate[] = [
@@ -79,6 +85,14 @@ const NEW_ELEMENT_TEMPLATES: NewElementTemplate[] = [
       category: TEMPLATE_CATEGORY,
       iconClass: ModelStructure.Mapping.ICON_CLASS,
       content: name => INITIAL_MAPPING_CONTENT.replace(/\$\{name\}/gi, quote(name)).replace(/\$\{id\}/gi, toId(name))
+   },
+   {
+      id: 'crossbreeze.new.archimate-diagram',
+      label: 'ArchiMateDiagram',
+      fileExtension: ModelFileExtensions.ArchiMateDiagram,
+      category: TEMPLATE_CATEGORY,
+      iconClass: ModelStructure.ArchiMateDiagram.ICON_CLASS,
+      content: name => INITIAL_ARCHIMATE_DIAGRAM_CONTENT.replace(/\$\{name\}/gi, quote(name)).replace(/\$\{id\}/gi, toId(name))
    }
 ];
 

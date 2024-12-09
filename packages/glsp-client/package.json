@@ -50,6 +50,9 @@
     },
     {
       "frontend": "lib/browser/mapping-diagram/mapping-diagram-frontend-module"
+    },
+    {
+      "frontend": "lib/browser/archimate-diagram/archimate-diagram-frontend-module"
     }
   ]
 }

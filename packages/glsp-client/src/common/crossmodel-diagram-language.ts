@@ -21,3 +21,10 @@ export const MappingDiagramLanguage: GLSPDiagramLanguage = {
    diagramType: 'mapping-diagram',
    fileExtensions: [ModelFileExtensions.Mapping]
 };
+
+export const ArchiMateDiagramLanguage: GLSPDiagramLanguage = {
+   contributionId: CrossModelLanguageContributionId,
+   label: 'ArchiMate Diagram',
+   diagramType: 'archimate-diagram',
+   fileExtensions: [ModelFileExtensions.ArchiMateDiagram]
+};

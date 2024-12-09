@@ -12,8 +12,10 @@ import {
    isAttributeMappingSource,
    isAttributeMappingTarget,
    isCustomProperty,
+   isElement,
    isEntityAttribute,
    isJoinCondition,
+   isRelation,
    isSourceObject,
    isSourceObjectDependency,
    JoinCondition,
@@ -57,6 +59,8 @@ export class CrossModelSerializer implements Serializer<CrossModelRoot> {
       }
       if (
          key === 'id' ||
+         (isElement(parent) && key === 'type') ||
+         (isRelation(parent) && key === 'type') ||
          propertyOf(parent, key, isCustomProperty, 'name') ||
          propertyOf(parent, key, isSourceObject, 'join') ||
          this.isValidReference(parent, key, value)

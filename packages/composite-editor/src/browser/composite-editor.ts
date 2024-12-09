@@ -4,8 +4,8 @@
 
 import { CrossModelWidgetOptions } from '@crossbreeze/core/lib/browser';
 import { FormEditorOpenHandler, FormEditorWidget } from '@crossbreeze/form-client/lib/browser';
-import { MappingDiagramManager, SystemDiagramManager } from '@crossbreeze/glsp-client/lib/browser/';
-import { MappingDiagramLanguage, SystemDiagramLanguage } from '@crossbreeze/glsp-client/lib/common';
+import { ArchiMateDiagramManager, MappingDiagramManager, SystemDiagramManager } from '@crossbreeze/glsp-client/lib/browser/';
+import { ArchiMateDiagramLanguage, MappingDiagramLanguage, SystemDiagramLanguage } from '@crossbreeze/glsp-client/lib/common';
 import { codiconCSSString, ModelFileType } from '@crossbreeze/protocol';
 import { FocusStateChangedAction, toTypeGuard } from '@eclipse-glsp/client';
 import { GLSPDiagramWidget, GLSPDiagramWidgetContainer, GLSPDiagramWidgetOptions } from '@eclipse-glsp/theia-integration';
@@ -180,6 +180,12 @@ export class CompositeEditor extends BaseWidget implements Saveable, Navigatable
             return this.createSystemDiagramWidget();
          case 'Mapping':
             return this.createMappingDiagramWidget();
+         case 'Element':
+            return this.getFormWidget();
+         case 'Relation':
+            return this.getFormWidget();
+         case 'ArchiMateDiagram':
+            return this.createArchiMateDiagramWidget();
       }
    }
 
@@ -213,6 +219,13 @@ export class CompositeEditor extends BaseWidget implements Saveable, Navigatable
    protected async createMappingDiagramWidget(): Promise<Widget> {
       const diagramOptions = this.createDiagramWidgetOptions(MappingDiagramLanguage, 'Mapping Diagram');
       const widget = await this.widgetManager.getOrCreateWidget<GLSPDiagramWidget>(MappingDiagramManager.ID, diagramOptions);
+      widget.title.closable = false;
+      return widget;
+   }
+
+   protected async createArchiMateDiagramWidget(): Promise<Widget> {
+      const diagramOptions = this.createDiagramWidgetOptions(ArchiMateDiagramLanguage, 'ArchiMate Diagram');
+      const widget = await this.widgetManager.getOrCreateWidget<GLSPDiagramWidget>(ArchiMateDiagramManager.ID, diagramOptions);
       widget.title.closable = false;
       return widget;
    }

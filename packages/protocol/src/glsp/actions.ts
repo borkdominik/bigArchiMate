@@ -55,6 +55,58 @@ export namespace AddEntityOperation {
    }
 }
 
+export interface DropElementOperation extends Operation {
+   kind: typeof DropElementOperation.KIND;
+
+   /** Insert position for dropped elements. */
+   position: Point;
+   /** List of file paths that contain elements to be added.  */
+   filePaths: string[];
+}
+
+export namespace DropElementOperation {
+   export const KIND = 'dropElementOperation';
+
+   export function is(object: any): object is DropElementOperation {
+      return Operation.hasKind(object, KIND) && hasArrayProp(object, 'filePaths') && hasObjectProp(object, 'position');
+   }
+
+   export function create(filePaths: string[], position: Point): DropElementOperation {
+      return {
+         kind: KIND,
+         isOperation: true,
+         filePaths,
+         position
+      };
+   }
+}
+
+export interface AddElementOperation extends Operation {
+   kind: typeof AddElementOperation.KIND;
+
+   /** Insert position for dropped element. */
+   position: Point;
+   /** Name of the element to be added. */
+   elementName: string;
+}
+
+export namespace AddElementOperation {
+   export const KIND = 'addElementOperation';
+
+   export function is(object: any): object is AddElementOperation {
+      return Operation.hasKind(object, KIND) && hasStringProp(object, 'elementName') && hasObjectProp(object, 'position');
+   }
+
+   export function create(elementName: string, position: Point): AddElementOperation {
+      return {
+         kind: KIND,
+         isOperation: true,
+         elementName,
+         position
+      };
+   }
+}
+
 export interface AddSourceObjectOperation extends Operation {
    kind: typeof AddSourceObjectOperation.KIND;
 
