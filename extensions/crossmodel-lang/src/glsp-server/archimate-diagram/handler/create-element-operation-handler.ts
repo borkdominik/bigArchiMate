@@ -67,7 +67,7 @@ export class ArchiMateDiagramCreateElementOperationHandler extends JsonCreateNod
 
       // create element, serialize and re-read to ensure everything is up to date and linked properly
       const elementRoot: CrossModelRoot = { $type: 'CrossModelRoot' };
-      const id = this.modelState.idProvider.findNextId(Element, 'NewElement');
+      const id = this.modelState.idProvider.findNextId(Element, `New${elementType}`);
 
       const element: Element = {
          $type: 'Element',
@@ -79,7 +79,7 @@ export class ArchiMateDiagramCreateElementOperationHandler extends JsonCreateNod
       };
 
       const dirName = UriUtils.joinPath(UriUtils.dirname(URI.parse(this.modelState.semanticUri)), '..', 'elements');
-      const targetUri = UriUtils.joinPath(dirName, element.name + '.element.cm');
+      const targetUri = UriUtils.joinPath(dirName, id + '.element.cm');
       const uri = Utils.findNewUri(targetUri);
 
       elementRoot.element = element;

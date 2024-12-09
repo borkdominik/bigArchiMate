@@ -21,9 +21,12 @@ import {
    SystemDiagram,
    TargetObject,
    TargetObjectAttribute,
+   isArchiMateDiagram,
    isCrossModelRoot,
+   isElement,
    isEntity,
    isMapping,
+   isRelation,
    isRelationship,
    isSystemDiagram
 } from '../generated/ast.js';
@@ -173,7 +176,15 @@ export type DocumentContent = LangiumDocument | AstNode;
 export type TypeGuard<T> = (item: unknown) => item is T;
 
 export function isSemanticRoot(element: unknown): element is SemanticRoot {
-   return isEntity(element) || isMapping(element) || isRelationship(element) || isSystemDiagram(element);
+   return (
+      isEntity(element) ||
+      isMapping(element) ||
+      isRelationship(element) ||
+      isSystemDiagram(element) ||
+      isElement(element) ||
+      isRelation(element) ||
+      isArchiMateDiagram(element)
+   );
 }
 
 export function findSemanticRoot(input: DocumentContent): SemanticRoot | undefined;
