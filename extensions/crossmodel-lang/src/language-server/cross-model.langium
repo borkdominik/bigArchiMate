@@ -6,7 +6,6 @@ import 'system-diagram'
 import 'mapping'
 import 'element'
 import 'relation'
-import 'archimate-model'
 import 'archimate-diagram'
 
 entry CrossModelRoot:
@@ -16,5 +15,4 @@ entry CrossModelRoot:
     mapping=Mapping |
     element=Element |
     relation=Relation |
-    archiMateModel=ArchiMateModel |
     archiMateDiagram=ArchiMateDiagram)?;

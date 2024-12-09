@@ -103,7 +103,6 @@ export type CrossModelKeywordNames =
     | "WorkPackage"
     | "apply"
     | "archiMateDiagram"
-    | "archiMateModel"
     | "attribute"
     | "attributes"
     | "child"
@@ -203,21 +202,6 @@ export function isArchiMateDiagram(item: unknown): item is ArchiMateDiagram {
     return reflection.isInstance(item, ArchiMateDiagram);
 }
 
-export interface ArchiMateModel extends AstNode {
-    readonly $container: CrossModelRoot;
-    readonly $type: 'ArchiMateModel';
-    edges: Array<Relation>;
-    id: string;
-    name: string;
-    nodes: Array<Element>;
-}
-
-export const ArchiMateModel = 'ArchiMateModel';
-
-export function isArchiMateModel(item: unknown): item is ArchiMateModel {
-    return reflection.isInstance(item, ArchiMateModel);
-}
-
 export interface Attribute extends AstNode {
     readonly $type: 'Attribute' | 'EntityAttribute' | 'EntityNodeAttribute' | 'SourceObjectAttribute' | 'TargetObjectAttribute';
     datatype: string;
@@ -288,7 +272,6 @@ export function isBinaryExpression(item: unknown): item is BinaryExpression {
 export interface CrossModelRoot extends AstNode {
     readonly $type: 'CrossModelRoot';
     archiMateDiagram?: ArchiMateDiagram;
-    archiMateModel?: ArchiMateModel;
     element?: Element;
     entity?: Entity;
     mapping?: Mapping;
@@ -317,7 +300,7 @@ export function isCustomProperty(item: unknown): item is CustomProperty {
 }
 
 export interface Element extends AstNode {
-    readonly $container: ArchiMateModel | CrossModelRoot;
+    readonly $container: CrossModelRoot;
     readonly $type: 'Element';
     customProperties: Array<CustomProperty>;
     description?: string;
@@ -428,7 +411,7 @@ export function isNumberLiteral(item: unknown): item is NumberLiteral {
 }
 
 export interface Relation extends AstNode {
-    readonly $container: ArchiMateModel | CrossModelRoot;
+    readonly $container: CrossModelRoot;
     readonly $type: 'Relation';
     customProperties: Array<CustomProperty>;
     description?: string;
@@ -648,7 +631,6 @@ export function isEntityNodeAttribute(item: unknown): item is EntityNodeAttribut
 
 export type CrossModelAstType = {
     ArchiMateDiagram: ArchiMateDiagram
-    ArchiMateModel: ArchiMateModel
     Attribute: Attribute
     AttributeMapping: AttributeMapping
     AttributeMappingSource: AttributeMappingSource
@@ -686,7 +668,7 @@ export type CrossModelAstType = {
 export class CrossModelAstReflection extends AbstractAstReflection {
 
     getAllTypes(): string[] {
-        return [ArchiMateDiagram, ArchiMateModel, Attribute, AttributeMapping, AttributeMappingSource, AttributeMappingTarget, BinaryExpression, BooleanExpression, CrossModelRoot, CustomProperty, Element, ElementNode, Entity, EntityAttribute, EntityNode, EntityNodeAttribute, JoinCondition, Mapping, NumberLiteral, Relation, RelationEdge, Relationship, RelationshipAttribute, RelationshipEdge, SourceObject, SourceObjectAttribute, SourceObjectAttributeReference, SourceObjectCondition, SourceObjectDependency, StringLiteral, SystemDiagram, TargetObject, TargetObjectAttribute, WithCustomProperties];
+        return [ArchiMateDiagram, Attribute, AttributeMapping, AttributeMappingSource, AttributeMappingTarget, BinaryExpression, BooleanExpression, CrossModelRoot, CustomProperty, Element, ElementNode, Entity, EntityAttribute, EntityNode, EntityNodeAttribute, JoinCondition, Mapping, NumberLiteral, Relation, RelationEdge, Relationship, RelationshipAttribute, RelationshipEdge, SourceObject, SourceObjectAttribute, SourceObjectAttributeReference, SourceObjectCondition, SourceObjectDependency, StringLiteral, SystemDiagram, TargetObject, TargetObjectAttribute, WithCustomProperties];
     }
 
     protected override computeIsSubtype(subtype: string, supertype: string): boolean {
@@ -776,17 +758,6 @@ export class CrossModelAstReflection extends AbstractAstReflection {
                     ]
                 };
             }
-            case ArchiMateModel: {
-                return {
-                    name: ArchiMateModel,
-                    properties: [
-                        { name: 'edges', defaultValue: [] },
-                        { name: 'id' },
-                        { name: 'name' },
-                        { name: 'nodes', defaultValue: [] }
-                    ]
-                };
-            }
             case Attribute: {
                 return {
                     name: Attribute,
@@ -840,7 +811,6 @@ export class CrossModelAstReflection extends AbstractAstReflection {
                     name: CrossModelRoot,
                     properties: [
                         { name: 'archiMateDiagram' },
-                        { name: 'archiMateModel' },
                         { name: 'element' },
                         { name: 'entity' },
                         { name: 'mapping' },
