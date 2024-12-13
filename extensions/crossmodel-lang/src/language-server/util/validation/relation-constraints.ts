@@ -4,7 +4,7 @@
 
 import { ElementType, RelationType } from '../../generated/ast.js';
 
-export const relationKeys: Record<string, RelationType> = {
+export const relationTypes: Record<string, RelationType> = {
    a: 'Access',
    c: 'Composition',
    f: 'Flow',

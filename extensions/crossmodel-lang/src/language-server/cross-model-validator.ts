@@ -16,6 +16,7 @@ import {
    isRelationship,
    isSystemDiagram,
    Mapping,
+   Relation,
    Relationship,
    RelationshipEdge,
    SourceObject,
@@ -26,6 +27,7 @@ import {
    TargetObjectAttribute
 } from './generated/ast.js';
 import { findDocument, getOwner, isSemanticRoot } from './util/ast-util.js';
+import { RelationValidator } from './util/validation/relation-validator.js';
 
 export namespace CrossModelIssueCodes {
    export const FilenameNotMatching = 'filename-not-matching';
@@ -59,7 +61,8 @@ export function registerValidationChecks(services: CrossModelServices): void {
       AttributeMapping: validator.checkAttributeMapping,
       TargetObject: validator.checkTargetObject,
       SourceObjectDependency: validator.checkSourceObjectDependency,
-      SourceObjectCondition: validator.checkSourceObjectCondition
+      SourceObjectCondition: validator.checkSourceObjectCondition,
+      Relation: validator.checkRelation
    };
    registry.register(checks, validator);
 }
@@ -175,6 +178,12 @@ export class CrossModelValidator {
       }
       if (edge.targetNode?.ref?.entity?.ref?.$type !== edge.relationship?.ref?.child?.ref?.$type) {
          accept('error', 'Target must match type of child.', { node: edge, property: 'targetNode' });
+      }
+   }
+
+   checkRelation(relation: Relation, accept: ValidationAcceptor): void {
+      if (!RelationValidator.isValid(relation.source.ref?.type, relation.target.ref?.type, relation.type)) {
+         accept('error', 'Invalid relation.', { node: relation, property: 'type' });
       }
    }
 
