@@ -22,7 +22,6 @@ RelationType returns string:
     'Composition' |
     'Flow' |
     'Influence' |
-    'Junction' |
     'Realization' |
     'Serving' |
     'Specialization' |

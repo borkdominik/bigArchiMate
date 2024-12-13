@@ -1,13 +1,13 @@
 /********************************************************************************
  * Copyright (c) 2023 CrossBreeze.
  ********************************************************************************/
-import { ELEMENT_LABEL_TYPE, ELEMENT_NODE_TYPE, RELATION_EDGE_TYPE } from '@crossbreeze/protocol';
+import { ARCHIMATE_EDGE_TYPE_MAP, ARCHIMATE_NODE_TYPE_MAP, ELEMENT_LABEL_TYPE } from '@crossbreeze/protocol';
 import {
-   ContainerConfiguration,
-   GLabelView,
    configureDefaultModelElements,
    configureModelElement,
+   ContainerConfiguration,
    editLabelFeature,
+   GLabelView,
    gridModule,
    initializeDiagramContainer,
    withEditLabelFeature
@@ -51,7 +51,14 @@ const archiMateDiagramModule = createCrossModelDiagramModule((bind, unbind, isBo
    // The glsp-server can send a request to render a specific view given a type, e.g. node:element
    // The model class holds the client-side model and properties
    // The view class shows how to draw the svg element given the properties of the model class
-   configureModelElement(context, ELEMENT_NODE_TYPE, ElementNode, ElementNodeView, { enable: [withEditLabelFeature] });
-   configureModelElement(context, RELATION_EDGE_TYPE, RelationEdge, RelationEdgeView);
+
+   Object.values(ARCHIMATE_NODE_TYPE_MAP).forEach(nodeType => {
+      configureModelElement(context, nodeType, ElementNode, ElementNodeView, { enable: [withEditLabelFeature] });
+   });
+
+   Object.values(ARCHIMATE_EDGE_TYPE_MAP).forEach(edgeType => {
+      configureModelElement(context, edgeType, RelationEdge, RelationEdgeView);
+   });
+
    configureModelElement(context, ELEMENT_LABEL_TYPE, GEditableLabel, GLabelView, { enable: [editLabelFeature] });
 });

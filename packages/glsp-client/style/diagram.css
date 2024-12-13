@@ -6,6 +6,14 @@
    --sprotty-background: var(--theia-layout-color3);
    --sprotty-edge: var(--theia-editor-foreground);
    --sprotty-border: var(--theia-editor-foreground);
+
+   /* Taken from https://www.archimatetool.com/downloads/colour-schemes/ArchiMate%20Standard%20-%203.2.prefs */
+   --bg-application-layer: #b5ffff;
+   --bg-business-layer: #ffffb5;
+   --bg-implementation-and-migration-layer: #ffe0e0;
+   --bg-motivation-layer: #ccccff;
+   --bg-strategy-layer: #f5deaa;
+   --bg-technology-layer: #c9e7b7;
 }
 
 /* Standard sprotty */
@@ -48,7 +56,6 @@
 
 /* Nodes */
 .sprotty-node:not(.selected, .mouseover) {
-   fill: #fbfaff;
    stroke: #a8a1c5;
    stroke-width: 2px;
    /* filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.8)); */
@@ -56,7 +63,6 @@
 
 .source-object .sprotty-node:not(.selected, .mouseover) {
    stroke: #a1c5a5;
-   fill: #fefffe;
 }
 
 .header-label {
@@ -89,7 +95,6 @@
 .attribute-compartment.selected,
 .sprotty-node.mouseover:not(.selected),
 .sprotty-node.selected {
-   fill: #f3faff;
    stroke-width: 2px;
 }
 
@@ -137,9 +142,6 @@
    color: var(--theia-activityBarBadge-foreground);
 } */
 
-.tool-palette .group-header {
-   display: none;
-}
 .command-palette {
    animation: none;
 }
@@ -184,4 +186,69 @@
 .error-extension {
    position: absolute;
    width: 100%;
+}
+
+.bg-application-layer > rect,
+.bg-application-layer > path {
+   fill: var(--bg-application-layer);
+}
+
+.bg-business-layer > rect,
+.bg-business-layer > path {
+   fill: var(--bg-business-layer);
+}
+
+.bg-implementation-and-migration-layer > rect,
+.bg-implementation-and-migration-layer > path {
+   fill: var(--bg-implementation-and-migration-layer);
+}
+
+.bg-motivation-layer > rect,
+.bg-motivation-layer > path {
+   fill: var(--bg-motivation-layer);
+}
+
+.bg-strategy-layer > rect,
+.bg-strategy-layer > path {
+   fill: var(--bg-strategy-layer);
+}
+
+.bg-technology-layer > rect,
+.bg-technology-layer > path {
+   fill: var(--bg-technology-layer);
+}
+
+.tool-palette .group-header {
+   height: 24px;
+   padding: 4px;
+}
+
+.tool-palette .palette-body #application-layer-group > .group-header,
+.tool-palette .palette-body #application-layer-group .tool-button {
+   color: var(--bg-application-layer);
+}
+
+.tool-palette .palette-body #business-layer-group > .group-header,
+.tool-palette .palette-body #business-layer-group .tool-button {
+   color: var(--bg-business-layer);
+}
+
+.tool-palette .palette-body #implementation-and-migration-layer-group > .group-header,
+.tool-palette .palette-body #implementation-and-migration-layer-group .tool-button {
+   color: var(--bg-implementation-and-migration-layer);
+}
+
+.tool-palette .palette-body #motivation-layer-group > .group-header,
+.tool-palette .palette-body #motivation-layer-group .tool-button {
+   color: var(--bg-motivation-layer);
+}
+
+.tool-palette .palette-body #strategy-layer-group > .group-header,
+.tool-palette .palette-body #strategy-layer-group .tool-button {
+   color: var(--bg-strategy-layer);
+}
+
+.tool-palette .palette-body #technology-layer-group > .group-header,
+.tool-palette .palette-body #technology-layer-group .tool-button {
+   color: var(--bg-technology-layer);
 }

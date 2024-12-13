@@ -1,7 +1,7 @@
 /********************************************************************************
  * Copyright (c) 2023 CrossBreeze.
  ********************************************************************************/
-import { ELEMENT_NODE_TYPE, RELATION_EDGE_TYPE } from '@crossbreeze/protocol';
+import { ARCHIMATE_EDGE_TYPE_MAP, ARCHIMATE_NODE_TYPE_MAP } from '@crossbreeze/protocol';
 import { DiagramConfiguration, ServerLayoutKind, getDefaultMapping } from '@eclipse-glsp/server';
 import { injectable } from 'inversify';
 
@@ -14,22 +14,24 @@ export class ArchiMateDiagramConfiguration implements DiagramConfiguration {
    typeMapping = getDefaultMapping();
 
    shapeTypeHints = [
-      {
-         elementTypeId: ELEMENT_NODE_TYPE,
+      ...Object.values(ARCHIMATE_NODE_TYPE_MAP).map(nodeType => ({
+         elementTypeId: nodeType,
          deletable: true,
          reparentable: false,
          repositionable: true,
          resizable: true
-      }
+      }))
    ];
+
    edgeTypeHints = [
-      {
-         elementTypeId: RELATION_EDGE_TYPE,
+      ...Object.values(ARCHIMATE_EDGE_TYPE_MAP).map(edgeType => ({
+         elementTypeId: edgeType,
          deletable: true,
          repositionable: false,
          routable: false,
-         sourceElementTypeIds: [ELEMENT_NODE_TYPE],
-         targetElementTypeIds: [ELEMENT_NODE_TYPE]
-      }
+         sourceElementTypeIds: [...Object.values(ARCHIMATE_NODE_TYPE_MAP)],
+         targetElementTypeIds: [...Object.values(ARCHIMATE_NODE_TYPE_MAP)],
+         dynamic: true
+      }))
    ];
 }

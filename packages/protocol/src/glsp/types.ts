@@ -18,9 +18,82 @@ export const TARGET_ATTRIBUTE_MAPPING_EDGE_TYPE = DefaultTypes.EDGE + ':target-a
 export const ATTRIBUTE_COMPARTMENT_TYPE = DefaultTypes.COMPARTMENT + ':attribute';
 
 // ArchiMate Diagram
-export const ELEMENT_NODE_TYPE = DefaultTypes.NODE + ':element';
-export const RELATION_EDGE_TYPE = DefaultTypes.EDGE + ':relation';
 export const ELEMENT_LABEL_TYPE = DefaultTypes.LABEL + ':element';
+
+export const ARCHIMATE_NODE_TYPE_MAP = {
+   ApplicationCollaboration: DefaultTypes.NODE + ':application-collaboration',
+   ApplicationComponent: DefaultTypes.NODE + ':application-component',
+   ApplicationEvent: DefaultTypes.NODE + ':application-event',
+   ApplicationFunction: DefaultTypes.NODE + ':application-function',
+   ApplicationInterface: DefaultTypes.NODE + ':application-interface',
+   ApplicationInteraction: DefaultTypes.NODE + ':application-interaction',
+   ApplicationProcess: DefaultTypes.NODE + ':application-process',
+   ApplicationService: DefaultTypes.NODE + ':application-service',
+   Artifact: DefaultTypes.NODE + ':artifact',
+   Assessment: DefaultTypes.NODE + ':assessment',
+   BusinessActor: DefaultTypes.NODE + ':business-actor',
+   BusinessCollaboration: DefaultTypes.NODE + ':business-collaboration',
+   BusinessEvent: DefaultTypes.NODE + ':business-event',
+   BusinessFunction: DefaultTypes.NODE + ':business-function',
+   BusinessInteraction: DefaultTypes.NODE + ':business-interaction',
+   BusinessInterface: DefaultTypes.NODE + ':business-interface',
+   BusinessObject: DefaultTypes.NODE + ':business-object',
+   BusinessProcess: DefaultTypes.NODE + ':business-process',
+   BusinessRole: DefaultTypes.NODE + ':business-role',
+   BusinessService: DefaultTypes.NODE + ':business-service',
+   Capability: DefaultTypes.NODE + ':capability',
+   Constraint: DefaultTypes.NODE + ':constraint',
+   CommunicationNetwork: DefaultTypes.NODE + ':communication-network',
+   Contract: DefaultTypes.NODE + ':contract',
+   CourseOfAction: DefaultTypes.NODE + ':course-of-action',
+   DataObject: DefaultTypes.NODE + ':data-object',
+   Deliverable: DefaultTypes.NODE + ':deliverable',
+   Device: DefaultTypes.NODE + ':device',
+   DistributionNetwork: DefaultTypes.NODE + ':distribution-network',
+   Driver: DefaultTypes.NODE + ':driver',
+   Equipment: DefaultTypes.NODE + ':equipment',
+   Facility: DefaultTypes.NODE + ':facility',
+   Gap: DefaultTypes.NODE + ':gap',
+   Goal: DefaultTypes.NODE + ':goal',
+   ImplementationEvent: DefaultTypes.NODE + ':implementation-event',
+   Material: DefaultTypes.NODE + ':material',
+   Meaning: DefaultTypes.NODE + ':meaning',
+   Node: DefaultTypes.NODE + ':node',
+   Outcome: DefaultTypes.NODE + ':outcome',
+   Path: DefaultTypes.NODE + ':path',
+   Plateau: DefaultTypes.NODE + ':plateau',
+   Principle: DefaultTypes.NODE + ':principle',
+   Product: DefaultTypes.NODE + ':product',
+   Requirement: DefaultTypes.NODE + ':requirement',
+   Representation: DefaultTypes.NODE + ':representation',
+   Resource: DefaultTypes.NODE + ':resource',
+   Stakeholder: DefaultTypes.NODE + ':stakeholder',
+   SystemSoftware: DefaultTypes.NODE + ':system-software',
+   TechnologyCollaboration: DefaultTypes.NODE + ':technology-collaboration',
+   TechnologyEvent: DefaultTypes.NODE + ':technology-event',
+   TechnologyFunction: DefaultTypes.NODE + ':technology-function',
+   TechnologyInteraction: DefaultTypes.NODE + ':technology-interaction',
+   TechnologyInterface: DefaultTypes.NODE + ':technology-interface',
+   TechnologyProcess: DefaultTypes.NODE + ':technology-process',
+   TechnologyService: DefaultTypes.NODE + ':technology-service',
+   Value: DefaultTypes.NODE + ':value',
+   ValueStream: DefaultTypes.NODE + ':value-stream',
+   WorkPackage: DefaultTypes.NODE + ':work-package'
+};
+
+export const ARCHIMATE_EDGE_TYPE_MAP = {
+   Access: DefaultTypes.EDGE + ':access',
+   Aggregation: DefaultTypes.EDGE + ':aggregation',
+   Assignment: DefaultTypes.EDGE + ':assignment',
+   Association: DefaultTypes.EDGE + ':association',
+   Composition: DefaultTypes.EDGE + ':composition',
+   Flow: DefaultTypes.EDGE + ':flow',
+   Influence: DefaultTypes.EDGE + ':influence',
+   Realization: DefaultTypes.EDGE + ':realization',
+   Serving: DefaultTypes.EDGE + ':serving',
+   Specialization: DefaultTypes.EDGE + ':specialization',
+   Triggering: DefaultTypes.EDGE + ':triggering'
+};
 
 // Args
 export const REFERENCE_CONTAINER_TYPE = 'reference-container-type';

@@ -4,7 +4,7 @@
 
 import { ElementType, RelationType } from '../../generated/ast.js';
 
-export const relationTypes: Record<string, RelationType> = {
+export const relationKeyToRelationType: Record<string, RelationType> = {
    a: 'Access',
    c: 'Composition',
    f: 'Flow',
@@ -22,8 +22,8 @@ type ConceptType = ElementType | 'Grouping' | 'Junction' | 'Location' | 'Relatio
 
 /**
  * Valid relations between ArchiMate elements.
- * Adapted from XML to JSON from https://github.com/archimatetool/archi/blob/master/com.archimatetool.model/model/relationships.xml
- * See also https://devlog.archimatetool.com/2017/08/20/archimate-relationships/
+ * - Adapted from XML to JSON from https://github.com/archimatetool/archi/blob/master/com.archimatetool.model/model/relationships.xml.
+ * - See also https://devlog.archimatetool.com/2017/08/20/archimate-relationships/.
  * ArchiMate version: 3.2.
  */
 export const relationConstraints: Record<ConceptType, Record<ConceptType, string>> = {

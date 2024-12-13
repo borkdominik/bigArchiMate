@@ -1,7 +1,7 @@
 /********************************************************************************
  * Copyright (c) 2024 CrossBreeze.
  ********************************************************************************/
-import { ELEMENT_NODE_TYPE } from '@crossbreeze/protocol';
+import { ARCHIMATE_NODE_TYPE_MAP } from '@crossbreeze/protocol';
 import {
    Action,
    ActionDispatcher,
@@ -22,7 +22,7 @@ import { ArchiMateModelState } from '../model/archimate-model-state.js';
 @injectable()
 export class ArchiMateDiagramCreateElementOperationHandler extends JsonCreateNodeOperationHandler {
    override label = 'Create Element';
-   elementTypeIds = [ELEMENT_NODE_TYPE];
+   elementTypeIds = [...Object.values(ARCHIMATE_NODE_TYPE_MAP)];
 
    @inject(ModelState) protected declare modelState: ArchiMateModelState;
    @inject(ActionDispatcher) protected actionDispatcher!: ActionDispatcher;

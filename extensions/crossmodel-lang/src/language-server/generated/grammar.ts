@@ -94,12 +94,24 @@ export const CrossModelGrammar = (): Grammar => loadedCrossModelGrammar ?? (load
           },
           {
             "$type": "Assignment",
-            "feature": "archiMateDiagram",
+            "feature": "archiMateModel",
             "operator": "=",
             "terminal": {
               "$type": "RuleCall",
               "rule": {
                 "$ref": "#/rules@36"
+              },
+              "arguments": []
+            }
+          },
+          {
+            "$type": "Assignment",
+            "feature": "archiMateDiagram",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "rule": {
+                "$ref": "#/rules@37"
               },
               "arguments": []
             }
@@ -3181,10 +3193,6 @@ export const CrossModelGrammar = (): Grammar => loadedCrossModelGrammar ?? (load
           },
           {
             "$type": "Keyword",
-            "value": "Junction"
-          },
-          {
-            "$type": "Keyword",
             "value": "Realization"
           },
           {
@@ -3198,6 +3206,177 @@ export const CrossModelGrammar = (): Grammar => loadedCrossModelGrammar ?? (load
           {
             "$type": "Keyword",
             "value": "Triggering"
+          }
+        ]
+      },
+      "definesHiddenTokens": false,
+      "entry": false,
+      "fragment": false,
+      "hiddenTokens": [],
+      "parameters": [],
+      "wildcard": false
+    },
+    {
+      "$type": "ParserRule",
+      "name": "ArchiMateModel",
+      "definition": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Keyword",
+            "value": "archiMateModel"
+          },
+          {
+            "$type": "Keyword",
+            "value": ":"
+          },
+          {
+            "$type": "RuleCall",
+            "rule": {
+              "$ref": "#/rules@9"
+            },
+            "arguments": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "id"
+          },
+          {
+            "$type": "Keyword",
+            "value": ":"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "id",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "rule": {
+                "$ref": "#/rules@14"
+              },
+              "arguments": []
+            }
+          },
+          {
+            "$type": "Keyword",
+            "value": "name"
+          },
+          {
+            "$type": "Keyword",
+            "value": ":"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "name",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "rule": {
+                "$ref": "#/rules@6"
+              },
+              "arguments": []
+            }
+          },
+          {
+            "$type": "Keyword",
+            "value": "nodes"
+          },
+          {
+            "$type": "Keyword",
+            "value": ":"
+          },
+          {
+            "$type": "RuleCall",
+            "rule": {
+              "$ref": "#/rules@9"
+            },
+            "arguments": []
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "RuleCall",
+                "rule": {
+                  "$ref": "#/rules@11"
+                },
+                "arguments": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "nodes",
+                "operator": "+=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "rule": {
+                    "$ref": "#/rules@32"
+                  },
+                  "arguments": []
+                }
+              }
+            ],
+            "cardinality": "+"
+          },
+          {
+            "$type": "RuleCall",
+            "rule": {
+              "$ref": "#/rules@10"
+            },
+            "arguments": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "edges"
+          },
+          {
+            "$type": "Keyword",
+            "value": ":"
+          },
+          {
+            "$type": "RuleCall",
+            "rule": {
+              "$ref": "#/rules@9"
+            },
+            "arguments": []
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "RuleCall",
+                "rule": {
+                  "$ref": "#/rules@11"
+                },
+                "arguments": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "edges",
+                "operator": "+=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "rule": {
+                    "$ref": "#/rules@34"
+                  },
+                  "arguments": []
+                }
+              }
+            ],
+            "cardinality": "+"
+          },
+          {
+            "$type": "RuleCall",
+            "rule": {
+              "$ref": "#/rules@10"
+            },
+            "arguments": []
+          },
+          {
+            "$type": "RuleCall",
+            "rule": {
+              "$ref": "#/rules@10"
+            },
+            "arguments": []
           }
         ]
       },
@@ -3313,7 +3492,7 @@ export const CrossModelGrammar = (): Grammar => loadedCrossModelGrammar ?? (load
                         "terminal": {
                           "$type": "RuleCall",
                           "rule": {
-                            "$ref": "#/rules@37"
+                            "$ref": "#/rules@38"
                           },
                           "arguments": []
                         }
@@ -3366,7 +3545,7 @@ export const CrossModelGrammar = (): Grammar => loadedCrossModelGrammar ?? (load
                         "terminal": {
                           "$type": "RuleCall",
                           "rule": {
-                            "$ref": "#/rules@38"
+                            "$ref": "#/rules@39"
                           },
                           "arguments": []
                         }
@@ -3681,7 +3860,7 @@ export const CrossModelGrammar = (): Grammar => loadedCrossModelGrammar ?? (load
             "terminal": {
               "$type": "CrossReference",
               "type": {
-                "$ref": "#/rules@37"
+                "$ref": "#/rules@38"
               },
               "terminal": {
                 "$type": "RuleCall",
@@ -3708,7 +3887,7 @@ export const CrossModelGrammar = (): Grammar => loadedCrossModelGrammar ?? (load
             "terminal": {
               "$type": "CrossReference",
               "type": {
-                "$ref": "#/rules@37"
+                "$ref": "#/rules@38"
               },
               "terminal": {
                 "$type": "RuleCall",

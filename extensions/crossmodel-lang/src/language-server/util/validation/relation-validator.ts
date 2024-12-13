@@ -2,7 +2,7 @@
  * Copyright (c) 2024 CrossBreeze.
  ********************************************************************************/
 import { ElementType, RelationType } from '../../generated/ast.js';
-import { relationConstraints, relationTypes } from './relation-constraints.js';
+import { relationConstraints, relationKeyToRelationType } from './relation-constraints.js';
 
 export namespace RelationValidator {
    /**
@@ -20,7 +20,7 @@ export namespace RelationValidator {
       const validRelationKeys = relationConstraints[sourceElementType][targetElementType];
 
       for (let i = 0; i < validRelationKeys.length; i++) {
-         if (relationTypes[validRelationKeys[i]] === relationType) {
+         if (relationKeyToRelationType[validRelationKeys[i]] === relationType) {
             // Relation is valid
             return true;
          }

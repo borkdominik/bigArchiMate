@@ -72,7 +72,6 @@ export type CrossModelKeywordNames =
     | "Goal"
     | "ImplementationEvent"
     | "Influence"
-    | "Junction"
     | "Material"
     | "Meaning"
     | "Node"
@@ -103,6 +102,7 @@ export type CrossModelKeywordNames =
     | "WorkPackage"
     | "apply"
     | "archiMateDiagram"
+    | "archiMateModel"
     | "attribute"
     | "attributes"
     | "child"
@@ -172,10 +172,10 @@ export function isJoinType(item: unknown): item is JoinType {
     return item === 'from' || item === 'inner-join' || item === 'cross-join' || item === 'left-join' || item === 'apply';
 }
 
-export type RelationType = 'Access' | 'Aggregation' | 'Assignment' | 'Association' | 'Composition' | 'Flow' | 'Influence' | 'Junction' | 'Realization' | 'Serving' | 'Specialization' | 'Triggering';
+export type RelationType = 'Access' | 'Aggregation' | 'Assignment' | 'Association' | 'Composition' | 'Flow' | 'Influence' | 'Realization' | 'Serving' | 'Specialization' | 'Triggering';
 
 export function isRelationType(item: unknown): item is RelationType {
-    return item === 'Access' || item === 'Aggregation' || item === 'Association' || item === 'Assignment' || item === 'Composition' || item === 'Flow' || item === 'Influence' || item === 'Junction' || item === 'Realization' || item === 'Serving' || item === 'Specialization' || item === 'Triggering';
+    return item === 'Access' || item === 'Aggregation' || item === 'Association' || item === 'Assignment' || item === 'Composition' || item === 'Flow' || item === 'Influence' || item === 'Realization' || item === 'Serving' || item === 'Specialization' || item === 'Triggering';
 }
 
 export type SourceObjectCondition = JoinCondition;
@@ -200,6 +200,21 @@ export const ArchiMateDiagram = 'ArchiMateDiagram';
 
 export function isArchiMateDiagram(item: unknown): item is ArchiMateDiagram {
     return reflection.isInstance(item, ArchiMateDiagram);
+}
+
+export interface ArchiMateModel extends AstNode {
+    readonly $container: CrossModelRoot;
+    readonly $type: 'ArchiMateModel';
+    edges: Array<Relation>;
+    id: string;
+    name: string;
+    nodes: Array<Element>;
+}
+
+export const ArchiMateModel = 'ArchiMateModel';
+
+export function isArchiMateModel(item: unknown): item is ArchiMateModel {
+    return reflection.isInstance(item, ArchiMateModel);
 }
 
 export interface Attribute extends AstNode {
@@ -272,6 +287,7 @@ export function isBinaryExpression(item: unknown): item is BinaryExpression {
 export interface CrossModelRoot extends AstNode {
     readonly $type: 'CrossModelRoot';
     archiMateDiagram?: ArchiMateDiagram;
+    archiMateModel?: ArchiMateModel;
     element?: Element;
     entity?: Entity;
     mapping?: Mapping;
@@ -300,7 +316,7 @@ export function isCustomProperty(item: unknown): item is CustomProperty {
 }
 
 export interface Element extends AstNode {
-    readonly $container: CrossModelRoot;
+    readonly $container: ArchiMateModel | CrossModelRoot;
     readonly $type: 'Element';
     customProperties: Array<CustomProperty>;
     description?: string;
@@ -411,7 +427,7 @@ export function isNumberLiteral(item: unknown): item is NumberLiteral {
 }
 
 export interface Relation extends AstNode {
-    readonly $container: CrossModelRoot;
+    readonly $container: ArchiMateModel | CrossModelRoot;
     readonly $type: 'Relation';
     customProperties: Array<CustomProperty>;
     description?: string;
@@ -631,6 +647,7 @@ export function isEntityNodeAttribute(item: unknown): item is EntityNodeAttribut
 
 export type CrossModelAstType = {
     ArchiMateDiagram: ArchiMateDiagram
+    ArchiMateModel: ArchiMateModel
     Attribute: Attribute
     AttributeMapping: AttributeMapping
     AttributeMappingSource: AttributeMappingSource
@@ -668,7 +685,7 @@ export type CrossModelAstType = {
 export class CrossModelAstReflection extends AbstractAstReflection {
 
     getAllTypes(): string[] {
-        return [ArchiMateDiagram, Attribute, AttributeMapping, AttributeMappingSource, AttributeMappingTarget, BinaryExpression, BooleanExpression, CrossModelRoot, CustomProperty, Element, ElementNode, Entity, EntityAttribute, EntityNode, EntityNodeAttribute, JoinCondition, Mapping, NumberLiteral, Relation, RelationEdge, Relationship, RelationshipAttribute, RelationshipEdge, SourceObject, SourceObjectAttribute, SourceObjectAttributeReference, SourceObjectCondition, SourceObjectDependency, StringLiteral, SystemDiagram, TargetObject, TargetObjectAttribute, WithCustomProperties];
+        return [ArchiMateDiagram, ArchiMateModel, Attribute, AttributeMapping, AttributeMappingSource, AttributeMappingTarget, BinaryExpression, BooleanExpression, CrossModelRoot, CustomProperty, Element, ElementNode, Entity, EntityAttribute, EntityNode, EntityNodeAttribute, JoinCondition, Mapping, NumberLiteral, Relation, RelationEdge, Relationship, RelationshipAttribute, RelationshipEdge, SourceObject, SourceObjectAttribute, SourceObjectAttributeReference, SourceObjectCondition, SourceObjectDependency, StringLiteral, SystemDiagram, TargetObject, TargetObjectAttribute, WithCustomProperties];
     }
 
     protected override computeIsSubtype(subtype: string, supertype: string): boolean {
@@ -758,6 +775,17 @@ export class CrossModelAstReflection extends AbstractAstReflection {
                     ]
                 };
             }
+            case ArchiMateModel: {
+                return {
+                    name: ArchiMateModel,
+                    properties: [
+                        { name: 'edges', defaultValue: [] },
+                        { name: 'id' },
+                        { name: 'name' },
+                        { name: 'nodes', defaultValue: [] }
+                    ]
+                };
+            }
             case Attribute: {
                 return {
                     name: Attribute,
@@ -811,6 +839,7 @@ export class CrossModelAstReflection extends AbstractAstReflection {
                     name: CrossModelRoot,
                     properties: [
                         { name: 'archiMateDiagram' },
+                        { name: 'archiMateModel' },
                         { name: 'element' },
                         { name: 'entity' },
                         { name: 'mapping' },

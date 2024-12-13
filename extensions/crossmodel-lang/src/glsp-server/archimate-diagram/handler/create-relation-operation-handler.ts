@@ -2,7 +2,7 @@
  * Copyright (c) 2023 CrossBreeze.
  ********************************************************************************/
 
-import { RELATION_EDGE_TYPE } from '@crossbreeze/protocol';
+import { ARCHIMATE_EDGE_TYPE_MAP } from '@crossbreeze/protocol';
 import {
    ActionDispatcher,
    Command,
@@ -21,7 +21,7 @@ import { ArchiMateModelState } from '../model/archimate-model-state.js';
 @injectable()
 export class ArchiMateDiagramCreateRelationOperationHandler extends JsonCreateEdgeOperationHandler {
    override label = 'Relation';
-   elementTypeIds = [RELATION_EDGE_TYPE];
+   elementTypeIds = [...Object.values(ARCHIMATE_EDGE_TYPE_MAP)];
 
    @inject(ModelState) protected override modelState!: ArchiMateModelState;
    @inject(ActionDispatcher) protected actionDispatcher!: ActionDispatcher;
