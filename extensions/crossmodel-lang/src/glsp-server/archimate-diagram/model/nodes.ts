@@ -33,7 +33,7 @@ export class GElementNodeBuilder extends GNodeBuilder<GElementNode> {
       const elementLayer = elementMetadataMap[elementType].layer;
 
       this.id(index.createId(node));
-      this.type(ARCHIMATE_NODE_TYPE_MAP[elementType]);
+      this.type(ARCHIMATE_NODE_TYPE_MAP.get(elementType));
 
       // Get the reference that the DiagramNode holds to the Element in the .langium file.
       const elementRef = node.element?.ref;

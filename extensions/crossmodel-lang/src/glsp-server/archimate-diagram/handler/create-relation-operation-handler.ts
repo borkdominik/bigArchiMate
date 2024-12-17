@@ -21,7 +21,7 @@ import { ArchiMateModelState } from '../model/archimate-model-state.js';
 @injectable()
 export class ArchiMateDiagramCreateRelationOperationHandler extends JsonCreateEdgeOperationHandler {
    override label = 'Relation';
-   elementTypeIds = [...Object.values(ARCHIMATE_EDGE_TYPE_MAP)];
+   elementTypeIds = [...ARCHIMATE_EDGE_TYPE_MAP.values()];
 
    @inject(ModelState) protected override modelState!: ArchiMateModelState;
    @inject(ActionDispatcher) protected actionDispatcher!: ActionDispatcher;

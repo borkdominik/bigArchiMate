@@ -3,6 +3,7 @@
  ********************************************************************************/
 
 import { Args, DefaultTypes } from '@eclipse-glsp/protocol';
+import { ReversibleMap } from '../util';
 
 // System Diagram
 export const ENTITY_NODE_TYPE = DefaultTypes.NODE + ':entity';
@@ -20,7 +21,10 @@ export const ATTRIBUTE_COMPARTMENT_TYPE = DefaultTypes.COMPARTMENT + ':attribute
 // ArchiMate Diagram
 export const ELEMENT_LABEL_TYPE = DefaultTypes.LABEL + ':element';
 
-export const ARCHIMATE_NODE_TYPE_MAP = {
+/**
+ * A reversible map of ArchiMate element types to GLSP node types.
+ */
+export const ARCHIMATE_NODE_TYPE_MAP = new ReversibleMap({
    ApplicationCollaboration: DefaultTypes.NODE + ':application-collaboration',
    ApplicationComponent: DefaultTypes.NODE + ':application-component',
    ApplicationEvent: DefaultTypes.NODE + ':application-event',
@@ -79,9 +83,12 @@ export const ARCHIMATE_NODE_TYPE_MAP = {
    Value: DefaultTypes.NODE + ':value',
    ValueStream: DefaultTypes.NODE + ':value-stream',
    WorkPackage: DefaultTypes.NODE + ':work-package'
-};
+});
 
-export const ARCHIMATE_EDGE_TYPE_MAP = {
+/**
+ * A reversible map of ArchiMate relation types to GLSP edge types.
+ */
+export const ARCHIMATE_EDGE_TYPE_MAP = new ReversibleMap({
    Access: DefaultTypes.EDGE + ':access',
    Aggregation: DefaultTypes.EDGE + ':aggregation',
    Assignment: DefaultTypes.EDGE + ':assignment',
@@ -93,7 +100,7 @@ export const ARCHIMATE_EDGE_TYPE_MAP = {
    Serving: DefaultTypes.EDGE + ':serving',
    Specialization: DefaultTypes.EDGE + ':specialization',
    Triggering: DefaultTypes.EDGE + ':triggering'
-};
+});
 
 // Args
 export const REFERENCE_CONTAINER_TYPE = 'reference-container-type';

@@ -22,7 +22,7 @@ import { ArchiMateModelState } from '../model/archimate-model-state.js';
 @injectable()
 export class ArchiMateDiagramCreateElementOperationHandler extends JsonCreateNodeOperationHandler {
    override label = 'Create Element';
-   elementTypeIds = [...Object.values(ARCHIMATE_NODE_TYPE_MAP)];
+   elementTypeIds = [...ARCHIMATE_NODE_TYPE_MAP.values()];
 
    @inject(ModelState) protected declare modelState: ArchiMateModelState;
    @inject(ActionDispatcher) protected actionDispatcher!: ActionDispatcher;

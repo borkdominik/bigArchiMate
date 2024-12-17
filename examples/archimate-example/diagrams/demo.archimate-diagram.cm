@@ -4,18 +4,34 @@ archiMateDiagram:
     nodes:
       - id: PeterNode
         element: Peter
-        x: 198
-        y: 187
+        x: 165
+        y: 110
         width: 121
         height: 103.5
       - id: PaulNode
         element: Paul
-        x: 660
-        y: 209
+        x: 462
+        y: 110
         width: 143
         height: 111
+      - id: ApplicationProcessNode
+        element: NewApplicationProcess
+        x: 154
+        y: 308
+        width: 144.27603149414062
+        height: 30
+      - id: ArtifactNode
+        element: NewArtifact
+        x: 418
+        y: 363
+        width: 75.27603149414062
+        height: 30
     edges:
       - id: PaulToPeterEdge
         relation: unknown.PaulToPeter
         sourceNode: PaulNode
         targetNode: PeterNode
+      - id: PaulToNewArtifactEdge
+        relation: unknown.PaulToNewArtifact
+        sourceNode: PaulNode
+        targetNode: ArtifactNode

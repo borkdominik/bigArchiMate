@@ -2,9 +2,13 @@
  * Copyright (c) 2024 CrossBreeze.
  ********************************************************************************/
 
+import { ReversibleMap } from '@crossbreeze/protocol';
 import { ElementType, RelationType } from '../../generated/ast.js';
 
-export const relationKeyToRelationType: Record<string, RelationType> = {
+/**
+ * A reversible map between relation keys and relation types.
+ */
+export const relationKeyMap = new ReversibleMap<string, RelationType>({
    a: 'Access',
    c: 'Composition',
    f: 'Flow',
@@ -16,7 +20,7 @@ export const relationKeyToRelationType: Record<string, RelationType> = {
    s: 'Specialization',
    t: 'Triggering',
    v: 'Serving'
-};
+});
 
 type ConceptType = ElementType | 'Grouping' | 'Junction' | 'Location' | 'Relationship';
 

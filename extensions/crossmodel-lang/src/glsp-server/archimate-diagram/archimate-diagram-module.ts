@@ -2,6 +2,7 @@
  * Copyright (c) 2023 CrossBreeze.
  ********************************************************************************/
 import {
+   ActionHandlerConstructor,
    BindingTarget,
    ContextActionsProvider,
    DiagramConfiguration,
@@ -13,6 +14,7 @@ import {
    ModelSubmissionHandler,
    MultiBinding,
    OperationHandlerConstructor,
+   RequestCheckEdgeActionHandler,
    SourceModelStorage,
    ToolPaletteItemProvider,
    bindAsService
@@ -31,6 +33,7 @@ import { ArchiMateDiagramCreateElementOperationHandler } from './handler/create-
 import { ArchiMateDiagramCreateRelationOperationHandler } from './handler/create-relation-operation-handler.js';
 import { ArchiMateDiagramDeleteOperationHandler } from './handler/delete-operation-handler.js';
 import { ArchiMateDiagramDropElementOperationHandler } from './handler/drop-element-operation-handler.js';
+import { ArchiMateDiagramValidateRelationActionHandler } from './handler/validate-relation-action-handler.js';
 import { ArchiMateDiagramGModelFactory } from './model/archimate-diagram-gmodel-factory.js';
 import { ArchiMateModelIndex } from './model/archimate-model-index.js';
 import { ArchiMateModelState } from './model/archimate-model-state.js';
@@ -69,6 +72,11 @@ export class ArchiMateDiagramModule extends DiagramModule {
    protected override configureContextActionProviders(binding: MultiBinding<ContextActionsProvider>): void {
       super.configureContextActionProviders(binding);
       binding.add(ArchiMateDiagramAddElementActionProvider);
+   }
+
+   protected override configureActionHandlers(binding: InstanceMultiBinding<ActionHandlerConstructor>): void {
+      super.configureActionHandlers(binding);
+      binding.rebind(RequestCheckEdgeActionHandler, ArchiMateDiagramValidateRelationActionHandler);
    }
 
    protected override bindGModelIndex(): BindingTarget<GModelIndex> {

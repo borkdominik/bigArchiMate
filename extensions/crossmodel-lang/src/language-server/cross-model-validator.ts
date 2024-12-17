@@ -182,7 +182,7 @@ export class CrossModelValidator {
    }
 
    checkRelation(relation: Relation, accept: ValidationAcceptor): void {
-      if (!RelationValidator.isValid(relation.source.ref?.type, relation.target.ref?.type, relation.type)) {
+      if (!RelationValidator.isValidTarget(relation.type, relation.source.ref?.type, relation.target.ref?.type)) {
          accept('error', 'Invalid relation.', { node: relation, property: 'type' });
       }
    }

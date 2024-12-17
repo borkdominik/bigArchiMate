@@ -52,11 +52,11 @@ const archiMateDiagramModule = createCrossModelDiagramModule((bind, unbind, isBo
    // The model class holds the client-side model and properties
    // The view class shows how to draw the svg element given the properties of the model class
 
-   Object.values(ARCHIMATE_NODE_TYPE_MAP).forEach(nodeType => {
+   ARCHIMATE_NODE_TYPE_MAP.values().forEach(nodeType => {
       configureModelElement(context, nodeType, ElementNode, ElementNodeView, { enable: [withEditLabelFeature] });
    });
 
-   Object.values(ARCHIMATE_EDGE_TYPE_MAP).forEach(edgeType => {
+   ARCHIMATE_EDGE_TYPE_MAP.values().forEach(edgeType => {
       configureModelElement(context, edgeType, RelationEdge, RelationEdgeView);
    });
 

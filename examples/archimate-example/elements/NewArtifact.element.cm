@@ -1,0 +1,4 @@
+element:
+    id: NewArtifact
+    name: "Artifact"
+    type: Artifact

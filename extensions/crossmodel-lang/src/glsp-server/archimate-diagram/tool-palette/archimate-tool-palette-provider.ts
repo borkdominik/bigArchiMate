@@ -56,7 +56,7 @@ const getElementPaletteItem = (elementType: ElementType, groupSortString: string
       sortString: `${groupSortString}-${elementMetadata.specificationSection}`,
       label: elementMetadata.label,
       icon: elementMetadata.icon,
-      actions: [TriggerNodeCreationAction.create(ARCHIMATE_NODE_TYPE_MAP[elementType], { args: { type: 'create', elementType } })]
+      actions: [TriggerNodeCreationAction.create(ARCHIMATE_NODE_TYPE_MAP.get(elementType), { args: { type: 'create', elementType } })]
    };
 };
 
@@ -73,7 +73,7 @@ const getRelationPaletteItem = (relationType: RelationType, groupSortString: str
       sortString: `${groupSortString}-${relationMetadata.specificationSection}`,
       label: `${relationMetadata.label} Relationship`,
       icon: relationMetadata.icon,
-      actions: [TriggerEdgeCreationAction.create(ARCHIMATE_EDGE_TYPE_MAP[relationType], { args: { type: 'create', relationType } })]
+      actions: [TriggerEdgeCreationAction.create(ARCHIMATE_EDGE_TYPE_MAP.get(relationType), { args: { type: 'create', relationType } })]
    };
 };
 

@@ -24,13 +24,13 @@ export class ArchiMateDiagramConfiguration implements DiagramConfiguration {
    ];
 
    edgeTypeHints = [
-      ...Object.values(ARCHIMATE_EDGE_TYPE_MAP).map(edgeType => ({
+      ...ARCHIMATE_EDGE_TYPE_MAP.values().map(edgeType => ({
          elementTypeId: edgeType,
          deletable: true,
          repositionable: false,
          routable: false,
-         sourceElementTypeIds: [...Object.values(ARCHIMATE_NODE_TYPE_MAP)],
-         targetElementTypeIds: [...Object.values(ARCHIMATE_NODE_TYPE_MAP)],
+         sourceElementTypeIds: [...ARCHIMATE_NODE_TYPE_MAP.values()],
+         targetElementTypeIds: [...ARCHIMATE_NODE_TYPE_MAP.values()],
          dynamic: true
       }))
    ];

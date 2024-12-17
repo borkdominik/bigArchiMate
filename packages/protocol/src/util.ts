@@ -66,3 +66,36 @@ export function findNextUnique<T>(suggestion: string, existing: T[], nameGetter:
    }
    return name;
 }
+
+export class ReversibleMap<K extends string, V extends string> {
+   private forwardMap: Record<K, V>;
+   private reverseMap: Record<V, K>;
+
+   constructor(map: Record<K, V>) {
+      this.forwardMap = map;
+      this.reverseMap = Object.keys(map).reduce(
+         (acc, key) => {
+            const value = map[key as K];
+            acc[value] = key as K;
+            return acc;
+         },
+         {} as Record<V, K>
+      );
+   }
+
+   get(key: K): V {
+      return this.forwardMap[key];
+   }
+
+   getReverse(value: V): K {
+      return this.reverseMap[value];
+   }
+
+   keys(): K[] {
+      return Object.keys(this.forwardMap) as K[];
+   }
+
+   values(): V[] {
+      return Object.values(this.forwardMap) as V[];
+   }
+}

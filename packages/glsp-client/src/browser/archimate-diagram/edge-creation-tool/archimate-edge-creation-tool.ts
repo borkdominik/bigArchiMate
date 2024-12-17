@@ -3,33 +3,13 @@
  ********************************************************************************/
 
 import {
-   Action,
-   Connectable,
-   CreateEdgeOperation,
-   CursorCSS,
-   Disposable,
-   DragAwareMouseListener,
    EdgeCreationTool,
-   FeedbackEmitter,
-   GEdge,
-   GLSPActionDispatcher,
+   EdgeCreationToolMouseListener,
    GModelElement,
-   HoverFeedbackAction,
-   ITypeHintProvider,
-   ModifyCSSFeedbackAction,
-   Point,
-   TriggerEdgeCreationAction,
-   cursorFeedbackAction,
-   findParentByFeature,
-   isConnectable
+   isConnectable,
+   RequestCheckEdgeAction
 } from '@eclipse-glsp/client';
-import {
-   DrawFeedbackEdgeAction,
-   RemoveFeedbackEdgeAction
-} from '@eclipse-glsp/client/lib/features/tools/edge-creation/dangling-edge-feedback';
 import { injectable } from '@theia/core/shared/inversify';
-
-const CSS_EDGE_CREATION = 'edge-creation';
 
 @injectable()
 export class ArchiMateEdgeCreationTool extends EdgeCreationTool {
@@ -44,183 +24,32 @@ export class ArchiMateEdgeCreationTool extends EdgeCreationTool {
    }
 }
 
-export interface ConnectionContext {
-   element?: GModelElement & Connectable;
-   canConnect?: boolean;
-}
-
-export interface DragConnectionContext {
-   element: GModelElement & Connectable;
-   dragStart: Point;
-}
-
-export class ArchiMateEdgeCreationToolMouseListener extends DragAwareMouseListener implements Disposable {
-   protected source?: string;
-   protected target?: string;
-   protected proxyEdge: GEdge;
-
-   protected dragContext?: DragConnectionContext;
-   protected mouseMoveFeedback: FeedbackEmitter;
-   protected sourceFeedback: FeedbackEmitter;
-   protected feedbackEdgeFeedback: FeedbackEmitter;
-
-   constructor(
-      protected triggerAction: TriggerEdgeCreationAction,
-      protected actionDispatcher: GLSPActionDispatcher,
-      protected typeHintProvider: ITypeHintProvider,
-      protected tool: EdgeCreationTool
-   ) {
-      super();
-      this.proxyEdge = new GEdge();
-      this.proxyEdge.type = triggerAction.elementTypeId;
-      this.feedbackEdgeFeedback = tool.createFeedbackEmitter();
-      this.mouseMoveFeedback = tool.createFeedbackEmitter();
-      this.sourceFeedback = tool.createFeedbackEmitter();
-   }
-
-   protected isSourceSelected(): boolean {
-      return this.source !== undefined;
-   }
-
-   protected isTargetSelected(): boolean {
-      return this.target !== undefined;
-   }
-
-   override mouseDown(target: GModelElement, event: MouseEvent): Action[] {
-      const result = super.mouseDown(target, event);
-      if (event.button === 0 && !this.isSourceSelected()) {
-         // update the current target
-         const context = this.calculateContext(target, event);
-         if (context.element && context.canConnect) {
-            this.dragContext = { element: context.element, dragStart: { x: event.clientX, y: event.clientY } };
-         }
+export class ArchiMateEdgeCreationToolMouseListener extends EdgeCreationToolMouseListener {
+   protected override canConnect(element: GModelElement | undefined, role: 'source' | 'target'): boolean {
+      if (!element || !isConnectable(element) || !element.canConnect(this.proxyEdge, role)) {
+         return false;
       }
-      return result;
-   }
-
-   override mouseMove(target: GModelElement, event: MouseEvent): Action[] {
-      const result = super.mouseMove(target, event);
-      if (this.isMouseDrag && this.dragContext && !this.isSourceSelected()) {
-         const dragDistance = Point.maxDistance(this.dragContext.dragStart, { x: event.clientX, y: event.clientY });
-         if (dragDistance > 3) {
-            // assign source if possible
-            this.source = this.dragContext.element.id;
-            this.feedbackEdgeFeedback
-               .add(
-                  DrawFeedbackEdgeAction.create({ elementTypeId: this.triggerAction.elementTypeId, sourceId: this.source }),
-                  RemoveFeedbackEdgeAction.create()
-               )
-               .submit();
-
-            this.dragContext = undefined;
-         }
+      if (!this.isDynamic(this.proxyEdge.type)) {
+         return true;
       }
-      this.updateFeedback(target, event);
-      return result;
-   }
+      const sourceElement = this.source ?? element;
+      const targetElement = this.source ? element : undefined;
 
-   override draggingMouseUp(target: GModelElement, event: MouseEvent): Action[] {
-      const result = super.draggingMouseUp(target, event);
-      if (this.isSourceSelected()) {
-         const context = this.calculateContext(target, event);
-         if (context.element && context.canConnect) {
-            this.target = context.element.id;
-            result.push(
-               CreateEdgeOperation.create({
-                  elementTypeId: this.triggerAction.elementTypeId,
-                  sourceElementId: this.source!,
-                  targetElementId: this.target,
-                  args: this.triggerAction.args
-               })
-            );
-         }
-      }
-      this.dispose();
-      this.updateFeedback(target, event);
-      return result;
-   }
-
-   override nonDraggingMouseUp(element: GModelElement, event: MouseEvent): Action[] {
-      this.dispose();
-      this.updateFeedback(element, event);
-      return [];
-   }
-
-   protected canConnect(element: GModelElement | undefined, role: 'source' | 'target'): boolean {
-      return (
-         !!element &&
-         !!isConnectable(element) &&
-         element.canConnect(this.proxyEdge, role) &&
-         (role !== 'target' || this.source !== element?.id)
-      );
-   }
-
-   protected updateFeedback(target: GModelElement, event: MouseEvent): void {
-      const context = this.calculateContext(target, event);
-
-      // source element feedback
-      if (this.isSourceSelected()) {
-         this.sourceFeedback
-            .add(
-               HoverFeedbackAction.create({ mouseoverElement: this.source!, mouseIsOver: true }),
-               HoverFeedbackAction.create({ mouseoverElement: this.source!, mouseIsOver: false })
-            )
-            .submit();
-      }
-
-      // cursor feedback
-      if (!context.element || context.element?.id === this.source) {
-         // by default we want to use the edge creation CSS when the tool is active
-         this.registerFeedback(
-            [ModifyCSSFeedbackAction.create({ add: [CSS_EDGE_CREATION] })],
-            [ModifyCSSFeedbackAction.create({ remove: [CSS_EDGE_CREATION] })]
-         );
-         return;
-      }
-
-      if (!context.canConnect) {
-         this.registerFeedback([cursorFeedbackAction(CursorCSS.OPERATION_NOT_ALLOWED)], [cursorFeedbackAction()]);
-         return;
-      }
-
-      const cursorCss = this.isSourceSelected() ? CursorCSS.EDGE_CREATION_TARGET : CursorCSS.EDGE_CREATION_SOURCE;
-      this.registerFeedback(
-         [cursorFeedbackAction(cursorCss), HoverFeedbackAction.create({ mouseoverElement: context.element.id, mouseIsOver: true })],
-         [cursorFeedbackAction(), HoverFeedbackAction.create({ mouseoverElement: context.element.id, mouseIsOver: false })]
-      );
-   }
-
-   protected registerFeedback(feedbackActions: Action[], cleanupActions?: Action[]): void {
-      this.mouseMoveFeedback.dispose();
-      feedbackActions.forEach(action => this.mouseMoveFeedback.add(action));
-      if (cleanupActions) {
-         this.mouseMoveFeedback.add(undefined, cleanupActions);
-      }
-      this.mouseMoveFeedback.submit();
-   }
-
-   protected calculateContext(target: GModelElement, event: MouseEvent, previousContext?: ConnectionContext): ConnectionContext {
-      const context: ConnectionContext = {};
-      context.element = findParentByFeature(target, isConnectable);
-      if (previousContext && previousContext.element === context.element) {
-         return previousContext;
-      }
-      if (!this.isSourceSelected()) {
-         context.canConnect = this.canConnect(context.element, 'source');
-      } else if (!this.isTargetSelected()) {
-         context.canConnect = this.canConnect(context.element, 'target');
-      } else {
-         context.canConnect = false;
-      }
-      return context;
-   }
-
-   override dispose(): void {
-      super.dispose();
-      this.source = undefined;
-      this.target = undefined;
-      this.feedbackEdgeFeedback.dispose();
-      this.mouseMoveFeedback.dispose();
-      this.sourceFeedback.dispose();
+      this.pendingDynamicCheck = true;
+      // Request server edge check
+      this.actionDispatcher
+         .request(RequestCheckEdgeAction.create({ edgeType: this.proxyEdge.type, sourceElement, targetElement }))
+         .then(result => {
+            console.log('result: ', result);
+            if (this.pendingDynamicCheck) {
+               this.allowedTarget = result.isValid;
+               this.actionDispatcher.dispatch(this.updateEdgeFeedback());
+               this.pendingDynamicCheck = false;
+            }
+         })
+         .catch(err => console.error('Dynamic edge check failed with: ', err));
+      // Temporarily mark the target as invalid while we wait for the server response,
+      // so a fast-clicking user doesn't get a chance to create the edge in the meantime.
+      return false;
    }
 }
