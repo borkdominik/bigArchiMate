@@ -61,6 +61,15 @@
    /* filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.8)); */
 }
 
+/* Center text within nodes */
+.sprotty-node text {
+   text-anchor: middle;
+   dominant-baseline: middle;
+   font-family: Arial, sans-serif;
+   font-size: 14px;
+   fill: black;
+}
+
 .source-object .sprotty-node:not(.selected, .mouseover) {
    stroke: #a1c5a5;
 }
