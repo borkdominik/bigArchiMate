@@ -3,15 +3,13 @@
  ********************************************************************************/
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable max-len */
+/** @jsx svg */
 
 import { GCompartmentView, RenderingContext, RoundedCornerNodeView, RoundedCornerWrapper, svg } from '@eclipse-glsp/client';
 import { ReactNode } from '@theia/core/shared/react';
 import { injectable } from 'inversify';
 import { VNode } from 'snabbdom';
 import { AttributeCompartment } from './model';
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const JSX = { createElement: svg };
 
 @injectable()
 export class DiagramNodeView extends RoundedCornerNodeView {

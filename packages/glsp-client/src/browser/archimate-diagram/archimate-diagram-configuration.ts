@@ -16,6 +16,7 @@ import { GLSPDiagramConfiguration } from '@eclipse-glsp/theia-integration';
 import { Container } from '@theia/core/shared/inversify/index';
 import { ArchiMateDiagramLanguage } from '../../common/crossmodel-diagram-language';
 import { createCrossModelDiagramModule } from '../crossmodel-diagram-module';
+import { CutOffCornerNodeView } from './cut-off-corner-view';
 import { archiMateEdgeCreationToolModule } from './edge-creation-tool/edge-creation-tool-module';
 import { ElementNode, GEditableLabel, RelationEdge } from './model';
 import { archiMateNodeCreationModule } from './node-creation-tool/node-creation-tool-module';
@@ -40,6 +41,19 @@ export class ArchiMateDiagramConfiguration extends GLSPDiagramConfiguration {
    }
 }
 
+const diamondConcepts = [
+   'Assessment',
+   'Constraint',
+   'Driver',
+   'Goal',
+   'Meaning',
+   'Outcome',
+   'Principle',
+   'Requirement',
+   'Stakeholder',
+   'Value'
+];
+
 const archiMateDiagramModule = createCrossModelDiagramModule((bind, unbind, isBound, rebind) => {
    const context = { bind, unbind, isBound, rebind };
 
@@ -53,7 +67,14 @@ const archiMateDiagramModule = createCrossModelDiagramModule((bind, unbind, isBo
    // The view class shows how to draw the svg element given the properties of the model class
 
    ARCHIMATE_NODE_TYPE_MAP.values().forEach(nodeType => {
-      configureModelElement(context, nodeType, ElementNode, ElementNodeView, { enable: [withEditLabelFeature] });
+      const concept = ARCHIMATE_NODE_TYPE_MAP.getReverse(nodeType);
+
+      if (diamondConcepts.includes(concept)) {
+         configureModelElement(context, nodeType, ElementNode, CutOffCornerNodeView, { enable: [withEditLabelFeature] });
+      } else {
+         // fallback: normal corner view
+         configureModelElement(context, nodeType, ElementNode, ElementNodeView, { enable: [withEditLabelFeature] });
+      }
    });
 
    ARCHIMATE_EDGE_TYPE_MAP.values().forEach(edgeType => {
