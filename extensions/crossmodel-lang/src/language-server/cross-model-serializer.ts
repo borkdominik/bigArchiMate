@@ -59,11 +59,12 @@ export class CrossModelSerializer implements Serializer<CrossModelRoot> {
       }
       if (
          key === 'id' ||
-         (isElement(parent) && key === 'type') ||
-         (isRelation(parent) && key === 'type') ||
+         (key === 'superEntities' && Array.isArray(parent)) ||
          propertyOf(parent, key, isCustomProperty, 'name') ||
          propertyOf(parent, key, isSourceObject, 'join') ||
-         this.isValidReference(parent, key, value)
+         (!Array.isArray(value) && this.isValidReference(parent, key, value)) ||
+         (isElement(parent) && key === 'type') ||
+         (isRelation(parent) && key === 'type')
       ) {
          // values that we do not want to quote because they are ids or references
          return value;
@@ -107,7 +108,7 @@ export class CrossModelSerializer implements Serializer<CrossModelRoot> {
                   return undefined;
                }
                const separator = onNewLine ? CrossModelSerializer.CHAR_NEWLINE : ' ';
-               const serializedProp = `${prop}:${separator}${serializedPropValue}`;
+               const serializedProp = `${this.toKeyword(prop)}:${separator}${serializedPropValue}`;
                const serialized = isFirstNested ? this.indent(serializedProp, indentationLevel) : serializedProp;
                isFirstNested = false;
                return serialized;
@@ -125,6 +126,13 @@ export class CrossModelSerializer implements Serializer<CrossModelRoot> {
             .join(CrossModelSerializer.CHAR_NEWLINE);
       }
       return JSON.stringify(value);
+   }
+
+   protected toKeyword(prop: string): string {
+      if (prop === 'superEntities') {
+         return 'inherits';
+      }
+      return prop;
    }
 
    protected indent(text: string, level: number): string {

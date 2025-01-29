@@ -17,16 +17,12 @@
     "name": "CrossBreeze",
     "email": "devops@crossbreeze.nl"
   },
+  "publisher": "CrossBreeze",
   "type": "module",
   "main": "./out/extension.cjs",
   "bin": {
     "cross-model-cli": "./bin/cli"
   },
-  "files": [
-    "bin",
-    "out",
-    "src"
-  ],
   "scripts": {
     "build": "yarn langium:generate && yarn build:esbuild",
     "build:esbuild": "node esbuild.mjs",
@@ -93,12 +89,12 @@
   ],
   "dependencies": {
     "@crossbreeze/protocol": "0.0.0",
-    "@eclipse-glsp/layout-elk": "2.2.1",
-    "@eclipse-glsp/server": "2.2.1",
+    "@eclipse-glsp/layout-elk": "2.3.0",
+    "@eclipse-glsp/server": "2.3.0",
     "chalk": "~4.1.2",
     "chevrotain": "~11.0.3",
     "commander": "~10.0.0",
-    "langium": "^3.2.0",
+    "langium": "^3.3.0",
     "p-debounce": "2.1.0",
     "prettier": "^3.1.0",
     "type-fest": "^4.18.2",
@@ -112,18 +108,18 @@
   "devDependencies": {
     "@types/jest": "^29.5.6",
     "@types/node": "~16.18.41",
-    "@types/vscode": "~1.67.0",
+    "@types/vscode": "^1.95.0",
     "@typescript-eslint/eslint-plugin": "~6.4.1",
     "@typescript-eslint/parser": "~6.4.1",
-    "@vscode/vsce": "^2.17.0",
+    "@vscode/vsce": "^2.32.1-0",
     "cross-env": "~7.0.3",
     "esbuild": "~0.19.7",
     "eslint": "^8.17.0",
-    "langium-cli": "^3.2.0",
+    "langium-cli": "^3.3.0",
     "ts-loader": "^9.4.2",
     "typescript": "~5.3.2"
   },
   "engines": {
-    "vscode": "^1.67.0"
+    "vscode": "^1.95.0"
   }
 }
