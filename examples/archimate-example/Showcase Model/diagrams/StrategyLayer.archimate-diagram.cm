@@ -1,0 +1,28 @@
+archiMateDiagram:
+    id: StrategyLayer
+    name: "StrategyLayer"
+    nodes:
+      - id: ResourceNode
+        element: NewResource
+        x: 88
+        y: 132
+        width: 10
+        height: 10
+      - id: CapabilityNode
+        element: NewCapability
+        x: 231
+        y: 132
+        width: 10
+        height: 10
+      - id: ValueStreamNode
+        element: NewValueStream
+        x: 385
+        y: 132
+        width: 10
+        height: 10
+      - id: CourseOfActionNode
+        element: NewCourseOfAction
+        x: 550
+        y: 143
+        width: 10
+        height: 10

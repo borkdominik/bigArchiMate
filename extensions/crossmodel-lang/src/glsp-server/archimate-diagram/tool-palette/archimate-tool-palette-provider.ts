@@ -1,7 +1,12 @@
 /********************************************************************************
  * Copyright (c) 2024 CrossBreeze.
  ********************************************************************************/
-import { activateDefaultToolsAction, ARCHIMATE_EDGE_TYPE_MAP, ARCHIMATE_NODE_TYPE_MAP } from '@crossbreeze/protocol';
+import {
+   activateDefaultToolsAction,
+   activateDeleteToolAction,
+   ARCHIMATE_EDGE_TYPE_MAP,
+   ARCHIMATE_NODE_TYPE_MAP
+} from '@crossbreeze/protocol';
 import {
    Args,
    MaybePromise,
@@ -25,6 +30,13 @@ export class ArchiMateToolPaletteProvider extends ToolPaletteItemProvider {
             label: 'Select & Move',
             icon: 'inspect',
             actions: [activateDefaultToolsAction()]
+         },
+         {
+            id: 'hide-tool',
+            sortString: 'AB',
+            label: 'Remove',
+            icon: 'close',
+            actions: [activateDeleteToolAction()]
          },
          {
             id: 'relations-group',

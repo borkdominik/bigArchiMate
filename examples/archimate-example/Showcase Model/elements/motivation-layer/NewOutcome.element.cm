@@ -1,0 +1,4 @@
+element:
+    id: NewOutcome
+    name: "Outcome"
+    type: Outcome

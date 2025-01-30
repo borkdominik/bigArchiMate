@@ -3,12 +3,13 @@
  ********************************************************************************/
 import {
    ARCHIMATE_NODE_TYPE_MAP,
+   ELEMENT_ICON_TYPE,
    ELEMENT_LABEL_TYPE,
    REFERENCE_CONTAINER_TYPE,
    REFERENCE_PROPERTY,
    REFERENCE_VALUE
 } from '@crossbreeze/protocol';
-import { ArgsUtil, GNode, GNodeBuilder } from '@eclipse-glsp/server';
+import { ArgsUtil, GCompartment, GNode, GNodeBuilder } from '@eclipse-glsp/server';
 import { elementMetadataMap } from '../../../archimate-metadata.js';
 import { ElementNode } from '../../../language-server/generated/ast.js';
 import { toKebabCase } from '../../../util.js';
@@ -49,6 +50,7 @@ export class GElementNodeBuilder extends GNodeBuilder<GElementNode> {
 
       // The DiagramNode in the langium file holds the coordinates of node
       this.layout('vbox')
+         .add(GCompartment.builder().type(ELEMENT_ICON_TYPE).build())
          .addArgs(ArgsUtil.cornerRadius(elementCornerType === 'round' ? 20 : 0))
          .addLayoutOption('prefWidth', node.width || 100)
          .addLayoutOption('prefHeight', node.height || 100)

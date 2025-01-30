@@ -1,0 +1,34 @@
+archiMateDiagram:
+    id: ImplementationAndMigrationLayer
+    name: "ImplementationAndMigrationLayer"
+    nodes:
+      - id: WorkPackageNode
+        element: NewWorkPackage
+        x: 143
+        y: 176
+        width: 96.12875366210938
+        height: 47.28761672973633
+      - id: DeliverableNode
+        element: NewDeliverable
+        x: 275
+        y: 176
+        width: 96.12875366210938
+        height: 47.24000072479248
+      - id: ImplementationEventNode
+        element: NewImplementationEvent
+        x: 407
+        y: 176
+        width: 151.478759765625
+        height: 47.29802989959717
+      - id: PlateauNode
+        element: NewPlateau
+        x: 297
+        y: 275
+        width: 68.44250106811523
+        height: 47.24000072479248
+      - id: GapNode
+        element: NewGap
+        x: 176
+        y: 286
+        width: 40.767499923706055
+        height: 47.29802989959717

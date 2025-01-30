@@ -14,8 +14,10 @@ import {
 } from '@eclipse-glsp/server';
 import { inject, injectable } from '@theia/core/shared/inversify';
 import { URI, Utils as UriUtils } from 'vscode-uri';
+import { elementMetadataMap } from '../../../archimate-metadata.js';
 import { CrossModelRoot, Element, ElementNode, ElementType } from '../../../language-server/generated/ast.js';
 import { Utils } from '../../../language-server/util/uri-util.js';
+import { toKebabCase } from '../../../util.js';
 import { CrossModelCommand } from '../../common/cross-model-command.js';
 import { ArchiMateModelState } from '../model/archimate-model-state.js';
 
@@ -78,7 +80,11 @@ export class ArchiMateDiagramCreateElementOperationHandler extends JsonCreateNod
          customProperties: []
       };
 
-      const dirName = UriUtils.joinPath(UriUtils.dirname(URI.parse(this.modelState.semanticUri)), '..', 'elements');
+      const dirName = UriUtils.joinPath(
+         UriUtils.dirname(URI.parse(this.modelState.semanticUri)),
+         '..',
+         `elements/${toKebabCase(elementMetadataMap[elementType].layer)}`
+      );
       const targetUri = UriUtils.joinPath(dirName, id + '.element.cm');
       const uri = Utils.findNewUri(targetUri);
 

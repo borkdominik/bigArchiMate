@@ -1,0 +1,4 @@
+element:
+    id: NewApplicationComponent
+    name: "ApplicationComponent"
+    type: ApplicationComponent

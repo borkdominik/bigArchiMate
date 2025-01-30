@@ -1,0 +1,4 @@
+element:
+    id: NewMaterial
+    name: "Material"
+    type: Material

@@ -1,0 +1,4 @@
+element:
+    id: NewPrinciple
+    name: "Principle"
+    type: Principle

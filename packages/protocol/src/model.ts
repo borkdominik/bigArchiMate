@@ -90,7 +90,7 @@ export const ModelFileExtensions = {
       return uri.endsWith(this.SystemDiagram) || uri.endsWith(this.Diagram);
    },
 
-   isElementFilr(uri: string): boolean {
+   isElementFile(uri: string): boolean {
       return uri.endsWith(this.Element);
    },
 
@@ -146,7 +146,7 @@ export const ModelFileExtensions = {
       if (this.isEntityFile(uri)) {
          return 'Entity';
       }
-      if (this.isElementFilr(uri)) {
+      if (this.isElementFile(uri)) {
          return 'Element';
       }
       if (this.isRelationFile(uri)) {
@@ -251,6 +251,11 @@ export const ModelStructure = {
       ICON: 'group-by-ref-type'
    },
 
+   ArchiMateModel: {
+      ICON_CLASS: 'codicon codicon-globe',
+      ICON: 'globe'
+   },
+
    Element: {
       FOLDER: 'elements',
       ICON_CLASS: 'codicon codicon-git-commit',
@@ -264,7 +269,7 @@ export const ModelStructure = {
    },
 
    ArchiMateDiagram: {
-      FOLDER: 'archimate-diagrams',
+      FOLDER: 'diagrams',
       ICON_CLASS: 'codicon codicon-type-hierarchy-sub',
       ICON: 'type-hierarchy-sub'
    }

@@ -1,0 +1,58 @@
+archiMateDiagram:
+    id: ApplicationLayer
+    name: "ApplicationLayer"
+    nodes:
+      - id: ApplicationComponentNode
+        element: NewApplicationComponent
+        x: -209
+        y: -198
+        width: 158.39759904824217
+        height: 47.298334364016114
+      - id: ApplicationCollaborationNode
+        element: NewApplicationCollaboration
+        x: 11
+        y: -198
+        width: 186.12608337402344
+        height: 47.4328727722168
+      - id: ApplicationInterfaceNode
+        element: NewApplicationInterface
+        x: 253
+        y: -198
+        width: 158.3975067138672
+        height: 47.29802989959717
+      - id: ApplicationFunctionNode
+        element: NewApplicationFunction
+        x: 22
+        y: -110
+        width: 151.5164794921875
+        height: 47.4328727722168
+      - id: ApplicationInteractionNode
+        element: NewApplicationInteraction
+        x: -220
+        y: -110
+        width: 172.2462615966797
+        height: 47.29802989959717
+      - id: ApplicationProcessNode
+        element: NewApplicationProcess
+        x: 231
+        y: -110
+        width: 144.56000518798828
+        height: 47.29802989959717
+      - id: ApplicationEventNode
+        element: NewApplicationEvent
+        x: -220
+        y: -22
+        width: 130.75072479248047
+        height: 47.4328727722168
+      - id: ApplicationServiceNode
+        element: NewApplicationService
+        x: -44
+        y: -22
+        width: 144.5945587158203
+        height: 47.4328727722168
+      - id: DataObjectNode
+        element: NewDataObject
+        x: 154
+        y: -22
+        width: 89.1987533569336
+        height: 47.28761672973633

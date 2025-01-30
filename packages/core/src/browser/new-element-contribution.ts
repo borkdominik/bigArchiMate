@@ -45,11 +45,20 @@ const INITIAL_MAPPING_CONTENT = `mapping:
       entity: 
       mappings: `;
 
-const INITIAL_ARCHIMATE_DIAGRAM_CONTENT = `archiMateDiagram:
+const INITIAL_ELEMENT_CONTENT = `element:
    id: \${id}
    name: \${name}
-   nodes:
-   edges:`;
+   type: `;
+
+const INITIAL_RELATION_CONTENT = `relation:
+    id: \${id}
+    type: 
+    source: 
+    target: `;
+
+const INITIAL_ARCHIMATE_DIAGRAM_CONTENT = `archiMateDiagram:
+   id: \${id}
+   name: \${name}`;
 
 const TEMPLATE_CATEGORY = 'New Element';
 
@@ -85,6 +94,22 @@ const NEW_ELEMENT_TEMPLATES: NewElementTemplate[] = [
       category: TEMPLATE_CATEGORY,
       iconClass: ModelStructure.Mapping.ICON_CLASS,
       content: name => INITIAL_MAPPING_CONTENT.replace(/\$\{name\}/gi, quote(name)).replace(/\$\{id\}/gi, toId(name))
+   },
+   {
+      id: 'crossbreeze.new.element',
+      label: 'Element',
+      fileExtension: ModelFileExtensions.Element,
+      category: TEMPLATE_CATEGORY,
+      iconClass: ModelStructure.Element.ICON_CLASS,
+      content: name => INITIAL_ELEMENT_CONTENT.replace(/\$\{name\}/gi, quote(name)).replace(/\$\{id\}/gi, toId(name))
+   },
+   {
+      id: 'crossbreeze.new.relation',
+      label: 'Relation',
+      fileExtension: ModelFileExtensions.Relation,
+      category: TEMPLATE_CATEGORY,
+      iconClass: ModelStructure.Relation.ICON_CLASS,
+      content: name => INITIAL_RELATION_CONTENT.replace(/\$\{name\}/gi, quote(name)).replace(/\$\{id\}/gi, toId(name))
    },
    {
       id: 'crossbreeze.new.archimate-diagram',

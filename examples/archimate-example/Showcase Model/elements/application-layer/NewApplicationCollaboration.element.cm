@@ -1,0 +1,4 @@
+element:
+    id: NewApplicationCollaboration
+    name: "ApplicationCollaboration"
+    type: ApplicationCollaboration

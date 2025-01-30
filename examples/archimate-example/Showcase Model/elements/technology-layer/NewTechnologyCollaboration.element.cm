@@ -1,0 +1,4 @@
+element:
+    id: NewTechnologyCollaboration
+    name: "TechnologyCollaboration"
+    type: TechnologyCollaboration

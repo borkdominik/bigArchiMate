@@ -46,6 +46,15 @@ export class CrossModelLabelProvider implements LabelProviderContribution, TreeD
       if (this.isSystemDirectory(node.parent) && node.fileStat.name === ModelStructure.Mapping.FOLDER) {
          return ModelStructure.Mapping.ICON_CLASS + ' default-folder-icon';
       }
+      if (this.isSystemDirectory(node.parent) && node.fileStat.name === ModelStructure.Element.FOLDER) {
+         return ModelStructure.Element.ICON_CLASS + ' default-folder-icon';
+      }
+      if (this.isSystemDirectory(node.parent) && node.fileStat.name === ModelStructure.Relation.FOLDER) {
+         return ModelStructure.Relation.ICON_CLASS + ' default-folder-icon';
+      }
+      if (this.isSystemDirectory(node.parent) && node.fileStat.name === ModelStructure.ArchiMateDiagram.FOLDER) {
+         return ModelStructure.ArchiMateDiagram.ICON_CLASS + ' default-folder-icon';
+      }
       return this.labelProvider.getIcon(node.fileStat);
    }
 
@@ -66,7 +75,7 @@ export class CrossModelLabelProvider implements LabelProviderContribution, TreeD
       for (const node of new DepthFirstTreeIterator(tree.root)) {
          if (FileStatNode.is(node) && this.isSystemDirectory(node)) {
             const decorations: WidgetDecoration.Data = {
-               captionSuffixes: [{ data: 'System' }]
+               captionSuffixes: [{ data: this.isInArchiMateDirectory(node) ? 'ArchiMate Model' : 'System' }]
             };
             result.set(node.id, decorations);
          }
@@ -80,5 +89,22 @@ export class CrossModelLabelProvider implements LabelProviderContribution, TreeD
          node.fileStat.isDirectory &&
          this.modelService.systems.some(system => system.directory === node.fileStat.resource.path.fsPath())
       );
+   }
+
+   protected isInArchiMateDirectory(node?: TreeNode): boolean {
+      if (node === undefined) {
+         return false;
+      }
+
+      if (
+         FileStatNode.is(node) &&
+         FileStatNode.is(node.parent) &&
+         node.parent.fileStat.isDirectory &&
+         node.parent.fileStat.name === 'archimate-example'
+      ) {
+         return true;
+      }
+
+      return this.isInArchiMateDirectory(node.parent);
    }
 }

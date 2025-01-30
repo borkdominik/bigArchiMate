@@ -1,5 +1,0 @@
-relation:
-    id: PaulToNewArtifact
-    type: Access
-    source: Paul
-    target: NewArtifact

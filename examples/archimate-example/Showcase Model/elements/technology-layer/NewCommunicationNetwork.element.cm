@@ -1,0 +1,4 @@
+element:
+    id: NewCommunicationNetwork
+    name: "CommunicationNetwork"
+    type: CommunicationNetwork

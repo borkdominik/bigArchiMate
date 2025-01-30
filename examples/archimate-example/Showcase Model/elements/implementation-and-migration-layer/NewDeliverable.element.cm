@@ -1,0 +1,4 @@
+element:
+    id: NewDeliverable
+    name: "Deliverable"
+    type: Deliverable

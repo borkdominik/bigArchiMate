@@ -20,6 +20,7 @@ export const ATTRIBUTE_COMPARTMENT_TYPE = DefaultTypes.COMPARTMENT + ':attribute
 
 // ArchiMate Diagram
 export const ELEMENT_LABEL_TYPE = DefaultTypes.LABEL + ':element';
+export const ELEMENT_ICON_TYPE = 'icon';
 
 /**
  * A reversible map of ArchiMate element types to GLSP node types.

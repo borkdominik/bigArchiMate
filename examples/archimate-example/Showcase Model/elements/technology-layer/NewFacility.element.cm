@@ -1,0 +1,4 @@
+element:
+    id: NewFacility
+    name: "Facility"
+    type: Facility

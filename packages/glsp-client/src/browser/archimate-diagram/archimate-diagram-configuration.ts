@@ -1,7 +1,7 @@
 /********************************************************************************
  * Copyright (c) 2023 CrossBreeze.
  ********************************************************************************/
-import { ARCHIMATE_EDGE_TYPE_MAP, ARCHIMATE_NODE_TYPE_MAP, ELEMENT_LABEL_TYPE } from '@crossbreeze/protocol';
+import { ARCHIMATE_EDGE_TYPE_MAP, ARCHIMATE_NODE_TYPE_MAP, ELEMENT_ICON_TYPE, ELEMENT_LABEL_TYPE } from '@crossbreeze/protocol';
 import {
    configureDefaultModelElements,
    configureModelElement,
@@ -18,7 +18,8 @@ import { ArchiMateDiagramLanguage } from '../../common/crossmodel-diagram-langua
 import { createCrossModelDiagramModule } from '../crossmodel-diagram-module';
 import { CutOffCornerNodeView } from './cut-off-corner-view';
 import { archiMateEdgeCreationToolModule } from './edge-creation-tool/edge-creation-tool-module';
-import { ElementNode, GEditableLabel, RelationEdge } from './model';
+import { IconView } from './icon-view';
+import { ElementNode, GEditableLabel, Icon, RelationEdge } from './model';
 import { archiMateNodeCreationModule } from './node-creation-tool/node-creation-tool-module';
 import { archiMateSelectModule } from './select-tool/select-tool-module';
 import { ElementNodeView, RelationEdgeView } from './views';
@@ -82,4 +83,5 @@ const archiMateDiagramModule = createCrossModelDiagramModule((bind, unbind, isBo
    });
 
    configureModelElement(context, ELEMENT_LABEL_TYPE, GEditableLabel, GLabelView, { enable: [editLabelFeature] });
+   configureModelElement(context, ELEMENT_ICON_TYPE, Icon, IconView);
 });

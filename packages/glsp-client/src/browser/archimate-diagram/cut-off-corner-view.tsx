@@ -1,6 +1,8 @@
 /********************************************************************************
- * Custom view for nodes with cut-off corners.
+ * Copyright (c) 2025 CrossBreeze.
  ********************************************************************************/
+/* eslint-disable react/no-unknown-property */
+/* eslint-disable max-len */
 /** @jsx svg */
 import { GNode, Hoverable, RectangularNodeView, RenderingContext, Selectable, svg } from '@eclipse-glsp/client';
 import { ReactNode } from '@theia/core/shared/react';

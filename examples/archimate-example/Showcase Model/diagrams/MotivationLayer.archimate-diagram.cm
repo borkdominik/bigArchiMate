@@ -1,0 +1,64 @@
+archiMateDiagram:
+    id: MotivationLayer
+    name: "MotivationLayer"
+    nodes:
+      - id: StakeholderNode
+        element: NewStakeholder
+        x: 110
+        y: 143
+        width: 96.12875366210938
+        height: 31.24000072479248
+      - id: DriverNode
+        element: NewDriver
+        x: 253
+        y: 132
+        width: 10
+        height: 10
+      - id: AssessmentNode
+        element: NewAssessment
+        x: 374
+        y: 132
+        width: 10
+        height: 10
+      - id: GoalNode
+        element: NewGoal
+        x: 528
+        y: 132
+        width: 10
+        height: 10
+      - id: OutcomeNode
+        element: NewOutcome
+        x: 121
+        y: 231
+        width: 68.44250106811523
+        height: 47.24000072479248
+      - id: PrincipleNode
+        element: NewPrinciple
+        x: 242
+        y: 231
+        width: 10
+        height: 10
+      - id: RequirementNode
+        element: NewRequirement
+        x: 385
+        y: 231
+        width: 96.12875366210938
+        height: 47.29802989959717
+      - id: ConstraintNode
+        element: NewConstraint
+        x: 528
+        y: 231
+        width: 89.20162200927734
+        height: 47.58807373046875
+      - id: MeaningNode
+        element: NewMeaning
+        x: 110
+        y: 341
+        width: 68.44273662474609
+        height: 47.54529932579718
+      - id: ValueNode
+        element: NewValue
+        x: 242
+        y: 341
+        width: 88
+        height: 47.279544830322266

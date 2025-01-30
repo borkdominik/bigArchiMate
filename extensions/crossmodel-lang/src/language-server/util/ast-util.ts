@@ -7,16 +7,19 @@ import { AstNode, AstNodeDescription, AstUtils, LangiumDocument, Reference, isAs
 import { ID_PROPERTY, IdProvider } from '../cross-model-naming.js';
 import { getLocalName } from '../cross-model-scope.js';
 import {
+   ArchiMateDiagram,
    Attribute,
    AttributeMapping,
    AttributeMappingSource,
    AttributeMappingTarget,
    CrossModelRoot,
+   Element,
    Entity,
    EntityAttribute,
    EntityNode,
    EntityNodeAttribute,
    Mapping,
+   Relation,
    Relationship,
    RelationshipEdge,
    SourceObject,
@@ -34,7 +37,7 @@ import {
    isSystemDiagram
 } from '../generated/ast.js';
 
-export type SemanticRoot = Entity | Mapping | Relationship | SystemDiagram;
+export type SemanticRoot = Entity | Mapping | Relationship | SystemDiagram | Element | Relation | ArchiMateDiagram;
 
 export const IMPLICIT_ATTRIBUTES_PROPERTY = '$attributes';
 export const IMPLICIT_OWNER_PROPERTY = '$owner';
@@ -302,7 +305,9 @@ export function findSemanticRoot(input: DocumentContent): SemanticRoot | undefin
 export function findSemanticRoot<T extends SemanticRoot>(input: DocumentContent, guard: TypeGuard<T>): T | undefined;
 export function findSemanticRoot<T extends SemanticRoot>(input: DocumentContent, guard?: TypeGuard<T>): SemanticRoot | T | undefined {
    const root = isAstNode(input) ? input.$document?.parseResult?.value ?? AstUtils.findRootNode(input) : input.parseResult?.value;
-   const semanticRoot = isCrossModelRoot(root) ? root.entity ?? root.mapping ?? root.relationship ?? root.systemDiagram : undefined;
+   const semanticRoot = isCrossModelRoot(root)
+      ? root.entity ?? root.mapping ?? root.relationship ?? root.systemDiagram ?? root.element ?? root.relation ?? root.archiMateDiagram
+      : undefined;
    return !semanticRoot ? undefined : !guard ? semanticRoot : guard(semanticRoot) ? semanticRoot : undefined;
 }
 
@@ -320,6 +325,18 @@ export function findSystemDiagram(input: DocumentContent): SystemDiagram | undef
 
 export function findMapping(input: DocumentContent): Mapping | undefined {
    return findSemanticRoot(input, isMapping);
+}
+
+export function findElement(input: DocumentContent): Element | undefined {
+   return findSemanticRoot(input, isElement);
+}
+
+export function findRelation(input: DocumentContent): Relation | undefined {
+   return findSemanticRoot(input, isRelation);
+}
+
+export function findArchiMateDiagram(input: DocumentContent): ArchiMateDiagram | undefined {
+   return findSemanticRoot(input, isArchiMateDiagram);
 }
 
 export function hasSemanticRoot<T extends SemanticRoot>(document: LangiumDocument<any>, guard: (item: unknown) => item is T): boolean {

@@ -14,7 +14,7 @@ export class ArchiMateDiagramConfiguration implements DiagramConfiguration {
    typeMapping = getDefaultMapping();
 
    shapeTypeHints = [
-      ...Object.values(ARCHIMATE_NODE_TYPE_MAP).map(nodeType => ({
+      ...ARCHIMATE_NODE_TYPE_MAP.values().map(nodeType => ({
          elementTypeId: nodeType,
          deletable: true,
          reparentable: false,

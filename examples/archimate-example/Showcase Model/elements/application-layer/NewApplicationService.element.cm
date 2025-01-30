@@ -1,0 +1,4 @@
+element:
+    id: NewApplicationService
+    name: "ApplicationService"
+    type: ApplicationService

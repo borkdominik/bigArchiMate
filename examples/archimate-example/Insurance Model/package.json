@@ -1,0 +1,7 @@
+{ 
+    "name": "Insurance Model",
+    "version": "1.0.0" ,
+    "dependencies": {
+        "Base Model": "1.0.0"
+    }
+}

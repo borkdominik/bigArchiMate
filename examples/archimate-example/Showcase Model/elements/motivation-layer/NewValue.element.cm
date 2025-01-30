@@ -1,0 +1,4 @@
+element:
+    id: NewValue
+    name: "Value"
+    type: Value

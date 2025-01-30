@@ -1,5 +1,0 @@
-relation:
-    id: PaulToPeter
-    type: Association
-    source: Paul
-    target: Peter

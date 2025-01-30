@@ -1,0 +1,4 @@
+element:
+    id: NewResource
+    name: "Resource"
+    type: Resource
