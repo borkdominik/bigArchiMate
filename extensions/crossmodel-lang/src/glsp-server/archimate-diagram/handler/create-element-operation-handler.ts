@@ -1,7 +1,7 @@
 /********************************************************************************
  * Copyright (c) 2024 CrossBreeze.
  ********************************************************************************/
-import { ARCHIMATE_NODE_TYPE_MAP } from '@crossbreeze/protocol';
+import { ARCHIMATE_NODE_TYPE_MAP, elementMetadataMap, layers } from '@crossbreeze/protocol';
 import {
    Action,
    ActionDispatcher,
@@ -14,10 +14,8 @@ import {
 } from '@eclipse-glsp/server';
 import { inject, injectable } from '@theia/core/shared/inversify';
 import { URI, Utils as UriUtils } from 'vscode-uri';
-import { elementMetadataMap } from '../../../archimate-metadata.js';
-import { CrossModelRoot, Element, ElementNode, ElementType } from '../../../language-server/generated/ast.js';
+import { CrossModelRoot, Element, ElementNode } from '../../../language-server/generated/ast.js';
 import { Utils } from '../../../language-server/util/uri-util.js';
-import { toKebabCase } from '../../../util.js';
 import { CrossModelCommand } from '../../common/cross-model-command.js';
 import { ArchiMateModelState } from '../model/archimate-model-state.js';
 
@@ -50,9 +48,8 @@ export class ArchiMateDiagramCreateElementOperationHandler extends JsonCreateNod
          },
          x: location.x,
          y: location.y,
-         width: 10,
-         height: 10,
-         customProperties: []
+         width: 200,
+         height: 50
       };
       container.nodes.push(node);
       this.actionDispatcher.dispatchAfterNextUpdate({
@@ -65,11 +62,11 @@ export class ArchiMateDiagramCreateElementOperationHandler extends JsonCreateNod
     * Creates a new element and stores it on a file on the file system.
     */
    protected async createAndSaveElement(operation: CreateNodeOperation): Promise<Element | undefined> {
-      const elementType = operation.args?.elementType as ElementType;
+      const elementType = ARCHIMATE_NODE_TYPE_MAP.getReverse(operation.elementTypeId);
 
       // create element, serialize and re-read to ensure everything is up to date and linked properly
       const elementRoot: CrossModelRoot = { $type: 'CrossModelRoot' };
-      const id = this.modelState.idProvider.findNextId(Element, `New${elementType}`);
+      const id = this.modelState.idProvider.findNextId(Element, `${elementType}`);
 
       const element: Element = {
          $type: 'Element',
@@ -77,13 +74,13 @@ export class ArchiMateDiagramCreateElementOperationHandler extends JsonCreateNod
          id,
          name: elementType,
          type: elementType,
-         customProperties: []
+         properties: []
       };
 
       const dirName = UriUtils.joinPath(
          UriUtils.dirname(URI.parse(this.modelState.semanticUri)),
          '..',
-         `elements/${toKebabCase(elementMetadataMap[elementType].layer)}`
+         `Elements/${layers[elementMetadataMap[elementType].layer].label}`
       );
       const targetUri = UriUtils.joinPath(dirName, id + '.element.cm');
       const uri = Utils.findNewUri(targetUri);

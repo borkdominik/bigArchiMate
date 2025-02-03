@@ -14,10 +14,22 @@ fragment CustomProperties:
         INDENT
             (LIST_ITEM customProperties+=CustomProperty)*
         DEDENT
-    ;
+;
 
 CustomProperty:
     'name' ':' name=ID
+    ('value' ':' value=STRING)?;
+
+fragment Properties:
+    'properties' ':'
+        INDENT
+            (LIST_ITEM properties+=Property)+
+        DEDENT
+;
+
+Property:
+    'id' ':' id=ID
+    'name' ':'  name=STRING
     ('value' ':' value=STRING)?;
 
 // Scalar values
@@ -32,6 +44,6 @@ terminal INDENT: ':synthetic-indent:';
 terminal DEDENT: ':synthetic-dedent:';
 terminal LIST_ITEM: '- '; // block sequence entry
 hidden terminal NEWLINE: /[/\r\n|\r|\n/]+/;
-hidden terminal WS: /[ \t]+/; 
+hidden terminal WS: /[ \t]+/;
 
 terminal ID: /[_a-zA-Z][\w_\-~$#@/\d]*/; 

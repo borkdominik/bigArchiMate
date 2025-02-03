@@ -16,6 +16,7 @@ import { ArchiMateDiagramManager } from './archimate-diagram-manager';
 import { ArchiMateDiagramWidget } from './archimate-diagram-widget';
 
 export class ArchiMateDiagramModule extends GLSPTheiaFrontendModule {
+   protected override enableCopyPaste = true;
    readonly diagramLanguage = ArchiMateDiagramLanguage;
 
    bindDiagramConfiguration(context: ContainerContext): void {

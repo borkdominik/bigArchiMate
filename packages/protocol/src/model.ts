@@ -66,7 +66,7 @@ export const ModelFileExtensions = {
    SystemDiagram: '.system-diagram.cm',
    Element: '.element.cm',
    Relation: '.relation.cm',
-   ArchiMateDiagram: '.archimate-diagram.cm',
+   ArchiMateDiagram: '.view.archi',
    /* @deprecated Use SystemDiagram instead */
    Diagram: '.diagram.cm',
 
@@ -257,19 +257,19 @@ export const ModelStructure = {
    },
 
    Element: {
-      FOLDER: 'elements',
+      FOLDER: 'Elements',
       ICON_CLASS: 'codicon codicon-git-commit',
       ICON: 'git-commit'
    },
 
    Relation: {
-      FOLDER: 'relations',
+      FOLDER: 'Relations',
       ICON_CLASS: 'codicon codicon-git-compare',
       ICON: 'git-compare'
    },
 
    ArchiMateDiagram: {
-      FOLDER: 'diagrams',
+      FOLDER: 'Views',
       ICON_CLASS: 'codicon codicon-type-hierarchy-sub',
       ICON: 'type-hierarchy-sub'
    }

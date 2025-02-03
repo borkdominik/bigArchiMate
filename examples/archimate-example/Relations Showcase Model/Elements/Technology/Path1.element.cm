@@ -1,0 +1,4 @@
+element:
+    id: Path1
+    name: "Path"
+    type: Path

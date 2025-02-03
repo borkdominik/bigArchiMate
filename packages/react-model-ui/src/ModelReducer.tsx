@@ -2,9 +2,11 @@
  * Copyright (c) 2023 CrossBreeze.
  ********************************************************************************/
 import { CrossModelRoot } from '@crossbreeze/protocol';
+import { ElementDispatchAction, ElementModelReducer, isElementDispatchAction } from './ElementModelReducer';
 import { EntityDispatchAction, EntityModelReducer, isEntityDispatchAction } from './EntityModelReducer';
 import { MappingSourcesDispatchAction, MappingSourcesModelReducer, isMappingSourcesDispatchAction } from './MappingSourcesReducer';
 import { MappingTargetDispatchAction, MappingTargetModelReducer, isMappingTargetDispatchAction } from './MappingTargetReducer';
+import { RelationDispatchAction, RelationModelReducer, isRelationDispatchAction } from './RelationModelReducer';
 import { RelationshipDispatchAction, RelationshipModelReducer, isRelationshipDispatchAction } from './RelationshipModelReducer';
 
 export interface ModelAction {
@@ -19,6 +21,8 @@ export interface ModelUpdateAction extends ModelAction {
 export type DispatchAction =
    | ModelUpdateAction
    | EntityDispatchAction
+   | ElementDispatchAction
+   | RelationDispatchAction
    | RelationshipDispatchAction
    | MappingTargetDispatchAction
    | MappingSourcesDispatchAction;
@@ -51,6 +55,12 @@ export function ModelReducer(state: ModelState, action: DispatchAction): ModelSt
    }
    if (isMappingSourcesDispatchAction(action)) {
       return MappingSourcesModelReducer(state, action);
+   }
+   if (isElementDispatchAction(action)) {
+      return ElementModelReducer(state, action);
+   }
+   if (isRelationDispatchAction(action)) {
+      return RelationModelReducer(state, action);
    }
    throw Error('Unknown ModelReducer action');
 }

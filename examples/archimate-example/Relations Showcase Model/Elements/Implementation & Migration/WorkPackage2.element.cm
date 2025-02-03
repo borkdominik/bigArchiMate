@@ -1,0 +1,4 @@
+element:
+    id: WorkPackage2
+    name: "WorkPackage"
+    type: WorkPackage

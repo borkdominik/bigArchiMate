@@ -72,6 +72,7 @@ export type CrossModelKeywordNames =
     | "Goal"
     | "ImplementationEvent"
     | "Influence"
+    | "Junction"
     | "Material"
     | "Meaning"
     | "Node"
@@ -112,6 +113,7 @@ export type CrossModelKeywordNames =
     | "dependencies"
     | "description"
     | "diagram"
+    | "documentation"
     | "edges"
     | "element"
     | "entity"
@@ -123,13 +125,16 @@ export type CrossModelKeywordNames =
     | "inherits"
     | "inner-join"
     | "join"
+    | "junction"
     | "left-join"
     | "mapping"
     | "mappings"
     | "name"
     | "nodes"
     | "parent"
+    | "properties"
     | "relation"
+    | "relations"
     | "relationship"
     | "source"
     | "sourceNode"
@@ -154,6 +159,32 @@ export function isBooleanExpression(item: unknown): item is BooleanExpression {
     return reflection.isInstance(item, BooleanExpression);
 }
 
+export type ElementID = ElementType | string;
+
+export function isElementID(item: unknown): item is ElementID {
+    return isElementType(item) || (typeof item === 'string' && (/[_a-zA-Z][\w_\-~$#@/\d]*/.test(item)));
+}
+
+export type ElementIDReference = string;
+
+export function isElementIDReference(item: unknown): item is ElementIDReference {
+    return typeof item === 'string';
+}
+
+export type ElementOrJunction = Element | Junction;
+
+export const ElementOrJunction = 'ElementOrJunction';
+
+export function isElementOrJunction(item: unknown): item is ElementOrJunction {
+    return reflection.isInstance(item, ElementOrJunction);
+}
+
+export type ElementOrJunctionID = ElementID | string;
+
+export function isElementOrJunctionID(item: unknown): item is ElementOrJunctionID {
+    return isElementID(item) || (typeof item === 'string' && (/[_a-zA-Z][\w_\-~$#@/\d]*/.test(item)));
+}
+
 export type ElementType = 'ApplicationCollaboration' | 'ApplicationComponent' | 'ApplicationEvent' | 'ApplicationFunction' | 'ApplicationInteraction' | 'ApplicationInterface' | 'ApplicationProcess' | 'ApplicationService' | 'Artifact' | 'Assessment' | 'BusinessActor' | 'BusinessCollaboration' | 'BusinessEvent' | 'BusinessFunction' | 'BusinessInteraction' | 'BusinessInterface' | 'BusinessObject' | 'BusinessProcess' | 'BusinessRole' | 'BusinessService' | 'Capability' | 'CommunicationNetwork' | 'Constraint' | 'Contract' | 'CourseOfAction' | 'DataObject' | 'Deliverable' | 'Device' | 'DistributionNetwork' | 'Driver' | 'Equipment' | 'Facility' | 'Gap' | 'Goal' | 'ImplementationEvent' | 'Material' | 'Meaning' | 'Node' | 'Outcome' | 'Path' | 'Plateau' | 'Principle' | 'Product' | 'Representation' | 'Requirement' | 'Resource' | 'Stakeholder' | 'SystemSoftware' | 'TechnologyCollaboration' | 'TechnologyEvent' | 'TechnologyFunction' | 'TechnologyInteraction' | 'TechnologyInterface' | 'TechnologyProcess' | 'TechnologyService' | 'Value' | 'ValueStream' | 'WorkPackage';
 
 export function isElementType(item: unknown): item is ElementType {
@@ -170,6 +201,12 @@ export type JoinType = 'apply' | 'cross-join' | 'from' | 'inner-join' | 'left-jo
 
 export function isJoinType(item: unknown): item is JoinType {
     return item === 'from' || item === 'inner-join' || item === 'cross-join' || item === 'left-join' || item === 'apply';
+}
+
+export type RelationID = RelationType | string;
+
+export function isRelationID(item: unknown): item is RelationID {
+    return isRelationType(item) || (typeof item === 'string' && (/[_a-zA-Z][\w_\-~$#@/\d]*/.test(item)));
 }
 
 export type RelationType = 'Access' | 'Aggregation' | 'Assignment' | 'Association' | 'Composition' | 'Flow' | 'Influence' | 'Realization' | 'Serving' | 'Specialization' | 'Triggering';
@@ -189,11 +226,11 @@ export function isSourceObjectCondition(item: unknown): item is SourceObjectCond
 export interface ArchiMateDiagram extends AstNode {
     readonly $container: CrossModelRoot;
     readonly $type: 'ArchiMateDiagram';
-    customProperties: Array<CustomProperty>;
     edges: Array<RelationEdge>;
     id?: string;
     name?: string;
-    nodes: Array<ElementNode>;
+    nodes: Array<ElementNode | JunctionNode>;
+    properties: Array<Property>;
 }
 
 export const ArchiMateDiagram = 'ArchiMateDiagram';
@@ -274,6 +311,7 @@ export interface CrossModelRoot extends AstNode {
     archiMateDiagram?: ArchiMateDiagram;
     element?: Element;
     entity?: Entity;
+    junction?: Junction;
     mapping?: Mapping;
     relation?: Relation;
     relationship?: Relationship;
@@ -287,7 +325,7 @@ export function isCrossModelRoot(item: unknown): item is CrossModelRoot {
 }
 
 export interface CustomProperty extends AstNode {
-    readonly $container: ArchiMateDiagram | AttributeMapping | Element | ElementNode | Entity | EntityNode | Mapping | Relation | RelationEdge | Relationship | RelationshipAttribute | RelationshipEdge | SourceObject | SystemDiagram | TargetObject | WithCustomProperties;
+    readonly $container: AttributeMapping | Entity | EntityNode | Mapping | Relationship | RelationshipAttribute | RelationshipEdge | SourceObject | SystemDiagram | TargetObject | WithCustomProperties;
     readonly $type: 'CustomProperty';
     name: string;
     value?: string;
@@ -302,10 +340,10 @@ export function isCustomProperty(item: unknown): item is CustomProperty {
 export interface Element extends AstNode {
     readonly $container: CrossModelRoot;
     readonly $type: 'Element';
-    customProperties: Array<CustomProperty>;
-    description?: string;
-    id: string;
+    documentation?: string;
+    id: ElementID;
     name: string;
+    properties: Array<Property>;
     type: ElementType;
 }
 
@@ -318,12 +356,9 @@ export function isElement(item: unknown): item is Element {
 export interface ElementNode extends AstNode {
     readonly $container: ArchiMateDiagram;
     readonly $type: 'ElementNode';
-    customProperties: Array<CustomProperty>;
-    description?: string;
     element: Reference<Element>;
     height: number;
     id: string;
-    name?: string;
     width: number;
     x: number;
     y: number;
@@ -384,6 +419,39 @@ export function isJoinCondition(item: unknown): item is JoinCondition {
     return reflection.isInstance(item, JoinCondition);
 }
 
+export interface Junction extends AstNode {
+    readonly $container: CrossModelRoot;
+    readonly $type: 'Junction';
+    documentation?: string;
+    id: string;
+    name?: string;
+    properties: Array<Property>;
+    relations: Array<Reference<Relation>>;
+}
+
+export const Junction = 'Junction';
+
+export function isJunction(item: unknown): item is Junction {
+    return reflection.isInstance(item, Junction);
+}
+
+export interface JunctionNode extends AstNode {
+    readonly $container: ArchiMateDiagram;
+    readonly $type: 'JunctionNode';
+    height: number;
+    id: string;
+    junction: Reference<Junction>;
+    width: number;
+    x: number;
+    y: number;
+}
+
+export const JunctionNode = 'JunctionNode';
+
+export function isJunctionNode(item: unknown): item is JunctionNode {
+    return reflection.isInstance(item, JunctionNode);
+}
+
 export interface Mapping extends AstNode {
     readonly $container: CrossModelRoot;
     readonly $type: 'Mapping';
@@ -411,15 +479,29 @@ export function isNumberLiteral(item: unknown): item is NumberLiteral {
     return reflection.isInstance(item, NumberLiteral);
 }
 
+export interface Property extends AstNode {
+    readonly $container: ArchiMateDiagram | Element | Junction | Relation;
+    readonly $type: 'Property';
+    id: string;
+    name: string;
+    value?: string;
+}
+
+export const Property = 'Property';
+
+export function isProperty(item: unknown): item is Property {
+    return reflection.isInstance(item, Property);
+}
+
 export interface Relation extends AstNode {
     readonly $container: CrossModelRoot;
     readonly $type: 'Relation';
-    customProperties: Array<CustomProperty>;
-    description?: string;
+    documentation?: string;
     id: string;
     name?: string;
-    source: Reference<Element>;
-    target: Reference<Element>;
+    properties: Array<Property>;
+    source: Reference<ElementOrJunction>;
+    target: Reference<ElementOrJunction>;
     type: RelationType;
 }
 
@@ -432,7 +514,6 @@ export function isRelation(item: unknown): item is Relation {
 export interface RelationEdge extends AstNode {
     readonly $container: ArchiMateDiagram;
     readonly $type: 'RelationEdge';
-    customProperties: Array<CustomProperty>;
     id: string;
     relation: Reference<Relation>;
     sourceNode: Reference<ElementNode>;
@@ -642,13 +723,17 @@ export type CrossModelAstType = {
     CustomProperty: CustomProperty
     Element: Element
     ElementNode: ElementNode
+    ElementOrJunction: ElementOrJunction
     Entity: Entity
     EntityAttribute: EntityAttribute
     EntityNode: EntityNode
     EntityNodeAttribute: EntityNodeAttribute
     JoinCondition: JoinCondition
+    Junction: Junction
+    JunctionNode: JunctionNode
     Mapping: Mapping
     NumberLiteral: NumberLiteral
+    Property: Property
     Relation: Relation
     RelationEdge: RelationEdge
     Relationship: Relationship
@@ -669,11 +754,15 @@ export type CrossModelAstType = {
 export class CrossModelAstReflection extends AbstractAstReflection {
 
     getAllTypes(): string[] {
-        return [ArchiMateDiagram, Attribute, AttributeMapping, AttributeMappingSource, AttributeMappingTarget, BinaryExpression, BooleanExpression, CrossModelRoot, CustomProperty, Element, ElementNode, Entity, EntityAttribute, EntityNode, EntityNodeAttribute, JoinCondition, Mapping, NumberLiteral, Relation, RelationEdge, Relationship, RelationshipAttribute, RelationshipEdge, SourceObject, SourceObjectAttribute, SourceObjectAttributeReference, SourceObjectCondition, SourceObjectDependency, StringLiteral, SystemDiagram, TargetObject, TargetObjectAttribute, WithCustomProperties];
+        return [ArchiMateDiagram, Attribute, AttributeMapping, AttributeMappingSource, AttributeMappingTarget, BinaryExpression, BooleanExpression, CrossModelRoot, CustomProperty, Element, ElementNode, ElementOrJunction, Entity, EntityAttribute, EntityNode, EntityNodeAttribute, JoinCondition, Junction, JunctionNode, Mapping, NumberLiteral, Property, Relation, RelationEdge, Relationship, RelationshipAttribute, RelationshipEdge, SourceObject, SourceObjectAttribute, SourceObjectAttributeReference, SourceObjectCondition, SourceObjectDependency, StringLiteral, SystemDiagram, TargetObject, TargetObjectAttribute, WithCustomProperties];
     }
 
     protected override computeIsSubtype(subtype: string, supertype: string): boolean {
         switch (subtype) {
+            case Element:
+            case Junction: {
+                return this.isSubtype(ElementOrJunction, supertype);
+            }
             case EntityAttribute:
             case SourceObjectAttribute:
             case TargetObjectAttribute: {
@@ -706,9 +795,7 @@ export class CrossModelAstReflection extends AbstractAstReflection {
             case 'AttributeMappingTarget:value': {
                 return TargetObjectAttribute;
             }
-            case 'ElementNode:element':
-            case 'Relation:source':
-            case 'Relation:target': {
+            case 'ElementNode:element': {
                 return Element;
             }
             case 'Entity:superEntities':
@@ -719,8 +806,16 @@ export class CrossModelAstReflection extends AbstractAstReflection {
             case 'TargetObject:entity': {
                 return Entity;
             }
+            case 'Junction:relations':
             case 'RelationEdge:relation': {
                 return Relation;
+            }
+            case 'JunctionNode:junction': {
+                return Junction;
+            }
+            case 'Relation:source':
+            case 'Relation:target': {
+                return ElementOrJunction;
             }
             case 'RelationEdge:sourceNode':
             case 'RelationEdge:targetNode': {
@@ -752,11 +847,11 @@ export class CrossModelAstReflection extends AbstractAstReflection {
                 return {
                     name: ArchiMateDiagram,
                     properties: [
-                        { name: 'customProperties', defaultValue: [] },
                         { name: 'edges', defaultValue: [] },
                         { name: 'id' },
                         { name: 'name' },
-                        { name: 'nodes', defaultValue: [] }
+                        { name: 'nodes', defaultValue: [] },
+                        { name: 'properties', defaultValue: [] }
                     ]
                 };
             }
@@ -815,6 +910,7 @@ export class CrossModelAstReflection extends AbstractAstReflection {
                         { name: 'archiMateDiagram' },
                         { name: 'element' },
                         { name: 'entity' },
+                        { name: 'junction' },
                         { name: 'mapping' },
                         { name: 'relation' },
                         { name: 'relationship' },
@@ -835,10 +931,10 @@ export class CrossModelAstReflection extends AbstractAstReflection {
                 return {
                     name: Element,
                     properties: [
-                        { name: 'customProperties', defaultValue: [] },
-                        { name: 'description' },
+                        { name: 'documentation' },
                         { name: 'id' },
                         { name: 'name' },
+                        { name: 'properties', defaultValue: [] },
                         { name: 'type' }
                     ]
                 };
@@ -847,12 +943,9 @@ export class CrossModelAstReflection extends AbstractAstReflection {
                 return {
                     name: ElementNode,
                     properties: [
-                        { name: 'customProperties', defaultValue: [] },
-                        { name: 'description' },
                         { name: 'element' },
                         { name: 'height' },
                         { name: 'id' },
-                        { name: 'name' },
                         { name: 'width' },
                         { name: 'x' },
                         { name: 'y' }
@@ -896,6 +989,31 @@ export class CrossModelAstReflection extends AbstractAstReflection {
                     ]
                 };
             }
+            case Junction: {
+                return {
+                    name: Junction,
+                    properties: [
+                        { name: 'documentation' },
+                        { name: 'id' },
+                        { name: 'name' },
+                        { name: 'properties', defaultValue: [] },
+                        { name: 'relations', defaultValue: [] }
+                    ]
+                };
+            }
+            case JunctionNode: {
+                return {
+                    name: JunctionNode,
+                    properties: [
+                        { name: 'height' },
+                        { name: 'id' },
+                        { name: 'junction' },
+                        { name: 'width' },
+                        { name: 'x' },
+                        { name: 'y' }
+                    ]
+                };
+            }
             case Mapping: {
                 return {
                     name: Mapping,
@@ -915,14 +1033,24 @@ export class CrossModelAstReflection extends AbstractAstReflection {
                     ]
                 };
             }
+            case Property: {
+                return {
+                    name: Property,
+                    properties: [
+                        { name: 'id' },
+                        { name: 'name' },
+                        { name: 'value' }
+                    ]
+                };
+            }
             case Relation: {
                 return {
                     name: Relation,
                     properties: [
-                        { name: 'customProperties', defaultValue: [] },
-                        { name: 'description' },
+                        { name: 'documentation' },
                         { name: 'id' },
                         { name: 'name' },
+                        { name: 'properties', defaultValue: [] },
                         { name: 'source' },
                         { name: 'target' },
                         { name: 'type' }
@@ -933,7 +1061,6 @@ export class CrossModelAstReflection extends AbstractAstReflection {
                 return {
                     name: RelationEdge,
                     properties: [
-                        { name: 'customProperties', defaultValue: [] },
                         { name: 'id' },
                         { name: 'relation' },
                         { name: 'sourceNode' },

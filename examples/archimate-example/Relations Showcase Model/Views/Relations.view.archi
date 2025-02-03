@@ -1,0 +1,181 @@
+archiMateDiagram:
+    id: Relations
+    name: "Relations"
+    nodes:
+      - id: ApplicationCollaboration1Node
+        element: ApplicationCollaboration1
+        x: 110
+        y: 418
+        width: 250
+        height: 50
+      - id: ApplicationInterface1Node
+        element: ApplicationInterface1
+        x: 110
+        y: 231
+        width: 250
+        height: 50
+      - id: BusinessObjectNode
+        element: BusinessObject1
+        x: 407
+        y: 418
+        width: 250
+        height: 50
+      - id: BusinessObjectNode1
+        element: BusinessObject2
+        x: 407
+        y: 231
+        width: 250
+        height: 50
+      - id: Path1Node
+        element: Path1
+        x: 704
+        y: 418
+        width: 250
+        height: 50
+      - id: BusinessService1Node
+        element: BusinessService1
+        x: 704
+        y: 231
+        width: 250
+        height: 50
+      - id: CapabilityNode
+        element: Capability1
+        x: 1001
+        y: 418
+        width: 250
+        height: 50
+      - id: ConstraintNode
+        element: Constraint1
+        x: 1001
+        y: 231
+        width: 250
+        height: 50
+      - id: BusinessInterfaceNode
+        element: BusinessInterface1
+        x: 110
+        y: 781
+        width: 250
+        height: 50
+      - id: DistributionNetworkNode
+        element: DistributionNetwork1
+        x: 110
+        y: 594
+        width: 250
+        height: 50
+      - id: ApplicationComponentNode
+        element: ApplicationComponent1
+        x: 407
+        y: 781
+        width: 250
+        height: 50
+      - id: ArtifactNode
+        element: Artifact1
+        x: 407
+        y: 594
+        width: 250
+        height: 50
+      - id: GoalNode
+        element: Goal1
+        x: 704
+        y: 781
+        width: 250
+        height: 50
+      - id: ValueStreamNode
+        element: ValueStream1
+        x: 704
+        y: 594
+        width: 250
+        height: 50
+      - id: PrincipleNode
+        element: Principle1
+        x: 1001
+        y: 781
+        width: 250
+        height: 50
+      - id: AssessmentNode
+        element: Assessment1
+        x: 1001
+        y: 594
+        width: 250
+        height: 50
+      - id: DeviceNode
+        element: Device1
+        x: 110
+        y: 1100
+        width: 250
+        height: 50
+      - id: SystemSoftwareNode
+        element: SystemSoftware1
+        x: 110
+        y: 946
+        width: 250
+        height: 50
+      - id: NodeNode
+        element: Node1
+        x: 407
+        y: 1100
+        width: 250
+        height: 50
+      - id: ApplicationProcessNode
+        element: ApplicationProcess1
+        x: 407
+        y: 946
+        width: 250
+        height: 50
+      - id: WorkPackageNode
+        element: WorkPackage1
+        x: 704
+        y: 1100
+        width: 250
+        height: 50
+      - id: WorkPackageNode1
+        element: WorkPackage2
+        x: 704
+        y: 946
+        width: 250
+        height: 50
+    edges:
+      - id: ApplicationCollaboration1ToApplicationInterface1Edge
+        relation: ApplicationCollaboration1ToApplicationInterface1
+        sourceNode: ApplicationCollaboration1Node
+        targetNode: ApplicationInterface1Node
+      - id: BusinessObject1ToBusinessObject2Edge
+        relation: BusinessObject1ToBusinessObject2
+        sourceNode: BusinessObjectNode
+        targetNode: BusinessObjectNode1
+      - id: Path1ToBusinessService1Edge
+        relation: Path1ToBusinessService1
+        sourceNode: Path1Node
+        targetNode: BusinessService1Node
+      - id: Capability1ToConstraint1Edge
+        relation: Capability1ToConstraint1
+        sourceNode: CapabilityNode
+        targetNode: ConstraintNode
+      - id: BusinessInterface1ToDistributionNetwork1Edge
+        relation: BusinessInterface1ToDistributionNetwork1
+        sourceNode: BusinessInterfaceNode
+        targetNode: DistributionNetworkNode
+      - id: ApplicationComponent1ToArtifact1Edge
+        relation: ApplicationComponent1ToArtifact1
+        sourceNode: ApplicationComponentNode
+        targetNode: ArtifactNode
+      - id: Goal1ToValueStream1Edge
+        relation: Goal1ToValueStream1
+        sourceNode: GoalNode
+        targetNode: ValueStreamNode
+      - id: Principle1ToAssessment1Edge
+        relation: Principle1ToAssessment1
+        sourceNode: PrincipleNode
+        targetNode: AssessmentNode
+      - id: Device1ToSystemSoftware1Edge
+        relation: Device1ToSystemSoftware1
+        sourceNode: DeviceNode
+        targetNode: SystemSoftwareNode
+      - id: Node1ToApplicationProcess1Edge
+        relation: Node1ToApplicationProcess1
+        sourceNode: NodeNode
+        targetNode: ApplicationProcessNode
+      - id: WorkPackage1ToWorkPackage2Edge
+        relation: WorkPackage1ToWorkPackage2
+        sourceNode: WorkPackageNode
+        targetNode: WorkPackageNode1

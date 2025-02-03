@@ -44,9 +44,8 @@ export class ArchiMateDiagramDropElementOperationHandler extends JsonOperationHa
                },
                x: (x += 10),
                y: (y += 10),
-               width: 10,
-               height: 10,
-               customProperties: []
+               width: 200,
+               height: 50
             };
             container.nodes.push(node);
          }

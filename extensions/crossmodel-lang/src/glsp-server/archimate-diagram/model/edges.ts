@@ -15,8 +15,13 @@ export class GRelationEdge extends GEdge {
 
 export class GRelationEdgeBuilder extends GEdgeBuilder<GRelationEdge> {
    set(edge: RelationEdge, index: ArchiMateModelIndex): this {
+      const type = edge.relation.ref?.type;
+
+      if (type) {
+         this.type(ARCHIMATE_EDGE_TYPE_MAP.get(type));
+      }
+
       this.id(index.createId(edge));
-      this.type(edge.relation.ref?.type ? ARCHIMATE_EDGE_TYPE_MAP.get(edge.relation.ref?.type) : '');
       this.addCssClasses('diagram-edge', 'relation');
       this.addArg('edgePadding', 5);
       this.addArg(REFERENCE_CONTAINER_TYPE, RelationEdge);

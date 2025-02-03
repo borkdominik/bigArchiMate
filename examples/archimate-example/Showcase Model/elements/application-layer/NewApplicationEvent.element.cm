@@ -1,4 +1,0 @@
-element:
-    id: NewApplicationEvent
-    name: "ApplicationEvent"
-    type: ApplicationEvent

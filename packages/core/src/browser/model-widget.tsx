@@ -5,12 +5,14 @@
 import { ModelService, ModelServiceClient } from '@crossbreeze/model-service/lib/common';
 import { CrossModelDocument, CrossModelRoot, ModelDiagnostic, ModelUpdatedEvent, RenderProps } from '@crossbreeze/protocol';
 import {
+   ElementComponent,
    EntityComponent,
    ErrorView,
    MappingComponent,
    MappingRenderProps,
    ModelProviderProps,
    OpenCallback,
+   RelationComponent,
    RelationshipComponent,
    SaveCallback,
    SourceObjectComponent,
@@ -195,6 +197,12 @@ export class CrossModelWidget extends ReactWidget implements Saveable {
    render(): React.ReactNode {
       if (this.document?.root?.entity) {
          return <EntityComponent {...this.getModelProviderProps()} {...this.getRenderProperties()} />;
+      }
+      if (this.document?.root?.element) {
+         return <ElementComponent {...this.getModelProviderProps()} {...this.getRenderProperties()} />;
+      }
+      if (this.document?.root?.relation) {
+         return <RelationComponent {...this.getModelProviderProps()} {...this.getRenderProperties()} />;
       }
       if (this.document?.root?.relationship) {
          return <RelationshipComponent {...this.getModelProviderProps()} {...this.getRenderProperties()} />;

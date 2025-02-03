@@ -3,13 +3,18 @@
  ********************************************************************************/
 import { ARCHIMATE_EDGE_TYPE_MAP, ARCHIMATE_NODE_TYPE_MAP, ELEMENT_ICON_TYPE, ELEMENT_LABEL_TYPE } from '@crossbreeze/protocol';
 import {
+   bindAsService,
+   bindOrRebind,
    configureDefaultModelElements,
    configureModelElement,
    ContainerConfiguration,
+   DeleteElementContextMenuItemProvider,
    editLabelFeature,
    GLabelView,
    gridModule,
+   GridSnapper,
    initializeDiagramContainer,
+   TYPES,
    withEditLabelFeature
 } from '@eclipse-glsp/client';
 import { GLSPDiagramConfiguration } from '@eclipse-glsp/theia-integration';
@@ -61,11 +66,13 @@ const archiMateDiagramModule = createCrossModelDiagramModule((bind, unbind, isBo
    // Use GLSP default model elements and their views
    // For example the model element with type 'node' (DefaultTypes.NODE) is represented by an SNode and rendered as RoundedCornerNodeView
    configureDefaultModelElements(context);
+   bindOrRebind(context, TYPES.ISnapper).to(GridSnapper);
+   bindAsService(context, TYPES.IContextMenuItemProvider, DeleteElementContextMenuItemProvider);
 
    // Bind views that can be rendered by the client-side
    // The glsp-server can send a request to render a specific view given a type, e.g. node:element
    // The model class holds the client-side model and properties
-   // The view class shows how to draw the svg element given the properties of the model class
+   // The view class shows how to draw the svg belement given the properties of the model class
 
    ARCHIMATE_NODE_TYPE_MAP.values().forEach(nodeType => {
       const concept = ARCHIMATE_NODE_TYPE_MAP.getReverse(nodeType);

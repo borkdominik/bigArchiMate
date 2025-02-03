@@ -1,4 +1,8 @@
 { 
-    "name": "Base Model",
-    "version": "1.0.0" 
+    "name": "BaseModel",
+    "version": "1.0.0" ,
+    "dependencies": {
+        "BaseModel2": "1.0.0",
+        "ElementsShowcaseModel": "1.0.0"
+    }
 }

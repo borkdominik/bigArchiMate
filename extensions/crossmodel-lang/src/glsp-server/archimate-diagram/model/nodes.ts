@@ -5,14 +5,14 @@ import {
    ARCHIMATE_NODE_TYPE_MAP,
    ELEMENT_ICON_TYPE,
    ELEMENT_LABEL_TYPE,
+   elementMetadataMap,
    REFERENCE_CONTAINER_TYPE,
    REFERENCE_PROPERTY,
-   REFERENCE_VALUE
+   REFERENCE_VALUE,
+   toKebabCase
 } from '@crossbreeze/protocol';
 import { ArgsUtil, GCompartment, GNode, GNodeBuilder } from '@eclipse-glsp/server';
-import { elementMetadataMap } from '../../../archimate-metadata.js';
 import { ElementNode } from '../../../language-server/generated/ast.js';
-import { toKebabCase } from '../../../util.js';
 import { createHeader } from '../../common/nodes.js';
 import { ArchiMateModelIndex } from './archimate-model-index.js';
 

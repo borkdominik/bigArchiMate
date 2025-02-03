@@ -11,13 +11,17 @@ import {
    AttributeMapping,
    CrossModelAstType,
    Entity,
+   isArchiMateDiagram,
+   isElement,
    isEntity,
    isEntityAttribute,
    isMapping,
+   isRelation,
    isRelationship,
    isSystemDiagram,
    Mapping,
    Relation,
+   RelationEdge,
    Relationship,
    RelationshipEdge,
    SourceObject,
@@ -64,7 +68,8 @@ export function registerValidationChecks(services: CrossModelServices): void {
       SourceObjectCondition: validator.checkSourceObjectCondition,
       SourceObjectDependency: validator.checkSourceObjectDependency,
       TargetObject: validator.checkTargetObject,
-      Relation: validator.checkRelation
+      Relation: validator.checkRelation,
+      RelationEdge: validator.checkRelationEdge
    };
    registry.register(checks, validator);
 }
@@ -123,7 +128,16 @@ export class CrossModelValidator {
 
    protected isExportedGlobally(node: AstNode): boolean {
       // we export anything with an id from entities and relationships and all root nodes, see CrossModelScopeComputation
-      return isEntity(node) || isEntityAttribute(node) || isRelationship(node) || isSystemDiagram(node) || isMapping(node);
+      return (
+         isEntity(node) ||
+         isEntityAttribute(node) ||
+         isRelationship(node) ||
+         isSystemDiagram(node) ||
+         isMapping(node) ||
+         isElement(node) ||
+         isRelation(node) ||
+         isArchiMateDiagram(node)
+      );
    }
 
    protected checkUniqueNodeId(node: AstNode, accept: ValidationAcceptor): void {
@@ -133,6 +147,10 @@ export class CrossModelValidator {
       }
       if (isMapping(node)) {
          this.markDuplicateIds(node.sources, accept);
+      }
+      if (isArchiMateDiagram(node)) {
+         this.markDuplicateIds(node.edges, accept);
+         this.markDuplicateIds(node.nodes, accept);
       }
    }
 
@@ -235,6 +253,15 @@ export class CrossModelValidator {
    checkRelation(relation: Relation, accept: ValidationAcceptor): void {
       if (!RelationValidator.isValidTarget(relation.type, relation.source.ref?.type, relation.target.ref?.type)) {
          accept('error', 'Invalid relation.', { node: relation, property: 'type' });
+      }
+   }
+
+   checkRelationEdge(edge: RelationEdge, accept: ValidationAcceptor): void {
+      if (edge.sourceNode?.ref?.element?.ref?.$type !== edge.relation?.ref?.source?.ref?.$type) {
+         accept('error', 'Source must match type of parent.', { node: edge, property: 'sourceNode' });
+      }
+      if (edge.targetNode?.ref?.element?.ref?.$type !== edge.relation?.ref?.target?.ref?.$type) {
+         accept('error', 'Target must match type of child.', { node: edge, property: 'targetNode' });
       }
    }
 

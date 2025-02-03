@@ -67,6 +67,10 @@ export function findNextUnique<T>(suggestion: string, existing: T[], nameGetter:
    return name;
 }
 
+/**
+ * A reversible map that maps keys to values and values to keys.
+ * This map can be used to map between two sets of strings and get the value for a key and the key for a value.
+ */
 export class ReversibleMap<K extends string, V extends string> {
    private forwardMap: Record<K, V>;
    private reverseMap: Record<V, K>;
@@ -83,19 +87,46 @@ export class ReversibleMap<K extends string, V extends string> {
       );
    }
 
+   /**
+    * Returns the value associated with the key.
+    * @param key the key
+    * @returns the value associated with the key
+    */
    get(key: K): V {
       return this.forwardMap[key];
    }
 
+   /**
+    * Returns the key associated with the value.
+    * @param value the value
+    * @returns the key associated with the value
+    */
    getReverse(value: V): K {
       return this.reverseMap[value];
    }
 
+   /**
+    * Returns all keys of the map.
+    * @returns all keys of the map
+    */
    keys(): K[] {
       return Object.keys(this.forwardMap) as K[];
    }
 
+   /**
+    * Returns all values of the map.
+    * @returns all values of the map
+    */
    values(): V[] {
       return Object.values(this.forwardMap) as V[];
    }
+}
+
+/**
+ * Converts a string to kebab case.
+ * @param input the input string
+ * @returns the kebab case string
+ */
+export function toKebabCase(input: string): string {
+   return input.replace(/([A-Z])/g, (match, offset) => (offset === 0 ? match.toLowerCase() : '-' + match.toLowerCase())).replace(/^-/, '');
 }

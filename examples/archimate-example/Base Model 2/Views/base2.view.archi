@@ -1,0 +1,16 @@
+archiMateDiagram:
+    id: Base2
+    name: "Base"
+    nodes:
+      - id: ApplicationProcess2Node
+        element: BaseModel.ApplicationProcess2
+        x: 436.28497314453125
+        y: 546.9999961853027
+        width: 200
+        height: 50
+      - id: ApplicationInteraction1Node
+        element: BaseModel.ApplicationInteraction1
+        x: 476.28497314453125
+        y: 313.99999618530273
+        width: 200
+        height: 50

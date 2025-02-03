@@ -1,0 +1,4 @@
+element:
+    id: ApplicationFunction3
+    name: "ApplicationFunction"
+    type: ApplicationFunction

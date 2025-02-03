@@ -5,6 +5,7 @@ import {
    ActionHandlerConstructor,
    BindingTarget,
    ContextActionsProvider,
+   ContextMenuItemProvider,
    DiagramConfiguration,
    DiagramModule,
    GModelFactory,
@@ -26,10 +27,12 @@ import { CrossModelStorage } from '../common/cross-model-storage.js';
 import { CrossModelSubmissionHandler } from '../common/cross-model-submission-handler.js';
 import { ArchiMateDiagramConfiguration } from './archimate-diagram-configuration.js';
 import { ArchiMateDiagramAddElementActionProvider } from './command-palette/add-element-action-provider.js';
+import { ArchiMateContextMenuItemProvider } from './context-menu/context-menu-item-provider.js';
 import { ArchiMateDiagramAddElementOperationHandler } from './handler/add-element-operation-handler.js';
 import { ArchiMateDiagramApplyLabelEditOperationHandler } from './handler/apply-edit-operation-handler.js';
 import { ArchiMateDiagramChangeBoundsOperationHandler } from './handler/change-bounds-operation-handler.js';
 import { ArchiMateDiagramCreateElementOperationHandler } from './handler/create-element-operation-handler.js';
+import { ArchiMateDiagramCreateJunctionOperationHandler } from './handler/create-junction-operation-handler.js';
 import { ArchiMateDiagramCreateRelationOperationHandler } from './handler/create-relation-operation-handler.js';
 import { ArchiMateDiagramDeleteOperationHandler } from './handler/delete-operation-handler.js';
 import { ArchiMateDiagramDropElementOperationHandler } from './handler/drop-element-operation-handler.js';
@@ -66,6 +69,7 @@ export class ArchiMateDiagramModule extends DiagramModule {
       binding.add(ArchiMateDiagramDropElementOperationHandler);
       binding.add(ArchiMateDiagramAddElementOperationHandler);
       binding.add(ArchiMateDiagramCreateElementOperationHandler);
+      binding.add(ArchiMateDiagramCreateJunctionOperationHandler);
       binding.add(ArchiMateDiagramApplyLabelEditOperationHandler);
    }
 
@@ -95,5 +99,9 @@ export class ArchiMateDiagramModule extends DiagramModule {
 
    protected override bindToolPaletteItemProvider(): BindingTarget<ToolPaletteItemProvider> | undefined {
       return ArchiMateToolPaletteProvider;
+   }
+
+   protected override bindContextMenuItemProvider(): BindingTarget<ContextMenuItemProvider> | undefined {
+      return ArchiMateContextMenuItemProvider;
    }
 }

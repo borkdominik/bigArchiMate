@@ -1,0 +1,4 @@
+element:
+    id: BusinessInteraction
+    name: "BusinessInteraction"
+    type: BusinessInteraction

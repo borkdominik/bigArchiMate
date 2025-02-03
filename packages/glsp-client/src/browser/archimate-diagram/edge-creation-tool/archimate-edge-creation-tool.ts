@@ -40,7 +40,6 @@ export class ArchiMateEdgeCreationToolMouseListener extends EdgeCreationToolMous
       this.actionDispatcher
          .request(RequestCheckEdgeAction.create({ edgeType: this.proxyEdge.type, sourceElement, targetElement }))
          .then(result => {
-            console.log('result: ', result);
             if (this.pendingDynamicCheck) {
                this.allowedTarget = result.isValid;
                this.actionDispatcher.dispatch(this.updateEdgeFeedback());

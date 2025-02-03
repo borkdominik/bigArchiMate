@@ -14,14 +14,14 @@ export class ArchiMateDiagramDeleteOperationHandler extends JsonOperationHandler
    @inject(ModelState) protected override modelState!: ArchiMateModelState;
 
    override createCommand(operation: DeleteElementOperation): Command | undefined {
-      const deleteInfo = this.findElementsToDelete(operation);
+      const deleteInfo = this.findComponentsToRemove(operation);
       if (deleteInfo.nodes.length === 0 && deleteInfo.edges.length === 0) {
          return undefined;
       }
-      return new CrossModelCommand(this.modelState, () => this.deleteElements(deleteInfo));
+      return new CrossModelCommand(this.modelState, () => this.removeComponents(deleteInfo));
    }
 
-   protected deleteElements(deleteInfo: DeleteInfo): void {
+   protected removeComponents(deleteInfo: DeleteInfo): void {
       const nodes = this.modelState.archiMateDiagram.nodes;
       remove(nodes, ...deleteInfo.nodes);
 
@@ -29,28 +29,28 @@ export class ArchiMateDiagramDeleteOperationHandler extends JsonOperationHandler
       remove(edges, ...deleteInfo.edges);
    }
 
-   protected findElementsToDelete(operation: DeleteElementOperation): DeleteInfo {
+   protected findComponentsToRemove(operation: DeleteElementOperation): DeleteInfo {
       const deleteInfo: DeleteInfo = { edges: [], nodes: [] };
 
       for (const elementId of operation.elementIds) {
-         const element = this.modelState.index.findSemanticElement(elementId, isDiagramElement);
+         const diagramComponent = this.modelState.index.findSemanticElement(elementId, isDiagramComponent);
          // simply remove any diagram nodes or edges from the diagram
-         if (isElementNode(element)) {
-            deleteInfo.nodes.push(element);
+         if (isElementNode(diagramComponent)) {
+            deleteInfo.nodes.push(diagramComponent);
             deleteInfo.edges.push(
                ...this.modelState.archiMateDiagram.edges.filter(
-                  edge => edge.sourceNode?.ref === element || edge.targetNode?.ref === element
+                  edge => edge.sourceNode?.ref === diagramComponent || edge.targetNode?.ref === diagramComponent
                )
             );
-         } else if (isRelationEdge(element)) {
-            deleteInfo.edges.push(element);
+         } else if (isRelationEdge(diagramComponent)) {
+            deleteInfo.edges.push(diagramComponent);
          }
       }
       return deleteInfo;
    }
 }
 
-function isDiagramElement(item: unknown): item is RelationEdge | ElementNode {
+function isDiagramComponent(item: unknown): item is RelationEdge | ElementNode {
    return isRelationEdge(item) || isElementNode(item);
 }
 

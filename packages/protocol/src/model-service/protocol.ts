@@ -2,6 +2,7 @@
  * Copyright (c) 2023 CrossBreeze.
  ********************************************************************************/
 import * as rpc from 'vscode-jsonrpc/node';
+import { ElementType, RelationType } from '../glsp/types';
 
 export const CrossModelRegex = {
    STRING: /^"[^"]*"$|^'[^']*'$/,
@@ -46,6 +47,8 @@ export interface CrossModelRoot extends CrossModelElement {
    entity?: Entity;
    relationship?: Relationship;
    mapping?: Mapping;
+   element?: Element;
+   relation?: Relation;
 }
 
 export function isCrossModelRoot(model?: any): model is CrossModelRoot {
@@ -70,6 +73,31 @@ export const EntityAttributeType = 'EntityAttribute';
 export interface EntityAttribute extends Attribute, WithCustomProperties {
    readonly $type: typeof EntityAttributeType;
    identifier?: boolean;
+}
+
+export const PropertyType = 'Property';
+
+export interface Property extends CrossModelElement, Identifiable {
+   readonly $type: typeof PropertyType;
+   value?: string;
+   name?: string;
+}
+
+export interface Element extends CrossModelElement, Identifiable {
+   readonly $type: 'Element';
+   name?: string;
+   documentation?: string;
+   type: ElementType;
+   properties: Array<Property>;
+}
+export interface Relation extends CrossModelElement, Identifiable {
+   readonly $type: 'Relation';
+   name?: string;
+   documentation?: string;
+   type: RelationType;
+   source: Reference<Element>;
+   target: Reference<Element>;
+   properties: Array<Property>;
 }
 
 export const RelationshipType = 'Relationship';

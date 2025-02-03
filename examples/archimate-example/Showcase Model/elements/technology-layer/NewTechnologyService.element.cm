@@ -1,4 +1,0 @@
-element:
-    id: NewTechnologyService
-    name: "TechnologyService"
-    type: TechnologyService

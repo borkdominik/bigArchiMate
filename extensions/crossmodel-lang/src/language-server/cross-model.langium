@@ -15,4 +15,5 @@ entry CrossModelRoot:
     mapping=Mapping |
     element=Element |
     relation=Relation |
+    junction=Junction |
     archiMateDiagram=ArchiMateDiagram)?;

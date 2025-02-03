@@ -1,4 +1,0 @@
-element:
-    id: NewTechnologyEvent
-    name: "TechnologyEvent"
-    type: TechnologyEvent

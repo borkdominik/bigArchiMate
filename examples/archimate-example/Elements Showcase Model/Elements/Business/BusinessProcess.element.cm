@@ -1,0 +1,4 @@
+element:
+    id: BusinessProcess
+    name: "BusinessProcess"
+    type: BusinessProcess

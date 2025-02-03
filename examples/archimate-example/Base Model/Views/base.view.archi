@@ -1,0 +1,40 @@
+archiMateDiagram:
+    id: Base
+    name: "Base"
+    nodes:
+      - id: BusinessActorNode
+        element: BusinessActor1
+        x: 253
+        y: -33
+        width: 200
+        height: 50
+      - id: DataObjectNode
+        element: DataObject2
+        x: 583
+        y: -209
+        width: 200
+        height: 50
+      - id: DriverNode
+        element: Driver1
+        x: 275
+        y: -176
+        width: 200
+        height: 50
+      - id: ApplicationComponentNode
+        element: ElementsShowcaseModel.ApplicationComponent
+        x: 209
+        y: 99
+        width: 200
+        height: 50
+      - id: ApplicationProcess2Node
+        element: ApplicationProcess2
+        x: 627
+        y: -22
+        width: 200
+        height: 50
+      - id: DataObject1Node
+        element: DataObject1
+        x: 329.03906977193725
+        y: 306.97889361694286
+        width: 200
+        height: 50

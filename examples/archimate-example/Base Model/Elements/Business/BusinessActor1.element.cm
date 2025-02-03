@@ -1,0 +1,4 @@
+element:
+    id: BusinessActor1
+    name: "BusinessActor"
+    type: BusinessActor

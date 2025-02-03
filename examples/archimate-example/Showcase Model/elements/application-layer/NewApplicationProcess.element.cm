@@ -1,4 +1,0 @@
-element:
-    id: NewApplicationProcess
-    name: "ApplicationProcess"
-    type: ApplicationProcess

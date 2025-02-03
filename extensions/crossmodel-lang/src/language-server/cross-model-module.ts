@@ -31,6 +31,7 @@ import { DefaultIdProvider } from './cross-model-naming.js';
 import { CrossModelPackageManager } from './cross-model-package-manager.js';
 import { CrossModelScopeProvider } from './cross-model-scope-provider.js';
 import { CrossModelScopeComputation } from './cross-model-scope.js';
+import { CrossModelSemanticTokenProvider } from './cross-model-semantic-token-provider.js';
 import { CrossModelSerializer } from './cross-model-serializer.js';
 import { CrossModelValidator, registerValidationChecks } from './cross-model-validator.js';
 import { CrossModelWorkspaceManager } from './cross-model-workspace-manager.js';
@@ -152,6 +153,7 @@ export interface CrossModelAddedServices {
    };
    lsp: {
       /* implement */ CodeActionProvider: CrossModelCodeActionProvider;
+      SemanticTokenProvider: CrossModelSemanticTokenProvider;
    };
    /* override */ shared: CrossModelSharedServices;
 }
@@ -185,7 +187,8 @@ export function createCrossModelModule(
       lsp: {
          CodeActionProvider: () => new CrossModelCodeActionProvider(),
          CompletionProvider: services => new CrossModelCompletionProvider(services),
-         Formatter: () => new CrossModelModelFormatter()
+         Formatter: () => new CrossModelModelFormatter(),
+         SemanticTokenProvider: services => new CrossModelSemanticTokenProvider(services)
       },
       serializer: {
          Serializer: services => new CrossModelSerializer(services.Grammar)

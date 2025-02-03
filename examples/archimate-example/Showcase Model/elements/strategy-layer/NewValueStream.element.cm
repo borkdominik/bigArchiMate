@@ -1,4 +1,0 @@
-element:
-    id: NewValueStream
-    name: "ValueStream"
-    type: ValueStream

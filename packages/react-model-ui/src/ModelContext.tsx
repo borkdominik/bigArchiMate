@@ -4,10 +4,12 @@
 import {
    CrossModelRoot,
    CrossReferenceContext,
+   Element,
    Entity,
    Mapping,
    ModelDiagnostic,
    ReferenceableElement,
+   Relation,
    Relationship
 } from '@crossbreeze/protocol';
 import * as React from 'react';
@@ -74,6 +76,14 @@ export function useReadonly(): boolean {
 
 export function useEntity(): Entity {
    return useModel().entity!;
+}
+
+export function useElement(): Element {
+   return useModel().element!;
+}
+
+export function useRelation(): Relation {
+   return useModel().relation!;
 }
 
 export function useRelationship(): Relationship {

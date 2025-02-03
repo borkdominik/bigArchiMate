@@ -8,12 +8,12 @@
    --sprotty-border: var(--theia-editor-foreground);
 
    /* Taken from https://www.archimatetool.com/downloads/colour-schemes/ArchiMate%20Standard%20-%203.2.prefs */
-   --bg-application-layer: #b5ffff;
-   --bg-business-layer: #ffffb5;
-   --bg-implementation-and-migration-layer: #ffe0e0;
-   --bg-motivation-layer: #ccccff;
-   --bg-strategy-layer: #f5deaa;
-   --bg-technology-layer: #c9e7b7;
+   --bg-application: #b5ffff;
+   --bg-business: #ffffb5;
+   --bg-implementation-and-migration: #ffe0e0;
+   --bg-motivation: #ccccff;
+   --bg-strategy: #f5deaa;
+   --bg-technology: #c9e7b7;
 }
 
 /* Standard sprotty */
@@ -197,34 +197,34 @@
    width: 100%;
 }
 
-.bg-application-layer > rect,
-.bg-application-layer > path {
-   fill: var(--bg-application-layer);
+.bg-application > rect,
+.bg-application > path {
+   fill: var(--bg-application);
 }
 
-.bg-business-layer > rect,
-.bg-business-layer > path {
-   fill: var(--bg-business-layer);
+.bg-business > rect,
+.bg-business > path {
+   fill: var(--bg-business);
 }
 
-.bg-implementation-and-migration-layer > rect,
-.bg-implementation-and-migration-layer > path {
-   fill: var(--bg-implementation-and-migration-layer);
+.bg-implementation-and-migration > rect,
+.bg-implementation-and-migration > path {
+   fill: var(--bg-implementation-and-migration);
 }
 
-.bg-motivation-layer > rect,
-.bg-motivation-layer > path {
-   fill: var(--bg-motivation-layer);
+.bg-motivation > rect,
+.bg-motivation > path {
+   fill: var(--bg-motivation);
 }
 
-.bg-strategy-layer > rect,
-.bg-strategy-layer > path {
-   fill: var(--bg-strategy-layer);
+.bg-strategy > rect,
+.bg-strategy > path {
+   fill: var(--bg-strategy);
 }
 
-.bg-technology-layer > rect,
-.bg-technology-layer > path {
-   fill: var(--bg-technology-layer);
+.bg-technology > rect,
+.bg-technology > path {
+   fill: var(--bg-technology);
 }
 
 .tool-palette .group-header {
@@ -232,32 +232,56 @@
    padding: 4px;
 }
 
-.tool-palette .palette-body #application-layer-group > .group-header,
-.tool-palette .palette-body #application-layer-group .tool-button {
-   color: var(--bg-application-layer);
+.tool-palette .palette-body #application-group > .group-header,
+.tool-palette .palette-body #application-group .tool-button {
+   color: var(--bg-application);
 }
 
-.tool-palette .palette-body #business-layer-group > .group-header,
-.tool-palette .palette-body #business-layer-group .tool-button {
-   color: var(--bg-business-layer);
+.tool-palette .palette-body #business-group > .group-header,
+.tool-palette .palette-body #business-group .tool-button {
+   color: var(--bg-business);
 }
 
-.tool-palette .palette-body #implementation-and-migration-layer-group > .group-header,
-.tool-palette .palette-body #implementation-and-migration-layer-group .tool-button {
-   color: var(--bg-implementation-and-migration-layer);
+.tool-palette .palette-body #implementation-and-migration-group > .group-header,
+.tool-palette .palette-body #implementation-and-migration-group .tool-button {
+   color: var(--bg-implementation-and-migration);
 }
 
-.tool-palette .palette-body #motivation-layer-group > .group-header,
-.tool-palette .palette-body #motivation-layer-group .tool-button {
-   color: var(--bg-motivation-layer);
+.tool-palette .palette-body #motivation-group > .group-header,
+.tool-palette .palette-body #motivation-group .tool-button {
+   color: var(--bg-motivation);
 }
 
-.tool-palette .palette-body #strategy-layer-group > .group-header,
-.tool-palette .palette-body #strategy-layer-group .tool-button {
-   color: var(--bg-strategy-layer);
+.tool-palette .palette-body #strategy-group > .group-header,
+.tool-palette .palette-body #strategy-group .tool-button {
+   color: var(--bg-strategy);
 }
 
-.tool-palette .palette-body #technology-layer-group > .group-header,
-.tool-palette .palette-body #technology-layer-group .tool-button {
-   color: var(--bg-technology-layer);
+.tool-palette .palette-body #technology-group > .group-header,
+.tool-palette .palette-body #technology-group .tool-button {
+   color: var(--bg-technology);
+}
+
+.sprotty-edge.realization :not(.arrow),
+.sprotty-edge.access :not(.arrow) {
+   stroke-dasharray: 3px 3px;
+}
+
+.sprotty-edge.influence :not(.arrow),
+.sprotty-edge.flow :not(.arrow) {
+   stroke-dasharray: 10px 3px;
+}
+
+.sprotty-edge.triggering .arrow,
+.sprotty-edge.flow .arrow,
+.sprotty-edge.assignment .arrow,
+.sprotty-edge.composition .arrow,
+.sprotty-edge .circle {
+   fill: #6d6d6d;
+}
+
+.sprotty-edge.serving .arrow,
+.sprotty-edge.access .arrow,
+.sprotty-edge.influence .arrow {
+   fill: none;
 }

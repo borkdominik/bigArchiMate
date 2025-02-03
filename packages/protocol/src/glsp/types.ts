@@ -3,7 +3,7 @@
  ********************************************************************************/
 
 import { Args, DefaultTypes } from '@eclipse-glsp/protocol';
-import { ReversibleMap } from '../util';
+import { ReversibleMap, toKebabCase } from '../util';
 
 // System Diagram
 export const ENTITY_NODE_TYPE = DefaultTypes.NODE + ':entity';
@@ -22,85 +22,168 @@ export const ATTRIBUTE_COMPARTMENT_TYPE = DefaultTypes.COMPARTMENT + ':attribute
 export const ELEMENT_LABEL_TYPE = DefaultTypes.LABEL + ':element';
 export const ELEMENT_ICON_TYPE = 'icon';
 
+export const layerTypes = ['Application', 'Business', 'ImplementationAndMigration', 'Motivation', 'Strategy', 'Technology'] as const;
+
+export type LayerType = (typeof layerTypes)[number];
+
+/**
+ * A list of all ArchiMate element types.
+ */
+export const elementTypes = [
+   'ApplicationCollaboration',
+   'ApplicationComponent',
+   'ApplicationEvent',
+   'ApplicationFunction',
+   'ApplicationInteraction',
+   'ApplicationInterface',
+   'ApplicationProcess',
+   'ApplicationService',
+   'Artifact',
+   'Assessment',
+   'BusinessActor',
+   'BusinessCollaboration',
+   'BusinessEvent',
+   'BusinessFunction',
+   'BusinessInteraction',
+   'BusinessInterface',
+   'BusinessObject',
+   'BusinessProcess',
+   'BusinessRole',
+   'BusinessService',
+   'Capability',
+   'CommunicationNetwork',
+   'Constraint',
+   'Contract',
+   'CourseOfAction',
+   'DataObject',
+   'Deliverable',
+   'Device',
+   'DistributionNetwork',
+   'Driver',
+   'Equipment',
+   'Facility',
+   'Gap',
+   'Goal',
+   'ImplementationEvent',
+   'Material',
+   'Meaning',
+   'Node',
+   'Outcome',
+   'Path',
+   'Plateau',
+   'Principle',
+   'Product',
+   'Representation',
+   'Requirement',
+   'Resource',
+   'Stakeholder',
+   'SystemSoftware',
+   'TechnologyCollaboration',
+   'TechnologyEvent',
+   'TechnologyFunction',
+   'TechnologyInteraction',
+   'TechnologyInterface',
+   'TechnologyProcess',
+   'TechnologyService',
+   'Value',
+   'ValueStream',
+   'WorkPackage'
+] as const;
+
+/**
+ * A type of an ArchiMate element.
+ */
+export type ElementType = (typeof elementTypes)[number];
+
+/**
+ * A map of ArchiMate element types to GLSP node types.
+ * The node type is prefixed with the default node type.
+ * For example, the element type 'ApplicationComponent' is mapped to 'node:application-component'.
+ */
+const ARCHIMATE_ELEMENT_TO_NODE_MAP: Record<ElementType, string> = elementTypes.reduce(
+   (map, elementType) => {
+      map[elementType] = DefaultTypes.NODE + ':' + toKebabCase(elementType);
+      return map;
+   },
+   {} as Record<ElementType, string>
+);
+
 /**
  * A reversible map of ArchiMate element types to GLSP node types.
  */
-export const ARCHIMATE_NODE_TYPE_MAP = new ReversibleMap({
-   ApplicationCollaboration: DefaultTypes.NODE + ':application-collaboration',
-   ApplicationComponent: DefaultTypes.NODE + ':application-component',
-   ApplicationEvent: DefaultTypes.NODE + ':application-event',
-   ApplicationFunction: DefaultTypes.NODE + ':application-function',
-   ApplicationInterface: DefaultTypes.NODE + ':application-interface',
-   ApplicationInteraction: DefaultTypes.NODE + ':application-interaction',
-   ApplicationProcess: DefaultTypes.NODE + ':application-process',
-   ApplicationService: DefaultTypes.NODE + ':application-service',
-   Artifact: DefaultTypes.NODE + ':artifact',
-   Assessment: DefaultTypes.NODE + ':assessment',
-   BusinessActor: DefaultTypes.NODE + ':business-actor',
-   BusinessCollaboration: DefaultTypes.NODE + ':business-collaboration',
-   BusinessEvent: DefaultTypes.NODE + ':business-event',
-   BusinessFunction: DefaultTypes.NODE + ':business-function',
-   BusinessInteraction: DefaultTypes.NODE + ':business-interaction',
-   BusinessInterface: DefaultTypes.NODE + ':business-interface',
-   BusinessObject: DefaultTypes.NODE + ':business-object',
-   BusinessProcess: DefaultTypes.NODE + ':business-process',
-   BusinessRole: DefaultTypes.NODE + ':business-role',
-   BusinessService: DefaultTypes.NODE + ':business-service',
-   Capability: DefaultTypes.NODE + ':capability',
-   Constraint: DefaultTypes.NODE + ':constraint',
-   CommunicationNetwork: DefaultTypes.NODE + ':communication-network',
-   Contract: DefaultTypes.NODE + ':contract',
-   CourseOfAction: DefaultTypes.NODE + ':course-of-action',
-   DataObject: DefaultTypes.NODE + ':data-object',
-   Deliverable: DefaultTypes.NODE + ':deliverable',
-   Device: DefaultTypes.NODE + ':device',
-   DistributionNetwork: DefaultTypes.NODE + ':distribution-network',
-   Driver: DefaultTypes.NODE + ':driver',
-   Equipment: DefaultTypes.NODE + ':equipment',
-   Facility: DefaultTypes.NODE + ':facility',
-   Gap: DefaultTypes.NODE + ':gap',
-   Goal: DefaultTypes.NODE + ':goal',
-   ImplementationEvent: DefaultTypes.NODE + ':implementation-event',
-   Material: DefaultTypes.NODE + ':material',
-   Meaning: DefaultTypes.NODE + ':meaning',
-   Node: DefaultTypes.NODE + ':node',
-   Outcome: DefaultTypes.NODE + ':outcome',
-   Path: DefaultTypes.NODE + ':path',
-   Plateau: DefaultTypes.NODE + ':plateau',
-   Principle: DefaultTypes.NODE + ':principle',
-   Product: DefaultTypes.NODE + ':product',
-   Requirement: DefaultTypes.NODE + ':requirement',
-   Representation: DefaultTypes.NODE + ':representation',
-   Resource: DefaultTypes.NODE + ':resource',
-   Stakeholder: DefaultTypes.NODE + ':stakeholder',
-   SystemSoftware: DefaultTypes.NODE + ':system-software',
-   TechnologyCollaboration: DefaultTypes.NODE + ':technology-collaboration',
-   TechnologyEvent: DefaultTypes.NODE + ':technology-event',
-   TechnologyFunction: DefaultTypes.NODE + ':technology-function',
-   TechnologyInteraction: DefaultTypes.NODE + ':technology-interaction',
-   TechnologyInterface: DefaultTypes.NODE + ':technology-interface',
-   TechnologyProcess: DefaultTypes.NODE + ':technology-process',
-   TechnologyService: DefaultTypes.NODE + ':technology-service',
-   Value: DefaultTypes.NODE + ':value',
-   ValueStream: DefaultTypes.NODE + ':value-stream',
-   WorkPackage: DefaultTypes.NODE + ':work-package'
-});
+export const ARCHIMATE_NODE_TYPE_MAP = new ReversibleMap(ARCHIMATE_ELEMENT_TO_NODE_MAP);
+
+/**
+ * A list of all ArchiMate relation types.
+ */
+export const relationTypes = [
+   'Access',
+   'Aggregation',
+   'Assignment',
+   'Association',
+   'Composition',
+   'Flow',
+   'Influence',
+   'Realization',
+   'Serving',
+   'Specialization',
+   'Triggering'
+] as const;
+
+/**
+ * A type of an ArchiMate relation.
+ */
+export type RelationType = (typeof relationTypes)[number];
+
+/**
+ * A map of ArchiMate relation types to GLSP edge types.
+ * The edge type is prefixed with the default edge type.
+ * For example, the relation type 'Access' is mapped to 'edge:access'.
+ */
+const ARCHIMATE_RELATION_TO_EDGE_MAP: Record<RelationType, string> = relationTypes.reduce(
+   (map, relationType) => {
+      map[relationType] = DefaultTypes.EDGE + ':' + toKebabCase(relationType);
+      return map;
+   },
+   {} as Record<RelationType, string>
+);
 
 /**
  * A reversible map of ArchiMate relation types to GLSP edge types.
  */
-export const ARCHIMATE_EDGE_TYPE_MAP = new ReversibleMap({
-   Access: DefaultTypes.EDGE + ':access',
-   Aggregation: DefaultTypes.EDGE + ':aggregation',
-   Assignment: DefaultTypes.EDGE + ':assignment',
-   Association: DefaultTypes.EDGE + ':association',
-   Composition: DefaultTypes.EDGE + ':composition',
-   Flow: DefaultTypes.EDGE + ':flow',
-   Influence: DefaultTypes.EDGE + ':influence',
-   Realization: DefaultTypes.EDGE + ':realization',
-   Serving: DefaultTypes.EDGE + ':serving',
-   Specialization: DefaultTypes.EDGE + ':specialization',
-   Triggering: DefaultTypes.EDGE + ':triggering'
+export const ARCHIMATE_EDGE_TYPE_MAP = new ReversibleMap(ARCHIMATE_RELATION_TO_EDGE_MAP);
+
+/**
+ * A list of all ArchiMate concept types that are not relations or elements.
+ */
+export const otherConcepts = ['Junction'] as const;
+
+export type OtherConceptType = (typeof otherConcepts)[number];
+
+/**
+ * A map of ArchiMate concepts that are not relations or elements to GLSP node types.
+ */
+const ARCHIMATE_CONCEPT_TO_NODE_MAP = {
+   Junction: DefaultTypes.NODE + ':junction'
+};
+
+/**
+ * A list of all ArchiMate concepts.
+ */
+export const concepts = [...elementTypes, ...relationTypes, ...otherConcepts] as const;
+
+/**
+ * A type of an ArchiMate concept.
+ */
+export type ConceptType = ElementType | RelationType | OtherConceptType;
+
+/**
+ * A reversible map of ArchiMate concept types to GLSP edge types.
+ */
+export const ARCHIMATE_CONCEPT_TYPE_MAP = new ReversibleMap({
+   ...ARCHIMATE_RELATION_TO_EDGE_MAP,
+   ...ARCHIMATE_ELEMENT_TO_NODE_MAP,
+   ...ARCHIMATE_CONCEPT_TO_NODE_MAP
 });
 
 // Args

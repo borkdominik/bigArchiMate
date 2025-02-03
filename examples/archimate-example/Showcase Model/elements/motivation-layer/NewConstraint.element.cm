@@ -1,4 +1,0 @@
-element:
-    id: NewConstraint
-    name: "Constraint"
-    type: Constraint

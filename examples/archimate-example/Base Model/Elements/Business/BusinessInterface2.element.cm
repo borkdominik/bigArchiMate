@@ -1,0 +1,4 @@
+element:
+    id: BusinessInterface2
+    name: "BusinessInterface"
+    type: BusinessInterface

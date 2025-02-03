@@ -1,0 +1,4 @@
+element:
+    id: SystemSoftware1
+    name: "SystemSoftware"
+    type: SystemSoftware

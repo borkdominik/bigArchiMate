@@ -1,0 +1,4 @@
+element:
+    id: Goal
+    name: "Goal"
+    type: Goal

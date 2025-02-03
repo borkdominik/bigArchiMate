@@ -1,4 +1,0 @@
-element:
-    id: NewApplicationFunction
-    name: "ApplicationFunction"
-    type: ApplicationFunction

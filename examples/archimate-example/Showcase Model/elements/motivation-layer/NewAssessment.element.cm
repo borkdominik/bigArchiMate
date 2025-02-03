@@ -1,4 +1,0 @@
-element:
-    id: NewAssessment
-    name: "Assessment"
-    type: Assessment

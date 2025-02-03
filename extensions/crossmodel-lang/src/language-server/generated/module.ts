@@ -9,7 +9,7 @@ import { CrossModelGrammar } from './grammar.js';
 
 export const CrossModelLanguageMetaData = {
     languageId: 'cross-model',
-    fileExtensions: ['.cm'],
+    fileExtensions: ['.cm', '.archi'],
     caseInsensitive: false,
     mode: 'development'
 } as const satisfies LanguageMetaData;

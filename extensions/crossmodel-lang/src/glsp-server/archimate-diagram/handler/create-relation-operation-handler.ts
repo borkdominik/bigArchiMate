@@ -13,7 +13,7 @@ import {
 } from '@eclipse-glsp/server';
 import { inject, injectable } from 'inversify';
 import { URI, Utils as UriUtils } from 'vscode-uri';
-import { CrossModelRoot, ElementNode, Relation, RelationEdge, RelationType } from '../../../language-server/generated/ast.js';
+import { CrossModelRoot, ElementNode, Relation, RelationEdge } from '../../../language-server/generated/ast.js';
 import { Utils } from '../../../language-server/util/uri-util.js';
 import { CrossModelCommand } from '../../common/cross-model-command.js';
 import { ArchiMateModelState } from '../model/archimate-model-state.js';
@@ -53,8 +53,7 @@ export class ArchiMateDiagramCreateRelationOperationHandler extends JsonCreateEd
                targetNode: {
                   ref: targetNode,
                   $refText: this.modelState.idProvider.getNodeId(targetNode) || targetNode.id || ''
-               },
-               customProperties: []
+               }
             };
             this.modelState.archiMateDiagram.edges.push(edge);
             this.actionDispatcher.dispatchAfterNextUpdate(
@@ -75,23 +74,21 @@ export class ArchiMateDiagramCreateRelationOperationHandler extends JsonCreateEd
       const source = sourceNode.element?.ref?.id || sourceNode.element?.$refText;
       const target = targetNode.element?.ref?.id || targetNode.element?.$refText;
 
-      console.log('Creating relation from ' + source + ' to ' + target);
-
       // create relation, serialize and re-read to ensure everything is up to date and linked properly
       const relationRoot: CrossModelRoot = { $type: 'CrossModelRoot' };
       const relation: Relation = {
          $type: Relation,
          $container: relationRoot,
          id: this.modelState.idProvider.findNextId(Relation, source + 'To' + target),
-         type: operation.args?.relationType as RelationType,
+         type: ARCHIMATE_EDGE_TYPE_MAP.getReverse(operation.elementTypeId),
          source: { $refText: sourceNode.element?.$refText || '' },
          target: { $refText: targetNode.element?.$refText || '' },
-         customProperties: []
+         properties: []
       };
 
       // search for unique file name for the relation and use file base name as relation name
       // if the user doesn't rename any files we should end up with unique names ;-)
-      const dirName = UriUtils.joinPath(UriUtils.dirname(URI.parse(this.modelState.semanticUri)), '..', 'relations');
+      const dirName = UriUtils.joinPath(UriUtils.dirname(URI.parse(this.modelState.semanticUri)), '..', 'Relations');
       const targetUri = UriUtils.joinPath(dirName, relation.id + '.relation.cm');
       const uri = Utils.findNewUri(targetUri);
 

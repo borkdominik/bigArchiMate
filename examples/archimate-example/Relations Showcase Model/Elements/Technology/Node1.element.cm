@@ -1,0 +1,4 @@
+element:
+    id: Node1
+    name: "Node"
+    type: Node

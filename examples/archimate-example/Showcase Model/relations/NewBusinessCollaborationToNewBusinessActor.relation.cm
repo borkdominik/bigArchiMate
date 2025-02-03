@@ -1,5 +1,0 @@
-relation:
-    id: NewBusinessCollaborationToNewBusinessActor
-    type: Association
-    source: ShowCase_Model.NewBusinessCollaboration
-    target: ShowCase_Model.NewBusinessActor

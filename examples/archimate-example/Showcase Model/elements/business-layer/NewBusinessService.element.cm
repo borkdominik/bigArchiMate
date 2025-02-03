@@ -1,4 +1,0 @@
-element:
-    id: NewBusinessService
-    name: "BusinessService"
-    type: BusinessService

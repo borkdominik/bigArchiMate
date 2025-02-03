@@ -1,4 +1,0 @@
-element:
-    id: NewContract
-    name: "Contract"
-    type: Contract

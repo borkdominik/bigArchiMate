@@ -1,0 +1,4 @@
+element:
+    id: Product1
+    name: "Product"
+    type: Product

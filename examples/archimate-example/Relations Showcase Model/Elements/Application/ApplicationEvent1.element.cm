@@ -1,0 +1,4 @@
+element:
+    id: ApplicationEvent1
+    name: "ApplicationEvent"
+    type: ApplicationEvent

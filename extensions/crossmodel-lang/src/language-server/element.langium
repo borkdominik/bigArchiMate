@@ -3,13 +3,17 @@ import 'terminals'
 Element:
     'element' ':'
         INDENT
-            'id' ':' id=ID
+            'id' ':' id=ElementID
             'name' ':' name=STRING
-            ('description' ':' description=STRING)?
+            ('documentation' ':' documentation=STRING)?
             'type' ':'  type=ElementType
-            CustomProperties?
+            Properties?
         DEDENT
 ;
+
+// See https://langium.org/docs/recipes/keywords-as-identifiers/
+ElementID returns string:
+    ID | ElementType;
 
 ElementType returns string:
     'ApplicationCollaboration' |
