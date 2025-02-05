@@ -5,6 +5,7 @@
 import {
    BoundsAware,
    boundsFeature,
+   CircularNode,
    Dimension,
    EditableLabel,
    fadeFeature,
@@ -32,6 +33,12 @@ export class ElementNode extends RectangularNode implements WithEditableLabel {
 
 export function isElementNode(element: GModelElement): element is ElementNode {
    return element instanceof ElementNode || false;
+}
+
+export class JunctionNode extends CircularNode {}
+
+export function isJunctionNode(junction: GModelElement): junction is JunctionNode {
+   return junction instanceof JunctionNode || false;
 }
 
 export class RelationEdge extends GEdge {}

@@ -13,11 +13,11 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
-import { ARCHIMATE_NODE_TYPE_MAP, getLabel, getLayerElements, layerTypes } from '@crossbreeze/protocol';
+import { ARCHIMATE_ELEMENT_TYPE_MAP, getLabel, getLayerElements, layerTypes } from '@crossbreeze/protocol';
 import { Args, ContextMenuItemProvider, CreateNodeOperation, MenuItem, ModelState, Point } from '@eclipse-glsp/server';
 import { inject, injectable } from 'inversify';
 import { getObjectKeys } from '../../../util.js';
-import { GridSnapper } from '../handler/grid-snapper.js';
+import { Grid } from '../../common/cross-model-grid.js';
 import { ArchiMateModelState } from '../model/archimate-model-state.js';
 
 @injectable()
@@ -38,8 +38,8 @@ export class ArchiMateContextMenuItemProvider extends ContextMenuItemProvider {
                   id: `new${elementType}`,
                   label: `${getLabel(elementType)}`,
                   actions: [
-                     CreateNodeOperation.create(ARCHIMATE_NODE_TYPE_MAP.get(elementType), {
-                        location: GridSnapper.snap(position)
+                     CreateNodeOperation.create(ARCHIMATE_ELEMENT_TYPE_MAP.get(elementType), {
+                        location: Grid.snap(position)
                      })
                   ]
                };

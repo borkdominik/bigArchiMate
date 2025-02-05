@@ -14,6 +14,8 @@
    --bg-motivation: #ccccff;
    --bg-strategy: #f5deaa;
    --bg-technology: #c9e7b7;
+   --bg-location: #edcfe2;
+   --bg-default: #ffffff;
 }
 
 /* Standard sprotty */
@@ -225,6 +227,16 @@
 .bg-technology > rect,
 .bg-technology > path {
    fill: var(--bg-technology);
+}
+
+.bg-location > rect,
+.bg-location > path {
+   fill: var(--bg-location);
+}
+
+.bg-default > rect,
+.bg-default > path {
+   fill: var(--bg-default);
 }
 
 .tool-palette .group-header {

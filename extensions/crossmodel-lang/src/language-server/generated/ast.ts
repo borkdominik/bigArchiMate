@@ -70,9 +70,10 @@ export type CrossModelKeywordNames =
     | "Flow"
     | "Gap"
     | "Goal"
+    | "Grouping"
     | "ImplementationEvent"
     | "Influence"
-    | "Junction"
+    | "Location"
     | "Material"
     | "Meaning"
     | "Node"
@@ -134,8 +135,8 @@ export type CrossModelKeywordNames =
     | "parent"
     | "properties"
     | "relation"
-    | "relations"
     | "relationship"
+    | "routingPoints"
     | "source"
     | "sourceNode"
     | "sources"
@@ -171,6 +172,14 @@ export function isElementIDReference(item: unknown): item is ElementIDReference 
     return typeof item === 'string';
 }
 
+export type ElementNodeOrJunctionNode = ElementNode | JunctionNode;
+
+export const ElementNodeOrJunctionNode = 'ElementNodeOrJunctionNode';
+
+export function isElementNodeOrJunctionNode(item: unknown): item is ElementNodeOrJunctionNode {
+    return reflection.isInstance(item, ElementNodeOrJunctionNode);
+}
+
 export type ElementOrJunction = Element | Junction;
 
 export const ElementOrJunction = 'ElementOrJunction';
@@ -185,10 +194,10 @@ export function isElementOrJunctionID(item: unknown): item is ElementOrJunctionI
     return isElementID(item) || (typeof item === 'string' && (/[_a-zA-Z][\w_\-~$#@/\d]*/.test(item)));
 }
 
-export type ElementType = 'ApplicationCollaboration' | 'ApplicationComponent' | 'ApplicationEvent' | 'ApplicationFunction' | 'ApplicationInteraction' | 'ApplicationInterface' | 'ApplicationProcess' | 'ApplicationService' | 'Artifact' | 'Assessment' | 'BusinessActor' | 'BusinessCollaboration' | 'BusinessEvent' | 'BusinessFunction' | 'BusinessInteraction' | 'BusinessInterface' | 'BusinessObject' | 'BusinessProcess' | 'BusinessRole' | 'BusinessService' | 'Capability' | 'CommunicationNetwork' | 'Constraint' | 'Contract' | 'CourseOfAction' | 'DataObject' | 'Deliverable' | 'Device' | 'DistributionNetwork' | 'Driver' | 'Equipment' | 'Facility' | 'Gap' | 'Goal' | 'ImplementationEvent' | 'Material' | 'Meaning' | 'Node' | 'Outcome' | 'Path' | 'Plateau' | 'Principle' | 'Product' | 'Representation' | 'Requirement' | 'Resource' | 'Stakeholder' | 'SystemSoftware' | 'TechnologyCollaboration' | 'TechnologyEvent' | 'TechnologyFunction' | 'TechnologyInteraction' | 'TechnologyInterface' | 'TechnologyProcess' | 'TechnologyService' | 'Value' | 'ValueStream' | 'WorkPackage';
+export type ElementType = 'ApplicationCollaboration' | 'ApplicationComponent' | 'ApplicationEvent' | 'ApplicationFunction' | 'ApplicationInteraction' | 'ApplicationInterface' | 'ApplicationProcess' | 'ApplicationService' | 'Artifact' | 'Assessment' | 'BusinessActor' | 'BusinessCollaboration' | 'BusinessEvent' | 'BusinessFunction' | 'BusinessInteraction' | 'BusinessInterface' | 'BusinessObject' | 'BusinessProcess' | 'BusinessRole' | 'BusinessService' | 'Capability' | 'CommunicationNetwork' | 'Constraint' | 'Contract' | 'CourseOfAction' | 'DataObject' | 'Deliverable' | 'Device' | 'DistributionNetwork' | 'Driver' | 'Equipment' | 'Facility' | 'Gap' | 'Goal' | 'Grouping' | 'ImplementationEvent' | 'Location' | 'Material' | 'Meaning' | 'Node' | 'Outcome' | 'Path' | 'Plateau' | 'Principle' | 'Product' | 'Representation' | 'Requirement' | 'Resource' | 'Stakeholder' | 'SystemSoftware' | 'TechnologyCollaboration' | 'TechnologyEvent' | 'TechnologyFunction' | 'TechnologyInteraction' | 'TechnologyInterface' | 'TechnologyProcess' | 'TechnologyService' | 'Value' | 'ValueStream' | 'WorkPackage';
 
 export function isElementType(item: unknown): item is ElementType {
-    return item === 'ApplicationCollaboration' || item === 'ApplicationComponent' || item === 'ApplicationEvent' || item === 'ApplicationFunction' || item === 'ApplicationInterface' || item === 'ApplicationInteraction' || item === 'ApplicationProcess' || item === 'ApplicationService' || item === 'Artifact' || item === 'Assessment' || item === 'BusinessActor' || item === 'BusinessCollaboration' || item === 'BusinessEvent' || item === 'BusinessFunction' || item === 'BusinessInteraction' || item === 'BusinessInterface' || item === 'BusinessObject' || item === 'BusinessProcess' || item === 'BusinessRole' || item === 'BusinessService' || item === 'Capability' || item === 'Constraint' || item === 'CommunicationNetwork' || item === 'Contract' || item === 'CourseOfAction' || item === 'DataObject' || item === 'Deliverable' || item === 'Device' || item === 'DistributionNetwork' || item === 'Driver' || item === 'Equipment' || item === 'Facility' || item === 'Gap' || item === 'Goal' || item === 'ImplementationEvent' || item === 'Material' || item === 'Meaning' || item === 'Node' || item === 'Outcome' || item === 'Path' || item === 'Plateau' || item === 'Principle' || item === 'Product' || item === 'Requirement' || item === 'Representation' || item === 'Resource' || item === 'Stakeholder' || item === 'SystemSoftware' || item === 'TechnologyCollaboration' || item === 'TechnologyEvent' || item === 'TechnologyFunction' || item === 'TechnologyInteraction' || item === 'TechnologyInterface' || item === 'TechnologyProcess' || item === 'TechnologyService' || item === 'Value' || item === 'ValueStream' || item === 'WorkPackage';
+    return item === 'ApplicationCollaboration' || item === 'ApplicationComponent' || item === 'ApplicationEvent' || item === 'ApplicationFunction' || item === 'ApplicationInterface' || item === 'ApplicationInteraction' || item === 'ApplicationProcess' || item === 'ApplicationService' || item === 'Artifact' || item === 'Assessment' || item === 'BusinessActor' || item === 'BusinessCollaboration' || item === 'BusinessEvent' || item === 'BusinessFunction' || item === 'BusinessInteraction' || item === 'BusinessInterface' || item === 'BusinessObject' || item === 'BusinessProcess' || item === 'BusinessRole' || item === 'BusinessService' || item === 'Capability' || item === 'Constraint' || item === 'CommunicationNetwork' || item === 'Contract' || item === 'CourseOfAction' || item === 'DataObject' || item === 'Deliverable' || item === 'Device' || item === 'DistributionNetwork' || item === 'Driver' || item === 'Equipment' || item === 'Facility' || item === 'Gap' || item === 'Goal' || item === 'Grouping' || item === 'ImplementationEvent' || item === 'Location' || item === 'Material' || item === 'Meaning' || item === 'Node' || item === 'Outcome' || item === 'Path' || item === 'Plateau' || item === 'Principle' || item === 'Product' || item === 'Requirement' || item === 'Representation' || item === 'Resource' || item === 'Stakeholder' || item === 'SystemSoftware' || item === 'TechnologyCollaboration' || item === 'TechnologyEvent' || item === 'TechnologyFunction' || item === 'TechnologyInteraction' || item === 'TechnologyInterface' || item === 'TechnologyProcess' || item === 'TechnologyService' || item === 'Value' || item === 'ValueStream' || item === 'WorkPackage';
 }
 
 export type IDReference = string;
@@ -426,7 +435,6 @@ export interface Junction extends AstNode {
     id: string;
     name?: string;
     properties: Array<Property>;
-    relations: Array<Reference<Relation>>;
 }
 
 export const Junction = 'Junction';
@@ -516,14 +524,28 @@ export interface RelationEdge extends AstNode {
     readonly $type: 'RelationEdge';
     id: string;
     relation: Reference<Relation>;
-    sourceNode: Reference<ElementNode>;
-    targetNode: Reference<ElementNode>;
+    routingPoints: Array<RelationRoutingPoint>;
+    sourceNode: Reference<ElementNodeOrJunctionNode>;
+    targetNode: Reference<ElementNodeOrJunctionNode>;
 }
 
 export const RelationEdge = 'RelationEdge';
 
 export function isRelationEdge(item: unknown): item is RelationEdge {
     return reflection.isInstance(item, RelationEdge);
+}
+
+export interface RelationRoutingPoint extends AstNode {
+    readonly $container: RelationEdge;
+    readonly $type: 'RelationRoutingPoint';
+    x: number;
+    y: number;
+}
+
+export const RelationRoutingPoint = 'RelationRoutingPoint';
+
+export function isRelationRoutingPoint(item: unknown): item is RelationRoutingPoint {
+    return reflection.isInstance(item, RelationRoutingPoint);
 }
 
 export interface Relationship extends AstNode {
@@ -723,6 +745,7 @@ export type CrossModelAstType = {
     CustomProperty: CustomProperty
     Element: Element
     ElementNode: ElementNode
+    ElementNodeOrJunctionNode: ElementNodeOrJunctionNode
     ElementOrJunction: ElementOrJunction
     Entity: Entity
     EntityAttribute: EntityAttribute
@@ -736,6 +759,7 @@ export type CrossModelAstType = {
     Property: Property
     Relation: Relation
     RelationEdge: RelationEdge
+    RelationRoutingPoint: RelationRoutingPoint
     Relationship: Relationship
     RelationshipAttribute: RelationshipAttribute
     RelationshipEdge: RelationshipEdge
@@ -754,7 +778,7 @@ export type CrossModelAstType = {
 export class CrossModelAstReflection extends AbstractAstReflection {
 
     getAllTypes(): string[] {
-        return [ArchiMateDiagram, Attribute, AttributeMapping, AttributeMappingSource, AttributeMappingTarget, BinaryExpression, BooleanExpression, CrossModelRoot, CustomProperty, Element, ElementNode, ElementOrJunction, Entity, EntityAttribute, EntityNode, EntityNodeAttribute, JoinCondition, Junction, JunctionNode, Mapping, NumberLiteral, Property, Relation, RelationEdge, Relationship, RelationshipAttribute, RelationshipEdge, SourceObject, SourceObjectAttribute, SourceObjectAttributeReference, SourceObjectCondition, SourceObjectDependency, StringLiteral, SystemDiagram, TargetObject, TargetObjectAttribute, WithCustomProperties];
+        return [ArchiMateDiagram, Attribute, AttributeMapping, AttributeMappingSource, AttributeMappingTarget, BinaryExpression, BooleanExpression, CrossModelRoot, CustomProperty, Element, ElementNode, ElementNodeOrJunctionNode, ElementOrJunction, Entity, EntityAttribute, EntityNode, EntityNodeAttribute, JoinCondition, Junction, JunctionNode, Mapping, NumberLiteral, Property, Relation, RelationEdge, RelationRoutingPoint, Relationship, RelationshipAttribute, RelationshipEdge, SourceObject, SourceObjectAttribute, SourceObjectAttributeReference, SourceObjectCondition, SourceObjectDependency, StringLiteral, SystemDiagram, TargetObject, TargetObjectAttribute, WithCustomProperties];
     }
 
     protected override computeIsSubtype(subtype: string, supertype: string): boolean {
@@ -762,6 +786,10 @@ export class CrossModelAstReflection extends AbstractAstReflection {
             case Element:
             case Junction: {
                 return this.isSubtype(ElementOrJunction, supertype);
+            }
+            case ElementNode:
+            case JunctionNode: {
+                return this.isSubtype(ElementNodeOrJunctionNode, supertype);
             }
             case EntityAttribute:
             case SourceObjectAttribute:
@@ -806,10 +834,6 @@ export class CrossModelAstReflection extends AbstractAstReflection {
             case 'TargetObject:entity': {
                 return Entity;
             }
-            case 'Junction:relations':
-            case 'RelationEdge:relation': {
-                return Relation;
-            }
             case 'JunctionNode:junction': {
                 return Junction;
             }
@@ -817,9 +841,12 @@ export class CrossModelAstReflection extends AbstractAstReflection {
             case 'Relation:target': {
                 return ElementOrJunction;
             }
+            case 'RelationEdge:relation': {
+                return Relation;
+            }
             case 'RelationEdge:sourceNode':
             case 'RelationEdge:targetNode': {
-                return ElementNode;
+                return ElementNodeOrJunctionNode;
             }
             case 'RelationshipAttribute:child':
             case 'RelationshipAttribute:parent': {
@@ -996,8 +1023,7 @@ export class CrossModelAstReflection extends AbstractAstReflection {
                         { name: 'documentation' },
                         { name: 'id' },
                         { name: 'name' },
-                        { name: 'properties', defaultValue: [] },
-                        { name: 'relations', defaultValue: [] }
+                        { name: 'properties', defaultValue: [] }
                     ]
                 };
             }
@@ -1063,8 +1089,18 @@ export class CrossModelAstReflection extends AbstractAstReflection {
                     properties: [
                         { name: 'id' },
                         { name: 'relation' },
+                        { name: 'routingPoints', defaultValue: [] },
                         { name: 'sourceNode' },
                         { name: 'targetNode' }
+                    ]
+                };
+            }
+            case RelationRoutingPoint: {
+                return {
+                    name: RelationRoutingPoint,
+                    properties: [
+                        { name: 'x' },
+                        { name: 'y' }
                     ]
                 };
             }

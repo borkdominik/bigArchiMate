@@ -2,12 +2,11 @@ import 'terminals'
 import 'relation'
 
 Junction:
-    'Junction' ':'
+    'junction' ':'
         INDENT
             'id' ':' id=ID
             ('name' ':' name=STRING)?
             ('documentation' ':' documentation=STRING)?
-            'relations' ':'  relations+=[Relation:RelationID]
             Properties?
         DEDENT
 ;

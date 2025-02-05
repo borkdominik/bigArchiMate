@@ -6,10 +6,12 @@ import { AstNode } from 'langium';
 import {
    Element,
    ElementNode,
+   JunctionNode,
    Relation,
    RelationEdge,
    isElement,
    isElementNode,
+   isJunctionNode,
    isRelation,
    isRelationEdge
 } from '../../../language-server/generated/ast.js';
@@ -21,12 +23,20 @@ export class ArchiMateModelIndex extends CrossModelIndex {
       return this.findSemanticElement(id, isElement);
    }
 
+   findJunction(id: string): Element | undefined {
+      return this.findSemanticElement(id, isElement);
+   }
+
    findRelation(id: string): Relation | undefined {
       return this.findSemanticElement(id, isRelation);
    }
 
    findElementNode(id: string): ElementNode | undefined {
       return this.findSemanticElement(id, isElementNode);
+   }
+
+   findJunctionNode(id: string): JunctionNode | undefined {
+      return this.findSemanticElement(id, isJunctionNode);
    }
 
    findRelationEdge(id: string): RelationEdge | undefined {

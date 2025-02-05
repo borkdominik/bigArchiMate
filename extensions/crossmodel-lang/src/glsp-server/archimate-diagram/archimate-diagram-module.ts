@@ -31,6 +31,7 @@ import { ArchiMateContextMenuItemProvider } from './context-menu/context-menu-it
 import { ArchiMateDiagramAddElementOperationHandler } from './handler/add-element-operation-handler.js';
 import { ArchiMateDiagramApplyLabelEditOperationHandler } from './handler/apply-edit-operation-handler.js';
 import { ArchiMateDiagramChangeBoundsOperationHandler } from './handler/change-bounds-operation-handler.js';
+import { ArchiMateDiagramChangeRelationRoutingPointsOperationHandler } from './handler/change-relation-routing-points.js';
 import { ArchiMateDiagramCreateElementOperationHandler } from './handler/create-element-operation-handler.js';
 import { ArchiMateDiagramCreateJunctionOperationHandler } from './handler/create-junction-operation-handler.js';
 import { ArchiMateDiagramCreateRelationOperationHandler } from './handler/create-relation-operation-handler.js';
@@ -65,6 +66,7 @@ export class ArchiMateDiagramModule extends DiagramModule {
       super.configureOperationHandlers(binding);
       binding.add(ArchiMateDiagramChangeBoundsOperationHandler); // move + resize behavior
       binding.add(ArchiMateDiagramCreateRelationOperationHandler); // create 1:1 relation
+      binding.add(ArchiMateDiagramChangeRelationRoutingPointsOperationHandler); // change routing points of a relation
       binding.add(ArchiMateDiagramDeleteOperationHandler); // delete elements
       binding.add(ArchiMateDiagramDropElementOperationHandler);
       binding.add(ArchiMateDiagramAddElementOperationHandler);

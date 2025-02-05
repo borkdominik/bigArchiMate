@@ -6,6 +6,7 @@ import {
    CrossReferenceContext,
    Element,
    Entity,
+   Junction,
    Mapping,
    ModelDiagnostic,
    ReferenceableElement,
@@ -80,6 +81,10 @@ export function useEntity(): Entity {
 
 export function useElement(): Element {
    return useModel().element!;
+}
+
+export function useJunction(): Junction {
+   return useModel().junction!;
 }
 
 export function useRelation(): Relation {

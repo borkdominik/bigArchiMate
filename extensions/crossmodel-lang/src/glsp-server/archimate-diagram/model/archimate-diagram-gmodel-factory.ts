@@ -3,10 +3,10 @@
  ********************************************************************************/
 import { GEdge, GGraph, GModelFactory, GNode, ModelState } from '@eclipse-glsp/server';
 import { inject, injectable } from 'inversify';
-import { ElementNode, RelationEdge } from '../../../language-server/generated/ast.js';
+import { ElementNode, JunctionNode, RelationEdge } from '../../../language-server/generated/ast.js';
 import { ArchiMateModelState } from './archimate-model-state.js';
 import { GRelationEdge } from './edges.js';
-import { GElementNode } from './nodes.js';
+import { GElementNode, GJunctionNode } from './nodes.js';
 
 /**
  * Custom factory that translates the semantic diagram root from Langium to a GLSP graph.
@@ -32,14 +32,17 @@ export class ArchiMateDiagramGModelFactory implements GModelFactory {
       }
       const graphBuilder = GGraph.builder().id(this.modelState.semanticUri);
 
-      diagramRoot.nodes.map(node => this.createElementNode(node)).forEach(node => graphBuilder.add(node));
+      diagramRoot.nodes.map(node => this.createNode(node)).forEach(node => graphBuilder.add(node));
       diagramRoot.edges.map(edge => this.createRelationEdge(edge)).forEach(edge => graphBuilder.add(edge));
 
       return graphBuilder.build();
    }
 
-   protected createElementNode(node: ElementNode): GNode {
-      return GElementNode.builder().set(node, this.modelState.index).build();
+   protected createNode(node: ElementNode | JunctionNode): GNode {
+      if (node.$type === 'ElementNode') {
+         return GElementNode.builder().set(node, this.modelState.index).build();
+      }
+      return GJunctionNode.builder().set(node, this.modelState.index).build();
    }
 
    protected createRelationEdge(edge: RelationEdge): GEdge {

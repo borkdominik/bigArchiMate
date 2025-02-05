@@ -8,6 +8,7 @@ import {
    ElementComponent,
    EntityComponent,
    ErrorView,
+   JunctionComponent,
    MappingComponent,
    MappingRenderProps,
    ModelProviderProps,
@@ -200,6 +201,9 @@ export class CrossModelWidget extends ReactWidget implements Saveable {
       }
       if (this.document?.root?.element) {
          return <ElementComponent {...this.getModelProviderProps()} {...this.getRenderProperties()} />;
+      }
+      if (this.document?.root.junction) {
+         return <JunctionComponent {...this.getModelProviderProps()} {...this.getRenderProperties()} />;
       }
       if (this.document?.root?.relation) {
          return <RelationComponent {...this.getModelProviderProps()} {...this.getRenderProperties()} />;

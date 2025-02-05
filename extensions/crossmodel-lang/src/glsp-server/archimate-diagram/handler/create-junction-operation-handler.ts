@@ -73,8 +73,7 @@ export class ArchiMateDiagramCreateJunctionOperationHandler extends JsonCreateNo
          $container: root,
          id,
          name: junctionType,
-         properties: [],
-         relations: []
+         properties: []
       };
 
       const dirName = UriUtils.joinPath(UriUtils.dirname(URI.parse(this.modelState.semanticUri)), '..', 'Other');

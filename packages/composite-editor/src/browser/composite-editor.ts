@@ -157,6 +157,8 @@ export class CompositeEditor extends BaseWidget implements SaveableSource, Navig
             return this.createMappingDiagramWidget();
          case 'Element':
             return this.getFormWidget();
+         case 'Junction':
+            return this.getFormWidget();
          case 'Relation':
             return this.getFormWidget();
          case 'ArchiMateDiagram':

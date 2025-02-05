@@ -36,13 +36,6 @@ ElementNode:
     'height' ':' height=NUMBER
 ;
 
-RelationEdge:
-    'id' ':' id=ID
-    'relation' ':' relation=[Relation:IDReference]
-    'sourceNode' ':' sourceNode=[ElementNode:IDReference]
-    'targetNode' ':' targetNode=[ElementNode:IDReference]
-;
-
 JunctionNode:
     'id' ':' id=ID
     'junction' ':' junction=[Junction:IDReference]
@@ -50,4 +43,23 @@ JunctionNode:
     'y' ':' y=NUMBER
     'width' ':' width=NUMBER
     'height' ':' height=NUMBER
+;
+
+ElementNodeOrJunctionNode:
+    ElementNode | JunctionNode;
+
+RelationRoutingPoint:
+    'x' ':' x=NUMBER
+    'y' ':' y=NUMBER;
+
+RelationEdge:
+    'id' ':' id=ID
+    'relation' ':' relation=[Relation:IDReference]
+    'sourceNode' ':' sourceNode=[ElementNodeOrJunctionNode:IDReference]
+    'targetNode' ':' targetNode=[ElementNodeOrJunctionNode:IDReference]
+    ('routingPoints' ':'
+        INDENT
+            (LIST_ITEM routingPoints+=RelationRoutingPoint)+
+        DEDENT
+    )?
 ;

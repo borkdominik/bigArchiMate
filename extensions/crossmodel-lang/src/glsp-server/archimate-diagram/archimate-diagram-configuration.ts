@@ -1,7 +1,7 @@
 /********************************************************************************
  * Copyright (c) 2023 CrossBreeze.
  ********************************************************************************/
-import { ARCHIMATE_EDGE_TYPE_MAP, ARCHIMATE_NODE_TYPE_MAP } from '@crossbreeze/protocol';
+import { ARCHIMATE_NODE_TYPE_MAP, ARCHIMATE_RELATION_TYPE_MAP } from '@crossbreeze/protocol';
 import { DiagramConfiguration, ServerLayoutKind, getDefaultMapping } from '@eclipse-glsp/server';
 import { injectable } from 'inversify';
 
@@ -24,11 +24,11 @@ export class ArchiMateDiagramConfiguration implements DiagramConfiguration {
    ];
 
    edgeTypeHints = [
-      ...ARCHIMATE_EDGE_TYPE_MAP.values().map(edgeType => ({
+      ...ARCHIMATE_RELATION_TYPE_MAP.values().map(edgeType => ({
          elementTypeId: edgeType,
          deletable: true,
          repositionable: false,
-         routable: false,
+         routable: true,
          sourceElementTypeIds: [...ARCHIMATE_NODE_TYPE_MAP.values()],
          targetElementTypeIds: [...ARCHIMATE_NODE_TYPE_MAP.values()],
          dynamic: true

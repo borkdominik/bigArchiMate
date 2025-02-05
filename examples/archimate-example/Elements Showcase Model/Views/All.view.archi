@@ -356,3 +356,15 @@ archiMateDiagram:
         y: 1100
         width: 200
         height: 50
+      - id: GroupingNode
+        element: Grouping4
+        x: 99
+        y: 1188
+        width: 200
+        height: 50
+      - id: LocationNode
+        element: Location2
+        x: 319
+        y: 1188
+        width: 200
+        height: 50

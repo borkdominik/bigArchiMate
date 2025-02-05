@@ -1,0 +1,4 @@
+element:
+    id: Location2
+    name: "Location"
+    type: Location

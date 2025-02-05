@@ -4,7 +4,7 @@
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable max-len */
 /** @jsx svg */
-import { ARCHIMATE_NODE_TYPE_MAP } from '@crossbreeze/protocol';
+import { ARCHIMATE_ELEMENT_TYPE_MAP } from '@crossbreeze/protocol';
 import { RenderingContext, ShapeView, findParentByFeature, svg } from '@eclipse-glsp/client';
 import { injectable } from '@theia/core/shared/inversify';
 import { VNode } from 'snabbdom';
@@ -19,7 +19,7 @@ export class IconView extends ShapeView {
          return undefined;
       }
 
-      const nodeType = ARCHIMATE_NODE_TYPE_MAP.getReverse(elementNode.type);
+      const nodeType = ARCHIMATE_ELEMENT_TYPE_MAP.getReverse(elementNode.type);
       const icon: any = icons[nodeType];
 
       return (<g>{icon}</g>) as any;

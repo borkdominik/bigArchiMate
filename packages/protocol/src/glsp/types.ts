@@ -22,7 +22,15 @@ export const ATTRIBUTE_COMPARTMENT_TYPE = DefaultTypes.COMPARTMENT + ':attribute
 export const ELEMENT_LABEL_TYPE = DefaultTypes.LABEL + ':element';
 export const ELEMENT_ICON_TYPE = 'icon';
 
-export const layerTypes = ['Application', 'Business', 'ImplementationAndMigration', 'Motivation', 'Strategy', 'Technology'] as const;
+export const layerTypes = [
+   'Application',
+   'Business',
+   'ImplementationAndMigration',
+   'Motivation',
+   'Strategy',
+   'Technology',
+   'Other'
+] as const;
 
 export type LayerType = (typeof layerTypes)[number];
 
@@ -64,7 +72,9 @@ export const elementTypes = [
    'Facility',
    'Gap',
    'Goal',
+   'Grouping',
    'ImplementationEvent',
+   'Location',
    'Material',
    'Meaning',
    'Node',
@@ -111,7 +121,7 @@ const ARCHIMATE_ELEMENT_TO_NODE_MAP: Record<ElementType, string> = elementTypes.
 /**
  * A reversible map of ArchiMate element types to GLSP node types.
  */
-export const ARCHIMATE_NODE_TYPE_MAP = new ReversibleMap(ARCHIMATE_ELEMENT_TO_NODE_MAP);
+export const ARCHIMATE_ELEMENT_TYPE_MAP = new ReversibleMap(ARCHIMATE_ELEMENT_TO_NODE_MAP);
 
 /**
  * A list of all ArchiMate relation types.
@@ -151,7 +161,7 @@ const ARCHIMATE_RELATION_TO_EDGE_MAP: Record<RelationType, string> = relationTyp
 /**
  * A reversible map of ArchiMate relation types to GLSP edge types.
  */
-export const ARCHIMATE_EDGE_TYPE_MAP = new ReversibleMap(ARCHIMATE_RELATION_TO_EDGE_MAP);
+export const ARCHIMATE_RELATION_TYPE_MAP = new ReversibleMap(ARCHIMATE_RELATION_TO_EDGE_MAP);
 
 /**
  * A list of all ArchiMate concept types that are not relations or elements.
@@ -162,10 +172,17 @@ export type OtherConceptType = (typeof otherConcepts)[number];
 
 /**
  * A map of ArchiMate concepts that are not relations or elements to GLSP node types.
+ * The node type is prefixed with the default node type.
+ * For example, the concept type 'Junction' is mapped to 'node:junction'.
  */
 const ARCHIMATE_CONCEPT_TO_NODE_MAP = {
-   Junction: DefaultTypes.NODE + ':junction'
+   Junction: DefaultTypes.NODE_CIRCLE + ':junction'
 };
+
+export const ARCHIMATE_NODE_TYPE_MAP = new ReversibleMap({
+   ...ARCHIMATE_ELEMENT_TO_NODE_MAP,
+   ...ARCHIMATE_CONCEPT_TO_NODE_MAP
+});
 
 /**
  * A list of all ArchiMate concepts.

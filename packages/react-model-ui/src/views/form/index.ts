@@ -4,6 +4,7 @@
 export * from './ElementForm';
 export * from './EntityForm';
 export * from './Header';
+export * from './JunctionForm';
 export * from './MappingForm';
 export * from './RelationForm';
 export * from './RelationshipForm';

@@ -2,7 +2,7 @@
  * Copyright (c) 2023 CrossBreeze.
  ********************************************************************************/
 
-import { ARCHIMATE_EDGE_TYPE_MAP } from '@crossbreeze/protocol';
+import { ARCHIMATE_RELATION_TYPE_MAP } from '@crossbreeze/protocol';
 import {
    ActionDispatcher,
    Command,
@@ -13,7 +13,7 @@ import {
 } from '@eclipse-glsp/server';
 import { inject, injectable } from 'inversify';
 import { URI, Utils as UriUtils } from 'vscode-uri';
-import { CrossModelRoot, ElementNode, Relation, RelationEdge } from '../../../language-server/generated/ast.js';
+import { CrossModelRoot, ElementNode, JunctionNode, Relation, RelationEdge } from '../../../language-server/generated/ast.js';
 import { Utils } from '../../../language-server/util/uri-util.js';
 import { CrossModelCommand } from '../../common/cross-model-command.js';
 import { ArchiMateModelState } from '../model/archimate-model-state.js';
@@ -21,7 +21,7 @@ import { ArchiMateModelState } from '../model/archimate-model-state.js';
 @injectable()
 export class ArchiMateDiagramCreateRelationOperationHandler extends JsonCreateEdgeOperationHandler {
    override label = 'Relation';
-   elementTypeIds = [...ARCHIMATE_EDGE_TYPE_MAP.values()];
+   elementTypeIds = [...ARCHIMATE_RELATION_TYPE_MAP.values()];
 
    @inject(ModelState) protected override modelState!: ArchiMateModelState;
    @inject(ActionDispatcher) protected actionDispatcher!: ActionDispatcher;
@@ -31,8 +31,12 @@ export class ArchiMateDiagramCreateRelationOperationHandler extends JsonCreateEd
    }
 
    protected async createEdge(operation: CreateEdgeOperation): Promise<void> {
-      const sourceNode = this.modelState.index.findElementNode(operation.sourceElementId);
-      const targetNode = this.modelState.index.findElementNode(operation.targetElementId);
+      const sourceNode =
+         this.modelState.index.findElementNode(operation.sourceElementId) ??
+         this.modelState.index.findJunctionNode(operation.sourceElementId);
+      const targetNode =
+         this.modelState.index.findElementNode(operation.targetElementId) ??
+         this.modelState.index.findJunctionNode(operation.targetElementId);
 
       if (sourceNode && targetNode) {
          // before we can create a diagram edge, we need to create the corresponding relation that it is based on
@@ -53,7 +57,8 @@ export class ArchiMateDiagramCreateRelationOperationHandler extends JsonCreateEd
                targetNode: {
                   ref: targetNode,
                   $refText: this.modelState.idProvider.getNodeId(targetNode) || targetNode.id || ''
-               }
+               },
+               routingPoints: []
             };
             this.modelState.archiMateDiagram.edges.push(edge);
             this.actionDispatcher.dispatchAfterNextUpdate(
@@ -68,11 +73,13 @@ export class ArchiMateDiagramCreateRelationOperationHandler extends JsonCreateEd
     */
    protected async createAndSaveRelation(
       operation: CreateEdgeOperation,
-      sourceNode: ElementNode,
-      targetNode: ElementNode
+      sourceNode: ElementNode | JunctionNode,
+      targetNode: ElementNode | JunctionNode
    ): Promise<Relation | undefined> {
-      const source = sourceNode.element?.ref?.id || sourceNode.element?.$refText;
-      const target = targetNode.element?.ref?.id || targetNode.element?.$refText;
+      const sourceConcept = sourceNode.$type === 'ElementNode' ? sourceNode.element : sourceNode.junction;
+      const targetConcept = targetNode.$type === 'ElementNode' ? targetNode.element : targetNode.junction;
+      const source = sourceConcept.ref?.id || sourceConcept.$refText;
+      const target = targetConcept.ref?.id || targetConcept.$refText;
 
       // create relation, serialize and re-read to ensure everything is up to date and linked properly
       const relationRoot: CrossModelRoot = { $type: 'CrossModelRoot' };
@@ -80,9 +87,9 @@ export class ArchiMateDiagramCreateRelationOperationHandler extends JsonCreateEd
          $type: Relation,
          $container: relationRoot,
          id: this.modelState.idProvider.findNextId(Relation, source + 'To' + target),
-         type: ARCHIMATE_EDGE_TYPE_MAP.getReverse(operation.elementTypeId),
-         source: { $refText: sourceNode.element?.$refText || '' },
-         target: { $refText: targetNode.element?.$refText || '' },
+         type: ARCHIMATE_RELATION_TYPE_MAP.getReverse(operation.elementTypeId),
+         source: { $refText: sourceConcept.$refText || '' },
+         target: { $refText: targetConcept.$refText || '' },
          properties: []
       };
 

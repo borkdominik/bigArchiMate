@@ -4,6 +4,7 @@
 import { CrossModelRoot } from '@crossbreeze/protocol';
 import { ElementDispatchAction, ElementModelReducer, isElementDispatchAction } from './ElementModelReducer';
 import { EntityDispatchAction, EntityModelReducer, isEntityDispatchAction } from './EntityModelReducer';
+import { JunctionDispatchAction, JunctionModelReducer, isJunctionDispatchAction } from './JunctionModelReducer';
 import { MappingSourcesDispatchAction, MappingSourcesModelReducer, isMappingSourcesDispatchAction } from './MappingSourcesReducer';
 import { MappingTargetDispatchAction, MappingTargetModelReducer, isMappingTargetDispatchAction } from './MappingTargetReducer';
 import { RelationDispatchAction, RelationModelReducer, isRelationDispatchAction } from './RelationModelReducer';
@@ -22,6 +23,7 @@ export type DispatchAction =
    | ModelUpdateAction
    | EntityDispatchAction
    | ElementDispatchAction
+   | JunctionDispatchAction
    | RelationDispatchAction
    | RelationshipDispatchAction
    | MappingTargetDispatchAction
@@ -58,6 +60,9 @@ export function ModelReducer(state: ModelState, action: DispatchAction): ModelSt
    }
    if (isElementDispatchAction(action)) {
       return ElementModelReducer(state, action);
+   }
+   if (isJunctionDispatchAction(action)) {
+      return JunctionModelReducer(state, action);
    }
    if (isRelationDispatchAction(action)) {
       return RelationModelReducer(state, action);

@@ -251,18 +251,21 @@ export class CrossModelValidator {
    }
 
    checkRelation(relation: Relation, accept: ValidationAcceptor): void {
-      if (!RelationValidator.isValidTarget(relation.type, relation.source.ref?.type, relation.target.ref?.type)) {
+      const sourceNodeType = relation.source.ref?.$type === 'Element' ? relation.source.ref?.type : 'Junction';
+      const targetNodeType = relation.target.ref?.$type === 'Element' ? relation.target.ref?.type : 'Junction';
+
+      if (!RelationValidator.isValidTarget(relation.type, sourceNodeType, targetNodeType)) {
          accept('error', 'Invalid relation.', { node: relation, property: 'type' });
       }
    }
 
    checkRelationEdge(edge: RelationEdge, accept: ValidationAcceptor): void {
-      if (edge.sourceNode?.ref?.element?.ref?.$type !== edge.relation?.ref?.source?.ref?.$type) {
-         accept('error', 'Source must match type of parent.', { node: edge, property: 'sourceNode' });
-      }
-      if (edge.targetNode?.ref?.element?.ref?.$type !== edge.relation?.ref?.target?.ref?.$type) {
-         accept('error', 'Target must match type of child.', { node: edge, property: 'targetNode' });
-      }
+      // if (edge.sourceNode?.ref?.element?.ref?.$type !== edge.relation?.ref?.source?.ref?.$type) {
+      //    accept('error', 'Source must match type of parent.', { node: edge, property: 'sourceNode' });
+      // }
+      // if (edge.targetNode?.ref?.element?.ref?.$type !== edge.relation?.ref?.target?.ref?.$type) {
+      //    accept('error', 'Target must match type of child.', { node: edge, property: 'targetNode' });
+      // }
    }
 
    checkSourceObject(obj: SourceObject, accept: ValidationAcceptor): void {

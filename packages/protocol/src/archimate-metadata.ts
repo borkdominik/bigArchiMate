@@ -6,7 +6,7 @@ import { ConceptType, ElementType, LayerType, OtherConceptType, RelationType } f
 
 type CornerType = 'round' | 'square' | 'diamond';
 
-export interface ConceptMetaData {
+interface ConceptMetaData {
    /**
     * The icon to display for the element.
     */
@@ -25,13 +25,13 @@ export interface ConceptMetaData {
 /**
  * Metadata of an element.
  */
-export interface ElementMetaData extends ConceptMetaData {
+interface ElementMetaData extends ConceptMetaData {
    /**
-    * The group the element belongs to.
+    * The layer the element belongs to.
     */
    layer: LayerType;
    /**
-    * The aspect group the element belongs to.
+    * The corner type of the element.
     */
    cornerType: CornerType;
 }
@@ -39,12 +39,12 @@ export interface ElementMetaData extends ConceptMetaData {
 /**
  * Metadata of an ArchiMate relation type.
  */
-export interface RelationMetaData extends ConceptMetaData {}
+interface RelationMetaData extends ConceptMetaData {}
 
 /**
  * A mapping of element types to their respective metadata.
  */
-export const elementMetadataMap: Record<ElementType, ElementMetaData> = {
+const elementMetadataMap: Record<ElementType, ElementMetaData> = {
    ApplicationCollaboration: {
       icon: 'reactions',
       label: 'Application Collaboration',
@@ -283,12 +283,26 @@ export const elementMetadataMap: Record<ElementType, ElementMetaData> = {
       cornerType: 'diamond',
       specificationSection: '6.3.1.'
    },
+   Grouping: {
+      icon: 'reactions',
+      label: 'Grouping',
+      layer: 'Other',
+      cornerType: 'square',
+      specificationSection: '4.5.1.'
+   },
    ImplementationEvent: {
       icon: 'reactions',
       label: 'Implementation Event',
       layer: 'ImplementationAndMigration',
       cornerType: 'round',
       specificationSection: '12.2.3.'
+   },
+   Location: {
+      icon: 'reactions',
+      label: 'Location',
+      layer: 'Other',
+      cornerType: 'square',
+      specificationSection: '4.5.2.'
    },
    Material: {
       icon: 'reactions',
@@ -456,7 +470,7 @@ export const elementMetadataMap: Record<ElementType, ElementMetaData> = {
 /**
  * A mapping of relation types to their respective metadata.
  */
-export const relationMetadataMap: Record<RelationType, RelationMetaData> = {
+const relationMetadataMap: Record<RelationType, RelationMetaData> = {
    Access: {
       icon: 'git-compare',
       label: 'Access',
@@ -525,7 +539,7 @@ const otherConceptMetaDataMap: Record<OtherConceptType, ConceptMetaData> = {
 /**
  * A mapping of all concepts to their respective metadata.
  */
-export const conceptMetaDataMap = {
+const conceptMetaDataMap = {
    ...elementMetadataMap,
    ...relationMetadataMap,
    ...otherConceptMetaDataMap
@@ -589,6 +603,10 @@ export const layers: Record<LayerType, ElementLayerInfo> = {
    Technology: {
       label: 'Technology',
       children: getLayerElements('Technology')
+   },
+   Other: {
+      label: 'Other',
+      children: getLayerElements('Other')
    }
 };
 
@@ -602,4 +620,5 @@ export const getLabel = (conceptOrLayer: ConceptType | LayerType): string => {
 export const getIcon = (concept: ConceptType): string => conceptMetaDataMap[concept].icon;
 export const getSpecificationSection = (concept: ConceptType): string => conceptMetaDataMap[concept].specificationSection;
 export const getLayer = (element: ElementType): LayerType => elementMetadataMap[element].layer;
+export const getCornerType = (element: ElementType): CornerType => elementMetadataMap[element].cornerType;
 export const getChildren = (layer: LayerType): Partial<Record<ElementType, ElementMetaData>> => layers[layer].children;

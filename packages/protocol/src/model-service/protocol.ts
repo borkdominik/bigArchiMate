@@ -49,6 +49,7 @@ export interface CrossModelRoot extends CrossModelElement {
    mapping?: Mapping;
    element?: Element;
    relation?: Relation;
+   junction?: Junction;
 }
 
 export function isCrossModelRoot(model?: any): model is CrossModelRoot {
@@ -90,6 +91,14 @@ export interface Element extends CrossModelElement, Identifiable {
    type: ElementType;
    properties: Array<Property>;
 }
+
+export interface Junction extends CrossModelElement, Identifiable {
+   readonly $type: 'Junction';
+   name?: string;
+   documentation?: string;
+   properties: Array<Property>;
+}
+
 export interface Relation extends CrossModelElement, Identifiable {
    readonly $type: 'Relation';
    name?: string;

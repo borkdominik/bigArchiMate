@@ -9,6 +9,7 @@ const ModelFileTypeValues = {
    Mapping: 'Mapping',
    SystemDiagram: 'SystemDiagram',
    Element: 'Element',
+   Junctin: 'Junction',
    Relation: 'Relation',
    ArchiMateDiagram: 'ArchiMateDiagram'
 } as const;
@@ -27,6 +28,8 @@ export const ModelFileType = {
             return ModelStructure.Mapping.ICON_CLASS;
          case 'Element':
             return ModelStructure.Element.ICON_CLASS;
+         case 'Junction':
+            return ModelStructure.Junction.ICON_CLASS;
          case 'Relation':
             return ModelStructure.Relation.ICON_CLASS;
          case 'ArchiMateDiagram':
@@ -49,6 +52,8 @@ export const ModelFileType = {
             return ModelFileExtensions.SystemDiagram;
          case 'Element':
             return ModelFileExtensions.Element;
+         case 'Junction':
+            return ModelFileExtensions.Junction;
          case 'Relation':
             return ModelFileExtensions.Relation;
          case 'ArchiMateDiagram':
@@ -65,6 +70,7 @@ export const ModelFileExtensions = {
    Mapping: '.mapping.cm',
    SystemDiagram: '.system-diagram.cm',
    Element: '.element.cm',
+   Junction: 'junction.cm',
    Relation: '.relation.cm',
    ArchiMateDiagram: '.view.archi',
    /* @deprecated Use SystemDiagram instead */
@@ -92,6 +98,10 @@ export const ModelFileExtensions = {
 
    isElementFile(uri: string): boolean {
       return uri.endsWith(this.Element);
+   },
+
+   isJunctionFile(uri: string): boolean {
+      return uri.endsWith(this.Junction);
    },
 
    isRelationFile(uri: string): boolean {
@@ -149,6 +159,9 @@ export const ModelFileExtensions = {
       if (this.isElementFile(uri)) {
          return 'Element';
       }
+      if (this.isJunctionFile(uri)) {
+         return 'Junction';
+      }
       if (this.isRelationFile(uri)) {
          return 'Relation';
       }
@@ -182,6 +195,8 @@ export const ModelFileExtensions = {
             return ModelStructure.Mapping.ICON_CLASS;
          case 'Element':
             return ModelStructure.Element.ICON_CLASS;
+         case 'Junction':
+            return ModelStructure.Junction.ICON_CLASS;
          case 'Relation':
             return ModelStructure.Relation.ICON_CLASS;
          case 'ArchiMateDiagram':
@@ -206,6 +221,9 @@ export const ModelFileExtensions = {
       }
       if (content.startsWith('element')) {
          return 'Element';
+      }
+      if (content.startsWith('junction')) {
+         return 'Junction';
       }
       if (content.startsWith('relation')) {
          return 'Relation';
@@ -260,6 +278,12 @@ export const ModelStructure = {
       FOLDER: 'Elements',
       ICON_CLASS: 'codicon codicon-git-commit',
       ICON: 'git-commit'
+   },
+
+   Junction: {
+      FOLDER: 'Other',
+      ICON_CLASS: 'codicon codicon-git-compare',
+      ICON: 'git-compare'
    },
 
    Relation: {

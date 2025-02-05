@@ -1,7 +1,14 @@
 /********************************************************************************
  * Copyright (c) 2023 CrossBreeze.
  ********************************************************************************/
-import { ARCHIMATE_EDGE_TYPE_MAP, ARCHIMATE_NODE_TYPE_MAP, ELEMENT_ICON_TYPE, ELEMENT_LABEL_TYPE } from '@crossbreeze/protocol';
+import {
+   ARCHIMATE_CONCEPT_TYPE_MAP,
+   ARCHIMATE_ELEMENT_TYPE_MAP,
+   ARCHIMATE_RELATION_TYPE_MAP,
+   ELEMENT_ICON_TYPE,
+   ELEMENT_LABEL_TYPE,
+   getCornerType
+} from '@crossbreeze/protocol';
 import {
    bindAsService,
    bindOrRebind,
@@ -24,10 +31,10 @@ import { createCrossModelDiagramModule } from '../crossmodel-diagram-module';
 import { CutOffCornerNodeView } from './cut-off-corner-view';
 import { archiMateEdgeCreationToolModule } from './edge-creation-tool/edge-creation-tool-module';
 import { IconView } from './icon-view';
-import { ElementNode, GEditableLabel, Icon, RelationEdge } from './model';
+import { ElementNode, GEditableLabel, Icon, JunctionNode, RelationEdge } from './model';
 import { archiMateNodeCreationModule } from './node-creation-tool/node-creation-tool-module';
 import { archiMateSelectModule } from './select-tool/select-tool-module';
-import { ElementNodeView, RelationEdgeView } from './views';
+import { ElementNodeView, JunctionNodeView, RelationEdgeView } from './views';
 
 export class ArchiMateDiagramConfiguration extends GLSPDiagramConfiguration {
    diagramType: string = ArchiMateDiagramLanguage.diagramType;
@@ -47,19 +54,6 @@ export class ArchiMateDiagramConfiguration extends GLSPDiagramConfiguration {
    }
 }
 
-const diamondConcepts = [
-   'Assessment',
-   'Constraint',
-   'Driver',
-   'Goal',
-   'Meaning',
-   'Outcome',
-   'Principle',
-   'Requirement',
-   'Stakeholder',
-   'Value'
-];
-
 const archiMateDiagramModule = createCrossModelDiagramModule((bind, unbind, isBound, rebind) => {
    const context = { bind, unbind, isBound, rebind };
 
@@ -74,20 +68,21 @@ const archiMateDiagramModule = createCrossModelDiagramModule((bind, unbind, isBo
    // The model class holds the client-side model and properties
    // The view class shows how to draw the svg belement given the properties of the model class
 
-   ARCHIMATE_NODE_TYPE_MAP.values().forEach(nodeType => {
-      const concept = ARCHIMATE_NODE_TYPE_MAP.getReverse(nodeType);
+   ARCHIMATE_ELEMENT_TYPE_MAP.values().forEach(nodeType => {
+      const elementType = ARCHIMATE_ELEMENT_TYPE_MAP.getReverse(nodeType);
 
-      if (diamondConcepts.includes(concept)) {
+      if (getCornerType(elementType) === 'diamond') {
          configureModelElement(context, nodeType, ElementNode, CutOffCornerNodeView, { enable: [withEditLabelFeature] });
       } else {
-         // fallback: normal corner view
          configureModelElement(context, nodeType, ElementNode, ElementNodeView, { enable: [withEditLabelFeature] });
       }
    });
 
-   ARCHIMATE_EDGE_TYPE_MAP.values().forEach(edgeType => {
+   ARCHIMATE_RELATION_TYPE_MAP.values().forEach(edgeType => {
       configureModelElement(context, edgeType, RelationEdge, RelationEdgeView);
    });
+
+   configureModelElement(context, ARCHIMATE_CONCEPT_TYPE_MAP.get('Junction'), JunctionNode, JunctionNodeView);
 
    configureModelElement(context, ELEMENT_LABEL_TYPE, GEditableLabel, GLabelView, { enable: [editLabelFeature] });
    configureModelElement(context, ELEMENT_ICON_TYPE, Icon, IconView);

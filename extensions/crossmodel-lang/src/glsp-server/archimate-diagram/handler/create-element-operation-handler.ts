@@ -1,7 +1,7 @@
 /********************************************************************************
  * Copyright (c) 2024 CrossBreeze.
  ********************************************************************************/
-import { ARCHIMATE_NODE_TYPE_MAP, elementMetadataMap, layers } from '@crossbreeze/protocol';
+import { ARCHIMATE_ELEMENT_TYPE_MAP, getLabel, getLayer } from '@crossbreeze/protocol';
 import {
    Action,
    ActionDispatcher,
@@ -22,7 +22,7 @@ import { ArchiMateModelState } from '../model/archimate-model-state.js';
 @injectable()
 export class ArchiMateDiagramCreateElementOperationHandler extends JsonCreateNodeOperationHandler {
    override label = 'Create Element';
-   elementTypeIds = [...ARCHIMATE_NODE_TYPE_MAP.values()];
+   elementTypeIds = [...ARCHIMATE_ELEMENT_TYPE_MAP.values()];
 
    @inject(ModelState) protected declare modelState: ArchiMateModelState;
    @inject(ActionDispatcher) protected actionDispatcher!: ActionDispatcher;
@@ -62,7 +62,7 @@ export class ArchiMateDiagramCreateElementOperationHandler extends JsonCreateNod
     * Creates a new element and stores it on a file on the file system.
     */
    protected async createAndSaveElement(operation: CreateNodeOperation): Promise<Element | undefined> {
-      const elementType = ARCHIMATE_NODE_TYPE_MAP.getReverse(operation.elementTypeId);
+      const elementType = ARCHIMATE_ELEMENT_TYPE_MAP.getReverse(operation.elementTypeId);
 
       // create element, serialize and re-read to ensure everything is up to date and linked properly
       const elementRoot: CrossModelRoot = { $type: 'CrossModelRoot' };
@@ -80,7 +80,7 @@ export class ArchiMateDiagramCreateElementOperationHandler extends JsonCreateNod
       const dirName = UriUtils.joinPath(
          UriUtils.dirname(URI.parse(this.modelState.semanticUri)),
          '..',
-         `Elements/${layers[elementMetadataMap[elementType].layer].label}`
+         `${getLabel(getLayer(elementType))}`
       );
       const targetUri = UriUtils.joinPath(dirName, id + '.element.cm');
       const uri = Utils.findNewUri(targetUri);

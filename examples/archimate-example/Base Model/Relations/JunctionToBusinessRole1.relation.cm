@@ -1,0 +1,5 @@
+relation:
+    id: JunctionToBusinessRole1
+    type: Association
+    source: Junction
+    target: BusinessRole1

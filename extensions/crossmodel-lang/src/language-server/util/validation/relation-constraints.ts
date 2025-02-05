@@ -22,7 +22,7 @@ export const relationKeyMap = new ReversibleMap<string, RelationType>({
    v: 'Serving'
 });
 
-type ConceptType = ElementType | 'Grouping' | 'Junction' | 'Location' | 'Relationship';
+type ConceptType = ElementType | 'Junction' | 'Relationship';
 
 /**
  * Valid relations between ArchiMate elements.

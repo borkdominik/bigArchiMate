@@ -5,14 +5,14 @@ import {
    activateDefaultToolsAction,
    activateDeleteToolAction,
    ARCHIMATE_CONCEPT_TYPE_MAP,
-   ARCHIMATE_EDGE_TYPE_MAP,
-   ARCHIMATE_NODE_TYPE_MAP,
+   ARCHIMATE_ELEMENT_TYPE_MAP,
+   ARCHIMATE_RELATION_TYPE_MAP,
    getChildren,
    getIcon,
    getLabel,
    getSpecificationSection,
    LayerType,
-   relationMetadataMap,
+   relationTypes,
    toKebabCase
 } from '@crossbreeze/protocol';
 import {
@@ -56,10 +56,7 @@ export class ArchiMateToolPaletteProvider extends ToolPaletteItemProvider {
             id: 'relations-group',
             sortString: 'B',
             label: 'Relationship',
-            children: [
-               ...getObjectKeys(relationMetadataMap).map(relationType => getRelationPaletteItem(relationType, 'B')),
-               getJunctionPaletteItem('B')
-            ],
+            children: [...relationTypes.map(relationType => getRelationPaletteItem(relationType, 'B')), getJunctionPaletteItem('B')],
             actions: []
          },
          getElementGroupPaletteItem('Application', 'U'),
@@ -67,7 +64,8 @@ export class ArchiMateToolPaletteProvider extends ToolPaletteItemProvider {
          getElementGroupPaletteItem('ImplementationAndMigration', 'W'),
          getElementGroupPaletteItem('Motivation', 'X'),
          getElementGroupPaletteItem('Strategy', 'Y'),
-         getElementGroupPaletteItem('Technology', 'Z')
+         getElementGroupPaletteItem('Technology', 'Z'),
+         getElementGroupPaletteItem('Other', 'ZA')
       ];
    }
 }
@@ -83,7 +81,7 @@ const getElementPaletteItem = (elementType: ElementType, groupSortString: string
    sortString: `${groupSortString}-${getSpecificationSection(elementType)}`,
    label: getLabel(elementType),
    icon: getIcon(elementType),
-   actions: [TriggerNodeCreationAction.create(ARCHIMATE_NODE_TYPE_MAP.get(elementType), { args: { type: 'create' } })]
+   actions: [TriggerNodeCreationAction.create(ARCHIMATE_ELEMENT_TYPE_MAP.get(elementType), { args: { type: 'create' } })]
 });
 
 /**
@@ -97,7 +95,7 @@ const getRelationPaletteItem = (relationType: RelationType, groupSortString: str
    sortString: `${groupSortString}-${getSpecificationSection(relationType)}`,
    label: `${getLabel(relationType)}`,
    icon: getIcon(relationType),
-   actions: [TriggerEdgeCreationAction.create(ARCHIMATE_EDGE_TYPE_MAP.get(relationType), { args: { type: 'create' } })]
+   actions: [TriggerEdgeCreationAction.create(ARCHIMATE_RELATION_TYPE_MAP.get(relationType), { args: { type: 'create' } })]
 });
 
 /**

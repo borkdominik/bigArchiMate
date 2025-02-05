@@ -3,7 +3,14 @@
  ********************************************************************************/
 import { Command, DeleteElementOperation, JsonOperationHandler, ModelState, remove } from '@eclipse-glsp/server';
 import { inject, injectable } from 'inversify';
-import { ElementNode, RelationEdge, isElementNode, isRelationEdge } from '../../../language-server/generated/ast.js';
+import {
+   ElementNode,
+   JunctionNode,
+   RelationEdge,
+   isElementNode,
+   isJunctionNode,
+   isRelationEdge
+} from '../../../language-server/generated/ast.js';
 import { CrossModelCommand } from '../../common/cross-model-command.js';
 import { ArchiMateModelState } from '../model/archimate-model-state.js';
 
@@ -35,7 +42,7 @@ export class ArchiMateDiagramDeleteOperationHandler extends JsonOperationHandler
       for (const elementId of operation.elementIds) {
          const diagramComponent = this.modelState.index.findSemanticElement(elementId, isDiagramComponent);
          // simply remove any diagram nodes or edges from the diagram
-         if (isElementNode(diagramComponent)) {
+         if (isElementNode(diagramComponent) || isJunctionNode(diagramComponent)) {
             deleteInfo.nodes.push(diagramComponent);
             deleteInfo.edges.push(
                ...this.modelState.archiMateDiagram.edges.filter(
@@ -50,11 +57,11 @@ export class ArchiMateDiagramDeleteOperationHandler extends JsonOperationHandler
    }
 }
 
-function isDiagramComponent(item: unknown): item is RelationEdge | ElementNode {
-   return isRelationEdge(item) || isElementNode(item);
+function isDiagramComponent(item: unknown): item is RelationEdge | ElementNode | JunctionNode {
+   return isRelationEdge(item) || isElementNode(item) || isJunctionNode(item);
 }
 
 interface DeleteInfo {
-   nodes: ElementNode[];
+   nodes: (ElementNode | JunctionNode)[];
    edges: RelationEdge[];
 }

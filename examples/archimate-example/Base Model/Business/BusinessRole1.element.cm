@@ -1,0 +1,4 @@
+element:
+    id: BusinessRole1
+    name: "BusinessRole"
+    type: BusinessRole

@@ -15,6 +15,7 @@ import {
    isElement,
    isEntityAttribute,
    isJoinCondition,
+   isJunction,
    isRelation,
    isSourceObject,
    isSourceObjectDependency,
@@ -64,7 +65,8 @@ export class CrossModelSerializer implements Serializer<CrossModelRoot> {
          propertyOf(parent, key, isSourceObject, 'join') ||
          (!Array.isArray(value) && this.isValidReference(parent, key, value)) ||
          (isElement(parent) && key === 'type') ||
-         (isRelation(parent) && key === 'type')
+         (isRelation(parent) && key === 'type') ||
+         (isJunction(parent) && key === 'type')
       ) {
          // values that we do not want to quote because they are ids or references
          return value;

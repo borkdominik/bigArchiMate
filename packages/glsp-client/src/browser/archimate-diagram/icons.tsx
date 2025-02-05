@@ -439,11 +439,29 @@ export const icons = {
          </g>
       </svg>
    ),
+   Grouping: (
+      <svg {...svgWrapperAttributes}>
+         <rect id='group' x={0} y={0} width={16} height={16} style={{ fill: 'none' }} />
+         <g>
+            <rect x={1} y={3} width={9} height={3} style={{ fill: 'none', stroke: '#0d0d0d', strokeWidth: 1 }} />
+            <rect x={1} y={6} width={14} height={8} style={{ fill: 'none', stroke: '#0d0d0d', strokeWidth: 1 }} />
+         </g>
+      </svg>
+   ),
    ImplementationEvent: (
       <svg {...svgWrapperAttributes}>
          <rect id='event' x={0} y={0} width={16} height={16} style={{ fill: 'none' }} />
          <path
             d='M0.932,2.863l8.835,0l0.034,0c2.91,0.018 5.267,2.313 5.267,5.137c0,2.835 -2.375,5.137 -5.301,5.137l-8.835,0l0.034,0c2.91,-0.018 5.267,-2.313 5.267,-5.137c0,-2.824 -2.357,-5.119 -5.267,-5.137l-0.034,0Z'
+            style={{ fill: 'none', stroke: '#0d0d0d', strokeWidth: 1 }}
+         />
+      </svg>
+   ),
+   Location: (
+      <svg {...svgWrapperAttributes}>
+         <rect id='location' x={0} y={0} width={16} height={16} style={{ fill: 'none' }} />
+         <path
+            d='M3.546,5c-0.03,-0.163 -0.046,-0.33 -0.046,-0.5c0,-1.932 2.016,-3.5 4.5,-3.5c2.484,0 4.5,1.568 4.5,3.5c0,0.17 -0.016,0.337 -0.046,0.5l0.046,0l-0.09,0.201c-0.082,0.313 -0.218,0.611 -0.4,0.888l-4.01,8.911l-4.01,-8.911c-0.182,-0.277 -0.318,-0.575 -0.4,-0.888l-0.09,-0.201l0.046,0Z'
             style={{ fill: 'none', stroke: '#0d0d0d', strokeWidth: 1 }}
          />
       </svg>

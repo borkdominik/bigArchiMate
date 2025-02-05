@@ -3089,7 +3089,15 @@ export const CrossModelGrammar = (): Grammar => loadedCrossModelGrammar ?? (load
           },
           {
             "$type": "Keyword",
+            "value": "Grouping"
+          },
+          {
+            "$type": "Keyword",
             "value": "ImplementationEvent"
+          },
+          {
+            "$type": "Keyword",
+            "value": "Location"
           },
           {
             "$type": "Keyword",
@@ -3540,7 +3548,7 @@ export const CrossModelGrammar = (): Grammar => loadedCrossModelGrammar ?? (load
         "elements": [
           {
             "$type": "Keyword",
-            "value": "Junction"
+            "value": "junction"
           },
           {
             "$type": "Keyword",
@@ -3624,33 +3632,6 @@ export const CrossModelGrammar = (): Grammar => loadedCrossModelGrammar ?? (load
               }
             ],
             "cardinality": "?"
-          },
-          {
-            "$type": "Keyword",
-            "value": "relations"
-          },
-          {
-            "$type": "Keyword",
-            "value": ":"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "relations",
-            "operator": "+=",
-            "terminal": {
-              "$type": "CrossReference",
-              "type": {
-                "$ref": "#/rules@39"
-              },
-              "terminal": {
-                "$type": "RuleCall",
-                "rule": {
-                  "$ref": "#/rules@40"
-                },
-                "arguments": []
-              },
-              "deprecatedSyntax": false
-            }
           },
           {
             "$type": "RuleCall",
@@ -3791,7 +3772,7 @@ export const CrossModelGrammar = (): Grammar => loadedCrossModelGrammar ?? (load
                             {
                               "$type": "RuleCall",
                               "rule": {
-                                "$ref": "#/rules@47"
+                                "$ref": "#/rules@46"
                               },
                               "arguments": []
                             }
@@ -3846,7 +3827,7 @@ export const CrossModelGrammar = (): Grammar => loadedCrossModelGrammar ?? (load
                         "terminal": {
                           "$type": "RuleCall",
                           "rule": {
-                            "$ref": "#/rules@46"
+                            "$ref": "#/rules@49"
                           },
                           "arguments": []
                         }
@@ -4075,122 +4056,6 @@ export const CrossModelGrammar = (): Grammar => loadedCrossModelGrammar ?? (load
     },
     {
       "$type": "ParserRule",
-      "name": "RelationEdge",
-      "definition": {
-        "$type": "Group",
-        "elements": [
-          {
-            "$type": "Keyword",
-            "value": "id"
-          },
-          {
-            "$type": "Keyword",
-            "value": ":"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "id",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "rule": {
-                "$ref": "#/rules@16"
-              },
-              "arguments": []
-            }
-          },
-          {
-            "$type": "Keyword",
-            "value": "relation"
-          },
-          {
-            "$type": "Keyword",
-            "value": ":"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "relation",
-            "operator": "=",
-            "terminal": {
-              "$type": "CrossReference",
-              "type": {
-                "$ref": "#/rules@39"
-              },
-              "terminal": {
-                "$type": "RuleCall",
-                "rule": {
-                  "$ref": "#/rules@3"
-                },
-                "arguments": []
-              },
-              "deprecatedSyntax": false
-            }
-          },
-          {
-            "$type": "Keyword",
-            "value": "sourceNode"
-          },
-          {
-            "$type": "Keyword",
-            "value": ":"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "sourceNode",
-            "operator": "=",
-            "terminal": {
-              "$type": "CrossReference",
-              "type": {
-                "$ref": "#/rules@45"
-              },
-              "terminal": {
-                "$type": "RuleCall",
-                "rule": {
-                  "$ref": "#/rules@3"
-                },
-                "arguments": []
-              },
-              "deprecatedSyntax": false
-            }
-          },
-          {
-            "$type": "Keyword",
-            "value": "targetNode"
-          },
-          {
-            "$type": "Keyword",
-            "value": ":"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "targetNode",
-            "operator": "=",
-            "terminal": {
-              "$type": "CrossReference",
-              "type": {
-                "$ref": "#/rules@45"
-              },
-              "terminal": {
-                "$type": "RuleCall",
-                "rule": {
-                  "$ref": "#/rules@3"
-                },
-                "arguments": []
-              },
-              "deprecatedSyntax": false
-            }
-          }
-        ]
-      },
-      "definesHiddenTokens": false,
-      "entry": false,
-      "fragment": false,
-      "hiddenTokens": [],
-      "parameters": [],
-      "wildcard": false
-    },
-    {
-      "$type": "ParserRule",
       "name": "JunctionNode",
       "definition": {
         "$type": "Group",
@@ -4321,6 +4186,259 @@ export const CrossModelGrammar = (): Grammar => loadedCrossModelGrammar ?? (load
               },
               "arguments": []
             }
+          }
+        ]
+      },
+      "definesHiddenTokens": false,
+      "entry": false,
+      "fragment": false,
+      "hiddenTokens": [],
+      "parameters": [],
+      "wildcard": false
+    },
+    {
+      "$type": "ParserRule",
+      "name": "ElementNodeOrJunctionNode",
+      "definition": {
+        "$type": "Alternatives",
+        "elements": [
+          {
+            "$type": "RuleCall",
+            "rule": {
+              "$ref": "#/rules@45"
+            },
+            "arguments": []
+          },
+          {
+            "$type": "RuleCall",
+            "rule": {
+              "$ref": "#/rules@46"
+            },
+            "arguments": []
+          }
+        ]
+      },
+      "definesHiddenTokens": false,
+      "entry": false,
+      "fragment": false,
+      "hiddenTokens": [],
+      "parameters": [],
+      "wildcard": false
+    },
+    {
+      "$type": "ParserRule",
+      "name": "RelationRoutingPoint",
+      "definition": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Keyword",
+            "value": "x"
+          },
+          {
+            "$type": "Keyword",
+            "value": ":"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "x",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "rule": {
+                "$ref": "#/rules@9"
+              },
+              "arguments": []
+            }
+          },
+          {
+            "$type": "Keyword",
+            "value": "y"
+          },
+          {
+            "$type": "Keyword",
+            "value": ":"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "y",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "rule": {
+                "$ref": "#/rules@9"
+              },
+              "arguments": []
+            }
+          }
+        ]
+      },
+      "definesHiddenTokens": false,
+      "entry": false,
+      "fragment": false,
+      "hiddenTokens": [],
+      "parameters": [],
+      "wildcard": false
+    },
+    {
+      "$type": "ParserRule",
+      "name": "RelationEdge",
+      "definition": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Keyword",
+            "value": "id"
+          },
+          {
+            "$type": "Keyword",
+            "value": ":"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "id",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "rule": {
+                "$ref": "#/rules@16"
+              },
+              "arguments": []
+            }
+          },
+          {
+            "$type": "Keyword",
+            "value": "relation"
+          },
+          {
+            "$type": "Keyword",
+            "value": ":"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "relation",
+            "operator": "=",
+            "terminal": {
+              "$type": "CrossReference",
+              "type": {
+                "$ref": "#/rules@39"
+              },
+              "terminal": {
+                "$type": "RuleCall",
+                "rule": {
+                  "$ref": "#/rules@3"
+                },
+                "arguments": []
+              },
+              "deprecatedSyntax": false
+            }
+          },
+          {
+            "$type": "Keyword",
+            "value": "sourceNode"
+          },
+          {
+            "$type": "Keyword",
+            "value": ":"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "sourceNode",
+            "operator": "=",
+            "terminal": {
+              "$type": "CrossReference",
+              "type": {
+                "$ref": "#/rules@47"
+              },
+              "terminal": {
+                "$type": "RuleCall",
+                "rule": {
+                  "$ref": "#/rules@3"
+                },
+                "arguments": []
+              },
+              "deprecatedSyntax": false
+            }
+          },
+          {
+            "$type": "Keyword",
+            "value": "targetNode"
+          },
+          {
+            "$type": "Keyword",
+            "value": ":"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "targetNode",
+            "operator": "=",
+            "terminal": {
+              "$type": "CrossReference",
+              "type": {
+                "$ref": "#/rules@47"
+              },
+              "terminal": {
+                "$type": "RuleCall",
+                "rule": {
+                  "$ref": "#/rules@3"
+                },
+                "arguments": []
+              },
+              "deprecatedSyntax": false
+            }
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "routingPoints"
+              },
+              {
+                "$type": "Keyword",
+                "value": ":"
+              },
+              {
+                "$type": "RuleCall",
+                "rule": {
+                  "$ref": "#/rules@11"
+                },
+                "arguments": []
+              },
+              {
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "RuleCall",
+                    "rule": {
+                      "$ref": "#/rules@13"
+                    },
+                    "arguments": []
+                  },
+                  {
+                    "$type": "Assignment",
+                    "feature": "routingPoints",
+                    "operator": "+=",
+                    "terminal": {
+                      "$type": "RuleCall",
+                      "rule": {
+                        "$ref": "#/rules@48"
+                      },
+                      "arguments": []
+                    }
+                  }
+                ],
+                "cardinality": "+"
+              },
+              {
+                "$type": "RuleCall",
+                "rule": {
+                  "$ref": "#/rules@12"
+                },
+                "arguments": []
+              }
+            ],
+            "cardinality": "?"
           }
         ]
       },

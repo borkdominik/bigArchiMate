@@ -50,7 +50,9 @@ ElementType returns string:
     'Facility' |
     'Gap' |
     'Goal' |
+    'Grouping' |
     'ImplementationEvent' |
+    'Location' |
     'Material' |
     'Meaning' |
     'Node' |

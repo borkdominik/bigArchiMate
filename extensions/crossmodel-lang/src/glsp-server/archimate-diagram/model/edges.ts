@@ -2,9 +2,9 @@
  * Copyright (c) 2024 CrossBreeze.
  ********************************************************************************/
 
-import { ARCHIMATE_EDGE_TYPE_MAP, REFERENCE_CONTAINER_TYPE, REFERENCE_PROPERTY, REFERENCE_VALUE } from '@crossbreeze/protocol';
-import { GEdge, GEdgeBuilder } from '@eclipse-glsp/server';
-import { RelationEdge } from '../../../language-server/generated/ast.js';
+import { ARCHIMATE_RELATION_TYPE_MAP, REFERENCE_CONTAINER_TYPE, REFERENCE_PROPERTY, REFERENCE_VALUE } from '@crossbreeze/protocol';
+import { GEdge, GEdgeBuilder, Point } from '@eclipse-glsp/server';
+import { RelationEdge, RelationRoutingPoint } from '../../../language-server/generated/ast.js';
 import { ArchiMateModelIndex } from './archimate-model-index.js';
 
 export class GRelationEdge extends GEdge {
@@ -18,7 +18,7 @@ export class GRelationEdgeBuilder extends GEdgeBuilder<GRelationEdge> {
       const type = edge.relation.ref?.type;
 
       if (type) {
-         this.type(ARCHIMATE_EDGE_TYPE_MAP.get(type));
+         this.type(ARCHIMATE_RELATION_TYPE_MAP.get(type));
       }
 
       this.id(index.createId(edge));
@@ -34,6 +34,11 @@ export class GRelationEdgeBuilder extends GEdgeBuilder<GRelationEdge> {
       this.sourceId(sourceId || '');
       this.targetId(targetId || '');
 
+      this.addRoutingPoints(edge.routingPoints.map(this.relationEdgeRoutingPointToPoint));
       return this;
+   }
+
+   private relationEdgeRoutingPointToPoint(routingPoint: RelationRoutingPoint): Point {
+      return { x: routingPoint.x, y: routingPoint.y };
    }
 }
