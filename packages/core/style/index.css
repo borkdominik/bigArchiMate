@@ -55,3 +55,13 @@ input[type='number'] {
 .editor-diagnostics-error-message {
    font-weight: 500;
 }
+
+.p-Widget.theia-side-panel .p-Widget,
+.p-Widget .theia-sidepanel-toolbar {
+   --archimate-icon-size: var(--theia-ui-font-size1);
+   --archimate-icon-color: var(--theia-sideBar-foreground, var(--theia-titleBar-activeForeground));
+}
+
+.theia-TreeNode:hover {
+   --archimate-icon-color: var(--theia-list-hoverForeground, var(--theia-sideBar-foreground, var(--theia-titleBar-activeForeground)));
+}

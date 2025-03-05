@@ -8,6 +8,7 @@ import { SaveFileDialog, SaveFileDialogFactory, SaveFileDialogProps } from '@the
 import { FileNavigatorWidget, NavigatorTreeDecorator } from '@theia/navigator/lib/browser';
 import { FileNavigatorContribution } from '@theia/navigator/lib/browser/navigator-contribution';
 import { WorkspaceCommandContribution } from '@theia/workspace/lib/browser/workspace-commands';
+import '../../style/icons.css';
 import '../../style/index.css';
 import { CrossModelLabelProvider } from './cm-file-label-provider';
 import { createCrossModelFileNavigatorWidget } from './cm-file-navigator-tree-widget';

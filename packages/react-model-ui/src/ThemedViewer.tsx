@@ -145,7 +145,7 @@ const darkTheme = createTheme({
          paper: '#1e1e1e' /* --theia-editor-background */
       },
       text: {
-         primary: '#d4d4d4' /* --theia-editor-foreground */
+         primary: '#ffffff' /* --theia-editor-foreground */
       }
    },
    ...sharedThemeOptions

@@ -1,0 +1,18 @@
+<svg id="root" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16" version="1.1" xmlSpace="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5">
+   <rect id="driver" x="0" y="0" width="16" height="16" style="fill:none" />
+   <clipPath id="_clip1">
+      <rect x="0" y="0" width="16" height="16" />
+   </clipPath>
+   <g clipPath="url(#_clip1)">
+      <g>
+         <path d="M8,8l0,-7l0,7Z" style="fill:none;stroke:#0d0d0d;stroke-width:1" />
+         <path d="M2.5,3l5.5,5l5.5,-5" style="fill:none;stroke:#0d0d0d;stroke-width:1" />
+         <circle cx="8" cy="8" r="6" style="fill:none;stroke:#0d0d0d;stroke-width:1" />
+         <circle cx="8" cy="8" r="1" style="fill:#05f;stroke:#0d0d0d;stroke-width:1" />
+         <path d="M3.5,13l4.5,-5l0,7" style="fill:none;stroke:#0d0d0d;stroke-width:1" />
+         <path d="M8,8l4.5,5" style="fill:none;stroke:#0d0d0d;stroke-width:1" />
+         <path d="M8,8l-7.5,0" style="fill:none;stroke:#0d0d0d;stroke-width:1" />
+         <path d="M8,8l7.5,0" style="fill:none;stroke:#0d0d0d;stroke-width:1" />
+      </g>
+   </g>
+</svg>

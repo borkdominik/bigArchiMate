@@ -1,0 +1,12 @@
+<svg id="root" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16" version="1.1" xmlSpace="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5">
+   <rect id="equipment" x="0" y="0" width="16" height="16" style="fill:none" />
+   <clipPath id="_clip1">
+      <rect x="0" y="0" width="16" height="16" />
+   </clipPath>
+   <g clipPath="url(#_clip1)">
+      <g>
+         <path d="M5.464,6.397l1.136,0l0,-1.136l2.8,0l0,1.136l1.136,0l0,2.8l-1.136,0l0,1.136l-2.8,0l0,-1.136l-1.136,0l0,-2.8Z" style="fill:none;stroke:#0d0d0d;stroke-width:1" />
+         <path d="M9.4,13.133l0,1.867l-2.8,0l0,-1.867l-3.733,0l0,-4.138l-1.867,0l0,-2.8l1.867,0l0,-3.328l3.733,0l0,-1.867l2.8,0l0,1.867l3.733,0l0,3.328l1.867,0l0,2.8l-1.867,0l0,4.138l-3.733,0Z" style="fill:none;stroke:#0d0d0d;stroke-width:1" />
+      </g>
+   </g>
+</svg>

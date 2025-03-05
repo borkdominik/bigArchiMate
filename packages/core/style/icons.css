@@ -1,0 +1,277 @@
+/********************************************************************************
+ * Copyright (c) 2025 EclipseSource and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+:root {
+   --archimate-icon-application-collaboration: url('./icons/application-collaboration.svg');
+   --archimate-icon-application-component: url('./icons/application-component.svg');
+   --archimate-icon-application-event: url('./icons/application-event.svg');
+   --archimate-icon-application-function: url('./icons/application-function.svg');
+   --archimate-icon-application-interface: url('./icons/application-interface.svg');
+   --archimate-icon-application-interaction: url('./icons/application-interaction.svg');
+   --archimate-icon-application-process: url('./icons/application-process.svg');
+   --archimate-icon-application-service: url('./icons/application-service.svg');
+   --archimate-icon-artifact: url('./icons/artifact.svg');
+   --archimate-icon-assessment: url('./icons/assessment.svg');
+   --archimate-icon-business-actor: url('./icons/business-actor.svg');
+   --archimate-icon-business-collaboration: url('./icons/business-collaboration.svg');
+   --archimate-icon-business-event: url('./icons/business-event.svg');
+   --archimate-icon-business-function: url('./icons/business-function.svg');
+   --archimate-icon-business-interaction: url('./icons/business-interaction.svg');
+   --archimate-icon-business-interface: url('./icons/business-interface.svg');
+   --archimate-icon-business-object: url('./icons/business-object.svg');
+   --archimate-icon-business-process: url('./icons/business-process.svg');
+   --archimate-icon-business-role: url('./icons/business-role.svg');
+   --archimate-icon-business-service: url('./icons/business-service.svg');
+   --archimate-icon-capability: url('./icons/capability.svg');
+   --archimate-icon-communication-network: url('./icons/communication-network.svg');
+   --archimate-icon-constraint: url('./icons/constraint.svg');
+   --archimate-icon-contract: url('./icons/contract.svg');
+   --archimate-icon-course-of-action: url('./icons/course-of-action.svg');
+   --archimate-icon-data-object: url('./icons/data-object.svg');
+   --archimate-icon-deliverable: url('./icons/deliverable.svg');
+   --archimate-icon-device: url('./icons/device.svg');
+   --archimate-icon-distribution-network: url('./icons/distribution-network.svg');
+   --archimate-icon-driver: url('./icons/driver.svg');
+   --archimate-icon-equipment: url('./icons/equipment.svg');
+   --archimate-icon-facility: url('./icons/facility.svg');
+   --archimate-icon-gap: url('./icons/gap.svg');
+   --archimate-icon-goal: url('./icons/goal.svg');
+   --archimate-icon-grouping: url('./icons/grouping.svg');
+   --archimate-icon-implementation-event: url('./icons/implementation-event.svg');
+   --archimate-icon-location: url('./icons/location.svg');
+   --archimate-icon-material: url('./icons/material.svg');
+   --archimate-icon-meaning: url('./icons/meaning.svg');
+   --archimate-icon-node: url('./icons/node.svg');
+   --archimate-icon-outcome: url('./icons/outcome.svg');
+   --archimate-icon-path: url('./icons/path.svg');
+   --archimate-icon-plateau: url('./icons/plateau.svg');
+   --archimate-icon-principle: url('./icons/principle.svg');
+   --archimate-icon-product: url('./icons/product.svg');
+   --archimate-icon-representation: url('./icons/representation.svg');
+   --archimate-icon-requirement: url('./icons/requirement.svg');
+   --archimate-icon-resource: url('./icons/resource.svg');
+   --archimate-icon-stakeholder: url('./icons/stakeholder.svg');
+   --archimate-icon-system-software: url('./icons/system-software.svg');
+   --archimate-icon-technology-collaboration: url('./icons/technology-collaboration.svg');
+   --archimate-icon-technology-event: url('./icons/technology-event.svg');
+   --archimate-icon-technology-function: url('./icons/technology-function.svg');
+   --archimate-icon-technology-interaction: url('./icons/technology-interaction.svg');
+   --archimate-icon-technology-interface: url('./icons/technology-interface.svg');
+   --archimate-icon-technology-process: url('./icons/technology-process.svg');
+   --archimate-icon-technology-service: url('./icons/technology-service.svg');
+   --archimate-icon-value: url('./icons/value.svg');
+   --archimate-icon-value-stream: url('./icons/value-stream.svg');
+   --archimate-icon-work-package: url('./icons/work-package.svg');
+
+   --archimate-icon-color: var(--theia-titleBar-activeForeground);
+   --archimate-icon-size: 1em;
+}
+
+/**
+ * If we had the the SVGs as a font, we could use the content property to reference the glyph, similar to codicon.
+ * This has the advantage of being able to use the font-size property to scale the icon and the color property to color the icon.
+ * Since we are using SVGs directly, however, we need to use them as a mask-image, set the size explicitly and color them using the background-color property.
+ */
+.codicon[class*='codicon-archimate']:before {
+   content: '' !important;
+   display: block;
+   width: var(--archimate-icon-size);
+   height: var(--archimate-icon-size);
+   mask-size: var(--archimate-icon-size);
+   mask-position: center;
+   mask-repeat: no-repeat;
+   background-color: var(--archimate-icon-color);
+}
+
+.codicon-archimate-application-collaboration:before {
+   mask-image: var(--archimate-icon-application-collaboration);
+}
+.codicon-archimate-application-component:before {
+   mask-image: var(--archimate-icon-application-component);
+}
+.codicon-archimate-application-event:before {
+   mask-image: var(--archimate-icon-application-event);
+}
+.codicon-archimate-application-function:before {
+   mask-image: var(--archimate-icon-application-function);
+}
+.codicon-archimate-application-interface:before {
+   mask-image: var(--archimate-icon-application-interface);
+}
+.codicon-archimate-application-interaction:before {
+   mask-image: var(--archimate-icon-application-interaction);
+}
+.codicon-archimate-application-process:before {
+   mask-image: var(--archimate-icon-application-process);
+}
+.codicon-archimate-application-service:before {
+   mask-image: var(--archimate-icon-application-service);
+}
+.codicon-archimate-artifact:before {
+   mask-image: var(--archimate-icon-artifact);
+}
+.codicon-archimate-assessment:before {
+   mask-image: var(--archimate-icon-assessment);
+}
+.codicon-archimate-business-actor:before {
+   mask-image: var(--archimate-icon-business-actor);
+}
+.codicon-archimate-business-collaboration:before {
+   mask-image: var(--archimate-icon-business-collaboration);
+}
+.codicon-archimate-business-event:before {
+   mask-image: var(--archimate-icon-business-event);
+}
+.codicon-archimate-business-function:before {
+   mask-image: var(--archimate-icon-business-function);
+}
+.codicon-archimate-business-interaction:before {
+   mask-image: var(--archimate-icon-business-interaction);
+}
+.codicon-archimate-business-interface:before {
+   mask-image: var(--archimate-icon-business-interface);
+}
+.codicon-archimate-business-object:before {
+   mask-image: var(--archimate-icon-business-object);
+}
+.codicon-archimate-business-process:before {
+   mask-image: var(--archimate-icon-business-process);
+}
+.codicon-archimate-business-role:before {
+   mask-image: var(--archimate-icon-business-role);
+}
+.codicon-archimate-business-service:before {
+   mask-image: var(--archimate-icon-business-service);
+}
+.codicon-archimate-capability:before {
+   mask-image: var(--archimate-icon-capability);
+}
+.codicon-archimate-communication-network:before {
+   mask-image: var(--archimate-icon-communication-network);
+}
+.codicon-archimate-constraint:before {
+   mask-image: var(--archimate-icon-constraint);
+}
+.codicon-archimate-contract:before {
+   mask-image: var(--archimate-icon-contract);
+}
+.codicon-archimate-course-of-action:before {
+   mask-image: var(--archimate-icon-course-of-action);
+}
+.codicon-archimate-data-object:before {
+   mask-image: var(--archimate-icon-data-object);
+}
+.codicon-archimate-deliverable:before {
+   mask-image: var(--archimate-icon-deliverable);
+}
+.codicon-archimate-device:before {
+   mask-image: var(--archimate-icon-device);
+}
+.codicon-archimate-distribution-network:before {
+   mask-image: var(--archimate-icon-distribution-network);
+}
+.codicon-archimate-driver:before {
+   mask-image: var(--archimate-icon-driver);
+}
+.codicon-archimate-equipment:before {
+   mask-image: var(--archimate-icon-equipment);
+}
+.codicon-archimate-facility:before {
+   mask-image: var(--archimate-icon-facility);
+}
+.codicon-archimate-gap:before {
+   mask-image: var(--archimate-icon-gap);
+}
+.codicon-archimate-goal:before {
+   mask-image: var(--archimate-icon-goal);
+}
+.codicon-archimate-grouping:before {
+   mask-image: var(--archimate-icon-grouping);
+}
+.codicon-archimate-implementation-event:before {
+   mask-image: var(--archimate-icon-implementation-event);
+}
+.codicon-archimate-location:before {
+   mask-image: var(--archimate-icon-location);
+}
+.codicon-archimate-material:before {
+   mask-image: var(--archimate-icon-material);
+}
+.codicon-archimate-meaning:before {
+   mask-image: var(--archimate-icon-meaning);
+}
+.codicon-archimate-node:before {
+   mask-image: var(--archimate-icon-node);
+}
+.codicon-archimate-outcome:before {
+   mask-image: var(--archimate-icon-outcome);
+}
+.codicon-archimate-path:before {
+   mask-image: var(--archimate-icon-path);
+}
+.codicon-archimate-plateau:before {
+   mask-image: var(--archimate-icon-plateau);
+}
+.codicon-archimate-principle:before {
+   mask-image: var(--archimate-icon-principle);
+}
+.codicon-archimate-product:before {
+   mask-image: var(--archimate-icon-product);
+}
+.codicon-archimate-representation:before {
+   mask-image: var(--archimate-icon-representation);
+}
+.codicon-archimate-requirement:before {
+   mask-image: var(--archimate-icon-requirement);
+}
+.codicon-archimate-resource:before {
+   mask-image: var(--archimate-icon-resource);
+}
+.codicon-archimate-stakeholder:before {
+   mask-image: var(--archimate-icon-stakeholder);
+}
+.codicon-archimate-system-software:before {
+   mask-image: var(--archimate-icon-system-software);
+}
+.codicon-archimate-technology-collaboration:before {
+   mask-image: var(--archimate-icon-technology-collaboration);
+}
+.codicon-archimate-technology-event:before {
+   mask-image: var(--archimate-icon-technology-event);
+}
+.codicon-archimate-technology-function:before {
+   mask-image: var(--archimate-icon-technology-function);
+}
+.codicon-archimate-technology-interaction:before {
+   mask-image: var(--archimate-icon-technology-interaction);
+}
+.codicon-archimate-technology-interface:before {
+   mask-image: var(--archimate-icon-technology-interface);
+}
+.codicon-archimate-technology-process:before {
+   mask-image: var(--archimate-icon-technology-process);
+}
+.codicon-archimate-technology-service:before {
+   mask-image: var(--archimate-icon-technology-service);
+}
+.codicon-archimate-value:before {
+   mask-image: var(--archimate-icon-value);
+}
+.codicon-archimate-value-stream:before {
+   mask-image: var(--archimate-icon-value-stream);
+}
+.codicon-archimate-work-package:before {
+   mask-image: var(--archimate-icon-work-package);
+}

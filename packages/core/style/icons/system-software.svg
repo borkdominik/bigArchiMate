@@ -1,0 +1,7 @@
+<svg id="root" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16" version="1.1" xmlSpace="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5">
+   <rect id="systemsoftware" x="0" y="0" width="16" height="16" style="fill:none" />
+   <g>
+      <circle cx="6.875" cy="8.563" r="5.625" style="fill:none;stroke:#0d0d0d;stroke-width:1" />
+      <path d="M5.552,3.094c0.972,-0.8 2.217,-1.281 3.573,-1.281c3.105,0 5.625,2.52 5.625,5.625c0,2.648 -1.835,4.872 -4.302,5.468c1.253,-1.032 2.052,-2.595 2.052,-4.343c0,-3.105 -2.52,-5.625 -5.625,-5.625c-0.456,0 -0.899,0.054 -1.323,0.156Z" style="fill:none;stroke:#0d0d0d;stroke-width:1" />
+   </g>
+</svg>

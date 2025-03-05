@@ -1,0 +1,8 @@
+<svg id="root" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16" version="1.1" xmlSpace="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5">
+   <rect id="communicationpath" x="0" y="0" width="16" height="16" style="fill:none" />
+   <g>
+      <path d="M2.167,8l11.94,0" style="fill:none;stroke:#0d0d0d;stroke-width:1;stroke-dasharray:1,1,1,1" />
+      <path d="M10.5,4.899l0,-1.197l5,4.298l-5,4.298l0,-1.197l3.607,-3.101l-3.607,-3.101Z" style="fill:none;stroke:#0d0d0d;stroke-width:0.8px;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5" />
+      <path d="M5.5,4.899l0,-1.197l-5,4.298l5,4.298l0,-1.197l-3.607,-3.101l3.607,-3.101Z" style="fill:none;stroke:#0d0d0d;stroke-width:0.8px;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5" />
+   </g>
+</svg>

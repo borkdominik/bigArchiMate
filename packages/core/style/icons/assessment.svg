@@ -1,0 +1,7 @@
+<svg id="root" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16" version="1.1" xmlSpace="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5">
+   <rect id="assessment" x="0" y="0" width="16" height="16" style="fill:none" />
+   <g>
+      <path d="M6.281,3.317c1.756,-1.756 4.608,-1.756 6.364,0c1.756,1.756 1.756,4.608 0,6.364c-1.756,1.756 -4.608,1.756 -6.364,0c-1.756,-1.756 -1.756,-4.608 0,-6.364Z" style="fill:none;stroke:#0d0d0d;stroke-width:1" />
+      <path d="M2.038,13.924l4.243,-4.243" style="fill:none;stroke:#0d0d0d;stroke-width:1" />
+   </g>
+</svg>

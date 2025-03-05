@@ -3,12 +3,12 @@
  ********************************************************************************/
 
 import { ModelService } from '@crossbreeze/model-service/lib/common';
-import { ModelStructure } from '@crossbreeze/protocol';
+import { codiconCSSString, elementTypes, getIcon, ModelStructure } from '@crossbreeze/protocol';
 import { Emitter, MaybePromise } from '@theia/core';
 import { DepthFirstTreeIterator, LabelProvider, LabelProviderContribution, Tree, TreeDecorator, TreeNode } from '@theia/core/lib/browser';
 import { WidgetDecoration } from '@theia/core/lib/browser/widget-decoration';
 import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
-import { FileStatNode } from '@theia/filesystem/lib/browser';
+import { FileNode, FileStatNode } from '@theia/filesystem/lib/browser';
 
 @injectable()
 export class CrossModelLabelProvider implements LabelProviderContribution, TreeDecorator {
@@ -54,6 +54,13 @@ export class CrossModelLabelProvider implements LabelProviderContribution, TreeD
       }
       if (this.isSystemDirectory(node.parent) && node.fileStat.name === ModelStructure.ArchiMateDiagram.FOLDER) {
          return ModelStructure.ArchiMateDiagram.ICON_CLASS + ' default-folder-icon';
+      }
+      if (FileNode.is(node)) {
+         // very simple name-based matching so we do not have to look into the file
+         const matchingType = elementTypes.find(elementType => node.fileStat.resource.path.name.includes(elementType));
+         if (matchingType) {
+            return codiconCSSString(getIcon(matchingType)) + ' default-file-icon';
+         }
       }
       return this.labelProvider.getIcon(node.fileStat);
    }

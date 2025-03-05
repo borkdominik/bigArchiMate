@@ -46,420 +46,420 @@ interface RelationMetaData extends ConceptMetaData {}
  */
 const elementMetadataMap: Record<ElementType, ElementMetaData> = {
    ApplicationCollaboration: {
-      icon: 'reactions',
+      icon: 'archimate-application-collaboration',
       label: 'Application Collaboration',
       layer: 'Application',
       cornerType: 'square',
       specificationSection: '9.2.2.'
    },
    ApplicationComponent: {
-      icon: 'reactions',
+      icon: 'archimate-application-component',
       label: 'Application Component',
       layer: 'Application',
       cornerType: 'square',
       specificationSection: '9.2.1.'
    },
    ApplicationEvent: {
-      icon: 'reactions',
+      icon: 'archimate-application-event',
       label: 'Application Event',
       layer: 'Application',
       cornerType: 'round',
       specificationSection: '9.3.4.'
    },
    ApplicationFunction: {
-      icon: 'reactions',
+      icon: 'archimate-application-function',
       label: 'Application Function',
       layer: 'Application',
       cornerType: 'round',
       specificationSection: '9.3.1.'
    },
    ApplicationInteraction: {
-      icon: 'reactions',
+      icon: 'archimate-application-interaction',
       label: 'Application Interaction',
       layer: 'Application',
       cornerType: 'round',
       specificationSection: '9.3.2.'
    },
    ApplicationInterface: {
-      icon: 'reactions',
+      icon: 'archimate-application-interface',
       label: 'Application Interface',
       layer: 'Application',
       cornerType: 'square',
       specificationSection: '9.2.3.'
    },
    ApplicationProcess: {
-      icon: 'reactions',
+      icon: 'archimate-application-process',
       label: 'Application Process',
       layer: 'Application',
       cornerType: 'round',
       specificationSection: '9.3.3.'
    },
    ApplicationService: {
-      icon: 'reactions',
+      icon: 'archimate-application-service',
       label: 'Application Service',
       layer: 'Application',
       cornerType: 'round',
       specificationSection: '9.3.5.'
    },
    Artifact: {
-      icon: 'reactions',
+      icon: 'archimate-artifact',
       label: 'Artifact',
       layer: 'Technology',
       cornerType: 'square',
       specificationSection: '10.4.1.'
    },
    Assessment: {
-      icon: 'reactions',
+      icon: 'archimate-assessment',
       label: 'Assessment',
       layer: 'Motivation',
       cornerType: 'diamond',
       specificationSection: '6.2.3.'
    },
    BusinessActor: {
-      icon: 'reactions',
+      icon: 'archimate-business-actor',
       label: 'Business Actor',
       layer: 'Business',
       cornerType: 'square',
       specificationSection: '8.2.1.'
    },
    BusinessCollaboration: {
-      icon: 'reactions',
+      icon: 'archimate-business-collaboration',
       label: 'Business Collaboration',
       layer: 'Business',
       cornerType: 'square',
       specificationSection: '8.2.3.'
    },
    BusinessEvent: {
-      icon: 'reactions',
+      icon: 'archimate-business-event',
       label: 'Business Event',
       layer: 'Business',
       cornerType: 'round',
       specificationSection: '8.3.4.'
    },
    BusinessFunction: {
-      icon: 'reactions',
+      icon: 'archimate-business-function',
       label: 'Business Function',
       layer: 'Business',
       cornerType: 'round',
       specificationSection: '8.3.2.'
    },
    BusinessInteraction: {
-      icon: 'reactions',
+      icon: 'archimate-business-interaction',
       label: 'Business Interaction',
       layer: 'Business',
       cornerType: 'round',
       specificationSection: '8.3.3.'
    },
    BusinessInterface: {
-      icon: 'reactions',
+      icon: 'archimate-business-interface',
       label: 'Business Interface',
       layer: 'Business',
       cornerType: 'square',
       specificationSection: '8.2.4.'
    },
    BusinessObject: {
-      icon: 'reactions',
+      icon: 'archimate-business-object',
       label: 'Business Object',
       layer: 'Business',
       cornerType: 'square',
       specificationSection: '8.4.1.'
    },
    BusinessProcess: {
-      icon: 'reactions',
+      icon: 'archimate-business-process',
       label: 'Business Process',
       layer: 'Business',
       cornerType: 'round',
       specificationSection: '8.3.1.'
    },
    BusinessRole: {
-      icon: 'reactions',
+      icon: 'archimate-business-role',
       label: 'Business Role',
       layer: 'Business',
       cornerType: 'square',
       specificationSection: '8.2.2.'
    },
    BusinessService: {
-      icon: 'reactions',
+      icon: 'archimate-business-service',
       label: 'Business Service',
       layer: 'Business',
       cornerType: 'round',
       specificationSection: '8.3.5.'
    },
    Capability: {
-      icon: 'reactions',
+      icon: 'archimate-capability',
       label: 'Capability',
       layer: 'Strategy',
       cornerType: 'round',
       specificationSection: '7.3.1.'
    },
    CommunicationNetwork: {
-      icon: 'reactions',
+      icon: 'archimate-communication-network',
       label: 'Communication Network',
       layer: 'Technology',
       cornerType: 'square',
       specificationSection: '10.2.7.'
    },
    Constraint: {
-      icon: 'reactions',
+      icon: 'archimate-constraint',
       label: 'Constraint',
       layer: 'Motivation',
       cornerType: 'diamond',
       specificationSection: '6.3.5.'
    },
    Contract: {
-      icon: 'reactions',
+      icon: 'archimate-contract',
       label: 'Contract',
       layer: 'Business',
       cornerType: 'square',
       specificationSection: '8.4.2.'
    },
    CourseOfAction: {
-      icon: 'reactions',
+      icon: 'archimate-course-of-action',
       label: 'Course of Action',
       layer: 'Strategy',
       cornerType: 'round',
       specificationSection: '7.3.3.'
    },
    DataObject: {
-      icon: 'reactions',
+      icon: 'archimate-data-object',
       label: 'Data Object',
       layer: 'Application',
       cornerType: 'square',
       specificationSection: '9.4.1.'
    },
    Deliverable: {
-      icon: 'reactions',
+      icon: 'archimate-deliverable',
       label: 'Deliverable',
       layer: 'ImplementationAndMigration',
       cornerType: 'square',
       specificationSection: '12.2.2.'
    },
    Device: {
-      icon: 'reactions',
+      icon: 'archimate-device',
       label: 'Device',
       layer: 'Technology',
       cornerType: 'square',
       specificationSection: '10.2.2.'
    },
    DistributionNetwork: {
-      icon: 'reactions',
+      icon: 'archimate-distribution-network',
       label: 'Distribution Network',
       layer: 'Technology',
       cornerType: 'square',
       specificationSection: '10.6.3.'
    },
    Driver: {
-      icon: 'reactions',
+      icon: 'archimate-driver',
       label: 'Driver',
       layer: 'Motivation',
       cornerType: 'diamond',
       specificationSection: '6.2.2.'
    },
    Equipment: {
-      icon: 'reactions',
+      icon: 'archimate-equipment',
       label: 'Equipment',
       layer: 'Technology',
       cornerType: 'square',
       specificationSection: '10.6.1.'
    },
    Facility: {
-      icon: 'reactions',
+      icon: 'archimate-facility',
       label: 'Facility',
       layer: 'Technology',
       cornerType: 'square',
       specificationSection: '10.6.2.'
    },
    Gap: {
-      icon: 'reactions',
+      icon: 'archimate-gap',
       label: 'Gap',
       layer: 'ImplementationAndMigration',
       cornerType: 'square',
       specificationSection: '12.2.5.'
    },
    Goal: {
-      icon: 'reactions',
+      icon: 'archimate-goal',
       label: 'Goal',
       layer: 'Motivation',
       cornerType: 'diamond',
       specificationSection: '6.3.1.'
    },
    Grouping: {
-      icon: 'reactions',
+      icon: 'archimate-grouping',
       label: 'Grouping',
       layer: 'Other',
       cornerType: 'square',
       specificationSection: '4.5.1.'
    },
    ImplementationEvent: {
-      icon: 'reactions',
+      icon: 'archimate-implementation-event',
       label: 'Implementation Event',
       layer: 'ImplementationAndMigration',
       cornerType: 'round',
       specificationSection: '12.2.3.'
    },
    Location: {
-      icon: 'reactions',
+      icon: 'archimate-location',
       label: 'Location',
       layer: 'Other',
       cornerType: 'square',
       specificationSection: '4.5.2.'
    },
    Material: {
-      icon: 'reactions',
+      icon: 'archimate-material',
       label: 'Material',
       layer: 'Technology',
       cornerType: 'square',
       specificationSection: '10.7.1.'
    },
    Meaning: {
-      icon: 'reactions',
+      icon: 'archimate-meaning',
       label: 'Meaning',
       layer: 'Motivation',
       cornerType: 'diamond',
       specificationSection: '6.4.1.'
    },
    Node: {
-      icon: 'reactions',
+      icon: 'archimate-node',
       label: 'Node',
       layer: 'Technology',
       cornerType: 'square',
       specificationSection: '10.2.1.'
    },
    Outcome: {
-      icon: 'reactions',
+      icon: 'archimate-outcome',
       label: 'Outcome',
       layer: 'Motivation',
       cornerType: 'diamond',
       specificationSection: '6.3.2.'
    },
    Path: {
-      icon: 'reactions',
+      icon: 'archimate-path',
       label: 'Path',
       layer: 'Technology',
       cornerType: 'square',
       specificationSection: '10.2.6.'
    },
    Plateau: {
-      icon: 'reactions',
+      icon: 'archimate-plateau',
       label: 'Plateau',
       layer: 'ImplementationAndMigration',
       cornerType: 'square',
       specificationSection: '12.2.4.'
    },
    Principle: {
-      icon: 'reactions',
+      icon: 'archimate-principle',
       label: 'Principle',
       layer: 'Motivation',
       cornerType: 'diamond',
       specificationSection: '6.3.3.'
    },
    Product: {
-      icon: 'reactions',
+      icon: 'archimate-product',
       label: 'Product',
       layer: 'Business',
       cornerType: 'square',
       specificationSection: '8.5.1.'
    },
    Representation: {
-      icon: 'reactions',
+      icon: 'archimate-representation',
       label: 'Representation',
       layer: 'Business',
       cornerType: 'square',
       specificationSection: '8.4.3.'
    },
    Requirement: {
-      icon: 'reactions',
+      icon: 'archimate-requirement',
       label: 'Requirement',
       layer: 'Motivation',
       cornerType: 'diamond',
       specificationSection: '6.3.4.'
    },
    Resource: {
-      icon: 'reactions',
+      icon: 'archimate-resource',
       label: 'Resource',
       layer: 'Strategy',
       cornerType: 'square',
       specificationSection: '7.2.1.'
    },
    Stakeholder: {
-      icon: 'reactions',
+      icon: 'archimate-stakeholder',
       label: 'Stakeholder',
       layer: 'Motivation',
       cornerType: 'diamond',
       specificationSection: '6.2.1.'
    },
    SystemSoftware: {
-      icon: 'reactions',
+      icon: 'archimate-system-software',
       label: 'System Software',
       layer: 'Technology',
       cornerType: 'square',
       specificationSection: '10.2.3.'
    },
    TechnologyCollaboration: {
-      icon: 'reactions',
+      icon: 'archimate-technology-collaboration',
       label: 'Technology Collaboration',
       layer: 'Technology',
       cornerType: 'square',
       specificationSection: '10.2.4.'
    },
    TechnologyEvent: {
-      icon: 'reactions',
+      icon: 'archimate-technology-event',
       label: 'Technology Event',
       layer: 'Technology',
       cornerType: 'round',
       specificationSection: '10.3.4.'
    },
    TechnologyFunction: {
-      icon: 'reactions',
+      icon: 'archimate-technology-function',
       label: 'Technology Function',
       layer: 'Technology',
       cornerType: 'round',
       specificationSection: '10.3.1.'
    },
    TechnologyInteraction: {
-      icon: 'reactions',
+      icon: 'archimate-technology-interaction',
       label: 'Technology Interaction',
       layer: 'Technology',
       cornerType: 'round',
       specificationSection: '10.3.3.'
    },
    TechnologyInterface: {
-      icon: 'reactions',
+      icon: 'archimate-technology-interface',
       label: 'Technology Interface',
       layer: 'Technology',
       cornerType: 'square',
       specificationSection: '10.2.5.'
    },
    TechnologyProcess: {
-      icon: 'reactions',
+      icon: 'archimate-technology-process',
       label: 'Technology Process',
       layer: 'Technology',
       cornerType: 'round',
       specificationSection: '10.3.2.'
    },
    TechnologyService: {
-      icon: 'reactions',
+      icon: 'archimate-technology-service',
       label: 'Technology Service',
       layer: 'Technology',
       cornerType: 'round',
       specificationSection: '10.3.5.'
    },
    Value: {
-      icon: 'reactions',
+      icon: 'archimate-value',
       label: 'Value',
       layer: 'Motivation',
       cornerType: 'diamond',
       specificationSection: '6.4.2.'
    },
    ValueStream: {
-      icon: 'reactions',
+      icon: 'archimate-value-stream',
       label: 'Value Stream',
       layer: 'Strategy',
       cornerType: 'round',
       specificationSection: '7.3.2.'
    },
    WorkPackage: {
-      icon: 'reactions',
+      icon: 'archimate-work-package',
       label: 'Work Package',
       layer: 'ImplementationAndMigration',
       cornerType: 'round',

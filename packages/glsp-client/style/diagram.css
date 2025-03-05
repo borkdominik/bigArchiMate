@@ -248,30 +248,48 @@
 .tool-palette .palette-body #application-group .tool-button {
    color: var(--bg-application);
 }
+.tool-palette .palette-body #application-group {
+   --archimate-icon-color: var(--bg-application);
+}
 
 .tool-palette .palette-body #business-group > .group-header,
 .tool-palette .palette-body #business-group .tool-button {
    color: var(--bg-business);
+}
+.tool-palette .palette-body #business-group {
+   --archimate-icon-color: var(--bg-business);
 }
 
 .tool-palette .palette-body #implementation-and-migration-group > .group-header,
 .tool-palette .palette-body #implementation-and-migration-group .tool-button {
    color: var(--bg-implementation-and-migration);
 }
+.tool-palette .palette-body #implementation-and-migration-group {
+   --archimate-icon-color: var(--bg-implementation-and-migration);
+}
 
 .tool-palette .palette-body #motivation-group > .group-header,
 .tool-palette .palette-body #motivation-group .tool-button {
    color: var(--bg-motivation);
+}
+.tool-palette .palette-body #motivation-group {
+   --archimate-icon-color: var(--bg-motivation);
 }
 
 .tool-palette .palette-body #strategy-group > .group-header,
 .tool-palette .palette-body #strategy-group .tool-button {
    color: var(--bg-strategy);
 }
+.tool-palette .palette-body #strategy-group {
+   --archimate-icon-color: var(--bg-strategy);
+}
 
 .tool-palette .palette-body #technology-group > .group-header,
 .tool-palette .palette-body #technology-group .tool-button {
    color: var(--bg-technology);
+}
+.tool-palette .palette-body #technology-group {
+   --archimate-icon-color: var(--bg-technology);
 }
 
 .sprotty-edge.realization :not(.arrow),

@@ -2,7 +2,7 @@
  * Copyright (c) 2023 CrossBreeze.
  ********************************************************************************/
 
-import { getLabel, ModelStructure } from '@crossbreeze/protocol';
+import { codiconCSSString, getIcon, getLabel } from '@crossbreeze/protocol';
 import { TextField } from '@mui/material';
 import * as React from 'react';
 import { useElement, useModelDispatch, useReadonly } from '../../ModelContext';
@@ -21,7 +21,7 @@ export function ElementForm(): React.ReactElement {
       <Form
          id={element.id}
          name={element.name ? `${element.name} (${getLabel(element.type)})` : getLabel(element.type)}
-         iconClass={ModelStructure.Element.ICON_CLASS}
+         iconClass={codiconCSSString(getIcon(element.type))}
       >
          <FormSection label='General'>
             <TextField
