@@ -13,9 +13,8 @@ import {
    REFERENCE_VALUE,
    toKebabCase
 } from '@crossbreeze/protocol';
-import { ArgsUtil, GCompartment, GNode, GNodeBuilder } from '@eclipse-glsp/server';
+import { ArgsUtil, GCompartment, GLabel, GNode, GNodeBuilder } from '@eclipse-glsp/server';
 import { ElementNode, JunctionNode } from '../../../language-server/generated/ast.js';
-import { createHeader } from '../../common/nodes.js';
 import { ArchiMateModelIndex } from './archimate-model-index.js';
 
 export class GElementNode extends GNode {
@@ -23,6 +22,9 @@ export class GElementNode extends GNode {
       return new GElementNodeBuilder(GElementNode);
    }
 }
+
+const ICON_SIZE = 16;
+const H_GAP = 3;
 
 export class GElementNodeBuilder extends GNodeBuilder<GElementNode> {
    set(node: ElementNode, index: ArchiMateModelIndex): this {
@@ -56,13 +58,30 @@ export class GElementNodeBuilder extends GNodeBuilder<GElementNode> {
       this.addArg(REFERENCE_PROPERTY, 'element');
       this.addArg(REFERENCE_VALUE, node.element.$refText);
 
-      // Add the label/name of the node
-      this.add(createHeader(elementRef?.name || elementRef?.id || 'unresolved', this.proxy.id, ELEMENT_LABEL_TYPE));
-
       // The DiagramNode in the langium file holds the coordinates of node
-      this.layout('vbox')
-         .add(GCompartment.builder().type(ELEMENT_ICON_TYPE).build())
+      this.layout('hbox')
+         .add(
+            GCompartment.builder()
+               .id(`${this.proxy.id}_header`)
+               .addLayoutOption('vAlign', 'center') // center the label vertically
+               .addLayoutOption('hGrab', true) // take all available space
+               .addLayoutOption('paddingRight', -ICON_SIZE - H_GAP) // compensate for size of the icon to get full width
+               .addLayoutOption('paddingLeft', 0)
+               .layout('vbox')
+               .add(
+                  GLabel.builder()
+                     .type(ELEMENT_LABEL_TYPE)
+                     .text(elementRef?.name || elementRef?.id || 'unresolved')
+                     .id(`${this.proxy.id}_label`)
+                     .addCssClass('header-label')
+                     .addLayoutOption('hAlign', 'center')
+                     .build()
+               )
+               .build()
+         )
+         .add(GCompartment.builder().type(ELEMENT_ICON_TYPE).addLayoutOption('vAlign', 'top').build())
          .addArgs(ArgsUtil.cornerRadius(elementCornerType === 'round' ? 20 : 0))
+         .addLayoutOption('hGap', H_GAP)
          .addLayoutOption('prefWidth', node.width || 100)
          .addLayoutOption('prefHeight', node.height || 100)
          .position(node.x || 100, node.y || 100);
