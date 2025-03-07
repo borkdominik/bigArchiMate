@@ -1,4 +1,5 @@
 import 'terminals'
+import 'common'
 
 Element:
     'element' ':'

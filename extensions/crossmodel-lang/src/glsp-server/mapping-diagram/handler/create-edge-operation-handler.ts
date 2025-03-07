@@ -19,7 +19,7 @@ import { MappingModelState } from '../model/mapping-model-state.js';
 
 @injectable()
 export class MappingEdgeCreationOperationHandler extends JsonCreateEdgeOperationHandler {
-   @inject(ModelState) protected override modelState!: MappingModelState;
+   @inject(ModelState) protected override modelState: MappingModelState;
 
    override elementTypeIds = [TARGET_ATTRIBUTE_MAPPING_EDGE_TYPE];
    override label: string = 'Mapping Edge';
@@ -44,7 +44,7 @@ export class MappingEdgeCreationOperationHandler extends JsonCreateEdgeOperation
             return;
          }
          const sourceAttributeReference = combineIds(getOwner(sourceElement).id, sourceElement.id);
-         const existingMapping = container.mappings.find(mapping => mapping.attribute.value.ref === targetElement);
+         const existingMapping = container.mappings.find(mapping => mapping.attribute.value.ref?.id === targetElement.id);
          if (existingMapping) {
             existingMapping.sources.push(createAttributeMappingSource(existingMapping, sourceAttributeReference));
          } else {

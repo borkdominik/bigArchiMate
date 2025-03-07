@@ -34,6 +34,7 @@ export interface CrossModelWidgetOptions {
    clientId: string;
    widgetId: string;
    uri?: string;
+   version?: number;
 }
 
 @injectable()
@@ -102,7 +103,7 @@ export class CrossModelWidget extends ReactWidget implements Saveable {
 
    protected async openModel(uri: string): Promise<CrossModelDocument | undefined> {
       try {
-         const document = await this.modelService.open({ clientId: this.options.clientId, uri });
+         const document = await this.modelService.open({ clientId: this.options.clientId, uri, version: this.options.version });
          return document;
       } catch (error: any) {
          this.error = error;
@@ -125,7 +126,7 @@ export class CrossModelWidget extends ReactWidget implements Saveable {
    }
 
    protected async handleExternalUpdate({ document, reason, sourceClientId }: ModelUpdatedEvent): Promise<void> {
-      if (this.document && !deepEqual(this.document.root, document.root)) {
+      if (this.document && (!deepEqual(this.document.root, document.root) || !deepEqual(this.document.diagnostics, document.diagnostics))) {
          console.debug(`[${this.options.clientId}] Receive update from ${sourceClientId} due to '${reason}'`);
          this.document = document;
          this.update();

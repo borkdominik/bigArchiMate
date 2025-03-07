@@ -3,7 +3,7 @@
   "languages": [
     {
       "id": "cross-model",
-      "grammar": "src/language-server/cross-model.langium",
+      "grammar": "src/language-server/grammar/cross-model.langium",
       "fileExtensions": [".cm", ".archi"],
       "textMate": {
         "out": "syntaxes/cross-model.tmLanguage.json"

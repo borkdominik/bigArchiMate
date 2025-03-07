@@ -1,4 +1,5 @@
 import 'terminals'
+import 'common'
 import 'element'
 import 'relation'
 

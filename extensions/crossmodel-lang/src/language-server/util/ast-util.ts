@@ -8,7 +8,6 @@ import { ID_PROPERTY, IdProvider } from '../cross-model-naming.js';
 import { getLocalName } from '../cross-model-scope.js';
 import {
    ArchiMateDiagram,
-   Attribute,
    AttributeMapping,
    AttributeMappingSource,
    AttributeMappingTarget,
@@ -53,7 +52,7 @@ export function getAttributes<T>(node: any): T[] {
 export function setAttributes(node: EntityNode, attributes: EntityNodeAttribute[]): void;
 export function setAttributes(node: SourceObject, attributes: SourceObjectAttribute[]): void;
 export function setAttributes(node: TargetObject, attributes: TargetObjectAttribute[]): void;
-export function setAttributes(node: object, attributes: Attribute[]): void {
+export function setAttributes(node: object, attributes: EntityAttribute[]): void {
    (node as any)[IMPLICIT_ATTRIBUTES_PROPERTY] = attributes;
 }
 
@@ -96,11 +95,17 @@ export function isImplicitProperty(prop: string, obj: any): boolean {
    );
 }
 
-export function createEntity(container: CrossModelRoot, id: string, opts?: Partial<Omit<Entity, '$container' | '$type' | 'id'>>): Entity {
+export function createEntity(
+   container: CrossModelRoot,
+   id: string,
+   name: string,
+   opts?: Partial<Omit<Entity, '$container' | '$type' | 'id' | 'name'>>
+): Entity {
    return {
       $container: container,
       $type: 'Entity',
       id,
+      name,
       attributes: [],
       customProperties: [],
       superEntities: [],
@@ -112,15 +117,13 @@ export function createEntityAttribute(
    container: Entity,
    id: string,
    name: string,
-   datatype: string,
-   opts?: Partial<Omit<EntityAttribute, '$container' | '$type' | 'id' | 'name' | 'attribute'>>
+   opts?: Partial<Omit<EntityAttribute, '$container' | '$type' | 'id' | 'name'>>
 ): EntityAttribute {
    return {
       $container: container,
       $type: 'EntityAttribute',
       id,
       name,
-      datatype,
       identifier: false,
       customProperties: [],
       ...opts
@@ -130,16 +133,16 @@ export function createEntityAttribute(
 export function createRelationship(
    container: CrossModelRoot,
    id: string,
-   type: string,
+   name: string,
    parent: Reference<Entity>,
    child: Reference<Entity>,
-   opts?: Partial<Omit<Relationship, '$container' | '$type' | 'id' | 'type' | 'parent' | 'child'>>
+   opts?: Partial<Omit<Relationship, '$container' | '$type' | 'id' | 'name' | 'parent' | 'child'>>
 ): Relationship {
    return {
       $container: container,
       $type: 'Relationship',
       id,
-      type,
+      name,
       parent,
       child,
       attributes: [],
@@ -159,7 +162,6 @@ export function createSystemDiagram(
       id,
       nodes: [],
       edges: [],
-      customProperties: [],
       ...opts
    };
 }
@@ -179,7 +181,6 @@ export function createEntityNode(
       entity,
       ...position,
       ...dimension,
-      customProperties: [],
       ...opts
    };
 }
@@ -199,7 +200,6 @@ export function createRelationshipEdge(
       relationship,
       sourceNode,
       targetNode,
-      customProperties: [],
       ...opts
    };
 }
