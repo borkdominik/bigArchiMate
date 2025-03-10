@@ -82,7 +82,7 @@ export class ArchiMateDiagramCreateElementOperationHandler extends JsonCreateNod
          '..',
          `${getLabel(getLayer(elementType))}`
       );
-      const targetUri = UriUtils.joinPath(dirName, id + '.element.cm');
+      const targetUri = UriUtils.joinPath(dirName, id + '.element.arch');
       const uri = Utils.findNewUri(targetUri);
 
       elementRoot.element = element;

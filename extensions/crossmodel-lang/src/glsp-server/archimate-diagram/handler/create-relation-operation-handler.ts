@@ -96,7 +96,7 @@ export class ArchiMateDiagramCreateRelationOperationHandler extends JsonCreateEd
       // search for unique file name for the relation and use file base name as relation name
       // if the user doesn't rename any files we should end up with unique names ;-)
       const dirName = UriUtils.joinPath(UriUtils.dirname(URI.parse(this.modelState.semanticUri)), '..', 'Relations');
-      const targetUri = UriUtils.joinPath(dirName, relation.id + '.relation.cm');
+      const targetUri = UriUtils.joinPath(dirName, relation.id + '.relation.arch');
       const uri = Utils.findNewUri(targetUri);
 
       relationRoot.relation = relation;
