@@ -22,7 +22,7 @@ export function Header({ name, id, iconClass }: HeaderProps): React.ReactElement
    const diagnostics = useDiagnostics();
 
    return (
-      <AppBar position='sticky'>
+      <AppBar color='default' position='sticky'>
          {ModelDiagnostic.hasErrors(diagnostics) && createEditorError(ERRONEOUS_MODEL)}
          <Toolbar className='form-header' variant='dense' sx={{ minHeight: '40px' }}>
             <Box sx={{ display: { xs: 'none', sm: 'flex' }, flexGrow: 1, gap: '1em', alignItems: 'center' }}>

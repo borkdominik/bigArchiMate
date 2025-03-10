@@ -54,6 +54,7 @@ export class ArchiMateToolPaletteProvider extends ToolPaletteItemProvider {
          },
          {
             id: 'relations-group',
+            icon: 'chevron-down',
             sortString: 'B',
             label: 'Relationship',
             children: [...relationTypes.map(relationType => getRelationPaletteItem(relationType, 'B')), getJunctionPaletteItem('B')],
@@ -119,6 +120,7 @@ const getJunctionPaletteItem = (groupSortString: string): PaletteItem => ({
  */
 const getElementGroupPaletteItem = (layerType: LayerType, groupSortString: string): PaletteItem => ({
    id: `${toKebabCase(layerType)}-group`,
+   icon: 'chevron-down',
    sortString: `${groupSortString}`,
    label: getLabel(layerType),
    children: (() => getObjectKeys(getChildren(layerType)).map(elementType => getElementPaletteItem(elementType, groupSortString)))(),

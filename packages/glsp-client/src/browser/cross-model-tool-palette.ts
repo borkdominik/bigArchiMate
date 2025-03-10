@@ -14,10 +14,16 @@ import {
    SetModelAction,
    ToolPalette,
    UpdateModelAction,
+   changeCSSClass,
+   changeCodiconClass,
+   compare,
    createIcon
 } from '@eclipse-glsp/client';
 import { injectable } from '@theia/core/shared/inversify';
+
 const CLICKED_CSS_CLASS = 'clicked';
+const PALETTE_ICON_ID = 'tools';
+const CHEVRON_DOWN_ICON_ID = 'chevron-right';
 
 @injectable()
 export class CrossModelToolPalette extends ToolPalette {
@@ -27,6 +33,62 @@ export class CrossModelToolPalette extends ToolPalette {
       this.createBody();
       this.changeActiveButton(this.defaultToolsButton);
       containerElement.setAttribute('aria-label', 'Tool-Palette');
+   }
+
+   protected override createBody(): void {
+      const bodyDiv = document.createElement('div');
+      bodyDiv.classList.add('palette-body');
+      let tabIndex = 0;
+      this.paletteItems.sort(compare).forEach(item => {
+         if (item.children) {
+            const group = createToolGroup(item);
+            item.children.sort(compare).forEach(child => group.appendChild(this.createToolButton(child, tabIndex++)));
+            bodyDiv.appendChild(group);
+         } else {
+            bodyDiv.appendChild(this.createToolButton(item, tabIndex++));
+         }
+      });
+      if (this.paletteItems.length === 0) {
+         const noResultsDiv = document.createElement('div');
+         noResultsDiv.innerText = 'No results found.';
+         noResultsDiv.classList.add('tool-button');
+         bodyDiv.appendChild(noResultsDiv);
+      }
+      // Remove existing body to refresh filtered entries
+      if (this.bodyDiv) {
+         this.containerElement.removeChild(this.bodyDiv);
+      }
+      this.containerElement.appendChild(bodyDiv);
+      this.bodyDiv = bodyDiv;
+   }
+
+   protected override addMinimizePaletteButton(): void {
+      const baseDiv = document.getElementById(this.options.baseDiv);
+      const minPaletteDiv = document.createElement('div');
+      minPaletteDiv.classList.add('minimize-palette-button');
+      this.containerElement.classList.add('collapsible-palette');
+      if (baseDiv) {
+         const insertedDiv = baseDiv.insertBefore(minPaletteDiv, baseDiv.firstChild);
+         const minimizeIcon = createIcon(CHEVRON_DOWN_ICON_ID);
+         this.updateMinimizePaletteButtonTooltip(minPaletteDiv);
+         minimizeIcon.onclick = _event => {
+            if (this.isPaletteMaximized()) {
+               this.containerElement.style.transform = 'translateX(260px)';
+            } else {
+               this.containerElement.style.transform = 'none';
+            }
+            this.updateMinimizePaletteButtonTooltip(minPaletteDiv);
+            setTimeout(() => {
+               changeCodiconClass(minimizeIcon, PALETTE_ICON_ID);
+               changeCodiconClass(minimizeIcon, CHEVRON_DOWN_ICON_ID);
+            }, 200);
+         };
+         insertedDiv.appendChild(minimizeIcon);
+      }
+   }
+
+   protected override isPaletteMaximized(): boolean {
+      return this.containerElement && this.containerElement.style.transform !== 'translateX(260px)';
    }
 
    protected override createHeaderTitle(): HTMLElement {
@@ -125,4 +187,25 @@ export class CrossModelToolPalette extends ToolPalette {
          minimizePaletteButton?.classList.add(CSS_HIDDEN_EXTENSION_CLASS, CSS_UI_EXTENSION_CLASS);
       }
    }
+}
+
+function createToolGroup(item: PaletteItem): HTMLElement {
+   const group = document.createElement('div');
+   group.classList.add('tool-group');
+   group.id = item.id;
+   const header = document.createElement('div');
+   header.classList.add('group-header');
+   if (item.icon) {
+      header.appendChild(createIcon(item.icon));
+   }
+   header.insertAdjacentText('beforeend', item.label);
+   header.onclick = _ev => {
+      const css = 'collapsed';
+      changeCSSClass(group, css);
+      Array.from(group.children).forEach(child => changeCSSClass(child, css));
+      window!.getSelection()!.removeAllRanges();
+   };
+
+   group.appendChild(header);
+   return group;
 }

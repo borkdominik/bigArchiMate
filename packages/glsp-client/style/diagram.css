@@ -136,37 +136,6 @@
    stroke-linecap: round;
 }
 
-/* .sprotty[id^='system-diagram'] .tool-palette {
-   top: 11px;
-   right: 11px;
-   width: 150px;
-   border: 1px solid #d7d7d7;
-}
-
-.sprotty[id^='system-diagram'] .tool-palette .palette-header,
-.sprotty[id^='system-diagram'] .tool-palette .group-header,
-.sprotty[id^='system-diagram'] .minimize-palette-button {
-   display: none;
-}
-
-.sprotty[id^='system-diagram'] .tool-palette .tool-button {
-   outline-width: 0;
-}
-
-.sprotty[id^='system-diagram'] .tool-palette .tool-button::before {
-   margin-right: var(--theia-ui-padding);
-   font-size: var(--theia-icon-size);
-   font: normal normal normal 16px/1 codicon;
-   content: '\eafd';
-   -webkit-font-smoothing: antialiased;
-   -moz-osx-font-smoothing: grayscale;
-}
-
-.sprotty[id^='system-diagram'] .tool-palette .tool-button.clicked {
-   background: var(--theia-activityBarBadge-background);
-   color: var(--theia-activityBarBadge-foreground);
-} */
-
 .command-palette {
    animation: none;
 }
@@ -253,9 +222,75 @@
    fill: var(--bg-default);
 }
 
-.tool-palette .group-header {
-   height: 24px;
-   padding: 4px;
+.collapsible-palette {
+   transition: transform 0.2s ease-in-out;
+}
+
+.minimize-palette-button {
+   top: 10px;
+   right: 10px;
+}
+
+.minimize-palette-button i {
+   cursor: pointer;
+   border-radius: 4px;
+   padding: 2px;
+}
+
+.minimize-palette-button i:hover {
+   background-color: var(--theia-list-hoverBackground);
+}
+
+.minimize-palette-button i:active {
+   background-color: var(--theia-list-activeSelectionBackground);
+}
+
+.tool-palette {
+   top: 10px;
+   border: 1px solid var(--theia-activityBar-border);
+}
+
+.tool-palette .header-tools > i {
+   cursor: pointer;
+}
+
+.inactive .tool-palette .palette-header,
+.tool-palette .palette-header {
+   border-top: none;
+}
+
+.tool-palette .palette-body .group-header,
+.tool-palette .palette-body .tool-button {
+   height: 30px;
+   padding-block: 0;
+   padding-inline: 8px;
+   cursor: pointer;
+}
+
+.tool-palette .palette-body .group-header {
+   background-color: var(--theia-list-hoverBackground);
+}
+
+.tool-palette .palette-body .group-header:hover {
+   background-color: var(--theia-list-activeSelectionBackground);
+}
+
+.tool-palette .palette-body .tool-button:hover:not(.clicked) {
+   background-color: var(--theia-list-hoverBackground);
+}
+
+.tool-palette .palette-body .tool-button.clicked {
+   background-color: var(--theia-list-activeSelectionBackground);
+}
+
+.group-header i {
+   padding: 0;
+   margin-left: -1px;
+   margin-right: 10px;
+}
+
+.group-header.collapsed i {
+   transform: rotate(-90deg);
 }
 
 .sprotty-edge.realization :not(.arrow),
