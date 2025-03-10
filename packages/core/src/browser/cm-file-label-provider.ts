@@ -3,7 +3,7 @@
  ********************************************************************************/
 
 import { ModelService } from '@crossbreeze/model-service/lib/common';
-import { codiconCSSString, elementTypes, getIcon, ModelStructure } from '@crossbreeze/protocol';
+import { codiconCSSString, concepts, getIcon, ModelFileExtensions, ModelStructure } from '@crossbreeze/protocol';
 import { Emitter, MaybePromise } from '@theia/core';
 import { DepthFirstTreeIterator, LabelProvider, LabelProviderContribution, Tree, TreeDecorator, TreeNode } from '@theia/core/lib/browser';
 import { WidgetDecoration } from '@theia/core/lib/browser/widget-decoration';
@@ -49,17 +49,17 @@ export class CrossModelLabelProvider implements LabelProviderContribution, TreeD
       if (this.isSystemDirectory(node.parent) && node.fileStat.name === ModelStructure.Element.FOLDER) {
          return ModelStructure.Element.ICON_CLASS + ' default-folder-icon';
       }
-      if (this.isSystemDirectory(node.parent) && node.fileStat.name === ModelStructure.Relation.FOLDER) {
-         return ModelStructure.Relation.ICON_CLASS + ' default-folder-icon';
-      }
-      if (this.isSystemDirectory(node.parent) && node.fileStat.name === ModelStructure.ArchiMateDiagram.FOLDER) {
-         return ModelStructure.ArchiMateDiagram.ICON_CLASS + ' default-folder-icon';
-      }
       if (FileNode.is(node)) {
-         // very simple name-based matching so we do not have to look into the file
-         const matchingType = elementTypes.find(elementType => node.fileStat.resource.path.name.includes(elementType));
-         if (matchingType) {
-            return codiconCSSString(getIcon(matchingType)) + ' default-file-icon';
+         if (ModelFileExtensions.isArchiMateDiagramFile(node.fileStat.name)) {
+            return ModelStructure.ArchiMateDiagram.ICON_CLASS + ' default-file-icon';
+         }
+
+         if (ModelFileExtensions.isElementFile(node.fileStat.name)) {
+            // very simple name-based matching so we do not have to look into the file
+            const matchingType = concepts.find(elementType => node.fileStat.resource.path.name.includes(elementType));
+            if (matchingType) {
+               return codiconCSSString(getIcon(matchingType)) + ' default-file-icon';
+            }
          }
       }
       return this.labelProvider.getIcon(node.fileStat);

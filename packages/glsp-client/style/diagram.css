@@ -8,6 +8,9 @@
    --sprotty-edge-selected: var(--theia-focusBorder);
    --sprotty-border: var(--theia-editor-foreground);
 
+   --arrow-empty-fill: white;
+   --arrow-filled-fill: var(--sprotty-edge);
+
    /* Taken from https://www.archimatetool.com/downloads/colour-schemes/ArchiMate%20Standard%20-%203.2.prefs */
    --bg-application: #b5ffff;
    --bg-business: #ffffb5;
@@ -17,6 +20,12 @@
    --bg-technology: #c9e7b7;
    --bg-location: #edcfe2;
    --bg-default: #ffffff;
+}
+
+.default-file-icon {
+   padding-right: 0;
+   padding: 1px;
+   margin-right: 6px;
 }
 
 /* Standard sprotty */
@@ -56,10 +65,6 @@
 .sprotty-edge {
    stroke: var(--sprotty-edge);
    stroke-width: 2px;
-}
-
-.sprotty-edge.selected {
-   stroke: var(--sprotty-edge-selected);
 }
 
 /* Nodes */
@@ -253,54 +258,6 @@
    padding: 4px;
 }
 
-.tool-palette .palette-body #application-group > .group-header,
-.tool-palette .palette-body #application-group .tool-button {
-   color: var(--bg-application);
-}
-.tool-palette .palette-body #application-group {
-   --archimate-icon-color: var(--bg-application);
-}
-
-.tool-palette .palette-body #business-group > .group-header,
-.tool-palette .palette-body #business-group .tool-button {
-   color: var(--bg-business);
-}
-.tool-palette .palette-body #business-group {
-   --archimate-icon-color: var(--bg-business);
-}
-
-.tool-palette .palette-body #implementation-and-migration-group > .group-header,
-.tool-palette .palette-body #implementation-and-migration-group .tool-button {
-   color: var(--bg-implementation-and-migration);
-}
-.tool-palette .palette-body #implementation-and-migration-group {
-   --archimate-icon-color: var(--bg-implementation-and-migration);
-}
-
-.tool-palette .palette-body #motivation-group > .group-header,
-.tool-palette .palette-body #motivation-group .tool-button {
-   color: var(--bg-motivation);
-}
-.tool-palette .palette-body #motivation-group {
-   --archimate-icon-color: var(--bg-motivation);
-}
-
-.tool-palette .palette-body #strategy-group > .group-header,
-.tool-palette .palette-body #strategy-group .tool-button {
-   color: var(--bg-strategy);
-}
-.tool-palette .palette-body #strategy-group {
-   --archimate-icon-color: var(--bg-strategy);
-}
-
-.tool-palette .palette-body #technology-group > .group-header,
-.tool-palette .palette-body #technology-group .tool-button {
-   color: var(--bg-technology);
-}
-.tool-palette .palette-body #technology-group {
-   --archimate-icon-color: var(--bg-technology);
-}
-
 .sprotty-edge.realization :not(.arrow),
 .sprotty-edge.access :not(.arrow) {
    stroke-dasharray: 3px 3px;
@@ -311,18 +268,31 @@
    stroke-dasharray: 10px 3px;
 }
 
-.sprotty-edge.triggering .arrow,
-.sprotty-edge.flow .arrow,
-.sprotty-edge.assignment .arrow,
-.sprotty-edge.composition .arrow,
+.sprotty-edge .arrow,
 .sprotty-edge .circle {
-   fill: #6d6d6d;
+   fill: var(--arrow-filled-fill);
+   color: var(--arrow-filled-fill);
+}
+
+.sprotty-edge.aggregation .arrow,
+.sprotty-edge.realization .arrow,
+.sprotty-edge.specialization .arrow {
+   fill: var(--arrow-empty-fill);
+   color: var(--arrow-empty-fill);
 }
 
 .sprotty-edge.serving .arrow,
 .sprotty-edge.access .arrow,
 .sprotty-edge.influence .arrow {
    fill: none;
+   color: transparent;
+}
+
+.sprotty-edge.mouseover .arrow,
+.sprotty-edge.mouseover .circle,
+.sprotty-edge.selected .arrow,
+.sprotty-edge.selected .circle {
+   fill: currentColor !important;
 }
 
 .diagram-edge.inheritance {

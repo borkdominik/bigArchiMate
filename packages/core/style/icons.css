@@ -14,6 +14,8 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 :root {
+   --archimate-icon-access: url('./icons/access.svg');
+   --archimate-icon-aggregation: url('./icons/aggregation.svg');
    --archimate-icon-application-collaboration: url('./icons/application-collaboration.svg');
    --archimate-icon-application-component: url('./icons/application-component.svg');
    --archimate-icon-application-event: url('./icons/application-event.svg');
@@ -24,6 +26,8 @@
    --archimate-icon-application-service: url('./icons/application-service.svg');
    --archimate-icon-artifact: url('./icons/artifact.svg');
    --archimate-icon-assessment: url('./icons/assessment.svg');
+   --archimate-icon-assignment: url('./icons/assignment.svg');
+   --archimate-icon-association: url('./icons/association.svg');
    --archimate-icon-business-actor: url('./icons/business-actor.svg');
    --archimate-icon-business-collaboration: url('./icons/business-collaboration.svg');
    --archimate-icon-business-event: url('./icons/business-event.svg');
@@ -36,6 +40,7 @@
    --archimate-icon-business-service: url('./icons/business-service.svg');
    --archimate-icon-capability: url('./icons/capability.svg');
    --archimate-icon-communication-network: url('./icons/communication-network.svg');
+   --archimate-icon-composition: url('./icons/composition.svg');
    --archimate-icon-constraint: url('./icons/constraint.svg');
    --archimate-icon-contract: url('./icons/contract.svg');
    --archimate-icon-course-of-action: url('./icons/course-of-action.svg');
@@ -46,10 +51,13 @@
    --archimate-icon-driver: url('./icons/driver.svg');
    --archimate-icon-equipment: url('./icons/equipment.svg');
    --archimate-icon-facility: url('./icons/facility.svg');
+   --archimate-icon-flow: url('./icons/flow.svg');
    --archimate-icon-gap: url('./icons/gap.svg');
    --archimate-icon-goal: url('./icons/goal.svg');
    --archimate-icon-grouping: url('./icons/grouping.svg');
    --archimate-icon-implementation-event: url('./icons/implementation-event.svg');
+   --archimate-icon-influence: url('./icons/influence.svg');
+   --archimate-icon-junction: url('./icons/junction.svg');
    --archimate-icon-location: url('./icons/location.svg');
    --archimate-icon-material: url('./icons/material.svg');
    --archimate-icon-meaning: url('./icons/meaning.svg');
@@ -59,9 +67,12 @@
    --archimate-icon-plateau: url('./icons/plateau.svg');
    --archimate-icon-principle: url('./icons/principle.svg');
    --archimate-icon-product: url('./icons/product.svg');
+   --archimate-icon-realization: url('./icons/realization.svg');
    --archimate-icon-representation: url('./icons/representation.svg');
    --archimate-icon-requirement: url('./icons/requirement.svg');
    --archimate-icon-resource: url('./icons/resource.svg');
+   --archimate-icon-serving: url('./icons/serving.svg');
+   --archimate-icon-specialization: url('./icons/specialization.svg');
    --archimate-icon-stakeholder: url('./icons/stakeholder.svg');
    --archimate-icon-system-software: url('./icons/system-software.svg');
    --archimate-icon-technology-collaboration: url('./icons/technology-collaboration.svg');
@@ -71,207 +82,243 @@
    --archimate-icon-technology-interface: url('./icons/technology-interface.svg');
    --archimate-icon-technology-process: url('./icons/technology-process.svg');
    --archimate-icon-technology-service: url('./icons/technology-service.svg');
+   --archimate-icon-triggering: url('./icons/triggering.svg');
    --archimate-icon-value: url('./icons/value.svg');
    --archimate-icon-value-stream: url('./icons/value-stream.svg');
    --archimate-icon-work-package: url('./icons/work-package.svg');
 
-   --archimate-icon-color: var(--theia-titleBar-activeForeground);
    --archimate-icon-size: 1em;
 }
 
 /**
  * If we had the the SVGs as a font, we could use the content property to reference the glyph, similar to codicon.
  * This has the advantage of being able to use the font-size property to scale the icon and the color property to color the icon.
- * Since we are using SVGs directly, however, we need to use them as a mask-image, set the size explicitly and color them using the background-color property.
+ * Since we are using SVGs directly, however, we need to use them as a background-image, set the size explicitly and color them using the background-color property.
  */
 .codicon[class*='codicon-archimate']:before {
    content: '' !important;
    display: block;
    width: var(--archimate-icon-size);
    height: var(--archimate-icon-size);
-   mask-size: var(--archimate-icon-size);
-   mask-position: center;
-   mask-repeat: no-repeat;
-   background-color: var(--archimate-icon-color);
+   background-repeat: no-repeat;
+   background-position: center;
+   padding: 2px;
+   border-radius: 4px;
 }
 
+.codicon-archimate-access:before {
+   background-image: var(--archimate-icon-access);
+}
+.codicon-archimate-aggregation:before {
+   background-image: var(--archimate-icon-aggregation);
+}
 .codicon-archimate-application-collaboration:before {
-   mask-image: var(--archimate-icon-application-collaboration);
+   background-image: var(--archimate-icon-application-collaboration);
 }
 .codicon-archimate-application-component:before {
-   mask-image: var(--archimate-icon-application-component);
+   background-image: var(--archimate-icon-application-component);
 }
 .codicon-archimate-application-event:before {
-   mask-image: var(--archimate-icon-application-event);
+   background-image: var(--archimate-icon-application-event);
 }
 .codicon-archimate-application-function:before {
-   mask-image: var(--archimate-icon-application-function);
+   background-image: var(--archimate-icon-application-function);
 }
 .codicon-archimate-application-interface:before {
-   mask-image: var(--archimate-icon-application-interface);
+   background-image: var(--archimate-icon-application-interface);
 }
 .codicon-archimate-application-interaction:before {
-   mask-image: var(--archimate-icon-application-interaction);
+   background-image: var(--archimate-icon-application-interaction);
 }
 .codicon-archimate-application-process:before {
-   mask-image: var(--archimate-icon-application-process);
+   background-image: var(--archimate-icon-application-process);
 }
 .codicon-archimate-application-service:before {
-   mask-image: var(--archimate-icon-application-service);
+   background-image: var(--archimate-icon-application-service);
 }
 .codicon-archimate-artifact:before {
-   mask-image: var(--archimate-icon-artifact);
+   background-image: var(--archimate-icon-artifact);
 }
 .codicon-archimate-assessment:before {
-   mask-image: var(--archimate-icon-assessment);
+   background-image: var(--archimate-icon-assessment);
+}
+.codicon-archimate-assignment:before {
+   background-image: var(--archimate-icon-assignment);
+}
+.codicon-archimate-association:before {
+   background-image: var(--archimate-icon-association);
 }
 .codicon-archimate-business-actor:before {
-   mask-image: var(--archimate-icon-business-actor);
+   background-image: var(--archimate-icon-business-actor);
 }
 .codicon-archimate-business-collaboration:before {
-   mask-image: var(--archimate-icon-business-collaboration);
+   background-image: var(--archimate-icon-business-collaboration);
 }
 .codicon-archimate-business-event:before {
-   mask-image: var(--archimate-icon-business-event);
+   background-image: var(--archimate-icon-business-event);
 }
 .codicon-archimate-business-function:before {
-   mask-image: var(--archimate-icon-business-function);
+   background-image: var(--archimate-icon-business-function);
 }
 .codicon-archimate-business-interaction:before {
-   mask-image: var(--archimate-icon-business-interaction);
+   background-image: var(--archimate-icon-business-interaction);
 }
 .codicon-archimate-business-interface:before {
-   mask-image: var(--archimate-icon-business-interface);
+   background-image: var(--archimate-icon-business-interface);
 }
 .codicon-archimate-business-object:before {
-   mask-image: var(--archimate-icon-business-object);
+   background-image: var(--archimate-icon-business-object);
 }
 .codicon-archimate-business-process:before {
-   mask-image: var(--archimate-icon-business-process);
+   background-image: var(--archimate-icon-business-process);
 }
 .codicon-archimate-business-role:before {
-   mask-image: var(--archimate-icon-business-role);
+   background-image: var(--archimate-icon-business-role);
 }
 .codicon-archimate-business-service:before {
-   mask-image: var(--archimate-icon-business-service);
+   background-image: var(--archimate-icon-business-service);
 }
 .codicon-archimate-capability:before {
-   mask-image: var(--archimate-icon-capability);
+   background-image: var(--archimate-icon-capability);
 }
 .codicon-archimate-communication-network:before {
-   mask-image: var(--archimate-icon-communication-network);
+   background-image: var(--archimate-icon-communication-network);
+}
+.codicon-archimate-composition:before {
+   background-image: var(--archimate-icon-composition);
 }
 .codicon-archimate-constraint:before {
-   mask-image: var(--archimate-icon-constraint);
+   background-image: var(--archimate-icon-constraint);
 }
 .codicon-archimate-contract:before {
-   mask-image: var(--archimate-icon-contract);
+   background-image: var(--archimate-icon-contract);
 }
 .codicon-archimate-course-of-action:before {
-   mask-image: var(--archimate-icon-course-of-action);
+   background-image: var(--archimate-icon-course-of-action);
 }
 .codicon-archimate-data-object:before {
-   mask-image: var(--archimate-icon-data-object);
+   background-image: var(--archimate-icon-data-object);
 }
 .codicon-archimate-deliverable:before {
-   mask-image: var(--archimate-icon-deliverable);
+   background-image: var(--archimate-icon-deliverable);
 }
 .codicon-archimate-device:before {
-   mask-image: var(--archimate-icon-device);
+   background-image: var(--archimate-icon-device);
 }
 .codicon-archimate-distribution-network:before {
-   mask-image: var(--archimate-icon-distribution-network);
+   background-image: var(--archimate-icon-distribution-network);
 }
 .codicon-archimate-driver:before {
-   mask-image: var(--archimate-icon-driver);
+   background-image: var(--archimate-icon-driver);
 }
 .codicon-archimate-equipment:before {
-   mask-image: var(--archimate-icon-equipment);
+   background-image: var(--archimate-icon-equipment);
 }
 .codicon-archimate-facility:before {
-   mask-image: var(--archimate-icon-facility);
+   background-image: var(--archimate-icon-facility);
+}
+.codicon-archimate-flow:before {
+   background-image: var(--archimate-icon-flow);
 }
 .codicon-archimate-gap:before {
-   mask-image: var(--archimate-icon-gap);
+   background-image: var(--archimate-icon-gap);
 }
 .codicon-archimate-goal:before {
-   mask-image: var(--archimate-icon-goal);
+   background-image: var(--archimate-icon-goal);
 }
 .codicon-archimate-grouping:before {
-   mask-image: var(--archimate-icon-grouping);
+   background-image: var(--archimate-icon-grouping);
 }
 .codicon-archimate-implementation-event:before {
-   mask-image: var(--archimate-icon-implementation-event);
+   background-image: var(--archimate-icon-implementation-event);
+}
+.codicon-archimate-influence:before {
+   background-image: var(--archimate-icon-influence);
+}
+.codicon-archimate-junction:before {
+   background-image: var(--archimate-icon-junction);
 }
 .codicon-archimate-location:before {
-   mask-image: var(--archimate-icon-location);
+   background-image: var(--archimate-icon-location);
 }
 .codicon-archimate-material:before {
-   mask-image: var(--archimate-icon-material);
+   background-image: var(--archimate-icon-material);
 }
 .codicon-archimate-meaning:before {
-   mask-image: var(--archimate-icon-meaning);
+   background-image: var(--archimate-icon-meaning);
 }
 .codicon-archimate-node:before {
-   mask-image: var(--archimate-icon-node);
+   background-image: var(--archimate-icon-node);
 }
 .codicon-archimate-outcome:before {
-   mask-image: var(--archimate-icon-outcome);
+   background-image: var(--archimate-icon-outcome);
 }
 .codicon-archimate-path:before {
-   mask-image: var(--archimate-icon-path);
+   background-image: var(--archimate-icon-path);
 }
 .codicon-archimate-plateau:before {
-   mask-image: var(--archimate-icon-plateau);
+   background-image: var(--archimate-icon-plateau);
 }
 .codicon-archimate-principle:before {
-   mask-image: var(--archimate-icon-principle);
+   background-image: var(--archimate-icon-principle);
 }
 .codicon-archimate-product:before {
-   mask-image: var(--archimate-icon-product);
+   background-image: var(--archimate-icon-product);
+}
+.codicon-archimate-realization:before {
+   background-image: var(--archimate-icon-realization);
 }
 .codicon-archimate-representation:before {
-   mask-image: var(--archimate-icon-representation);
+   background-image: var(--archimate-icon-representation);
 }
 .codicon-archimate-requirement:before {
-   mask-image: var(--archimate-icon-requirement);
+   background-image: var(--archimate-icon-requirement);
 }
 .codicon-archimate-resource:before {
-   mask-image: var(--archimate-icon-resource);
+   background-image: var(--archimate-icon-resource);
+}
+.codicon-archimate-serving:before {
+   background-image: var(--archimate-icon-serving);
+}
+.codicon-archimate-specialization:before {
+   background-image: var(--archimate-icon-specialization);
 }
 .codicon-archimate-stakeholder:before {
-   mask-image: var(--archimate-icon-stakeholder);
+   background-image: var(--archimate-icon-stakeholder);
 }
 .codicon-archimate-system-software:before {
-   mask-image: var(--archimate-icon-system-software);
+   background-image: var(--archimate-icon-system-software);
 }
 .codicon-archimate-technology-collaboration:before {
-   mask-image: var(--archimate-icon-technology-collaboration);
+   background-image: var(--archimate-icon-technology-collaboration);
 }
 .codicon-archimate-technology-event:before {
-   mask-image: var(--archimate-icon-technology-event);
+   background-image: var(--archimate-icon-technology-event);
 }
 .codicon-archimate-technology-function:before {
-   mask-image: var(--archimate-icon-technology-function);
+   background-image: var(--archimate-icon-technology-function);
 }
 .codicon-archimate-technology-interaction:before {
-   mask-image: var(--archimate-icon-technology-interaction);
+   background-image: var(--archimate-icon-technology-interaction);
 }
 .codicon-archimate-technology-interface:before {
-   mask-image: var(--archimate-icon-technology-interface);
+   background-image: var(--archimate-icon-technology-interface);
 }
 .codicon-archimate-technology-process:before {
-   mask-image: var(--archimate-icon-technology-process);
+   background-image: var(--archimate-icon-technology-process);
 }
 .codicon-archimate-technology-service:before {
-   mask-image: var(--archimate-icon-technology-service);
+   background-image: var(--archimate-icon-technology-service);
+}
+.codicon-archimate-triggering:before {
+   background-image: var(--archimate-icon-triggering);
 }
 .codicon-archimate-value:before {
-   mask-image: var(--archimate-icon-value);
+   background-image: var(--archimate-icon-value);
 }
 .codicon-archimate-value-stream:before {
-   mask-image: var(--archimate-icon-value-stream);
+   background-image: var(--archimate-icon-value-stream);
 }
 .codicon-archimate-work-package:before {
-   mask-image: var(--archimate-icon-work-package);
+   background-image: var(--archimate-icon-work-package);
 }

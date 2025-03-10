@@ -4,7 +4,7 @@
 
 import { ERRONEOUS_MODEL, ModelDiagnostic } from '@crossbreeze/protocol';
 import { OpenInNewOutlined, SaveOutlined } from '@mui/icons-material';
-import { AppBar, Box, Button, Icon, Toolbar, Typography, useTheme } from '@mui/material';
+import { AppBar, Box, Button, Icon, Toolbar, Typography } from '@mui/material';
 import { useDiagnostics, useDirty, useModelOpen, useModelSave } from '../../ModelContext';
 import { createEditorError } from '../common/EditorError';
 import React = require('react');
@@ -20,16 +20,11 @@ export function Header({ name, id, iconClass }: HeaderProps): React.ReactElement
    const openModel = useModelOpen();
    const dirty = useDirty();
    const diagnostics = useDiagnostics();
-   const theme = useTheme();
 
    return (
       <AppBar position='sticky'>
          {ModelDiagnostic.hasErrors(diagnostics) && createEditorError(ERRONEOUS_MODEL)}
-         <Toolbar
-            className='form-header'
-            variant='dense'
-            sx={{ minHeight: '40px', '--archimate-icon-color': theme.palette.primary.contrastText }}
-         >
+         <Toolbar className='form-header' variant='dense' sx={{ minHeight: '40px' }}>
             <Box sx={{ display: { xs: 'none', sm: 'flex' }, flexGrow: 1, gap: '1em', alignItems: 'center' }}>
                {iconClass && <Icon baseClassName='codicon' className={iconClass} sx={{ fontSize: '1.7em !important' }} />}
                <Typography variant='h6' component='div' className='form-title'>

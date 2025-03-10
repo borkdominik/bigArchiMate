@@ -1,15 +1,7 @@
-<svg id="root" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16" version="1.1" xmlSpace="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5">
-   <rect id="businessactor" x="0" y="0" width="16" height="16" style="fill:none" />
-   <clipPath id="_clip1">
-      <rect x="0" y="0" width="16" height="16" />
-   </clipPath>
-   <g clipPath="url(#_clip1)">
-      <g>
-         <path d="M8,12.5l-3.5,3" style="fill:none;stroke:#0d0d0d;stroke-width:1" />
-         <path d="M8,12.5l3.5,3" style="fill:none;stroke:#0d0d0d;stroke-width:1" />
-         <circle cx="8" cy="4" r="3.5" style="fill:#ffffb5;stroke:#0d0d0d;stroke-width:1" />
-         <path d="M12.571,9.5l-9.142,0" style="fill:none;stroke:#0d0d0d;stroke-width:1" />
-         <path d="M8,7.5l0,5" style="fill:none;stroke:#0d0d0d;stroke-width:1" />
-      </g>
-   </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+   <path d="M8,12.5l-3.5,3" style="fill:none;stroke:#0d0d0d;stroke-width:1" />
+   <path d="M8,12.5l3.5,3" style="fill:none;stroke:#0d0d0d;stroke-width:1" />
+   <circle cx="8" cy="4" r="3.5" style="fill:#ffffb5;stroke:#0d0d0d;stroke-width:1" />
+   <path d="M12.571,9.5l-9.142,0" style="fill:none;stroke:#0d0d0d;stroke-width:1" />
+   <path d="M8,7.5l0,5" style="fill:none;stroke:#0d0d0d;stroke-width:1" />
 </svg>

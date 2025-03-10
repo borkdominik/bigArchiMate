@@ -472,57 +472,57 @@ const elementMetadataMap: Record<ElementType, ElementMetaData> = {
  */
 const relationMetadataMap: Record<RelationType, RelationMetaData> = {
    Access: {
-      icon: 'git-compare',
+      icon: 'archimate-access',
       label: 'Access',
       specificationSection: '5.2.2.'
    },
    Aggregation: {
-      icon: 'git-compare',
+      icon: 'archimate-aggregation',
       label: 'Aggregation',
       specificationSection: '5.1.2.'
    },
    Association: {
-      icon: 'git-compare',
+      icon: 'archimate-association',
       label: 'Association',
       specificationSection: '5.2.4.'
    },
    Assignment: {
-      icon: 'git-compare',
+      icon: 'archimate-assignment',
       label: 'Assignment',
       specificationSection: '5.1.3.'
    },
    Composition: {
-      icon: 'git-compare',
+      icon: 'archimate-composition',
       label: 'Composition',
       specificationSection: '5.1.1.'
    },
    Flow: {
-      icon: 'git-compare',
+      icon: 'archimate-flow',
       label: 'Flow',
       specificationSection: '5.3.2.'
    },
    Influence: {
-      icon: 'git-compare',
+      icon: 'archimate-influence',
       label: 'Influence',
       specificationSection: '5.3.1.'
    },
    Realization: {
-      icon: 'git-compare',
+      icon: 'archimate-realization',
       label: 'Realization',
       specificationSection: '5.1.4.'
    },
    Serving: {
-      icon: 'git-compare',
+      icon: 'archimate-serving',
       label: 'Serving',
       specificationSection: '5.2.1.'
    },
    Specialization: {
-      icon: 'git-compare',
+      icon: 'archimate-specialization',
       label: 'Specialization',
       specificationSection: '5.4.1.'
    },
    Triggering: {
-      icon: 'git-compare',
+      icon: 'archimate-triggering',
       label: 'Triggering',
       specificationSection: '5.3.1.'
    }
@@ -530,7 +530,7 @@ const relationMetadataMap: Record<RelationType, RelationMetaData> = {
 
 const otherConceptMetaDataMap: Record<OtherConceptType, ConceptMetaData> = {
    Junction: {
-      icon: 'git-compare',
+      icon: 'archimate-junction',
       label: 'Junction',
       specificationSection: '5.5.1.'
    }
