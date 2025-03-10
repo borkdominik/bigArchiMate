@@ -69,10 +69,10 @@ export const ModelFileExtensions = {
    Relationship: '.relationship.cm',
    Mapping: '.mapping.cm',
    SystemDiagram: '.system-diagram.cm',
-   Element: '.element.cm',
-   Junction: 'junction.cm',
-   Relation: '.relation.cm',
-   ArchiMateDiagram: '.view.archi',
+   Element: '.element.arch',
+   Junction: 'junction.arch',
+   Relation: '.relation.arch',
+   ArchiMateDiagram: '.view.arch',
    /* @deprecated Use SystemDiagram instead */
    Diagram: '.diagram.cm',
 

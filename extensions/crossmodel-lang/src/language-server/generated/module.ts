@@ -3,13 +3,13 @@
  * DO NOT EDIT MANUALLY!
  ******************************************************************************/
 
-import type { LangiumSharedCoreServices, LangiumCoreServices, LangiumGeneratedCoreServices, LangiumGeneratedSharedCoreServices, LanguageMetaData, Module } from 'langium';
+import type { LangiumCoreServices, LangiumGeneratedCoreServices, LangiumGeneratedSharedCoreServices, LangiumSharedCoreServices, LanguageMetaData, Module } from 'langium';
 import { CrossModelAstReflection } from './ast.js';
 import { CrossModelGrammar } from './grammar.js';
 
 export const CrossModelLanguageMetaData = {
     languageId: 'cross-model',
-    fileExtensions: ['.cm', '.archi'],
+    fileExtensions: ['.cm', '.arch'],
     caseInsensitive: false,
     mode: 'development'
 } as const satisfies LanguageMetaData;

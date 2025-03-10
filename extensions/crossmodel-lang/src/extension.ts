@@ -57,7 +57,7 @@ function createClientOptions(context: vscode.ExtensionContext): LanguageClientOp
    const crossModelWatcher = vscode.workspace.createFileSystemWatcher('**/*.cm');
    context.subscriptions.push(crossModelWatcher);
 
-   const archiMateModelWatcher = vscode.workspace.createFileSystemWatcher('**/*.archi');
+   const archiMateModelWatcher = vscode.workspace.createFileSystemWatcher('**/*.arch');
    context.subscriptions.push(archiMateModelWatcher);
 
    // watch changes to package.json as it contains the dependencies between our systems

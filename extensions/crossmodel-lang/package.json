@@ -79,7 +79,7 @@
         ],
         "extensions": [
           ".cm",
-          ".archi"
+          ".arch"
         ],
         "configuration": "./language-configuration.json"
       }
