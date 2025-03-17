@@ -481,15 +481,15 @@ const relationMetadataMap: Record<RelationType, RelationMetaData> = {
       label: 'Aggregation',
       specificationSection: '5.1.2.'
    },
-   Association: {
-      icon: 'archimate-association',
-      label: 'Association',
-      specificationSection: '5.2.4.'
-   },
    Assignment: {
       icon: 'archimate-assignment',
       label: 'Assignment',
       specificationSection: '5.1.3.'
+   },
+   Association: {
+      icon: 'archimate-association',
+      label: 'Association',
+      specificationSection: '5.2.4.'
    },
    Composition: {
       icon: 'archimate-composition',

@@ -13,88 +13,161 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
-:root {
-   --archimate-icon-access: url('./icons/access.svg');
-   --archimate-icon-aggregation: url('./icons/aggregation.svg');
-   --archimate-icon-application-collaboration: url('./icons/application-collaboration.svg');
-   --archimate-icon-application-component: url('./icons/application-component.svg');
-   --archimate-icon-application-event: url('./icons/application-event.svg');
-   --archimate-icon-application-function: url('./icons/application-function.svg');
-   --archimate-icon-application-interface: url('./icons/application-interface.svg');
-   --archimate-icon-application-interaction: url('./icons/application-interaction.svg');
-   --archimate-icon-application-process: url('./icons/application-process.svg');
-   --archimate-icon-application-service: url('./icons/application-service.svg');
-   --archimate-icon-artifact: url('./icons/artifact.svg');
-   --archimate-icon-assessment: url('./icons/assessment.svg');
-   --archimate-icon-assignment: url('./icons/assignment.svg');
-   --archimate-icon-association: url('./icons/association.svg');
-   --archimate-icon-business-actor: url('./icons/business-actor.svg');
-   --archimate-icon-business-collaboration: url('./icons/business-collaboration.svg');
-   --archimate-icon-business-event: url('./icons/business-event.svg');
-   --archimate-icon-business-function: url('./icons/business-function.svg');
-   --archimate-icon-business-interaction: url('./icons/business-interaction.svg');
-   --archimate-icon-business-interface: url('./icons/business-interface.svg');
-   --archimate-icon-business-object: url('./icons/business-object.svg');
-   --archimate-icon-business-process: url('./icons/business-process.svg');
-   --archimate-icon-business-role: url('./icons/business-role.svg');
-   --archimate-icon-business-service: url('./icons/business-service.svg');
-   --archimate-icon-capability: url('./icons/capability.svg');
-   --archimate-icon-communication-network: url('./icons/communication-network.svg');
-   --archimate-icon-composition: url('./icons/composition.svg');
-   --archimate-icon-constraint: url('./icons/constraint.svg');
-   --archimate-icon-contract: url('./icons/contract.svg');
-   --archimate-icon-course-of-action: url('./icons/course-of-action.svg');
-   --archimate-icon-data-object: url('./icons/data-object.svg');
-   --archimate-icon-deliverable: url('./icons/deliverable.svg');
-   --archimate-icon-device: url('./icons/device.svg');
-   --archimate-icon-distribution-network: url('./icons/distribution-network.svg');
-   --archimate-icon-driver: url('./icons/driver.svg');
-   --archimate-icon-equipment: url('./icons/equipment.svg');
-   --archimate-icon-facility: url('./icons/facility.svg');
-   --archimate-icon-flow: url('./icons/flow.svg');
-   --archimate-icon-gap: url('./icons/gap.svg');
-   --archimate-icon-goal: url('./icons/goal.svg');
-   --archimate-icon-grouping: url('./icons/grouping.svg');
-   --archimate-icon-implementation-event: url('./icons/implementation-event.svg');
-   --archimate-icon-influence: url('./icons/influence.svg');
-   --archimate-icon-junction: url('./icons/junction.svg');
-   --archimate-icon-location: url('./icons/location.svg');
-   --archimate-icon-material: url('./icons/material.svg');
-   --archimate-icon-meaning: url('./icons/meaning.svg');
-   --archimate-icon-node: url('./icons/node.svg');
-   --archimate-icon-outcome: url('./icons/outcome.svg');
-   --archimate-icon-path: url('./icons/path.svg');
-   --archimate-icon-plateau: url('./icons/plateau.svg');
-   --archimate-icon-principle: url('./icons/principle.svg');
-   --archimate-icon-product: url('./icons/product.svg');
-   --archimate-icon-realization: url('./icons/realization.svg');
-   --archimate-icon-representation: url('./icons/representation.svg');
-   --archimate-icon-requirement: url('./icons/requirement.svg');
-   --archimate-icon-resource: url('./icons/resource.svg');
-   --archimate-icon-serving: url('./icons/serving.svg');
-   --archimate-icon-specialization: url('./icons/specialization.svg');
-   --archimate-icon-stakeholder: url('./icons/stakeholder.svg');
-   --archimate-icon-system-software: url('./icons/system-software.svg');
-   --archimate-icon-technology-collaboration: url('./icons/technology-collaboration.svg');
-   --archimate-icon-technology-event: url('./icons/technology-event.svg');
-   --archimate-icon-technology-function: url('./icons/technology-function.svg');
-   --archimate-icon-technology-interaction: url('./icons/technology-interaction.svg');
-   --archimate-icon-technology-interface: url('./icons/technology-interface.svg');
-   --archimate-icon-technology-process: url('./icons/technology-process.svg');
-   --archimate-icon-technology-service: url('./icons/technology-service.svg');
-   --archimate-icon-triggering: url('./icons/triggering.svg');
-   --archimate-icon-value: url('./icons/value.svg');
-   --archimate-icon-value-stream: url('./icons/value-stream.svg');
-   --archimate-icon-work-package: url('./icons/work-package.svg');
 
+:root .theia-light {
+   --archimate-icon-access: url('./icons/default/access.svg');
+   --archimate-icon-aggregation: url('./icons/default/aggregation.svg');
+   --archimate-icon-application-collaboration: url('./icons/default/application-collaboration.svg');
+   --archimate-icon-application-component: url('./icons/default/application-component.svg');
+   --archimate-icon-application-event: url('./icons/default/application-event.svg');
+   --archimate-icon-application-function: url('./icons/default/application-function.svg');
+   --archimate-icon-application-interface: url('./icons/default/application-interface.svg');
+   --archimate-icon-application-interaction: url('./icons/default/application-interaction.svg');
+   --archimate-icon-application-process: url('./icons/default/application-process.svg');
+   --archimate-icon-application-service: url('./icons/default/application-service.svg');
+   --archimate-icon-artifact: url('./icons/default/artifact.svg');
+   --archimate-icon-assessment: url('./icons/default/assessment.svg');
+   --archimate-icon-assignment: url('./icons/default/assignment.svg');
+   --archimate-icon-association: url('./icons/default/association.svg');
+   --archimate-icon-business-actor: url('./icons/default/business-actor.svg');
+   --archimate-icon-business-collaboration: url('./icons/default/business-collaboration.svg');
+   --archimate-icon-business-event: url('./icons/default/business-event.svg');
+   --archimate-icon-business-function: url('./icons/default/business-function.svg');
+   --archimate-icon-business-interaction: url('./icons/default/business-interaction.svg');
+   --archimate-icon-business-interface: url('./icons/default/business-interface.svg');
+   --archimate-icon-business-object: url('./icons/default/business-object.svg');
+   --archimate-icon-business-process: url('./icons/default/business-process.svg');
+   --archimate-icon-business-role: url('./icons/default/business-role.svg');
+   --archimate-icon-business-service: url('./icons/default/business-service.svg');
+   --archimate-icon-capability: url('./icons/default/capability.svg');
+   --archimate-icon-communication-network: url('./icons/default/communication-network.svg');
+   --archimate-icon-composition: url('./icons/default/composition.svg');
+   --archimate-icon-constraint: url('./icons/default/constraint.svg');
+   --archimate-icon-contract: url('./icons/default/contract.svg');
+   --archimate-icon-course-of-action: url('./icons/default/course-of-action.svg');
+   --archimate-icon-data-object: url('./icons/default/data-object.svg');
+   --archimate-icon-deliverable: url('./icons/default/deliverable.svg');
+   --archimate-icon-device: url('./icons/default/device.svg');
+   --archimate-icon-distribution-network: url('./icons/default/distribution-network.svg');
+   --archimate-icon-driver: url('./icons/default/driver.svg');
+   --archimate-icon-equipment: url('./icons/default/equipment.svg');
+   --archimate-icon-facility: url('./icons/default/facility.svg');
+   --archimate-icon-flow: url('./icons/default/flow.svg');
+   --archimate-icon-gap: url('./icons/default/gap.svg');
+   --archimate-icon-goal: url('./icons/default/goal.svg');
+   --archimate-icon-grouping: url('./icons/default/grouping.svg');
+   --archimate-icon-implementation-event: url('./icons/default/implementation-event.svg');
+   --archimate-icon-influence: url('./icons/default/influence.svg');
+   --archimate-icon-junction: url('./icons/default/junction.svg');
+   --archimate-icon-location: url('./icons/default/location.svg');
+   --archimate-icon-material: url('./icons/default/material.svg');
+   --archimate-icon-meaning: url('./icons/default/meaning.svg');
+   --archimate-icon-node: url('./icons/default/node.svg');
+   --archimate-icon-outcome: url('./icons/default/outcome.svg');
+   --archimate-icon-path: url('./icons/default/path.svg');
+   --archimate-icon-plateau: url('./icons/default/plateau.svg');
+   --archimate-icon-principle: url('./icons/default/principle.svg');
+   --archimate-icon-product: url('./icons/default/product.svg');
+   --archimate-icon-realization: url('./icons/default/realization.svg');
+   --archimate-icon-representation: url('./icons/default/representation.svg');
+   --archimate-icon-requirement: url('./icons/default/requirement.svg');
+   --archimate-icon-resource: url('./icons/default/resource.svg');
+   --archimate-icon-serving: url('./icons/default/serving.svg');
+   --archimate-icon-specialization: url('./icons/default/specialization.svg');
+   --archimate-icon-stakeholder: url('./icons/default/stakeholder.svg');
+   --archimate-icon-system-software: url('./icons/default/system-software.svg');
+   --archimate-icon-technology-collaboration: url('./icons/default/technology-collaboration.svg');
+   --archimate-icon-technology-event: url('./icons/default/technology-event.svg');
+   --archimate-icon-technology-function: url('./icons/default/technology-function.svg');
+   --archimate-icon-technology-interaction: url('./icons/default/technology-interaction.svg');
+   --archimate-icon-technology-interface: url('./icons/default/technology-interface.svg');
+   --archimate-icon-technology-process: url('./icons/default/technology-process.svg');
+   --archimate-icon-technology-service: url('./icons/default/technology-service.svg');
+   --archimate-icon-triggering: url('./icons/default/triggering.svg');
+   --archimate-icon-value: url('./icons/default/value.svg');
+   --archimate-icon-value-stream: url('./icons/default/value-stream.svg');
+   --archimate-icon-work-package: url('./icons/default/work-package.svg');
+}
+
+:root .theia-dark {
+   --archimate-icon-access: url('./icons/dark/access.svg');
+   --archimate-icon-aggregation: url('./icons/dark/aggregation.svg');
+   --archimate-icon-application-collaboration: url('./icons/default/application-collaboration.svg');
+   --archimate-icon-application-component: url('./icons/default/application-component.svg');
+   --archimate-icon-application-event: url('./icons/default/application-event.svg');
+   --archimate-icon-application-function: url('./icons/default/application-function.svg');
+   --archimate-icon-application-interface: url('./icons/default/application-interface.svg');
+   --archimate-icon-application-interaction: url('./icons/default/application-interaction.svg');
+   --archimate-icon-application-process: url('./icons/default/application-process.svg');
+   --archimate-icon-application-service: url('./icons/default/application-service.svg');
+   --archimate-icon-artifact: url('./icons/default/artifact.svg');
+   --archimate-icon-assessment: url('./icons/default/assessment.svg');
+   --archimate-icon-assignment: url('./icons/dark/assignment.svg');
+   --archimate-icon-association: url('./icons/dark/association.svg');
+   --archimate-icon-business-actor: url('./icons/default/business-actor.svg');
+   --archimate-icon-business-collaboration: url('./icons/default/business-collaboration.svg');
+   --archimate-icon-business-event: url('./icons/default/business-event.svg');
+   --archimate-icon-business-function: url('./icons/default/business-function.svg');
+   --archimate-icon-business-interaction: url('./icons/default/business-interaction.svg');
+   --archimate-icon-business-interface: url('./icons/default/business-interface.svg');
+   --archimate-icon-business-object: url('./icons/default/business-object.svg');
+   --archimate-icon-business-process: url('./icons/default/business-process.svg');
+   --archimate-icon-business-role: url('./icons/default/business-role.svg');
+   --archimate-icon-business-service: url('./icons/default/business-service.svg');
+   --archimate-icon-capability: url('./icons/default/capability.svg');
+   --archimate-icon-communication-network: url('./icons/default/communication-network.svg');
+   --archimate-icon-composition: url('./icons/dark/composition.svg');
+   --archimate-icon-constraint: url('./icons/default/constraint.svg');
+   --archimate-icon-contract: url('./icons/default/contract.svg');
+   --archimate-icon-course-of-action: url('./icons/default/course-of-action.svg');
+   --archimate-icon-data-object: url('./icons/default/data-object.svg');
+   --archimate-icon-deliverable: url('./icons/default/deliverable.svg');
+   --archimate-icon-device: url('./icons/default/device.svg');
+   --archimate-icon-distribution-network: url('./icons/default/distribution-network.svg');
+   --archimate-icon-driver: url('./icons/default/driver.svg');
+   --archimate-icon-equipment: url('./icons/default/equipment.svg');
+   --archimate-icon-facility: url('./icons/default/facility.svg');
+   --archimate-icon-flow: url('./icons/dark/flow.svg');
+   --archimate-icon-gap: url('./icons/default/gap.svg');
+   --archimate-icon-goal: url('./icons/default/goal.svg');
+   --archimate-icon-grouping: url('./icons/default/grouping.svg');
+   --archimate-icon-implementation-event: url('./icons/default/implementation-event.svg');
+   --archimate-icon-influence: url('./icons/dark/influence.svg');
+   --archimate-icon-junction: url('./icons/dark/junction.svg');
+   --archimate-icon-location: url('./icons/default/location.svg');
+   --archimate-icon-material: url('./icons/default/material.svg');
+   --archimate-icon-meaning: url('./icons/default/meaning.svg');
+   --archimate-icon-node: url('./icons/default/node.svg');
+   --archimate-icon-outcome: url('./icons/default/outcome.svg');
+   --archimate-icon-path: url('./icons/default/path.svg');
+   --archimate-icon-plateau: url('./icons/default/plateau.svg');
+   --archimate-icon-principle: url('./icons/default/principle.svg');
+   --archimate-icon-product: url('./icons/default/product.svg');
+   --archimate-icon-realization: url('./icons/dark/realization.svg');
+   --archimate-icon-representation: url('./icons/default/representation.svg');
+   --archimate-icon-requirement: url('./icons/default/requirement.svg');
+   --archimate-icon-resource: url('./icons/default/resource.svg');
+   --archimate-icon-serving: url('./icons/dark/serving.svg');
+   --archimate-icon-specialization: url('./icons/dark/specialization.svg');
+   --archimate-icon-stakeholder: url('./icons/default/stakeholder.svg');
+   --archimate-icon-system-software: url('./icons/default/system-software.svg');
+   --archimate-icon-technology-collaboration: url('./icons/default/technology-collaboration.svg');
+   --archimate-icon-technology-event: url('./icons/default/technology-event.svg');
+   --archimate-icon-technology-function: url('./icons/default/technology-function.svg');
+   --archimate-icon-technology-interaction: url('./icons/default/technology-interaction.svg');
+   --archimate-icon-technology-interface: url('./icons/default/technology-interface.svg');
+   --archimate-icon-technology-process: url('./icons/default/technology-process.svg');
+   --archimate-icon-technology-service: url('./icons/default/technology-service.svg');
+   --archimate-icon-triggering: url('./icons/dark/triggering.svg');
+   --archimate-icon-value: url('./icons/default/value.svg');
+   --archimate-icon-value-stream: url('./icons/default/value-stream.svg');
+   --archimate-icon-work-package: url('./icons/default/work-package.svg');
+}
+
+:root {
    --archimate-icon-size: 1em;
 }
 
-/**
- * If we had the the SVGs as a font, we could use the content property to reference the glyph, similar to codicon.
- * This has the advantage of being able to use the font-size property to scale the icon and the color property to color the icon.
- * Since we are using SVGs directly, however, we need to use them as a background-image, set the size explicitly and color them using the background-color property.
- */
 .codicon[class*='codicon-archimate']:before {
    content: '' !important;
    display: block;
@@ -102,8 +175,6 @@
    height: var(--archimate-icon-size);
    background-repeat: no-repeat;
    background-position: center;
-   padding: 2px;
-   border-radius: 4px;
 }
 
 .codicon-archimate-access:before {

@@ -8,10 +8,11 @@
    --sprotty-edge-selected: var(--theia-focusBorder);
    --sprotty-border: var(--theia-editor-foreground);
 
-   --arrow-empty-fill: white;
+   --node-stroke: var(--sprotty-edge);
+   --arrow-empty-fill: var(--sprotty-background);
    --arrow-filled-fill: var(--sprotty-edge);
 
-   /* Taken from https://www.archimatetool.com/downloads/colour-schemes/ArchiMate%20Standard%20-%203.2.prefs */
+   /* Color codes adapted from https://www.archimatetool.com/downloads/colour-schemes/ArchiMate%20Standard%20-%203.2.prefs */
    --bg-application: #b5ffff;
    --bg-business: #ffffb5;
    --bg-implementation-and-migration: #ffe0e0;
@@ -22,19 +23,12 @@
    --bg-default: #ffffff;
 }
 
-.default-file-icon {
-   padding-right: 0;
-   padding: 1px;
-   margin-right: 6px;
-}
-
-/* Standard sprotty */
-.sprotty {
-   height: 100%;
-}
-
-.feedback-edge {
-   pointer-events: none;
+.grid-background .sprotty-graph,
+.grid-background.sprotty-graph {
+   --background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><g><line x1="10" y1="15" x2="20" y2="15" stroke="black" stroke-width="1" stroke-linecap="round" stroke-opacity="0.15" /><line x1="15" y1="10" x2="15" y2="20" stroke="black" stroke-width="1" stroke-linecap="round" stroke-opacity="0.15" /></g></svg>');
+   background-image: var(--background-image);
+   background-size: var(--grid-background-width) var(--grid-background-height);
+   background-position: var(--grid-background-x) var(--grid-background-y);
 }
 
 .sprotty-graph {
@@ -42,20 +36,6 @@
    height: 100%;
    background-size: 11px;
    background: var(--sprotty-background);
-}
-
-.sprotty
-   .edge-creation:not(.edge-check-pending-mode):not(.edge-creation-select-source-mode):not(.edge-creation-select-target-mode):not(
-      .edge-reconnect-select-target-mode
-   ):not(.edge-modification-not-allowed-mode) {
-   cursor: ew-resize;
-}
-
-.sprotty
-   .mapping-creation:not(.edge-check-pending-mode):not(.edge-creation-select-source-mode):not(.edge-creation-select-target-mode):not(
-      .edge-reconnect-select-target-mode
-   ):not(.edge-modification-not-allowed-mode) {
-   cursor: ew-resize;
 }
 
 .sprotty text {
@@ -67,109 +47,36 @@
    stroke-width: 2px;
 }
 
-/* Nodes */
 .sprotty-node:not(.selected, .mouseover) {
-   stroke: #a8a1c5;
+   stroke: var(--node-stroke);
    stroke-width: 2px;
-   /* filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.8)); */
 }
 
-/* Center text within nodes */
-.sprotty-node text {
-   text-anchor: middle;
-   dominant-baseline: middle;
-   font-family: Arial, sans-serif;
-   font-size: 14px;
-   fill: black;
-}
-
-.source-object .sprotty-node:not(.selected, .mouseover) {
-   stroke: #a1c5a5;
-}
-
-.header-label {
-   font-weight: bold;
-   letter-spacing: 0.5px;
-}
-
-.attribute-compartment {
-   stroke: none;
-   fill: transparent;
-}
-
-.attribute-compartment.mouseover,
 .sprotty-node.mouseover:not(.selected),
 .sprotty-edge.mouseover:not(.selected),
-.source-highlight > .sprotty-node {
+.sprotty-edge.mouseover:not(.selected) .arrow,
+.sprotty-edge.mouseover:not(.selected) .circle {
    stroke: var(--theia-focusBorder);
    stroke-width: 2px;
    opacity: 1;
 }
 
-.attribute-compartment.selected,
 .sprotty-node.selected,
 .sprotty-edge.selected {
    stroke: var(--theia-focusBorder);
    stroke-width: 2px;
+}
+
+.sprotty-node.selected {
    stroke-dasharray: 6px 3px;
 }
 
-.attribute-compartment.mouseover,
-.attribute-compartment.selected,
-.sprotty-node.mouseover:not(.selected),
-.sprotty-node.selected,
-.source-highlight > .sprotty-node {
-   /* fill: #f3faff; */
-   stroke-width: 2px;
+.diagram-node .header-label {
+   font-weight: bold;
+   letter-spacing: 0.5px;
 }
 
-.sprotty .attribute_expression_marker {
-   text-anchor: start;
-   fill: #666666;
-   baseline-shift: 2px;
-}
-
-.sprotty line.identifier {
-   stroke: black;
-   stroke-width: 0.75px;
-   stroke-dasharray: none;
-   stroke-linecap: round;
-}
-
-.command-palette {
-   animation: none;
-}
-
-.attribute.identifier .icon-path {
-   transform: scale(0.0105) translate(-400px, 1375px);
-   fill: #000;
-}
-
-.grid-background .sprotty-graph,
-.grid-background.sprotty-graph {
-   --background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><g><line x1="10" y1="15" x2="20" y2="15" stroke="black" stroke-width="1" stroke-linecap="round" stroke-opacity="0.15" /><line x1="15" y1="10" x2="15" y2="20" stroke="black" stroke-width="1" stroke-linecap="round" stroke-opacity="0.15" /></g></svg>');
-   background-image: var(--background-image);
-   background-size: var(--grid-background-width) var(--grid-background-height);
-   background-position: var(--grid-background-x) var(--grid-background-y);
-}
-
-.sprotty .header-icon {
-   display: flex;
-}
-
-.sprotty .header-icon i {
-   display: none;
-}
-
-.sprotty .header-icon i {
-   margin-right: 0.2em;
-}
-
-.sprotty .palette-header {
-   flex-direction: row;
-}
-
-.label-edit input {
+.diagram-node .label-edit input {
    text-align: center;
    background-color: transparent;
    outline-color: transparent;
@@ -177,120 +84,44 @@
    letter-spacing: 0.9px;
 }
 
-.error-extension {
-   position: absolute;
-   width: 100%;
-}
-
-.bg-application > rect,
-.bg-application > path {
+.diagram-node.bg-application > rect,
+.diagram-node.bg-application > path {
    fill: var(--bg-application);
 }
 
-.bg-business > rect,
-.bg-business > path {
+.diagram-node.bg-business > rect,
+.diagram-node.bg-business > path {
    fill: var(--bg-business);
 }
 
-.bg-implementation-and-migration > rect,
-.bg-implementation-and-migration > path {
+.diagram-node.bg-implementation-and-migration > rect,
+.diagram-node.bg-implementation-and-migration > path {
    fill: var(--bg-implementation-and-migration);
 }
 
-.bg-motivation > rect,
-.bg-motivation > path {
+.diagram-node.bg-motivation > rect,
+.diagram-node.bg-motivation > path {
    fill: var(--bg-motivation);
 }
 
-.bg-strategy > rect,
-.bg-strategy > path {
+.diagram-node.bg-strategy > rect,
+.diagram-node.bg-strategy > path {
    fill: var(--bg-strategy);
 }
 
-.bg-technology > rect,
-.bg-technology > path {
+.diagram-node.bg-technology > rect,
+.diagram-node.bg-technology > path {
    fill: var(--bg-technology);
 }
 
-.bg-location > rect,
-.bg-location > path {
+.diagram-node.bg-location > rect,
+.diagram-node.bg-location > path {
    fill: var(--bg-location);
 }
 
-.bg-default > rect,
-.bg-default > path {
+.diagram-node.bg-default > rect,
+.diagram-node.bg-default > path {
    fill: var(--bg-default);
-}
-
-.collapsible-palette {
-   transition: transform 0.2s ease-in-out;
-}
-
-.minimize-palette-button {
-   top: 10px;
-   right: 10px;
-}
-
-.minimize-palette-button i {
-   cursor: pointer;
-   border-radius: 4px;
-   padding: 2px;
-}
-
-.minimize-palette-button i:hover {
-   background-color: var(--theia-list-hoverBackground);
-}
-
-.minimize-palette-button i:active {
-   background-color: var(--theia-list-activeSelectionBackground);
-}
-
-.tool-palette {
-   top: 10px;
-   border: 1px solid var(--theia-activityBar-border);
-}
-
-.tool-palette .header-tools > i {
-   cursor: pointer;
-}
-
-.inactive .tool-palette .palette-header,
-.tool-palette .palette-header {
-   border-top: none;
-}
-
-.tool-palette .palette-body .group-header,
-.tool-palette .palette-body .tool-button {
-   height: 30px;
-   padding-block: 0;
-   padding-inline: 8px;
-   cursor: pointer;
-}
-
-.tool-palette .palette-body .group-header {
-   background-color: var(--theia-list-hoverBackground);
-}
-
-.tool-palette .palette-body .group-header:hover {
-   background-color: var(--theia-list-activeSelectionBackground);
-}
-
-.tool-palette .palette-body .tool-button:hover:not(.clicked) {
-   background-color: var(--theia-list-hoverBackground);
-}
-
-.tool-palette .palette-body .tool-button.clicked {
-   background-color: var(--theia-list-activeSelectionBackground);
-}
-
-.group-header i {
-   padding: 0;
-   margin-left: -1px;
-   margin-right: 10px;
-}
-
-.group-header.collapsed i {
-   transform: rotate(-90deg);
 }
 
 .sprotty-edge.realization :not(.arrow),
@@ -328,13 +159,4 @@
 .sprotty-edge.selected .arrow,
 .sprotty-edge.selected .circle {
    fill: currentColor !important;
-}
-
-.diagram-edge.inheritance {
-   marker-end: var(--svg-def-marker-inheritance);
-}
-
-.diagram-edge.inheritance.selected,
-.diagram-edge.inheritance.mouseover {
-   marker-end: var(--svg-def-marker-inheritance-selected);
 }

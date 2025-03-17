@@ -46,13 +46,6 @@ export class ArchiMateToolPaletteProvider extends ToolPaletteItemProvider {
             actions: [activateDeleteToolAction()]
          },
          {
-            id: 'hide-tool',
-            sortString: 'AC',
-            label: 'Delete from Model',
-            icon: 'trash',
-            actions: [activateDeleteToolAction()]
-         },
-         {
             id: 'relations-group',
             icon: 'chevron-down',
             sortString: 'B',

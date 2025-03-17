@@ -73,7 +73,7 @@ export class CrossModelToolPalette extends ToolPalette {
          this.updateMinimizePaletteButtonTooltip(minPaletteDiv);
          minimizeIcon.onclick = _event => {
             if (this.isPaletteMaximized()) {
-               this.containerElement.style.transform = 'translateX(260px)';
+               this.containerElement.style.transform = 'translateX(270px)';
             } else {
                this.containerElement.style.transform = 'none';
             }
@@ -88,7 +88,7 @@ export class CrossModelToolPalette extends ToolPalette {
    }
 
    protected override isPaletteMaximized(): boolean {
-      return this.containerElement && this.containerElement.style.transform !== 'translateX(260px)';
+      return this.containerElement && this.containerElement.style.transform !== 'translateX(270px)';
    }
 
    protected override createHeaderTitle(): HTMLElement {
