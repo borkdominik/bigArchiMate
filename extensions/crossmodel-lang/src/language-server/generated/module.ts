@@ -3,7 +3,7 @@
  * DO NOT EDIT MANUALLY!
  ******************************************************************************/
 
-import type { LangiumCoreServices, LangiumGeneratedCoreServices, LangiumGeneratedSharedCoreServices, LangiumSharedCoreServices, LanguageMetaData, Module } from 'langium';
+import type { LangiumSharedCoreServices, LangiumCoreServices, LangiumGeneratedCoreServices, LangiumGeneratedSharedCoreServices, LanguageMetaData, Module } from 'langium';
 import { CrossModelAstReflection } from './ast.js';
 import { CrossModelGrammar } from './grammar.js';
 
