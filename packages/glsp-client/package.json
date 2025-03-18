@@ -45,14 +45,8 @@
   },
   "theiaExtensions": [
     {
-      "frontend": "lib/browser/system-diagram/system-diagram-frontend-module",
+      "frontend": "lib/browser/archimate-diagram/archimate-diagram-frontend-module",
       "backend": "lib/node/crossmodel-backend-module"
-    },
-    {
-      "frontend": "lib/browser/mapping-diagram/mapping-diagram-frontend-module"
-    },
-    {
-      "frontend": "lib/browser/archimate-diagram/archimate-diagram-frontend-module"
     }
   ]
 }

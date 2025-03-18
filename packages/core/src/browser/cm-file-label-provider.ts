@@ -31,30 +31,16 @@ export class CrossModelLabelProvider implements LabelProviderContribution, TreeD
    }
 
    getIcon(node: FileStatNode): string {
-      if (this.isSystemDirectory(node)) {
-         return ModelStructure.System.ICON_CLASS + ' default-folder-icon';
-      }
-      if (this.isSystemDirectory(node.parent) && node.fileStat.name === ModelStructure.Entity.FOLDER) {
-         return ModelStructure.Entity.ICON_CLASS + ' default-folder-icon';
-      }
-      if (this.isSystemDirectory(node.parent) && node.fileStat.name === ModelStructure.Relationship.FOLDER) {
-         return ModelStructure.Relationship.ICON_CLASS + ' default-folder-icon';
-      }
-      if (this.isSystemDirectory(node.parent) && node.fileStat.name === ModelStructure.SystemDiagram.FOLDER) {
-         return ModelStructure.SystemDiagram.ICON_CLASS + ' default-folder-icon';
-      }
-      if (this.isSystemDirectory(node.parent) && node.fileStat.name === ModelStructure.Mapping.FOLDER) {
-         return ModelStructure.Mapping.ICON_CLASS + ' default-folder-icon';
-      }
       if (this.isSystemDirectory(node.parent) && node.fileStat.name === ModelStructure.Element.FOLDER) {
-         return ModelStructure.Element.ICON_CLASS + ' default-folder-icon';
+         return ModelStructure.ArchiMateModel.ICON_CLASS + ' default-folder-icon';
       }
+
       if (FileNode.is(node)) {
          if (ModelFileExtensions.isArchiMateDiagramFile(node.fileStat.name)) {
             return ModelStructure.ArchiMateDiagram.ICON_CLASS + ' default-file-icon';
          }
 
-         if (ModelFileExtensions.isElementFile(node.fileStat.name)) {
+         if (ModelFileExtensions.isElementFile(node.fileStat.name) || ModelFileExtensions.isJunctionFile(node.fileStat.name)) {
             // very simple name-based matching so we do not have to look into the file
             const matchingType = concepts.find(elementType => node.fileStat.resource.path.name.includes(elementType));
             if (matchingType) {

@@ -5,12 +5,14 @@
 import {
    ContainerContext,
    DiagramConfiguration,
+   GLSPClientContribution,
    GLSPDiagramWidget,
    GLSPTheiaFrontendModule,
    registerDiagramManager
 } from '@eclipse-glsp/theia-integration';
 
 import { ArchiMateDiagramLanguage } from '../../common/crossmodel-diagram-language';
+import { CrossModelClientContribution } from '../crossmodel-client-contribution';
 import { ArchiMateDiagramConfiguration } from './archimate-diagram-configuration';
 import { ArchiMateDiagramManager } from './archimate-diagram-manager';
 import { ArchiMateDiagramWidget } from './archimate-diagram-widget';
@@ -24,7 +26,9 @@ export class ArchiMateDiagramModule extends GLSPTheiaFrontendModule {
    }
 
    override bindGLSPClientContribution(context: ContainerContext): void {
-      // DO NOT BIND ANOTHER GLSP CLIENT CONTRIBUTION, WE ONLY NEED ONE PER SERVER AND WE DO IT IN THE SYSTEM DIAGRAM LANGUAGE
+      // override client contribution to delay Theia frontend-backend connection for GLSP (see comments in contribution)
+      context.bind(CrossModelClientContribution).toSelf().inSingletonScope();
+      context.bind(GLSPClientContribution).toService(CrossModelClientContribution);
    }
 
    override bindDiagramWidgetFactory(context: ContainerContext): void {

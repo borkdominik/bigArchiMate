@@ -78,7 +78,6 @@
           "cross-model"
         ],
         "extensions": [
-          ".cm",
           ".arch"
         ],
         "configuration": "./language-configuration.json"

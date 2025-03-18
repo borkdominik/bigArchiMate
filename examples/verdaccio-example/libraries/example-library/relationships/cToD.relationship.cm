@@ -1,5 +1,0 @@
-relationship cToD {
-    source := C with C.name;
-    target := B;
-    type := 1:n;
-} 

@@ -6,18 +6,12 @@ import { ModelService, ModelServiceClient } from '@crossbreeze/model-service/lib
 import { CrossModelDocument, CrossModelRoot, ModelDiagnostic, ModelUpdatedEvent, RenderProps } from '@crossbreeze/protocol';
 import {
    ElementComponent,
-   EntityComponent,
    ErrorView,
    JunctionComponent,
-   MappingComponent,
-   MappingRenderProps,
    ModelProviderProps,
    OpenCallback,
    RelationComponent,
-   RelationshipComponent,
-   SaveCallback,
-   SourceObjectComponent,
-   SourceObjectRenderProps
+   SaveCallback
 } from '@crossbreeze/react-model-ui';
 import { Emitter, Event } from '@theia/core';
 import { LabelProvider, Message, OpenerService, ReactWidget, Saveable, open } from '@theia/core/lib/browser';
@@ -197,9 +191,6 @@ export class CrossModelWidget extends ReactWidget implements Saveable {
    }
 
    render(): React.ReactNode {
-      if (this.document?.root?.entity) {
-         return <EntityComponent {...this.getModelProviderProps()} {...this.getRenderProperties()} />;
-      }
       if (this.document?.root?.element) {
          return <ElementComponent {...this.getModelProviderProps()} {...this.getRenderProperties()} />;
       }
@@ -208,18 +199,6 @@ export class CrossModelWidget extends ReactWidget implements Saveable {
       }
       if (this.document?.root?.relation) {
          return <RelationComponent {...this.getModelProviderProps()} {...this.getRenderProperties()} />;
-      }
-      if (this.document?.root?.relationship) {
-         return <RelationshipComponent {...this.getModelProviderProps()} {...this.getRenderProperties()} />;
-      }
-      if (this.document?.root?.mapping) {
-         const renderProps = this.getRenderProperties() as RenderProps & MappingRenderProps & SourceObjectRenderProps;
-         if (renderProps?.mappingIndex >= 0) {
-            return <MappingComponent {...this.getModelProviderProps()} {...renderProps} />;
-         }
-         if (renderProps?.sourceObjectIndex >= 0) {
-            return <SourceObjectComponent {...this.getModelProviderProps()} {...renderProps} />;
-         }
       }
       if (this.error) {
          return <ErrorView errorMessage={this.error} />;

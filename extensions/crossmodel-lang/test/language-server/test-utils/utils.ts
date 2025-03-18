@@ -8,17 +8,7 @@ import { ParseHelperOptions, parseDocument as langiumParseDocument } from 'langi
 import path from 'path';
 import { PackageJson } from 'type-fest';
 import { CrossModelServices, createCrossModelServices } from '../../../src/language-server/cross-model-module.js';
-import {
-   CrossModelRoot,
-   Entity,
-   Mapping,
-   Relationship,
-   SystemDiagram,
-   isEntity,
-   isMapping,
-   isRelationship,
-   isSystemDiagram
-} from '../../../src/language-server/generated/ast.js';
+import { CrossModelRoot } from '../../../src/language-server/generated/ast.js';
 import { SemanticRoot, TypeGuard, WithDocument, findSemanticRoot } from '../../../src/language-server/util/ast-util.js';
 
 export function createCrossModelTestServices(context: DefaultSharedModuleContext = EmptyFileSystem): CrossModelServices {
@@ -85,22 +75,6 @@ export async function parseSemanticRoot<T extends SemanticRoot>(
    expect(semanticRoot).toBeDefined();
    (semanticRoot as any).$document = document;
    return semanticRoot as WithDocument<T>;
-}
-
-export async function parseEntity(input: DocumentInput, assert: ParseAssert = {}): Promise<WithDocument<Entity>> {
-   return parseSemanticRoot(input, assert, isEntity);
-}
-
-export async function parseRelationship(input: DocumentInput, assert: ParseAssert = {}): Promise<WithDocument<Relationship>> {
-   return parseSemanticRoot(input, assert, isRelationship);
-}
-
-export async function parseSystemDiagram(input: DocumentInput, assert: ParseAssert = {}): Promise<WithDocument<SystemDiagram>> {
-   return parseSemanticRoot(input, assert, isSystemDiagram);
-}
-
-export async function parseMapping(input: DocumentInput, assert: ParseAssert = {}): Promise<WithDocument<Mapping>> {
-   return parseSemanticRoot(input, assert, isMapping);
 }
 
 export const MockFileSystem: DefaultSharedModuleContext = {

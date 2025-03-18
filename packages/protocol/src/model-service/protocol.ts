@@ -44,9 +44,6 @@ export interface CrossModelDocument<T = CrossModelRoot, D = ModelDiagnostic> {
 
 export interface CrossModelRoot extends CrossModelElement {
    readonly $type: 'CrossModelRoot';
-   entity?: Entity;
-   relationship?: Relationship;
-   mapping?: Mapping;
    element?: Element;
    relation?: Relation;
    junction?: Junction;
@@ -54,26 +51,6 @@ export interface CrossModelRoot extends CrossModelElement {
 
 export function isCrossModelRoot(model?: any): model is CrossModelRoot {
    return !!model && model.$type === 'CrossModelRoot';
-}
-
-export const EntityType = 'Entity';
-export interface Entity extends CrossModelElement, Identifiable, WithCustomProperties {
-   readonly $type: typeof EntityType;
-   attributes: Array<EntityAttribute>;
-   description?: string;
-   name?: string;
-}
-
-export interface Attribute extends CrossModelElement, Identifiable {
-   datatype?: string;
-   description?: string;
-   name?: string;
-}
-
-export const EntityAttributeType = 'EntityAttribute';
-export interface EntityAttribute extends Attribute, WithCustomProperties {
-   readonly $type: typeof EntityAttributeType;
-   identifier?: boolean;
 }
 
 export const PropertyType = 'Property';
@@ -107,120 +84,6 @@ export interface Relation extends CrossModelElement, Identifiable {
    source: Reference<Element>;
    target: Reference<Element>;
    properties: Array<Property>;
-}
-
-export const RelationshipType = 'Relationship';
-export interface Relationship extends CrossModelElement, Identifiable, WithCustomProperties {
-   readonly $type: typeof RelationshipType;
-   attributes: Array<RelationshipAttribute>;
-   child?: Reference<Entity>;
-   description?: string;
-   name?: string;
-   parent?: Reference<Entity>;
-   type?: string;
-}
-
-export const RelationshipAttributeType = 'RelationshipAttribute';
-export interface RelationshipAttribute extends CrossModelElement, WithCustomProperties {
-   readonly $type: typeof RelationshipAttributeType;
-   parent?: Reference<EntityAttribute>;
-   child?: Reference<EntityAttribute>;
-}
-
-export const MappingType = 'Mapping';
-export interface Mapping extends CrossModelElement, Identifiable, WithCustomProperties {
-   readonly $type: typeof MappingType;
-   sources: Array<SourceObject>;
-   target: TargetObject;
-}
-
-export const SourceObjectType = 'SourceObject';
-export type SourceObjectJoinType = 'from' | 'inner-join' | 'cross-join' | 'left-join' | 'apply';
-export interface SourceObject extends CrossModelElement, Identifiable, WithCustomProperties {
-   readonly $type: typeof SourceObjectType;
-   entity?: Reference<Entity>;
-   join?: SourceObjectJoinType;
-   dependencies: Array<SourceObjectDependency>;
-   conditions: Array<SourceObjectCondition>;
-}
-
-export const SourceObjectDependencyType = 'SourceObjectDependency';
-export interface SourceObjectDependency extends CrossModelElement {
-   readonly $type: typeof SourceObjectDependencyType;
-   source: Reference<SourceObject>;
-}
-
-export type SourceObjectCondition = JoinCondition;
-
-export const JoinConditionType = 'JoinCondition';
-export interface JoinCondition extends CrossModelElement {
-   readonly $type: typeof JoinConditionType;
-   expression: BinaryExpression;
-}
-
-export const BinaryExpressionType = 'BinaryExpression';
-export interface BinaryExpression extends CrossModelElement {
-   readonly $type: typeof BinaryExpressionType;
-   left: BooleanExpression;
-   op: '!=' | '<' | '<=' | '=' | '>' | '>=';
-   right: BooleanExpression;
-}
-
-export type BooleanExpression = NumberLiteral | SourceObjectAttributeReference | StringLiteral;
-
-export const NumberLiteralType = 'NumberLiteral';
-export interface NumberLiteral extends CrossModelElement {
-   readonly $type: typeof NumberLiteralType;
-   value: number;
-}
-
-export const StringLiteralType = 'StringLiteral';
-export interface StringLiteral extends CrossModelElement {
-   readonly $type: typeof StringLiteralType;
-   value: string;
-}
-
-export const SourceObjectAttributeReferenceType = 'SourceObjectAttributeReference';
-export interface SourceObjectAttributeReference extends CrossModelElement {
-   readonly $type: typeof SourceObjectAttributeReferenceType;
-   value: Reference<SourceObjectAttribute>;
-}
-
-export const TargetObjectType = 'TargetObject';
-export interface TargetObject extends CrossModelElement, WithCustomProperties {
-   readonly $type: typeof TargetObjectType;
-   entity?: Reference<Entity>;
-   mappings: Array<AttributeMapping>;
-}
-
-export const AttributeMappingType = 'AttributeMapping';
-export interface AttributeMapping extends CrossModelElement, WithCustomProperties {
-   readonly $type: typeof AttributeMappingType;
-   attribute?: AttributeMappingTarget;
-   sources: Array<AttributeMappingSource>;
-   expression?: string;
-}
-
-export const AttributeMappingTargetType = 'AttributeMappingTarget';
-export interface AttributeMappingTarget extends CrossModelElement {
-   readonly $type: typeof AttributeMappingTargetType;
-   value?: Reference<Attribute>;
-}
-
-export const TargetObjectAttributeType = 'TargetObjectAttribute';
-export interface TargetObjectAttribute extends Attribute, WithCustomProperties {
-   readonly $type: typeof TargetObjectAttributeType;
-}
-
-export const AttributeMappingSourceType = 'AttributeMappingSource';
-export interface AttributeMappingSource extends CrossModelElement {
-   readonly $type: typeof AttributeMappingSourceType;
-   value: Reference<Attribute>;
-}
-
-export const SourceObjectAttributeType = 'SourceObjectAttribute';
-export interface SourceObjectAttribute extends Attribute, WithCustomProperties {
-   readonly $type: typeof SourceObjectAttributeType;
 }
 
 export interface ClientModelArgs {

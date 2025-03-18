@@ -5,13 +5,10 @@ import {
    CrossModelRoot,
    CrossReferenceContext,
    Element,
-   Entity,
    Junction,
-   Mapping,
    ModelDiagnostic,
    ReferenceableElement,
-   Relation,
-   Relationship
+   Relation
 } from '@crossbreeze/protocol';
 import * as React from 'react';
 import { DispatchAction, ModelReducer } from './ModelReducer';
@@ -75,10 +72,6 @@ export function useReadonly(): boolean {
    return ModelDiagnostic.hasErrors(useDiagnostics());
 }
 
-export function useEntity(): Entity {
-   return useModel().entity!;
-}
-
 export function useElement(): Element {
    return useModel().element!;
 }
@@ -89,12 +82,4 @@ export function useJunction(): Junction {
 
 export function useRelation(): Relation {
    return useModel().relation!;
-}
-
-export function useRelationship(): Relationship {
-   return useModel().relationship!;
-}
-
-export function useMapping(): Mapping {
-   return useModel().mapping!;
 }

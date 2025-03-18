@@ -2,45 +2,22 @@
  * Copyright (c) 2023 CrossBreeze.
  ********************************************************************************/
 
-import { quote } from '@crossbreeze/protocol';
 import { AstNode, GenericAstNode, Grammar, isAstNode, isReference } from 'langium';
 import { collectAst } from 'langium/grammar';
 import { Serializer } from '../model-server/serializer.js';
 import {
-   AttributeMapping,
+   ArchiMateDiagram,
    CrossModelRoot,
-   Entity,
-   EntityAttribute,
-   EntityNode,
-   isAttributeMappingSource,
-   isAttributeMappingTarget,
-   isCustomProperty,
+   Element,
    isElement,
-   isEntityAttribute,
-   isJoinCondition,
    isJunction,
+   isProperty,
    isRelation,
-   isRelationship,
-   isSourceObject,
-   isSourceObjectDependency,
-   JoinCondition,
-   Mapping,
+   Junction,
    reflection,
-   Relationship,
-   RelationshipAttribute,
-   RelationshipEdge,
-   SourceObject,
-   SourceObjectAttribute,
-   StringLiteral,
-   SystemDiagram,
-   TargetObject,
-   TargetObjectAttribute
+   Relation
 } from './generated/ast.js';
 import { isImplicitProperty } from './util/ast-util.js';
-
-const IDENTIFIED_PROPERTIES = ['id'];
-const NAMED_OBJECT_PROPERTIES = [...IDENTIFIED_PROPERTIES, 'name', 'description'];
-const CUSTOM_PROPERTIES = ['customProperties'];
 
 /**
  * Hand-written map of the order of properties for serialization.
@@ -48,33 +25,11 @@ const CUSTOM_PROPERTIES = ['customProperties'];
  * It cannot be derived for interfaces as the interface order does not reflect property order in grammar due to inheritance.
  */
 const PROPERTY_ORDER = new Map<string, string[]>([
-   [Entity, [...NAMED_OBJECT_PROPERTIES, 'superEntities', 'attributes', ...CUSTOM_PROPERTIES]],
-   [EntityAttribute, [...NAMED_OBJECT_PROPERTIES, 'datatype', 'length', 'precision', 'scale', 'identifier', ...CUSTOM_PROPERTIES]],
-   [
-      Relationship,
-      [
-         ...NAMED_OBJECT_PROPERTIES,
-         'parent',
-         'parentRole',
-         'parentCardinality',
-         'child',
-         'childRole',
-         'childCardinality',
-         'attributes',
-         ...CUSTOM_PROPERTIES
-      ]
-   ],
-   [RelationshipAttribute, ['parent', 'child', ...CUSTOM_PROPERTIES]],
-   [SystemDiagram, [...IDENTIFIED_PROPERTIES, 'nodes', 'edges']],
-   [EntityNode, [...IDENTIFIED_PROPERTIES, 'entity', 'x', 'y', 'width', 'height']],
-   [RelationshipEdge, [...IDENTIFIED_PROPERTIES, 'relationship', 'sourceNode', 'targetNode']],
-   [Mapping, [...IDENTIFIED_PROPERTIES, 'sources', 'target', ...CUSTOM_PROPERTIES]],
-   [SourceObject, [...IDENTIFIED_PROPERTIES, 'entity', 'join', 'dependencies', 'conditions', ...CUSTOM_PROPERTIES]],
-   [TargetObject, ['entity', 'mappings', ...CUSTOM_PROPERTIES]],
-   [AttributeMapping, ['attribute', 'sources', 'expression', ...CUSTOM_PROPERTIES]]
+   [Element, ['id', 'name', 'documentation', 'type', 'properties']],
+   [Junction, ['id', 'name', 'documentation', 'properties']],
+   [Relation, ['id', 'name', 'documentation', 'type', 'source', 'target', 'properties']],
+   [ArchiMateDiagram, ['id', 'name', 'nodes', 'edges', 'properties']]
 ]);
-PROPERTY_ORDER.set(SourceObjectAttribute, PROPERTY_ORDER.get(EntityAttribute) ?? []);
-PROPERTY_ORDER.set(TargetObjectAttribute, PROPERTY_ORDER.get(EntityAttribute) ?? []);
 
 /**
  * Hand-written AST serializer as there is currently no out-of-the box serializer from Langium, but it is on the roadmap.
@@ -111,11 +66,7 @@ export class CrossModelSerializer implements Serializer<CrossModelRoot> {
       }
       if (
          key === 'id' ||
-         (key === 'superEntities' && Array.isArray(parent)) ||
-         propertyOf(parent, key, isRelationship, 'parentCardinality') ||
-         propertyOf(parent, key, isRelationship, 'childCardinality') ||
-         propertyOf(parent, key, isCustomProperty, 'name') ||
-         propertyOf(parent, key, isSourceObject, 'join') ||
+         propertyOf(parent, key, isProperty, 'name') ||
          (!Array.isArray(value) && this.isValidReference(parent, key, value)) ||
          (isElement(parent) && key === 'type') ||
          (isRelation(parent) && key === 'type') ||
@@ -123,15 +74,6 @@ export class CrossModelSerializer implements Serializer<CrossModelRoot> {
       ) {
          // values that we do not want to quote because they are ids or references
          return value;
-      }
-      if (isAttributeMappingSource(value) || isAttributeMappingTarget(value)) {
-         return value.value?.$refText ?? value.value;
-      }
-      if (isSourceObjectDependency(value)) {
-         return value.source?.$refText ?? value.source;
-      }
-      if (isJoinCondition(value)) {
-         return this.serializeJoinCondition(value);
       }
       if (isAstNode(value)) {
          let isFirstNested = isAstNode(parent);
@@ -146,18 +88,8 @@ export class CrossModelSerializer implements Serializer<CrossModelRoot> {
                   // skip empty arrays
                   return undefined;
                }
-               if (isEntityAttribute(value) && prop === 'identifier' && propValue === false) {
-                  // special: skip identifier property if it is false
-                  return undefined;
-               }
                // arrays and objects start on a new line -- skip some objects that we do not actually serialize in object structure
-               const onNewLine =
-                  Array.isArray(propValue) ||
-                  (isAstNode(propValue) &&
-                     !isAttributeMappingSource(propValue) &&
-                     !isAttributeMappingTarget(propValue) &&
-                     !isSourceObjectDependency(propValue) &&
-                     !isJoinCondition(propValue));
+               const onNewLine = Array.isArray(propValue) || isAstNode(propValue);
                const serializedPropValue = this.toYaml(value, prop, propValue, onNewLine ? indentationLevel + 1 : 0);
                if (!serializedPropValue) {
                   return undefined;
@@ -231,16 +163,6 @@ export class CrossModelSerializer implements Serializer<CrossModelRoot> {
            : kind === 'optional'
              ? allProperties.filter(prop => prop.optional).map(prop => prop.name)
              : allProperties.filter(prop => !prop.optional).map(prop => prop.name);
-   }
-
-   private serializeJoinCondition(obj: JoinCondition): any {
-      const text = obj.$cstNode?.text?.trim();
-      if (text) {
-         return text;
-      }
-      const left = obj.expression.left.$type === StringLiteral ? quote(obj.expression.left.value) : obj.expression.left.value;
-      const right = obj.expression.right.$type === StringLiteral ? quote(obj.expression.right.value) : obj.expression.right.value;
-      return [left, obj.expression.op, right].join(' ');
    }
 }
 

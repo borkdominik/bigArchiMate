@@ -32,7 +32,7 @@ export function getSelectionDataFor(selection: GModelElement[]): CrossModelSelec
 }
 
 export function getElementInfo(element: GModelElement): GModelElementInfo {
-   return { type: element.type, reference: getCrossReference(element), renderProps: getRenderProps(element) };
+   return { type: element.type, reference: getCrossReference(element) };
 }
 
 export function getCrossReference(element: GModelElement): CrossReference | undefined {
@@ -49,8 +49,4 @@ export function getCrossReference(element: GModelElement): CrossReference | unde
       }
    }
    return undefined;
-}
-
-export function getRenderProps(element: GModelElement): Partial<RenderProps> {
-   return hasArgs(element) ? RenderProps.read(element.args) : {};
 }

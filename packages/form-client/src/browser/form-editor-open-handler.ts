@@ -31,7 +31,7 @@ export class FormEditorOpenHandler
    }
 
    canHandle(uri: URI): number {
-      return uri.path.ext === '.cm' || uri.path.ext === '.arch' ? 1 : -1;
+      return uri.path.ext === '.arch' ? 1 : -1;
    }
 }
 

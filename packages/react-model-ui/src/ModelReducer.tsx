@@ -3,12 +3,8 @@
  ********************************************************************************/
 import { CrossModelRoot } from '@crossbreeze/protocol';
 import { ElementDispatchAction, ElementModelReducer, isElementDispatchAction } from './ElementModelReducer';
-import { EntityDispatchAction, EntityModelReducer, isEntityDispatchAction } from './EntityModelReducer';
 import { JunctionDispatchAction, JunctionModelReducer, isJunctionDispatchAction } from './JunctionModelReducer';
-import { MappingSourcesDispatchAction, MappingSourcesModelReducer, isMappingSourcesDispatchAction } from './MappingSourcesReducer';
-import { MappingTargetDispatchAction, MappingTargetModelReducer, isMappingTargetDispatchAction } from './MappingTargetReducer';
 import { RelationDispatchAction, RelationModelReducer, isRelationDispatchAction } from './RelationModelReducer';
-import { RelationshipDispatchAction, RelationshipModelReducer, isRelationshipDispatchAction } from './RelationshipModelReducer';
 
 export interface ModelAction {
    type: string;
@@ -19,15 +15,7 @@ export interface ModelUpdateAction extends ModelAction {
    model: CrossModelRoot;
 }
 
-export type DispatchAction =
-   | ModelUpdateAction
-   | EntityDispatchAction
-   | ElementDispatchAction
-   | JunctionDispatchAction
-   | RelationDispatchAction
-   | RelationshipDispatchAction
-   | MappingTargetDispatchAction
-   | MappingSourcesDispatchAction;
+export type DispatchAction = ModelUpdateAction | ElementDispatchAction | JunctionDispatchAction | RelationDispatchAction;
 
 export type ModelStateReason = DispatchAction['type'] | 'model:initial';
 
@@ -45,18 +33,6 @@ export function ModelReducer(state: ModelState, action: DispatchAction): ModelSt
    if (action.type === 'model:update') {
       state.model = action.model;
       return state;
-   }
-   if (isEntityDispatchAction(action)) {
-      return EntityModelReducer(state, action);
-   }
-   if (isRelationshipDispatchAction(action)) {
-      return RelationshipModelReducer(state, action);
-   }
-   if (isMappingTargetDispatchAction(action)) {
-      return MappingTargetModelReducer(state, action);
-   }
-   if (isMappingSourcesDispatchAction(action)) {
-      return MappingSourcesModelReducer(state, action);
    }
    if (isElementDispatchAction(action)) {
       return ElementModelReducer(state, action);

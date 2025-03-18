@@ -54,9 +54,6 @@ function createServerOptions(context: vscode.ExtensionContext): ServerOptions {
 }
 
 function createClientOptions(context: vscode.ExtensionContext): LanguageClientOptions {
-   const crossModelWatcher = vscode.workspace.createFileSystemWatcher('**/*.cm');
-   context.subscriptions.push(crossModelWatcher);
-
    const archiMateModelWatcher = vscode.workspace.createFileSystemWatcher('**/*.arch');
    context.subscriptions.push(archiMateModelWatcher);
 
@@ -77,7 +74,7 @@ function createClientOptions(context: vscode.ExtensionContext): LanguageClientOp
       ],
       synchronize: {
          // Notify the server about file changes to files contained in the workspace
-         fileEvents: [crossModelWatcher, packageWatcher, directoryWatcher]
+         fileEvents: [archiMateModelWatcher, packageWatcher, directoryWatcher]
       }
    };
 }

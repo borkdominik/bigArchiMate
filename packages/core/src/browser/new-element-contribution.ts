@@ -2,17 +2,15 @@
  * Copyright (c) 2023 CrossBreeze.
  ********************************************************************************/
 import { ModelService } from '@crossbreeze/model-service/lib/common';
-import { MappingType, ModelFileExtensions, ModelStructure, TargetObjectType, quote, toId } from '@crossbreeze/protocol';
+import { ModelFileExtensions, ModelStructure, quote, toId } from '@crossbreeze/protocol';
 import { Command, CommandContribution, CommandRegistry, MaybePromise, MenuContribution, MenuModelRegistry, URI, nls } from '@theia/core';
 import { CommonMenus, DialogError, open } from '@theia/core/lib/browser';
 import { TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
 import { inject, injectable } from '@theia/core/shared/inversify';
-import { EditorContextMenu } from '@theia/editor/lib/browser';
 import { FileStat } from '@theia/filesystem/lib/common/files';
 import { FileNavigatorContribution, NavigatorContextMenu } from '@theia/navigator/lib/browser/navigator-contribution';
 import { WorkspaceCommandContribution } from '@theia/workspace/lib/browser/workspace-commands';
 import { WorkspaceInputDialog } from '@theia/workspace/lib/browser/workspace-input-dialog';
-import * as yaml from 'yaml';
 
 const NEW_ELEMENT_NAV_MENU = [...NavigatorContextMenu.NAVIGATION, '0_new'];
 const NEW_ELEMENT_MAIN_MENU = [...CommonMenus.FILE, '0_new'];
@@ -22,28 +20,6 @@ interface NewElementTemplate extends Command {
    fileExtension: string;
    content: string | ((name: string) => string);
 }
-
-const INITIAL_ENTITY_CONTENT = `entity:
-    id: \${id}
-    name: \${name}`;
-
-const INITIAL_RELATIONSHIP_CONTENT = `relationship:
-    id: \${id}
-    parent: 
-    child: 
-    type: "1:1"`;
-
-const INITIAL_DIAGRAM_CONTENT = `systemDiagram:
-    id: \${id}
-    name: \${name}`;
-
-const INITIAL_MAPPING_CONTENT = `mapping:
-   id: \${id}
-   sources:
-      - id: Source
-   target:
-      entity: 
-      mappings: `;
 
 const INITIAL_ELEMENT_CONTENT = `element:
    id: \${id}
@@ -63,38 +39,6 @@ const INITIAL_ARCHIMATE_DIAGRAM_CONTENT = `archiMateDiagram:
 const TEMPLATE_CATEGORY = 'New Element';
 
 const NEW_ELEMENT_TEMPLATES: NewElementTemplate[] = [
-   {
-      id: 'crossbreeze.new.entity',
-      label: 'Entity',
-      fileExtension: ModelFileExtensions.Entity,
-      category: TEMPLATE_CATEGORY,
-      iconClass: ModelStructure.Entity.ICON_CLASS,
-      content: name => INITIAL_ENTITY_CONTENT.replace(/\$\{name\}/gi, quote(name)).replace(/\$\{id\}/gi, toId(name))
-   },
-   {
-      id: 'crossbreeze.new.relationship',
-      label: 'Relationship',
-      fileExtension: ModelFileExtensions.Relationship,
-      category: TEMPLATE_CATEGORY,
-      iconClass: ModelStructure.Relationship.ICON_CLASS,
-      content: name => INITIAL_RELATIONSHIP_CONTENT.replace(/\$\{name\}/gi, quote(name)).replace(/\$\{id\}/gi, toId(name))
-   },
-   {
-      id: 'crossbreeze.new.system-diagram',
-      label: 'SystemDiagram',
-      fileExtension: ModelFileExtensions.SystemDiagram,
-      category: TEMPLATE_CATEGORY,
-      iconClass: ModelStructure.SystemDiagram.ICON_CLASS,
-      content: name => INITIAL_DIAGRAM_CONTENT.replace(/\$\{name\}/gi, quote(name)).replace(/\$\{id\}/gi, toId(name))
-   },
-   {
-      id: 'crossbreeze.new.mapping',
-      label: 'Mapping',
-      fileExtension: ModelFileExtensions.Mapping,
-      category: TEMPLATE_CATEGORY,
-      iconClass: ModelStructure.Mapping.ICON_CLASS,
-      content: name => INITIAL_MAPPING_CONTENT.replace(/\$\{name\}/gi, quote(name)).replace(/\$\{id\}/gi, toId(name))
-   },
    {
       id: 'crossbreeze.new.element',
       label: 'Element',
@@ -123,11 +67,6 @@ const NEW_ELEMENT_TEMPLATES: NewElementTemplate[] = [
 
 const ID_REGEX = /^[_a-zA-Z@][\w_\-@/#]*$/; /* taken from the langium file, in newer Langium versions constants may be generated. */
 
-const DERIVE_MAPPING_FROM_ENTITY: Command = {
-   id: 'crossmodel.mapping',
-   label: 'Derive Mapping'
-};
-
 @injectable()
 export class CrossModelWorkspaceContribution extends WorkspaceCommandContribution implements MenuContribution, CommandContribution {
    @inject(ModelService) modelService: ModelService;
@@ -140,15 +79,6 @@ export class CrossModelWorkspaceContribution extends WorkspaceCommandContributio
             this.newWorkspaceRootUriAwareCommandHandler({ execute: uri => this.createNewElementFile(uri, template) })
          );
       }
-
-      commands.registerCommand(
-         DERIVE_MAPPING_FROM_ENTITY,
-         this.newWorkspaceRootUriAwareCommandHandler({
-            execute: uri => this.deriveNewMappingFile(uri),
-            isEnabled: uri => ModelFileExtensions.isEntityFile(uri.path.base),
-            isVisible: uri => ModelFileExtensions.isEntityFile(uri.path.base)
-         })
-      );
    }
 
    registerMenus(registry: MenuModelRegistry): void {
@@ -162,11 +92,6 @@ export class CrossModelWorkspaceContribution extends WorkspaceCommandContributio
          });
       }
 
-      registry.registerMenuAction(NavigatorContextMenu.NAVIGATION, {
-         commandId: DERIVE_MAPPING_FROM_ENTITY.id,
-         label: DERIVE_MAPPING_FROM_ENTITY.label + '...'
-      });
-
       // main menu bar
       registry.registerSubmenu(NEW_ELEMENT_MAIN_MENU, TEMPLATE_CATEGORY);
       for (const [id, template] of NEW_ELEMENT_TEMPLATES.entries()) {
@@ -175,65 +100,6 @@ export class CrossModelWorkspaceContribution extends WorkspaceCommandContributio
             label: template.label + '...',
             order: id.toString()
          });
-      }
-
-      // editor context menu
-      registry.registerMenuAction(EditorContextMenu.COMMANDS, { commandId: DERIVE_MAPPING_FROM_ENTITY.id });
-   }
-
-   protected async deriveNewMappingFile(entityUri: URI): Promise<void> {
-      const parent = await this.getDirectory(entityUri);
-      if (parent) {
-         const parentUri = parent.resource;
-         const dialog = new WorkspaceInputDialog(
-            {
-               title: 'New Mapping...',
-               parentUri: parentUri,
-               initialValue: 'NewMapping',
-               placeholder: 'NewMapping',
-               validate: newName => this.validateElementFileName(newName, parent, ModelFileExtensions.Mapping)
-            },
-            this.labelProvider
-         );
-         const selectedSource = await dialog.open();
-         if (selectedSource) {
-            const fileName = this.applyFileExtension(selectedSource, ModelFileExtensions.Mapping);
-            const baseFileName = this.removeFileExtension(selectedSource, ModelFileExtensions.Mapping);
-            const mappingUri = parentUri.resolve(fileName);
-
-            const elements = await this.modelService.findReferenceableElements({
-               container: { uri: mappingUri.path.fsPath(), type: MappingType },
-               syntheticElements: [{ property: 'target', type: TargetObjectType }],
-               property: 'entity'
-            });
-            const entityElement = elements.find(element => element.uri === entityUri.toString());
-            if (!entityElement) {
-               this.messageService.error('Could not detect target element at ' + entityUri.path.fsPath());
-               return;
-            }
-
-            const document = await this.modelService.request(entityElement.uri);
-            const entity = document?.root.entity;
-            if (!entity) {
-               this.messageService.error('Could not resolve entity element at ' + entityUri.path.fsPath());
-               return;
-            }
-            const mappingName = baseFileName.charAt(0).toUpperCase() + baseFileName.substring(1);
-            const mapping = {
-               mapping: {
-                  id: mappingName,
-                  target: {
-                     entity: entityElement.label,
-                     mappings: [] as { attribute: string }[]
-                  }
-               }
-            };
-            entity.attributes.forEach(attribute => mapping.mapping.target.mappings.push({ attribute: attribute.id }));
-            const content = yaml.stringify(mapping, { indent: 4 });
-            await this.fileService.create(mappingUri, content);
-            this.fireCreateNewFile({ parent: parentUri, uri: mappingUri });
-            open(this.openerService, mappingUri);
-         }
       }
    }
 

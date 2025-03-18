@@ -4,10 +4,6 @@
 
 const ModelFileTypeValues = {
    Generic: 'Generic',
-   Entity: 'Entity',
-   Relationship: 'Relationship',
-   Mapping: 'Mapping',
-   SystemDiagram: 'SystemDiagram',
    Element: 'Element',
    Junctin: 'Junction',
    Relation: 'Relation',
@@ -18,14 +14,6 @@ export const ModelFileType = {
    ...ModelFileTypeValues,
    getIconClass: (type: ModelFileType) => {
       switch (type) {
-         case 'Entity':
-            return ModelStructure.Entity.ICON_CLASS;
-         case 'Relationship':
-            return ModelStructure.Relationship.ICON_CLASS;
-         case 'SystemDiagram':
-            return ModelStructure.SystemDiagram.ICON_CLASS;
-         case 'Mapping':
-            return ModelStructure.Mapping.ICON_CLASS;
          case 'Element':
             return ModelStructure.Element.ICON_CLASS;
          case 'Junction':
@@ -40,16 +28,8 @@ export const ModelFileType = {
    },
    getFileExtension(type: ModelFileType): string | undefined {
       switch (type) {
-         case 'Entity':
-            return ModelFileExtensions.Entity;
          case 'Generic':
             return ModelFileExtensions.Generic;
-         case 'Mapping':
-            return ModelFileExtensions.Mapping;
-         case 'Relationship':
-            return ModelFileExtensions.Relationship;
-         case 'SystemDiagram':
-            return ModelFileExtensions.SystemDiagram;
          case 'Element':
             return ModelFileExtensions.Element;
          case 'Junction':
@@ -64,36 +44,14 @@ export const ModelFileType = {
 export type ModelFileType = (typeof ModelFileTypeValues)[keyof typeof ModelFileTypeValues];
 
 export const ModelFileExtensions = {
-   Generic: '.cm',
-   Entity: '.entity.cm',
-   Relationship: '.relationship.cm',
-   Mapping: '.mapping.cm',
-   SystemDiagram: '.system-diagram.cm',
+   Generic: '.arch',
    Element: '.element.arch',
-   Junction: 'junction.arch',
+   Junction: '.junction.arch',
    Relation: '.relation.arch',
    ArchiMateDiagram: '.view.arch',
-   /* @deprecated Use SystemDiagram instead */
-   Diagram: '.diagram.cm',
 
    isModelFile(uri: string): boolean {
       return uri.endsWith(this.Generic);
-   },
-
-   isEntityFile(uri: string): boolean {
-      return uri.endsWith(this.Entity);
-   },
-
-   isRelationshipFile(uri: string): boolean {
-      return uri.endsWith(this.Relationship);
-   },
-
-   isMappingFile(uri: string): boolean {
-      return uri.endsWith(this.Mapping);
-   },
-
-   isSystemDiagramFile(uri: string): boolean {
-      return uri.endsWith(this.SystemDiagram) || uri.endsWith(this.Diagram);
    },
 
    isElementFile(uri: string): boolean {
@@ -114,21 +72,6 @@ export const ModelFileExtensions = {
 
    getName(uri: string): string {
       // since we have file extensions with two '.', we cannot use the default implementation that only works for one '.'
-      if (uri.endsWith(this.Entity)) {
-         return uri.substring(0, uri.length - this.Entity.length);
-      }
-      if (uri.endsWith(this.Relationship)) {
-         return uri.substring(0, uri.length - this.Relationship.length);
-      }
-      if (uri.endsWith(this.Mapping)) {
-         return uri.substring(0, uri.length - this.Mapping.length);
-      }
-      if (uri.endsWith(this.SystemDiagram)) {
-         return uri.substring(0, uri.length - this.SystemDiagram.length);
-      }
-      if (uri.endsWith(this.Diagram)) {
-         return uri.substring(0, uri.length - this.Diagram.length);
-      }
       if (uri.endsWith(this.Element)) {
          return uri.substring(0, uri.length - this.Element.length);
       }
@@ -144,18 +87,6 @@ export const ModelFileExtensions = {
    },
 
    getFileType(uri: string): ModelFileType | undefined {
-      if (this.isMappingFile(uri)) {
-         return 'Mapping';
-      }
-      if (this.isSystemDiagramFile(uri)) {
-         return 'SystemDiagram';
-      }
-      if (this.isRelationshipFile(uri)) {
-         return 'Relationship';
-      }
-      if (this.isEntityFile(uri)) {
-         return 'Entity';
-      }
       if (this.isElementFile(uri)) {
          return 'Element';
       }
@@ -185,14 +116,6 @@ export const ModelFileExtensions = {
          return undefined;
       }
       switch (fileType) {
-         case 'Entity':
-            return ModelStructure.Entity.ICON_CLASS;
-         case 'Relationship':
-            return ModelStructure.Relationship.ICON_CLASS;
-         case 'SystemDiagram':
-            return ModelStructure.SystemDiagram.ICON_CLASS;
-         case 'Mapping':
-            return ModelStructure.Mapping.ICON_CLASS;
          case 'Element':
             return ModelStructure.Element.ICON_CLASS;
          case 'Junction':
@@ -207,18 +130,6 @@ export const ModelFileExtensions = {
    },
 
    detectFileType(content: string): ModelFileType | undefined {
-      if (content.startsWith('entity')) {
-         return 'Entity';
-      }
-      if (content.startsWith('relationship')) {
-         return 'Relationship';
-      }
-      if (content.startsWith('systemDiagram') || content.startsWith('diagram')) {
-         return 'SystemDiagram';
-      }
-      if (content.startsWith('mapping')) {
-         return 'Mapping';
-      }
       if (content.startsWith('element')) {
          return 'Element';
       }
@@ -241,34 +152,6 @@ export const ModelFileExtensions = {
 } as const;
 
 export const ModelStructure = {
-   System: {
-      ICON_CLASS: 'codicon codicon-globe',
-      ICON: 'globe'
-   },
-   Entity: {
-      FOLDER: 'entities',
-      ICON_CLASS: 'codicon codicon-git-commit',
-      ICON: 'git-commit'
-   },
-
-   Relationship: {
-      FOLDER: 'relationships',
-      ICON_CLASS: 'codicon codicon-git-compare',
-      ICON: 'git-compare'
-   },
-
-   SystemDiagram: {
-      FOLDER: 'diagrams',
-      ICON_CLASS: 'codicon codicon-type-hierarchy-sub',
-      ICON: 'type-hierarchy-sub'
-   },
-
-   Mapping: {
-      FOLDER: 'mappings',
-      ICON_CLASS: 'codicon codicon-group-by-ref-type',
-      ICON: 'group-by-ref-type'
-   },
-
    ArchiMateModel: {
       ICON_CLASS: 'codicon codicon-globe',
       ICON: 'globe'

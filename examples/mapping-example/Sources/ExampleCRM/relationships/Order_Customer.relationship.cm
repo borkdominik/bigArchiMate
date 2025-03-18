@@ -1,8 +1,0 @@
-relationship:
-    id: Order_Customer
-    name: "Order - Customer"
-    parent: Customer
-    child: Order
-    attributes:
-      - parent: Customer.Id
-        child: Order.CustomerId

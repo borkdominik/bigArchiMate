@@ -4,8 +4,8 @@
 
 import { CrossModelWidget, CrossModelWidgetOptions } from '@crossbreeze/core/lib/browser';
 import { FormEditorOpenHandler, FormEditorWidget } from '@crossbreeze/form-client/lib/browser';
-import { ArchiMateDiagramManager, MappingDiagramManager, SystemDiagramManager } from '@crossbreeze/glsp-client/lib/browser/';
-import { ArchiMateDiagramLanguage, MappingDiagramLanguage, SystemDiagramLanguage } from '@crossbreeze/glsp-client/lib/common';
+import { ArchiMateDiagramManager } from '@crossbreeze/glsp-client/lib/browser/';
+import { ArchiMateDiagramLanguage } from '@crossbreeze/glsp-client/lib/common';
 import { codiconCSSString, ModelFileType } from '@crossbreeze/protocol';
 import { FocusStateChangedAction, SetDirtyStateAction, toTypeGuard } from '@eclipse-glsp/client';
 import { GLSPDiagramWidget, GLSPDiagramWidgetContainer, GLSPDiagramWidgetOptions, GLSPSaveable } from '@eclipse-glsp/theia-integration';
@@ -208,14 +208,6 @@ export class CompositeEditor extends BaseWidget implements SaveableSource, Navig
 
    protected async createPrimaryWidget(options: CompositeWidgetOptions): Promise<Widget> {
       switch (this.fileType) {
-         case 'Entity':
-            return this.createFormWidget(options);
-         case 'Relationship':
-            return this.createFormWidget(options);
-         case 'SystemDiagram':
-            return this.createSystemDiagramWidget();
-         case 'Mapping':
-            return this.createMappingDiagramWidget();
          case 'Element':
             return this.createFormWidget(options);
          case 'Junction':
@@ -241,20 +233,6 @@ export class CompositeEditor extends BaseWidget implements SaveableSource, Navig
       formEditor.title.iconClass = codiconCSSString('symbol-keyword');
       formEditor.title.closable = false;
       return formEditor;
-   }
-
-   protected async createSystemDiagramWidget(): Promise<Widget> {
-      const diagramOptions = this.createDiagramWidgetOptions(SystemDiagramLanguage, 'System Diagram');
-      const widget = await this.widgetManager.getOrCreateWidget<GLSPDiagramWidget>(SystemDiagramManager.ID, diagramOptions);
-      widget.title.closable = false;
-      return widget;
-   }
-
-   protected async createMappingDiagramWidget(): Promise<Widget> {
-      const diagramOptions = this.createDiagramWidgetOptions(MappingDiagramLanguage, 'Mapping Diagram');
-      const widget = await this.widgetManager.getOrCreateWidget<GLSPDiagramWidget>(MappingDiagramManager.ID, diagramOptions);
-      widget.title.closable = false;
-      return widget;
    }
 
    protected async createArchiMateDiagramWidget(): Promise<Widget> {

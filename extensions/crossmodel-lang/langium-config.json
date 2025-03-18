@@ -4,7 +4,7 @@
     {
       "id": "cross-model",
       "grammar": "src/language-server/grammar/cross-model.langium",
-      "fileExtensions": [".cm", ".arch"],
+      "fileExtensions": [".arch"],
       "textMate": {
         "out": "syntaxes/cross-model.tmLanguage.json"
       }
