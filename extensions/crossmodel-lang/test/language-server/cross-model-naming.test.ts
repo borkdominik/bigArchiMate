@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
 import { describe, expect, test } from '@jest/globals';
 import { EntityNode } from '../../src/language-server/generated/ast.js';
 import { createCrossModelTestServices, parseSystemDiagram } from './test-utils/utils.js';

@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
 import { ModelFileExtensions } from '@crossbreeze/protocol';
 import { AstNode, UriUtils, ValidationAcceptor, ValidationChecks } from 'langium';
 import { Diagnostic } from 'vscode-languageserver-protocol';

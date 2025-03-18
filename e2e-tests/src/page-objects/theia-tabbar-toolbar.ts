@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
 import { TheiaToolbarItem, TheiaView } from '@theia/playwright';
 import { TheiaViewObject } from './theia-view-object';
 

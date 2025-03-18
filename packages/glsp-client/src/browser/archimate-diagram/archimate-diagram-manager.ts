@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
 import { codiconCSSString } from '@eclipse-glsp/client';
 import { GLSPDiagramManager } from '@eclipse-glsp/theia-integration';
 import { OpenWithHandler } from '@theia/core/lib/browser';

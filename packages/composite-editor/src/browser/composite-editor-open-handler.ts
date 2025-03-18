@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
 import { ModelFileExtensions, ModelFileType } from '@crossbreeze/protocol';
 import { RecursivePartial, URI } from '@theia/core';
 import {

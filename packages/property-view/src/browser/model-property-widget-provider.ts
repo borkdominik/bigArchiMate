@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
-
 import { GlspSelection } from '@eclipse-glsp/theia-integration';
 import { inject, injectable } from '@theia/core/shared/inversify';
 import { DefaultPropertyViewWidgetProvider } from '@theia/property-view/lib/browser/property-view-widget-provider';

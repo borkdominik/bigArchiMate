@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
 import { GModelElement, GModelIndex } from '@eclipse-glsp/server';
 import { inject, injectable } from 'inversify';
 import { AstNode, AstUtils } from 'langium';

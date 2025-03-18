@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
 import { GLSPBaseCommandPalette, InteractablePosition, PModelElement, PModelElementConstructor } from '@eclipse-glsp/glsp-playwright';
 import { OSUtil, normalizeId, urlEncodePath } from '@theia/playwright';
 import { join } from 'path';

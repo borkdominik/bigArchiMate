@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
 import { GLSP_PORT_COMMAND, MODELSERVER_PORT_COMMAND } from '@crossbreeze/protocol';
 import * as path from 'path';
 import * as vscode from 'vscode';

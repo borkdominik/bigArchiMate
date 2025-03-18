@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
 import { CrossModelWidget, CrossModelWidgetOptions } from '@crossbreeze/core/lib/browser';
 import { FormEditorOpenHandler, FormEditorWidget } from '@crossbreeze/form-client/lib/browser';
 import { ArchiMateDiagramManager } from '@crossbreeze/glsp-client/lib/browser/';

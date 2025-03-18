@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
 import { ContextMenuIntegration, Integration, IntegrationArgs, TheiaIntegrationOptions } from '@eclipse-glsp/glsp-playwright';
 import { Locator, Page } from '@playwright/test';
 import { TheiaAppFactory, TheiaAppLoader } from '@theia/playwright';

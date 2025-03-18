@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
-
 import { AstNode } from 'langium';
 
 export interface Serializer<T extends AstNode> {

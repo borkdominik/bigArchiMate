@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
 import { codiconCSSString } from '@crossbreeze/protocol';
 import React = require('react');
 

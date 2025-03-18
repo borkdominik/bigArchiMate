@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
 import { OSUtil, TheiaDialog, USER_KEY_TYPING_DELAY } from '@theia/playwright';
 
 export class TheiaSingleInputDialog extends TheiaDialog {

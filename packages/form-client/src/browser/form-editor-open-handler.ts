@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
-
 import { nls } from '@theia/core';
 import { FrontendApplicationContribution, NavigatableWidgetOpenHandler, OpenWithHandler, OpenWithService } from '@theia/core/lib/browser';
 import URI from '@theia/core/lib/common/uri';

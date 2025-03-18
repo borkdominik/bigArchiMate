@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
 import { defined } from '@eclipse-glsp/glsp-playwright';
 import { Locator } from '@playwright/test';
 import { TheiaPageObject } from '@theia/playwright';

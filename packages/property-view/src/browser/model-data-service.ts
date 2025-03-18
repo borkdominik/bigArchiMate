@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
-
 import { CrossModelSelectionData, GModelElementInfo } from '@crossbreeze/glsp-client/lib/browser/crossmodel-selection-data-service';
 import { ModelService } from '@crossbreeze/model-service/lib/common';
 import { RenderProps } from '@crossbreeze/protocol';

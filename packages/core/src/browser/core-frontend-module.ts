@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
 import { MenuContribution } from '@theia/core';
 import { LabelProviderContribution } from '@theia/core/lib/browser';
 import { ContainerModule } from '@theia/core/shared/inversify';

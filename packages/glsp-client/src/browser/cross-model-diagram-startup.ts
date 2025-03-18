@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
 import { GridManager, IDiagramStartup, MaybePromise } from '@eclipse-glsp/client';
 import { inject, injectable, optional } from '@theia/core/shared/inversify';
 

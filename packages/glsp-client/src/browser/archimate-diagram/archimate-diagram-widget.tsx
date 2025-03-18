@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
-
 import { getAbsolutePosition } from '@eclipse-glsp/client';
 import { GLSPDiagramWidget } from '@eclipse-glsp/theia-integration';
 import { Message } from '@theia/core/lib/browser';

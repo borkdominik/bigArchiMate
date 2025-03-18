@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
 import { ApplicationShell, FrontendApplication, WidgetManager } from '@theia/core/lib/browser';
 import { inject } from '@theia/core/shared/inversify';
 import { PROBLEMS_WIDGET_ID } from '@theia/markers/lib/browser/problem/problem-widget';

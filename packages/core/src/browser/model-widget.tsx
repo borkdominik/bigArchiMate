@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
-
 import { ModelService, ModelServiceClient } from '@crossbreeze/model-service/lib/common';
 import { CrossModelDocument, CrossModelRoot, ModelDiagnostic, ModelUpdatedEvent, RenderProps } from '@crossbreeze/protocol';
 import {

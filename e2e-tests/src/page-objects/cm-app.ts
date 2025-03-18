@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
 import { IntegrationArgs, TheiaGLSPApp } from '@eclipse-glsp/glsp-playwright';
 import { Page } from '@playwright/test';
 import { TheiaEditor, TheiaNotificationIndicator, TheiaNotificationOverlay, TheiaWorkspace } from '@theia/playwright';

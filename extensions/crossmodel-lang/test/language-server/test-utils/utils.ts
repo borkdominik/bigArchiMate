@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
-
 import { EmptyFileSystem, FileSystemNode, FileSystemProvider, LangiumDocument, URI } from 'langium';
 import { DefaultSharedModuleContext, LangiumServices } from 'langium/lsp';
 import { ParseHelperOptions, parseDocument as langiumParseDocument } from 'langium/test';

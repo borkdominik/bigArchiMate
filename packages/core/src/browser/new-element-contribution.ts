@@ -1,6 +1,3 @@
-/** ******************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
 import { ModelService } from '@crossbreeze/model-service/lib/common';
 import { ModelFileExtensions, ModelStructure, quote, toId } from '@crossbreeze/protocol';
 import { Command, CommandContribution, CommandRegistry, MaybePromise, MenuContribution, MenuModelRegistry, URI, nls } from '@theia/core';

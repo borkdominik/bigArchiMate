@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
 import { expect } from '@eclipse-glsp/glsp-playwright';
 import { test } from '@playwright/test';
 import { CMApp } from '../../../page-objects/cm-app';

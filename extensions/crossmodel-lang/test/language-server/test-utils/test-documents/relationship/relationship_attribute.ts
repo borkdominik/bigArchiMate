@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
 /** Valid relationship with attribute */
 export const relationship_with_attribute = `relationship: 
     id: Order_CustomerWithAttribute

@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
 import { Message } from '@theia/core/lib/browser';
 import { Container, injectable, interfaces } from '@theia/core/shared/inversify';
 import {

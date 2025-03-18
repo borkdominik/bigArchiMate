@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
-
 import { Disposable, DocumentState, LangiumDocument, MultiMap } from 'langium';
 // eslint-disable-next-line import/no-unresolved
 import { SystemInfo, SystemUpdatedEvent, SystemUpdateListener } from '@crossbreeze/protocol';

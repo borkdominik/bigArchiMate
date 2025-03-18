@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
 import 'reflect-metadata';
 export * from './archimate-metadata';
 export * from './expression';

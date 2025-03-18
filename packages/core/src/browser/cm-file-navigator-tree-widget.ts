@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
 import { SelectableTreeNode } from '@theia/core/lib/browser';
 import { injectable, interfaces } from '@theia/core/shared/inversify';
 import { FileNavigatorWidget } from '@theia/navigator/lib/browser';

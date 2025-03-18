@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
 import { AstNode, AstNodeDescription, DefaultIndexManager, URI } from 'langium';
 import { CrossModelSharedServices } from './cross-model-module.js';
 import { SemanticRoot, findSemanticRoot } from './util/ast-util.js';

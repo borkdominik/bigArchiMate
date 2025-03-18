@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
 import { EdgeCreationTool, FeatureModule, edgeCreationToolModule, viewportModule } from '@eclipse-glsp/client';
 import { ArchiMateEdgeCreationTool } from './archimate-edge-creation-tool';
 

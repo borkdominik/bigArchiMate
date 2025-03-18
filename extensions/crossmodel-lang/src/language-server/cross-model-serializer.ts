@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
-
 import { AstNode, GenericAstNode, Grammar, isAstNode, isReference } from 'langium';
 import { collectAst } from 'langium/grammar';
 import { Serializer } from '../model-server/serializer.js';

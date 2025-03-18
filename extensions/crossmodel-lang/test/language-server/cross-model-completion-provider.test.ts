@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
 import { expandToString } from 'langium/generate';
 import { expectCompletion } from 'langium/test';
 import { address } from './test-utils/test-documents/entity/address.js';

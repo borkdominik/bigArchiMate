@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
 import fs from 'fs';
 import { CompositeGeneratorNode, NL, toString } from 'langium/generate';
 import path from 'path';

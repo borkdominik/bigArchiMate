@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
 export const EXPRESSION_REGEX = /{{(.*?)}}/g;
 
 export function findAllExpressions(text?: string): RegExpMatchArray[] {

@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
-
 import { describe, expect, test } from '@jest/globals';
 import { isReference } from 'langium';
 

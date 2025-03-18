@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
-
 import { TextDocument } from 'vscode-languageserver-textdocument';
 import { ModelService } from './model-service.js';
 import { OpenTextDocumentManager } from './open-text-document-manager.js';

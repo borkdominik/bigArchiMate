@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
-
 import { CrossModelRegex } from './model-service/protocol';
 
 export function quote(text: string, quoteChar = '"', replaceChar = "'"): string {

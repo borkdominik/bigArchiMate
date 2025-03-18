@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
 import * as rpc from 'vscode-jsonrpc/node';
 import { ElementType, RelationType } from '../glsp/types';
 

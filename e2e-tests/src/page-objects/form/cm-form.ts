@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
 import { waitForFunction } from '@eclipse-glsp/glsp-playwright';
 import { ElementHandle, Locator } from '@playwright/test';
 import { TheiaPageObject, TheiaView } from '@theia/playwright';

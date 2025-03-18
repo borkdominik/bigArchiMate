@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
 import { DefaultDocumentBuilder } from 'langium';
 import { CancellationToken } from 'vscode-languageclient';
 import { URI, Utils as UriUtils } from 'vscode-uri';

@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2025 CrossBreeze.
- ********************************************************************************/
 import { AstNode } from 'langium';
 import { AbstractSemanticTokenProvider, SemanticTokenAcceptor } from 'langium/lsp';
 import { SemanticTokenTypes } from 'vscode-languageserver';

@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
 import { AstNode, DefaultLinker, DocumentState, LangiumDocument } from 'langium';
 import { isArchiMateDiagram } from '../generated/ast.js';
 import { hasSemanticRoot } from '../util/ast-util.js';

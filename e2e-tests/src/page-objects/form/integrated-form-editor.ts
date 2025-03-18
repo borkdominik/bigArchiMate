@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
 import { OSUtil, normalizeId, urlEncodePath } from '@theia/playwright';
 import { join } from 'path';
 import { CMCompositeEditor, hasViewError } from '../cm-composite-editor';

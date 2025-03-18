@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
 import { BuiltinThemeProvider } from '@theia/core/lib/browser/theming';
 import { injectable } from '@theia/core/shared/inversify';
 import { ThemeServiceWithDB } from '@theia/monaco/lib/browser/monaco-indexed-db';

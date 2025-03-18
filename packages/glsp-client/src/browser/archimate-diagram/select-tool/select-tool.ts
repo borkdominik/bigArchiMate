@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
 import { GLSPMouseTool, RankedSelectMouseListener, Tool } from '@eclipse-glsp/client';
 import { inject, injectable } from '@theia/core/shared/inversify';
 

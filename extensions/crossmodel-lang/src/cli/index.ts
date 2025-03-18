@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
 import chalk from 'chalk';
 import { Command } from 'commander';
 import { NodeFileSystem } from 'langium/node';

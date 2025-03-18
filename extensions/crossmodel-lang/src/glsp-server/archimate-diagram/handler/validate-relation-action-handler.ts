@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
 import { ARCHIMATE_NODE_TYPE_MAP, ARCHIMATE_RELATION_TYPE_MAP } from '@crossbreeze/protocol';
 import { DiagramConfiguration, EdgeCreationChecker, ModelState, RequestCheckEdgeActionHandler } from '@eclipse-glsp/server';
 import { inject, injectable, optional } from 'inversify';

@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
 import { ElementType, RelationType } from '../../generated/ast.js';
 import { relationConstraints, relationKeyMap } from './relation-constraints.js';
 

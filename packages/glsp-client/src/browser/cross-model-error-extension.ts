@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
 import { ERRONEOUS_MODEL } from '@crossbreeze/protocol';
 import { createEditorError } from '@crossbreeze/react-model-ui/lib/views/common/EditorError';
 import { EditorContextService, GLSPAbstractUIExtension } from '@eclipse-glsp/client';

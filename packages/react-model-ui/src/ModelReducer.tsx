@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
 import { CrossModelRoot } from '@crossbreeze/protocol';
 import { ElementDispatchAction, ElementModelReducer, isElementDispatchAction } from './ElementModelReducer';
 import { JunctionDispatchAction, JunctionModelReducer, isJunctionDispatchAction } from './JunctionModelReducer';

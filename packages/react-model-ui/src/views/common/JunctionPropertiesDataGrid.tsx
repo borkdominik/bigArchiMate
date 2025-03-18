@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
 import { Property, PropertyType, findNextUnique, toId } from '@crossbreeze/protocol';
 import { GridColDef } from '@mui/x-data-grid';
 import * as React from 'react';

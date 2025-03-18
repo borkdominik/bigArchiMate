@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
 import { FeatureModule, NodeCreationTool, nodeCreationToolModule, viewportModule } from '@eclipse-glsp/client';
 import { ArchiMateNodeCreationTool } from './archimate-node-creation-tool';
 

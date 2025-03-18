@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
 import { ARCHIMATE_CONCEPT_TYPE_MAP } from '@crossbreeze/protocol';
 import {
    Action,

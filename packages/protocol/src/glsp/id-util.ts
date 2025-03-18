@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
 // Port information created on server but used in client tools for better UX
 export const LEFT_PORT_SUFFIX = '___left';
 export const RIGHT_PORT_SUFFIX = '___right';

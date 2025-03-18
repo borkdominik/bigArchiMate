@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
-
 import { getLabel, ModelStructure } from '@crossbreeze/protocol';
 import { TextField } from '@mui/material';
 import * as React from 'react';

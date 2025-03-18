@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2025 CrossBreeze.
- ********************************************************************************/
-
 import { URI } from '@theia/core';
 import { injectable } from '@theia/core/shared/inversify';
 import { FileResourceResolver } from '@theia/filesystem/lib/browser';

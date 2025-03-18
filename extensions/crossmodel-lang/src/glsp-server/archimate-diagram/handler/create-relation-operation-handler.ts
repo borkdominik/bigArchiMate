@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
-
 import { ARCHIMATE_RELATION_TYPE_MAP } from '@crossbreeze/protocol';
 import {
    ActionDispatcher,

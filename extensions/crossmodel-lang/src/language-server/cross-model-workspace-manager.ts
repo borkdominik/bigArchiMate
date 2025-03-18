@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
 import { AstNode, DefaultWorkspaceManager, Deferred, FileSystemNode, LangiumDocument } from 'langium';
 import { CancellationToken, Emitter, Event, WorkspaceFolder } from 'vscode-languageserver';
 import { URI, Utils } from 'vscode-uri';

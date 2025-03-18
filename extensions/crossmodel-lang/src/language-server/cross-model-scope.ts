@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
-
 import { AstNode, AstNodeDescription, AstUtils, DefaultScopeComputation, LangiumDocument, PrecomputedScopes } from 'langium';
 import { CancellationToken } from 'vscode-jsonrpc';
 import { CrossModelServices } from './cross-model-module.js';

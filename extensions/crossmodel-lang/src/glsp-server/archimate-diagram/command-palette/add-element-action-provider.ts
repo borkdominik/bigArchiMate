@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
 import { AddElementOperation, codiconCSSString } from '@crossbreeze/protocol';
 import { ContextActionsProvider, EditorContext, LabeledAction, ModelState, Point } from '@eclipse-glsp/server';
 import { inject, injectable } from 'inversify';

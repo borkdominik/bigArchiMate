@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2025 CrossBreeze.
- ********************************************************************************/
 import { ChangeRoutingPointsOperation, Command, JsonOperationHandler, MaybePromise, ModelState } from '@eclipse-glsp/server';
 import { inject, injectable } from 'inversify';
 import { RelationRoutingPoint } from '../../../language-server/generated/ast.js';

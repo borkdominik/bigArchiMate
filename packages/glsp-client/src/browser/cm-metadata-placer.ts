@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
 import { GChildElement, GEdge, GModelElement, GModelRoot, MetadataPlacer, setAttr } from '@eclipse-glsp/client';
 import { injectable } from '@theia/core/shared/inversify';
 import { VNode } from 'snabbdom';

@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
 import { DefaultTypes, GCompartment, GCompartmentBuilder, GLabel } from '@eclipse-glsp/server';
 
 export function createHeader(text: string, containerId: string, labelType = DefaultTypes.LABEL): GCompartment {

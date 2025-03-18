@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
 import { ConceptType, ElementType, LayerType, OtherConceptType, RelationType } from './glsp/types';
 
 type CornerType = 'round' | 'square' | 'diamond';

@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
 import { GEdge, GGraph, GModelFactory, GNode, ModelState } from '@eclipse-glsp/server';
 import { inject, injectable } from 'inversify';
 import { ElementNode, JunctionNode, RelationEdge } from '../../../language-server/generated/ast.js';

@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
 import { ARCHIMATE_ELEMENT_TYPE_MAP, getLabel, getLayer } from '@crossbreeze/protocol';
 import {
    Action,

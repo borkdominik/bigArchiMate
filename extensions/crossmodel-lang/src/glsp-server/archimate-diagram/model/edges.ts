@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
 import { ARCHIMATE_RELATION_TYPE_MAP, REFERENCE_CONTAINER_TYPE, REFERENCE_PROPERTY, REFERENCE_VALUE } from '@crossbreeze/protocol';
 import { GEdge, GEdgeBuilder, Point } from '@eclipse-glsp/server';
 import { RelationEdge, RelationRoutingPoint } from '../../../language-server/generated/ast.js';

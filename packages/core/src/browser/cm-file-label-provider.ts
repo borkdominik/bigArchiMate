@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
 import { ModelService } from '@crossbreeze/model-service/lib/common';
 import { codiconCSSString, concepts, getIcon, ModelFileExtensions, ModelStructure } from '@crossbreeze/protocol';
 import { Emitter, MaybePromise } from '@theia/core';

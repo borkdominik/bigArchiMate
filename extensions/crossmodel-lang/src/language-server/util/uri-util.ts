@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
 import * as fs from 'fs';
 import * as path from 'path';
 import { URI, Utils as UriUtils } from 'vscode-uri';

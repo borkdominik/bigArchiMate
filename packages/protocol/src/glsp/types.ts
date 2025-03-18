@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
 import { DefaultTypes } from '@eclipse-glsp/protocol';
 import { ReversibleMap, toKebabCase } from '../util';
 

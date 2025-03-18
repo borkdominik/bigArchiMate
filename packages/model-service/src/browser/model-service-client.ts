@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
-
 import { ModelUpdatedEvent, SystemUpdatedEvent } from '@crossbreeze/protocol';
 import { Emitter } from '@theia/core';
 import { injectable } from '@theia/core/shared/inversify';

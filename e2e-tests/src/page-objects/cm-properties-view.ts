@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
 import { ElementHandle } from '@playwright/test';
 import { TheiaApp, TheiaEditor, isElementVisible } from '@theia/playwright';
 import { CMForm } from './form/cm-form';

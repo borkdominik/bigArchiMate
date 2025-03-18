@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
 import { AstNode, AstUtils, LangiumDocument, isAstNode } from 'langium';
 import { ID_PROPERTY } from '../cross-model-naming.js';
 import {

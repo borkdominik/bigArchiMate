@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import { Theme, ThemeOptions, ThemeProvider, createTheme } from '@mui/material';
 import React = require('react');

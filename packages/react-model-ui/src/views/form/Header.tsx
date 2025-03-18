@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
 import { ERRONEOUS_MODEL, ModelDiagnostic } from '@crossbreeze/protocol';
 import { OpenInNewOutlined, SaveOutlined } from '@mui/icons-material';
 import { AppBar, Box, Button, Icon, Toolbar, Typography } from '@mui/material';

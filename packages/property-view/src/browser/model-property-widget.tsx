@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
-
 import { ApplicationShell, ShouldSaveDialog } from '@theia/core/lib/browser';
 import { PropertyDataService } from '@theia/property-view/lib/browser/property-data-service';
 import { PropertyViewContentWidget } from '@theia/property-view/lib/browser/property-view-content-widget';

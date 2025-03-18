@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
 import { TheiaApp, TheiaExplorerFileStatNode, TheiaExplorerView } from '@theia/playwright';
 import { CMMTabBarToolbar } from './cm-tab-bar-toolbar';
 

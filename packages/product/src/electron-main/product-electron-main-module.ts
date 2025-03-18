@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
-
 import { ElectronMainApplicationContribution } from '@theia/core/lib/electron-main/electron-main-application';
 import { ContainerModule } from '@theia/core/shared/inversify';
 import { IconContribution } from './icon-contribution';

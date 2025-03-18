@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
 import { inject, injectable } from 'inversify';
 import { ArchiMateDiagram } from '../../../language-server/generated/ast.js';
 import { CrossModelState } from '../../common/cross-model-state.js';

@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
-
 import { ModelFileExtensions } from '@crossbreeze/protocol';
 import { GLSPDiagramLanguage } from '@eclipse-glsp/theia-integration/lib/common';
 

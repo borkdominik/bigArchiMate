@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
 import { ReversibleMap } from '@crossbreeze/protocol';
 import { ElementType, RelationType } from '../../generated/ast.js';
 

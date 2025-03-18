@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
 import { expect, test } from '@playwright/test';
 import { CMApp } from '../../../page-objects/cm-app';
 import { RelationshipPropertiesView } from '../../../page-objects/cm-properties-view';

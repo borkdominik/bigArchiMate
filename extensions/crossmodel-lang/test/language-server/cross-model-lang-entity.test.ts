@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
-
 import { describe, expect, test } from '@jest/globals';
 
 import { entity1, entity2, entity3, entity4 } from './test-utils/test-documents/entity/index.js';

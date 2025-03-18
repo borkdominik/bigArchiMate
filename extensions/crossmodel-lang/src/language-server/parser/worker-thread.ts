@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
 import { EmptyFileSystem } from 'langium';
 import { parentPort } from 'node:worker_threads';
 import { createCrossModelServices } from '../cross-model-module.js';

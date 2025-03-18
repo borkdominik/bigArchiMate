@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
 import { expect, test } from '@playwright/test';
 import { CMApp } from '../page-objects/cm-app';
 import { CMExplorerView } from '../page-objects/cm-explorer-view';

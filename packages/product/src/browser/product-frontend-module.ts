@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
 import { ApplicationShell, ApplicationShellOptions, FrontendApplication } from '@theia/core/lib/browser';
 import { ContainerModule } from '@theia/core/shared/inversify';
 import { ThemeServiceWithDB } from '@theia/monaco/lib/browser/monaco-indexed-db';

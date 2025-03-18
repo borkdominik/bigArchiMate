@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
 import { Action, Operation, Point, hasArrayProp, hasObjectProp, hasStringProp } from '@eclipse-glsp/protocol';
 
 export interface DropEntityOperation extends Operation {

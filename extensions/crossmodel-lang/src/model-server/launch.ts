@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
 import { MODELSERVER_PORT_COMMAND } from '@crossbreeze/protocol';
 import console from 'console';
 import * as net from 'net';

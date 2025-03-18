@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
 import { ElementHandle, Page } from '@playwright/test';
 import { OSUtil, TheiaEditor, isElementVisible, normalizeId, urlEncodePath } from '@theia/playwright';
 import { TheiaMonacoEditor } from '@theia/playwright/lib/theia-monaco-editor';

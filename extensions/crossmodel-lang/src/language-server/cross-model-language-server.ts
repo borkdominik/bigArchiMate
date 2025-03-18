@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
 import { DefaultLanguageServer } from 'langium/lsp';
 import { TextDocumentSyncKind, type InitializeParams, type InitializeResult } from 'vscode-languageserver-protocol';
 
