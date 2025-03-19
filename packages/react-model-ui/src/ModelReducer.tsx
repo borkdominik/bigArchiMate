@@ -1,4 +1,4 @@
-import { CrossModelRoot } from '@crossbreeze/protocol';
+import { ArchiMateRoot } from '@crossbreeze/protocol';
 import { ElementDispatchAction, ElementModelReducer, isElementDispatchAction } from './ElementModelReducer';
 import { JunctionDispatchAction, JunctionModelReducer, isJunctionDispatchAction } from './JunctionModelReducer';
 import { RelationDispatchAction, RelationModelReducer, isRelationDispatchAction } from './RelationModelReducer';
@@ -9,7 +9,7 @@ export interface ModelAction {
 
 export interface ModelUpdateAction extends ModelAction {
    type: 'model:update';
-   model: CrossModelRoot;
+   model: ArchiMateRoot;
 }
 
 export type DispatchAction = ModelUpdateAction | ElementDispatchAction | JunctionDispatchAction | RelationDispatchAction;
@@ -17,7 +17,7 @@ export type DispatchAction = ModelUpdateAction | ElementDispatchAction | Junctio
 export type ModelStateReason = DispatchAction['type'] | 'model:initial';
 
 export interface ModelState {
-   model: CrossModelRoot;
+   model: ArchiMateRoot;
    reason: ModelStateReason;
 }
 

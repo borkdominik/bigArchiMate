@@ -2,12 +2,12 @@ import { AstNode, AstUtils, LangiumDocument, isAstNode } from 'langium';
 import { ID_PROPERTY } from '../cross-model-naming.js';
 import {
    ArchiMateDiagram,
-   CrossModelRoot,
+   ArchiMateRoot,
    Element,
    Junction,
    Relation,
    isArchiMateDiagram,
-   isCrossModelRoot,
+   isArchiMateRoot,
    isElement,
    isJunction,
    isRelation
@@ -82,7 +82,7 @@ export function fixDocument<T extends AstNode = AstNode, R extends AstNode = Ast
    return node;
 }
 
-export type WithDocument<T> = T & { $document: LangiumDocument<CrossModelRoot> };
+export type WithDocument<T> = T & { $document: LangiumDocument<ArchiMateRoot> };
 export type DocumentContent = LangiumDocument | AstNode;
 export type TypeGuard<T> = (item: unknown) => item is T;
 
@@ -94,7 +94,7 @@ export function findSemanticRoot(input: DocumentContent): SemanticRoot | undefin
 export function findSemanticRoot<T extends SemanticRoot>(input: DocumentContent, guard: TypeGuard<T>): T | undefined;
 export function findSemanticRoot<T extends SemanticRoot>(input: DocumentContent, guard?: TypeGuard<T>): SemanticRoot | T | undefined {
    const root = isAstNode(input) ? input.$document?.parseResult?.value ?? AstUtils.findRootNode(input) : input.parseResult?.value;
-   const semanticRoot = isCrossModelRoot(root) ? root.element ?? root.junction ?? root.relation ?? root.archiMateDiagram : undefined;
+   const semanticRoot = isArchiMateRoot(root) ? root.element ?? root.junction ?? root.relation ?? root.archiMateDiagram : undefined;
    return !semanticRoot ? undefined : !guard ? semanticRoot : guard(semanticRoot) ? semanticRoot : undefined;
 }
 

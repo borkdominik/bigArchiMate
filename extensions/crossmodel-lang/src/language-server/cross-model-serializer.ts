@@ -3,7 +3,7 @@ import { collectAst } from 'langium/grammar';
 import { Serializer } from '../model-server/serializer.js';
 import {
    ArchiMateDiagram,
-   CrossModelRoot,
+   ArchiMateRoot,
    Element,
    isElement,
    isJunction,
@@ -32,7 +32,7 @@ const PROPERTY_ORDER = new Map<string, string[]>([
  * cf. https://github.com/langium/langium/discussions/683
  * cf. https://github.com/langium/langium/discussions/863
  */
-export class CrossModelSerializer implements Serializer<CrossModelRoot> {
+export class CrossModelSerializer implements Serializer<ArchiMateRoot> {
    // New line character.
    static readonly CHAR_NEWLINE = '\n';
    // Indentation character.
@@ -49,7 +49,7 @@ export class CrossModelSerializer implements Serializer<CrossModelRoot> {
       readonly astTypes = collectAst(grammar)
    ) {}
 
-   serialize(root: CrossModelRoot): string {
+   serialize(root: ArchiMateRoot): string {
       return this.toYaml(root, '', root)?.trim() ?? '';
    }
 

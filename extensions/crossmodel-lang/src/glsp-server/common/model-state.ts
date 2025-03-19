@@ -4,7 +4,7 @@ import { DocumentState } from 'langium';
 import { URI } from 'vscode-uri';
 import { CrossModelLSPServices } from '../../integration.js';
 import { IdProvider } from '../../language-server/cross-model-naming.js';
-import { ArchiMateDiagram, CrossModelRoot } from '../../language-server/generated/ast.js';
+import { ArchiMateDiagram, ArchiMateRoot } from '../../language-server/generated/ast.js';
 import { ModelService } from '../../model-server/model-service.js';
 import { Serializer } from '../../model-server/serializer.js';
 import { ArchiMateGModelIndex } from './gmodel-index.js';
@@ -23,10 +23,10 @@ export class ArchiMateModelState extends DefaultModelState implements JsonModelS
    @inject(CrossModelLSPServices) readonly services!: CrossModelLSPServices;
 
    protected _semanticUri!: string;
-   protected _semanticRoot!: CrossModelRoot;
+   protected _semanticRoot!: ArchiMateRoot;
    protected _packageId!: string;
 
-   setSemanticRoot(uri: string, semanticRoot: CrossModelRoot): void {
+   setSemanticRoot(uri: string, semanticRoot: ArchiMateRoot): void {
       this._semanticUri = uri;
       this._semanticRoot = semanticRoot;
       this._packageId = this.services.shared.workspace.PackageManager.getPackageIdByUri(URI.parse(uri));
@@ -37,7 +37,7 @@ export class ArchiMateModelState extends DefaultModelState implements JsonModelS
       return this._semanticUri;
    }
 
-   get semanticRoot(): CrossModelRoot {
+   get semanticRoot(): ArchiMateRoot {
       return this._semanticRoot;
    }
 
@@ -49,7 +49,7 @@ export class ArchiMateModelState extends DefaultModelState implements JsonModelS
       return this.services.shared.model.ModelService;
    }
 
-   get semanticSerializer(): Serializer<CrossModelRoot> {
+   get semanticSerializer(): Serializer<ArchiMateRoot> {
       return this.services.language.serializer.Serializer;
    }
 

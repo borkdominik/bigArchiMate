@@ -1,7 +1,7 @@
 import { toId } from '@crossbreeze/protocol';
 import { ApplyLabelEditOperation, Command, getOrThrow, JsonOperationHandler, ModelState } from '@eclipse-glsp/server';
 import { inject, injectable } from 'inversify';
-import { CrossModelRoot, Element, ElementNode } from '../../../language-server/generated/ast.js';
+import { ArchiMateRoot, Element, ElementNode } from '../../../language-server/generated/ast.js';
 import { findDocument } from '../../../language-server/util/ast-util.js';
 import { ArchiMateCommand } from '../../common/command.js';
 import { ArchiMateModelState } from '../../common/model-state.js';
@@ -35,7 +35,7 @@ export class ApplyLabelEditOperationHandler extends JsonOperationHandler {
 
    protected async renameElement(elementNode: ElementNode, element: Element, name: string): Promise<void> {
       element.name = name;
-      const document = findDocument<CrossModelRoot>(element)!;
+      const document = findDocument<ArchiMateRoot>(element)!;
       const references = Array.from(
          this.modelState.services.language.references.References.findReferences(element, { includeDeclaration: false })
       );

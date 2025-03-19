@@ -4,7 +4,7 @@ import { ParseHelperOptions, parseDocument as langiumParseDocument } from 'langi
 import path from 'path';
 import { PackageJson } from 'type-fest';
 import { CrossModelServices, createCrossModelServices } from '../../../src/language-server/cross-model-module.js';
-import { CrossModelRoot } from '../../../src/language-server/generated/ast.js';
+import { ArchiMateRoot } from '../../../src/language-server/generated/ast.js';
 import { SemanticRoot, TypeGuard, WithDocument, findSemanticRoot } from '../../../src/language-server/util/ast-util.js';
 
 export function createCrossModelTestServices(context: DefaultSharedModuleContext = EmptyFileSystem): CrossModelServices {
@@ -45,17 +45,17 @@ export async function parsePackage(input: PackageInput): Promise<PackageDependen
    return { [input.content.name]: input.content.version };
 }
 
-export async function parseDocument(input: DocumentInput): Promise<LangiumDocument<CrossModelRoot>> {
+export async function parseDocument(input: DocumentInput): Promise<LangiumDocument<ArchiMateRoot>> {
    if (input.documentUri) {
       const fileSystemProvider = input.services.shared.workspace.FileSystemProvider;
       if (fileSystemProvider instanceof MockFileSystemProvider) {
          fileSystemProvider.setFile(URI.parse(input.documentUri), input.text);
       }
    }
-   return langiumParseDocument<CrossModelRoot>(input.services, input.text, input);
+   return langiumParseDocument<ArchiMateRoot>(input.services, input.text, input);
 }
 
-export async function parseDocuments(inputs: DocumentInput[]): Promise<LangiumDocument<CrossModelRoot>[]> {
+export async function parseDocuments(inputs: DocumentInput[]): Promise<LangiumDocument<ArchiMateRoot>[]> {
    return Promise.all(inputs.map(parseDocument));
 }
 

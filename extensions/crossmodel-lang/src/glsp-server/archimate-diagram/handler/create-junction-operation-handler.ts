@@ -11,7 +11,7 @@ import {
 } from '@eclipse-glsp/server';
 import { inject, injectable } from '@theia/core/shared/inversify';
 import { URI, Utils as UriUtils } from 'vscode-uri';
-import { CrossModelRoot, Junction, JunctionNode } from '../../../language-server/generated/ast.js';
+import { ArchiMateRoot, Junction, JunctionNode } from '../../../language-server/generated/ast.js';
 import { Utils } from '../../../language-server/util/uri-util.js';
 import { ArchiMateCommand } from '../../common/command.js';
 import { ArchiMateModelState } from '../../common/model-state.js';
@@ -62,7 +62,7 @@ export class CreateJunctionOperationHandler extends JsonCreateNodeOperationHandl
       const junctionType = 'Junction';
 
       // create junction, serialize and re-read to ensure everything is up to date and linked properly
-      const root: CrossModelRoot = { $type: 'CrossModelRoot' };
+      const root: ArchiMateRoot = { $type: 'ArchiMateRoot' };
       const id = this.modelState.idProvider.findNextId(Junction, `${junctionType}`);
 
       const junction: Junction = {

@@ -178,7 +178,7 @@ export function isRelationType(item: unknown): item is RelationType {
 }
 
 export interface ArchiMateDiagram extends AstNode {
-    readonly $container: CrossModelRoot;
+    readonly $container: ArchiMateRoot;
     readonly $type: 'ArchiMateDiagram';
     edges: Array<RelationEdge>;
     id?: string;
@@ -193,22 +193,22 @@ export function isArchiMateDiagram(item: unknown): item is ArchiMateDiagram {
     return reflection.isInstance(item, ArchiMateDiagram);
 }
 
-export interface CrossModelRoot extends AstNode {
-    readonly $type: 'CrossModelRoot';
+export interface ArchiMateRoot extends AstNode {
+    readonly $type: 'ArchiMateRoot';
     archiMateDiagram?: ArchiMateDiagram;
     element?: Element;
     junction?: Junction;
     relation?: Relation;
 }
 
-export const CrossModelRoot = 'CrossModelRoot';
+export const ArchiMateRoot = 'ArchiMateRoot';
 
-export function isCrossModelRoot(item: unknown): item is CrossModelRoot {
-    return reflection.isInstance(item, CrossModelRoot);
+export function isArchiMateRoot(item: unknown): item is ArchiMateRoot {
+    return reflection.isInstance(item, ArchiMateRoot);
 }
 
 export interface Element extends AstNode {
-    readonly $container: CrossModelRoot;
+    readonly $container: ArchiMateRoot;
     readonly $type: 'Element';
     documentation?: string;
     id: ElementID;
@@ -241,7 +241,7 @@ export function isElementNode(item: unknown): item is ElementNode {
 }
 
 export interface Junction extends AstNode {
-    readonly $container: CrossModelRoot;
+    readonly $container: ArchiMateRoot;
     readonly $type: 'Junction';
     documentation?: string;
     id: string;
@@ -287,7 +287,7 @@ export function isProperty(item: unknown): item is Property {
 }
 
 export interface Relation extends AstNode {
-    readonly $container: CrossModelRoot;
+    readonly $container: ArchiMateRoot;
     readonly $type: 'Relation';
     documentation?: string;
     id: string;
@@ -335,7 +335,7 @@ export function isRelationRoutingPoint(item: unknown): item is RelationRoutingPo
 
 export type ArchiMateLanguageAstType = {
     ArchiMateDiagram: ArchiMateDiagram
-    CrossModelRoot: CrossModelRoot
+    ArchiMateRoot: ArchiMateRoot
     Element: Element
     ElementNode: ElementNode
     ElementNodeOrJunctionNode: ElementNodeOrJunctionNode
@@ -351,7 +351,7 @@ export type ArchiMateLanguageAstType = {
 export class ArchiMateLanguageAstReflection extends AbstractAstReflection {
 
     getAllTypes(): string[] {
-        return [ArchiMateDiagram, CrossModelRoot, Element, ElementNode, ElementNodeOrJunctionNode, ElementOrJunction, Junction, JunctionNode, Property, Relation, RelationEdge, RelationRoutingPoint];
+        return [ArchiMateDiagram, ArchiMateRoot, Element, ElementNode, ElementNodeOrJunctionNode, ElementOrJunction, Junction, JunctionNode, Property, Relation, RelationEdge, RelationRoutingPoint];
     }
 
     protected override computeIsSubtype(subtype: string, supertype: string): boolean {
@@ -410,9 +410,9 @@ export class ArchiMateLanguageAstReflection extends AbstractAstReflection {
                     ]
                 };
             }
-            case CrossModelRoot: {
+            case ArchiMateRoot: {
                 return {
-                    name: CrossModelRoot,
+                    name: ArchiMateRoot,
                     properties: [
                         { name: 'archiMateDiagram' },
                         { name: 'element' },

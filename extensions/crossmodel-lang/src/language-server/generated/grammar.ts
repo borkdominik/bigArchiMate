@@ -15,7 +15,7 @@ export const CrossModelGrammar = (): Grammar => loadedCrossModelGrammar ?? (load
   "rules": [
     {
       "$type": "ParserRule",
-      "name": "CrossModelRoot",
+      "name": "ArchiMateRoot",
       "entry": true,
       "definition": {
         "$type": "Alternatives",

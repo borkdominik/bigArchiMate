@@ -9,7 +9,7 @@ import {
 } from '@eclipse-glsp/server';
 import { inject, injectable } from 'inversify';
 import { URI, Utils as UriUtils } from 'vscode-uri';
-import { CrossModelRoot, ElementNode, JunctionNode, Relation, RelationEdge } from '../../../language-server/generated/ast.js';
+import { ArchiMateRoot, ElementNode, JunctionNode, Relation, RelationEdge } from '../../../language-server/generated/ast.js';
 import { Utils } from '../../../language-server/util/uri-util.js';
 import { ArchiMateCommand } from '../../common/command.js';
 import { ArchiMateModelState } from '../../common/model-state.js';
@@ -78,7 +78,7 @@ export class CreateRelationOperationHandler extends JsonCreateEdgeOperationHandl
       const target = targetConcept.ref?.id || targetConcept.$refText;
 
       // create relation, serialize and re-read to ensure everything is up to date and linked properly
-      const relationRoot: CrossModelRoot = { $type: 'CrossModelRoot' };
+      const relationRoot: ArchiMateRoot = { $type: 'ArchiMateRoot' };
       const relation: Relation = {
          $type: Relation,
          $container: relationRoot,

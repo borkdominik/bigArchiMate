@@ -15,7 +15,7 @@ import { Disposable } from 'vscode-languageserver';
 import { Diagnostic, TextDocumentIdentifier, TextDocumentItem, VersionedTextDocumentIdentifier } from 'vscode-languageserver-protocol';
 import { TextDocument } from 'vscode-languageserver-textdocument';
 import { URI } from 'vscode-uri';
-import { CrossModelRoot } from '../language-server/generated/ast.js';
+import { ArchiMateRoot } from '../language-server/generated/ast.js';
 import { CrossModelLanguageMetaData } from '../language-server/generated/module.js';
 import { AddedSharedModelServices } from './model-module.js';
 import { OpenableTextDocuments } from './openable-text-documents.js';
@@ -25,7 +25,7 @@ export interface UpdateInfo {
    deleted: URI[];
 }
 
-export type AstArchiMateDocument = CrossModelDocument<CrossModelRoot, Diagnostic>;
+export type AstArchiMateDocument = CrossModelDocument<ArchiMateRoot, Diagnostic>;
 
 /**
  * A manager class that supports handling documents with a simple open-update-save/close lifecycle.
@@ -70,7 +70,7 @@ export class OpenTextDocumentManager {
          // Check if the uri of the saved document and the uri of the listener are equal.
          if (event.document.uri === uri && documentURI !== undefined && this.langiumDocs.hasDocument(documentURI)) {
             const document = await this.langiumDocs.getOrCreateDocument(documentURI);
-            const root = document.parseResult.value as CrossModelRoot;
+            const root = document.parseResult.value as ArchiMateRoot;
             return listener({
                document: {
                   root,
@@ -95,7 +95,7 @@ export class OpenTextDocumentManager {
             const sourceClientId = this.getSourceClientId(buildTrigger ?? changedDocument, allChangedDocuments);
             const event: ModelUpdatedEvent<AstArchiMateDocument> = {
                document: {
-                  root: changedDocument.parseResult.value as CrossModelRoot,
+                  root: changedDocument.parseResult.value as ArchiMateRoot,
                   diagnostics: changedDocument.diagnostics ?? [],
                   uri: changedDocument.textDocument.uri
                },

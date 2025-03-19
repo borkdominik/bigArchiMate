@@ -17,7 +17,7 @@ import { Disposable, OptionalVersionedTextDocumentIdentifier, Range, TextDocumen
 import { URI, Utils as UriUtils } from 'vscode-uri';
 import { CrossModelServices, CrossModelSharedServices } from '../language-server/cross-model-module.js';
 import { PACKAGE_JSON } from '../language-server/cross-model-package-manager.js';
-import { CrossModelRoot, isCrossModelRoot } from '../language-server/generated/ast.js';
+import { ArchiMateRoot, isArchiMateRoot } from '../language-server/generated/ast.js';
 import { findDocument } from '../language-server/util/ast-util.js';
 import { AstArchiMateDocument } from './open-text-document-manager.js';
 import { LANGUAGE_CLIENT_ID } from './openable-text-documents.js';
@@ -107,7 +107,7 @@ export class ModelService {
       await this.documentBuilder.waitUntil(state, documentUri);
       const document = await this.documents.getOrCreateDocument(documentUri);
       const root = document.parseResult.value;
-      return isCrossModelRoot(root) ? { root, diagnostics: document.diagnostics ?? [], uri } : undefined;
+      return isArchiMateRoot(root) ? { root, diagnostics: document.diagnostics ?? [], uri } : undefined;
    }
 
    /**
@@ -119,7 +119,7 @@ export class ModelService {
     * @param model semantic model or textual representation of it
     * @returns the stored semantic model
     */
-   async update(args: UpdateModelArgs<CrossModelRoot>): Promise<AstArchiMateDocument> {
+   async update(args: UpdateModelArgs<ArchiMateRoot>): Promise<AstArchiMateDocument> {
       await this.open(args);
       const documentUri = URI.parse(args.uri);
       const document = await this.documents.getOrCreateDocument(documentUri);
@@ -132,7 +132,7 @@ export class ModelService {
       if (text === textDocument.getText()) {
          return {
             diagnostics: document.diagnostics ?? [],
-            root: document.parseResult.value as CrossModelRoot,
+            root: document.parseResult.value as ArchiMateRoot,
             uri: args.uri
          };
       }
@@ -145,7 +145,7 @@ export class ModelService {
          if (updatedDocument) {
             pendingUpdate.resolve({
                diagnostics: updatedDocument.diagnostics ?? [],
-               root: updatedDocument.parseResult.value as CrossModelRoot,
+               root: updatedDocument.parseResult.value as ArchiMateRoot,
                uri: args.uri
             });
             listener.dispose();
@@ -175,7 +175,7 @@ export class ModelService {
     * @param uri document uri
     * @param model semantic model or text
     */
-   async save(args: SaveModelArgs<CrossModelRoot>): Promise<void> {
+   async save(args: SaveModelArgs<ArchiMateRoot>): Promise<void> {
       // sync: implicit update of internal data structure to match file system (similar to workspace initialization)
       const text = typeof args.model === 'string' ? args.model : this.serialize(URI.parse(args.uri), args.model);
       if (this.documents.hasDocument(URI.parse(args.uri))) {

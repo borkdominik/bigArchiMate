@@ -1,8 +1,8 @@
 import {
+   ArchiMateRoot,
    CloseModel,
    CloseModelArgs,
    CrossModelDocument,
-   CrossModelRoot,
    CrossReference,
    CrossReferenceContext,
    FindReferenceableElements,
@@ -148,12 +148,12 @@ export class ModelServiceServerImpl implements ModelServiceServer {
       return this.connection.sendRequest(RequestModel, uri);
    }
 
-   async update(args: UpdateModelArgs<CrossModelRoot>): Promise<CrossModelDocument> {
+   async update(args: UpdateModelArgs<ArchiMateRoot>): Promise<CrossModelDocument> {
       await this.initializeServerConnection();
       return this.connection.sendRequest(UpdateModel, args);
    }
 
-   async save(args: SaveModelArgs<CrossModelRoot>): Promise<void> {
+   async save(args: SaveModelArgs<ArchiMateRoot>): Promise<void> {
       await this.initializeServerConnection();
       return this.connection.sendRequest(SaveModel, args);
    }

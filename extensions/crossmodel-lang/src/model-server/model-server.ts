@@ -1,8 +1,8 @@
 import {
+   ArchiMateRoot,
    CloseModel,
    CloseModelArgs,
    CrossModelDocument,
-   CrossModelRoot,
    CrossReference,
    CrossReferenceContext,
    FindReferenceableElements,
@@ -80,7 +80,7 @@ export class ModelServer implements Disposable {
          return undefined;
       }
       const uri = AstUtils.getDocument(node).uri.toString();
-      const model = this.toSerializable(AstUtils.findRootNode(node)) as CrossModelRoot;
+      const model = this.toSerializable(AstUtils.findRootNode(node)) as ArchiMateRoot;
       return { uri, model };
    }
 
@@ -128,22 +128,22 @@ export class ModelServer implements Disposable {
       return document ? this.toDocument(document) : undefined;
    }
 
-   protected async updateModel(args: UpdateModelArgs<CrossModelRoot>): Promise<CrossModelDocument> {
-      const updated = await this.modelService.update({ ...args, model: args.model as ast.CrossModelRoot });
+   protected async updateModel(args: UpdateModelArgs<ArchiMateRoot>): Promise<CrossModelDocument> {
+      const updated = await this.modelService.update({ ...args, model: args.model as ast.ArchiMateRoot });
       return this.toDocument(updated);
    }
 
-   protected async saveModel(args: SaveModelArgs<CrossModelRoot>): Promise<void> {
-      await this.modelService.save({ ...args, model: args.model as ast.CrossModelRoot });
+   protected async saveModel(args: SaveModelArgs<ArchiMateRoot>): Promise<void> {
+      await this.modelService.save({ ...args, model: args.model as ast.ArchiMateRoot });
    }
 
    dispose(): void {
       this.toDispose.forEach(disposable => disposable.dispose());
    }
 
-   protected toDocument<T extends CrossModelDocument<ast.CrossModelRoot, Diagnostic>>(
+   protected toDocument<T extends CrossModelDocument<ast.ArchiMateRoot, Diagnostic>>(
       document: T
-   ): CrossModelDocument<CrossModelRoot, ModelDiagnostic> {
+   ): CrossModelDocument<ArchiMateRoot, ModelDiagnostic> {
       return {
          uri: document.uri,
          diagnostics: document.diagnostics.map(diagnostic => this.toModelDiagnostic(diagnostic)),
@@ -172,7 +172,7 @@ export class ModelServer implements Disposable {
     * @param obj semantic object
     * @returns serializable semantic object
     */
-   protected toSerializable<T extends AstNode = ast.CrossModelRoot, O extends object = CrossModelRoot>(obj?: T): O | undefined {
+   protected toSerializable<T extends AstNode = ast.ArchiMateRoot, O extends object = ArchiMateRoot>(obj?: T): O | undefined {
       if (!obj) {
          return;
       }

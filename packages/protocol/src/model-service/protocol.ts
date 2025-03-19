@@ -33,21 +33,21 @@ export interface CustomProperty {
    value?: string;
 }
 
-export interface CrossModelDocument<T = CrossModelRoot, D = ModelDiagnostic> {
+export interface CrossModelDocument<T = ArchiMateRoot, D = ModelDiagnostic> {
    uri: string;
    root: T;
    diagnostics: D[];
 }
 
-export interface CrossModelRoot extends CrossModelElement {
-   readonly $type: 'CrossModelRoot';
+export interface ArchiMateRoot extends CrossModelElement {
+   readonly $type: 'ArchiMateRoot';
    element?: Element;
    relation?: Relation;
    junction?: Junction;
 }
 
-export function isCrossModelRoot(model?: any): model is CrossModelRoot {
-   return !!model && model.$type === 'CrossModelRoot';
+export function isArchiMateRoot(model?: any): model is ArchiMateRoot {
+   return !!model && model.$type === 'ArchiMateRoot';
 }
 
 export const PropertyType = 'Property';
@@ -95,11 +95,11 @@ export interface OpenModelArgs extends ClientModelArgs {
 
 export interface CloseModelArgs extends ClientModelArgs {}
 
-export interface UpdateModelArgs<T = CrossModelRoot> extends ClientModelArgs {
+export interface UpdateModelArgs<T = ArchiMateRoot> extends ClientModelArgs {
    model: T | string;
 }
 
-export interface SaveModelArgs<T = CrossModelRoot> extends ClientModelArgs {
+export interface SaveModelArgs<T = ArchiMateRoot> extends ClientModelArgs {
    model: T | string;
 }
 
@@ -219,7 +219,7 @@ export interface CrossReference {
 
 export interface ResolvedElement {
    uri: string;
-   model: CrossModelRoot;
+   model: ArchiMateRoot;
 }
 
 export interface SystemInfoArgs {

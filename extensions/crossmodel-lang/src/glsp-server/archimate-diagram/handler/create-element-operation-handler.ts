@@ -11,7 +11,7 @@ import {
 } from '@eclipse-glsp/server';
 import { inject, injectable } from '@theia/core/shared/inversify';
 import { URI, Utils as UriUtils } from 'vscode-uri';
-import { CrossModelRoot, Element, ElementNode } from '../../../language-server/generated/ast.js';
+import { ArchiMateRoot, Element, ElementNode } from '../../../language-server/generated/ast.js';
 import { Utils } from '../../../language-server/util/uri-util.js';
 import { ArchiMateCommand } from '../../common/command.js';
 import { ArchiMateModelState } from '../../common/model-state.js';
@@ -62,7 +62,7 @@ export class CreateElementOperationHandler extends JsonCreateNodeOperationHandle
       const elementType = ARCHIMATE_ELEMENT_TYPE_MAP.getReverse(operation.elementTypeId);
 
       // create element, serialize and re-read to ensure everything is up to date and linked properly
-      const elementRoot: CrossModelRoot = { $type: 'CrossModelRoot' };
+      const elementRoot: ArchiMateRoot = { $type: 'ArchiMateRoot' };
       const id = this.modelState.idProvider.findNextId(Element, `${elementType}`);
 
       const element: Element = {

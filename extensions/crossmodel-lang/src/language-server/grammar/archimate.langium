@@ -4,7 +4,7 @@ import 'element'
 import 'relation'
 import 'diagram'
 
-entry CrossModelRoot:
+entry ArchiMateRoot:
     (element=Element |
     relation=Relation |
     junction=Junction |

@@ -1,5 +1,5 @@
 import {
-   CrossModelRoot,
+   ArchiMateRoot,
    CrossReferenceContext,
    Element,
    Junction,
@@ -17,7 +17,7 @@ export interface ModelQueryApi {
    findReferenceableElements(args: CrossReferenceContext): Promise<ReferenceableElement[]>;
 }
 
-const DEFAULT_MODEL_ROOT: CrossModelRoot = { $type: 'CrossModelRoot' };
+const DEFAULT_MODEL_ROOT: ArchiMateRoot = { $type: 'ArchiMateRoot' };
 export const ModelContext = React.createContext(DEFAULT_MODEL_ROOT);
 
 export type ActionDispatcher = React.Dispatch<React.ReducerAction<typeof ModelReducer>>;
@@ -37,7 +37,7 @@ export const ModelDirtyContext = React.createContext<boolean>(false);
 
 export const ModelDiagnosticsContext = React.createContext<ModelDiagnostic[]>([]);
 
-export function useModel(): CrossModelRoot {
+export function useModel(): ArchiMateRoot {
    return React.useContext(ModelContext);
 }
 

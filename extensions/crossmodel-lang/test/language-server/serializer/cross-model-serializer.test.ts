@@ -3,7 +3,7 @@ import { Reference, URI } from 'langium';
 
 import _ from 'lodash';
 import { CrossModelSerializer } from '../../../src/language-server/cross-model-serializer.js';
-import { CrossModelRoot, Entity, Relationship } from '../../../src/language-server/generated/ast.js';
+import { ArchiMateRoot, Entity, Relationship } from '../../../src/language-server/generated/ast.js';
 import {
    createEntity,
    createEntityAttribute,
@@ -28,12 +28,12 @@ describe('CrossModelLexer', () => {
    });
 
    describe('Serialize entity', () => {
-      let crossModelRoot: CrossModelRoot;
-      let crossModelRootWithoutAttributes: CrossModelRoot;
-      let crossModelRootWithAttributesDifPlace: CrossModelRoot;
+      let crossModelRoot: ArchiMateRoot;
+      let crossModelRootWithoutAttributes: ArchiMateRoot;
+      let crossModelRootWithAttributesDifPlace: ArchiMateRoot;
 
       beforeAll(() => {
-         crossModelRoot = { $type: 'CrossModelRoot' };
+         crossModelRoot = { $type: 'ArchiMateRoot' };
          crossModelRoot.entity = createEntity(crossModelRoot, 'testId', 'test Name', {
             description: 'Test description'
          });
@@ -45,7 +45,7 @@ describe('CrossModelLexer', () => {
             createEntityAttribute(crossModelRoot.entity, 'Attribute2', 'Attribute 2')
          ];
 
-         crossModelRootWithAttributesDifPlace = { $type: 'CrossModelRoot' };
+         crossModelRootWithAttributesDifPlace = { $type: 'ArchiMateRoot' };
          crossModelRootWithAttributesDifPlace.entity = createEntity(crossModelRoot, 'testId', 'test Name', {
             description: 'Test description'
          });
@@ -72,11 +72,11 @@ describe('CrossModelLexer', () => {
    });
 
    describe('Serialize relationship', () => {
-      let crossModelRoot: CrossModelRoot;
+      let crossModelRoot: ArchiMateRoot;
 
       beforeAll(() => {
          crossModelRoot = {
-            $type: 'CrossModelRoot'
+            $type: 'ArchiMateRoot'
          };
 
          const ref1: Reference<Entity> = {
@@ -105,11 +105,11 @@ describe('CrossModelLexer', () => {
    });
 
    describe('Serialize diagram', () => {
-      let crossModelRoot: CrossModelRoot;
+      let crossModelRoot: ArchiMateRoot;
 
       beforeAll(() => {
          crossModelRoot = {
-            $type: 'CrossModelRoot'
+            $type: 'ArchiMateRoot'
          };
 
          const ref1: Reference<Entity> = {

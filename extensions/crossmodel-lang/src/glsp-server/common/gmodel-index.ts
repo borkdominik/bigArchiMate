@@ -4,7 +4,7 @@ import { AstNode, AstUtils } from 'langium';
 import * as uuid from 'uuid';
 import { CrossModelLSPServices } from '../../integration.js';
 import {
-   CrossModelRoot,
+   ArchiMateRoot,
    Element,
    ElementNode,
    isElement,
@@ -48,7 +48,7 @@ export class ArchiMateGModelIndex extends GModelIndex {
       return id;
    }
 
-   indexSemanticRoot(root: CrossModelRoot): void {
+   indexSemanticRoot(root: ArchiMateRoot): void {
       this.idToSemanticNode.clear();
       AstUtils.streamAst(root).forEach(node => this.indexAstNode(node));
    }

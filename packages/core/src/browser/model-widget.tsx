@@ -1,5 +1,5 @@
 import { ModelService, ModelServiceClient } from '@crossbreeze/model-service/lib/common';
-import { CrossModelDocument, CrossModelRoot, ModelDiagnostic, ModelUpdatedEvent, RenderProps } from '@crossbreeze/protocol';
+import { ArchiMateRoot, CrossModelDocument, ModelDiagnostic, ModelUpdatedEvent, RenderProps } from '@crossbreeze/protocol';
 import {
    ElementComponent,
    ErrorView,
@@ -123,7 +123,7 @@ export class CrossModelWidget extends ReactWidget implements Saveable {
       }
    }
 
-   protected async updateModel(root: CrossModelRoot): Promise<void> {
+   protected async updateModel(root: ArchiMateRoot): Promise<void> {
       if (this.document && !deepEqual(this.document.root, root)) {
          this.document.root = root;
          this.setDirty(true);
@@ -171,7 +171,7 @@ export class CrossModelWidget extends ReactWidget implements Saveable {
       };
    }
 
-   protected handleUpdateRequest = debounce(async (root: CrossModelRoot): Promise<void> => {
+   protected handleUpdateRequest = debounce(async (root: ArchiMateRoot): Promise<void> => {
       await this.updateModel(root);
    }, 200);
 

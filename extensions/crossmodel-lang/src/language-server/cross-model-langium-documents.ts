@@ -2,7 +2,7 @@ import { DefaultLangiumDocuments, DocumentState, LangiumDocument } from 'langium
 import { TextDocument } from 'vscode-languageserver-textdocument';
 import { URI } from 'vscode-uri';
 import { isPackageUri } from './cross-model-package-manager.js';
-import { CrossModelRoot } from './generated/ast.js';
+import { ArchiMateRoot } from './generated/ast.js';
 import { fixDocument } from './util/ast-util.js';
 import { Utils } from './util/uri-util.js';
 
@@ -29,7 +29,7 @@ export class CrossModelLangiumDocuments extends DefaultLangiumDocuments {
       return Utils.toRealURIorUndefined(uri);
    }
 
-   createEmptyDocument(uri: URI, rootType = CrossModelRoot): LangiumDocument {
+   createEmptyDocument(uri: URI, rootType = ArchiMateRoot): LangiumDocument {
       const document: LangiumDocument = {
          uri,
          parseResult: { lexerErrors: [], parserErrors: [], value: { $type: rootType } },

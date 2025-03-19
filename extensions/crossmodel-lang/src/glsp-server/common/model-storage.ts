@@ -21,7 +21,7 @@ import { AstUtils } from 'langium';
 import debounce from 'p-debounce';
 import { DiagnosticSeverity } from 'vscode-languageserver-protocol';
 import { URI } from 'vscode-uri';
-import { CrossModelRoot } from '../../language-server/generated/ast.js';
+import { ArchiMateRoot } from '../../language-server/generated/ast.js';
 import { AstArchiMateDocument } from '../../model-server/open-text-document-manager.js';
 import { ArchiMateModelState } from './model-state.js';
 
@@ -108,7 +108,7 @@ export class ArchiMateModelStorage implements SourceModelStorage, ClientSessionL
       AstUtils.streamReferences(this.state.semanticRoot)
          .map(refInfo => refInfo.reference.ref)
          .nonNullable()
-         .map(ref => AstUtils.findRootNode(ref) as CrossModelRoot)
+         .map(ref => AstUtils.findRootNode(ref) as ArchiMateRoot)
          .forEach(root =>
             this.state.modelService.save({ uri: root.$document!.uri.toString(), model: root, clientId: this.state.clientId })
          );
