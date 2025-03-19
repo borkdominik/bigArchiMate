@@ -1,4 +1,4 @@
-import { CrossModelWidget, CrossModelWidgetOptions } from '@crossbreeze/core/lib/browser';
+import { CustomWidget, CustomWidgetOptions } from '@crossbreeze/core/lib/browser';
 import { FormEditorOpenHandler, FormEditorWidget } from '@crossbreeze/form-client/lib/browser';
 import { ArchiMateDiagramManager } from '@crossbreeze/glsp-client/lib/browser/';
 import { ArchiMateDiagramLanguage } from '@crossbreeze/glsp-client/lib/common';
@@ -79,7 +79,7 @@ export class ReverseCompositeSaveable extends CompositeSaveable {
                saveable['setDirty'](false);
             } else if (saveable instanceof GLSPSaveable) {
                saveable['actionDispatcher'].dispatch(SetDirtyStateAction.create(false));
-            } else if (saveable instanceof CrossModelWidget) {
+            } else if (saveable instanceof CustomWidget) {
                saveable.setDirty(false);
             }
          });
@@ -92,7 +92,7 @@ export interface CompositeWidgetOptions extends NavigatableWidgetOptions {
 
 @injectable()
 export class CompositeEditor extends BaseWidget implements SaveableSource, Navigatable, Partial<GLSPDiagramWidgetContainer> {
-   @inject(CrossModelWidgetOptions) protected options: CompositeEditorOptions;
+   @inject(CustomWidgetOptions) protected options: CompositeEditorOptions;
    @inject(LabelProvider) protected labelProvider: LabelProvider;
    @inject(WidgetManager) protected widgetManager: WidgetManager;
    @inject(CustomEditorPreviewManager) protected editorManager: CustomEditorPreviewManager;

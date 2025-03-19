@@ -4,7 +4,7 @@ import { startLanguageServer } from 'langium/lsp';
 import { NodeFileSystem } from 'langium/node';
 import { createConnection, ProposedFeatures } from 'vscode-languageserver/node.js';
 import { startGLSPServer } from './glsp-server/launch.js';
-import { createCrossModelServices } from './language-server/module.js';
+import { createServices } from './language-server/module.js';
 import { startModelServer } from './model-server/launch.js';
 
 /**
@@ -22,7 +22,7 @@ import { startModelServer } from './model-server/launch.js';
 const connection = createConnection(ProposedFeatures.all);
 
 // Inject the shared services and language-specific services
-const { shared, CrossModel } = createCrossModelServices({ connection, ...NodeFileSystem });
+const { shared, services: CrossModel } = createServices({ connection, ...NodeFileSystem });
 
 // Start the language server with the shared services
 startLanguageServer(shared);

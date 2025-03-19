@@ -1,4 +1,4 @@
-import { CrossModelSelectionData, GModelElementInfo } from '@crossbreeze/glsp-client/lib/browser/selection-data-service';
+import { GModelElementInfo, SelectionData } from '@crossbreeze/glsp-client/lib/browser/selection-data-service';
 import { ModelService } from '@crossbreeze/model-service/lib/common';
 import { RenderProps } from '@crossbreeze/protocol';
 import { GlspSelection } from '@eclipse-glsp/theia-integration';
@@ -27,7 +27,7 @@ export class ModelDataService implements PropertyDataService {
       if (!selection || !GlspSelection.is(selection) || !selection.sourceUri || selection.selectedElementsIDs.length === 0) {
          return undefined;
       }
-      const selectionData = selection.additionalSelectionData as CrossModelSelectionData;
+      const selectionData = selection.additionalSelectionData as SelectionData;
       for (const selectedElementId of selection.selectedElementsIDs) {
          const renderData = await this.getPropertyData(selection, selectionData?.selectionDataMap.get(selectedElementId));
          if (renderData) {

@@ -6,7 +6,7 @@ import { PropertyViewWidget } from '@theia/property-view/lib/browser/property-vi
 import { SCM_VIEW_CONTAINER_ID } from '@theia/scm/lib/browser/scm-contribution';
 import { SearchInWorkspaceWidget } from '@theia/search-in-workspace/lib/browser/search-in-workspace-widget';
 
-export class CrossModelFrontendApplication extends FrontendApplication {
+export class CustomFrontendApplication extends FrontendApplication {
    @inject(WidgetManager) protected readonly widgetManager: WidgetManager;
 
    protected override async createDefaultLayout(): Promise<void> {

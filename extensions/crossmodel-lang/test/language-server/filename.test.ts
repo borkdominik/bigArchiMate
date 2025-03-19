@@ -1,10 +1,10 @@
 import { ModelFileExtensions } from '@crossbreeze/protocol';
 import { entity1 } from './test-utils/test-documents/entity/entity1.js';
-import { createCrossModelTestServices, parseEntity, testUri } from './test-utils/utils.js';
+import { createTestServices, parseEntity, testUri } from './test-utils/utils.js';
 
-const services = createCrossModelTestServices();
+const services = createTestServices();
 
-describe('CrossModel Filename Validation', () => {
+describe('Filename Validation', () => {
    test('Mismatching id and filename does not yield error', async () => {
       const entity = await parseEntity({
          services,

@@ -8,7 +8,7 @@ import {
    createSaveFileDialogContainer
 } from '@theia/filesystem/lib/browser';
 
-export function createCrossModelSaveFileDialogContainer(parent: interfaces.Container, props: SaveFileDialogProps): Container {
+export function createCustomSaveFileDialogContainer(parent: interfaces.Container, props: SaveFileDialogProps): Container {
    const container = createSaveFileDialogContainer(parent, props);
    container.rebind(SaveFileDialog).to(CustomSaveFileDialog);
    return container;

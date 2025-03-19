@@ -1,4 +1,4 @@
-import { CrossModelWidgetOptions } from '@crossbreeze/core/lib/browser';
+import { CustomWidgetOptions } from '@crossbreeze/core/lib/browser';
 import { FrontendApplicationContribution, OpenHandler, WidgetFactory } from '@theia/core/lib/browser';
 import { ContainerModule } from '@theia/core/shared/inversify';
 import { EditorPreviewManager } from '@theia/editor-preview/lib/browser/editor-preview-manager';
@@ -19,7 +19,7 @@ export default new ContainerModule((bind, _unbind, _isBound, rebind) => {
       id: CompositeEditorOpenHandler.ID, // must match the id in the open handler
       createWidget: (options: CompositeEditorOptions) => {
          const container = context.container.createChild();
-         container.bind(CrossModelWidgetOptions).toConstantValue(options);
+         container.bind(CustomWidgetOptions).toConstantValue(options);
          return container.resolve(CompositeEditor);
       }
    }));

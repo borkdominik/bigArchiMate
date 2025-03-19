@@ -25,7 +25,7 @@ function launchLanguageClient(context: vscode.ExtensionContext): LanguageClient 
    const clientOptions: LanguageClientOptions = createClientOptions(context);
 
    // Start the client. This will also launch the server
-   const languageClient = new LanguageClient('cross-model', 'CrossModel', serverOptions, clientOptions);
+   const languageClient = new LanguageClient('archimate', 'CrossModel', serverOptions, clientOptions);
    languageClient.start();
    vscode.commands.registerCommand(MODELSERVER_PORT_COMMAND, () => languageClient.sendRequest(MODELSERVER_PORT_COMMAND));
    vscode.commands.registerCommand(GLSP_PORT_COMMAND, () => languageClient.sendRequest(GLSP_PORT_COMMAND));

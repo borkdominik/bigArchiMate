@@ -1,4 +1,4 @@
-import { CrossModelDocument } from '@crossbreeze/protocol';
+import { ArchiMateDocument } from '@crossbreeze/protocol';
 import * as React from 'react';
 import { ModelQueryApi, OpenCallback, SaveCallback } from './ModelContext';
 import { ModelProvider, UpdateCallback } from './ModelProvider';
@@ -8,7 +8,7 @@ export interface ModelProviderProps {
    /**
     * The model object that will be provided to the child components.
     */
-   document: CrossModelDocument;
+   document: ArchiMateDocument;
 
    dirty: boolean;
 

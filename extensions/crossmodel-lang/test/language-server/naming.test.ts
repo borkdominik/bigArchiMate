@@ -1,8 +1,8 @@
 import { describe, expect, test } from '@jest/globals';
 import { EntityNode } from '../../src/language-server/generated/ast.js';
-import { createCrossModelTestServices, parseSystemDiagram } from './test-utils/utils.js';
+import { createTestServices, parseSystemDiagram } from './test-utils/utils.js';
 
-const services = createCrossModelTestServices();
+const services = createTestServices();
 
 const ex1 = `systemDiagram:
     id: example1`;

@@ -6,7 +6,7 @@ import { injectable } from '@theia/core/shared/inversify';
 
 @injectable()
 export class SelectionDataService extends GlspSelectionDataService {
-   async getSelectionData(root: Readonly<GModelRoot>, selectedElementIds: string[]): Promise<CrossModelSelectionData> {
+   async getSelectionData(root: Readonly<GModelRoot>, selectedElementIds: string[]): Promise<SelectionData> {
       const selection = selectedElementIds.map(id => root.index.getById(id)).filter(isDefined);
       return getSelectionDataFor(selection);
    }
@@ -18,11 +18,11 @@ export interface GModelElementInfo {
    renderProps?: Partial<RenderProps>;
 }
 
-export interface CrossModelSelectionData {
+export interface SelectionData {
    selectionDataMap: Map<string, GModelElementInfo>;
 }
 
-export function getSelectionDataFor(selection: GModelElement[]): CrossModelSelectionData {
+export function getSelectionDataFor(selection: GModelElement[]): SelectionData {
    const selectionDataMap = new Map<string, GModelElementInfo>();
    selection.forEach(element => selectionDataMap.set(element.id, getElementInfo(element)));
    return { selectionDataMap };

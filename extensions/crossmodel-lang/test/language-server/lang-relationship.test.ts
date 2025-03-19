@@ -8,16 +8,16 @@ import {
    relationship_with_attribute_wrong_entity,
    relationship_with_duplicate_attributes
 } from './test-utils/test-documents/relationship/index.js';
-import { createCrossModelTestServices, parseDocuments, parseRelationship, testUri } from './test-utils/utils.js';
+import { createTestServices, parseDocuments, parseRelationship, testUri } from './test-utils/utils.js';
 
 import { ModelFileExtensions } from '@crossbreeze/protocol';
 import { address } from './test-utils/test-documents/entity/address.js';
 import { customer } from './test-utils/test-documents/entity/customer.js';
 import { order } from './test-utils/test-documents/entity/order.js';
 
-const services = createCrossModelTestServices();
+const services = createTestServices();
 
-describe('CrossModel language Relationship', () => {
+describe('language Relationship', () => {
    beforeAll(async () => {
       await parseDocuments([
          { services, text: order },

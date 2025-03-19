@@ -22,7 +22,7 @@ import {
    StreamScope,
    URI
 } from 'langium';
-import { CrossModelServices } from './module.js';
+import { Services } from './module.js';
 import { QUALIFIED_ID_SEPARATOR } from './naming.js';
 import { GlobalAstNodeDescription, isGlobalDescriptionForLocalPackage, PackageAstNodeDescription } from './scope-computation.js';
 import { findDocument, fixDocument } from './util/ast-util.js';
@@ -33,7 +33,7 @@ import { findDocument, fixDocument } from './util/ast-util.js';
  */
 export class PackageScopeProvider extends DefaultScopeProvider {
    constructor(
-      protected services: CrossModelServices,
+      protected services: Services,
       protected packageManager = services.shared.workspace.PackageManager,
       protected idProvider = services.references.IdProvider
    ) {

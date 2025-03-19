@@ -1,6 +1,6 @@
 import {
+   ArchiMateDocument,
    CloseModelArgs,
-   CrossModelDocument,
    CrossReference,
    CrossReferenceContext,
    ModelUpdatedEvent,
@@ -41,7 +41,7 @@ export class ModelServiceImpl implements ModelService {
       });
    }
 
-   open(args: OpenModelArgs): Promise<CrossModelDocument | undefined> {
+   open(args: OpenModelArgs): Promise<ArchiMateDocument | undefined> {
       return this.server.open(args);
    }
 
@@ -49,7 +49,7 @@ export class ModelServiceImpl implements ModelService {
       return this.server.close(args);
    }
 
-   update(args: UpdateModelArgs): Promise<CrossModelDocument> {
+   update(args: UpdateModelArgs): Promise<ArchiMateDocument> {
       return this.server.update(args);
    }
 
@@ -57,7 +57,7 @@ export class ModelServiceImpl implements ModelService {
       return this.server.save(args);
    }
 
-   request(uri: string): Promise<CrossModelDocument | undefined> {
+   request(uri: string): Promise<ArchiMateDocument | undefined> {
       return this.server.request(uri);
    }
 

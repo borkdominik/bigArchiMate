@@ -16,11 +16,11 @@ import { customer } from '../test-utils/test-documents/entity/customer.js';
 import { sub_customer } from '../test-utils/test-documents/entity/sub_customer.js';
 import { sub_customer_cycle } from '../test-utils/test-documents/entity/sub_customer_cycle.js';
 import { sub_customer_multi } from '../test-utils/test-documents/entity/sub_customer_multi.js';
-import { createCrossModelTestServices, parseDocuments, parseEntity, testUri } from '../test-utils/utils.js';
+import { createTestServices, parseDocuments, parseEntity, testUri } from '../test-utils/utils.js';
 
-const services = createCrossModelTestServices();
+const services = createTestServices();
 
-describe('CrossModelLexer', () => {
+describe('Lexer', () => {
    let serializer: Serializer;
 
    beforeAll(() => {

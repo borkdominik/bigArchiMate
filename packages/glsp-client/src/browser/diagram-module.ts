@@ -23,7 +23,7 @@ import { MousePositionTracker } from './mouse-position-tracker';
 import { SelectionDataService } from './selection-data-service';
 import { CustomToolPalette } from './tool-palette';
 
-export function createCrossModelDiagramModule(registry: interfaces.ContainerModuleCallBack): ContainerModule {
+export function createDiagramModule(registry: interfaces.ContainerModuleCallBack): ContainerModule {
    return new ContainerModule((bind, unbind, isBound, rebind, unbindAsync, onActivation, onDeactivation) => {
       const context = { bind, unbind, isBound, rebind };
       rebind(TYPES.ILogger).to(ConsoleLogger).inSingletonScope();
@@ -42,8 +42,8 @@ export function createCrossModelDiagramModule(registry: interfaces.ContainerModu
       bind(MousePositionTracker).toSelf().inSingletonScope();
       bindOrRebind(context, GLSPMousePositionTracker).toService(MousePositionTracker);
 
-      bind(CrossModelToolManager).toSelf().inSingletonScope();
-      bindOrRebind(context, TYPES.IToolManager).toService(CrossModelToolManager);
+      bind(CustomToolManager).toSelf().inSingletonScope();
+      bindOrRebind(context, TYPES.IToolManager).toService(CustomToolManager);
 
       bindAsService(bind, TYPES.IUIExtension, ErrorExtension);
       rebind(MetadataPlacer).to(CustomMetadataPlacer).inSingletonScope();
@@ -51,7 +51,7 @@ export function createCrossModelDiagramModule(registry: interfaces.ContainerModu
 }
 
 @injectable()
-export class CrossModelToolManager extends ToolManager {
+export class CustomToolManager extends ToolManager {
    override enableDefaultTools(): void {
       super.enableDefaultTools();
       // since setting the _defaultToolsEnabled flag to true will short-circuit the enableDefaultTools method

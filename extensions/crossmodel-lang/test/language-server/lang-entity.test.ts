@@ -1,11 +1,11 @@
 import { describe, expect, test } from '@jest/globals';
 
 import { entity1, entity2, entity3, entity4 } from './test-utils/test-documents/entity/index.js';
-import { createCrossModelTestServices, parseEntity } from './test-utils/utils.js';
+import { createTestServices, parseEntity } from './test-utils/utils.js';
 
-const services = createCrossModelTestServices();
+const services = createTestServices();
 
-describe('CrossModel language Entity', () => {
+describe('language Entity', () => {
    describe('Without attributes', () => {
       test('Simple file for entity', async () => {
          const entity = await parseEntity({ services, text: entity1 });

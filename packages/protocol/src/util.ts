@@ -1,4 +1,4 @@
-import { CrossModelRegex } from './model-service/protocol';
+import { ArchiMateLanguageRegex } from './model-service/protocol';
 
 export function quote(text: string, quoteChar = '"', replaceChar = "'"): string {
    if (text.length === 0) {
@@ -29,7 +29,7 @@ export function unquote(text: string, quoteChar = '"'): string {
 }
 
 export function toId(text: string): string {
-   if (CrossModelRegex.ID.test(text)) {
+   if (ArchiMateLanguageRegex.ID.test(text)) {
       return text;
    }
    let id = text;
@@ -38,7 +38,7 @@ export function toId(text: string): string {
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '')
       .replace(/[^\w_\-~$#@/\d]/g, '_');
-   if (CrossModelRegex.ID.test(id)) {
+   if (ArchiMateLanguageRegex.ID.test(id)) {
       return id;
    }
    // prefix with '_' if necessary

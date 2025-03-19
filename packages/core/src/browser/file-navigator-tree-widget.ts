@@ -14,7 +14,7 @@ export class CustomFileNavigatorWidget extends FileNavigatorWidget {
    }
 }
 
-export function createCrossModelFileNavigatorWidget(parent: interfaces.Container): FileNavigatorWidget {
+export function createFileNavigatorWidget(parent: interfaces.Container): FileNavigatorWidget {
    const child = createFileNavigatorContainer(parent);
    child.bind(CustomFileNavigatorWidget).toSelf().inSingletonScope();
    child.rebind(FileNavigatorWidget).toService(CustomFileNavigatorWidget);

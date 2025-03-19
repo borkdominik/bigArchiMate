@@ -4,7 +4,7 @@ import { CompletionAcceptor, CompletionContext, CompletionValueItem, DefaultComp
 import { v4 as uuid } from 'uuid';
 import { CompletionItemKind, InsertTextFormat } from 'vscode-languageserver-protocol';
 import type { Range } from 'vscode-languageserver-types';
-import { CrossModelServices } from './module.js';
+import { Services } from './module.js';
 import { ScopeProvider } from './scope-provider.js';
 import { fixDocument } from './util/ast-util.js';
 
@@ -21,7 +21,7 @@ export class CompletionProvider extends DefaultCompletionProvider {
    protected declare readonly scopeProvider: ScopeProvider;
 
    constructor(
-      protected services: CrossModelServices,
+      protected services: Services,
       protected packageManager = services.shared.workspace.PackageManager
    ) {
       super(services);

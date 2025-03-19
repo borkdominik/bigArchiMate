@@ -3,11 +3,11 @@ import { isReference } from 'langium';
 
 import { InheritanceEdge, RelationshipEdge, isInheritanceEdge, isRelationshipEdge } from '../../src/language-server/generated/ast.js';
 import { diagram1, diagram2, diagram3, diagram4, diagram5, diagram6, diagram7 } from './test-utils/test-documents/diagram/index.js';
-import { createCrossModelTestServices, parseSystemDiagram } from './test-utils/utils.js';
+import { createTestServices, parseSystemDiagram } from './test-utils/utils.js';
 
-const services = createCrossModelTestServices();
+const services = createTestServices();
 
-describe('CrossModel language Diagram', () => {
+describe('language Diagram', () => {
    describe('Diagram without nodes and edges', () => {
       test('Simple file for diagram', async () => {
          const systemDiagram = await parseSystemDiagram({ services, text: diagram1 });

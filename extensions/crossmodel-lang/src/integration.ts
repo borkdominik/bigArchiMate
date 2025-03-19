@@ -1,4 +1,4 @@
-import { CrossModelServices, CrossModelSharedServices } from './language-server/module.js';
+import { CrossModelSharedServices, Services } from './language-server/module.js';
 
 /**
  * Language services required in GLSP.
@@ -8,5 +8,5 @@ export interface CrossModelLSPServices {
    /** Language services shared across all languages. */
    shared: CrossModelSharedServices;
    /** CrossModel language-specific services. */
-   language: CrossModelServices;
+   language: Services;
 }

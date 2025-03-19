@@ -1,4 +1,4 @@
-import { CrossModelWidgetOptions } from '@crossbreeze/core/lib/browser';
+import { CustomWidgetOptions } from '@crossbreeze/core/lib/browser';
 import { FrontendApplicationContribution, NavigatableWidgetOptions, OpenHandler, WidgetFactory } from '@theia/core/lib/browser';
 import { ContainerModule } from '@theia/core/shared/inversify';
 import { FormEditorOpenHandler, createFormEditorId } from './form-editor-open-handler';
@@ -19,7 +19,7 @@ export default new ContainerModule(bind => {
             widgetId,
             clientId: 'form-editor'
          };
-         container.bind(CrossModelWidgetOptions).toConstantValue(options);
+         container.bind(CustomWidgetOptions).toConstantValue(options);
          container.bind(FormEditorWidget).toSelf();
          return container.get(FormEditorWidget);
       }

@@ -1,5 +1,5 @@
 import { ModelService, ModelServiceClient } from '@crossbreeze/model-service/lib/common';
-import { ArchiMateRoot, CrossModelDocument, ModelDiagnostic, ModelUpdatedEvent, RenderProps } from '@crossbreeze/protocol';
+import { ArchiMateDocument, ArchiMateRoot, ModelDiagnostic, ModelUpdatedEvent, RenderProps } from '@crossbreeze/protocol';
 import {
    ElementComponent,
    ErrorView,
@@ -19,8 +19,8 @@ import { EditorPreferences } from '@theia/editor/lib/browser';
 import * as deepEqual from 'fast-deep-equal';
 import * as debounce from 'p-debounce';
 
-export const CrossModelWidgetOptions = Symbol('FormEditorWidgetOptions');
-export interface CrossModelWidgetOptions {
+export const CustomWidgetOptions = Symbol('CustomWidgetOptions');
+export interface CustomWidgetOptions {
    clientId: string;
    widgetId: string;
    uri?: string;
@@ -28,8 +28,8 @@ export interface CrossModelWidgetOptions {
 }
 
 @injectable()
-export class CrossModelWidget extends ReactWidget implements Saveable {
-   @inject(CrossModelWidgetOptions) protected options: CrossModelWidgetOptions;
+export class CustomWidget extends ReactWidget implements Saveable {
+   @inject(CustomWidgetOptions) protected options: CustomWidgetOptions;
    @inject(LabelProvider) protected labelProvider: LabelProvider;
    @inject(ModelService) protected readonly modelService: ModelService;
    @inject(ModelServiceClient) protected serviceClient: ModelServiceClient;
@@ -45,7 +45,7 @@ export class CrossModelWidget extends ReactWidget implements Saveable {
    autoSave: 'off' | 'afterDelay' | 'onFocusChange' | 'onWindowChange';
    autoSaveDelay: number;
 
-   protected document?: CrossModelDocument;
+   protected document?: ArchiMateDocument;
    protected error: string | undefined;
 
    @postConstruct()
@@ -91,7 +91,7 @@ export class CrossModelWidget extends ReactWidget implements Saveable {
       await this.modelService.close({ clientId: this.options.clientId, uri });
    }
 
-   protected async openModel(uri: string): Promise<CrossModelDocument | undefined> {
+   protected async openModel(uri: string): Promise<ArchiMateDocument | undefined> {
       try {
          const document = await this.modelService.open({ clientId: this.options.clientId, uri, version: this.options.version });
          return document;

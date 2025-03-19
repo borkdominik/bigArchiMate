@@ -1,7 +1,7 @@
 import * as rpc from 'vscode-jsonrpc/node';
 import { ElementType, RelationType } from '../glsp/types';
 
-export const CrossModelRegex = {
+export const ArchiMateLanguageRegex = {
    STRING: /^"[^"]*"$|^'[^']*'$/,
    NUMBER: /^(-)?[0-9]+(\.[0-9]*)?$/,
    SL_COMMENT: /^#[^\n\r]*$/,
@@ -15,7 +15,7 @@ export const CrossModelRegex = {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export type Reference<T> = string;
 
-export interface CrossModelElement {
+export interface ArchiMateObject {
    readonly $type: string;
 }
 
@@ -33,13 +33,13 @@ export interface CustomProperty {
    value?: string;
 }
 
-export interface CrossModelDocument<T = ArchiMateRoot, D = ModelDiagnostic> {
+export interface ArchiMateDocument<T = ArchiMateRoot, D = ModelDiagnostic> {
    uri: string;
    root: T;
    diagnostics: D[];
 }
 
-export interface ArchiMateRoot extends CrossModelElement {
+export interface ArchiMateRoot extends ArchiMateObject {
    readonly $type: 'ArchiMateRoot';
    element?: Element;
    relation?: Relation;
@@ -52,13 +52,13 @@ export function isArchiMateRoot(model?: any): model is ArchiMateRoot {
 
 export const PropertyType = 'Property';
 
-export interface Property extends CrossModelElement, Identifiable {
+export interface Property extends ArchiMateObject, Identifiable {
    readonly $type: typeof PropertyType;
    value?: string;
    name?: string;
 }
 
-export interface Element extends CrossModelElement, Identifiable {
+export interface Element extends ArchiMateObject, Identifiable {
    readonly $type: 'Element';
    name?: string;
    documentation?: string;
@@ -66,14 +66,14 @@ export interface Element extends CrossModelElement, Identifiable {
    properties: Array<Property>;
 }
 
-export interface Junction extends CrossModelElement, Identifiable {
+export interface Junction extends ArchiMateObject, Identifiable {
    readonly $type: 'Junction';
    name?: string;
    documentation?: string;
    properties: Array<Property>;
 }
 
-export interface Relation extends CrossModelElement, Identifiable {
+export interface Relation extends ArchiMateObject, Identifiable {
    readonly $type: 'Relation';
    name?: string;
    documentation?: string;
@@ -123,13 +123,13 @@ export namespace ModelDiagnostic {
    }
 }
 
-export interface ModelUpdatedEvent<D = CrossModelDocument> {
+export interface ModelUpdatedEvent<D = ArchiMateDocument> {
    document: D;
    sourceClientId: string;
    reason: 'changed' | 'deleted' | 'updated' | 'saved';
 }
 
-export interface ModelSavedEvent<D = CrossModelDocument> {
+export interface ModelSavedEvent<D = ArchiMateDocument> {
    document: D;
    sourceClientId: string;
 }
@@ -240,15 +240,15 @@ export interface SystemUpdatedEvent {
 }
 export type SystemUpdateListener = (event: SystemUpdatedEvent) => void | Promise<void>;
 
-export const OpenModel = new rpc.RequestType1<OpenModelArgs, CrossModelDocument | undefined, void>('server/open');
+export const OpenModel = new rpc.RequestType1<OpenModelArgs, ArchiMateDocument | undefined, void>('server/open');
 export const CloseModel = new rpc.RequestType1<CloseModelArgs, void, void>('server/close');
-export const RequestModel = new rpc.RequestType1<string, CrossModelDocument | undefined, void>('server/request');
+export const RequestModel = new rpc.RequestType1<string, ArchiMateDocument | undefined, void>('server/request');
 export const RequestModelDiagramNode = new rpc.RequestType2<string, string, Element | undefined, void>('server/requestModelDiagramNode');
 
 export const FindReferenceableElements = new rpc.RequestType1<CrossReferenceContext, ReferenceableElement[], void>('server/complete');
 export const ResolveReference = new rpc.RequestType1<CrossReference, ResolvedElement | undefined, void>('server/resolve');
 
-export const UpdateModel = new rpc.RequestType1<UpdateModelArgs, CrossModelDocument, void>('server/update');
+export const UpdateModel = new rpc.RequestType1<UpdateModelArgs, ArchiMateDocument, void>('server/update');
 export const SaveModel = new rpc.RequestType1<SaveModelArgs, void, void>('server/save');
 export const OnModelSaved = new rpc.NotificationType1<ModelSavedEvent>('server/onSave');
 export const OnModelUpdated = new rpc.NotificationType1<ModelUpdatedEvent>('server/onUpdated');

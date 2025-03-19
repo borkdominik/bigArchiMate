@@ -24,7 +24,7 @@ import {
 import { GLSPDiagramConfiguration } from '@eclipse-glsp/theia-integration';
 import { Container } from '@theia/core/shared/inversify/index';
 import { ArchiMateDiagramLanguage } from '../../common/diagram-language';
-import { createCrossModelDiagramModule } from '../diagram-module';
+import { createDiagramModule } from '../diagram-module';
 import { CutOffCornerNodeView } from './cut-off-corner-view';
 import { archiMateEdgeCreationToolModule } from './edge-creation-tool/edge-creation-tool-module';
 import { IconView } from './icon-view';
@@ -51,7 +51,7 @@ export class ArchiMateDiagramConfiguration extends GLSPDiagramConfiguration {
    }
 }
 
-const archiMateDiagramModule = createCrossModelDiagramModule((bind, unbind, isBound, rebind) => {
+const archiMateDiagramModule = createDiagramModule((bind, unbind, isBound, rebind) => {
    const context = { bind, unbind, isBound, rebind };
 
    // Use GLSP default model elements and their views

@@ -1,6 +1,6 @@
 import {
+   ArchiMateDocument,
    CloseModelArgs,
-   CrossModelDocument,
    CrossReference,
    CrossReferenceContext,
    ModelUpdatedEvent,
@@ -31,13 +31,13 @@ export interface ModelService
 export const ModelServiceServer = Symbol('ModelServiceServer');
 export interface ModelServiceServer extends RpcServer<ModelServiceClient> {
    // Model API
-   open(args: OpenModelArgs): Promise<CrossModelDocument | undefined>;
+   open(args: OpenModelArgs): Promise<ArchiMateDocument | undefined>;
    close(args: CloseModelArgs): Promise<void>;
-   update(args: UpdateModelArgs): Promise<CrossModelDocument>;
+   update(args: UpdateModelArgs): Promise<ArchiMateDocument>;
    save(args: SaveModelArgs): Promise<void>;
 
    // Query API
-   request(uri: string): Promise<CrossModelDocument | undefined>;
+   request(uri: string): Promise<ArchiMateDocument | undefined>;
    findReferenceableElements(args: CrossReferenceContext): Promise<ReferenceableElement[]>;
    resolveReference(reference: CrossReference): Promise<ResolvedElement | undefined>;
 

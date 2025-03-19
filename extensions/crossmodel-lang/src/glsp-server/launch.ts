@@ -13,7 +13,7 @@ import { Container, ContainerModule } from 'inversify';
 import { AddressInfo } from 'net';
 import { URI } from 'vscode-uri';
 import { CrossModelLSPServices } from '../integration.js';
-import { CrossModelServices, CrossModelSharedServices } from '../language-server/module.js';
+import { Services, CrossModelSharedServices } from '../language-server/module.js';
 import { ArchiMateDiagramModule } from './archimate-diagram/diagram-module.js';
 
 /**
@@ -69,6 +69,6 @@ export function createLSPModule(services: CrossModelLSPServices): ContainerModul
    return new ContainerModule(bind => {
       bind(CrossModelLSPServices).toConstantValue(services);
       bind(CrossModelSharedServices).toConstantValue(services.shared);
-      bind(CrossModelServices).toConstantValue(services.language);
+      bind(Services).toConstantValue(services.language);
    });
 }

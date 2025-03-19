@@ -4,11 +4,11 @@ import { ParseHelperOptions, parseDocument as langiumParseDocument } from 'langi
 import path from 'path';
 import { PackageJson } from 'type-fest';
 import { ArchiMateRoot } from '../../../src/language-server/generated/ast.js';
-import { CrossModelServices, createCrossModelServices } from '../../../src/language-server/module.js';
+import { Services, createServices } from '../../../src/language-server/module.js';
 import { SemanticRoot, TypeGuard, WithDocument, findSemanticRoot } from '../../../src/language-server/util/ast-util.js';
 
-export function createCrossModelTestServices(context: DefaultSharedModuleContext = EmptyFileSystem): CrossModelServices {
-   return createCrossModelServices(context).CrossModel;
+export function createTestServices(context: DefaultSharedModuleContext = EmptyFileSystem): Services {
+   return createServices(context).services;
 }
 
 export interface ProjectInput {

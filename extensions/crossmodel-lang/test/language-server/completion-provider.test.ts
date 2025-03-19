@@ -3,12 +3,12 @@ import { expectCompletion } from 'langium/test';
 import { address } from './test-utils/test-documents/entity/address.js';
 import { customer } from './test-utils/test-documents/entity/customer.js';
 import { order } from './test-utils/test-documents/entity/order.js';
-import { createCrossModelTestServices, MockFileSystem, parseProject, testUri } from './test-utils/utils.js';
+import { createTestServices, MockFileSystem, parseProject, testUri } from './test-utils/utils.js';
 
-const services = createCrossModelTestServices(MockFileSystem);
+const services = createTestServices(MockFileSystem);
 const assertCompletion = expectCompletion(services);
 
-describe('CrossModelCompletionProvider', () => {
+describe('CompletionProvider', () => {
    const text = expandToString`
     relationship:
        id: Address_Customer

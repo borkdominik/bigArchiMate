@@ -1,8 +1,8 @@
 import { EmptyFileSystem } from 'langium';
 import { parentPort } from 'node:worker_threads';
-import { createCrossModelServices } from '../module.js';
+import { createServices } from '../module.js';
 
-const services = createCrossModelServices(EmptyFileSystem).CrossModel;
+const services = createServices(EmptyFileSystem).services;
 const parser = services.parser.LangiumParser;
 const hydrator = services.serializer.Hydrator;
 

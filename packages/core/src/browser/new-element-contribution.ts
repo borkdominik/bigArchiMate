@@ -65,7 +65,7 @@ const NEW_ELEMENT_TEMPLATES: NewElementTemplate[] = [
 const ID_REGEX = /^[_a-zA-Z@][\w_\-@/#]*$/; /* taken from the langium file, in newer Langium versions constants may be generated. */
 
 @injectable()
-export class CrossModelWorkspaceContribution extends WorkspaceCommandContribution implements MenuContribution, CommandContribution {
+export class CustomWorkspaceCommandContribution extends WorkspaceCommandContribution implements MenuContribution, CommandContribution {
    @inject(ModelService) modelService: ModelService;
 
    override registerCommands(commands: CommandRegistry): void {
@@ -151,7 +151,7 @@ export class CrossModelWorkspaceContribution extends WorkspaceCommandContributio
 }
 
 @injectable()
-export class CrossModelFileNavigatorContribution extends FileNavigatorContribution {
+export class CustomFileNavigatorContribution extends FileNavigatorContribution {
    override registerCommands(registry: CommandRegistry): void {
       super.registerCommands(registry);
 

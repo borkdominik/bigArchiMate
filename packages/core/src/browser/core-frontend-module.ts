@@ -7,25 +7,25 @@ import { FileNavigatorContribution } from '@theia/navigator/lib/browser/navigato
 import { WorkspaceCommandContribution } from '@theia/workspace/lib/browser/workspace-commands';
 import '../../style/icons.css';
 import '../../style/index.css';
-import { createCrossModelFileNavigatorWidget } from './file-navigator-tree-widget';
+import { createFileNavigatorWidget } from './file-navigator-tree-widget';
 import { CustomLabelProvider } from './label-provider';
-import { CrossModelFileNavigatorContribution, CrossModelWorkspaceContribution } from './new-element-contribution';
-import { createCrossModelSaveFileDialogContainer } from './save-file-dialog';
+import { CustomFileNavigatorContribution, CustomWorkspaceCommandContribution } from './new-element-contribution';
+import { createCustomSaveFileDialogContainer } from './save-file-dialog';
 
 export default new ContainerModule((bind, _unbind, _isBound, rebind) => {
-   bind(CrossModelWorkspaceContribution).toSelf().inSingletonScope();
-   rebind(WorkspaceCommandContribution).toService(CrossModelWorkspaceContribution);
-   bind(MenuContribution).toService(CrossModelWorkspaceContribution);
+   bind(CustomWorkspaceCommandContribution).toSelf().inSingletonScope();
+   rebind(WorkspaceCommandContribution).toService(CustomWorkspaceCommandContribution);
+   bind(MenuContribution).toService(CustomWorkspaceCommandContribution);
 
-   bind(CrossModelFileNavigatorContribution).toSelf().inSingletonScope();
-   rebind(FileNavigatorContribution).toService(CrossModelFileNavigatorContribution);
+   bind(CustomFileNavigatorContribution).toSelf().inSingletonScope();
+   rebind(FileNavigatorContribution).toService(CustomFileNavigatorContribution);
 
-   rebind(FileNavigatorWidget).toDynamicValue(ctx => createCrossModelFileNavigatorWidget(ctx.container));
+   rebind(FileNavigatorWidget).toDynamicValue(ctx => createFileNavigatorWidget(ctx.container));
    bind(CustomLabelProvider).toSelf().inSingletonScope();
    bind(LabelProviderContribution).toService(CustomLabelProvider);
    bind(NavigatorTreeDecorator).toService(CustomLabelProvider);
 
    rebind(SaveFileDialogFactory).toFactory(
-      ctx => (props: SaveFileDialogProps) => createCrossModelSaveFileDialogContainer(ctx.container, props).get(SaveFileDialog)
+      ctx => (props: SaveFileDialogProps) => createCustomSaveFileDialogContainer(ctx.container, props).get(SaveFileDialog)
    );
 });

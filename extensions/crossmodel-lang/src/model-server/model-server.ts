@@ -1,8 +1,8 @@
 import {
+   ArchiMateDocument,
    ArchiMateRoot,
    CloseModel,
    CloseModelArgs,
-   CrossModelDocument,
    CrossReference,
    CrossReferenceContext,
    FindReferenceableElements,
@@ -84,7 +84,7 @@ export class ModelServer implements Disposable {
       return { uri, model };
    }
 
-   protected async openModel(args: OpenModelArgs): Promise<CrossModelDocument | undefined> {
+   protected async openModel(args: OpenModelArgs): Promise<ArchiMateDocument | undefined> {
       if (!this.modelService.isOpen(args.uri)) {
          await this.modelService.open(args);
       }
@@ -123,12 +123,12 @@ export class ModelServer implements Disposable {
       return this.modelService.close(args);
    }
 
-   protected async requestModel(uri: string): Promise<CrossModelDocument | undefined> {
+   protected async requestModel(uri: string): Promise<ArchiMateDocument | undefined> {
       const document = await this.modelService.request(uri);
       return document ? this.toDocument(document) : undefined;
    }
 
-   protected async updateModel(args: UpdateModelArgs<ArchiMateRoot>): Promise<CrossModelDocument> {
+   protected async updateModel(args: UpdateModelArgs<ArchiMateRoot>): Promise<ArchiMateDocument> {
       const updated = await this.modelService.update({ ...args, model: args.model as ast.ArchiMateRoot });
       return this.toDocument(updated);
    }
@@ -141,9 +141,9 @@ export class ModelServer implements Disposable {
       this.toDispose.forEach(disposable => disposable.dispose());
    }
 
-   protected toDocument<T extends CrossModelDocument<ast.ArchiMateRoot, Diagnostic>>(
+   protected toDocument<T extends ArchiMateDocument<ast.ArchiMateRoot, Diagnostic>>(
       document: T
-   ): CrossModelDocument<ArchiMateRoot, ModelDiagnostic> {
+   ): ArchiMateDocument<ArchiMateRoot, ModelDiagnostic> {
       return {
          uri: document.uri,
          diagnostics: document.diagnostics.map(diagnostic => this.toModelDiagnostic(diagnostic)),

@@ -1,14 +1,14 @@
-import { CloseModelArgs, CrossModelDocument, ModelSavedEvent, ModelUpdatedEvent, OpenModelArgs } from '@crossbreeze/protocol';
+import { ArchiMateDocument, CloseModelArgs, ModelSavedEvent, ModelUpdatedEvent, OpenModelArgs } from '@crossbreeze/protocol';
 import * as fs from 'fs';
 import {
-    AstNode,
-    DocumentBuilder,
-    DocumentState,
-    FileSystemProvider,
-    LangiumDefaultSharedCoreServices,
-    LangiumDocument,
-    LangiumDocuments,
-    UriUtils
+   AstNode,
+   DocumentBuilder,
+   DocumentState,
+   FileSystemProvider,
+   LangiumDefaultSharedCoreServices,
+   LangiumDocument,
+   LangiumDocuments,
+   UriUtils
 } from 'langium';
 import * as path from 'path';
 import { Disposable } from 'vscode-languageserver';
@@ -25,7 +25,7 @@ export interface UpdateInfo {
    deleted: URI[];
 }
 
-export type AstArchiMateDocument = CrossModelDocument<ArchiMateRoot, Diagnostic>;
+export type AstArchiMateDocument = ArchiMateDocument<ArchiMateRoot, Diagnostic>;
 
 /**
  * A manager class that supports handling documents with a simple open-update-save/close lifecycle.

@@ -45,14 +45,14 @@ export type ExtendedLangiumServices = LangiumServices & {
 };
 
 export class DefaultExtendedServiceRegistry extends DefaultServiceRegistry {
-   protected _crossModelService!: CrossModelServices;
+   protected _services!: Services;
 
-   get CrossModel(): CrossModelServices {
-      return this._crossModelService;
+   get CrossModel(): Services {
+      return this._services;
    }
 
-   set CrossModel(service: CrossModelServices) {
-      this._crossModelService = service;
+   set CrossModel(service: Services) {
+      this._services = service;
    }
 
    override register(language: ExtendedLangiumServices): void {
@@ -65,7 +65,7 @@ export class DefaultExtendedServiceRegistry extends DefaultServiceRegistry {
 }
 
 export interface ExtendedServiceRegistry extends ServiceRegistry {
-   CrossModel: CrossModelServices;
+   CrossModel: Services;
    register(language: ExtendedLangiumServices): void;
    getServices(uri: URI): ExtendedLangiumServices;
 }
@@ -158,15 +158,15 @@ export interface AddedServices {
  * Union of Langium default services and your custom services - use this as constructor parameter
  * of custom service classes.
  */
-export type CrossModelServices = ExtendedLangiumServices & AddedServices;
-export const CrossModelServices = Symbol('CrossModelServices');
+export type Services = ExtendedLangiumServices & AddedServices;
+export const Services = Symbol('Services');
 
 /**
  * Dependency injection module that overrides Langium default services and contributes the
  * declared custom services. The Langium defaults can be partially specified to override only
  * selected services, while the custom services must be fully specified.
  */
-export function createCrossModelModule(context: ModuleContext): Module<CrossModelServices, PartialLangiumServices & AddedServices> {
+export function createCrossModelModule(context: ModuleContext): Module<Services, PartialLangiumServices & AddedServices> {
    return {
       references: {
          ScopeComputation: services => new ScopeComputation(services),
@@ -210,14 +210,14 @@ export function createCrossModelModule(context: ModuleContext): Module<CrossMode
  * @param context Optional module context with the LSP connection
  * @returns An object wrapping the shared services and the language-specific services
  */
-export function createCrossModelServices(context: DefaultSharedModuleContext): {
+export function createServices(context: DefaultSharedModuleContext): {
    shared: CrossModelSharedServices;
-   CrossModel: CrossModelServices;
+   services: Services;
 } {
    const shared = inject(createDefaultSharedModule(context), ArchiMateLanguageGeneratedSharedModule, SharedModule);
-   const CrossModel = inject(createDefaultModule({ shared }), ArchiMateGeneratedModule, createCrossModelModule({ shared }));
-   shared.ServiceRegistry.CrossModel = CrossModel;
-   shared.ServiceRegistry.register(CrossModel);
-   registerValidationChecks(CrossModel);
-   return { shared, CrossModel };
+   const services = inject(createDefaultModule({ shared }), ArchiMateGeneratedModule, createCrossModelModule({ shared }));
+   shared.ServiceRegistry.CrossModel = services;
+   shared.ServiceRegistry.register(services);
+   registerValidationChecks(services);
+   return { shared, services };
 }

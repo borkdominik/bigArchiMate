@@ -24,7 +24,7 @@ For this reason, we are defining that any directory with a [`package.json`](http
 By re-using the `package.json` format from npm, we also gain automatic support for publishing systems and libraries on an npm registry that can be automatically downloaded through the npm CLI.
 The task of the package manager is to introduce that mechanism in the language server.
 
-The code responsible for this functionality can be found in [`cross-model-package-manager.ts`](../extensions/crossmodel-lang/src/language-server/cross-model-package-manager.ts).
+The code responsible for this functionality can be found in [`package-manager.ts`](../extensions/crossmodel-lang/src/language-server/package-manager.ts).
 
 ### Model Service Facade
 

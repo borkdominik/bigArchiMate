@@ -3,12 +3,12 @@ import { Command } from 'commander';
 import { NodeFileSystem } from 'langium/node';
 import { ArchiMateRoot } from '../language-server/generated/ast.js';
 import { ArchiMateLanguageMetaData } from '../language-server/generated/module.js';
-import { createCrossModelServices } from '../language-server/module.js';
+import { createServices } from '../language-server/module.js';
 import { extractAstNode } from './cli-util.js';
 import { generateJavaScript } from './generator.js';
 
 export const generateAction = async (fileName: string, opts: GenerateOptions): Promise<void> => {
-   const services = createCrossModelServices(NodeFileSystem).CrossModel;
+   const services = createServices(NodeFileSystem).services;
    const root = await extractAstNode<ArchiMateRoot>(fileName, services);
    const generatedFilePath = generateJavaScript(root, fileName, opts.destination);
    console.log(chalk.green(`JavaScript code generated successfully: ${generatedFilePath}`));

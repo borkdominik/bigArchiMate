@@ -1,10 +1,10 @@
 import { describe, expect, test } from '@jest/globals';
 import { NodeFileSystem } from 'langium/node';
-import { createCrossModelServices } from '../../src/language-server/module.js';
+import { createServices } from '../../src/language-server/module.js';
 import { ModelService } from '../../src/model-server/model-service.js';
 
 // the model service actually needs a file system, so we use the NodeFileSystem
-const services = createCrossModelServices({ ...NodeFileSystem });
+const services = createServices({ ...NodeFileSystem });
 const sharedServices = services.shared;
 
 const modelService = new ModelService(sharedServices);

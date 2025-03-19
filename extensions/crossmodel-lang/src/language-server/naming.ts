@@ -1,6 +1,6 @@
 import { findNextUnique, identity } from '@crossbreeze/protocol';
 import { AstNode, AstUtils, CstNode, GrammarUtils, isAstNode, NameProvider } from 'langium';
-import { CrossModelServices } from './module.js';
+import { Services } from './module.js';
 import { UNKNOWN_PROJECT_REFERENCE } from './package-manager.js';
 import { findDocument, getOwner } from './util/ast-util.js';
 
@@ -46,7 +46,7 @@ export function combineIds(...ids: string[]): string {
  */
 export class DefaultIdProvider implements NameProvider, IdProvider {
    constructor(
-      protected services: CrossModelServices,
+      protected services: Services,
       protected packageManager = services.shared.workspace.PackageManager
    ) {}
 

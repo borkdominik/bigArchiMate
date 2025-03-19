@@ -16,7 +16,7 @@ import { AstNode, Deferred, DocumentState, isAstNode } from 'langium';
 import { Disposable, OptionalVersionedTextDocumentIdentifier, Range, TextDocumentEdit, TextEdit, uinteger } from 'vscode-languageserver';
 import { URI, Utils as UriUtils } from 'vscode-uri';
 import { ArchiMateRoot, isArchiMateRoot } from '../language-server/generated/ast.js';
-import { CrossModelServices, CrossModelSharedServices } from '../language-server/module.js';
+import { CrossModelSharedServices, Services } from '../language-server/module.js';
 import { PACKAGE_JSON } from '../language-server/package-manager.js';
 import { findDocument } from '../language-server/util/ast-util.js';
 import { AstArchiMateDocument } from './open-text-document-manager.js';
@@ -199,7 +199,7 @@ export class ModelService {
 
    getId(node: AstNode, uri = findDocument(node)?.uri): string | undefined {
       if (uri) {
-         const services = this.shared.ServiceRegistry.getServices(uri) as CrossModelServices;
+         const services = this.shared.ServiceRegistry.getServices(uri) as Services;
          return services.references.IdProvider.getLocalId(node);
       }
       return undefined;
@@ -207,7 +207,7 @@ export class ModelService {
 
    getGlobalId(node: AstNode, uri = findDocument(node)?.uri): string | undefined {
       if (uri) {
-         const services = this.shared.ServiceRegistry.getServices(uri) as CrossModelServices;
+         const services = this.shared.ServiceRegistry.getServices(uri) as Services;
          return services.references.IdProvider.getGlobalId(node);
       }
       return undefined;

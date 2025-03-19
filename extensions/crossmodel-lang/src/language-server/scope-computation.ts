@@ -1,6 +1,6 @@
 import { AstNode, AstNodeDescription, AstUtils, DefaultScopeComputation, LangiumDocument, PrecomputedScopes } from 'langium';
 import { CancellationToken } from 'vscode-jsonrpc';
-import { CrossModelServices } from './module.js';
+import { Services } from './module.js';
 import { DefaultIdProvider } from './naming.js';
 import { PackageManager, UNKNOWN_PROJECT_ID, UNKNOWN_PROJECT_REFERENCE } from './package-manager.js';
 
@@ -57,7 +57,7 @@ export class ScopeComputation extends DefaultScopeComputation {
    protected idProvider: DefaultIdProvider;
    protected packageManager: PackageManager;
 
-   constructor(services: CrossModelServices) {
+   constructor(services: Services) {
       super(services);
       this.idProvider = services.references.IdProvider;
       this.packageManager = services.shared.workspace.PackageManager;

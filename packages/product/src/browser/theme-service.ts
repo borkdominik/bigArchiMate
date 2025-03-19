@@ -3,7 +3,7 @@ import { injectable } from '@theia/core/shared/inversify';
 import { ThemeServiceWithDB } from '@theia/monaco/lib/browser/monaco-indexed-db';
 
 @injectable()
-export class CrossModelThemeService extends ThemeServiceWithDB {
+export class ThemeService extends ThemeServiceWithDB {
    override setCurrentTheme(themeId: string, persist?: boolean): void {
       super.setCurrentTheme(themeId, persist);
       this.removeBuiltInThemes(themeId);
