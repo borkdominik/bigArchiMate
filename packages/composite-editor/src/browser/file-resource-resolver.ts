@@ -3,7 +3,7 @@ import { injectable } from '@theia/core/shared/inversify';
 import { FileResourceResolver } from '@theia/filesystem/lib/browser';
 
 @injectable()
-export class CrossModelFileResourceResolver extends FileResourceResolver {
+export class CustomFileResourceResolver extends FileResourceResolver {
    protected _autoOverwrite = false;
 
    get autoOverwrite(): boolean {

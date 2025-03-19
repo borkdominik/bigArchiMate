@@ -23,8 +23,8 @@ import {
 } from '@eclipse-glsp/client';
 import { GLSPDiagramConfiguration } from '@eclipse-glsp/theia-integration';
 import { Container } from '@theia/core/shared/inversify/index';
-import { ArchiMateDiagramLanguage } from '../../common/crossmodel-diagram-language';
-import { createCrossModelDiagramModule } from '../crossmodel-diagram-module';
+import { ArchiMateDiagramLanguage } from '../../common/diagram-language';
+import { createCrossModelDiagramModule } from '../diagram-module';
 import { CutOffCornerNodeView } from './cut-off-corner-view';
 import { archiMateEdgeCreationToolModule } from './edge-creation-tool/edge-creation-tool-module';
 import { IconView } from './icon-view';

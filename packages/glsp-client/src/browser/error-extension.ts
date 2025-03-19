@@ -5,14 +5,14 @@ import { inject, injectable, postConstruct } from '@theia/core/shared/inversify'
 import { createRoot } from '@theia/core/shared/react-dom/client';
 
 @injectable()
-export class CrossModelErrorExtension extends GLSPAbstractUIExtension {
+export class ErrorExtension extends GLSPAbstractUIExtension {
    static readonly ID = 'error-extension';
 
    @inject(EditorContextService)
    protected editorContext: EditorContextService;
 
    id(): string {
-      return CrossModelErrorExtension.ID;
+      return ErrorExtension.ID;
    }
 
    override containerClass(): string {

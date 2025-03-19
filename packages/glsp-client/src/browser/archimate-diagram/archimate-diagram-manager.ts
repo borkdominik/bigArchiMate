@@ -2,7 +2,7 @@ import { codiconCSSString } from '@eclipse-glsp/client';
 import { GLSPDiagramManager } from '@eclipse-glsp/theia-integration';
 import { OpenWithHandler } from '@theia/core/lib/browser';
 import { injectable } from '@theia/core/shared/inversify';
-import { ArchiMateDiagramLanguage } from '../../common/crossmodel-diagram-language';
+import { ArchiMateDiagramLanguage } from '../../common/diagram-language';
 
 @injectable()
 export class ArchiMateDiagramManager extends GLSPDiagramManager implements OpenWithHandler {

@@ -7,7 +7,7 @@ import { Disposable, MessageConnection } from '@theia/core/shared/vscode-languag
 import { OutputChannelManager } from '@theia/output/lib/browser/output-channel';
 import '../../style/diagram.css';
 import '../../style/tool-palette.css';
-import { CrossModelLanguageContributionId } from '../common/crossmodel-diagram-language';
+import { ArchiMateLanguageContributionId } from '../common/diagram-language';
 
 /** The message the GLSP server outputs as soon as it is properly connected through a socket. */
 export const CLIENT_CONNECTION_READY_MSG = 'Starting GLSP server connection';
@@ -17,10 +17,10 @@ export const CLIENT_CONNECTION_READY_MSG = 'Starting GLSP server connection';
  * This contribution requires some special handling as our GLSP server might not be running as it is started through a VS Code extension.
  */
 @injectable()
-export class CrossModelClientContribution extends BaseGLSPClientContribution {
+export class ClientConribution extends BaseGLSPClientContribution {
    @inject(OutputChannelManager) protected outputChannelManager: OutputChannelManager;
 
-   readonly id = CrossModelLanguageContributionId;
+   readonly id = ArchiMateLanguageContributionId;
 
    protected async waitForBackendConnected(): Promise<void> {
       // We know that our VS Code extension outputs any log on a channel called 'CrossModel'

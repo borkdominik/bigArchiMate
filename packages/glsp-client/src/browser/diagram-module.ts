@@ -14,14 +14,14 @@ import {
 } from '@eclipse-glsp/client';
 import { GlspSelectionDataService } from '@eclipse-glsp/theia-integration';
 import { ContainerModule, injectable, interfaces } from '@theia/core/shared/inversify';
-import { CmMetadataPlacer } from './cm-metadata-placer';
-import { CommandPalette } from './command-palette';
-import { CrossModelMouseDeleteTool } from './cross-model-delete-tool';
-import { CrossModelDiagramStartup } from './cross-model-diagram-startup';
-import { CrossModelErrorExtension } from './cross-model-error-extension';
-import { CrossModelToolPalette } from './cross-model-tool-palette';
-import { CrossModelGLSPSelectionDataService } from './crossmodel-selection-data-service';
+import { CustomCommandPalette } from './command-palette';
+import { CustomMouseDeleteTool } from './delete-tool';
+import { DiagramStartup } from './diagram-startup';
+import { ErrorExtension } from './error-extension';
+import { CustomMetadataPlacer } from './metadata-placer';
 import { MousePositionTracker } from './mouse-position-tracker';
+import { SelectionDataService } from './selection-data-service';
+import { CustomToolPalette } from './tool-palette';
 
 export function createCrossModelDiagramModule(registry: interfaces.ContainerModuleCallBack): ContainerModule {
    return new ContainerModule((bind, unbind, isBound, rebind, unbindAsync, onActivation, onDeactivation) => {
@@ -29,15 +29,15 @@ export function createCrossModelDiagramModule(registry: interfaces.ContainerModu
       rebind(TYPES.ILogger).to(ConsoleLogger).inSingletonScope();
       rebind(TYPES.LogLevel).toConstantValue(LogLevel.warn);
       rebind(TYPES.Grid).toConstantValue(GRID);
-      bind(CrossModelToolPalette).toSelf().inSingletonScope();
-      bind(CrossModelMouseDeleteTool).toSelf().inSingletonScope();
-      rebind(MouseDeleteTool).toService(CrossModelMouseDeleteTool);
-      rebind(ToolPalette).toService(CrossModelToolPalette);
-      bindAsService(context, GlspSelectionDataService, CrossModelGLSPSelectionDataService);
-      bindAsService(context, TYPES.IDiagramStartup, CrossModelDiagramStartup);
+      bind(CustomToolPalette).toSelf().inSingletonScope();
+      bind(CustomMouseDeleteTool).toSelf().inSingletonScope();
+      rebind(MouseDeleteTool).toService(CustomMouseDeleteTool);
+      rebind(ToolPalette).toService(CustomToolPalette);
+      bindAsService(context, GlspSelectionDataService, SelectionDataService);
+      bindAsService(context, TYPES.IDiagramStartup, DiagramStartup);
       registry(bind, unbind, isBound, rebind, unbindAsync, onActivation, onDeactivation);
-      bind(CommandPalette).toSelf().inSingletonScope();
-      rebind(GlspCommandPalette).toService(CommandPalette);
+      bind(CustomCommandPalette).toSelf().inSingletonScope();
+      rebind(GlspCommandPalette).toService(CustomCommandPalette);
 
       bind(MousePositionTracker).toSelf().inSingletonScope();
       bindOrRebind(context, GLSPMousePositionTracker).toService(MousePositionTracker);
@@ -45,8 +45,8 @@ export function createCrossModelDiagramModule(registry: interfaces.ContainerModu
       bind(CrossModelToolManager).toSelf().inSingletonScope();
       bindOrRebind(context, TYPES.IToolManager).toService(CrossModelToolManager);
 
-      bindAsService(bind, TYPES.IUIExtension, CrossModelErrorExtension);
-      rebind(MetadataPlacer).to(CmMetadataPlacer).inSingletonScope();
+      bindAsService(bind, TYPES.IUIExtension, ErrorExtension);
+      rebind(MetadataPlacer).to(CustomMetadataPlacer).inSingletonScope();
    });
 }
 

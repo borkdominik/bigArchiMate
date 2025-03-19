@@ -29,13 +29,13 @@ import { EditorOpenerOptions, EditorWidget } from '@theia/editor/lib/browser';
 import * as monaco from '@theia/monaco-editor-core';
 import { MonacoEditorModel } from '@theia/monaco/lib/browser/monaco-editor-model';
 import { CompositeEditorOptions } from './composite-editor-open-handler';
-import { CrossModelEditorManager } from './cross-model-editor-manager';
-import { CrossModelFileResourceResolver } from './cross-model-file-resource-resolver';
+import { CustomEditorPreviewManager } from './editor-manager';
+import { CustomFileResourceResolver } from './file-resource-resolver';
 
 export class ReverseCompositeSaveable extends CompositeSaveable {
    constructor(
       protected editor: CompositeEditor,
-      protected fileResourceResolver: CrossModelFileResourceResolver
+      protected fileResourceResolver: CustomFileResourceResolver
    ) {
       super();
    }
@@ -95,8 +95,8 @@ export class CompositeEditor extends BaseWidget implements SaveableSource, Navig
    @inject(CrossModelWidgetOptions) protected options: CompositeEditorOptions;
    @inject(LabelProvider) protected labelProvider: LabelProvider;
    @inject(WidgetManager) protected widgetManager: WidgetManager;
-   @inject(CrossModelEditorManager) protected editorManager: CrossModelEditorManager;
-   @inject(CrossModelFileResourceResolver) protected fileResourceResolver: CrossModelFileResourceResolver;
+   @inject(CustomEditorPreviewManager) protected editorManager: CustomEditorPreviewManager;
+   @inject(CustomFileResourceResolver) protected fileResourceResolver: CustomFileResourceResolver;
 
    protected tabPanel: TabPanel;
    saveable: CompositeSaveable;

@@ -8,7 +8,7 @@ import { EditorOpenerOptions, EditorWidget } from '@theia/editor/lib/browser';
  * This ensures tha the `CompositeEditor` can also use this method
  */
 @injectable()
-export class CrossModelEditorManager extends EditorPreviewManager {
+export class CustomEditorPreviewManager extends EditorPreviewManager {
    public override revealSelection(widget: EditorWidget, input?: EditorOpenerOptions, uri?: URI): void {
       super.revealSelection(widget, input, uri);
    }

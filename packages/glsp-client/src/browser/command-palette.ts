@@ -12,7 +12,7 @@ import { inject, injectable } from '@theia/core/shared/inversify';
 import { MousePositionTracker } from './mouse-position-tracker';
 
 @injectable()
-export class CommandPalette extends GlspCommandPalette {
+export class CustomCommandPalette extends GlspCommandPalette {
    protected visible = false;
    protected creationPosition?: Point;
 

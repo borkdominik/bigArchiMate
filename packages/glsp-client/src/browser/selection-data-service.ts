@@ -5,7 +5,7 @@ import { isDefined } from '@theia/core';
 import { injectable } from '@theia/core/shared/inversify';
 
 @injectable()
-export class CrossModelGLSPSelectionDataService extends GlspSelectionDataService {
+export class SelectionDataService extends GlspSelectionDataService {
    async getSelectionData(root: Readonly<GModelRoot>, selectedElementIds: string[]): Promise<CrossModelSelectionData> {
       const selection = selectedElementIds.map(id => root.index.getById(id)).filter(isDefined);
       return getSelectionDataFor(selection);

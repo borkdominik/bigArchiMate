@@ -9,12 +9,12 @@ import {
 } from '@eclipse-glsp/client';
 import { injectable } from '@theia/core/shared/inversify';
 
-export class CrossModelMouseDeleteTool extends MouseDeleteTool {
-   protected override deleteToolMouseListener: DeleteToolMouseListener = new CrossModelDeleteMouseListener();
+export class CustomMouseDeleteTool extends MouseDeleteTool {
+   protected override deleteToolMouseListener: DeleteToolMouseListener = new CustomDeleteMouseListener();
 }
 
 @injectable()
-export class CrossModelDeleteMouseListener extends DeleteToolMouseListener {
+class CustomDeleteMouseListener extends DeleteToolMouseListener {
    override mouseUp(target: GModelElement, event: MouseEvent): Action[] {
       const deletableParent = findParentByFeature(target, isDeletable);
       if (deletableParent === undefined) {

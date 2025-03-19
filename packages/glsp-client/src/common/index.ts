@@ -1,1 +1,1 @@
-export * from './crossmodel-diagram-language';
+export * from './diagram-language';

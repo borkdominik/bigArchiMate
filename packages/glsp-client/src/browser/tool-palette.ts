@@ -23,7 +23,7 @@ const PALETTE_ICON_ID = 'tools';
 const CHEVRON_DOWN_ICON_ID = 'chevron-right';
 
 @injectable()
-export class CrossModelToolPalette extends ToolPalette {
+export class CustomToolPalette extends ToolPalette {
    protected readonly defaultToolsBtnId = 'default-tool';
    protected override initializeContents(containerElement: HTMLElement): void {
       this.createHeader();

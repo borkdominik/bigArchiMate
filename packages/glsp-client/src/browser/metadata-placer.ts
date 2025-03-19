@@ -3,7 +3,7 @@ import { injectable } from '@theia/core/shared/inversify';
 import { VNode } from 'snabbdom';
 
 @injectable()
-export class CmMetadataPlacer extends MetadataPlacer {
+export class CustomMetadataPlacer extends MetadataPlacer {
    override decorate(vnode: VNode, element: GModelElement): VNode {
       if (element instanceof GModelRoot) {
          setAttr(vnode, 'data-svg-metadata-api', true);

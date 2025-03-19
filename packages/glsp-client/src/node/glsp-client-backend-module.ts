@@ -1,12 +1,12 @@
 import { ConnectionHandler } from '@theia/core';
 import { ConnectionContainerModule } from '@theia/core/lib/node/messaging/connection-container-module';
 import { ContainerModule } from '@theia/core/shared/inversify/index';
-import { CrossModelDiagramGLSPConnectionHandler } from './crossmodel-diagram-connection-handler';
+import { DiagramConnectionHandler } from './diagram-connection-handler';
 
 const frontendScopedConnectionModule = ConnectionContainerModule.create(({ bind }) => {
-   bind(CrossModelDiagramGLSPConnectionHandler).toSelf().inSingletonScope();
+   bind(DiagramConnectionHandler).toSelf().inSingletonScope();
    bind(ConnectionHandler)
-      .toDynamicValue(context => context.container.get(CrossModelDiagramGLSPConnectionHandler))
+      .toDynamicValue(context => context.container.get(DiagramConnectionHandler))
       .inSingletonScope();
 });
 
