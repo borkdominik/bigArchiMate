@@ -65,17 +65,18 @@
     },
     "grammars": [
       {
-        "language": "cross-model",
-        "scopeName": "source.cross-model",
+        "language": "archimate",
+        "scopeName": "source.archimate",
         "path": "./syntaxes/archimate.tmLanguage.json"
       }
     ],
     "languages": [
       {
-        "id": "cross-model",
+        "id": "archimate",
         "aliases": [
           "CrossModel",
-          "cross-model"
+          "cross-model",
+          "archimate"
         ],
         "extensions": [
           ".arch"
