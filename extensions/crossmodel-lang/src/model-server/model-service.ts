@@ -16,7 +16,7 @@ import { AstNode, Deferred, DocumentState, isAstNode } from 'langium';
 import { Disposable, OptionalVersionedTextDocumentIdentifier, Range, TextDocumentEdit, TextEdit, uinteger } from 'vscode-languageserver';
 import { URI, Utils as UriUtils } from 'vscode-uri';
 import { ArchiMateRoot, isArchiMateRoot } from '../language-server/generated/ast.js';
-import { CrossModelSharedServices, Services } from '../language-server/module.js';
+import { Services, SharedServices } from '../language-server/module.js';
 import { PACKAGE_JSON } from '../language-server/package-manager.js';
 import { findDocument } from '../language-server/util/ast-util.js';
 import { AstArchiMateDocument } from './open-text-document-manager.js';
@@ -28,7 +28,7 @@ import { LANGUAGE_CLIENT_ID } from './openable-text-documents.js';
  */
 export class ModelService {
    constructor(
-      protected shared: CrossModelSharedServices,
+      protected shared: SharedServices,
       protected documentManager = shared.workspace.TextDocumentManager,
       protected documents = shared.workspace.LangiumDocuments,
       protected documentBuilder = shared.workspace.DocumentBuilder,
@@ -214,11 +214,11 @@ export class ModelService {
    }
 
    async findReferenceableElements(args: CrossReferenceContext): Promise<ReferenceableElement[]> {
-      return this.shared.ServiceRegistry.CrossModel.references.ScopeProvider.complete(args);
+      return this.shared.ServiceRegistry.services.references.ScopeProvider.complete(args);
    }
 
    async resolveCrossReference(args: CrossReference): Promise<AstNode | undefined> {
-      return this.shared.ServiceRegistry.CrossModel.references.ScopeProvider.resolveCrossReference(args);
+      return this.shared.ServiceRegistry.services.references.ScopeProvider.resolveCrossReference(args);
    }
 
    async getSystemInfos(): Promise<SystemInfo[]> {

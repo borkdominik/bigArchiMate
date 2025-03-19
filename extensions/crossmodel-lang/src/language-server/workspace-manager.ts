@@ -1,7 +1,7 @@
 import { AstNode, DefaultWorkspaceManager, Deferred, FileSystemNode, LangiumDocument } from 'langium';
 import { CancellationToken, Emitter, Event, WorkspaceFolder } from 'vscode-languageserver';
 import { URI, Utils } from 'vscode-uri';
-import { CrossModelSharedServices } from './module.js';
+import { SharedServices } from './module.js';
 
 /**
  * A custom workspace manager that:
@@ -15,7 +15,7 @@ export class WorkspaceManager extends DefaultWorkspaceManager {
    workspaceInitialized = this.workspaceInitializedDeferred.promise;
 
    constructor(
-      protected services: CrossModelSharedServices,
+      protected services: SharedServices,
       protected logger = services.logger.ClientLogger
    ) {
       super(services);

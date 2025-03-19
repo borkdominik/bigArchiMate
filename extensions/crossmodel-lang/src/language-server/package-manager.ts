@@ -4,7 +4,7 @@ import { SystemInfo, SystemUpdatedEvent, SystemUpdateListener } from '@crossbree
 import { PackageJson } from 'type-fest';
 import { CancellationToken, WorkspaceFolder } from 'vscode-languageserver';
 import { URI, Utils as UriUtils } from 'vscode-uri';
-import { CrossModelSharedServices } from './module.js';
+import { SharedServices } from './module.js';
 import { QUALIFIED_ID_SEPARATOR } from './naming.js';
 import { PackageAstNodeDescription } from './scope-computation.js';
 import { Utils } from './util/uri-util.js';
@@ -88,7 +88,7 @@ export class PackageManager {
    protected readonly updateListeners: SystemUpdateListener[] = [];
 
    constructor(
-      protected shared: CrossModelSharedServices,
+      protected shared: SharedServices,
       protected fileSystemProvider = shared.workspace.FileSystemProvider,
       protected textDocuments = shared.workspace.TextDocuments,
       protected langiumDocuments = shared.workspace.LangiumDocuments,

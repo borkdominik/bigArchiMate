@@ -28,7 +28,7 @@ export namespace FilenameNotMatchingDiagnostic {
  */
 export function registerValidationChecks(services: Services): void {
    const registry = services.validation.ValidationRegistry;
-   const validator = services.validation.CrossModelValidator;
+   const validator = services.validation.Validator;
 
    const checks: ValidationChecks<CrossModelAstType> = {
       AstNode: validator.checkNode,

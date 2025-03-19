@@ -1,10 +1,10 @@
-import { CrossModelSharedServices } from './module.js';
+import { SharedServices } from './module.js';
 
 /**
  * Centralized logger.
  */
 export class ClientLogger {
-   constructor(protected services: CrossModelSharedServices) {}
+   constructor(protected services: SharedServices) {}
 
    /**
     * Show an error message.

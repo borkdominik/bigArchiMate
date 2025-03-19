@@ -47,11 +47,11 @@ export type ExtendedLangiumServices = LangiumServices & {
 export class DefaultExtendedServiceRegistry extends DefaultServiceRegistry {
    protected _services!: Services;
 
-   get CrossModel(): Services {
+   get services(): Services {
       return this._services;
    }
 
-   set CrossModel(service: Services) {
+   set services(service: Services) {
       this._services = service;
    }
 
@@ -65,7 +65,7 @@ export class DefaultExtendedServiceRegistry extends DefaultServiceRegistry {
 }
 
 export interface ExtendedServiceRegistry extends ServiceRegistry {
-   CrossModel: Services;
+   services: Services;
    register(language: ExtendedLangiumServices): void;
    getServices(uri: URI): ExtendedLangiumServices;
 }
@@ -73,7 +73,7 @@ export interface ExtendedServiceRegistry extends ServiceRegistry {
 /**
  * Declaration of custom services - add your own service classes here.
  */
-export interface CrossModelAddedSharedServices {
+export interface AddedSharedServices {
    /* override */
    ServiceRegistry: ExtendedServiceRegistry;
 
@@ -91,15 +91,10 @@ export interface CrossModelAddedSharedServices {
    };
 }
 
-export const CrossModelSharedServices = Symbol('CrossModelSharedServices');
-export type CrossModelSharedServices = Omit<LangiumSharedServices, 'ServiceRegistry'> &
-   CrossModelAddedSharedServices &
-   AddedSharedModelServices;
+export const SharedServices = Symbol('SharedServices');
+export type SharedServices = Omit<LangiumSharedServices, 'ServiceRegistry'> & AddedSharedServices & AddedSharedModelServices;
 
-export const SharedModule: Module<
-   CrossModelSharedServices,
-   PartialLangiumSharedServices & CrossModelAddedSharedServices & AddedSharedModelServices
-> = {
+export const SharedModule: Module<SharedServices, PartialLangiumSharedServices & AddedSharedServices & AddedSharedModelServices> = {
    ServiceRegistry: () => new DefaultExtendedServiceRegistry(),
    workspace: {
       WorkspaceManager: services => new WorkspaceManager(services),
@@ -126,7 +121,7 @@ export const SharedModule: Module<
  ***************************/
 
 export interface ModuleContext {
-   shared: CrossModelSharedServices;
+   shared: SharedServices;
 }
 
 /**
@@ -139,7 +134,7 @@ export interface AddedServices {
       ScopeProvider: ScopeProvider;
    };
    validation: {
-      CrossModelValidator: Validator;
+      Validator: Validator;
    };
    serializer: {
       Serializer: Serializer;
@@ -151,7 +146,7 @@ export interface AddedServices {
       /* implement */ CodeActionProvider: CodeActionProvider;
       SemanticTokenProvider: SemanticTokenProvider;
    };
-   /* override */ shared: CrossModelSharedServices;
+   /* override */ shared: SharedServices;
 }
 
 /**
@@ -166,7 +161,7 @@ export const Services = Symbol('Services');
  * declared custom services. The Langium defaults can be partially specified to override only
  * selected services, while the custom services must be fully specified.
  */
-export function createCrossModelModule(context: ModuleContext): Module<Services, PartialLangiumServices & AddedServices> {
+export function createModule(context: ModuleContext): Module<Services, PartialLangiumServices & AddedServices> {
    return {
       references: {
          ScopeComputation: services => new ScopeComputation(services),
@@ -176,7 +171,7 @@ export function createCrossModelModule(context: ModuleContext): Module<Services,
          Linker: services => new Linker(services)
       },
       validation: {
-         CrossModelValidator: services => new Validator(services)
+         Validator: services => new Validator(services)
       },
       lsp: {
          CodeActionProvider: () => new CodeActionProvider(),
@@ -211,12 +206,12 @@ export function createCrossModelModule(context: ModuleContext): Module<Services,
  * @returns An object wrapping the shared services and the language-specific services
  */
 export function createServices(context: DefaultSharedModuleContext): {
-   shared: CrossModelSharedServices;
+   shared: SharedServices;
    services: Services;
 } {
    const shared = inject(createDefaultSharedModule(context), ArchiMateLanguageGeneratedSharedModule, SharedModule);
-   const services = inject(createDefaultModule({ shared }), ArchiMateGeneratedModule, createCrossModelModule({ shared }));
-   shared.ServiceRegistry.CrossModel = services;
+   const services = inject(createDefaultModule({ shared }), ArchiMateGeneratedModule, createModule({ shared }));
+   shared.ServiceRegistry.services = services;
    shared.ServiceRegistry.register(services);
    registerValidationChecks(services);
    return { shared, services };

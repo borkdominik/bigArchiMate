@@ -25,7 +25,7 @@ import {
 } from 'vscode-languageserver';
 import { TextDocument } from 'vscode-languageserver-textdocument';
 import { URI } from 'vscode-uri';
-import { CrossModelSharedServices } from '../language-server/module.js';
+import { SharedServices } from '../language-server/module.js';
 
 export const LANGUAGE_CLIENT_ID = 'language-client';
 
@@ -42,7 +42,7 @@ export class OpenableTextDocuments<T extends TextDocument> extends NormalizedTex
 
    public constructor(
       protected configuration: TextDocumentsConfiguration<T>,
-      protected services: CrossModelSharedServices,
+      protected services: SharedServices,
       protected logger = services.logger.ClientLogger
    ) {
       super(configuration);

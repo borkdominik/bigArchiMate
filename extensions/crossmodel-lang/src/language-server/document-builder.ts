@@ -1,7 +1,7 @@
 import { DefaultDocumentBuilder } from 'langium';
 import { CancellationToken } from 'vscode-languageclient';
 import { URI, Utils as UriUtils } from 'vscode-uri';
-import { CrossModelSharedServices } from './module.js';
+import { SharedServices } from './module.js';
 import { isPackageUri } from './package-manager.js';
 import { Utils } from './util/uri-util.js';
 
@@ -11,7 +11,7 @@ import { Utils } from './util/uri-util.js';
 export class DocumentBuilder extends DefaultDocumentBuilder {
    protected languageFileExtensions: string[] = [];
 
-   constructor(protected services: CrossModelSharedServices) {
+   constructor(protected services: SharedServices) {
       super(services);
       this.languageFileExtensions = this.serviceRegistry.all.flatMap(service => service.LanguageMetaData.fileExtensions);
    }

@@ -1,9 +1,9 @@
 import { AstNode, AstNodeDescription, DefaultIndexManager, URI } from 'langium';
-import { CrossModelSharedServices } from './module.js';
+import { SharedServices } from './module.js';
 import { SemanticRoot, findSemanticRoot } from './util/ast-util.js';
 
 export class IndexManager extends DefaultIndexManager {
-   constructor(protected services: CrossModelSharedServices) {
+   constructor(protected services: SharedServices) {
       super(services);
    }
 
