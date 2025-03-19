@@ -3,8 +3,8 @@ import { Command, JsonOperationHandler, ModelState } from '@eclipse-glsp/server'
 import { inject, injectable } from 'inversify';
 import { URI } from 'vscode-uri';
 import { ElementNode } from '../../../language-server/generated/ast.js';
-import { CrossModelCommand } from '../../common/cross-model-command.js';
-import { ArchiMateModelState } from '../model/archimate-model-state.js';
+import { ArchiMateCommand } from '../../common/command.js';
+import { ArchiMateModelState } from '../../common/model-state.js';
 
 /**
  * An operation handler for the 'DropElementOperation' that finds an element for each of the given file URIs and
@@ -12,13 +12,13 @@ import { ArchiMateModelState } from '../model/archimate-model-state.js';
  * their position is shifted by (10,10) so they do not fully overlap.
  */
 @injectable()
-export class ArchiMateDiagramDropElementOperationHandler extends JsonOperationHandler {
+export class DropElementOperationHandler extends JsonOperationHandler {
    override operationType = DropElementOperation.KIND;
 
    @inject(ModelState) protected override modelState!: ArchiMateModelState;
 
    createCommand(operation: DropElementOperation): Command {
-      return new CrossModelCommand(this.modelState, () => this.createElementNode(operation));
+      return new ArchiMateCommand(this.modelState, () => this.createElementNode(operation));
    }
 
    protected async createElementNode(operation: DropElementOperation): Promise<void> {

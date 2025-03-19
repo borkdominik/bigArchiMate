@@ -3,11 +3,11 @@ import { ApplyLabelEditOperation, Command, getOrThrow, JsonOperationHandler, Mod
 import { inject, injectable } from 'inversify';
 import { CrossModelRoot, Element, ElementNode } from '../../../language-server/generated/ast.js';
 import { findDocument } from '../../../language-server/util/ast-util.js';
-import { CrossModelCommand } from '../../common/cross-model-command.js';
-import { ArchiMateModelState } from '../model/archimate-model-state.js';
+import { ArchiMateCommand } from '../../common/command.js';
+import { ArchiMateModelState } from '../../common/model-state.js';
 
 @injectable()
-export class ArchiMateDiagramApplyLabelEditOperationHandler extends JsonOperationHandler {
+export class ApplyLabelEditOperationHandler extends JsonOperationHandler {
    readonly operationType = ApplyLabelEditOperation.KIND;
    @inject(ModelState) declare modelState: ArchiMateModelState;
 
@@ -15,7 +15,7 @@ export class ArchiMateDiagramApplyLabelEditOperationHandler extends JsonOperatio
       const elementNode = getOrThrow(this.modelState.index.findElementNode(operation.labelId), 'Element node not found');
       const element = getOrThrow(elementNode.element.ref, 'Element not found');
       const oldName = element.name;
-      return new CrossModelCommand(
+      return new ArchiMateCommand(
          this.modelState,
          () => this.renameElement(elementNode, element, operation.text),
          () =>

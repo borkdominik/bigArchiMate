@@ -8,11 +8,11 @@ import {
    isJunctionNode,
    isRelationEdge
 } from '../../../language-server/generated/ast.js';
-import { CrossModelCommand } from '../../common/cross-model-command.js';
-import { ArchiMateModelState } from '../model/archimate-model-state.js';
+import { ArchiMateCommand } from '../../common/command.js';
+import { ArchiMateModelState } from '../../common/model-state.js';
 
 @injectable()
-export class ArchiMateDiagramDeleteOperationHandler extends JsonOperationHandler {
+export class DeleteOperationHandler extends JsonOperationHandler {
    operationType = DeleteElementOperation.KIND;
 
    @inject(ModelState) protected override modelState!: ArchiMateModelState;
@@ -22,7 +22,7 @@ export class ArchiMateDiagramDeleteOperationHandler extends JsonOperationHandler
       if (deleteInfo.nodes.length === 0 && deleteInfo.edges.length === 0) {
          return undefined;
       }
-      return new CrossModelCommand(this.modelState, () => this.removeComponents(deleteInfo));
+      return new ArchiMateCommand(this.modelState, () => this.removeComponents(deleteInfo));
    }
 
    protected removeComponents(deleteInfo: DeleteInfo): void {

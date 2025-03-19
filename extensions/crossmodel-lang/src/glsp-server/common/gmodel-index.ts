@@ -3,13 +3,25 @@ import { inject, injectable } from 'inversify';
 import { AstNode, AstUtils } from 'langium';
 import * as uuid from 'uuid';
 import { CrossModelLSPServices } from '../../integration.js';
-import { CrossModelRoot } from '../../language-server/generated/ast.js';
+import {
+   CrossModelRoot,
+   Element,
+   ElementNode,
+   isElement,
+   isElementNode,
+   isJunctionNode,
+   isRelation,
+   isRelationEdge,
+   JunctionNode,
+   Relation,
+   RelationEdge
+} from '../../language-server/generated/ast.js';
 
 /**
  * Custom model index that not only indexes the GModel elements but also the semantic elements (AstNodes) they represent.
  */
 @injectable()
-export class CrossModelIndex extends GModelIndex {
+export class ArchiMateGModelIndex extends GModelIndex {
    @inject(CrossModelLSPServices) services!: CrossModelLSPServices;
 
    protected idToSemanticNode = new Map<string, AstNode>();
@@ -46,6 +58,9 @@ export class CrossModelIndex extends GModelIndex {
       if (id) {
          this.indexSemanticElement(id, node);
       }
+      if (isElementNode(node)) {
+         this.indexSemanticElement(`${this.createId(node)}_label`, node);
+      }
    }
 
    indexSemanticElement<T extends AstNode>(id: string, element: T): void {
@@ -69,5 +84,29 @@ export class CrossModelIndex extends GModelIndex {
          return;
       }
       super.doIndex(element);
+   }
+
+   findElement(id: string): Element | undefined {
+      return this.findSemanticElement(id, isElement);
+   }
+
+   findJunction(id: string): Element | undefined {
+      return this.findSemanticElement(id, isElement);
+   }
+
+   findRelation(id: string): Relation | undefined {
+      return this.findSemanticElement(id, isRelation);
+   }
+
+   findElementNode(id: string): ElementNode | undefined {
+      return this.findSemanticElement(id, isElementNode);
+   }
+
+   findJunctionNode(id: string): JunctionNode | undefined {
+      return this.findSemanticElement(id, isJunctionNode);
+   }
+
+   findRelationEdge(id: string): RelationEdge | undefined {
+      return this.findSemanticElement(id, isRelationEdge);
    }
 }

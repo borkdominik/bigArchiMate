@@ -14,7 +14,7 @@ import { AddressInfo } from 'net';
 import { URI } from 'vscode-uri';
 import { CrossModelLSPServices } from '../integration.js';
 import { CrossModelServices, CrossModelSharedServices } from '../language-server/cross-model-module.js';
-import { ArchiMateDiagramModule } from './archimate-diagram/archimate-diagram-module.js';
+import { ArchiMateDiagramModule } from './archimate-diagram/diagram-module.js';
 
 /**
  * Launches a GLSP server with access to the given language services on the default port.

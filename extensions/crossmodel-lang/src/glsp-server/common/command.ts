@@ -1,14 +1,14 @@
 import { JsonRecordingCommand, MaybePromise } from '@eclipse-glsp/server';
 import * as jsonPatch from 'fast-json-patch';
-import { CrossModelSourceModel, CrossModelState } from './cross-model-state.js';
+import { ArchiMateModelState, CrossModelSourceModel } from './model-state.js';
 
 /**
  * A custom recording command that tracks updates during execution through a textual semantic state.
  * Tracking updates ensures that we have proper undo/redo support
  */
-export class CrossModelCommand extends JsonRecordingCommand<CrossModelSourceModel> {
+export class ArchiMateCommand extends JsonRecordingCommand<CrossModelSourceModel> {
    constructor(
-      protected state: CrossModelState,
+      protected state: ArchiMateModelState,
       protected runnable: () => MaybePromise<void>,
       protected undoAction?: () => MaybePromise<void>,
       protected redoAction?: () => MaybePromise<void>

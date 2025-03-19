@@ -12,7 +12,7 @@ import {
 } from '@crossbreeze/protocol';
 import { ArgsUtil, GCompartment, GLabel, GNode, GNodeBuilder } from '@eclipse-glsp/server';
 import { ElementNode, JunctionNode } from '../../../language-server/generated/ast.js';
-import { ArchiMateModelIndex } from './archimate-model-index.js';
+import { ArchiMateGModelIndex } from '../../common/gmodel-index.js';
 
 export class GElementNode extends GNode {
    static override builder(): GElementNodeBuilder {
@@ -24,7 +24,7 @@ const ICON_SIZE = 16;
 const H_GAP = 3;
 
 export class GElementNodeBuilder extends GNodeBuilder<GElementNode> {
-   set(node: ElementNode, index: ArchiMateModelIndex): this {
+   set(node: ElementNode, index: ArchiMateGModelIndex): this {
       const elementType = node.element.ref?.type;
 
       if (elementType === undefined) {
@@ -94,7 +94,7 @@ export class GJunctionNode extends GNode {
 }
 
 export class GJunctionNodeBuilder extends GNodeBuilder<GJunctionNode> {
-   set(node: JunctionNode, index: ArchiMateModelIndex): this {
+   set(node: JunctionNode, index: ArchiMateGModelIndex): this {
       this.id(index.createId(node));
       this.type(ARCHIMATE_CONCEPT_TYPE_MAP.get('Junction'));
 

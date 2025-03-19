@@ -2,14 +2,14 @@ import { AddElementOperation, codiconCSSString } from '@crossbreeze/protocol';
 import { ContextActionsProvider, EditorContext, LabeledAction, ModelState, Point } from '@eclipse-glsp/server';
 import { inject, injectable } from 'inversify';
 import { ElementNode } from '../../../language-server/generated/ast.js';
-import { ArchiMateModelState } from '../model/archimate-model-state.js';
+import { ArchiMateModelState } from '../../common/model-state.js';
 
 /**
  * An action provider for the command palette (Ctrl+Space) to allow adding elements to an existing diagram.
  * Each action will trigger a 'AddElementOperation' for the specific element.
  */
 @injectable()
-export class ArchiMateDiagramAddElementActionProvider implements ContextActionsProvider {
+export class AddElementActionProvider implements ContextActionsProvider {
    contextId = 'command-palette';
 
    @inject(ModelState) protected state!: ArchiMateModelState;

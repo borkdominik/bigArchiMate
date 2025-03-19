@@ -2,19 +2,19 @@ import { AddElementOperation } from '@crossbreeze/protocol';
 import { Command, JsonOperationHandler, ModelState } from '@eclipse-glsp/server';
 import { inject, injectable } from 'inversify';
 import { Element, ElementNode } from '../../../language-server/generated/ast.js';
-import { CrossModelCommand } from '../../common/cross-model-command.js';
-import { ArchiMateModelState } from '../model/archimate-model-state.js';
+import { ArchiMateCommand } from '../../common/command.js';
+import { ArchiMateModelState } from '../../common/model-state.js';
 
 /**
  * An operation handler for the 'AddElementOperation' that resolves the referenced element by name and places it in a new node on the diagram.
  */
 @injectable()
-export class ArchiMateDiagramAddElementOperationHandler extends JsonOperationHandler {
+export class AddElementOperationHandler extends JsonOperationHandler {
    override operationType = AddElementOperation.KIND;
    @inject(ModelState) protected override modelState!: ArchiMateModelState;
 
    createCommand(operation: AddElementOperation): Command {
-      return new CrossModelCommand(this.modelState, () => this.createElementNode(operation));
+      return new ArchiMateCommand(this.modelState, () => this.createElementNode(operation));
    }
 
    protected async createElementNode(operation: AddElementOperation): Promise<void> {

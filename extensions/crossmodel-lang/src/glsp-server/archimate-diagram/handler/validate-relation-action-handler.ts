@@ -4,7 +4,7 @@ import { inject, injectable, optional } from 'inversify';
 import { RelationValidator } from '../../../language-server/util/validation/relation-validator.js';
 
 @injectable()
-export class ArchiMateDiagramValidateRelationActionHandler extends RequestCheckEdgeActionHandler {
+export class ValidateRelationActionHandler extends RequestCheckEdgeActionHandler {
    @inject(ModelState)
    protected override modelState!: ModelState;
 

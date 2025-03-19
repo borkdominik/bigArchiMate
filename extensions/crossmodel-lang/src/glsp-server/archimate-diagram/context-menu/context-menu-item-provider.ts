@@ -17,8 +17,8 @@ import { ARCHIMATE_ELEMENT_TYPE_MAP, getLabel, getLayerElements, layerTypes } fr
 import { Args, ContextMenuItemProvider, CreateNodeOperation, MenuItem, ModelState, Point } from '@eclipse-glsp/server';
 import { inject, injectable } from 'inversify';
 import { getObjectKeys } from '../../../util.js';
-import { Grid } from '../../common/cross-model-grid.js';
-import { ArchiMateModelState } from '../model/archimate-model-state.js';
+import { ArchiMateGrid } from '../../common/grid.js';
+import { ArchiMateModelState } from '../../common/model-state.js';
 
 @injectable()
 export class ArchiMateContextMenuItemProvider extends ContextMenuItemProvider {
@@ -39,7 +39,7 @@ export class ArchiMateContextMenuItemProvider extends ContextMenuItemProvider {
                   label: `${getLabel(elementType)}`,
                   actions: [
                      CreateNodeOperation.create(ARCHIMATE_ELEMENT_TYPE_MAP.get(elementType), {
-                        location: Grid.snap(position)
+                        location: ArchiMateGrid.snap(position)
                      })
                   ]
                };

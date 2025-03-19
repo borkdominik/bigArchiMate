@@ -1,17 +1,17 @@
 import { ChangeRoutingPointsOperation, Command, JsonOperationHandler, MaybePromise, ModelState } from '@eclipse-glsp/server';
 import { inject, injectable } from 'inversify';
 import { RelationRoutingPoint } from '../../../language-server/generated/ast.js';
-import { CrossModelCommand } from '../../common/cross-model-command.js';
-import { ArchiMateModelState } from '../model/archimate-model-state.js';
+import { ArchiMateCommand } from '../../common/command.js';
+import { ArchiMateModelState } from '../../common/model-state.js';
 
 @injectable()
-export class ArchiMateDiagramChangeRelationRoutingPointsOperationHandler extends JsonOperationHandler {
+export class ChangeRelationRoutingPointsOperationHandler extends JsonOperationHandler {
    operationType = ChangeRoutingPointsOperation.KIND;
 
    @inject(ModelState) protected override modelState!: ArchiMateModelState;
 
    override createCommand(operation: ChangeRoutingPointsOperation): MaybePromise<Command | undefined> {
-      return new CrossModelCommand(this.modelState, () => this.executeChangeRoutingPoints(operation));
+      return new ArchiMateCommand(this.modelState, () => this.executeChangeRoutingPoints(operation));
    }
 
    executeChangeRoutingPoints(operation: ChangeRoutingPointsOperation): MaybePromise<void> {

@@ -19,7 +19,7 @@ import { CrossModelServices, CrossModelSharedServices } from '../language-server
 import { PACKAGE_JSON } from '../language-server/cross-model-package-manager.js';
 import { CrossModelRoot, isCrossModelRoot } from '../language-server/generated/ast.js';
 import { findDocument } from '../language-server/util/ast-util.js';
-import { AstCrossModelDocument } from './open-text-document-manager.js';
+import { AstArchiMateDocument } from './open-text-document-manager.js';
 import { LANGUAGE_CLIENT_ID } from './openable-text-documents.js';
 
 /**
@@ -102,7 +102,7 @@ export class ModelService {
     * @param uri document URI
     * @param state minimum state the document should have before returning
     */
-   async request(uri: string, state = DocumentState.Validated): Promise<AstCrossModelDocument | undefined> {
+   async request(uri: string, state = DocumentState.Validated): Promise<AstArchiMateDocument | undefined> {
       const documentUri = URI.parse(uri);
       await this.documentBuilder.waitUntil(state, documentUri);
       const document = await this.documents.getOrCreateDocument(documentUri);
@@ -119,7 +119,7 @@ export class ModelService {
     * @param model semantic model or textual representation of it
     * @returns the stored semantic model
     */
-   async update(args: UpdateModelArgs<CrossModelRoot>): Promise<AstCrossModelDocument> {
+   async update(args: UpdateModelArgs<CrossModelRoot>): Promise<AstArchiMateDocument> {
       await this.open(args);
       const documentUri = URI.parse(args.uri);
       const document = await this.documents.getOrCreateDocument(documentUri);
@@ -137,7 +137,7 @@ export class ModelService {
          };
       }
       const newVersion = textDocument.version + 1;
-      const pendingUpdate = new Deferred<AstCrossModelDocument>();
+      const pendingUpdate = new Deferred<AstArchiMateDocument>();
       const listener = this.documentBuilder.onBuildPhase(DocumentState.Validated, (allChangedDocuments, _token) => {
          const updatedDocument = allChangedDocuments.find(
             doc => doc.uri.toString() === documentUri.toString() && doc.textDocument.version === newVersion
@@ -151,7 +151,7 @@ export class ModelService {
             listener.dispose();
          }
       });
-      const timeout = new Promise<AstCrossModelDocument>((_, reject) =>
+      const timeout = new Promise<AstArchiMateDocument>((_, reject) =>
          setTimeout(() => {
             listener.dispose();
             reject('Update timed out.');
@@ -161,11 +161,11 @@ export class ModelService {
       return Promise.race([pendingUpdate.promise, timeout]);
    }
 
-   onModelUpdated(uri: string, listener: (model: ModelUpdatedEvent<AstCrossModelDocument>) => void): Disposable {
+   onModelUpdated(uri: string, listener: (model: ModelUpdatedEvent<AstArchiMateDocument>) => void): Disposable {
       return this.documentManager.onUpdate(uri, listener);
    }
 
-   onModelSaved(uri: string, listener: (model: ModelSavedEvent<AstCrossModelDocument>) => void): Disposable {
+   onModelSaved(uri: string, listener: (model: ModelSavedEvent<AstArchiMateDocument>) => void): Disposable {
       return this.documentManager.onSave(uri, listener);
    }
 

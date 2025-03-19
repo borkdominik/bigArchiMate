@@ -4,10 +4,10 @@ import { DocumentState } from 'langium';
 import { URI } from 'vscode-uri';
 import { CrossModelLSPServices } from '../../integration.js';
 import { IdProvider } from '../../language-server/cross-model-naming.js';
-import { CrossModelRoot } from '../../language-server/generated/ast.js';
+import { ArchiMateDiagram, CrossModelRoot } from '../../language-server/generated/ast.js';
 import { ModelService } from '../../model-server/model-service.js';
 import { Serializer } from '../../model-server/serializer.js';
-import { CrossModelIndex } from './cross-model-index.js';
+import { ArchiMateGModelIndex } from './gmodel-index.js';
 
 export interface CrossModelSourceModel {
    text: string;
@@ -18,8 +18,8 @@ export interface CrossModelSourceModel {
  * It also provides convenience methods for accessing specific language services.
  */
 @injectable()
-export class CrossModelState extends DefaultModelState implements JsonModelState<CrossModelSourceModel> {
-   @inject(CrossModelIndex) override readonly index: CrossModelIndex;
+export class ArchiMateModelState extends DefaultModelState implements JsonModelState<CrossModelSourceModel> {
+   @inject(ArchiMateGModelIndex) override readonly index: ArchiMateGModelIndex;
    @inject(CrossModelLSPServices) readonly services!: CrossModelLSPServices;
 
    protected _semanticUri!: string;
@@ -61,6 +61,10 @@ export class CrossModelState extends DefaultModelState implements JsonModelState
       return { text: this.semanticText() };
    }
 
+   get archiMateDiagram(): ArchiMateDiagram {
+      return this.semanticRoot.archiMateDiagram!;
+   }
+
    async updateSourceModel(sourceModel: CrossModelSourceModel): Promise<void> {
       const document = await this.modelService.update({
          uri: this.semanticUri,
@@ -81,8 +85,8 @@ export class CrossModelState extends DefaultModelState implements JsonModelState
    }
 }
 
-export namespace CrossModelState {
-   export function is(modelState: ModelState): modelState is CrossModelState {
+export namespace ArchiMateModelState {
+   export function is(modelState: ModelState): modelState is ArchiMateModelState {
       return JsonModelState.is(modelState) && hasFunctionProp(modelState, 'setSemanticRoot');
    }
 }

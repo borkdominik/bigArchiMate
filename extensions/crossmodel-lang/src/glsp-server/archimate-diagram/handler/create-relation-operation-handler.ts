@@ -11,11 +11,11 @@ import { inject, injectable } from 'inversify';
 import { URI, Utils as UriUtils } from 'vscode-uri';
 import { CrossModelRoot, ElementNode, JunctionNode, Relation, RelationEdge } from '../../../language-server/generated/ast.js';
 import { Utils } from '../../../language-server/util/uri-util.js';
-import { CrossModelCommand } from '../../common/cross-model-command.js';
-import { ArchiMateModelState } from '../model/archimate-model-state.js';
+import { ArchiMateCommand } from '../../common/command.js';
+import { ArchiMateModelState } from '../../common/model-state.js';
 
 @injectable()
-export class ArchiMateDiagramCreateRelationOperationHandler extends JsonCreateEdgeOperationHandler {
+export class CreateRelationOperationHandler extends JsonCreateEdgeOperationHandler {
    override label = 'Relation';
    elementTypeIds = [...ARCHIMATE_RELATION_TYPE_MAP.values()];
 
@@ -23,7 +23,7 @@ export class ArchiMateDiagramCreateRelationOperationHandler extends JsonCreateEd
    @inject(ActionDispatcher) protected actionDispatcher!: ActionDispatcher;
 
    createCommand(operation: CreateEdgeOperation): Command {
-      return new CrossModelCommand(this.modelState, () => this.createEdge(operation));
+      return new ArchiMateCommand(this.modelState, () => this.createEdge(operation));
    }
 
    protected async createEdge(operation: CreateEdgeOperation): Promise<void> {

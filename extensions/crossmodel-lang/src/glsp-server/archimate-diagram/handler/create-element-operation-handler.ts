@@ -13,11 +13,11 @@ import { inject, injectable } from '@theia/core/shared/inversify';
 import { URI, Utils as UriUtils } from 'vscode-uri';
 import { CrossModelRoot, Element, ElementNode } from '../../../language-server/generated/ast.js';
 import { Utils } from '../../../language-server/util/uri-util.js';
-import { CrossModelCommand } from '../../common/cross-model-command.js';
-import { ArchiMateModelState } from '../model/archimate-model-state.js';
+import { ArchiMateCommand } from '../../common/command.js';
+import { ArchiMateModelState } from '../../common/model-state.js';
 
 @injectable()
-export class ArchiMateDiagramCreateElementOperationHandler extends JsonCreateNodeOperationHandler {
+export class CreateElementOperationHandler extends JsonCreateNodeOperationHandler {
    override label = 'Create Element';
    elementTypeIds = [...ARCHIMATE_ELEMENT_TYPE_MAP.values()];
 
@@ -25,7 +25,7 @@ export class ArchiMateDiagramCreateElementOperationHandler extends JsonCreateNod
    @inject(ActionDispatcher) protected actionDispatcher!: ActionDispatcher;
 
    override createCommand(operation: CreateNodeOperation): MaybePromise<Command | undefined> {
-      return new CrossModelCommand(this.modelState, () => this.createNode(operation));
+      return new ArchiMateCommand(this.modelState, () => this.createNode(operation));
    }
 
    protected async createNode(operation: CreateNodeOperation): Promise<void> {

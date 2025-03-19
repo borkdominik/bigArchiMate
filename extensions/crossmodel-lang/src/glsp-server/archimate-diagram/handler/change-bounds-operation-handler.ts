@@ -1,15 +1,15 @@
 import { ChangeBoundsOperation, Command, JsonOperationHandler, ModelState } from '@eclipse-glsp/server';
 import { inject, injectable } from 'inversify';
-import { CrossModelCommand } from '../../common/cross-model-command.js';
-import { ArchiMateModelState } from '../model/archimate-model-state.js';
+import { ArchiMateCommand } from '../../common/command.js';
+import { ArchiMateModelState } from '../../common/model-state.js';
 
 @injectable()
-export class ArchiMateDiagramChangeBoundsOperationHandler extends JsonOperationHandler {
+export class ChangeBoundsOperationHandler extends JsonOperationHandler {
    operationType = ChangeBoundsOperation.KIND;
    @inject(ModelState) protected override modelState!: ArchiMateModelState;
 
    createCommand(operation: ChangeBoundsOperation): Command {
-      return new CrossModelCommand(this.modelState, () => this.changeBounds(operation));
+      return new ArchiMateCommand(this.modelState, () => this.changeBounds(operation));
    }
 
    protected changeBounds(operation: ChangeBoundsOperation): void {

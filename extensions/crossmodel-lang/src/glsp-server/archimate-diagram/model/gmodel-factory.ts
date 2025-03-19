@@ -1,7 +1,7 @@
 import { GEdge, GGraph, GModelFactory, GNode, ModelState } from '@eclipse-glsp/server';
 import { inject, injectable } from 'inversify';
 import { ElementNode, JunctionNode, RelationEdge } from '../../../language-server/generated/ast.js';
-import { ArchiMateModelState } from './archimate-model-state.js';
+import { ArchiMateModelState } from '../../common/model-state.js';
 import { GRelationEdge } from './edges.js';
 import { GElementNode, GJunctionNode } from './nodes.js';
 

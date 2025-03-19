@@ -25,7 +25,7 @@ export interface UpdateInfo {
    deleted: URI[];
 }
 
-export type AstCrossModelDocument = CrossModelDocument<CrossModelRoot, Diagnostic>;
+export type AstArchiMateDocument = CrossModelDocument<CrossModelRoot, Diagnostic>;
 
 /**
  * A manager class that supports handling documents with a simple open-update-save/close lifecycle.
@@ -63,7 +63,7 @@ export class OpenTextDocumentManager {
     * @param listener Callback to be called
     * @returns Disposable object
     */
-   onSave(uri: string, listener: (model: ModelSavedEvent<AstCrossModelDocument>) => void): Disposable {
+   onSave(uri: string, listener: (model: ModelSavedEvent<AstArchiMateDocument>) => void): Disposable {
       return this.textDocuments.onDidSave(async event => {
          const documentURI = URI.parse(event.document.uri);
 
@@ -85,7 +85,7 @@ export class OpenTextDocumentManager {
       });
    }
 
-   onUpdate(uri: string, listener: (model: ModelUpdatedEvent<AstCrossModelDocument>) => void): Disposable {
+   onUpdate(uri: string, listener: (model: ModelUpdatedEvent<AstArchiMateDocument>) => void): Disposable {
       return this.documentBuilder.onBuildPhase(DocumentState.Validated, (allChangedDocuments, _token) => {
          const changedDocument = allChangedDocuments.find(document => document.uri.toString() === uri);
          if (changedDocument) {
@@ -93,7 +93,7 @@ export class OpenTextDocumentManager {
                document => document.uri.toString() === this.lastUpdate?.changed?.[0]?.toString()
             );
             const sourceClientId = this.getSourceClientId(buildTrigger ?? changedDocument, allChangedDocuments);
-            const event: ModelUpdatedEvent<AstCrossModelDocument> = {
+            const event: ModelUpdatedEvent<AstArchiMateDocument> = {
                document: {
                   root: changedDocument.parseResult.value as CrossModelRoot,
                   diagnostics: changedDocument.diagnostics ?? [],

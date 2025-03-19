@@ -1,6 +1,6 @@
 import { Point } from '@eclipse-glsp/server';
 
-export class Grid {
+export class ArchiMateGrid {
    public static GRID_X = 5.0;
    public static GRID_Y = 5.0;
 

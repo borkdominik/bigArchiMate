@@ -1,7 +1,7 @@
 import { ARCHIMATE_RELATION_TYPE_MAP, REFERENCE_CONTAINER_TYPE, REFERENCE_PROPERTY, REFERENCE_VALUE } from '@crossbreeze/protocol';
 import { GEdge, GEdgeBuilder, Point } from '@eclipse-glsp/server';
 import { RelationEdge, RelationRoutingPoint } from '../../../language-server/generated/ast.js';
-import { ArchiMateModelIndex } from './archimate-model-index.js';
+import { ArchiMateGModelIndex } from '../../common/gmodel-index.js';
 
 export class GRelationEdge extends GEdge {
    static override builder(): GRelationEdgeBuilder {
@@ -10,7 +10,7 @@ export class GRelationEdge extends GEdge {
 }
 
 export class GRelationEdgeBuilder extends GEdgeBuilder<GRelationEdge> {
-   set(edge: RelationEdge, index: ArchiMateModelIndex): this {
+   set(edge: RelationEdge, index: ArchiMateGModelIndex): this {
       const type = edge.relation.ref?.type;
 
       if (type) {
