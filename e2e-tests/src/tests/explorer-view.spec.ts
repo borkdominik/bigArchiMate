@@ -18,7 +18,7 @@ async function checkOpenWithItem(page: Page, text: string): Promise<boolean> {
    return false;
 }
 
-test.describe('CrossModel Explorer View', () => {
+test.describe('Explorer View', () => {
    let app: App;
    let explorer: ExplorerView;
 

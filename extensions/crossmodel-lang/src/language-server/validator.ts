@@ -1,25 +1,33 @@
 import { ModelFileExtensions } from '@crossbreeze/protocol';
 import { AstNode, UriUtils, ValidationAcceptor, ValidationChecks } from 'langium';
 import { Diagnostic } from 'vscode-languageserver-protocol';
-import { CrossModelAstType, isArchiMateDiagram, isElement, isRelation, NamedObject, Relation, RelationEdge } from './generated/ast.js';
+import {
+   ArchiMateLanguageAstType,
+   isArchiMateDiagram,
+   isElement,
+   isRelation,
+   NamedObject,
+   Relation,
+   RelationEdge
+} from './generated/ast.js';
 import type { Services } from './module.js';
 import { ID_PROPERTY, IdentifiableAstNode } from './naming.js';
 import { findDocument, isSemanticRoot } from './util/ast-util.js';
 import { RelationValidator } from './util/validation/relation-validator.js';
 
-export namespace CrossModelIssueCodes {
+export namespace IssueCodes {
    export const FilenameNotMatching = 'filename-not-matching';
 }
 
 export interface FilenameNotMatchingDiagnostic extends Diagnostic {
    data: {
-      code: typeof CrossModelIssueCodes.FilenameNotMatching;
+      code: typeof IssueCodes.FilenameNotMatching;
    };
 }
 
 export namespace FilenameNotMatchingDiagnostic {
    export function is(diagnostic: Diagnostic): diagnostic is FilenameNotMatchingDiagnostic {
-      return diagnostic.data?.code === CrossModelIssueCodes.FilenameNotMatching;
+      return diagnostic.data?.code === IssueCodes.FilenameNotMatching;
    }
 }
 
@@ -30,7 +38,7 @@ export function registerValidationChecks(services: Services): void {
    const registry = services.validation.ValidationRegistry;
    const validator = services.validation.Validator;
 
-   const checks: ValidationChecks<CrossModelAstType> = {
+   const checks: ValidationChecks<ArchiMateLanguageAstType> = {
       AstNode: validator.checkNode,
       Relation: validator.checkRelation,
       RelationEdge: validator.checkRelationEdge,
@@ -76,7 +84,7 @@ export class Validator {
          accept('warning', `Filename should match element id: ${node.id}`, {
             node,
             property: ID_PROPERTY,
-            data: { code: CrossModelIssueCodes.FilenameNotMatching }
+            data: { code: IssueCodes.FilenameNotMatching }
          });
       }
    }
@@ -98,7 +106,7 @@ export class Validator {
    }
 
    protected isExportedGlobally(node: AstNode): boolean {
-      // we export anything with an id from entities and relationships and all root nodes, see CrossModelScopeComputation
+      // we export anything with an id from entities and relationships and all root nodes, see ScopeComputation
       return isElement(node) || isRelation(node) || isArchiMateDiagram(node);
    }
 

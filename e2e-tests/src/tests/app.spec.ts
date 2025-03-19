@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 import { App } from '../page-objects/app';
 
-test.describe('CrossModel App', () => {
+test.describe('App', () => {
    let app: App;
 
    test.beforeAll(async ({ browser, playwright }) => {

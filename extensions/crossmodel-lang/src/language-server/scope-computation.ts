@@ -80,7 +80,7 @@ export class ScopeComputation extends DefaultScopeComputation {
 
       // Export nodes twice: Once for external usage with the fully-qualified name and once for package-local usage.
       // To avoid duplicates in the UI but still allow access to the node through both names we filter the
-      // external usage descriptions in the CrossModelCompletionProvider if package-local usage is also available
+      // external usage descriptions in the CompletionProvider if package-local usage is also available
 
       let description: AstNodeDescription | undefined;
       const localId = this.idProvider.getLocalId(node);

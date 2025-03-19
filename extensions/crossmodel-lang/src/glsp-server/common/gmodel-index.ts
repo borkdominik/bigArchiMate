@@ -2,7 +2,7 @@ import { GModelElement, GModelIndex } from '@eclipse-glsp/server';
 import { inject, injectable } from 'inversify';
 import { AstNode, AstUtils } from 'langium';
 import * as uuid from 'uuid';
-import { CrossModelLSPServices } from '../../integration.js';
+import { LSPServices } from '../../integration.js';
 import {
    ArchiMateRoot,
    Element,
@@ -22,7 +22,7 @@ import {
  */
 @injectable()
 export class ArchiMateGModelIndex extends GModelIndex {
-   @inject(CrossModelLSPServices) services!: CrossModelLSPServices;
+   @inject(LSPServices) services!: LSPServices;
 
    protected idToSemanticNode = new Map<string, AstNode>();
 

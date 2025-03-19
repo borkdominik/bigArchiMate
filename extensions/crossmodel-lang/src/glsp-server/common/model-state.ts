@@ -2,14 +2,14 @@ import { DefaultModelState, JsonModelState, ModelState, hasFunctionProp } from '
 import { inject, injectable } from 'inversify';
 import { DocumentState } from 'langium';
 import { URI } from 'vscode-uri';
-import { CrossModelLSPServices } from '../../integration.js';
+import { LSPServices } from '../../integration.js';
 import { ArchiMateDiagram, ArchiMateRoot } from '../../language-server/generated/ast.js';
 import { IdProvider } from '../../language-server/naming.js';
 import { ModelSerializer } from '../../model-server/model-serializer.js';
 import { ModelService } from '../../model-server/model-service.js';
 import { ArchiMateGModelIndex } from './gmodel-index.js';
 
-export interface CrossModelSourceModel {
+export interface SourceModel {
    text: string;
 }
 
@@ -18,9 +18,9 @@ export interface CrossModelSourceModel {
  * It also provides convenience methods for accessing specific language services.
  */
 @injectable()
-export class ArchiMateModelState extends DefaultModelState implements JsonModelState<CrossModelSourceModel> {
+export class ArchiMateModelState extends DefaultModelState implements JsonModelState<SourceModel> {
    @inject(ArchiMateGModelIndex) override readonly index: ArchiMateGModelIndex;
-   @inject(CrossModelLSPServices) readonly services!: CrossModelLSPServices;
+   @inject(LSPServices) readonly services!: LSPServices;
 
    protected _semanticUri!: string;
    protected _semanticRoot!: ArchiMateRoot;
@@ -57,7 +57,7 @@ export class ArchiMateModelState extends DefaultModelState implements JsonModelS
       return this.services.language.references.IdProvider;
    }
 
-   get sourceModel(): CrossModelSourceModel {
+   get sourceModel(): SourceModel {
       return { text: this.semanticText() };
    }
 
@@ -65,7 +65,7 @@ export class ArchiMateModelState extends DefaultModelState implements JsonModelS
       return this.semanticRoot.archiMateDiagram!;
    }
 
-   async updateSourceModel(sourceModel: CrossModelSourceModel): Promise<void> {
+   async updateSourceModel(sourceModel: SourceModel): Promise<void> {
       const document = await this.modelService.update({
          uri: this.semanticUri,
          model: sourceModel.text ?? this.semanticRoot,

@@ -3,7 +3,7 @@ import console from 'console';
 import * as net from 'net';
 import * as rpc from 'vscode-jsonrpc/node.js';
 import { URI } from 'vscode-uri';
-import { CrossModelLSPServices } from '../integration.js';
+import { LSPServices } from '../integration.js';
 import { ModelServer } from './model-server.js';
 
 const currentConnections: rpc.MessageConnection[] = [];
@@ -14,7 +14,7 @@ const currentConnections: rpc.MessageConnection[] = [];
  * @param services language services
  * @returns a promise that is resolved as soon as the server is shut down or rejects if an error occurs
  */
-export function startModelServer(services: CrossModelLSPServices, workspaceFolder: URI): Promise<void> {
+export function startModelServer(services: LSPServices, workspaceFolder: URI): Promise<void> {
    const netServer = net.createServer(socket => createClientConnection(socket, services));
    netServer.listen(0);
    netServer.on('listening', () => {
@@ -48,7 +48,7 @@ export function startModelServer(services: CrossModelLSPServices, workspaceFolde
  * @param services language services
  * @returns a promise that is resolved as soon as the connection is closed or rejects if an error occurs
  */
-async function createClientConnection(socket: net.Socket, services: CrossModelLSPServices): Promise<void> {
+async function createClientConnection(socket: net.Socket, services: LSPServices): Promise<void> {
    console.info(`[ModelServer] Starting model server connection for client: '${socket.localAddress}'`);
    const connection = createConnection(socket);
    currentConnections.push(connection);

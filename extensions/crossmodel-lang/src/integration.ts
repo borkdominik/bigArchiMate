@@ -3,10 +3,10 @@ import { Services, SharedServices } from './language-server/module.js';
 /**
  * Language services required in GLSP.
  */
-export const CrossModelLSPServices = Symbol('CrossModelLSPServices');
-export interface CrossModelLSPServices {
+export const LSPServices = Symbol('LSPServices');
+export interface LSPServices {
    /** Language services shared across all languages. */
    shared: SharedServices;
-   /** CrossModel language-specific services. */
+   /** ArchiMate language-specific services. */
    language: Services;
 }

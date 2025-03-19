@@ -22,14 +22,14 @@ import { startModelServer } from './model-server/launch.js';
 const connection = createConnection(ProposedFeatures.all);
 
 // Inject the shared services and language-specific services
-const { shared, services: CrossModel } = createServices({ connection, ...NodeFileSystem });
+const { shared, services } = createServices({ connection, ...NodeFileSystem });
 
 // Start the language server with the shared services
 startLanguageServer(shared);
 
 shared.workspace.WorkspaceManager.onWorkspaceInitialized(workspaceFolders => {
    // Start the graphical language server with the shared services
-   startGLSPServer({ shared, language: CrossModel }, workspaceFolders[0]);
+   startGLSPServer({ shared, language: services }, workspaceFolders[0]);
    // Start the JSON server with the shared services
-   startModelServer({ shared, language: CrossModel }, workspaceFolders[0]);
+   startModelServer({ shared, language: services }, workspaceFolders[0]);
 });

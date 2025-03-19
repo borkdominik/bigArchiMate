@@ -3,7 +3,7 @@ import { App } from '../page-objects/app';
 import { ExplorerView } from '../page-objects/explorer-view';
 import { TheiaSingleInputDialog } from '../page-objects/theia-single-input-dialog';
 
-test.describe('CrossModel TabBar Toolbar', () => {
+test.describe('TabBar Toolbar', () => {
    let app: App;
    let explorer: ExplorerView;
 

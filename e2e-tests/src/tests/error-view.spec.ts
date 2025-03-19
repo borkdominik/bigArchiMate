@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 import { App } from '../page-objects/app';
 import { CompositeEditor } from '../page-objects/composite-editor';
 
-test.describe('CrossModel Error Views', () => {
+test.describe('Error Views', () => {
    let app: App;
 
    test.beforeAll(async ({ browser, playwright }) => {

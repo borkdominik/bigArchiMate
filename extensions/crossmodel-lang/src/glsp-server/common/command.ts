@@ -1,12 +1,12 @@
 import { JsonRecordingCommand, MaybePromise } from '@eclipse-glsp/server';
 import * as jsonPatch from 'fast-json-patch';
-import { ArchiMateModelState, CrossModelSourceModel } from './model-state.js';
+import { ArchiMateModelState, SourceModel } from './model-state.js';
 
 /**
  * A custom recording command that tracks updates during execution through a textual semantic state.
  * Tracking updates ensures that we have proper undo/redo support
  */
-export class ArchiMateCommand extends JsonRecordingCommand<CrossModelSourceModel> {
+export class ArchiMateCommand extends JsonRecordingCommand<SourceModel> {
    constructor(
       protected state: ArchiMateModelState,
       protected runnable: () => MaybePromise<void>,
@@ -16,7 +16,7 @@ export class ArchiMateCommand extends JsonRecordingCommand<CrossModelSourceModel
       super(state, runnable);
    }
 
-   protected override postChange(newModel: CrossModelSourceModel): MaybePromise<void> {
+   protected override postChange(newModel: SourceModel): MaybePromise<void> {
       return this.state.updateSourceModel(newModel);
    }
 
