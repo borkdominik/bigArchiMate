@@ -10,12 +10,12 @@ import {
 
 export function createCrossModelSaveFileDialogContainer(parent: interfaces.Container, props: SaveFileDialogProps): Container {
    const container = createSaveFileDialogContainer(parent, props);
-   container.rebind(SaveFileDialog).to(CrossModelSaveFileDialog);
+   container.rebind(SaveFileDialog).to(CustomSaveFileDialog);
    return container;
 }
 
 @injectable()
-export class CrossModelSaveFileDialog extends SaveFileDialog {
+export class CustomSaveFileDialog extends SaveFileDialog {
    protected override onAfterAttach(msg: Message): void {
       super.onAfterAttach(msg);
       // re-wire content so that the file name comes before the filters which is more common under Windows

@@ -1,18 +1,18 @@
 import { IntegrationArgs, TheiaGLSPApp } from '@eclipse-glsp/glsp-playwright';
 import { Page } from '@playwright/test';
 import { TheiaEditor, TheiaNotificationIndicator, TheiaNotificationOverlay, TheiaWorkspace } from '@theia/playwright';
-import { CMCompositeEditor, IntegratedEditorType } from './cm-composite-editor';
-import { CMExplorerView } from './cm-explorer-view';
-import { CMTheiaIntegration } from './cm-theia-integration';
+import { CompositeEditor, IntegratedEditorType } from './composite-editor';
+import { ExplorerView } from './explorer-view';
+import { TheiaIntegration } from './theia-integration';
 import path = require('path');
 
-export interface CMAppArgs extends Omit<IntegrationArgs, 'page'> {
+export interface AppArgs extends Omit<IntegrationArgs, 'page'> {
    workspaceUrl?: string;
    baseUrl?: string;
 }
-export class CMApp extends TheiaGLSPApp {
-   public static async load(args: CMAppArgs): Promise<CMApp> {
-      const integration = new CMTheiaIntegration(
+export class App extends TheiaGLSPApp {
+   public static async load(args: AppArgs): Promise<App> {
+      const integration = new TheiaIntegration(
          { browser: args.browser, page: {} as any, playwright: args.playwright },
          {
             type: 'Theia',
@@ -39,9 +39,9 @@ export class CMApp extends TheiaGLSPApp {
       this.notificationOverlay = this.notificationOverlay = new TheiaNotificationOverlay(this, this.notificationIndicator);
    }
 
-   protected _integration: CMTheiaIntegration;
+   protected _integration: TheiaIntegration;
 
-   set integration(integration: CMTheiaIntegration) {
+   set integration(integration: TheiaIntegration) {
       if (!this._integration) {
          this._integration = integration;
       } else {
@@ -49,18 +49,18 @@ export class CMApp extends TheiaGLSPApp {
       }
    }
 
-   get integration(): CMTheiaIntegration {
+   get integration(): TheiaIntegration {
       return this._integration;
    }
 
-   async openExplorerView(): Promise<CMExplorerView> {
-      const explorer = await this.openView(CMExplorerView);
+   async openExplorerView(): Promise<ExplorerView> {
+      const explorer = await this.openView(ExplorerView);
       await explorer.waitForVisibleFileNodes();
       return explorer;
    }
 
    async openCompositeEditor<T extends keyof IntegratedEditorType>(filePath: string, editorType: T): Promise<IntegratedEditorType[T]> {
-      const editor = await this.openEditor(filePath, CMCompositeEditor);
+      const editor = await this.openEditor(filePath, CompositeEditor);
       await editor.waitForVisible();
       let integratedEditor: TheiaEditor | undefined = undefined;
       if (editorType === 'Code Editor') {
@@ -80,7 +80,7 @@ export class CMApp extends TheiaGLSPApp {
 
    override openEditor<T extends TheiaEditor>(
       filePath: string,
-      editorFactory: new (editorFilePath: string, app: CMApp) => T,
+      editorFactory: new (editorFilePath: string, app: App) => T,
       editorName?: string | undefined,
       expectFileNodes?: boolean | undefined
    ): Promise<T> {

@@ -4,7 +4,7 @@ import { FileNavigatorWidget } from '@theia/navigator/lib/browser';
 import { createFileNavigatorContainer } from '@theia/navigator/lib/browser/navigator-container';
 
 @injectable()
-export class CrossModelFileNavigatorWidget extends FileNavigatorWidget {
+export class CustomFileNavigatorWidget extends FileNavigatorWidget {
    protected override toContextMenuArgs(node: SelectableTreeNode): any[] | undefined {
       const uris = this.model.selectedFileStatNodes.map(selected => selected.uri);
       if (uris.length > 0) {
@@ -16,7 +16,7 @@ export class CrossModelFileNavigatorWidget extends FileNavigatorWidget {
 
 export function createCrossModelFileNavigatorWidget(parent: interfaces.Container): FileNavigatorWidget {
    const child = createFileNavigatorContainer(parent);
-   child.bind(CrossModelFileNavigatorWidget).toSelf().inSingletonScope();
-   child.rebind(FileNavigatorWidget).toService(CrossModelFileNavigatorWidget);
+   child.bind(CustomFileNavigatorWidget).toSelf().inSingletonScope();
+   child.rebind(FileNavigatorWidget).toService(CustomFileNavigatorWidget);
    return child.get(FileNavigatorWidget);
 }

@@ -2,14 +2,14 @@ import { waitForFunction } from '@eclipse-glsp/glsp-playwright';
 import { ElementHandle } from '@playwright/test';
 import { TheiaEditor, TheiaTextEditor, TheiaViewData } from '@theia/playwright';
 import { TheiaMonacoEditor } from '@theia/playwright/lib/theia-monaco-editor';
-import { CMApp } from './cm-app';
-import { CMCompositeEditor } from './cm-composite-editor';
+import { App } from './app';
+import { CompositeEditor } from './composite-editor';
 
 export abstract class IntegratedEditor extends TheiaEditor {
-   override app: CMApp;
+   override app: App;
    constructor(
       data: TheiaViewData,
-      readonly parent: CMCompositeEditor
+      readonly parent: CompositeEditor
    ) {
       super(data, parent.app);
       this.app = parent.app;
@@ -72,10 +72,10 @@ export abstract class IntegratedEditor extends TheiaEditor {
 }
 
 export abstract class IntegratedTextEditor extends TheiaTextEditor {
-   override app: CMApp;
+   override app: App;
    constructor(
       filePath: string,
-      readonly parent: CMCompositeEditor
+      readonly parent: CompositeEditor
    ) {
       super(filePath, parent.app);
       this.app = parent.app;

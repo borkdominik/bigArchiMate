@@ -7,8 +7,8 @@ import { inject, injectable, postConstruct } from '@theia/core/shared/inversify'
 import { FileNode, FileStatNode } from '@theia/filesystem/lib/browser';
 
 @injectable()
-export class CrossModelLabelProvider implements LabelProviderContribution, TreeDecorator {
-   id = 'CrossModelLabelProvider';
+export class CustomLabelProvider implements LabelProviderContribution, TreeDecorator {
+   id = 'CustomLabelProvider';
 
    @inject(LabelProvider) protected readonly labelProvider: LabelProvider;
    @inject(ModelService) protected readonly modelService: ModelService;

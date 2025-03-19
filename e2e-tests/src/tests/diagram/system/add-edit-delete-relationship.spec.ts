@@ -1,18 +1,18 @@
 import { expect, test } from '@playwright/test';
-import { CMApp } from '../../../page-objects/cm-app';
-import { RelationshipPropertiesView } from '../../../page-objects/cm-properties-view';
+import { App } from '../../../page-objects/app';
+import { RelationshipPropertiesView } from '../../../page-objects/properties-view';
 import { Relationship } from '../../../page-objects/system-diagram/diagram-elements';
 import { IntegratedSystemDiagramEditor } from '../../../page-objects/system-diagram/integrated-system-diagram-editor';
 
 test.describe.serial('Add/Edit/Delete relationship in a diagram ', () => {
-   let app: CMApp;
+   let app: App;
    const SYSTEM_DIAGRAM_PATH = 'ExampleCRM/diagrams/CRM.system-diagram.cm';
    const CUSTOMER_ENTITY_ID = 'Customer';
    const ORDER_ENTITY_ID = 'Order';
    const NEW_RELATIONSHIP_PATH = 'ExampleCRM/relationships/CustomerToOrder.relationship.cm';
 
    test.beforeAll(async ({ browser, playwright }) => {
-      app = await CMApp.load({ browser, playwright });
+      app = await App.load({ browser, playwright });
    });
    test.afterAll(async () => {
       await app.page.close();

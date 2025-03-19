@@ -1,3 +1,3 @@
 import { TheiaTabBarToolbar } from './theia-tabbar-toolbar';
 
-export class CMMTabBarToolbar extends TheiaTabBarToolbar {}
+export class TabBarToolbar extends TheiaTabBarToolbar {}

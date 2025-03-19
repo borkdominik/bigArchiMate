@@ -1,7 +1,7 @@
 import { TheiaView } from '@theia/playwright';
-import { CMForm, FormIcons, FormSection } from './cm-form';
+import { Form, FormIcons, FormSection } from './form';
 
-export class RelationshipForm extends CMForm {
+export class RelationshipForm extends Form {
    protected override iconClass = FormIcons.Relationship;
 
    readonly generalSection: RelationshipGeneralSection;

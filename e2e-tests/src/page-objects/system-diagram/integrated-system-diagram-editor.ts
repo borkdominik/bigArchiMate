@@ -1,17 +1,17 @@
 import { GLSPBaseCommandPalette, InteractablePosition, PModelElement, PModelElementConstructor } from '@eclipse-glsp/glsp-playwright';
 import { OSUtil, normalizeId, urlEncodePath } from '@theia/playwright';
 import { join } from 'path';
-import { CMCompositeEditor, hasViewError } from '../cm-composite-editor';
-import { IntegratedEditor } from '../cm-integrated-editor';
-import { EntityPropertiesView } from '../cm-properties-view';
-import { CMTheiaIntegration } from '../cm-theia-integration';
+import { CompositeEditor, hasViewError } from '../composite-editor';
+import { IntegratedEditor } from '../integrated-editor';
+import { EntityPropertiesView } from '../properties-view';
+import { TheiaIntegration } from '../theia-integration';
 import { Entity } from './diagram-elements';
 import { SystemDiagram, WaitForModelUpdateOptions } from './system-diagram';
 import { SystemTools } from './system-tool-box';
 
 export class IntegratedSystemDiagramEditor extends IntegratedEditor {
    readonly diagram: SystemDiagram;
-   constructor(filePath: string, parent: CMCompositeEditor, tabSelector: string) {
+   constructor(filePath: string, parent: CompositeEditor, tabSelector: string) {
       super(
          {
             tabSelector,
@@ -32,7 +32,7 @@ export class IntegratedSystemDiagramEditor extends IntegratedEditor {
       return this.diagram.graph.waitForVisible();
    }
 
-   protected createSystemDiagram(integration: CMTheiaIntegration): SystemDiagram {
+   protected createSystemDiagram(integration: TheiaIntegration): SystemDiagram {
       return new SystemDiagram({ type: 'integration', integration });
    }
 

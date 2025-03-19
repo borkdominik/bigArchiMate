@@ -1,17 +1,17 @@
 import { expect } from '@eclipse-glsp/glsp-playwright';
 import { test } from '@playwright/test';
-import { CMApp } from '../../../page-objects/cm-app';
+import { App } from '../../../page-objects/app';
 import { Attribute } from '../../../page-objects/system-diagram/diagram-elements';
 
 test.describe.serial('Add/Edit/Delete attributes to/from an entity in a diagram', () => {
-   let app: CMApp;
+   let app: App;
    const SYSTEM_DIAGRAM_PATH = 'ExampleCRM/diagrams/EMPTY.system-diagram.cm';
    const ENTITY_PATH = 'ExampleCRM/entities/EmptyEntity.entity.cm';
    const EMPTY_ENTITY_ID = 'EmptyEntity';
    const RENAMED_ATTRIBUTE_LABEL = 'Renamed Attribute';
 
    test.beforeAll(async ({ browser, playwright }) => {
-      app = await CMApp.load({ browser, playwright });
+      app = await App.load({ browser, playwright });
    });
    test.afterAll(async () => {
       await app.page.close();

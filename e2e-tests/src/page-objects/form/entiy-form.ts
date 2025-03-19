@@ -2,9 +2,9 @@ import { defined } from '@eclipse-glsp/glsp-playwright';
 import { Locator } from '@playwright/test';
 import { TheiaPageObject } from '@theia/playwright';
 import { TheiaView } from '@theia/playwright/lib/theia-view';
-import { CMForm, FormIcons, FormSection } from './cm-form';
+import { Form, FormIcons, FormSection } from './form';
 
-export class EntityForm extends CMForm {
+export class EntityForm extends Form {
    protected override iconClass = FormIcons.Entity;
 
    readonly generalSection: EntityGeneralSection;

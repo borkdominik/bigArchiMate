@@ -1,12 +1,12 @@
 import { TheiaApp, TheiaExplorerFileStatNode, TheiaExplorerView } from '@theia/playwright';
-import { CMMTabBarToolbar } from './cm-tab-bar-toolbar';
+import { TabBarToolbar } from './tabbar-toolbar';
 
-export class CMExplorerView extends TheiaExplorerView {
-   public readonly tabBarToolbar: CMMTabBarToolbar;
+export class ExplorerView extends TheiaExplorerView {
+   public readonly tabBarToolbar: TabBarToolbar;
 
    constructor(app: TheiaApp) {
       super(app);
-      this.tabBarToolbar = new CMMTabBarToolbar(this);
+      this.tabBarToolbar = new TabBarToolbar(this);
    }
 
    /**

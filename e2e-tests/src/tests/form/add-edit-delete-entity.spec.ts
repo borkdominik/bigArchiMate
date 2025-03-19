@@ -1,8 +1,8 @@
 import { expect, test } from '@playwright/test';
-import { CMApp } from '../../page-objects/cm-app';
+import { App } from '../../page-objects/app';
 import { TheiaSingleInputDialog } from '../../page-objects/theia-single-input-dialog';
 
-async function confirmCreationDialog(app: CMApp, entityName: string): Promise<void> {
+async function confirmCreationDialog(app: App, entityName: string): Promise<void> {
    const newEntityDialog = new TheiaSingleInputDialog(app);
    newEntityDialog.waitForVisible();
    expect(await newEntityDialog.title()).toBe('New Entity...');
@@ -13,11 +13,11 @@ async function confirmCreationDialog(app: CMApp, entityName: string): Promise<vo
 }
 
 test.describe('Add/Edit/Delete entity from explorer', () => {
-   let app: CMApp;
+   let app: App;
    const NEW_ENTITY_PATH = 'ExampleCRM/entities/NewEntity.entity.cm';
    const NEW_ENTITY2_PATH = 'testFolder/NewEntity2.entity.cm';
    test.beforeAll(async ({ browser, playwright }) => {
-      app = await CMApp.load({ browser, playwright });
+      app = await App.load({ browser, playwright });
    });
    test.afterAll(async () => {
       await app.page.close();

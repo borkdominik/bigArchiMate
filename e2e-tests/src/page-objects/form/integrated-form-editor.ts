@@ -1,12 +1,12 @@
 import { OSUtil, normalizeId, urlEncodePath } from '@theia/playwright';
 import { join } from 'path';
-import { CMCompositeEditor, hasViewError } from '../cm-composite-editor';
-import { IntegratedEditor } from '../cm-integrated-editor';
-import { CMForm } from './cm-form';
+import { CompositeEditor, hasViewError } from '../composite-editor';
+import { IntegratedEditor } from '../integrated-editor';
 import { EntityForm } from './entiy-form';
+import { Form } from './form';
 import { RelationshipForm } from './relationship-form';
 export class IntegratedFormEditor extends IntegratedEditor {
-   constructor(filePath: string, parent: CMCompositeEditor, tabSelector: string) {
+   constructor(filePath: string, parent: CompositeEditor, tabSelector: string) {
       super(
          {
             tabSelector,
@@ -24,7 +24,7 @@ export class IntegratedFormEditor extends IntegratedEditor {
 
    async formFor(entity: 'entity'): Promise<EntityForm>;
    async formFor(relationship: 'relationship'): Promise<RelationshipForm>;
-   async formFor(string: 'entity' | 'relationship'): Promise<CMForm> {
+   async formFor(string: 'entity' | 'relationship'): Promise<Form> {
       if (string === 'entity') {
          const form = new EntityForm(this, '');
          await form.waitForVisible();

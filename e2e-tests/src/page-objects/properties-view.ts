@@ -1,22 +1,22 @@
 import { ElementHandle } from '@playwright/test';
 import { TheiaApp, TheiaEditor, isElementVisible } from '@theia/playwright';
-import { CMForm } from './form/cm-form';
 import { EntityForm } from './form/entiy-form';
+import { Form } from './form/form';
 import { RelationshipForm } from './form/relationship-form';
 
-const CMPropertiesViewData = {
+const PropertiesViewData = {
    tabSelector: '#shell-tab-property-view',
    viewSelector: '#property-view',
    viewName: 'Properties'
 };
 
-export abstract class CMPropertiesView<F extends CMForm> extends TheiaEditor {
+export abstract class PropertiesView<F extends Form> extends TheiaEditor {
    protected modelRootSelector = '#model-property-view';
 
    abstract form(): Promise<F>;
 
    constructor(app: TheiaApp) {
-      super(CMPropertiesViewData, app);
+      super(PropertiesViewData, app);
    }
 
    protected async modelPropertyElement(): Promise<ElementHandle<SVGElement | HTMLElement> | null> {
@@ -33,7 +33,7 @@ export abstract class CMPropertiesView<F extends CMForm> extends TheiaEditor {
    }
 }
 
-export class EntityPropertiesView extends CMPropertiesView<EntityForm> {
+export class EntityPropertiesView extends PropertiesView<EntityForm> {
    async form(): Promise<EntityForm> {
       const entityForm = new EntityForm(this, this.modelRootSelector);
       await entityForm.waitForVisible();
@@ -41,7 +41,7 @@ export class EntityPropertiesView extends CMPropertiesView<EntityForm> {
    }
 }
 
-export class RelationshipPropertiesView extends CMPropertiesView<RelationshipForm> {
+export class RelationshipPropertiesView extends PropertiesView<RelationshipForm> {
    async form(): Promise<RelationshipForm> {
       const relationshipForm = new RelationshipForm(this, this.modelRootSelector);
       await relationshipForm.waitForVisible();

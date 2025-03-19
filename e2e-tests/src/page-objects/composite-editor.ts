@@ -2,9 +2,9 @@ import { ElementHandle, Page } from '@playwright/test';
 import { OSUtil, TheiaEditor, isElementVisible, normalizeId, urlEncodePath } from '@theia/playwright';
 import { TheiaMonacoEditor } from '@theia/playwright/lib/theia-monaco-editor';
 import { join } from 'path';
-import { CMApp } from './cm-app';
-import { IntegratedEditor, IntegratedTextEditor } from './cm-integrated-editor';
+import { App } from './app';
 import { IntegratedFormEditor } from './form/integrated-form-editor';
+import { IntegratedEditor, IntegratedTextEditor } from './integrated-editor';
 import { IntegratedSystemDiagramEditor } from './system-diagram/integrated-system-diagram-editor';
 
 export type CompositeEditorName = keyof IntegratedEditorType;
@@ -15,10 +15,10 @@ export interface IntegratedEditorType {
    'Mapping Diagram': IntegratedMappingDiagramEditor;
 }
 
-export class CMCompositeEditor extends TheiaEditor {
+export class CompositeEditor extends TheiaEditor {
    constructor(
       protected filePath: string,
-      public override app: CMApp
+      public override app: App
    ) {
       // shell-tab-code-editor-opener:file:///c%3A/Users/user/AppData/Local/Temp/cloud-ws-JBUhb6/sample.txt:1
       // code-editor-opener:file:///c%3A/Users/user/AppData/Local/Temp/cloud-ws-JBUhb6/sample.txt:1
@@ -90,7 +90,7 @@ export class CMCompositeEditor extends TheiaEditor {
 }
 
 export class IntegratedCodeEditor extends IntegratedTextEditor {
-   constructor(filePath: string, parent: CMCompositeEditor, tabSelector: string) {
+   constructor(filePath: string, parent: CompositeEditor, tabSelector: string) {
       // shell-tab-code-editor-opener:file:///c%3A/Users/user/AppData/Local/Temp/cloud-ws-JBUhb6/sample.txt:1
       // code-editor-opener:file:///c%3A/Users/user/AppData/Local/Temp/cloud-ws-JBUhb6/sample.txt:1
       super(filePath, parent);
@@ -103,7 +103,7 @@ export class IntegratedCodeEditor extends IntegratedTextEditor {
 }
 
 export class IntegratedMappingDiagramEditor extends IntegratedEditor {
-   constructor(filePath: string, parent: CMCompositeEditor, tabSelector: string) {
+   constructor(filePath: string, parent: CompositeEditor, tabSelector: string) {
       super(
          {
             tabSelector,

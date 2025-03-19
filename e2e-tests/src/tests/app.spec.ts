@@ -1,11 +1,11 @@
 import { expect, test } from '@playwright/test';
-import { CMApp } from '../page-objects/cm-app';
+import { App } from '../page-objects/app';
 
 test.describe('CrossModel App', () => {
-   let app: CMApp;
+   let app: App;
 
    test.beforeAll(async ({ browser, playwright }) => {
-      app = await CMApp.load({ browser, playwright });
+      app = await App.load({ browser, playwright });
    });
 
    test('main content panel visible', async () => {

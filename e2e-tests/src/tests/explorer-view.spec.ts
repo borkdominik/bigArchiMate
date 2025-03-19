@@ -1,6 +1,6 @@
 import { expect, Page, test } from '@playwright/test';
-import { CMApp } from '../page-objects/cm-app';
-import { CMExplorerView } from '../page-objects/cm-explorer-view';
+import { App } from '../page-objects/app';
+import { ExplorerView } from '../page-objects/explorer-view';
 
 async function checkOpenWithItem(page: Page, text: string): Promise<boolean> {
    // Locate all elements matching the selector
@@ -19,11 +19,11 @@ async function checkOpenWithItem(page: Page, text: string): Promise<boolean> {
 }
 
 test.describe('CrossModel Explorer View', () => {
-   let app: CMApp;
-   let explorer: CMExplorerView;
+   let app: App;
+   let explorer: ExplorerView;
 
    test.beforeAll(async ({ browser, playwright }) => {
-      app = await CMApp.load({ browser, playwright });
+      app = await App.load({ browser, playwright });
       explorer = await app.openExplorerView();
    });
 

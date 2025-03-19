@@ -12,7 +12,7 @@ export const FormIcons = {
 
 export type FormType = keyof typeof FormIcons;
 
-export abstract class CMForm extends TheiaViewObject {
+export abstract class Form extends TheiaViewObject {
    protected abstract iconClass: string;
    protected typeSelector: string;
 
@@ -51,7 +51,7 @@ export abstract class FormSection extends TheiaPageObject {
    readonly locator: Locator;
 
    constructor(
-      readonly form: CMForm,
+      readonly form: Form,
       sectionName: string
    ) {
       super(form.app);

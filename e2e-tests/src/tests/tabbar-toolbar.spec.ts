@@ -1,14 +1,14 @@
 import { expect, test } from '@playwright/test';
-import { CMApp } from '../page-objects/cm-app';
-import { CMExplorerView } from '../page-objects/cm-explorer-view';
+import { App } from '../page-objects/app';
+import { ExplorerView } from '../page-objects/explorer-view';
 import { TheiaSingleInputDialog } from '../page-objects/theia-single-input-dialog';
 
 test.describe('CrossModel TabBar Toolbar', () => {
-   let app: CMApp;
-   let explorer: CMExplorerView;
+   let app: App;
+   let explorer: ExplorerView;
 
    test.beforeAll(async ({ browser, playwright }) => {
-      app = await CMApp.load({ browser, playwright });
+      app = await App.load({ browser, playwright });
       explorer = await app.openExplorerView();
    });
    test.beforeEach(async () => {
@@ -39,7 +39,7 @@ test.describe('CrossModel TabBar Toolbar', () => {
          // Wait until the dialog is closed.
          await newEntityDialog.waitForClosed();
 
-         explorer = await app.openView(CMExplorerView);
+         explorer = await app.openView(ExplorerView);
          const file = await explorer.getFileStatNodeByLabel('entity-created-from-tabbar-toolbar.entity.cm');
          expect(file).toBeDefined();
          expect(await file.label()).toBe('entity-created-from-tabbar-toolbar.entity.cm');
@@ -69,7 +69,7 @@ test.describe('CrossModel TabBar Toolbar', () => {
          // Wait until the dialog is closed.
          await newRelationshipDialog.waitForClosed();
 
-         explorer = await app.openView(CMExplorerView);
+         explorer = await app.openView(ExplorerView);
          const file = await explorer.getFileStatNodeByLabel('relationship-created-from-tabbar-toolbar.relationship.cm');
          expect(file).toBeDefined();
          expect(await file.label()).toBe('relationship-created-from-tabbar-toolbar.relationship.cm');
@@ -99,7 +99,7 @@ test.describe('CrossModel TabBar Toolbar', () => {
          // Wait until the dialog is closed.
          await newDiagramDialog.waitForClosed();
 
-         explorer = await app.openView(CMExplorerView);
+         explorer = await app.openView(ExplorerView);
          const file = await explorer.getFileStatNodeByLabel('diagram-created-from-tabbar-toolbar.system-diagram.cm');
          expect(file).toBeDefined();
          expect(await file.label()).toBe('diagram-created-from-tabbar-toolbar.system-diagram.cm');

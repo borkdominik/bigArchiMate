@@ -1,17 +1,17 @@
 import { ContextMenuIntegration, Integration, IntegrationArgs, TheiaIntegrationOptions } from '@eclipse-glsp/glsp-playwright';
 import { Locator, Page } from '@playwright/test';
 import { TheiaAppFactory, TheiaAppLoader } from '@theia/playwright';
-import { CMApp } from './cm-app';
-import { CMWorkspace } from './cm-workspace';
+import { App } from './app';
+import { Workspace } from './workspace';
 
-export class CMTheiaIntegration extends Integration implements ContextMenuIntegration {
-   protected theiaApp: CMApp;
+export class TheiaIntegration extends Integration implements ContextMenuIntegration {
+   protected theiaApp: App;
 
    override get page(): Page {
       return this.theiaApp.page;
    }
 
-   get app(): CMApp {
+   get app(): App {
       return this.theiaApp;
    }
 
@@ -27,8 +27,8 @@ export class CMTheiaIntegration extends Integration implements ContextMenuIntegr
    }
 
    protected override async launch(): Promise<void> {
-      const ws = new CMWorkspace(this.options.workspace ? [this.options.workspace] : undefined);
-      this.theiaApp = await TheiaAppLoader.load(this.args, ws, CMApp as TheiaAppFactory<CMApp>);
+      const ws = new Workspace(this.options.workspace ? [this.options.workspace] : undefined);
+      this.theiaApp = await TheiaAppLoader.load(this.args, ws, App as TheiaAppFactory<App>);
       this.theiaApp.integration = this;
       this.theiaApp.initialize(this.options);
    }

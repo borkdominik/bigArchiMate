@@ -1,1 +1,1 @@
-export * from './cm-env-variable-server';
+export * from './env-variables-server';

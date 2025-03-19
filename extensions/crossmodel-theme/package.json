@@ -32,13 +32,13 @@
         "id": "crossmodel-light",
         "label": "CrossModel Light",
         "uiTheme": "vs",
-        "path": "./themes/crossmodel-light-color-theme.json"
+        "path": "./themes/light-color-theme.json"
       },
       {
         "id": "crossmodel-dark",
         "label": "CrossModel Dark",
         "uiTheme": "vs-dark",
-        "path": "./themes/crossmodel-dark-color-theme.json"
+        "path": "./themes/dark-color-theme.json"
       }
     ]
   },

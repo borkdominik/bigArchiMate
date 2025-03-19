@@ -1,8 +1,8 @@
 import { expect, test } from '@playwright/test';
-import { CMApp } from '../../page-objects/cm-app';
+import { App } from '../../page-objects/app';
 import { TheiaSingleInputDialog } from '../../page-objects/theia-single-input-dialog';
 
-async function confirmCreationDialog(app: CMApp, relationshipName: string): Promise<void> {
+async function confirmCreationDialog(app: App, relationshipName: string): Promise<void> {
    const dialog = new TheiaSingleInputDialog(app);
    dialog.waitForVisible();
    expect(await dialog.title()).toBe('New Relationship...');
@@ -13,11 +13,11 @@ async function confirmCreationDialog(app: CMApp, relationshipName: string): Prom
 }
 
 test.describe('Add/Edit/Delete relationship from explorer', () => {
-   let app: CMApp;
+   let app: App;
    const NEW_RELATIONSHIP_PATH = 'ExampleCRM/relationships/NewRelationship.relationship.cm';
    const TEST_RELATIONSHIP_PATH = 'ExampleCRM/relationships/Test.relationship.cm';
    test.beforeAll(async ({ browser, playwright }) => {
-      app = await CMApp.load({ browser, playwright });
+      app = await App.load({ browser, playwright });
    });
    test.afterAll(async () => {
       await app.page.close();

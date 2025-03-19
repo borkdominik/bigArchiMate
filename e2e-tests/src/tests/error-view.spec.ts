@@ -1,15 +1,15 @@
 import { expect, test } from '@playwright/test';
-import { CMApp } from '../page-objects/cm-app';
-import { CMCompositeEditor } from '../page-objects/cm-composite-editor';
+import { App } from '../page-objects/app';
+import { CompositeEditor } from '../page-objects/composite-editor';
 
 test.describe('CrossModel Error Views', () => {
-   let app: CMApp;
+   let app: App;
 
    test.beforeAll(async ({ browser, playwright }) => {
-      app = await CMApp.load({ browser, playwright });
+      app = await App.load({ browser, playwright });
    });
    test('Form Editor should show error if model code is broken', async () => {
-      const editor = await app.openEditor('example-entity.entity.cm', CMCompositeEditor);
+      const editor = await app.openEditor('example-entity.entity.cm', CompositeEditor);
       expect(editor).toBeDefined();
 
       const codeEditor = await editor.switchToCodeEditor();
@@ -26,7 +26,7 @@ test.describe('CrossModel Error Views', () => {
    });
 
    test('System Diagram Editor should show error if model code is broken', async () => {
-      const editor = await app.openEditor('example-diagram.diagram.cm', CMCompositeEditor);
+      const editor = await app.openEditor('example-diagram.diagram.cm', CompositeEditor);
       expect(editor).toBeDefined();
 
       const codeEditor = await editor.switchToCodeEditor();
