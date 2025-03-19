@@ -46,7 +46,7 @@
   "theiaExtensions": [
     {
       "frontend": "lib/browser/archimate-diagram/archimate-diagram-frontend-module",
-      "backend": "lib/node/crossmodel-backend-module"
+      "backend": "lib/node/glsp-client-backend-module"
     }
   ]
 }
