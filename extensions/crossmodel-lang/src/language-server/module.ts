@@ -1,46 +1,46 @@
 import { AstNode, DefaultServiceRegistry, IndentationAwareLexer, Module, ServiceRegistry, inject } from 'langium';
 import {
-    DefaultSharedModuleContext,
-    LangiumServices,
-    LangiumSharedServices,
-    PartialLangiumServices,
-    PartialLangiumSharedServices,
-    createDefaultModule,
-    createDefaultSharedModule
+   DefaultSharedModuleContext,
+   LangiumServices,
+   LangiumSharedServices,
+   PartialLangiumServices,
+   PartialLangiumSharedServices,
+   createDefaultModule,
+   createDefaultSharedModule
 } from 'langium/lsp';
 import { TextDocument } from 'vscode-languageserver-textdocument';
 import { URI } from 'vscode-uri';
 import { AddedSharedModelServices } from '../model-server/model-module.js';
+import { ModelSerializer } from '../model-server/model-serializer.js';
 import { ModelService } from '../model-server/model-service.js';
 import { OpenTextDocumentManager } from '../model-server/open-text-document-manager.js';
 import { OpenableTextDocuments } from '../model-server/openable-text-documents.js';
-import { Serializer } from '../model-server/serializer.js';
-import { ClientLogger } from './cross-model-client-logger.js';
-import { CrossModelCodeActionProvider } from './cross-model-code-action-provider.js';
-import { CrossModelCompletionProvider } from './cross-model-completion-provider.js';
-import { CrossModelDocumentBuilder } from './cross-model-document-builder.js';
-import { CrossModelModelFormatter } from './cross-model-formatter.js';
-import { CrossModelIndexManager } from './cross-model-index-manager.js';
-import { CrossModelLangiumDocuments } from './cross-model-langium-documents.js';
-import { CrossModelLanguageServer } from './cross-model-language-server.js';
-import { DefaultIdProvider } from './cross-model-naming.js';
-import { CrossModelPackageManager } from './cross-model-package-manager.js';
-import { CrossModelScopeProvider } from './cross-model-scope-provider.js';
-import { CrossModelScopeComputation } from './cross-model-scope.js';
-import { CrossModelSemanticTokenProvider } from './cross-model-semantic-token-provider.js';
-import { CrossModelSerializer } from './cross-model-serializer.js';
-import { CrossModelValidator, registerValidationChecks } from './cross-model-validator.js';
-import { CrossModelWorkspaceManager } from './cross-model-workspace-manager.js';
+import { ClientLogger } from './client-logger.js';
+import { CodeActionProvider } from './code-action-provider.js';
+import { CompletionProvider } from './completion-provider.js';
+import { DocumentBuilder } from './document-builder.js';
+import { Formatter } from './formatter.js';
 import { ArchiMateGeneratedModule, ArchiMateLanguageGeneratedSharedModule } from './generated/module.js';
-import { CrossModelTokenBuilder } from './parser/cross-model-indentation-aware.js';
-import { CrossModelLinker } from './references/cross-model-linker.js';
+import { IndexManager } from './index-manager.js';
+import { LangiumDocuments } from './langium-documents.js';
+import { LanguageServer } from './language-server.js';
+import { DefaultIdProvider } from './naming.js';
+import { PackageManager } from './package-manager.js';
+import { TokenBuilder } from './parser/token-builder.js';
+import { Linker } from './references/linker.js';
+import { ScopeComputation } from './scope-computation.js';
+import { ScopeProvider } from './scope-provider.js';
+import { SemanticTokenProvider } from './semantic-token-provider.js';
+import { Serializer } from './serializer.js';
+import { Validator, registerValidationChecks } from './validator.js';
+import { WorkspaceManager } from './workspace-manager.js';
 
 /***************************
  * Shared Module
  ***************************/
 export type ExtendedLangiumServices = LangiumServices & {
    serializer: {
-      Serializer: Serializer<AstNode>;
+      Serializer: ModelSerializer<AstNode>;
    };
 };
 
@@ -78,16 +78,16 @@ export interface CrossModelAddedSharedServices {
    ServiceRegistry: ExtendedServiceRegistry;
 
    workspace: {
-      /* override */ WorkspaceManager: CrossModelWorkspaceManager;
-      PackageManager: CrossModelPackageManager;
-      LangiumDocuments: CrossModelLangiumDocuments;
-      IndexManager: CrossModelIndexManager;
+      /* override */ WorkspaceManager: WorkspaceManager;
+      PackageManager: PackageManager;
+      LangiumDocuments: LangiumDocuments;
+      IndexManager: IndexManager;
    };
    logger: {
       ClientLogger: ClientLogger;
    };
    lsp: {
-      /* override */ LanguageServer: CrossModelLanguageServer;
+      /* override */ LanguageServer: LanguageServer;
    };
 }
 
@@ -96,25 +96,25 @@ export type CrossModelSharedServices = Omit<LangiumSharedServices, 'ServiceRegis
    CrossModelAddedSharedServices &
    AddedSharedModelServices;
 
-export const CrossModelSharedModule: Module<
+export const SharedModule: Module<
    CrossModelSharedServices,
    PartialLangiumSharedServices & CrossModelAddedSharedServices & AddedSharedModelServices
 > = {
    ServiceRegistry: () => new DefaultExtendedServiceRegistry(),
    workspace: {
-      WorkspaceManager: services => new CrossModelWorkspaceManager(services),
-      PackageManager: services => new CrossModelPackageManager(services),
-      LangiumDocuments: services => new CrossModelLangiumDocuments(services),
+      WorkspaceManager: services => new WorkspaceManager(services),
+      PackageManager: services => new PackageManager(services),
+      LangiumDocuments: services => new LangiumDocuments(services),
       TextDocuments: services => new OpenableTextDocuments(TextDocument, services),
       TextDocumentManager: services => new OpenTextDocumentManager(services),
-      DocumentBuilder: services => new CrossModelDocumentBuilder(services),
-      IndexManager: services => new CrossModelIndexManager(services)
+      DocumentBuilder: services => new DocumentBuilder(services),
+      IndexManager: services => new IndexManager(services)
    },
    logger: {
       ClientLogger: services => new ClientLogger(services)
    },
    lsp: {
-      LanguageServer: services => new CrossModelLanguageServer(services)
+      LanguageServer: services => new LanguageServer(services)
    },
    model: {
       ModelService: services => new ModelService(services)
@@ -125,31 +125,31 @@ export const CrossModelSharedModule: Module<
  * Language Module
  ***************************/
 
-export interface CrossModelModuleContext {
+export interface ModuleContext {
    shared: CrossModelSharedServices;
 }
 
 /**
  * Declaration of custom services - add your own service classes here.
  */
-export interface CrossModelAddedServices {
+export interface AddedServices {
    references: {
       IdProvider: DefaultIdProvider;
-      Linker: CrossModelLinker;
-      ScopeProvider: CrossModelScopeProvider;
+      Linker: Linker;
+      ScopeProvider: ScopeProvider;
    };
    validation: {
-      CrossModelValidator: CrossModelValidator;
+      CrossModelValidator: Validator;
    };
    serializer: {
-      Serializer: CrossModelSerializer;
+      Serializer: Serializer;
    };
    parser: {
-      TokenBuilder: CrossModelTokenBuilder;
+      TokenBuilder: TokenBuilder;
    };
    lsp: {
-      /* implement */ CodeActionProvider: CrossModelCodeActionProvider;
-      SemanticTokenProvider: CrossModelSemanticTokenProvider;
+      /* implement */ CodeActionProvider: CodeActionProvider;
+      SemanticTokenProvider: SemanticTokenProvider;
    };
    /* override */ shared: CrossModelSharedServices;
 }
@@ -158,7 +158,7 @@ export interface CrossModelAddedServices {
  * Union of Langium default services and your custom services - use this as constructor parameter
  * of custom service classes.
  */
-export type CrossModelServices = ExtendedLangiumServices & CrossModelAddedServices;
+export type CrossModelServices = ExtendedLangiumServices & AddedServices;
 export const CrossModelServices = Symbol('CrossModelServices');
 
 /**
@@ -166,31 +166,29 @@ export const CrossModelServices = Symbol('CrossModelServices');
  * declared custom services. The Langium defaults can be partially specified to override only
  * selected services, while the custom services must be fully specified.
  */
-export function createCrossModelModule(
-   context: CrossModelModuleContext
-): Module<CrossModelServices, PartialLangiumServices & CrossModelAddedServices> {
+export function createCrossModelModule(context: ModuleContext): Module<CrossModelServices, PartialLangiumServices & AddedServices> {
    return {
       references: {
-         ScopeComputation: services => new CrossModelScopeComputation(services),
-         ScopeProvider: services => new CrossModelScopeProvider(services),
+         ScopeComputation: services => new ScopeComputation(services),
+         ScopeProvider: services => new ScopeProvider(services),
          IdProvider: services => new DefaultIdProvider(services),
          NameProvider: services => services.references.IdProvider,
-         Linker: services => new CrossModelLinker(services)
+         Linker: services => new Linker(services)
       },
       validation: {
-         CrossModelValidator: services => new CrossModelValidator(services)
+         CrossModelValidator: services => new Validator(services)
       },
       lsp: {
-         CodeActionProvider: () => new CrossModelCodeActionProvider(),
-         CompletionProvider: services => new CrossModelCompletionProvider(services),
-         Formatter: () => new CrossModelModelFormatter(),
-         SemanticTokenProvider: services => new CrossModelSemanticTokenProvider(services)
+         CodeActionProvider: () => new CodeActionProvider(),
+         CompletionProvider: services => new CompletionProvider(services),
+         Formatter: () => new Formatter(),
+         SemanticTokenProvider: services => new SemanticTokenProvider(services)
       },
       serializer: {
-         Serializer: services => new CrossModelSerializer(services.Grammar)
+         Serializer: services => new Serializer(services.Grammar)
       },
       parser: {
-         TokenBuilder: () => new CrossModelTokenBuilder(),
+         TokenBuilder: () => new TokenBuilder(),
          Lexer: services => new IndentationAwareLexer(services)
       },
       shared: () => context.shared
@@ -216,7 +214,7 @@ export function createCrossModelServices(context: DefaultSharedModuleContext): {
    shared: CrossModelSharedServices;
    CrossModel: CrossModelServices;
 } {
-   const shared = inject(createDefaultSharedModule(context), ArchiMateLanguageGeneratedSharedModule, CrossModelSharedModule);
+   const shared = inject(createDefaultSharedModule(context), ArchiMateLanguageGeneratedSharedModule, SharedModule);
    const CrossModel = inject(createDefaultModule({ shared }), ArchiMateGeneratedModule, createCrossModelModule({ shared }));
    shared.ServiceRegistry.CrossModel = CrossModel;
    shared.ServiceRegistry.register(CrossModel);

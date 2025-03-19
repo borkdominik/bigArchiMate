@@ -2,7 +2,7 @@ import { AstNode, DefaultLinker, DocumentState, LangiumDocument } from 'langium'
 import { isArchiMateDiagram } from '../generated/ast.js';
 import { hasSemanticRoot } from '../util/ast-util.js';
 
-export class CrossModelLinker extends DefaultLinker {
+export class Linker extends DefaultLinker {
    override unlink(document: LangiumDocument<AstNode>): void {
       super.unlink(document);
       if (hasSemanticRoot(document, isArchiMateDiagram)) {

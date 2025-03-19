@@ -1,5 +1,4 @@
 import { AstNode, AstUtils, LangiumDocument, isAstNode } from 'langium';
-import { ID_PROPERTY } from '../cross-model-naming.js';
 import {
    ArchiMateDiagram,
    ArchiMateRoot,
@@ -12,6 +11,7 @@ import {
    isJunction,
    isRelation
 } from '../generated/ast.js';
+import { ID_PROPERTY } from '../naming.js';
 
 export type SemanticRoot = Element | Junction | Relation | ArchiMateDiagram;
 

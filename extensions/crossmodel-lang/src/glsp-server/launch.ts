@@ -13,7 +13,7 @@ import { Container, ContainerModule } from 'inversify';
 import { AddressInfo } from 'net';
 import { URI } from 'vscode-uri';
 import { CrossModelLSPServices } from '../integration.js';
-import { CrossModelServices, CrossModelSharedServices } from '../language-server/cross-model-module.js';
+import { CrossModelServices, CrossModelSharedServices } from '../language-server/module.js';
 import { ArchiMateDiagramModule } from './archimate-diagram/diagram-module.js';
 
 /**

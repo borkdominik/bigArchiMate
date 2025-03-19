@@ -2,8 +2,8 @@ import { beforeAll, describe, expect, test } from '@jest/globals';
 import { Reference, URI } from 'langium';
 
 import _ from 'lodash';
-import { CrossModelSerializer } from '../../../src/language-server/cross-model-serializer.js';
 import { ArchiMateRoot, Entity, Relationship } from '../../../src/language-server/generated/ast.js';
+import { Serializer } from '../../../src/language-server/serializer.js';
 import {
    createEntity,
    createEntityAttribute,
@@ -21,7 +21,7 @@ import { createCrossModelTestServices, parseDocuments, parseEntity, testUri } fr
 const services = createCrossModelTestServices();
 
 describe('CrossModelLexer', () => {
-   let serializer: CrossModelSerializer;
+   let serializer: Serializer;
 
    beforeAll(() => {
       serializer = services.serializer.Serializer;

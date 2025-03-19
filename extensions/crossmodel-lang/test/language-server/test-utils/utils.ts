@@ -3,8 +3,8 @@ import { DefaultSharedModuleContext, LangiumServices } from 'langium/lsp';
 import { ParseHelperOptions, parseDocument as langiumParseDocument } from 'langium/test';
 import path from 'path';
 import { PackageJson } from 'type-fest';
-import { CrossModelServices, createCrossModelServices } from '../../../src/language-server/cross-model-module.js';
 import { ArchiMateRoot } from '../../../src/language-server/generated/ast.js';
+import { CrossModelServices, createCrossModelServices } from '../../../src/language-server/module.js';
 import { SemanticRoot, TypeGuard, WithDocument, findSemanticRoot } from '../../../src/language-server/util/ast-util.js';
 
 export function createCrossModelTestServices(context: DefaultSharedModuleContext = EmptyFileSystem): CrossModelServices {

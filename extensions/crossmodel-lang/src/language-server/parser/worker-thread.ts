@@ -1,6 +1,6 @@
 import { EmptyFileSystem } from 'langium';
 import { parentPort } from 'node:worker_threads';
-import { createCrossModelServices } from '../cross-model-module.js';
+import { createCrossModelServices } from '../module.js';
 
 const services = createCrossModelServices(EmptyFileSystem).CrossModel;
 const parser = services.parser.LangiumParser;

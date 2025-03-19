@@ -1,14 +1,14 @@
 import { DefaultDocumentBuilder } from 'langium';
 import { CancellationToken } from 'vscode-languageclient';
 import { URI, Utils as UriUtils } from 'vscode-uri';
-import { CrossModelSharedServices } from './cross-model-module.js';
-import { isPackageUri } from './cross-model-package-manager.js';
+import { CrossModelSharedServices } from './module.js';
+import { isPackageUri } from './package-manager.js';
 import { Utils } from './util/uri-util.js';
 
 /**
  * A document builder that can also handle directories by flattening out directories to an array of file URIs.
  */
-export class CrossModelDocumentBuilder extends DefaultDocumentBuilder {
+export class DocumentBuilder extends DefaultDocumentBuilder {
    protected languageFileExtensions: string[] = [];
 
    constructor(protected services: CrossModelSharedServices) {

@@ -25,7 +25,7 @@ import {
 } from 'vscode-languageserver';
 import { TextDocument } from 'vscode-languageserver-textdocument';
 import { URI } from 'vscode-uri';
-import { CrossModelSharedServices } from '../language-server/cross-model-module.js';
+import { CrossModelSharedServices } from '../language-server/module.js';
 
 export const LANGUAGE_CLIENT_ID = 'language-client';
 

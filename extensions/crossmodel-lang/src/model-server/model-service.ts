@@ -15,9 +15,9 @@ import {
 import { AstNode, Deferred, DocumentState, isAstNode } from 'langium';
 import { Disposable, OptionalVersionedTextDocumentIdentifier, Range, TextDocumentEdit, TextEdit, uinteger } from 'vscode-languageserver';
 import { URI, Utils as UriUtils } from 'vscode-uri';
-import { CrossModelServices, CrossModelSharedServices } from '../language-server/cross-model-module.js';
-import { PACKAGE_JSON } from '../language-server/cross-model-package-manager.js';
 import { ArchiMateRoot, isArchiMateRoot } from '../language-server/generated/ast.js';
+import { CrossModelServices, CrossModelSharedServices } from '../language-server/module.js';
+import { PACKAGE_JSON } from '../language-server/package-manager.js';
 import { findDocument } from '../language-server/util/ast-util.js';
 import { AstArchiMateDocument } from './open-text-document-manager.js';
 import { LANGUAGE_CLIENT_ID } from './openable-text-documents.js';

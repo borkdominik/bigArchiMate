@@ -4,7 +4,7 @@ import { startLanguageServer } from 'langium/lsp';
 import { NodeFileSystem } from 'langium/node';
 import { createConnection, ProposedFeatures } from 'vscode-languageserver/node.js';
 import { startGLSPServer } from './glsp-server/launch.js';
-import { createCrossModelServices } from './language-server/cross-model-module.js';
+import { createCrossModelServices } from './language-server/module.js';
 import { startModelServer } from './model-server/launch.js';
 
 /**

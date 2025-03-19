@@ -1,8 +1,8 @@
 import { AstNode, AstNodeDescription, AstUtils, DefaultScopeComputation, LangiumDocument, PrecomputedScopes } from 'langium';
 import { CancellationToken } from 'vscode-jsonrpc';
-import { CrossModelServices } from './cross-model-module.js';
-import { DefaultIdProvider } from './cross-model-naming.js';
-import { CrossModelPackageManager, UNKNOWN_PROJECT_ID, UNKNOWN_PROJECT_REFERENCE } from './cross-model-package-manager.js';
+import { CrossModelServices } from './module.js';
+import { DefaultIdProvider } from './naming.js';
+import { PackageManager, UNKNOWN_PROJECT_ID, UNKNOWN_PROJECT_REFERENCE } from './package-manager.js';
 
 /**
  * Custom node description that wraps a given description under a potentially new name and also stores the package id for faster access.
@@ -53,9 +53,9 @@ export function getLocalName(description: AstNodeDescription): string {
  * - Store the package id for each node so we can do faster dependency calculation.
  * - Export nodes twice: Once for external usage with the fully-qualified name and once for package-local usage.
  */
-export class CrossModelScopeComputation extends DefaultScopeComputation {
+export class ScopeComputation extends DefaultScopeComputation {
    protected idProvider: DefaultIdProvider;
-   protected packageManager: CrossModelPackageManager;
+   protected packageManager: PackageManager;
 
    constructor(services: CrossModelServices) {
       super(services);

@@ -3,10 +3,10 @@ import { inject, injectable } from 'inversify';
 import { DocumentState } from 'langium';
 import { URI } from 'vscode-uri';
 import { CrossModelLSPServices } from '../../integration.js';
-import { IdProvider } from '../../language-server/cross-model-naming.js';
 import { ArchiMateDiagram, ArchiMateRoot } from '../../language-server/generated/ast.js';
+import { IdProvider } from '../../language-server/naming.js';
+import { ModelSerializer } from '../../model-server/model-serializer.js';
 import { ModelService } from '../../model-server/model-service.js';
-import { Serializer } from '../../model-server/serializer.js';
 import { ArchiMateGModelIndex } from './gmodel-index.js';
 
 export interface CrossModelSourceModel {
@@ -49,7 +49,7 @@ export class ArchiMateModelState extends DefaultModelState implements JsonModelS
       return this.services.shared.model.ModelService;
    }
 
-   get semanticSerializer(): Serializer<ArchiMateRoot> {
+   get semanticSerializer(): ModelSerializer<ArchiMateRoot> {
       return this.services.language.serializer.Serializer;
    }
 

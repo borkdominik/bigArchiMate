@@ -1,6 +1,6 @@
 import { AstNode, GenericAstNode, Grammar, isAstNode, isReference } from 'langium';
 import { collectAst } from 'langium/grammar';
-import { Serializer } from '../model-server/serializer.js';
+import { ModelSerializer } from '../model-server/model-serializer.js';
 import {
    ArchiMateDiagram,
    ArchiMateRoot,
@@ -32,7 +32,7 @@ const PROPERTY_ORDER = new Map<string, string[]>([
  * cf. https://github.com/langium/langium/discussions/683
  * cf. https://github.com/langium/langium/discussions/863
  */
-export class CrossModelSerializer implements Serializer<ArchiMateRoot> {
+export class Serializer implements ModelSerializer<ArchiMateRoot> {
    // New line character.
    static readonly CHAR_NEWLINE = '\n';
    // Indentation character.
@@ -90,14 +90,14 @@ export class CrossModelSerializer implements Serializer<ArchiMateRoot> {
                if (!serializedPropValue) {
                   return undefined;
                }
-               const separator = onNewLine ? CrossModelSerializer.CHAR_NEWLINE : ' ';
+               const separator = onNewLine ? Serializer.CHAR_NEWLINE : ' ';
                const serializedProp = `${this.toKeyword(prop)}:${separator}${serializedPropValue}`;
                const serialized = isFirstNested ? this.indent(serializedProp, indentationLevel) : serializedProp;
                isFirstNested = false;
                return serialized;
             })
             .filter(serializedProp => serializedProp !== undefined)
-            .join(CrossModelSerializer.CHAR_NEWLINE + this.indent('', indentationLevel));
+            .join(Serializer.CHAR_NEWLINE + this.indent('', indentationLevel));
          return properties;
       }
       if (Array.isArray(value)) {
@@ -106,7 +106,7 @@ export class CrossModelSerializer implements Serializer<ArchiMateRoot> {
             .map(item => this.toYaml(value, key, item, indentationLevel))
             .filter(serializedItem => serializedItem !== undefined)
             .map(serializedItem => this.indent(`  - ${serializedItem}`, indentationLevel - 1))
-            .join(CrossModelSerializer.CHAR_NEWLINE);
+            .join(Serializer.CHAR_NEWLINE);
       }
       return JSON.stringify(value);
    }
@@ -119,7 +119,7 @@ export class CrossModelSerializer implements Serializer<ArchiMateRoot> {
    }
 
    protected indent(text: string, level: number): string {
-      return `${CrossModelSerializer.CHAR_INDENTATION.repeat(level * CrossModelSerializer.INDENTATION_AMOUNT_OBJECT)}${text}`;
+      return `${Serializer.CHAR_INDENTATION.repeat(level * Serializer.INDENTATION_AMOUNT_OBJECT)}${text}`;
    }
 
    protected isValidReference(node: AstNode | any[], key: string, value: any): value is string {

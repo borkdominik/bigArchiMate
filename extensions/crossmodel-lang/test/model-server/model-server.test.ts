@@ -1,6 +1,6 @@
 import { describe, expect, test } from '@jest/globals';
 import { NodeFileSystem } from 'langium/node';
-import { createCrossModelServices } from '../../src/language-server/cross-model-module.js';
+import { createCrossModelServices } from '../../src/language-server/module.js';
 import { ModelService } from '../../src/model-server/model-service.js';
 
 // the model service actually needs a file system, so we use the NodeFileSystem

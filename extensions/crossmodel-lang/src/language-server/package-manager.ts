@@ -4,9 +4,9 @@ import { SystemInfo, SystemUpdatedEvent, SystemUpdateListener } from '@crossbree
 import { PackageJson } from 'type-fest';
 import { CancellationToken, WorkspaceFolder } from 'vscode-languageserver';
 import { URI, Utils as UriUtils } from 'vscode-uri';
-import { CrossModelSharedServices } from './cross-model-module.js';
-import { QUALIFIED_ID_SEPARATOR } from './cross-model-naming.js';
-import { PackageAstNodeDescription } from './cross-model-scope.js';
+import { CrossModelSharedServices } from './module.js';
+import { QUALIFIED_ID_SEPARATOR } from './naming.js';
+import { PackageAstNodeDescription } from './scope-computation.js';
 import { Utils } from './util/uri-util.js';
 
 /** Constant for representing an unknown project ID. */
@@ -82,7 +82,7 @@ export class PackageInfo {
  * Directories with a 'package.json' file represent a closed system that can only reference itself.
  * However, dependencies may be explicitly given as part of the 'package.json' in which case other systems may become visible/referable.
  */
-export class CrossModelPackageManager {
+export class PackageManager {
    protected uriToPackage = new Map<string, PackageInfo>();
    protected idToPackage = new MultiMap<string, PackageInfo>();
    protected readonly updateListeners: SystemUpdateListener[] = [];

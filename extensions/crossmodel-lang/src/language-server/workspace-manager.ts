@@ -1,7 +1,7 @@
 import { AstNode, DefaultWorkspaceManager, Deferred, FileSystemNode, LangiumDocument } from 'langium';
 import { CancellationToken, Emitter, Event, WorkspaceFolder } from 'vscode-languageserver';
 import { URI, Utils } from 'vscode-uri';
-import { CrossModelSharedServices } from './cross-model-module.js';
+import { CrossModelSharedServices } from './module.js';
 
 /**
  * A custom workspace manager that:
@@ -9,7 +9,7 @@ import { CrossModelSharedServices } from './cross-model-module.js';
  * - sets up a package-system on top of the workspace folders (including the 'node_modules' folder)
  * - validates all documents after workspace initialization
  */
-export class CrossModelWorkspaceManager extends DefaultWorkspaceManager {
+export class WorkspaceManager extends DefaultWorkspaceManager {
    protected onWorkspaceInitializedEmitter = new Emitter<URI[]>();
    protected workspaceInitializedDeferred = new Deferred<URI[]>();
    workspaceInitialized = this.workspaceInitializedDeferred.promise;

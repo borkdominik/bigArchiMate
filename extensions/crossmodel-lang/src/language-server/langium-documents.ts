@@ -1,12 +1,12 @@
 import { DefaultLangiumDocuments, DocumentState, LangiumDocument } from 'langium';
 import { TextDocument } from 'vscode-languageserver-textdocument';
 import { URI } from 'vscode-uri';
-import { isPackageUri } from './cross-model-package-manager.js';
 import { ArchiMateRoot } from './generated/ast.js';
+import { isPackageUri } from './package-manager.js';
 import { fixDocument } from './util/ast-util.js';
 import { Utils } from './util/uri-util.js';
 
-export class CrossModelLangiumDocuments extends DefaultLangiumDocuments {
+export class LangiumDocuments extends DefaultLangiumDocuments {
    override async getOrCreateDocument(uri: URI): Promise<LangiumDocument> {
       const document = this.getDocument(uri);
       if (document) {

@@ -1,4 +1,4 @@
-import { CrossModelSharedServices } from './cross-model-module.js';
+import { CrossModelSharedServices } from './module.js';
 
 /**
  * Centralized logger.

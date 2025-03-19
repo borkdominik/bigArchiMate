@@ -1,9 +1,9 @@
 import chalk from 'chalk';
 import { Command } from 'commander';
 import { NodeFileSystem } from 'langium/node';
-import { createCrossModelServices } from '../language-server/cross-model-module.js';
 import { ArchiMateRoot } from '../language-server/generated/ast.js';
 import { ArchiMateLanguageMetaData } from '../language-server/generated/module.js';
+import { createCrossModelServices } from '../language-server/module.js';
 import { extractAstNode } from './cli-util.js';
 import { generateJavaScript } from './generator.js';
 

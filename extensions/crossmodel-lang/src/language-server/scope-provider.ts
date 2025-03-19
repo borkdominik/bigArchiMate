@@ -22,9 +22,9 @@ import {
    StreamScope,
    URI
 } from 'langium';
-import { CrossModelServices } from './cross-model-module.js';
-import { QUALIFIED_ID_SEPARATOR } from './cross-model-naming.js';
-import { GlobalAstNodeDescription, isGlobalDescriptionForLocalPackage, PackageAstNodeDescription } from './cross-model-scope.js';
+import { CrossModelServices } from './module.js';
+import { QUALIFIED_ID_SEPARATOR } from './naming.js';
+import { GlobalAstNodeDescription, isGlobalDescriptionForLocalPackage, PackageAstNodeDescription } from './scope-computation.js';
 import { findDocument, fixDocument } from './util/ast-util.js';
 
 /**
@@ -100,7 +100,7 @@ export class GlobalScope extends MapScope {
    }
 }
 
-export class CrossModelScopeProvider extends PackageScopeProvider {
+export class ScopeProvider extends PackageScopeProvider {
    protected resolveCrossReferenceContainer(container: CrossReferenceContainer): AstNode | undefined {
       if (isSyntheticDocument(container)) {
          const document = this.services.shared.workspace.LangiumDocuments.createEmptyDocument(URI.parse(container.uri));

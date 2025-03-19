@@ -1,11 +1,11 @@
 import { ModelFileExtensions } from '@crossbreeze/protocol';
 import { UriUtils, type LangiumDocument } from 'langium';
-import type { CodeActionProvider } from 'langium/lsp';
+import type { CodeActionProvider as CodeActionProviderI } from 'langium/lsp';
 import { RenameFile, type CodeAction, type CodeActionParams } from 'vscode-languageserver-protocol';
-import { FilenameNotMatchingDiagnostic } from './cross-model-validator.js';
 import { findSemanticRoot } from './util/ast-util.js';
+import { FilenameNotMatchingDiagnostic } from './validator.js';
 
-export class CrossModelCodeActionProvider implements CodeActionProvider {
+export class CodeActionProvider implements CodeActionProviderI {
    getCodeActions(document: LangiumDocument, params: CodeActionParams): CodeAction[] {
       const result: CodeAction[] = [];
       const accept = (action: CodeAction | undefined): void => {

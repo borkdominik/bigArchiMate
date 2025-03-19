@@ -4,7 +4,7 @@ import { IToken } from 'chevrotain';
 import { IndentationAwareTokenBuilder } from 'langium';
 import { ArchiMateLanguageTerminals } from '../generated/ast.js';
 
-export class CrossModelTokenBuilder extends IndentationAwareTokenBuilder {
+export class TokenBuilder extends IndentationAwareTokenBuilder {
    protected readonly listItemRegExp = new RegExp(
       ArchiMateLanguageTerminals.LIST_ITEM.source,
       ArchiMateLanguageTerminals.LIST_ITEM.flags + 'y'

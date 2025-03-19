@@ -4,21 +4,21 @@ import { CompletionAcceptor, CompletionContext, CompletionValueItem, DefaultComp
 import { v4 as uuid } from 'uuid';
 import { CompletionItemKind, InsertTextFormat } from 'vscode-languageserver-protocol';
 import type { Range } from 'vscode-languageserver-types';
-import { CrossModelServices } from './cross-model-module.js';
-import { CrossModelScopeProvider } from './cross-model-scope-provider.js';
+import { CrossModelServices } from './module.js';
+import { ScopeProvider } from './scope-provider.js';
 import { fixDocument } from './util/ast-util.js';
 
 /**
  * Custom completion provider that only shows the short options to the user if a longer, fully-qualified version is also available.
  */
-export class CrossModelCompletionProvider extends DefaultCompletionProvider {
+export class CompletionProvider extends DefaultCompletionProvider {
    protected packageId?: string;
 
    override readonly completionOptions = {
       triggerCharacters: ['\n', ' ', '{']
    };
 
-   protected declare readonly scopeProvider: CrossModelScopeProvider;
+   protected declare readonly scopeProvider: ScopeProvider;
 
    constructor(
       protected services: CrossModelServices,

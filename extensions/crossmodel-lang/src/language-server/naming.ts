@@ -1,7 +1,7 @@
 import { findNextUnique, identity } from '@crossbreeze/protocol';
 import { AstNode, AstUtils, CstNode, GrammarUtils, isAstNode, NameProvider } from 'langium';
-import { CrossModelServices } from './cross-model-module.js';
-import { UNKNOWN_PROJECT_REFERENCE } from './cross-model-package-manager.js';
+import { CrossModelServices } from './module.js';
+import { UNKNOWN_PROJECT_REFERENCE } from './package-manager.js';
 import { findDocument, getOwner } from './util/ast-util.js';
 
 export const ID_PROPERTY = 'id';

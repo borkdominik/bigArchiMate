@@ -1,9 +1,9 @@
 import { ModelFileExtensions } from '@crossbreeze/protocol';
 import { AstNode, UriUtils, ValidationAcceptor, ValidationChecks } from 'langium';
 import { Diagnostic } from 'vscode-languageserver-protocol';
-import type { CrossModelServices } from './cross-model-module.js';
-import { ID_PROPERTY, IdentifiableAstNode } from './cross-model-naming.js';
 import { CrossModelAstType, isArchiMateDiagram, isElement, isRelation, NamedObject, Relation, RelationEdge } from './generated/ast.js';
+import type { CrossModelServices } from './module.js';
+import { ID_PROPERTY, IdentifiableAstNode } from './naming.js';
 import { findDocument, isSemanticRoot } from './util/ast-util.js';
 import { RelationValidator } from './util/validation/relation-validator.js';
 
@@ -42,7 +42,7 @@ export function registerValidationChecks(services: CrossModelServices): void {
 /**
  * Implementation of custom validations.
  */
-export class CrossModelValidator {
+export class Validator {
    constructor(protected services: CrossModelServices) {}
 
    checkNamedObject(namedObject: NamedObject, accept: ValidationAcceptor): void {
