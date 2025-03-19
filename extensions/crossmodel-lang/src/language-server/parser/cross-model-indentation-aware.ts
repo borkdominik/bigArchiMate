@@ -2,10 +2,13 @@
 
 import { IToken } from 'chevrotain';
 import { IndentationAwareTokenBuilder } from 'langium';
-import { CrossModelTerminals } from '../generated/ast.js';
+import { ArchiMateLanguageTerminals } from '../generated/ast.js';
 
 export class CrossModelTokenBuilder extends IndentationAwareTokenBuilder {
-   protected readonly listItemRegExp = new RegExp(CrossModelTerminals.LIST_ITEM.source, CrossModelTerminals.LIST_ITEM.flags + 'y');
+   protected readonly listItemRegExp = new RegExp(
+      ArchiMateLanguageTerminals.LIST_ITEM.source,
+      ArchiMateLanguageTerminals.LIST_ITEM.flags + 'y'
+   );
 
    /** Flag that indicates whether the token builder will auto-complete the remaining detents at the end of the token stream. */
    autoCompleteDedents = true;

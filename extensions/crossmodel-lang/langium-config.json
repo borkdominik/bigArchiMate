@@ -1,12 +1,12 @@
 {
-  "projectName": "CrossModel",
+  "projectName": "ArchiMateLanguage",
   "languages": [
     {
-      "id": "cross-model",
-      "grammar": "src/language-server/grammar/cross-model.langium",
+      "id": "archimate",
+      "grammar": "src/language-server/grammar/archimate.langium",
       "fileExtensions": [".arch"],
       "textMate": {
-        "out": "syntaxes/cross-model.tmLanguage.json"
+        "out": "syntaxes/archimate.tmLanguage.json"
       }
     }
   ],

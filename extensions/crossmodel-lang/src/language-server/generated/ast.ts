@@ -7,7 +7,7 @@
 import type { AstNode, Reference, ReferenceInfo, TypeMetaData } from 'langium';
 import { AbstractAstReflection } from 'langium';
 
-export const CrossModelTerminals = {
+export const ArchiMateLanguageTerminals = {
     STRING: /"[^"]*"|'[^']*'/,
     NUMBER: /(-)?[0-9]+(\.[0-9]+)?/,
     ID: /[_a-zA-Z][\w_\-~$#@/\d]*/,
@@ -19,9 +19,9 @@ export const CrossModelTerminals = {
     WS: /[ \t]+/,
 };
 
-export type CrossModelTerminalNames = keyof typeof CrossModelTerminals;
+export type ArchiMateLanguageTerminalNames = keyof typeof ArchiMateLanguageTerminals;
 
-export type CrossModelKeywordNames = 
+export type ArchiMateLanguageKeywordNames = 
     | "."
     | ":"
     | "Access"
@@ -117,7 +117,7 @@ export type CrossModelKeywordNames =
     | "x"
     | "y";
 
-export type CrossModelTokenNames = CrossModelTerminalNames | CrossModelKeywordNames;
+export type ArchiMateLanguageTokenNames = ArchiMateLanguageTerminalNames | ArchiMateLanguageKeywordNames;
 
 export type ElementID = ElementType | string;
 
@@ -333,7 +333,7 @@ export function isRelationRoutingPoint(item: unknown): item is RelationRoutingPo
     return reflection.isInstance(item, RelationRoutingPoint);
 }
 
-export type CrossModelAstType = {
+export type ArchiMateLanguageAstType = {
     ArchiMateDiagram: ArchiMateDiagram
     CrossModelRoot: CrossModelRoot
     Element: Element
@@ -348,7 +348,7 @@ export type CrossModelAstType = {
     RelationRoutingPoint: RelationRoutingPoint
 }
 
-export class CrossModelAstReflection extends AbstractAstReflection {
+export class ArchiMateLanguageAstReflection extends AbstractAstReflection {
 
     getAllTypes(): string[] {
         return [ArchiMateDiagram, CrossModelRoot, Element, ElementNode, ElementNodeOrJunctionNode, ElementOrJunction, Junction, JunctionNode, Property, Relation, RelationEdge, RelationRoutingPoint];
@@ -525,4 +525,4 @@ export class CrossModelAstReflection extends AbstractAstReflection {
     }
 }
 
-export const reflection = new CrossModelAstReflection();
+export const reflection = new ArchiMateLanguageAstReflection();

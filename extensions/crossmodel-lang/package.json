@@ -67,7 +67,7 @@
       {
         "language": "cross-model",
         "scopeName": "source.cross-model",
-        "path": "./syntaxes/cross-model.tmLanguage.json"
+        "path": "./syntaxes/archimate.tmLanguage.json"
       }
     ],
     "languages": [

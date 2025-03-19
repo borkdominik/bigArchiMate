@@ -31,7 +31,7 @@ import { CrossModelSemanticTokenProvider } from './cross-model-semantic-token-pr
 import { CrossModelSerializer } from './cross-model-serializer.js';
 import { CrossModelValidator, registerValidationChecks } from './cross-model-validator.js';
 import { CrossModelWorkspaceManager } from './cross-model-workspace-manager.js';
-import { CrossModelGeneratedModule, CrossModelGeneratedSharedModule } from './generated/module.js';
+import { ArchiMateLanguageGeneratedSharedModule, CrossModelGeneratedModule } from './generated/module.js';
 import { CrossModelTokenBuilder } from './parser/cross-model-indentation-aware.js';
 import { CrossModelLinker } from './references/cross-model-linker.js';
 
@@ -216,7 +216,7 @@ export function createCrossModelServices(context: DefaultSharedModuleContext): {
    shared: CrossModelSharedServices;
    CrossModel: CrossModelServices;
 } {
-   const shared = inject(createDefaultSharedModule(context), CrossModelGeneratedSharedModule, CrossModelSharedModule);
+   const shared = inject(createDefaultSharedModule(context), ArchiMateLanguageGeneratedSharedModule, CrossModelSharedModule);
    const CrossModel = inject(createDefaultModule({ shared }), CrossModelGeneratedModule, createCrossModelModule({ shared }));
    shared.ServiceRegistry.CrossModel = CrossModel;
    shared.ServiceRegistry.register(CrossModel);

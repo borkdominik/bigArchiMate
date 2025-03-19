@@ -2,7 +2,7 @@ grammar CrossModel
 
 import 'element'
 import 'relation'
-import 'archimate-diagram'
+import 'diagram'
 
 entry CrossModelRoot:
     (element=Element |
