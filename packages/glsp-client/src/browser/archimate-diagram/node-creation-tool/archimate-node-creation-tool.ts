@@ -10,7 +10,7 @@ import {
    TrackedInsert
 } from '@eclipse-glsp/client';
 import { injectable } from '@theia/core/shared/inversify';
-import { CrossModelCommandPalette } from '../../cross-model-command-palette';
+import { CommandPalette } from '../../command-palette';
 
 @injectable()
 export class ArchiMateNodeCreationTool extends NodeCreationTool {
@@ -28,7 +28,7 @@ export class ArchiMateNodeCreationToolMouseListener extends NodeCreationToolMous
    protected override getCreateOperation(ctx: GModelElement, event: MouseEvent, insert: TrackedInsert): Action {
       if (this.triggerAction.args?.type === 'show') {
          return SetUIExtensionVisibilityAction.create({
-            extensionId: CrossModelCommandPalette.ID,
+            extensionId: CommandPalette.ID,
             visible: true,
             contextElementsId: [this.ghostElementId]
          });

@@ -15,12 +15,13 @@ import {
 import { GlspSelectionDataService } from '@eclipse-glsp/theia-integration';
 import { ContainerModule, injectable, interfaces } from '@theia/core/shared/inversify';
 import { CmMetadataPlacer } from './cm-metadata-placer';
-import { CrossModelCommandPalette, CrossModelMousePositionTracker } from './cross-model-command-palette';
+import { CommandPalette } from './command-palette';
 import { CrossModelMouseDeleteTool } from './cross-model-delete-tool';
 import { CrossModelDiagramStartup } from './cross-model-diagram-startup';
 import { CrossModelErrorExtension } from './cross-model-error-extension';
 import { CrossModelToolPalette } from './cross-model-tool-palette';
 import { CrossModelGLSPSelectionDataService } from './crossmodel-selection-data-service';
+import { MousePositionTracker } from './mouse-position-tracker';
 
 export function createCrossModelDiagramModule(registry: interfaces.ContainerModuleCallBack): ContainerModule {
    return new ContainerModule((bind, unbind, isBound, rebind, unbindAsync, onActivation, onDeactivation) => {
@@ -35,11 +36,11 @@ export function createCrossModelDiagramModule(registry: interfaces.ContainerModu
       bindAsService(context, GlspSelectionDataService, CrossModelGLSPSelectionDataService);
       bindAsService(context, TYPES.IDiagramStartup, CrossModelDiagramStartup);
       registry(bind, unbind, isBound, rebind, unbindAsync, onActivation, onDeactivation);
-      bind(CrossModelCommandPalette).toSelf().inSingletonScope();
-      rebind(GlspCommandPalette).toService(CrossModelCommandPalette);
+      bind(CommandPalette).toSelf().inSingletonScope();
+      rebind(GlspCommandPalette).toService(CommandPalette);
 
-      bind(CrossModelMousePositionTracker).toSelf().inSingletonScope();
-      bindOrRebind(context, GLSPMousePositionTracker).toService(CrossModelMousePositionTracker);
+      bind(MousePositionTracker).toSelf().inSingletonScope();
+      bindOrRebind(context, GLSPMousePositionTracker).toService(MousePositionTracker);
 
       bind(CrossModelToolManager).toSelf().inSingletonScope();
       bindOrRebind(context, TYPES.IToolManager).toService(CrossModelToolManager);
