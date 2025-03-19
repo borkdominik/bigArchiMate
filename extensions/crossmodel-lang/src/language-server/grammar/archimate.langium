@@ -1,4 +1,4 @@
-grammar CrossModel
+grammar ArchiMate
 
 import 'element'
 import 'relation'

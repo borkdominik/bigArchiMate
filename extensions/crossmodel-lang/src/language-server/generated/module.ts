@@ -5,9 +5,9 @@
 
 import type { LangiumSharedCoreServices, LangiumCoreServices, LangiumGeneratedCoreServices, LangiumGeneratedSharedCoreServices, LanguageMetaData, Module } from 'langium';
 import { ArchiMateLanguageAstReflection } from './ast.js';
-import { CrossModelGrammar } from './grammar.js';
+import { ArchiMateGrammar } from './grammar.js';
 
-export const CrossModelLanguageMetaData = {
+export const ArchiMateLanguageMetaData = {
     languageId: 'archimate',
     fileExtensions: ['.arch'],
     caseInsensitive: false,
@@ -18,8 +18,8 @@ export const ArchiMateLanguageGeneratedSharedModule: Module<LangiumSharedCoreSer
     AstReflection: () => new ArchiMateLanguageAstReflection()
 };
 
-export const CrossModelGeneratedModule: Module<LangiumCoreServices, LangiumGeneratedCoreServices> = {
-    Grammar: () => CrossModelGrammar(),
-    LanguageMetaData: () => CrossModelLanguageMetaData,
+export const ArchiMateGeneratedModule: Module<LangiumCoreServices, LangiumGeneratedCoreServices> = {
+    Grammar: () => ArchiMateGrammar(),
+    LanguageMetaData: () => ArchiMateLanguageMetaData,
     parser: {}
 };

@@ -3,7 +3,7 @@ import { Command } from 'commander';
 import { NodeFileSystem } from 'langium/node';
 import { createCrossModelServices } from '../language-server/cross-model-module.js';
 import { ArchiMateRoot } from '../language-server/generated/ast.js';
-import { CrossModelLanguageMetaData } from '../language-server/generated/module.js';
+import { ArchiMateLanguageMetaData } from '../language-server/generated/module.js';
 import { extractAstNode } from './cli-util.js';
 import { generateJavaScript } from './generator.js';
 
@@ -25,7 +25,7 @@ export default function (): void {
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       .version(require('../../package.json').version);
 
-   const fileExtensions = CrossModelLanguageMetaData.fileExtensions.join(', ');
+   const fileExtensions = ArchiMateLanguageMetaData.fileExtensions.join(', ');
    program
       .command('generate')
       .argument('<file>', `source file (possible file extensions: ${fileExtensions})`)

@@ -6,11 +6,11 @@
 import type { Grammar } from 'langium';
 import { loadGrammarFromJson } from 'langium';
 
-let loadedCrossModelGrammar: Grammar | undefined;
-export const CrossModelGrammar = (): Grammar => loadedCrossModelGrammar ?? (loadedCrossModelGrammar = loadGrammarFromJson(`{
+let loadedArchiMateGrammar: Grammar | undefined;
+export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loadedArchiMateGrammar = loadGrammarFromJson(`{
   "$type": "Grammar",
   "isDeclared": true,
-  "name": "CrossModel",
+  "name": "ArchiMate",
   "imports": [],
   "rules": [
     {

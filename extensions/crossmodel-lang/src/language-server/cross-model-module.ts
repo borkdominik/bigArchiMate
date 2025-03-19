@@ -1,12 +1,12 @@
 import { AstNode, DefaultServiceRegistry, IndentationAwareLexer, Module, ServiceRegistry, inject } from 'langium';
 import {
-   DefaultSharedModuleContext,
-   LangiumServices,
-   LangiumSharedServices,
-   PartialLangiumServices,
-   PartialLangiumSharedServices,
-   createDefaultModule,
-   createDefaultSharedModule
+    DefaultSharedModuleContext,
+    LangiumServices,
+    LangiumSharedServices,
+    PartialLangiumServices,
+    PartialLangiumSharedServices,
+    createDefaultModule,
+    createDefaultSharedModule
 } from 'langium/lsp';
 import { TextDocument } from 'vscode-languageserver-textdocument';
 import { URI } from 'vscode-uri';
@@ -31,7 +31,7 @@ import { CrossModelSemanticTokenProvider } from './cross-model-semantic-token-pr
 import { CrossModelSerializer } from './cross-model-serializer.js';
 import { CrossModelValidator, registerValidationChecks } from './cross-model-validator.js';
 import { CrossModelWorkspaceManager } from './cross-model-workspace-manager.js';
-import { ArchiMateLanguageGeneratedSharedModule, CrossModelGeneratedModule } from './generated/module.js';
+import { ArchiMateGeneratedModule, ArchiMateLanguageGeneratedSharedModule } from './generated/module.js';
 import { CrossModelTokenBuilder } from './parser/cross-model-indentation-aware.js';
 import { CrossModelLinker } from './references/cross-model-linker.js';
 
@@ -217,7 +217,7 @@ export function createCrossModelServices(context: DefaultSharedModuleContext): {
    CrossModel: CrossModelServices;
 } {
    const shared = inject(createDefaultSharedModule(context), ArchiMateLanguageGeneratedSharedModule, CrossModelSharedModule);
-   const CrossModel = inject(createDefaultModule({ shared }), CrossModelGeneratedModule, createCrossModelModule({ shared }));
+   const CrossModel = inject(createDefaultModule({ shared }), ArchiMateGeneratedModule, createCrossModelModule({ shared }));
    shared.ServiceRegistry.CrossModel = CrossModel;
    shared.ServiceRegistry.register(CrossModel);
    registerValidationChecks(CrossModel);

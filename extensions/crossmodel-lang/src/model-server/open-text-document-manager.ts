@@ -1,14 +1,14 @@
 import { CloseModelArgs, CrossModelDocument, ModelSavedEvent, ModelUpdatedEvent, OpenModelArgs } from '@crossbreeze/protocol';
 import * as fs from 'fs';
 import {
-   AstNode,
-   DocumentBuilder,
-   DocumentState,
-   FileSystemProvider,
-   LangiumDefaultSharedCoreServices,
-   LangiumDocument,
-   LangiumDocuments,
-   UriUtils
+    AstNode,
+    DocumentBuilder,
+    DocumentState,
+    FileSystemProvider,
+    LangiumDefaultSharedCoreServices,
+    LangiumDocument,
+    LangiumDocuments,
+    UriUtils
 } from 'langium';
 import * as path from 'path';
 import { Disposable } from 'vscode-languageserver';
@@ -16,7 +16,7 @@ import { Diagnostic, TextDocumentIdentifier, TextDocumentItem, VersionedTextDocu
 import { TextDocument } from 'vscode-languageserver-textdocument';
 import { URI } from 'vscode-uri';
 import { ArchiMateRoot } from '../language-server/generated/ast.js';
-import { CrossModelLanguageMetaData } from '../language-server/generated/module.js';
+import { ArchiMateLanguageMetaData } from '../language-server/generated/module.js';
 import { AddedSharedModelServices } from './model-module.js';
 import { OpenableTextDocuments } from './openable-text-documents.js';
 
@@ -168,12 +168,12 @@ export class OpenTextDocumentManager {
    }
 
    protected createDummyDocument(uri: string, version = 0): TextDocumentItem {
-      return TextDocumentItem.create(this.normalizedUri(uri), CrossModelLanguageMetaData.languageId, version, '');
+      return TextDocumentItem.create(this.normalizedUri(uri), ArchiMateLanguageMetaData.languageId, version, '');
    }
 
    protected async createDocumentFromFileSystem(
       uri: string,
-      languageId: string = CrossModelLanguageMetaData.languageId,
+      languageId: string = ArchiMateLanguageMetaData.languageId,
       version = 0
    ): Promise<TextDocumentItem> {
       return TextDocumentItem.create(uri, languageId, version, await this.readFile(uri));
