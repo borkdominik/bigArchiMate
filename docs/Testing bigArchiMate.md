@@ -12,8 +12,6 @@ It is recommended to run the Jest tests using the VS Code extension: [_Jest_](ht
 
 ## Writing tests
 
-Unit tests can be placed in the same directory as the TypeScript files they test. It is also possible to add them to the `big-archimate/tests/` directory. Functional and integration tests are located in the `big-archimate/tests/` directory as well.
-
 Unit test files should have the structure `*.test.ts` as their filename, for clarity in the project structure and to allow Jest to run your TypeScript tests[^1]. Consider using the inbuilt assert functions of Jest, such as:  
 `expect(sum(5, 25)).toEqual(30)` and `expect(results_arr.length).toBeGreaterThan(2)` . See all the methods available on [`expect()`](https://jestjs.io/docs/expect).
 

@@ -1,15 +1,7 @@
 import { ModelFileExtensions } from '@big-archimate/protocol';
 import { AstNode, UriUtils, ValidationAcceptor, ValidationChecks } from 'langium';
 import { Diagnostic } from 'vscode-languageserver-protocol';
-import {
-   ArchiMateLanguageAstType,
-   isArchiMateDiagram,
-   isElement,
-   isRelation,
-   NamedObject,
-   Relation,
-   RelationEdge
-} from './generated/ast.js';
+import { ArchiMateLanguageAstType, Element, isArchiMateDiagram, isElement, isRelation, Relation } from './generated/ast.js';
 import type { Services } from './module.js';
 import { ID_PROPERTY, IdentifiableAstNode } from './naming.js';
 import { findDocument, isSemanticRoot } from './util/ast-util.js';
@@ -41,8 +33,7 @@ export function registerValidationChecks(services: Services): void {
    const checks: ValidationChecks<ArchiMateLanguageAstType> = {
       AstNode: validator.checkNode,
       Relation: validator.checkRelation,
-      RelationEdge: validator.checkRelationEdge,
-      NamedObject: validator.checkNamedObject
+      Element: validator.checkElement
    };
    registry.register(checks, validator);
 }
@@ -52,12 +43,6 @@ export function registerValidationChecks(services: Services): void {
  */
 export class Validator {
    constructor(protected services: Services) {}
-
-   checkNamedObject(namedObject: NamedObject, accept: ValidationAcceptor): void {
-      if (namedObject.name === undefined || namedObject.name.length === 0) {
-         accept('error', 'The name of this object cannot be empty', { node: namedObject, property: 'name' });
-      }
-   }
 
    checkNode(node: AstNode, accept: ValidationAcceptor): void {
       this.checkUniqueGlobalId(node, accept);
@@ -128,6 +113,12 @@ export class Validator {
       }
    }
 
+   checkElement(element: Element, accept: ValidationAcceptor): void {
+      if (!element.name) {
+         accept('error', 'The name of an element cannot be empty', { node: element, property: 'name' });
+      }
+   }
+
    checkRelation(relation: Relation, accept: ValidationAcceptor): void {
       const sourceNodeType = relation.source.ref?.$type === 'Element' ? relation.source.ref?.type : 'Junction';
       const targetNodeType = relation.target.ref?.$type === 'Element' ? relation.target.ref?.type : 'Junction';
@@ -135,14 +126,5 @@ export class Validator {
       if (!RelationValidator.isValidTarget(relation.type, sourceNodeType, targetNodeType)) {
          accept('error', 'Invalid relation.', { node: relation, property: 'type' });
       }
-   }
-
-   checkRelationEdge(edge: RelationEdge, accept: ValidationAcceptor): void {
-      // if (edge.sourceNode?.ref?.element?.ref?.$type !== edge.relation?.ref?.source?.ref?.$type) {
-      //    accept('error', 'Source must match type of parent.', { node: edge, property: 'sourceNode' });
-      // }
-      // if (edge.targetNode?.ref?.element?.ref?.$type !== edge.relation?.ref?.target?.ref?.$type) {
-      //    accept('error', 'Target must match type of child.', { node: edge, property: 'targetNode' });
-      // }
    }
 }

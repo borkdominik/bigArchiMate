@@ -1,58 +1,58 @@
 import { describe, expect, test } from '@jest/globals';
-import { EntityNode } from '../../src/language-server/generated/ast.js';
-import { createTestServices, parseSystemDiagram } from './test-utils/utils.js';
+import { ElementNode } from '../../src/language-server/generated/ast.js';
+import { createTestServices, parseArchiMateDiagram } from './test-utils/utils.js';
 
 const services = createTestServices();
 
-const ex1 = `systemDiagram:
+const ex1 = `archiMateDiagram:
     id: example1`;
-const ex2 = `systemDiagram:
+const ex2 = `archiMateDiagram:
     id: example2
     nodes:
         - id: nodeA
-          entity: NotExisting
+          element: NotExisting
           x: 0
           y: 0
           width: 0
           height: 0`;
-const ex3 = `systemDiagram:
+const ex3 = `archiMateDiagram:
     id: example3
     nodes:
         - id: nodeA
-          entity: NotExisting
+          element: NotExisting
           x: 0
           y: 0
           width: 0
           height: 0
         - id: nodeA1
-          entity: NotExisting
+          element: NotExisting
           x: 0
           y: 0
           width: 0
           height: 0`;
-const ex4 = `systemDiagram:
+const ex4 = `archiMateDiagram:
     id: example4
     nodes:
         - id: nodeA
-          entity: NotExisting
+          element: NotExisting
           x: 0
           y: 0
           width: 0
           height: 0
         - id: nodeA1
-          entity: NotExisting
+          element: NotExisting
           x: 0
           y: 0
           width: 0
           height: 0
         - id: nodeA2
-          entity: NotExisting
+          element: NotExisting
           x: 0
           y: 0
           width: 0
           height: 0
         - id: nodeA4
-          entity: NotExisting
+          element: NotExisting
           x: 0
           y: 0
           width: 0
@@ -61,23 +61,23 @@ const ex4 = `systemDiagram:
 describe('NameUtil', () => {
    describe('findAvailableNodeName', () => {
       test('should return given name if unique', async () => {
-         const diagram = await parseSystemDiagram({ services, text: ex1 });
-         expect(services.references.IdProvider.findNextId(EntityNode, 'nodeA', diagram)).toBe('nodeA');
+         const diagram = await parseArchiMateDiagram({ services, text: ex1 });
+         expect(services.references.IdProvider.findNextId(ElementNode, 'nodeA', diagram)).toBe('nodeA');
       });
 
       test('should return unique name if given is taken', async () => {
-         const diagram = await parseSystemDiagram({ services, text: ex2 });
-         expect(services.references.IdProvider.findNextId(EntityNode, 'nodeA', diagram)).toBe('nodeA1');
+         const diagram = await parseArchiMateDiagram({ services, text: ex2 });
+         expect(services.references.IdProvider.findNextId(ElementNode, 'nodeA', diagram)).toBe('nodeA1');
       });
 
       test('should properly count up if name is taken', async () => {
-         const diagram = await parseSystemDiagram({ services, text: ex3 });
-         expect(services.references.IdProvider.findNextId(EntityNode, 'nodeA', diagram)).toBe('nodeA2');
+         const diagram = await parseArchiMateDiagram({ services, text: ex3 });
+         expect(services.references.IdProvider.findNextId(ElementNode, 'nodeA', diagram)).toBe('nodeA2');
       });
 
       test('should find lowest count if multiple are taken', async () => {
-         const diagram = await parseSystemDiagram({ services, text: ex4 });
-         expect(services.references.IdProvider.findNextId(EntityNode, 'nodeA', diagram)).toBe('nodeA3');
+         const diagram = await parseArchiMateDiagram({ services, text: ex4 });
+         expect(services.references.IdProvider.findNextId(ElementNode, 'nodeA', diagram)).toBe('nodeA3');
       });
    });
 });

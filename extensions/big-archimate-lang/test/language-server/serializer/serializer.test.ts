@@ -1,22 +1,16 @@
 import { beforeAll, describe, expect, test } from '@jest/globals';
-import { Reference, URI } from 'langium';
+import { Reference } from 'langium';
 
-import _ from 'lodash';
-import { ArchiMateRoot, Entity, Relationship } from '../../../src/language-server/generated/ast.js';
+import { ArchiMateRoot, Element, Relation } from '../../../src/language-server/generated/ast.js';
 import { Serializer } from '../../../src/language-server/serializer.js';
 import {
-   createEntity,
-   createEntityAttribute,
-   createEntityNode,
-   createRelationship,
-   createRelationshipEdge,
-   createSystemDiagram
+   createArchiMateDiagram,
+   createElement,
+   createElementNode,
+   createRelation,
+   createRelationEdge
 } from '../../../src/language-server/util/ast-util.js';
-import { customer } from '../test-utils/test-documents/entity/customer.js';
-import { sub_customer } from '../test-utils/test-documents/entity/sub_customer.js';
-import { sub_customer_cycle } from '../test-utils/test-documents/entity/sub_customer_cycle.js';
-import { sub_customer_multi } from '../test-utils/test-documents/entity/sub_customer_multi.js';
-import { createTestServices, parseDocuments, parseEntity, testUri } from '../test-utils/utils.js';
+import { createTestServices } from '../test-utils/utils.js';
 
 const services = createTestServices();
 
@@ -27,51 +21,23 @@ describe('Lexer', () => {
       serializer = services.serializer.Serializer;
    });
 
-   describe('Serialize entity', () => {
+   describe('Serialize element', () => {
       let archiMateRoot: ArchiMateRoot;
-      let archiMateRootWithoutAttributes: ArchiMateRoot;
-      let archiMateRootWithAttributesDifPlace: ArchiMateRoot;
 
       beforeAll(() => {
          archiMateRoot = { $type: 'ArchiMateRoot' };
-         archiMateRoot.entity = createEntity(archiMateRoot, 'testId', 'test Name', {
-            description: 'Test description'
+         archiMateRoot.element = createElement(archiMateRoot, 'testId', 'test Name', 'ApplicationCollaboration', {
+            documentation: 'Test documentation'
          });
-
-         archiMateRootWithoutAttributes = _.cloneDeep(archiMateRoot);
-
-         archiMateRoot.entity.attributes = [
-            createEntityAttribute(archiMateRoot.entity, 'Attribute1', 'Attribute 1'),
-            createEntityAttribute(archiMateRoot.entity, 'Attribute2', 'Attribute 2')
-         ];
-
-         archiMateRootWithAttributesDifPlace = { $type: 'ArchiMateRoot' };
-         archiMateRootWithAttributesDifPlace.entity = createEntity(archiMateRoot, 'testId', 'test Name', {
-            description: 'Test description'
-         });
-         archiMateRootWithAttributesDifPlace.entity.attributes = [
-            createEntityAttribute(archiMateRoot.entity, 'Attribute1', 'Attribute 1'),
-            createEntityAttribute(archiMateRoot.entity, 'Attribute2', 'Attribute 2')
-         ];
       });
 
-      test('serialize entity with attributes', () => {
+      test('serialize element', () => {
          const parseResult = serializer.serialize(archiMateRoot);
          expect(parseResult).toBe(expected_result);
       });
-
-      test('serialize entity without attributes', () => {
-         const parseResult = serializer.serialize(archiMateRootWithoutAttributes);
-         expect(parseResult).toBe(expected_result2);
-      });
-
-      test('serialize entity with attributes in different place', () => {
-         const parseResult = serializer.serialize(archiMateRootWithAttributesDifPlace);
-         expect(parseResult).toBe(expected_result3);
-      });
    });
 
-   describe('Serialize relationship', () => {
+   describe('Serialize relation', () => {
       let archiMateRoot: ArchiMateRoot;
 
       beforeAll(() => {
@@ -79,28 +45,28 @@ describe('Lexer', () => {
             $type: 'ArchiMateRoot'
          };
 
-         const ref1: Reference<Entity> = {
+         const ref1: Reference<Element> = {
             $refText: 'Ref1',
-            ref: createEntity(archiMateRoot, 'Ref1', 'test Name', {
-               description: 'Test description'
+            ref: createElement(archiMateRoot, 'Ref1', 'test Name', 'ApplicationCollaboration', {
+               documentation: 'Test documentation'
             })
          };
 
-         const ref2: Reference<Entity> = {
+         const ref2: Reference<Element> = {
             $refText: 'Ref2',
-            ref: createEntity(archiMateRoot, 'Ref2', 'test Name', {
-               description: 'Test description'
+            ref: createElement(archiMateRoot, 'Ref2', 'test Name', 'ApplicationCollaboration', {
+               documentation: 'Test documentation'
             })
          };
 
-         archiMateRoot.relationship = createRelationship(archiMateRoot, 'testId', 'test Name', ref1, ref2, {
-            description: 'Test description'
+         archiMateRoot.relation = createRelation(archiMateRoot, 'testId', 'test Name', 'Association', ref1, ref2, {
+            documentation: 'Test documentation'
          });
       });
 
-      test('serialize entity with attributes', () => {
+      test('serialize relation', () => {
          const parseResult = serializer.serialize(archiMateRoot);
-         expect(parseResult).toBe(expected_result4);
+         expect(parseResult).toBe(expected_result1);
       });
    });
 
@@ -112,124 +78,77 @@ describe('Lexer', () => {
             $type: 'ArchiMateRoot'
          };
 
-         const ref1: Reference<Entity> = {
+         const ref1: Reference<Element> = {
             $refText: 'Ref1',
-            ref: createEntity(archiMateRoot, 'Ref1', 'test Name', {
-               description: 'Test description'
+            ref: createElement(archiMateRoot, 'Ref1', 'test Name', 'ApplicationCollaboration', {
+               documentation: 'Test documentation'
             })
          };
 
-         const ref2: Reference<Entity> = {
+         const ref2: Reference<Element> = {
             $refText: 'Ref2',
-            ref: createEntity(archiMateRoot, 'Ref2', 'test Name', {
-               description: 'Test description'
+            ref: createElement(archiMateRoot, 'Ref2', 'test Name', 'ApplicationCollaboration', {
+               documentation: 'Test documentation'
             })
          };
 
-         const ref3: Reference<Relationship> = {
+         const ref3: Reference<Relation> = {
             $refText: 'Ref3',
-            ref: createRelationship(archiMateRoot, 'testId', 'test Name', ref1, ref2, {
-               description: 'Test description'
+            ref: createRelation(archiMateRoot, 'testId', 'test Name', 'Association', ref1, ref2, {
+               documentation: 'Test documentation'
             })
          };
 
-         archiMateRoot.systemDiagram = createSystemDiagram(archiMateRoot, 'testId');
+         archiMateRoot.archiMateDiagram = createArchiMateDiagram(archiMateRoot, 'testId');
 
-         archiMateRoot.systemDiagram.nodes = [
-            createEntityNode(archiMateRoot.systemDiagram, 'Node1', ref1, { x: 100, y: 101 }, { width: 102, height: 102 }),
-            createEntityNode(archiMateRoot.systemDiagram, 'Node2', ref2, { x: 100, y: 101 }, { width: 102, height: 102 })
+         archiMateRoot.archiMateDiagram.nodes = [
+            createElementNode(archiMateRoot.archiMateDiagram, 'Node1', ref1, { x: 100, y: 101 }, { width: 102, height: 102 }),
+            createElementNode(archiMateRoot.archiMateDiagram, 'Node2', ref2, { x: 100, y: 101 }, { width: 102, height: 102 })
          ];
 
-         archiMateRoot.systemDiagram.edges = [
-            createRelationshipEdge(archiMateRoot.systemDiagram, 'Edge1', ref3, { $refText: 'A' }, { $refText: 'B' })
+         archiMateRoot.archiMateDiagram.edges = [
+            createRelationEdge(archiMateRoot.archiMateDiagram, 'Edge1', ref3, { $refText: 'A' }, { $refText: 'B' })
          ];
       });
 
-      test('serialize entity with attributes', () => {
+      test('serialize diagram', () => {
          const parseResult = serializer.serialize(archiMateRoot);
-         expect(parseResult).toBe(expected_result5);
-      });
-   });
-
-   describe('Serialize entity with inheritance', () => {
-      const customerDocumentUri = testUri('customer');
-
-      beforeAll(async () => {
-         await parseDocuments([{ services, text: customer, documentUri: customerDocumentUri }]);
-      });
-
-      test('Single inheritance', async () => {
-         const subCustomer = await parseEntity({ services, text: sub_customer });
-         expect(subCustomer.superEntities).toHaveLength(1);
-         expect(subCustomer.superEntities[0].$refText).toBe('Customer');
-      });
-
-      test('Multiple inheritance', async () => {
-         const subCustomer = await parseEntity({ services, text: sub_customer_multi });
-         expect(subCustomer.superEntities).toHaveLength(2);
-         expect(subCustomer.superEntities[0].$refText).toBe('Customer');
-         expect(subCustomer.superEntities[1].$refText).toBe('SubCustomer');
-      });
-
-      test('Inheritance Cycle', async () => {
-         services.shared.workspace.LangiumDocuments.deleteDocument(URI.parse(customerDocumentUri));
-         const newCustomer = await parseEntity({ services, text: sub_customer_cycle, documentUri: 'customer', validation: true });
-         expect(newCustomer.$document.diagnostics).toBeDefined();
-         expect(newCustomer.$document.diagnostics).toEqual(
-            expect.arrayContaining([
-               expect.objectContaining({ message: 'Inheritance cycle detected: Customer -> SubCustomer -> Customer.' })
-            ])
-         );
+         expect(parseResult).toBe(expected_result2);
       });
    });
 });
 
-const expected_result = `entity:
+const expected_result = `element:
     id: testId
     name: "test Name"
-    description: "Test description"
-    attributes:
-      - id: Attribute1
-        name: "Attribute 1"
-      - id: Attribute2
-        name: "Attribute 2"`;
-const expected_result2 = `entity:
-    id: testId
-    name: "test Name"
-    description: "Test description"`;
-const expected_result3 = `entity:
-    id: testId
-    name: "test Name"
-    description: "Test description"
-    attributes:
-      - id: Attribute1
-        name: "Attribute 1"
-      - id: Attribute2
-        name: "Attribute 2"`;
+    documentation: "Test documentation"
+    type: ApplicationCollaboration`;
 
-const expected_result4 = `relationship:
+const expected_result1 = `relation:
     id: testId
     name: "test Name"
-    description: "Test description"
-    parent: Ref1
-    child: Ref2`;
-const expected_result5 = `systemDiagram:
+    documentation: "Test documentation"
+    type: Association
+    source: Ref1
+    target: Ref2`;
+
+const expected_result2 = `archiMateDiagram:
     id: testId
     nodes:
       - id: Node1
-        entity: Ref1
+        element: Ref1
         x: 100
         y: 101
         width: 102
         height: 102
       - id: Node2
-        entity: Ref2
+        element: Ref2
         x: 100
         y: 101
         width: 102
         height: 102
     edges:
       - id: Edge1
-        relationship: Ref3
+        relation: Ref3
         sourceNode: A
         targetNode: B`;

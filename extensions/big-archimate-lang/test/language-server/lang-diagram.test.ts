@@ -1,115 +1,117 @@
 import { describe, expect, test } from '@jest/globals';
-import { isReference } from 'langium';
 
-import { InheritanceEdge, RelationshipEdge, isInheritanceEdge, isRelationshipEdge } from '../../src/language-server/generated/ast.js';
-import { diagram1, diagram2, diagram3, diagram4, diagram5, diagram6, diagram7 } from './test-utils/test-documents/diagram/index.js';
-import { createTestServices, parseSystemDiagram } from './test-utils/utils.js';
+import { isReference } from 'langium';
+import { ArchiMateDiagram, ElementNode, JunctionNode } from '../../src/language-server/generated/ast.js';
+import { WithDocument } from '../../src/language-server/util/ast-util.js';
+import {
+   diagram1,
+   diagram1_with_element_node,
+   diagram1_with_junction_node,
+   diagram1_with_name,
+   diagram1_with_two_nodes_and_one_edge
+} from './test-utils/test-documents/diagram/index.js';
+import { createTestServices, parseArchiMateDiagram } from './test-utils/utils.js';
 
 const services = createTestServices();
 
-describe('language Diagram', () => {
-   describe('Diagram without nodes and edges', () => {
-      test('Simple file for diagram', async () => {
-         const systemDiagram = await parseSystemDiagram({ services, text: diagram1 });
-         expect(systemDiagram?.id).toBe('Systemdiagram1');
+describe('Language diagram', () => {
+   describe('Valid diagram files', () => {
+      const testValidArchiMateDiagram = async (diagram: WithDocument<ArchiMateDiagram>) => {
+         expect(diagram.id).toBe('ArchiMateDiagram1Id');
+      };
+
+      test('Valid diagram file', async () => {
+         const diagram = await parseArchiMateDiagram({ services, text: diagram1 });
+         testValidArchiMateDiagram(diagram);
+         expect(diagram.name).toBeUndefined();
+         expect(diagram.nodes).toHaveLength(0);
+         expect(diagram.edges).toHaveLength(0);
+         expect(diagram.properties).toHaveLength(0);
       });
 
-      test('Diagram with indentation and dedentation error', async () => {
-         await parseSystemDiagram({ services, text: diagram4 }, { parserErrors: 2 });
-      });
-   });
-
-   describe('Diagram with nodes', () => {
-      test('Simple file for diagram and nodes', async () => {
-         const systemDiagram = await parseSystemDiagram({ services, text: diagram2 });
-
-         expect(systemDiagram?.nodes).toHaveLength(1);
-         const node1 = systemDiagram?.nodes[0];
-         expect(node1?.id).toBe('CustomerNode');
-         expect(isReference(node1?.entity)).toBe(true);
-         expect(node1?.entity?.$refText).toBe('Customer');
-         expect(node1?.x).toBe(100);
-      });
-   });
-
-   describe('Diagram with relationship edges', () => {
-      test('Simple file for diagram and relationship edges', async () => {
-         const systemDiagram = await parseSystemDiagram({ services, text: diagram3 });
-
-         expect(systemDiagram?.edges).toHaveLength(1);
-         const edge1 = systemDiagram?.edges[0] as RelationshipEdge;
-         expect(isRelationshipEdge(edge1)).toBe(true);
-         expect(edge1?.id).toBe('OrderCustomerEdge');
-         expect(isReference(edge1?.relationship)).toBe(true);
-         expect(edge1?.relationship?.$refText).toBe('Order_Customer');
-      });
-   });
-
-   describe('Diagram with nodes and relationship edges', () => {
-      test('Simple file for diagram and relationship edges', async () => {
-         const systemDiagram = await parseSystemDiagram({ services, text: diagram5 });
-
-         expect(systemDiagram?.nodes).toHaveLength(1);
-         const node1 = systemDiagram?.nodes[0];
-         expect(node1?.id).toBe('CustomerNode');
-         expect(isReference(node1?.entity)).toBe(true);
-         expect(node1?.entity?.$refText).toBe('Customer');
-         expect(node1?.x).toBe(100);
-
-         expect(systemDiagram?.edges).toHaveLength(1);
-         const edge1 = systemDiagram?.edges[0] as RelationshipEdge;
-         expect(isRelationshipEdge(edge1)).toBe(true);
-         expect(edge1?.id).toBe('OrderCustomerEdge');
-         expect(isReference(edge1?.relationship)).toBe(true);
-         expect(edge1?.relationship?.$refText).toBe('Order_Customer');
+      test('Valid diagram file with name', async () => {
+         const diagram = await parseArchiMateDiagram({ services, text: diagram1_with_name });
+         testValidArchiMateDiagram(diagram);
+         expect(diagram.name).toBe('ArchiMateDiagram1 Name');
+         expect(diagram.nodes).toHaveLength(0);
+         expect(diagram.edges).toHaveLength(0);
+         expect(diagram.properties).toHaveLength(0);
       });
 
-      test('Simple file for diagram and edges, but edge source and target nodes are not specified', async () => {
-         const systemDiagram = await parseSystemDiagram({ services, text: diagram6 }, { parserErrors: 1 });
+      test('Valid diagram file with element node', async () => {
+         const diagram = await parseArchiMateDiagram({ services, text: diagram1_with_element_node });
+         testValidArchiMateDiagram(diagram);
+         expect(diagram.name).toBeUndefined();
+         expect(diagram.nodes).toHaveLength(1);
 
-         const node1 = systemDiagram?.nodes[0];
+         const node1 = diagram.nodes[0];
+         expect(node1.id).toBe('Element1IdNode');
+         expect(isReference((node1 as ElementNode).element)).toBe(true);
+         expect((node1 as ElementNode).element.$refText).toBe('Element1Id');
+         expect(node1.x).toBe(100);
+         expect(node1.y).toBe(100);
+         expect(node1.width).toBe(100);
+         expect(node1.height).toBe(100);
 
-         expect(systemDiagram?.nodes).toHaveLength(1);
-         expect(node1?.id).toBe('CustomerNode');
-         expect(isReference(node1?.entity)).toBe(true);
-         expect(node1?.entity?.$refText).toBe('Customer');
-         expect(node1?.x).toBe(100);
-
-         expect(systemDiagram?.edges).toHaveLength(1);
-         const edge1 = systemDiagram?.edges[0] as RelationshipEdge;
-         expect(isRelationshipEdge(edge1)).toBe(true);
-         expect(edge1?.id).toBe('OrderCustomerEdge');
-         expect(isReference(edge1?.relationship)).toBe(true);
-         expect(edge1?.relationship?.$refText).toBe('Order_Customer');
+         expect(diagram.edges).toHaveLength(0);
+         expect(diagram.properties).toHaveLength(0);
       });
 
-      describe('Diagram with nodes and inheritance edges', () => {
-         test('Simple file for diagram and inheritance edges', async () => {
-            const systemDiagram = await parseSystemDiagram({ services, text: diagram7 });
+      test('Valid diagram file with junction node', async () => {
+         const diagram = await parseArchiMateDiagram({ services, text: diagram1_with_junction_node });
+         testValidArchiMateDiagram(diagram);
+         expect(diagram.name).toBeUndefined();
+         expect(diagram.nodes).toHaveLength(1);
 
-            expect(systemDiagram?.nodes).toHaveLength(2);
+         const node1 = diagram.nodes[0];
+         expect(node1.id).toBe('Junction1IdNode');
+         expect(isReference((node1 as JunctionNode).junction)).toBe(true);
+         expect((node1 as JunctionNode).junction.$refText).toBe('Junction1Id');
+         expect(node1.x).toBe(100);
+         expect(node1.y).toBe(100);
+         expect(node1.width).toBe(100);
+         expect(node1.height).toBe(100);
 
-            const node1 = systemDiagram?.nodes[0];
-            expect(node1?.id).toBe('CustomerNode');
-            expect(isReference(node1?.entity)).toBe(true);
-            expect(node1?.entity?.$refText).toBe('Customer');
-            expect(node1?.x).toBe(100);
+         expect(diagram.edges).toHaveLength(0);
+         expect(diagram.properties).toHaveLength(0);
+      });
 
-            const node2 = systemDiagram?.nodes[1];
-            expect(node2?.id).toBe('SubCustomerNode');
-            expect(isReference(node2?.entity)).toBe(true);
-            expect(node2?.entity?.$refText).toBe('SubCustomer');
-            expect(node2?.x).toBe(400);
+      test('Valid diagram file with two nodes and one edge connecting them', async () => {
+         const diagram = await parseArchiMateDiagram({ services, text: diagram1_with_two_nodes_and_one_edge });
+         testValidArchiMateDiagram(diagram);
+         expect(diagram.name).toBeUndefined();
+         expect(diagram.nodes).toHaveLength(2);
 
-            expect(systemDiagram?.edges).toHaveLength(1);
-            const edge1 = systemDiagram?.edges[0] as InheritanceEdge;
-            expect(isInheritanceEdge(edge1)).toBe(true);
-            expect(edge1?.id).toBe('SubCustomerInheritanceEdge');
-            expect(isReference(edge1?.baseNode)).toBe(true);
-            expect(edge1?.baseNode?.$refText).toBe('SubCustomerNode');
-            expect(isReference(edge1?.superNode)).toBe(true);
-            expect(edge1?.superNode?.$refText).toBe('CustomerNode');
-         });
+         const node1 = diagram.nodes[0];
+         expect(node1.id).toBe('Element1IdNode');
+         expect(isReference((node1 as ElementNode).element)).toBe(true);
+         expect((node1 as ElementNode).element.$refText).toBe('Element1Id');
+         expect(node1.x).toBe(100);
+         expect(node1.y).toBe(100);
+         expect(node1.width).toBe(100);
+         expect(node1.height).toBe(100);
+
+         const node2 = diagram.nodes[1];
+         expect(node2.id).toBe('Junction1IdNode');
+         expect(isReference((node2 as JunctionNode).junction)).toBe(true);
+         expect((node2 as JunctionNode).junction.$refText).toBe('Junction1Id');
+         expect(node2.x).toBe(200);
+         expect(node2.y).toBe(200);
+         expect(node2.width).toBe(100);
+         expect(node2.height).toBe(100);
+
+         expect(diagram.edges).toHaveLength(1);
+
+         const edge1 = diagram.edges[0];
+         expect(edge1.id).toBe('Edge1Id');
+         expect(isReference(edge1.relation)).toBe(true);
+         expect(edge1.relation.$refText).toBe('Relation1Id');
+         expect(isReference(edge1.sourceNode)).toBe(true);
+         expect(edge1.sourceNode.$refText).toBe('Element1IdNode');
+         expect(isReference(edge1.targetNode)).toBe(true);
+         expect(edge1.targetNode.$refText).toBe('Junction1IdNode');
+
+         expect(diagram.properties).toHaveLength(0);
       });
    });
 });

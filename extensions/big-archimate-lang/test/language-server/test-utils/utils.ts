@@ -3,7 +3,17 @@ import { DefaultSharedModuleContext, LangiumServices } from 'langium/lsp';
 import { ParseHelperOptions, parseDocument as langiumParseDocument } from 'langium/test';
 import path from 'path';
 import { PackageJson } from 'type-fest';
-import { ArchiMateRoot } from '../../../src/language-server/generated/ast.js';
+import {
+   ArchiMateDiagram,
+   ArchiMateRoot,
+   Element,
+   Junction,
+   Relation,
+   isArchiMateDiagram,
+   isElement,
+   isJunction,
+   isRelation
+} from '../../../src/language-server/generated/ast.js';
 import { Services, createServices } from '../../../src/language-server/module.js';
 import { SemanticRoot, TypeGuard, WithDocument, findSemanticRoot } from '../../../src/language-server/util/ast-util.js';
 
@@ -71,6 +81,22 @@ export async function parseSemanticRoot<T extends SemanticRoot>(
    expect(semanticRoot).toBeDefined();
    (semanticRoot as any).$document = document;
    return semanticRoot as WithDocument<T>;
+}
+
+export async function parseElement(input: DocumentInput, assert: ParseAssert = {}): Promise<WithDocument<Element>> {
+   return parseSemanticRoot(input, assert, isElement);
+}
+
+export async function parseJunction(input: DocumentInput, assert: ParseAssert = {}): Promise<WithDocument<Junction>> {
+   return parseSemanticRoot(input, assert, isJunction);
+}
+
+export async function parseRelation(input: DocumentInput, assert: ParseAssert = {}): Promise<WithDocument<Relation>> {
+   return parseSemanticRoot(input, assert, isRelation);
+}
+
+export async function parseArchiMateDiagram(input: DocumentInput, assert: ParseAssert = {}): Promise<WithDocument<ArchiMateDiagram>> {
+   return parseSemanticRoot(input, assert, isArchiMateDiagram);
 }
 
 export const MockFileSystem: DefaultSharedModuleContext = {
