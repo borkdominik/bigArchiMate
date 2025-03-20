@@ -8,7 +8,7 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch CrossModel Electron",
+      "name": "Launch bigArchiMate Electron",
       "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
       "windows": {
         "name": "Launch Electron",
@@ -50,7 +50,7 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch CrossModel Browser Backend",
+      "name": "Launch bigArchiMate Browser Backend",
       "program": "${workspaceRoot}/applications/browser-app/lib/backend/main.js",
       "cwd": "${workspaceFolder}/applications/browser-app",
       "protocol": "inspector",
@@ -85,7 +85,7 @@
       "stopOnEntry": false
     },
     {
-      "name": "Run CrossModel Language in VS Code",
+      "name": "Run bigArchiMate Language in VS Code",
       "type": "extensionHost",
       "request": "launch",
       "env": {
@@ -195,7 +195,7 @@
       "disableOptimisticBPs": true
     },
     {
-      "name": "Debug CrossModel Theme",
+      "name": "Debug bigArchiMate Theme",
       "type": "extensionHost",
       "request": "launch",
       "args": ["--extensionDevelopmentPath=${workspaceFolder}/extensions/crossmodel-theme"]

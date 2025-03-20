@@ -1,4 +1,4 @@
-// Dev-Container for CrossModel.
+// Dev-Container for bigArchiMate.
 {
   "name": "Node.js & TypeScript",
   "build": {

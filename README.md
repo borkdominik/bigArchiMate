@@ -1,4 +1,4 @@
-# CrossModel Community Edition
+# bigArchiMate
 
 ## Getting started
 
@@ -14,14 +14,14 @@ For detailed instructions for a Windows machine, follow [this](./docs/Prerequisi
 
 ### Browser
 
-This will build and start CrossModel as a web application. When the web application is running you can open <http://localhost:3000> in your browser to use CrossModel.
+This will build and start bigArchiMate as a web application. When the web application is running you can open <http://localhost:3000> in your browser to use bigArchiMate.
 
     yarn build:browser &&
     yarn start:browser
 
 ### Electron (desktop application)
 
-This will build and start CrossModel as a native desktop application for the OS (Windows, Linux or MacOS) where the command is started.
+This will build and start bigArchiMate as a native desktop application for the OS (Windows, Linux or MacOS) where the command is started.
 
     yarn build:electron &&
     yarn start:electron
@@ -75,7 +75,7 @@ If you also made changes to the backend, you can close and restart the applicati
 
 ### Developing in Dev Container
 
-You can work on CrossModel from within a Dev Container. The best way to do so is create a new Dev Container and cloning the repository in there. For instructions please consult [this](https://code.visualstudio.com/docs/devcontainers/containers#_quick-start-open-a-git-repository-or-github-pr-in-an-isolated-container-volume) page.
+You can work on bigArchiMate from within a Dev Container. The best way to do so is create a new Dev Container and cloning the repository in there. For instructions please consult [this](https://code.visualstudio.com/docs/devcontainers/containers#_quick-start-open-a-git-repository-or-github-pr-in-an-isolated-container-volume) page.
 
 Short steps:
 
@@ -85,7 +85,7 @@ Short steps:
 
 ## Packaging
 
-We package CrossModel either for the browser (Docker) or desktop application (Electron).
+We package bigArchiMate either for the browser (Docker) or desktop application (Electron).
 
 ### Docker
 
@@ -103,7 +103,7 @@ In the main build action we build and publish the Alpine version.
 
 ### Electron
 
-To package CrossModel as a desktop application, execute the following command:
+To package bigArchiMate as a desktop application, execute the following command:
 
     yarn theia:electron package
 
@@ -126,7 +126,7 @@ The repository itself contains the following components structured as follows:
     │   ├── registry                 # Local npm registry using Verdaccio
     │   └── workspace                # Workspace that can be opened in the tool
     ├── extensions                   # VS Code extensions
-    │   └── crossmodel-lang          # CrossModel language support (through three servers)
+    │   └── crossmodel-lang          # bigArchiMate language support (through three servers)
     │       └── src
     │           ├── glsp-server      # Graphical modelling server based on GLSP
     │           ├── language-server  # Textual modelling server based on Langium

@@ -1,6 +1,6 @@
-appId: crossbreeze.crossmodel
-productName: CrossModelCE
-copyright: Copyright © 2023 CrossBreeze
+appId: bigarchimate
+productName: bigArchiMate
+copyright: Copyright © 2025 Vienna University of Technology
 executableName: crossmodel-app
 electronDist: ../../node_modules/electron/dist
 electronVersion: 30.1.2

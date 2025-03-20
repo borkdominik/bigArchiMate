@@ -37,7 +37,7 @@ const TEMPLATE_CATEGORY = 'New Element';
 
 const NEW_ELEMENT_TEMPLATES: NewElementTemplate[] = [
    {
-      id: 'crossbreeze.new.element',
+      id: 'new.element',
       label: 'Element',
       fileExtension: ModelFileExtensions.Element,
       category: TEMPLATE_CATEGORY,
@@ -45,7 +45,7 @@ const NEW_ELEMENT_TEMPLATES: NewElementTemplate[] = [
       content: name => INITIAL_ELEMENT_CONTENT.replace(/\$\{name\}/gi, quote(name)).replace(/\$\{id\}/gi, toId(name))
    },
    {
-      id: 'crossbreeze.new.relation',
+      id: 'new.relation',
       label: 'Relation',
       fileExtension: ModelFileExtensions.Relation,
       category: TEMPLATE_CATEGORY,
@@ -53,7 +53,7 @@ const NEW_ELEMENT_TEMPLATES: NewElementTemplate[] = [
       content: name => INITIAL_RELATION_CONTENT.replace(/\$\{name\}/gi, quote(name)).replace(/\$\{id\}/gi, toId(name))
    },
    {
-      id: 'crossbreeze.new.archimate-diagram',
+      id: 'new.archimate-diagram',
       label: 'ArchiMateDiagram',
       fileExtension: ModelFileExtensions.ArchiMateDiagram,
       category: TEMPLATE_CATEGORY,

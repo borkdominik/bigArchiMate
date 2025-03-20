@@ -28,7 +28,7 @@ test.describe('Add/Edit/Delete entity from explorer', () => {
       await explorer.getFileStatNodeByLabel('ExampleCRM/entities');
       await explorer.selectTreeNode('ExampleCRM/entities');
 
-      const tabBarToolbarNewEntity = await explorer.tabBarToolbar.toolBarItem('crossbreeze.new.entity.toolbar');
+      const tabBarToolbarNewEntity = await explorer.tabBarToolbar.toolBarItem('new.entity.toolbar');
       expect(tabBarToolbarNewEntity).toBeDefined();
       if (!tabBarToolbarNewEntity) {
          return;

@@ -18,7 +18,7 @@ test.describe('TabBar Toolbar', () => {
 
    test('create new entity from tabbar toolbar', async () => {
       // Get the new-entity toolbar item.
-      const tabBarToolbarNewEntity = await explorer.tabBarToolbar.toolBarItem('crossbreeze.new.entity.toolbar');
+      const tabBarToolbarNewEntity = await explorer.tabBarToolbar.toolBarItem('new.entity.toolbar');
       expect(tabBarToolbarNewEntity).toBeDefined();
       if (tabBarToolbarNewEntity) {
          // expect(await tabBarToolbarNewEntity.isEnabled()).toBe(true);
@@ -48,7 +48,7 @@ test.describe('TabBar Toolbar', () => {
 
    test('create new relationship from tabbar toolbar', async () => {
       // Get the new-entity toolbar item.
-      const tabBarToolbarNewEntity = await explorer.tabBarToolbar.toolBarItem('crossbreeze.new.relationship.toolbar');
+      const tabBarToolbarNewEntity = await explorer.tabBarToolbar.toolBarItem('new.relationship.toolbar');
       expect(tabBarToolbarNewEntity).toBeDefined();
       if (tabBarToolbarNewEntity) {
          // expect(await tabBarToolbarNewEntity.isEnabled()).toBe(true);
@@ -78,7 +78,7 @@ test.describe('TabBar Toolbar', () => {
 
    test('create new diagram from tabbar toolbar', async () => {
       // Get the new-entity toolbar item.
-      const tabBarToolbarNewEntity = await explorer.tabBarToolbar.toolBarItem('crossbreeze.new.system-diagram.toolbar');
+      const tabBarToolbarNewEntity = await explorer.tabBarToolbar.toolBarItem('new.system-diagram.toolbar');
       expect(tabBarToolbarNewEntity).toBeDefined();
       if (tabBarToolbarNewEntity) {
          // expect(await tabBarToolbarNewEntity.isEnabled()).toBe(true);

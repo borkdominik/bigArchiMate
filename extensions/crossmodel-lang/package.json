@@ -44,7 +44,7 @@
   "contributes": {
     "configuration": {
       "type": "object",
-      "title": "CrossModel configuration",
+      "title": "bigArchiMate configuration",
       "properties": {
         "cross-model.trace.server": {
           "scope": "window",

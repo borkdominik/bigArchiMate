@@ -1,6 +1,6 @@
 # Architecture Overview
 
-The general architecture of CrossModel consists of several parts that aim to share a common data model and support different editing capabilities on that model.
+The general architecture of bigArchiMate consists of several parts that aim to share a common data model and support different editing capabilities on that model.
 
 ![Architecture Overview](Architecture.png)
 
@@ -10,7 +10,7 @@ The support for textual modeling is provided through a [language server](https:/
 The Langium framework creates the language server infrastructure based on a given grammar and provides a document store for semantic models / AST nodes.
 In our architecture, we use the language server and the document store as the source of truth for our modeling.
 
-When the application is started, our CrossModel VS Code extension will start the server process, initialize the language server and provide the textual modeling capabilities through the generic language client.
+When the application is started, our bigArchiMate VS Code extension will start the server process, initialize the language server and provide the textual modeling capabilities through the generic language client.
 During initialization of the language server, the whole workspace is scanned and the documents as well an index of node descriptions for linking, and a package system for project-like semantics, is created.
 If the user makes any changes using the [Monaco editor](https://microsoft.github.io/monaco-editor/) in the Theia frontend, the document store will get updated accordingly.
 
@@ -19,7 +19,7 @@ The code responsible for this functionality can be found in [`extension.ts`](../
 ### Package Manager
 
 In general, the language server protocol does not contain any dedicated project-like semantics, only the concept of a workspace.
-In CrossModel, however, we want to be able to support multiple closed systems where elements can only be referenced within that system but also allow references between systems if declared explicitly.
+In bigArchiMate, however, we want to be able to support multiple closed systems where elements can only be referenced within that system but also allow references between systems if declared explicitly.
 For this reason, we are defining that any directory with a [`package.json`](https://docs.npmjs.com/cli/v9/configuring-npm/package-json) file is considered a closed system and can only see elements within that system as well as any direct or indirect dependency declared through the `package.json`.
 By re-using the `package.json` format from npm, we also gain automatic support for publishing systems and libraries on an npm registry that can be automatically downloaded through the npm CLI.
 The task of the package manager is to introduce that mechanism in the language server.
@@ -56,7 +56,7 @@ To sync the different modeling perspectives (textual, graphical, form-based, pro
 The lifecycle of a document is aligned with the expected lifecycle of the [language server protocol](https://microsoft.github.io/language-server-protocol/overviews/lsp/overview/) where the `open` call transfers the document content from the client to the server which is now the source of truth until the document is `closed` again.
 Each update from the client changes the in-memory state of the server and increases its internal version number.
 
-In CrossModel, we enhance that lifecycle to support a multi-client scenario where only the first `open` call needs to transfer the content (usually the content of the file on the filesystem) and subsequent open calls are ignored as the server already holds the source of truth for the document.
+In bigArchiMate, we enhance that lifecycle to support a multi-client scenario where only the first `open` call needs to transfer the content (usually the content of the file on the filesystem) and subsequent open calls are ignored as the server already holds the source of truth for the document.
 In-between the open and close calls, clients are free to send updates to the server.
 To allow live syncing, any state resulting from applying an update is forwarded to all clients with the information of which client triggered the update.
 This allows each client to decide whether to apply or discard an update based on their internal model and makes it easy to avoid update-cycles.

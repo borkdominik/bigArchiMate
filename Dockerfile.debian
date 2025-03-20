@@ -5,12 +5,12 @@ FROM node:20-bookworm AS build-stage
 RUN apt-get update && \
     export DEBIAN_FRONTEND=noninteractive && \
     apt-get -y install --no-install-recommends \
-        libsecret-1-dev \
-        libxkbfile-dev \
-        make \
-        build-essential \
-        python3 \
-        unzip
+    libsecret-1-dev \
+    libxkbfile-dev \
+    make \
+    build-essential \
+    python3 \
+    unzip
 
 # Set the working directory
 WORKDIR /home/crossmodel
@@ -54,11 +54,11 @@ RUN adduser --system --group --uid 101 --home /home/crossmodel crossmodel && \
 # Node is already available in base image
 RUN apt-get update && \
     apt-get install -y \
-        bash \
-        openssh-server \
-        openssh-client \
-        libsecret-1-0 \
-        git && \
+    bash \
+    openssh-server \
+    openssh-client \
+    libsecret-1-0 \
+    git && \
     apt-get clean
 
 # Copy the mapping example workspace into the project folder.
@@ -73,7 +73,7 @@ WORKDIR /home/crossmodel
 # Copy the build output to the production environment
 COPY --from=build-stage --chown=crossmodel:crossmodel /home/crossmodel /home/crossmodel
 
-# Expose the default CrossModel port
+# Expose the default bigArchiMate port
 EXPOSE 3000
 
 # Specify default shell for Theia and the Built-In plugins directory

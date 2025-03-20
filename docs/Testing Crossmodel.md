@@ -1,4 +1,4 @@
-# Tests: CrossModel Community Edition
+# Tests: bigArchiMate
 
 ## Getting started
 

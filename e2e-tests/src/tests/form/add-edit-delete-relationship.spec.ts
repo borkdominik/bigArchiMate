@@ -28,7 +28,7 @@ test.describe('Add/Edit/Delete relationship from explorer', () => {
       await explorer.getFileStatNodeByLabel('ExampleCRM/relationships');
       await explorer.selectTreeNode('ExampleCRM/relationships');
 
-      const tabBarToolbarNewRelationship = await explorer.tabBarToolbar.toolBarItem('crossbreeze.new.relationship.toolbar');
+      const tabBarToolbarNewRelationship = await explorer.tabBarToolbar.toolBarItem('new.relationship.toolbar');
       expect(tabBarToolbarNewRelationship).toBeDefined();
       if (!tabBarToolbarNewRelationship) {
          return;

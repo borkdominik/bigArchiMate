@@ -73,7 +73,7 @@ WORKDIR /home/crossmodel
 # Copy the build output to the production environment
 COPY --from=build-stage --chown=crossmodel:crossmodel /home/crossmodel /home/crossmodel
 
-# Expose the default CrossModel port
+# Expose the default bigArchiMate port
 EXPOSE 3000
 
 # Specify default shell for Theia and the Built-In plugins directory

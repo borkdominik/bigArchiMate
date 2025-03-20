@@ -1,6 +1,6 @@
 {
   "$schema": "vscode://schemas/color-theme",
-  "name": "CrossModel Light",
+  "name": "bigArchiMate Light",
   "type": "light",
   "semanticHighlighting": true,
   "semanticTokenColors": {
