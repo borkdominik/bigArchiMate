@@ -1,4 +1,4 @@
-import { codiconCSSString, getIcon, getLabel } from '@crossbreeze/protocol';
+import { codiconCSSString, getIcon, getLabel } from '@big-archimate/protocol';
 import { TextField } from '@mui/material';
 import * as React from 'react';
 import { useElement, useModelDispatch, useReadonly } from '../../ModelContext';

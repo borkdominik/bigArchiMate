@@ -1,4 +1,4 @@
-import { AddElementOperation, codiconCSSString } from '@crossbreeze/protocol';
+import { AddElementOperation, codiconCSSString } from '@big-archimate/protocol';
 import { ContextActionsProvider, EditorContext, LabeledAction, ModelState, Point } from '@eclipse-glsp/server';
 import { inject, injectable } from 'inversify';
 import { ElementNode } from '../../../language-server/generated/ast.js';

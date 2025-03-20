@@ -1,4 +1,4 @@
-import { ReversibleMap } from '@crossbreeze/protocol';
+import { ReversibleMap } from '@big-archimate/protocol';
 import { ElementType, RelationType } from '../../generated/ast.js';
 
 /**

@@ -5,7 +5,7 @@ import {
    ELEMENT_ICON_TYPE,
    ELEMENT_LABEL_TYPE,
    getCornerType
-} from '@crossbreeze/protocol';
+} from '@big-archimate/protocol';
 import {
    bindAsService,
    bindOrRebind,

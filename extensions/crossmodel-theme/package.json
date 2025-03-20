@@ -3,20 +3,16 @@
   "displayName": "crossmodel-theme",
   "version": "0.0.0",
   "private": true,
-  "description": "CrossModel Theme",
+  "description": "bigArchiMate Theme",
   "categories": [
     "Themes"
   ],
-  "homepage": "https://github.com/CrossBreezeNL/crossmodel",
+  "homepage": "https://github.com/borkdominik/bigArchiMate",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CrossBreezeNL/crossmodel"
+    "url": "git+https://github.com/borkdominik/bigArchiMate"
   },
   "license": "AGPL-3.0-or-later",
-  "author": {
-    "name": "CrossBreeze",
-    "email": "devops@crossbreeze.nl"
-  },
   "publisher": "CrossBreeze",
   "scripts": {
     "build": "echo \"Nothing to build\"",

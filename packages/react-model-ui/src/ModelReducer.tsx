@@ -1,4 +1,4 @@
-import { ArchiMateRoot } from '@crossbreeze/protocol';
+import { ArchiMateRoot } from '@big-archimate/protocol';
 import { ElementDispatchAction, ElementModelReducer, isElementDispatchAction } from './ElementModelReducer';
 import { JunctionDispatchAction, JunctionModelReducer, isJunctionDispatchAction } from './JunctionModelReducer';
 import { RelationDispatchAction, RelationModelReducer, isRelationDispatchAction } from './RelationModelReducer';

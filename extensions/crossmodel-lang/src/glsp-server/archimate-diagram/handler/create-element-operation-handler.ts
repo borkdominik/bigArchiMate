@@ -1,4 +1,4 @@
-import { ARCHIMATE_ELEMENT_TYPE_MAP, getLabel, getLayer } from '@crossbreeze/protocol';
+import { ARCHIMATE_ELEMENT_TYPE_MAP, getLabel, getLayer } from '@big-archimate/protocol';
 import {
    Action,
    ActionDispatcher,

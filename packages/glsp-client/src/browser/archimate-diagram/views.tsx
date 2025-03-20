@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 /** @jsx svg */
 
-import { ARCHIMATE_RELATION_TYPE_MAP } from '@crossbreeze/protocol';
+import { ARCHIMATE_RELATION_TYPE_MAP } from '@big-archimate/protocol';
 import { angleOfPoint, CircularNodeView, GEdge, GEdgeView, Point, RenderingContext, svg, toDegrees } from '@eclipse-glsp/client';
 import { injectable } from 'inversify';
 import { VNode } from 'snabbdom';

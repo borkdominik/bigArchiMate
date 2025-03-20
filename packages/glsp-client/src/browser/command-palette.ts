@@ -1,4 +1,4 @@
-import { AddEntityOperation } from '@crossbreeze/protocol';
+import { AddEntityOperation } from '@big-archimate/protocol';
 import {
    Action,
    GModelRoot,

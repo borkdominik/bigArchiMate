@@ -1,4 +1,4 @@
-import { Property, PropertyType, findNextUnique, toId } from '@crossbreeze/protocol';
+import { Property, PropertyType, findNextUnique, toId } from '@big-archimate/protocol';
 import { GridColDef } from '@mui/x-data-grid';
 import * as React from 'react';
 import { useJunction, useModelDispatch, useReadonly } from '../../ModelContext';

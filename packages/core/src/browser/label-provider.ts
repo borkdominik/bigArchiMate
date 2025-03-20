@@ -1,5 +1,5 @@
-import { ModelService } from '@crossbreeze/model-service/lib/common';
-import { codiconCSSString, concepts, getIcon, ModelFileExtensions, ModelStructure } from '@crossbreeze/protocol';
+import { ModelService } from '@big-archimate/model-service/lib/common';
+import { codiconCSSString, concepts, getIcon, ModelFileExtensions, ModelStructure } from '@big-archimate/protocol';
 import { Emitter, MaybePromise } from '@theia/core';
 import { DepthFirstTreeIterator, LabelProvider, LabelProviderContribution, Tree, TreeDecorator, TreeNode } from '@theia/core/lib/browser';
 import { WidgetDecoration } from '@theia/core/lib/browser/widget-decoration';

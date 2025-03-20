@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable max-len */
 /** @jsx svg */
-import { ARCHIMATE_ELEMENT_TYPE_MAP } from '@crossbreeze/protocol';
+import { ARCHIMATE_ELEMENT_TYPE_MAP } from '@big-archimate/protocol';
 import { RenderingContext, ShapeView, findParentByFeature, svg } from '@eclipse-glsp/client';
 import { injectable } from '@theia/core/shared/inversify';
 import { VNode } from 'snabbdom';

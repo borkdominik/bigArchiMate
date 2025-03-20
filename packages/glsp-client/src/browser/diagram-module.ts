@@ -1,4 +1,4 @@
-import { GRID } from '@crossbreeze/protocol';
+import { GRID } from '@big-archimate/protocol';
 import {
    ConsoleLogger,
    GLSPMousePositionTracker,

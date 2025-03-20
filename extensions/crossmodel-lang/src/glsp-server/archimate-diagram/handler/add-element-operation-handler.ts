@@ -1,4 +1,4 @@
-import { AddElementOperation } from '@crossbreeze/protocol';
+import { AddElementOperation } from '@big-archimate/protocol';
 import { Command, JsonOperationHandler, ModelState } from '@eclipse-glsp/server';
 import { inject, injectable } from 'inversify';
 import { Element, ElementNode } from '../../../language-server/generated/ast.js';

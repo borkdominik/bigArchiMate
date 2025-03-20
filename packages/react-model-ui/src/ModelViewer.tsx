@@ -1,4 +1,4 @@
-import { ArchiMateDocument } from '@crossbreeze/protocol';
+import { ArchiMateDocument } from '@big-archimate/protocol';
 import * as React from 'react';
 import { ModelQueryApi, OpenCallback, SaveCallback } from './ModelContext';
 import { ModelProvider, UpdateCallback } from './ModelProvider';

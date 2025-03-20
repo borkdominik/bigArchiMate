@@ -1,5 +1,5 @@
-import { ModelService } from '@crossbreeze/model-service/lib/common';
-import { ModelFileExtensions, ModelStructure, quote, toId } from '@crossbreeze/protocol';
+import { ModelService } from '@big-archimate/model-service/lib/common';
+import { ModelFileExtensions, ModelStructure, quote, toId } from '@big-archimate/protocol';
 import { Command, CommandContribution, CommandRegistry, MaybePromise, MenuContribution, MenuModelRegistry, URI, nls } from '@theia/core';
 import { CommonMenus, DialogError, open } from '@theia/core/lib/browser';
 import { TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';

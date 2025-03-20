@@ -1,4 +1,4 @@
-import { ModelFileExtensions } from '@crossbreeze/protocol';
+import { ModelFileExtensions } from '@big-archimate/protocol';
 import { AstNode, UriUtils, ValidationAcceptor, ValidationChecks } from 'langium';
 import { Diagnostic } from 'vscode-languageserver-protocol';
 import {

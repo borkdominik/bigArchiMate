@@ -1,4 +1,4 @@
-import { DropElementOperation } from '@crossbreeze/protocol';
+import { DropElementOperation } from '@big-archimate/protocol';
 import { Command, JsonOperationHandler, ModelState } from '@eclipse-glsp/server';
 import { inject, injectable } from 'inversify';
 import { URI } from 'vscode-uri';

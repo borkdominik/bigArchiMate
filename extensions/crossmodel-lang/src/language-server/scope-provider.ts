@@ -6,7 +6,7 @@ import {
    isRootElementReference,
    isSyntheticDocument,
    ReferenceableElement
-} from '@crossbreeze/protocol';
+} from '@big-archimate/protocol';
 import {
    AstNode,
    AstNodeDescription,

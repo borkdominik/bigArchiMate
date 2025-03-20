@@ -1,4 +1,4 @@
-import { CustomWidgetOptions } from '@crossbreeze/core/lib/browser';
+import { CustomWidgetOptions } from '@big-archimate/core/lib/browser';
 import { ContainerModule } from '@theia/core/shared/inversify';
 import { PropertyDataService } from '@theia/property-view/lib/browser/property-data-service';
 import { PropertyViewWidget } from '@theia/property-view/lib/browser/property-view-widget';

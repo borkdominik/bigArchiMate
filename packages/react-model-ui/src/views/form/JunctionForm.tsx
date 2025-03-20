@@ -1,4 +1,4 @@
-import { getLabel, ModelStructure } from '@crossbreeze/protocol';
+import { getLabel, ModelStructure } from '@big-archimate/protocol';
 import { TextField } from '@mui/material';
 import * as React from 'react';
 import { useJunction, useModelDispatch, useReadonly } from '../../ModelContext';

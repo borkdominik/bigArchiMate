@@ -6,7 +6,7 @@ import {
    ModelDiagnostic,
    ReferenceableElement,
    Relation
-} from '@crossbreeze/protocol';
+} from '@big-archimate/protocol';
 import * as React from 'react';
 import { DispatchAction, ModelReducer } from './ModelReducer';
 

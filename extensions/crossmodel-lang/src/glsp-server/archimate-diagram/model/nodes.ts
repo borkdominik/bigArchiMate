@@ -9,7 +9,7 @@ import {
    REFERENCE_PROPERTY,
    REFERENCE_VALUE,
    toKebabCase
-} from '@crossbreeze/protocol';
+} from '@big-archimate/protocol';
 import { ArgsUtil, GCompartment, GLabel, GNode, GNodeBuilder } from '@eclipse-glsp/server';
 import { ElementNode, JunctionNode } from '../../../language-server/generated/ast.js';
 import { ArchiMateGModelIndex } from '../../common/gmodel-index.js';

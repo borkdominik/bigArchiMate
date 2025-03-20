@@ -1,4 +1,4 @@
-import { findNextUnique, identity } from '@crossbreeze/protocol';
+import { findNextUnique, identity } from '@big-archimate/protocol';
 import { AstNode, AstUtils, CstNode, GrammarUtils, isAstNode, NameProvider } from 'langium';
 import { Services } from './module.js';
 import { UNKNOWN_PROJECT_REFERENCE } from './package-manager.js';

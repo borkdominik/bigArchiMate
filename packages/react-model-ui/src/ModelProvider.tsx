@@ -1,4 +1,4 @@
-import { ArchiMateRoot } from '@crossbreeze/protocol';
+import { ArchiMateRoot } from '@big-archimate/protocol';
 import * as React from 'react';
 import { useImmerReducer } from 'use-immer';
 import {

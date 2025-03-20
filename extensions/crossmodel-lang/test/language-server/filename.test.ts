@@ -1,4 +1,4 @@
-import { ModelFileExtensions } from '@crossbreeze/protocol';
+import { ModelFileExtensions } from '@big-archimate/protocol';
 import { entity1 } from './test-utils/test-documents/entity/entity1.js';
 import { createTestServices, parseEntity, testUri } from './test-utils/utils.js';
 

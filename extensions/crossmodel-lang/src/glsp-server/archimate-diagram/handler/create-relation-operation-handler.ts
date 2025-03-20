@@ -1,4 +1,4 @@
-import { ARCHIMATE_RELATION_TYPE_MAP } from '@crossbreeze/protocol';
+import { ARCHIMATE_RELATION_TYPE_MAP } from '@big-archimate/protocol';
 import {
    ActionDispatcher,
    Command,

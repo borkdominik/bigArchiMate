@@ -1,4 +1,4 @@
-import { Property } from '@crossbreeze/protocol';
+import { Property } from '@big-archimate/protocol';
 import { DispatchAction, ModelAction, ModelState, moveDown, moveUp, undefinedIfEmpty } from './ModelReducer';
 
 export interface JunctionChangeNameAction extends ModelAction {

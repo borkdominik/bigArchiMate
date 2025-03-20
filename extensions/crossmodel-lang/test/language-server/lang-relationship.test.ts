@@ -10,7 +10,7 @@ import {
 } from './test-utils/test-documents/relationship/index.js';
 import { createTestServices, parseDocuments, parseRelationship, testUri } from './test-utils/utils.js';
 
-import { ModelFileExtensions } from '@crossbreeze/protocol';
+import { ModelFileExtensions } from '@big-archimate/protocol';
 import { address } from './test-utils/test-documents/entity/address.js';
 import { customer } from './test-utils/test-documents/entity/customer.js';
 import { order } from './test-utils/test-documents/entity/order.js';

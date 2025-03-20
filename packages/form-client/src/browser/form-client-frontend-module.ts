@@ -1,4 +1,4 @@
-import { CustomWidgetOptions } from '@crossbreeze/core/lib/browser';
+import { CustomWidgetOptions } from '@big-archimate/core/lib/browser';
 import { FrontendApplicationContribution, NavigatableWidgetOptions, OpenHandler, WidgetFactory } from '@theia/core/lib/browser';
 import { ContainerModule } from '@theia/core/shared/inversify';
 import { FormEditorOpenHandler, createFormEditorId } from './form-editor-open-handler';

@@ -11,7 +11,7 @@ import {
    LayerType,
    relationTypes,
    toKebabCase
-} from '@crossbreeze/protocol';
+} from '@big-archimate/protocol';
 import {
    Args,
    MaybePromise,

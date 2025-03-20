@@ -1,5 +1,5 @@
-import { ERRONEOUS_MODEL } from '@crossbreeze/protocol';
-import { createEditorError } from '@crossbreeze/react-model-ui/lib/views/common/EditorError';
+import { ERRONEOUS_MODEL } from '@big-archimate/protocol';
+import { createEditorError } from '@big-archimate/react-model-ui/lib/views/common/EditorError';
 import { EditorContextService, GLSPAbstractUIExtension } from '@eclipse-glsp/client';
 import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
 import { createRoot } from '@theia/core/shared/react-dom/client';

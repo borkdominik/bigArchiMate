@@ -1,4 +1,4 @@
-import { quote } from '@crossbreeze/protocol';
+import { quote } from '@big-archimate/protocol';
 import { AstNodeDescription, AstUtils, GrammarAST, GrammarUtils, MaybePromise, ReferenceInfo, Stream } from 'langium';
 import { CompletionAcceptor, CompletionContext, CompletionValueItem, DefaultCompletionProvider, NextFeature } from 'langium/lsp';
 import { v4 as uuid } from 'uuid';

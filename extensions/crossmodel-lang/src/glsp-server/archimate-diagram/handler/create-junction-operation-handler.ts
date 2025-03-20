@@ -1,4 +1,4 @@
-import { ARCHIMATE_CONCEPT_TYPE_MAP } from '@crossbreeze/protocol';
+import { ARCHIMATE_CONCEPT_TYPE_MAP } from '@big-archimate/protocol';
 import {
    Action,
    ActionDispatcher,

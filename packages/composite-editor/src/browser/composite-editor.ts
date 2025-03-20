@@ -1,8 +1,8 @@
-import { CustomWidget, CustomWidgetOptions } from '@crossbreeze/core/lib/browser';
-import { FormEditorOpenHandler, FormEditorWidget } from '@crossbreeze/form-client/lib/browser';
-import { ArchiMateDiagramManager } from '@crossbreeze/glsp-client/lib/browser/';
-import { ArchiMateDiagramLanguage } from '@crossbreeze/glsp-client/lib/common';
-import { codiconCSSString, ModelFileType } from '@crossbreeze/protocol';
+import { CustomWidget, CustomWidgetOptions } from '@big-archimate/core/lib/browser';
+import { FormEditorOpenHandler, FormEditorWidget } from '@big-archimate/form-client/lib/browser';
+import { ArchiMateDiagramManager } from '@big-archimate/glsp-client/lib/browser/';
+import { ArchiMateDiagramLanguage } from '@big-archimate/glsp-client/lib/common';
+import { codiconCSSString, ModelFileType } from '@big-archimate/protocol';
 import { FocusStateChangedAction, SetDirtyStateAction, toTypeGuard } from '@eclipse-glsp/client';
 import { GLSPDiagramWidget, GLSPDiagramWidgetContainer, GLSPDiagramWidgetOptions, GLSPSaveable } from '@eclipse-glsp/theia-integration';
 import { GLSPDiagramLanguage } from '@eclipse-glsp/theia-integration/lib/common';

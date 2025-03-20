@@ -1,6 +1,6 @@
-import { GModelElementInfo, SelectionData } from '@crossbreeze/glsp-client/lib/browser/selection-data-service';
-import { ModelService } from '@crossbreeze/model-service/lib/common';
-import { RenderProps } from '@crossbreeze/protocol';
+import { GModelElementInfo, SelectionData } from '@big-archimate/glsp-client/lib/browser/selection-data-service';
+import { ModelService } from '@big-archimate/model-service/lib/common';
+import { RenderProps } from '@big-archimate/protocol';
 import { GlspSelection } from '@eclipse-glsp/theia-integration';
 import { inject, injectable } from '@theia/core/shared/inversify';
 import { PropertyDataService } from '@theia/property-view/lib/browser/property-data-service';

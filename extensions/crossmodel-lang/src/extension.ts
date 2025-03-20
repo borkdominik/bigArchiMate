@@ -1,4 +1,4 @@
-import { GLSP_PORT_COMMAND, MODELSERVER_PORT_COMMAND } from '@crossbreeze/protocol';
+import { GLSP_PORT_COMMAND, MODELSERVER_PORT_COMMAND } from '@big-archimate/protocol';
 import * as path from 'path';
 import * as vscode from 'vscode';
 import { LanguageClient, LanguageClientOptions, ServerOptions, TransportKind } from 'vscode-languageclient/node.js';

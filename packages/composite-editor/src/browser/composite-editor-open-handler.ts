@@ -1,4 +1,4 @@
-import { ModelFileExtensions, ModelFileType } from '@crossbreeze/protocol';
+import { ModelFileExtensions, ModelFileType } from '@big-archimate/protocol';
 import { RecursivePartial, URI } from '@theia/core';
 import {
    FrontendApplicationContribution,

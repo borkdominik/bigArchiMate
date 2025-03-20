@@ -4,7 +4,7 @@ import { Message } from '@theia/core/lib/browser';
 import { TreeWidgetSelection } from '@theia/core/lib/browser/tree/tree-widget-selection';
 import { FILE_NAVIGATOR_ID, FileNavigatorWidget } from '@theia/navigator/lib/browser/navigator-widget';
 
-import { DropElementOperation } from '@crossbreeze/protocol';
+import { DropElementOperation } from '@big-archimate/protocol';
 import { injectable } from '@theia/core/shared/inversify';
 import { FileNode } from '@theia/filesystem/lib/browser';
 

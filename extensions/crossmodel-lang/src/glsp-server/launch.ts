@@ -1,4 +1,4 @@
-import { GLSP_PORT_COMMAND } from '@crossbreeze/protocol';
+import { GLSP_PORT_COMMAND } from '@big-archimate/protocol';
 import {
    LogLevel,
    LoggerFactory,
@@ -37,7 +37,7 @@ export function startGLSPServer(services: LSPServices, workspaceFolder: URI): Ma
    // create server module with our cross model diagram
    const serverModule = new ServerModule().configureDiagramModule(new ArchiMateDiagramModule());
 
-   const logger = appContainer.get<LoggerFactory>(LoggerFactory)('CrossModelServer');
+   const logger = appContainer.get<LoggerFactory>(LoggerFactory)('bigArchiMateServer');
    const launcher = appContainer.resolve<SocketServerLauncher>(SocketServerLauncher);
    launcher.configure(serverModule);
    try {

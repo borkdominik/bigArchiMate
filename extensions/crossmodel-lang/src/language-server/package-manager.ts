@@ -1,6 +1,6 @@
 import { Disposable, DocumentState, LangiumDocument, MultiMap } from 'langium';
 // eslint-disable-next-line import/no-unresolved
-import { SystemInfo, SystemUpdatedEvent, SystemUpdateListener } from '@crossbreeze/protocol';
+import { SystemInfo, SystemUpdatedEvent, SystemUpdateListener } from '@big-archimate/protocol';
 import { PackageJson } from 'type-fest';
 import { CancellationToken, WorkspaceFolder } from 'vscode-languageserver';
 import { URI, Utils as UriUtils } from 'vscode-uri';

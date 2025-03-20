@@ -1,4 +1,4 @@
-import { ModelFileExtensions } from '@crossbreeze/protocol';
+import { ModelFileExtensions } from '@big-archimate/protocol';
 import { UriUtils, type LangiumDocument } from 'langium';
 import type { CodeActionProvider as CodeActionProviderI } from 'langium/lsp';
 import { RenameFile, type CodeAction, type CodeActionParams } from 'vscode-languageserver-protocol';

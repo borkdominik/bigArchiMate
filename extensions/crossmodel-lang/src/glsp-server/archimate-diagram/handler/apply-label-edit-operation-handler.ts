@@ -1,4 +1,4 @@
-import { toId } from '@crossbreeze/protocol';
+import { toId } from '@big-archimate/protocol';
 import { ApplyLabelEditOperation, Command, getOrThrow, JsonOperationHandler, ModelState } from '@eclipse-glsp/server';
 import { inject, injectable } from 'inversify';
 import { ArchiMateRoot, Element, ElementNode } from '../../../language-server/generated/ast.js';

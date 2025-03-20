@@ -13,7 +13,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
-import { ARCHIMATE_ELEMENT_TYPE_MAP, getLabel, getLayerElements, layerTypes } from '@crossbreeze/protocol';
+import { ARCHIMATE_ELEMENT_TYPE_MAP, getLabel, getLayerElements, layerTypes } from '@big-archimate/protocol';
 import { Args, ContextMenuItemProvider, CreateNodeOperation, MenuItem, ModelState, Point } from '@eclipse-glsp/server';
 import { inject, injectable } from 'inversify';
 import { getObjectKeys } from '../../../util.js';

@@ -1,4 +1,4 @@
-import { ArchiMateDocument, CloseModelArgs, ModelSavedEvent, ModelUpdatedEvent, OpenModelArgs } from '@crossbreeze/protocol';
+import { ArchiMateDocument, CloseModelArgs, ModelSavedEvent, ModelUpdatedEvent, OpenModelArgs } from '@big-archimate/protocol';
 import * as fs from 'fs';
 import {
    AstNode,

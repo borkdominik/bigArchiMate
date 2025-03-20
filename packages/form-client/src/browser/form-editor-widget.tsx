@@ -1,4 +1,4 @@
-import { CustomWidget, CustomWidgetOptions } from '@crossbreeze/core/lib/browser';
+import { CustomWidget, CustomWidgetOptions } from '@big-archimate/core/lib/browser';
 import { NavigatableWidget, NavigatableWidgetOptions } from '@theia/core/lib/browser';
 import URI from '@theia/core/lib/common/uri';
 import { inject, injectable } from '@theia/core/shared/inversify';

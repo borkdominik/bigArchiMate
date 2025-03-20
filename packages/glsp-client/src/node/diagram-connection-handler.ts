@@ -1,4 +1,4 @@
-import { GLSP_PORT_COMMAND } from '@crossbreeze/protocol';
+import { GLSP_PORT_COMMAND } from '@big-archimate/protocol';
 import { GLSPContribution } from '@eclipse-glsp/theia-integration/lib/common';
 import { SocketConnectionForwarder } from '@eclipse-glsp/theia-integration/lib/node';
 import { Channel, CommandService, ConnectionHandler, Disposable, MessageService } from '@theia/core';

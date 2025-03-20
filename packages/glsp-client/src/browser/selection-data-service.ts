@@ -1,4 +1,4 @@
-import { CrossReference, REFERENCE_CONTAINER_TYPE, REFERENCE_PROPERTY, REFERENCE_VALUE, RenderProps } from '@crossbreeze/protocol';
+import { CrossReference, REFERENCE_CONTAINER_TYPE, REFERENCE_PROPERTY, REFERENCE_VALUE, RenderProps } from '@big-archimate/protocol';
 import { GModelElement, GModelRoot, hasArgs } from '@eclipse-glsp/client';
 import { GlspSelectionDataService } from '@eclipse-glsp/theia-integration';
 import { isDefined } from '@theia/core';
