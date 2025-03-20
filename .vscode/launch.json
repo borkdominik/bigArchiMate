@@ -169,7 +169,7 @@
       "internalConsoleOptions": "neverOpen"
     },
     {
-      "name": "vscode-jest-tests.v2.crossmodel",
+      "name": "vscode-jest-tests.v2.big-archimate",
       "type": "node",
       "request": "launch",
       "cwd": "${workspaceRoot}",

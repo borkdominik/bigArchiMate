@@ -93,11 +93,11 @@ To package the web application we build a docker image. There are currently two 
 
 To create the Alpine based image, execute the following command:
 
-    docker build -t crossmodel:0.0.0-alpine -f .\Dockerfile .
+    docker build -t big-archimate:0.0.0-alpine -f .\Dockerfile .
 
 To create the Debian based image, execute the following command:
 
-    docker build -t crossmodel:0.0.0-debian -f .\Dockerfile.debian .
+    docker build -t big-archimate:0.0.0-debian -f .\Dockerfile.debian .
 
 In the main build action we build and publish the Alpine version.
 
@@ -143,6 +143,6 @@ The repository itself contains the following components structured as follows:
 
 -  mui-x : MUI X is open core—base components are MIT-licensed, while more advanced features require a Pro or Premium commercial license. We are currently only using core-base
 -  react-tabs: MIT
--  chevrotain: This library is a dependency of langium. To get the Yaml language working in crossmodel an example implementation of the python language of chevrotain has been used. This example has been modified to make it work for the yaml language.
+-  chevrotain: This library is a dependency of langium. To get the Yaml language working in bigArchiMate an example implementation of the python language of chevrotain has been used. This example has been modified to make it work for the yaml language.
    -  <https://github.com/Chevrotain/chevrotain>
    -  example that has been used: <https://github.com/Chevrotain/chevrotain/tree/master/examples/lexer/python_indentation>

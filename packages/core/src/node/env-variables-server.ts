@@ -8,7 +8,7 @@ import * as path from 'path';
 export class EnvVariablesServer extends EnvVariablesServerImpl {
    // do not use the default configuration directory of Theia (<home>/.theia) but instead use our own
    // to avoid any conflicts and allow for easier customizations
-   protected readonly _configDirUri: string = FileUri.create(path.join(homedir(), '.crossmodel')).toString(true);
+   protected readonly _configDirUri: string = FileUri.create(path.join(homedir(), '.big-archimate')).toString(true);
 
    override async getConfigDirUri(): Promise<string> {
       return this._configDirUri;

@@ -56,7 +56,7 @@ export function isUnknownPackage(packageId: string): boolean {
 }
 
 /**
- * Information derived from the package.json containing all data necessary within the crossmodel system.
+ * Information derived from the package.json containing all data necessary within the ArchiMate model.
  */
 export class PackageInfo {
    constructor(
