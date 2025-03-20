@@ -13,7 +13,7 @@
     "url": "git+https://github.com/borkdominik/bigArchiMate"
   },
   "license": "AGPL-3.0-or-later",
-  "publisher": "CrossBreeze",
+  "publisher": "Vienna University of Technology",
   "type": "module",
   "main": "./out/extension.cjs",
   "bin": {

@@ -127,7 +127,7 @@ export class CompositeEditor extends BaseWidget implements SaveableSource, Navig
    @postConstruct()
    protected init(): void {
       this.id = this.options.widgetId;
-      this.addClass('cm-composite-editor');
+      this.addClass('composite-editor');
       this.title.closable = true;
       this.title.label = this.labelProvider.getName(this.resourceUri);
       this.title.iconClass = ModelFileType.getIconClass(this.fileType) ?? '';

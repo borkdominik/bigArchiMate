@@ -23,7 +23,7 @@ export class CompositeEditorOpenHandler
    extends NavigatableWidgetOpenHandler<CompositeEditor>
    implements OpenWithHandler, FrontendApplicationContribution
 {
-   static readonly ID = 'cm-composite-editor-handler';
+   static readonly ID = 'composite-editor-handler';
    static readonly PRIORITY = 2000;
 
    @inject(OpenWithService)

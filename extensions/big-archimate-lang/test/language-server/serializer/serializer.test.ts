@@ -28,125 +28,125 @@ describe('Lexer', () => {
    });
 
    describe('Serialize entity', () => {
-      let crossModelRoot: ArchiMateRoot;
-      let crossModelRootWithoutAttributes: ArchiMateRoot;
-      let crossModelRootWithAttributesDifPlace: ArchiMateRoot;
+      let archiMateRoot: ArchiMateRoot;
+      let archiMateRootWithoutAttributes: ArchiMateRoot;
+      let archiMateRootWithAttributesDifPlace: ArchiMateRoot;
 
       beforeAll(() => {
-         crossModelRoot = { $type: 'ArchiMateRoot' };
-         crossModelRoot.entity = createEntity(crossModelRoot, 'testId', 'test Name', {
+         archiMateRoot = { $type: 'ArchiMateRoot' };
+         archiMateRoot.entity = createEntity(archiMateRoot, 'testId', 'test Name', {
             description: 'Test description'
          });
 
-         crossModelRootWithoutAttributes = _.cloneDeep(crossModelRoot);
+         archiMateRootWithoutAttributes = _.cloneDeep(archiMateRoot);
 
-         crossModelRoot.entity.attributes = [
-            createEntityAttribute(crossModelRoot.entity, 'Attribute1', 'Attribute 1'),
-            createEntityAttribute(crossModelRoot.entity, 'Attribute2', 'Attribute 2')
+         archiMateRoot.entity.attributes = [
+            createEntityAttribute(archiMateRoot.entity, 'Attribute1', 'Attribute 1'),
+            createEntityAttribute(archiMateRoot.entity, 'Attribute2', 'Attribute 2')
          ];
 
-         crossModelRootWithAttributesDifPlace = { $type: 'ArchiMateRoot' };
-         crossModelRootWithAttributesDifPlace.entity = createEntity(crossModelRoot, 'testId', 'test Name', {
+         archiMateRootWithAttributesDifPlace = { $type: 'ArchiMateRoot' };
+         archiMateRootWithAttributesDifPlace.entity = createEntity(archiMateRoot, 'testId', 'test Name', {
             description: 'Test description'
          });
-         crossModelRootWithAttributesDifPlace.entity.attributes = [
-            createEntityAttribute(crossModelRoot.entity, 'Attribute1', 'Attribute 1'),
-            createEntityAttribute(crossModelRoot.entity, 'Attribute2', 'Attribute 2')
+         archiMateRootWithAttributesDifPlace.entity.attributes = [
+            createEntityAttribute(archiMateRoot.entity, 'Attribute1', 'Attribute 1'),
+            createEntityAttribute(archiMateRoot.entity, 'Attribute2', 'Attribute 2')
          ];
       });
 
       test('serialize entity with attributes', () => {
-         const parseResult = serializer.serialize(crossModelRoot);
+         const parseResult = serializer.serialize(archiMateRoot);
          expect(parseResult).toBe(expected_result);
       });
 
       test('serialize entity without attributes', () => {
-         const parseResult = serializer.serialize(crossModelRootWithoutAttributes);
+         const parseResult = serializer.serialize(archiMateRootWithoutAttributes);
          expect(parseResult).toBe(expected_result2);
       });
 
       test('serialize entity with attributes in different place', () => {
-         const parseResult = serializer.serialize(crossModelRootWithAttributesDifPlace);
+         const parseResult = serializer.serialize(archiMateRootWithAttributesDifPlace);
          expect(parseResult).toBe(expected_result3);
       });
    });
 
    describe('Serialize relationship', () => {
-      let crossModelRoot: ArchiMateRoot;
+      let archiMateRoot: ArchiMateRoot;
 
       beforeAll(() => {
-         crossModelRoot = {
+         archiMateRoot = {
             $type: 'ArchiMateRoot'
          };
 
          const ref1: Reference<Entity> = {
             $refText: 'Ref1',
-            ref: createEntity(crossModelRoot, 'Ref1', 'test Name', {
+            ref: createEntity(archiMateRoot, 'Ref1', 'test Name', {
                description: 'Test description'
             })
          };
 
          const ref2: Reference<Entity> = {
             $refText: 'Ref2',
-            ref: createEntity(crossModelRoot, 'Ref2', 'test Name', {
+            ref: createEntity(archiMateRoot, 'Ref2', 'test Name', {
                description: 'Test description'
             })
          };
 
-         crossModelRoot.relationship = createRelationship(crossModelRoot, 'testId', 'test Name', ref1, ref2, {
+         archiMateRoot.relationship = createRelationship(archiMateRoot, 'testId', 'test Name', ref1, ref2, {
             description: 'Test description'
          });
       });
 
       test('serialize entity with attributes', () => {
-         const parseResult = serializer.serialize(crossModelRoot);
+         const parseResult = serializer.serialize(archiMateRoot);
          expect(parseResult).toBe(expected_result4);
       });
    });
 
    describe('Serialize diagram', () => {
-      let crossModelRoot: ArchiMateRoot;
+      let archiMateRoot: ArchiMateRoot;
 
       beforeAll(() => {
-         crossModelRoot = {
+         archiMateRoot = {
             $type: 'ArchiMateRoot'
          };
 
          const ref1: Reference<Entity> = {
             $refText: 'Ref1',
-            ref: createEntity(crossModelRoot, 'Ref1', 'test Name', {
+            ref: createEntity(archiMateRoot, 'Ref1', 'test Name', {
                description: 'Test description'
             })
          };
 
          const ref2: Reference<Entity> = {
             $refText: 'Ref2',
-            ref: createEntity(crossModelRoot, 'Ref2', 'test Name', {
+            ref: createEntity(archiMateRoot, 'Ref2', 'test Name', {
                description: 'Test description'
             })
          };
 
          const ref3: Reference<Relationship> = {
             $refText: 'Ref3',
-            ref: createRelationship(crossModelRoot, 'testId', 'test Name', ref1, ref2, {
+            ref: createRelationship(archiMateRoot, 'testId', 'test Name', ref1, ref2, {
                description: 'Test description'
             })
          };
 
-         crossModelRoot.systemDiagram = createSystemDiagram(crossModelRoot, 'testId');
+         archiMateRoot.systemDiagram = createSystemDiagram(archiMateRoot, 'testId');
 
-         crossModelRoot.systemDiagram.nodes = [
-            createEntityNode(crossModelRoot.systemDiagram, 'Node1', ref1, { x: 100, y: 101 }, { width: 102, height: 102 }),
-            createEntityNode(crossModelRoot.systemDiagram, 'Node2', ref2, { x: 100, y: 101 }, { width: 102, height: 102 })
+         archiMateRoot.systemDiagram.nodes = [
+            createEntityNode(archiMateRoot.systemDiagram, 'Node1', ref1, { x: 100, y: 101 }, { width: 102, height: 102 }),
+            createEntityNode(archiMateRoot.systemDiagram, 'Node2', ref2, { x: 100, y: 101 }, { width: 102, height: 102 })
          ];
 
-         crossModelRoot.systemDiagram.edges = [
-            createRelationshipEdge(crossModelRoot.systemDiagram, 'Edge1', ref3, { $refText: 'A' }, { $refText: 'B' })
+         archiMateRoot.systemDiagram.edges = [
+            createRelationshipEdge(archiMateRoot.systemDiagram, 'Edge1', ref3, { $refText: 'A' }, { $refText: 'B' })
          ];
       });
 
       test('serialize entity with attributes', () => {
-         const parseResult = serializer.serialize(crossModelRoot);
+         const parseResult = serializer.serialize(archiMateRoot);
          expect(parseResult).toBe(expected_result5);
       });
    });

@@ -25,12 +25,12 @@ export class CompositeEditor extends TheiaEditor {
       super(
          {
             tabSelector: normalizeId(
-               `#shell-tab-cm-composite-editor-handler:file://${urlEncodePath(
+               `#shell-tab-composite-editor-handler:file://${urlEncodePath(
                   join(app.workspace.escapedPath, OSUtil.fileSeparator, filePath)
                )}`
             ),
             viewSelector: normalizeId(
-               `#cm-composite-editor-handler:file://${urlEncodePath(join(app.workspace.escapedPath, OSUtil.fileSeparator, filePath))}`
+               `#composite-editor-handler:file://${urlEncodePath(join(app.workspace.escapedPath, OSUtil.fileSeparator, filePath))}`
             )
          },
          app
