@@ -31,7 +31,7 @@ RUN yarn --pure-lockfile --skip-integrity-check --network-timeout 100000 && \
     yarn build:extensions && \
     yarn package:extensions && \
     yarn theia:browser build && \
-    unzip extensions/crossmodel-lang/*.vsix -d applications/browser-app/plugins/crossmodel-lang && \
+    unzip extensions/big-archimate-lang/*.vsix -d applications/browser-app/plugins/big-archimate-lang && \
     unzip extensions/big-archimate-theme/*.vsix -d applications/browser-app/plugins/big-archimate-theme && \
     yarn autoclean --init && \
     echo *.ts >> .yarnclean && \

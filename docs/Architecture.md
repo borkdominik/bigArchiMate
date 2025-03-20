@@ -14,7 +14,7 @@ When the application is started, our bigArchiMate VS Code extension will start t
 During initialization of the language server, the whole workspace is scanned and the documents as well an index of node descriptions for linking, and a package system for project-like semantics, is created.
 If the user makes any changes using the [Monaco editor](https://microsoft.github.io/monaco-editor/) in the Theia frontend, the document store will get updated accordingly.
 
-The code responsible for this functionality can be found in [`extension.ts`](../extensions/crossmodel-lang/src/extension.ts) for the language client and starting the server process, [`main.ts`](../extensions/crossmodel-lang/src/main.ts) for the actual server process and the [`language-server`](../extensions/crossmodel-lang/src/language-server/) directory for the overall language server implementation.
+The code responsible for this functionality can be found in [`extension.ts`](../extensions/big-archimate-lang/src/extension.ts) for the language client and starting the server process, [`main.ts`](../extensions/big-archimate-lang/src/main.ts) for the actual server process and the [`language-server`](../extensions/big-archimate-lang/src/language-server/) directory for the overall language server implementation.
 
 ### Package Manager
 
@@ -24,7 +24,7 @@ For this reason, we are defining that any directory with a [`package.json`](http
 By re-using the `package.json` format from npm, we also gain automatic support for publishing systems and libraries on an npm registry that can be automatically downloaded through the npm CLI.
 The task of the package manager is to introduce that mechanism in the language server.
 
-The code responsible for this functionality can be found in [`package-manager.ts`](../extensions/crossmodel-lang/src/language-server/package-manager.ts).
+The code responsible for this functionality can be found in [`package-manager.ts`](../extensions/big-archimate-lang/src/language-server/package-manager.ts).
 
 ### Model Service Facade
 
@@ -32,7 +32,7 @@ The language server is implemented with the language server protocol in mind, ha
 The resulting encapsulation makes it difficult for non-LSP clients to access the documents and the semantic models behind them.
 We therefore explicitly create a Model Service Facade that exposes a simple open-request-update-save/close lifecycle for documents and their semantic model for non-LSP clients but internally ensures that all necessary LSP events are triggered.
 
-The code responsible for this functionality can be found in [`model-service.ts`](../extensions/crossmodel-lang/src/model-server/model-service.ts).
+The code responsible for this functionality can be found in [`model-service.ts`](../extensions/big-archimate-lang/src/model-server/model-service.ts).
 
 ## Graphical Modeling with GLSP
 
@@ -40,7 +40,7 @@ The support for graphical modeling is provided through a graphical language serv
 
 When the user opens a diagram in the frontend, the GLSP client communicates through a contribution in the backend with the GLSP server to [load](https://www.eclipse.org/glsp/documentation/sourcemodel/) the [GModel](https://www.eclipse.org/glsp/documentation/gmodel/) and render it in the widget. On the server, we load the document from the language service and translate the semantic model into the GModel. Any operations that the user performs based on the GModel in the frontend are translated back to changes in the semantic model and the GModel is re-generated. If the user changes the model, the document in the document store is updated with the current version of the semantic model and any listeners for that document are notified.
 
-The code responsible for this functionality can be found in the [`glsp-server`](../extensions/crossmodel-lang/src/glsp-server/) directory and the [`glsp-client`](../packages/glsp-client) package.
+The code responsible for this functionality can be found in the [`glsp-server`](../extensions/big-archimate-lang/src/glsp-server/) directory and the [`glsp-client`](../packages/glsp-client) package.
 
 ## Form-Based Modeling
 
@@ -48,7 +48,7 @@ The support for form-based modeling is provided through a custom solution: The g
 
 When the user opens a file with the form-based editor, the custom widget retrieves the semantic model for an opened URI and renders the data down in an HTML form. Any updates to the semantic model in the widget trigger a full update on the server. If the user hits the Save button, the document in the document store is updated with the current version of the semantic model and any listeners for that document are notified.
 
-The code responsible for this functionality can be found in the [`model-server`](../extensions/crossmodel-lang/src/model-server/) directory and the [`form-client`](../packages/form-client) package.
+The code responsible for this functionality can be found in the [`model-server`](../extensions/big-archimate-lang/src/model-server/) directory and the [`form-client`](../packages/form-client) package.
 
 ## Syncing Modeling Perspectives
 

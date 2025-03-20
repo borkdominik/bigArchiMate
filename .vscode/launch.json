@@ -92,7 +92,7 @@
         "NODE_ENV": "development"
       },
       "stopOnEntry": true,
-      "args": ["--extensionDevelopmentPath=${workspaceFolder}/extensions/crossmodel-lang"]
+      "args": ["--extensionDevelopmentPath=${workspaceFolder}/extensions/big-archimate-lang"]
     },
     {
       "name": "Attach to Language Server in VS Code",
@@ -105,7 +105,7 @@
       "skipFiles": ["<node_internals>/**"],
       "sourceMaps": true,
       "outFiles": [
-        "${workspaceFolder}/extensions/crossmodel-lang/out/**/*.js",
+        "${workspaceFolder}/extensions/big-archimate-lang/out/**/*.js",
         "${workspaceFolder}/node_modules/langium/**/*.js",
         "${workspaceFolder}/node_modules/vscode-languageclient/**/*.js",
         "${workspaceFolder}/node_modules/vscode-jsonrpc/**/*.js"

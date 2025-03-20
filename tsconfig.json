@@ -7,7 +7,7 @@
   },
   "references": [
     {
-      "path": "extensions/crossmodel-lang"
+      "path": "extensions/big-archimate-lang"
     },
     {
       "path": "packages/core"

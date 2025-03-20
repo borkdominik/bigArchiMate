@@ -126,7 +126,7 @@ The repository itself contains the following components structured as follows:
     │   ├── registry                 # Local npm registry using Verdaccio
     │   └── workspace                # Workspace that can be opened in the tool
     ├── extensions                   # VS Code extensions
-    │   └── crossmodel-lang          # bigArchiMate language support (through three servers)
+    │   └── big-archimate-lang          # bigArchiMate language support (through three servers)
     │       └── src
     │           ├── glsp-server      # Graphical modelling server based on GLSP
     │           ├── language-server  # Textual modelling server based on Langium
