@@ -198,7 +198,7 @@
       "name": "Debug bigArchiMate Theme",
       "type": "extensionHost",
       "request": "launch",
-      "args": ["--extensionDevelopmentPath=${workspaceFolder}/extensions/crossmodel-theme"]
+      "args": ["--extensionDevelopmentPath=${workspaceFolder}/extensions/big-archimate-theme"]
     }
   ],
   "compounds": [
