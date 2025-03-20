@@ -12,8 +12,6 @@ export interface PropertiesRenderData {
    renderProps?: Partial<RenderProps>;
 }
 
-// test;
-
 @injectable()
 export class ModelDataService implements PropertyDataService {
    id = 'model-property-data-service';
