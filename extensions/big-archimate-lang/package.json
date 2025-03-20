@@ -17,7 +17,7 @@
   "type": "module",
   "main": "./out/extension.cjs",
   "bin": {
-    "cross-model-cli": "./bin/cli"
+    "big-archimate-cli": "./bin/cli"
   },
   "scripts": {
     "build": "yarn langium:generate && yarn build:esbuild",
@@ -46,7 +46,7 @@
       "type": "object",
       "title": "bigArchiMate configuration",
       "properties": {
-        "cross-model.trace.server": {
+        "big-archimate.trace.server": {
           "scope": "window",
           "type": "string",
           "enum": [

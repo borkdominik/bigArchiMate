@@ -66,7 +66,7 @@ function createClientOptions(context: vscode.ExtensionContext): LanguageClientOp
    // Options to control the language client
    return {
       documentSelector: [
-         { scheme: 'file', language: 'cross-model' },
+         { scheme: 'file', language: 'archimate' },
          { scheme: 'file', pattern: '**/package.json' }
       ],
       synchronize: {
