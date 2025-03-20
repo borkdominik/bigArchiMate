@@ -1,5 +1,5 @@
 {
-  "name": "crossmodel-app",
+  "name": "big-archimate-app",
   "version": "0.0.0",
   "private": true,
   "description": "bigArchiMate",
@@ -62,8 +62,8 @@
       "config": {
         "applicationName": "bigArchiMate",
         "defaultTheme": {
-          "light": "crossmodel-light",
-          "dark": "crossmodel-dark"
+          "light": "big-archimate-light",
+          "dark": "big-archimate-dark"
         },
         "reloadOnReconnect": true,
         "preferences": {
