@@ -1,6 +1,6 @@
 import { ModelService } from '@big-archimate/model-service/lib/common';
 import { ModelFileExtensions, ModelStructure, quote, toId } from '@big-archimate/protocol';
-import { Command, CommandContribution, CommandRegistry, MaybePromise, MenuContribution, MenuModelRegistry, URI, nls } from '@theia/core';
+import { Command, CommandContribution, CommandRegistry, MaybePromise, MenuContribution, MenuModelRegistry, nls, URI } from '@theia/core';
 import { CommonMenus, DialogError, open } from '@theia/core/lib/browser';
 import { TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
 import { inject, injectable } from '@theia/core/shared/inversify';
@@ -18,40 +18,13 @@ interface NewElementTemplate extends Command {
    content: string | ((name: string) => string);
 }
 
-const INITIAL_ELEMENT_CONTENT = `element:
-   id: \${id}
-   name: \${name}
-   type: `;
-
-const INITIAL_RELATION_CONTENT = `relation:
-    id: \${id}
-    type: 
-    source: 
-    target: `;
-
 const INITIAL_ARCHIMATE_DIAGRAM_CONTENT = `archiMateDiagram:
    id: \${id}
    name: \${name}`;
 
-const TEMPLATE_CATEGORY = 'New Element';
+const TEMPLATE_CATEGORY = 'New';
 
-const NEW_ELEMENT_TEMPLATES: NewElementTemplate[] = [
-   {
-      id: 'new.element',
-      label: 'Element',
-      fileExtension: ModelFileExtensions.Element,
-      category: TEMPLATE_CATEGORY,
-      iconClass: ModelStructure.Element.ICON_CLASS,
-      content: name => INITIAL_ELEMENT_CONTENT.replace(/\$\{name\}/gi, quote(name)).replace(/\$\{id\}/gi, toId(name))
-   },
-   {
-      id: 'new.relation',
-      label: 'Relation',
-      fileExtension: ModelFileExtensions.Relation,
-      category: TEMPLATE_CATEGORY,
-      iconClass: ModelStructure.Relation.ICON_CLASS,
-      content: name => INITIAL_RELATION_CONTENT.replace(/\$\{name\}/gi, quote(name)).replace(/\$\{id\}/gi, toId(name))
-   },
+const NEW_FILE_TEMPLATES: NewElementTemplate[] = [
    {
       id: 'new.archimate-diagram',
       label: 'ArchiMateDiagram',
@@ -70,10 +43,10 @@ export class CustomWorkspaceCommandContribution extends WorkspaceCommandContribu
 
    override registerCommands(commands: CommandRegistry): void {
       super.registerCommands(commands);
-      for (const template of NEW_ELEMENT_TEMPLATES) {
+      for (const template of NEW_FILE_TEMPLATES) {
          commands.registerCommand(
             { ...template, label: template.label + '...' },
-            this.newWorkspaceRootUriAwareCommandHandler({ execute: uri => this.createNewElementFile(uri, template) })
+            this.newWorkspaceRootUriAwareCommandHandler({ execute: uri => this.createNewFile(uri, template) })
          );
       }
    }
@@ -81,7 +54,7 @@ export class CustomWorkspaceCommandContribution extends WorkspaceCommandContribu
    registerMenus(registry: MenuModelRegistry): void {
       // explorer context menu
       registry.registerSubmenu(NEW_ELEMENT_NAV_MENU, TEMPLATE_CATEGORY);
-      for (const [id, template] of NEW_ELEMENT_TEMPLATES.entries()) {
+      for (const [id, template] of NEW_FILE_TEMPLATES.entries()) {
          registry.registerMenuAction(NEW_ELEMENT_NAV_MENU, {
             commandId: template.id,
             label: template.label + '...',
@@ -91,7 +64,7 @@ export class CustomWorkspaceCommandContribution extends WorkspaceCommandContribu
 
       // main menu bar
       registry.registerSubmenu(NEW_ELEMENT_MAIN_MENU, TEMPLATE_CATEGORY);
-      for (const [id, template] of NEW_ELEMENT_TEMPLATES.entries()) {
+      for (const [id, template] of NEW_FILE_TEMPLATES.entries()) {
          registry.registerMenuAction(NEW_ELEMENT_MAIN_MENU, {
             commandId: template.id,
             label: template.label + '...',
@@ -100,7 +73,7 @@ export class CustomWorkspaceCommandContribution extends WorkspaceCommandContribu
       }
    }
 
-   protected async createNewElementFile(uri: URI, template: NewElementTemplate): Promise<void> {
+   protected async createNewFile(uri: URI, template: NewElementTemplate): Promise<void> {
       const parent = await this.getDirectory(uri);
       if (parent) {
          const parentUri = parent.resource;
@@ -110,7 +83,7 @@ export class CustomWorkspaceCommandContribution extends WorkspaceCommandContribu
                parentUri: parentUri,
                initialValue: 'New' + template.label,
                placeholder: 'New ' + template.label,
-               validate: newName => this.validateElementFileName(newName, parent, template.fileExtension)
+               validate: newName => this.customValidateFileName(newName, parent, template.fileExtension)
             },
             this.labelProvider
          );
@@ -128,7 +101,7 @@ export class CustomWorkspaceCommandContribution extends WorkspaceCommandContribu
       }
    }
 
-   protected validateElementFileName(name: string, parent: FileStat, fileExtension: string): MaybePromise<DialogError> {
+   protected customValidateFileName(name: string, parent: FileStat, fileExtension: string): MaybePromise<DialogError> {
       // default behavior for empty strings is like cancel
       if (!name) {
          return '';
@@ -155,7 +128,7 @@ export class CustomFileNavigatorContribution extends FileNavigatorContribution {
    override registerCommands(registry: CommandRegistry): void {
       super.registerCommands(registry);
 
-      for (const template of NEW_ELEMENT_TEMPLATES) {
+      for (const template of NEW_FILE_TEMPLATES) {
          registry.registerCommand(
             { ...template, label: undefined, id: template.id + '.toolbar' },
             {
@@ -170,7 +143,7 @@ export class CustomFileNavigatorContribution extends FileNavigatorContribution {
    override async registerToolbarItems(toolbarRegistry: TabBarToolbarRegistry): Promise<void> {
       super.registerToolbarItems(toolbarRegistry);
 
-      for (const [id, template] of NEW_ELEMENT_TEMPLATES.entries()) {
+      for (const [id, template] of NEW_FILE_TEMPLATES.entries()) {
          toolbarRegistry.registerItem({
             id: template.id + '.toolbar',
             command: template.id + '.toolbar',

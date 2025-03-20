@@ -113,7 +113,7 @@ export class CompositeEditor extends BaseWidget implements SaveableSource, Navig
       return this.options.uri;
    }
 
-   get fileType(): Exclude<ModelFileType, 'Generic'> {
+   get fileType(): ModelFileType {
       return this.options.fileType;
    }
 

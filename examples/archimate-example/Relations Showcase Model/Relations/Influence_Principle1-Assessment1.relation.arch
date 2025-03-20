@@ -1,5 +1,5 @@
 relation:
-    id: Principle1ToAssessment1
+    id: Influence_Principle1-Assessment1
     type: Influence
     source: Principle1
     target: Assessment1

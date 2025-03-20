@@ -16,16 +16,10 @@ archiMateDiagram:
         height: 50
       - id: JunctionNode
         junction: Junction
-        x: -121
-        y: -495
+        x: -187
+        y: -451
         width: 25
         height: 25
-      - id: BusinessRole1Node
-        element: BaseModel.BusinessRole1
-        x: -638
-        y: -429
-        width: 200
-        height: 50
       - id: LocationNode
         element: Location
         x: -615
@@ -33,7 +27,15 @@ archiMateDiagram:
         width: 200
         height: 50
     edges:
-      - id: JunctionToBusinessRole1Edge
-        relation: BaseModel.JunctionToBusinessRole1
+      - id: Association_BusinessRole1-ApplicationCollaboration6Edge
+        relation: BaseModel.Association_BusinessRole1-ApplicationCollaboration6
+        sourceNode: BusinessRoleNode
+        targetNode: ApplicationCollaborationNode
+      - id: Association_BusinessRole1-ApplicationCollaboration61Edge
+        relation: BaseModel.Association_BusinessRole1-ApplicationCollaboration61
+        sourceNode: BusinessRoleNode
+        targetNode: ApplicationCollaborationNode
+      - id: Association_Junction-BusinessRole1Edge
+        relation: BaseModel.Association_Junction-BusinessRole1
         sourceNode: JunctionNode
         targetNode: BusinessRoleNode

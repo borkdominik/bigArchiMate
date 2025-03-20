@@ -1,4 +1,4 @@
-import { getLabel, ModelStructure } from '@big-archimate/protocol';
+import { codiconCSSString, getIcon, getLabel } from '@big-archimate/protocol';
 import { TextField } from '@mui/material';
 import * as React from 'react';
 import { useJunction, useModelDispatch, useReadonly } from '../../ModelContext';
@@ -17,7 +17,7 @@ export function JunctionForm(): React.ReactElement {
       <Form
          id={junction.id}
          name={junction.name ? `${junction.name} (${getLabel(junction.$type)})` : getLabel(junction.$type)}
-         iconClass={ModelStructure.Junction.ICON_CLASS}
+         iconClass={codiconCSSString(getIcon('Junction'))}
       >
          <FormSection label='General'>
             <TextField

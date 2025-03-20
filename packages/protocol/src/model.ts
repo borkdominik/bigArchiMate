@@ -1,7 +1,8 @@
+import { codiconCSSString } from './util';
+
 const ModelFileTypeValues = {
-   Generic: 'Generic',
    Element: 'Element',
-   Junctin: 'Junction',
+   Junction: 'Junction',
    Relation: 'Relation',
    ArchiMateDiagram: 'ArchiMateDiagram'
 } as const;
@@ -10,12 +11,6 @@ export const ModelFileType = {
    ...ModelFileTypeValues,
    getIconClass: (type: ModelFileType) => {
       switch (type) {
-         case 'Element':
-            return ModelStructure.Element.ICON_CLASS;
-         case 'Junction':
-            return ModelStructure.Junction.ICON_CLASS;
-         case 'Relation':
-            return ModelStructure.Relation.ICON_CLASS;
          case 'ArchiMateDiagram':
             return ModelStructure.ArchiMateDiagram.ICON_CLASS;
          default:
@@ -24,8 +19,6 @@ export const ModelFileType = {
    },
    getFileExtension(type: ModelFileType): string | undefined {
       switch (type) {
-         case 'Generic':
-            return ModelFileExtensions.Generic;
          case 'Element':
             return ModelFileExtensions.Element;
          case 'Junction':
@@ -40,15 +33,10 @@ export const ModelFileType = {
 export type ModelFileType = (typeof ModelFileTypeValues)[keyof typeof ModelFileTypeValues];
 
 export const ModelFileExtensions = {
-   Generic: '.arch',
    Element: '.element.arch',
    Junction: '.junction.arch',
    Relation: '.relation.arch',
    ArchiMateDiagram: '.view.arch',
-
-   isModelFile(uri: string): boolean {
-      return uri.endsWith(this.Generic);
-   },
 
    isElementFile(uri: string): boolean {
       return uri.endsWith(this.Element);
@@ -95,9 +83,6 @@ export const ModelFileExtensions = {
       if (this.isArchiMateDiagramFile(uri)) {
          return 'ArchiMateDiagram';
       }
-      if (this.isModelFile(uri)) {
-         return 'Generic';
-      }
       return undefined;
    },
 
@@ -112,12 +97,6 @@ export const ModelFileExtensions = {
          return undefined;
       }
       switch (fileType) {
-         case 'Element':
-            return ModelStructure.Element.ICON_CLASS;
-         case 'Junction':
-            return ModelStructure.Junction.ICON_CLASS;
-         case 'Relation':
-            return ModelStructure.Relation.ICON_CLASS;
          case 'ArchiMateDiagram':
             return ModelStructure.ArchiMateDiagram.ICON_CLASS;
          default:
@@ -149,31 +128,11 @@ export const ModelFileExtensions = {
 
 export const ModelStructure = {
    ArchiMateModel: {
-      ICON_CLASS: 'codicon codicon-globe',
-      ICON: 'globe'
-   },
-
-   Element: {
-      FOLDER: 'Elements',
-      ICON_CLASS: 'codicon codicon-git-commit',
-      ICON: 'git-commit'
-   },
-
-   Junction: {
-      FOLDER: 'Other',
-      ICON_CLASS: 'codicon codicon-git-compare',
-      ICON: 'git-compare'
-   },
-
-   Relation: {
-      FOLDER: 'Relations',
-      ICON_CLASS: 'codicon codicon-git-compare',
-      ICON: 'git-compare'
+      ICON_CLASS: codiconCSSString('list-tree')
    },
 
    ArchiMateDiagram: {
       FOLDER: 'Views',
-      ICON_CLASS: 'codicon codicon-type-hierarchy-sub',
-      ICON: 'type-hierarchy-sub'
+      ICON_CLASS: codiconCSSString('type-hierarchy-sub')
    }
 };

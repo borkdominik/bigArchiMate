@@ -15,7 +15,7 @@ import { CompositeEditor } from './composite-editor';
 export interface CompositeEditorOptions extends NavigatableWidgetOptions {
    widgetId: string;
    selection?: RecursivePartial<Range>;
-   fileType: Exclude<ModelFileType, 'Generic'>;
+   fileType: ModelFileType;
 }
 
 @injectable()
@@ -46,7 +46,7 @@ export class CompositeEditorOpenHandler
       const { kind, uri } = super.createWidgetOptions(resourceUri, options);
       const widgetId = createCompositeEditorId(uri);
       const fileType = ModelFileExtensions.getFileType(uri);
-      if (fileType === undefined || fileType === 'Generic') {
+      if (fileType === undefined) {
          throw new Error(`Cannot open a composite editor for the file type ${fileType}`);
       }
       return {
@@ -67,7 +67,7 @@ export class CompositeEditorOpenHandler
 
    canHandle(uri: URI, _options?: EditorOpenerOptions): number {
       const fileType = ModelFileExtensions.getFileType(uri.path.base);
-      return fileType !== undefined && fileType !== 'Generic' ? CompositeEditorOpenHandler.PRIORITY : -1;
+      return fileType !== undefined ? CompositeEditorOpenHandler.PRIORITY : -1;
    }
 }
 

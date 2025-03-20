@@ -135,47 +135,47 @@ archiMateDiagram:
         width: 250
         height: 50
     edges:
-      - id: ApplicationCollaboration1ToApplicationInterface1Edge
-        relation: ApplicationCollaboration1ToApplicationInterface1
+      - id: Composition_ApplicationCollaboration1-ApplicationInterface1Edge
+        relation: RelationsShowCaseModel.Composition_ApplicationCollaboration1-ApplicationInterface1
         sourceNode: ApplicationCollaboration1Node
         targetNode: ApplicationInterface1Node
-      - id: BusinessObject1ToBusinessObject2Edge
-        relation: BusinessObject1ToBusinessObject2
+      - id: Aggregation_BusinessObject1-BusinessObject2Edge
+        relation: RelationsShowCaseModel.Aggregation_BusinessObject1-BusinessObject2
         sourceNode: BusinessObjectNode
         targetNode: BusinessObjectNode1
-      - id: Path1ToBusinessService1Edge
-        relation: Path1ToBusinessService1
+      - id: Assignment_Path1-BusinessService1Edge
+        relation: RelationsShowCaseModel.Assignment_Path1-BusinessService1
         sourceNode: Path1Node
         targetNode: BusinessService1Node
-      - id: Capability1ToConstraint1Edge
-        relation: Capability1ToConstraint1
+      - id: Realization_Capability1-Constraint1Edge
+        relation: RelationsShowCaseModel.Realization_Capability1-Constraint1
         sourceNode: CapabilityNode
         targetNode: ConstraintNode
-      - id: BusinessInterface1ToDistributionNetwork1Edge
-        relation: BusinessInterface1ToDistributionNetwork1
+      - id: Serving_BusinessInterface1-DistributionNetwork1Edge
+        relation: RelationsShowCaseModel.Serving_BusinessInterface1-DistributionNetwork1
         sourceNode: BusinessInterfaceNode
         targetNode: DistributionNetworkNode
-      - id: ApplicationComponent1ToArtifact1Edge
-        relation: ApplicationComponent1ToArtifact1
+      - id: Access_ApplicationComponent1-Artifact1Edge
+        relation: RelationsShowCaseModel.Access_ApplicationComponent1-Artifact1
         sourceNode: ApplicationComponentNode
         targetNode: ArtifactNode
-      - id: Goal1ToValueStream1Edge
-        relation: Goal1ToValueStream1
+      - id: Association_Goal1-ValueStream1Edge
+        relation: RelationsShowCaseModel.Association_Goal1-ValueStream1
         sourceNode: GoalNode
         targetNode: ValueStreamNode
-      - id: Principle1ToAssessment1Edge
-        relation: Principle1ToAssessment1
+      - id: Influence_Principle1-Assessment1Edge
+        relation: RelationsShowCaseModel.Influence_Principle1-Assessment1
         sourceNode: PrincipleNode
         targetNode: AssessmentNode
-      - id: Device1ToSystemSoftware1Edge
-        relation: Device1ToSystemSoftware1
+      - id: Triggering_Device1-SystemSoftware1Edge
+        relation: RelationsShowCaseModel.Triggering_Device1-SystemSoftware1
         sourceNode: DeviceNode
         targetNode: SystemSoftwareNode
-      - id: Node1ToApplicationProcess1Edge
-        relation: Node1ToApplicationProcess1
+      - id: Flow_Node1-ApplicationProcess1Edge
+        relation: RelationsShowCaseModel.Flow_Node1-ApplicationProcess1
         sourceNode: NodeNode
         targetNode: ApplicationProcessNode
-      - id: WorkPackage1ToWorkPackage2Edge
-        relation: WorkPackage1ToWorkPackage2
+      - id: Specialization_WorkPackage1-WorkPackage2Edge
+        relation: RelationsShowCaseModel.Specialization_WorkPackage1-WorkPackage2
         sourceNode: WorkPackageNode
         targetNode: WorkPackageNode1

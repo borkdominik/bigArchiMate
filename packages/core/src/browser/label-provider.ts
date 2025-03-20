@@ -1,5 +1,5 @@
 import { ModelService } from '@big-archimate/model-service/lib/common';
-import { codiconCSSString, concepts, getIcon, ModelFileExtensions, ModelStructure } from '@big-archimate/protocol';
+import { codiconCSSString, elementTypes, getIcon, ModelFileExtensions, ModelStructure, relationTypes } from '@big-archimate/protocol';
 import { Emitter, MaybePromise } from '@theia/core';
 import { DepthFirstTreeIterator, LabelProvider, LabelProviderContribution, Tree, TreeDecorator, TreeNode } from '@theia/core/lib/browser';
 import { WidgetDecoration } from '@theia/core/lib/browser/widget-decoration';
@@ -27,7 +27,7 @@ export class CustomLabelProvider implements LabelProviderContribution, TreeDecor
    }
 
    getIcon(node: FileStatNode): string {
-      if (this.isSystemDirectory(node.parent) && node.fileStat.name === ModelStructure.Element.FOLDER) {
+      if (this.isSystemDirectory(node)) {
          return ModelStructure.ArchiMateModel.ICON_CLASS + ' default-folder-icon';
       }
 
@@ -36,12 +36,26 @@ export class CustomLabelProvider implements LabelProviderContribution, TreeDecor
             return ModelStructure.ArchiMateDiagram.ICON_CLASS + ' default-file-icon';
          }
 
-         if (ModelFileExtensions.isElementFile(node.fileStat.name) || ModelFileExtensions.isJunctionFile(node.fileStat.name)) {
-            // very simple name-based matching so we do not have to look into the file
-            const matchingType = concepts.find(elementType => node.fileStat.resource.path.name.includes(elementType));
+         // very simple name-based matching so we do not have to look into the file
+
+         if (ModelFileExtensions.isElementFile(node.fileStat.name)) {
+            const derivedElementTypeFromFileName = node.fileStat.resource.path.name.split('.')[0].replace(/\d+$/, '');
+            const matchingType = elementTypes.find(elementType => derivedElementTypeFromFileName === elementType);
             if (matchingType) {
                return codiconCSSString(getIcon(matchingType)) + ' default-file-icon';
             }
+         }
+
+         if (ModelFileExtensions.isRelationFile(node.fileStat.name)) {
+            const derivedRelationTypeFromFileName = node.fileStat.resource.path.name.split('.')[0].split('_')[0];
+            const matchingType = relationTypes.find(relationType => derivedRelationTypeFromFileName === relationType);
+            if (matchingType) {
+               return codiconCSSString(getIcon(matchingType)) + ' default-file-icon';
+            }
+         }
+
+         if (ModelFileExtensions.isJunctionFile(node.fileStat.name)) {
+            return codiconCSSString(getIcon('Junction')) + ' default-file-icon';
          }
       }
       return this.labelProvider.getIcon(node.fileStat);
@@ -64,7 +78,7 @@ export class CustomLabelProvider implements LabelProviderContribution, TreeDecor
       for (const node of new DepthFirstTreeIterator(tree.root)) {
          if (FileStatNode.is(node) && this.isSystemDirectory(node)) {
             const decorations: WidgetDecoration.Data = {
-               captionSuffixes: [{ data: this.isInArchiMateDirectory(node) ? 'ArchiMate Model' : 'System' }]
+               captionSuffixes: [{ data: 'ArchiMate Model' }]
             };
             result.set(node.id, decorations);
          }
@@ -78,22 +92,5 @@ export class CustomLabelProvider implements LabelProviderContribution, TreeDecor
          node.fileStat.isDirectory &&
          this.modelService.systems.some(system => system.directory === node.fileStat.resource.path.fsPath())
       );
-   }
-
-   protected isInArchiMateDirectory(node?: TreeNode): boolean {
-      if (node === undefined) {
-         return false;
-      }
-
-      if (
-         FileStatNode.is(node) &&
-         FileStatNode.is(node.parent) &&
-         node.parent.fileStat.isDirectory &&
-         node.parent.fileStat.name === 'archimate-example'
-      ) {
-         return true;
-      }
-
-      return this.isInArchiMateDirectory(node.parent);
    }
 }

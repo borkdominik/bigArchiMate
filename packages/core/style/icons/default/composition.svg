@@ -5,6 +5,6 @@
     />
     <path
         d="M 0.5 16 L 0.5 10 L 6 10 L 6 15.5 L 0.5 15.5"
-        style="fill:none;stroke:#0d0d0d;stroke-width:1"
+        style="fill:#0d0d0d;stroke:#0d0d0d;stroke-width:1"
     />
 </svg>

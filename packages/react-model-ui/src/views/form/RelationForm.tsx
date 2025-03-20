@@ -1,4 +1,4 @@
-import { getLabel, ModelStructure } from '@big-archimate/protocol';
+import { codiconCSSString, getIcon, getLabel } from '@big-archimate/protocol';
 import { Box, TextField } from '@mui/material';
 import * as React from 'react';
 import { useModelDispatch, useReadonly, useRelation } from '../../ModelContext';
@@ -21,7 +21,7 @@ export function RelationForm(): React.ReactElement {
                ? `${relation.name} (${getLabel(relation.type)} relation) (${relation.source} - ${relation.target})`
                : `${getLabel(relation.type)} relation (${relation.source} - ${relation.target})`
          }
-         iconClass={ModelStructure.Relation.ICON_CLASS}
+         iconClass={codiconCSSString(getIcon(relation.type))}
       >
          <FormSection label='Info'>
             <TextField sx={{ width: '25%' }} label='Type' margin='normal' variant='outlined' disabled value={relation.type ?? ''} />

@@ -76,14 +76,15 @@ export class CreateRelationOperationHandler extends JsonCreateEdgeOperationHandl
       const targetConcept = targetNode.$type === 'ElementNode' ? targetNode.element : targetNode.junction;
       const source = sourceConcept.ref?.id || sourceConcept.$refText;
       const target = targetConcept.ref?.id || targetConcept.$refText;
+      const relationType = ARCHIMATE_RELATION_TYPE_MAP.getReverse(operation.elementTypeId);
 
       // create relation, serialize and re-read to ensure everything is up to date and linked properly
       const relationRoot: ArchiMateRoot = { $type: 'ArchiMateRoot' };
       const relation: Relation = {
          $type: Relation,
          $container: relationRoot,
-         id: this.modelState.idProvider.findNextId(Relation, source + 'To' + target),
-         type: ARCHIMATE_RELATION_TYPE_MAP.getReverse(operation.elementTypeId),
+         id: this.modelState.idProvider.findNextId(Relation, `${relationType}_${source}-${target}`),
+         type: relationType,
          source: { $refText: sourceConcept.$refText || '' },
          target: { $refText: targetConcept.$refText || '' },
          properties: []

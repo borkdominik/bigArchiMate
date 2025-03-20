@@ -9,7 +9,7 @@ import '../../style/icons.css';
 import '../../style/index.css';
 import { createFileNavigatorWidget } from './file-navigator-tree-widget';
 import { CustomLabelProvider } from './label-provider';
-import { CustomFileNavigatorContribution, CustomWorkspaceCommandContribution } from './new-element-contribution';
+import { CustomFileNavigatorContribution, CustomWorkspaceCommandContribution } from './new-file-contribution';
 import { createCustomSaveFileDialogContainer } from './save-file-dialog';
 
 export default new ContainerModule((bind, _unbind, _isBound, rebind) => {

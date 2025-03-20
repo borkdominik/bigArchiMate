@@ -1,5 +1,5 @@
 relation:
-    id: WorkPackage1ToWorkPackage2
+    id: Specialization_WorkPackage1-WorkPackage2
     type: Specialization
     source: WorkPackage1
     target: WorkPackage2
