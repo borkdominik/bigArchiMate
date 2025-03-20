@@ -5,13 +5,16 @@ import {
    ArchiMateDiagram,
    ArchiMateRoot,
    Element,
+   ElementNode,
    isElement,
    isJunction,
-   isProperty,
    isRelation,
    Junction,
+   JunctionNode,
    reflection,
-   Relation
+   Relation,
+   RelationEdge,
+   RelationRoutingPoint
 } from './generated/ast.js';
 import { isImplicitProperty } from './util/ast-util.js';
 
@@ -23,8 +26,12 @@ import { isImplicitProperty } from './util/ast-util.js';
 const PROPERTY_ORDER = new Map<string, string[]>([
    [Element, ['id', 'name', 'documentation', 'type', 'properties']],
    [Junction, ['id', 'name', 'documentation', 'properties']],
-   [Relation, ['id', 'name', 'documentation', 'type', 'source', 'target', 'properties']],
-   [ArchiMateDiagram, ['id', 'name', 'nodes', 'edges', 'properties']]
+   [Relation, ['id', 'name', 'documentation', 'source', 'target', 'properties']],
+   [ArchiMateDiagram, ['id', 'name', 'nodes', 'edges', 'properties']],
+   [ElementNode, ['id', 'element', 'x', 'y', 'width', 'height']],
+   [JunctionNode, ['id', 'junction', 'x', 'y', 'width', 'height']],
+   [RelationEdge, ['id', 'relation', 'sourceNode', 'targetNode', 'routingPoints']],
+   [RelationRoutingPoint, ['x', 'y']]
 ]);
 
 /**
@@ -62,7 +69,6 @@ export class Serializer implements ModelSerializer<ArchiMateRoot> {
       }
       if (
          key === 'id' ||
-         propertyOf(parent, key, isProperty, 'name') ||
          (!Array.isArray(value) && this.isValidReference(parent, key, value)) ||
          (isElement(parent) && key === 'type') ||
          (isRelation(parent) && key === 'type') ||
@@ -91,7 +97,7 @@ export class Serializer implements ModelSerializer<ArchiMateRoot> {
                   return undefined;
                }
                const separator = onNewLine ? Serializer.CHAR_NEWLINE : ' ';
-               const serializedProp = `${this.toKeyword(prop)}:${separator}${serializedPropValue}`;
+               const serializedProp = `${prop}:${separator}${serializedPropValue}`;
                const serialized = isFirstNested ? this.indent(serializedProp, indentationLevel) : serializedProp;
                isFirstNested = false;
                return serialized;
@@ -109,13 +115,6 @@ export class Serializer implements ModelSerializer<ArchiMateRoot> {
             .join(Serializer.CHAR_NEWLINE);
       }
       return JSON.stringify(value);
-   }
-
-   protected toKeyword(prop: string): string {
-      if (prop === 'superEntities') {
-         return 'inherits';
-      }
-      return prop;
    }
 
    protected indent(text: string, level: number): string {
@@ -160,14 +159,4 @@ export class Serializer implements ModelSerializer<ArchiMateRoot> {
              ? allProperties.filter(prop => prop.optional).map(prop => prop.name)
              : allProperties.filter(prop => !prop.optional).map(prop => prop.name);
    }
-}
-
-function propertyOf<T extends AstNode, K extends keyof T>(
-   obj: unknown,
-   key: string,
-   guard: (type: unknown) => type is T,
-   property: K
-): obj is T {
-   // type-safe check for a specific property
-   return guard(obj) && key === property;
 }

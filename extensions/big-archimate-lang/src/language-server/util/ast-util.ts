@@ -1,10 +1,16 @@
-import { AstNode, AstUtils, LangiumDocument, isAstNode } from 'langium';
+import { Dimension, Point } from '@eclipse-glsp/server';
+import { AstNode, AstUtils, LangiumDocument, Reference, isAstNode } from 'langium';
 import {
    ArchiMateDiagram,
    ArchiMateRoot,
    Element,
+   ElementNode,
+   ElementType,
    Junction,
+   JunctionNode,
    Relation,
+   RelationEdge,
+   RelationType,
    isArchiMateDiagram,
    isArchiMateRoot,
    isElement,
@@ -116,4 +122,134 @@ export function findArchiMateDiagram(input: DocumentContent): ArchiMateDiagram |
 
 export function hasSemanticRoot<T extends SemanticRoot>(document: LangiumDocument<any>, guard: (item: unknown) => item is T): boolean {
    return guard(findSemanticRoot(document));
+}
+
+export function createElement(
+   container: ArchiMateRoot,
+   id: string,
+   name: string,
+   type: ElementType,
+   opts?: Partial<Omit<Element, '$container' | '$type' | 'id' | 'name' | 'type'>>
+): Element {
+   return {
+      $container: container,
+      $type: 'Element',
+      id,
+      name,
+      type,
+      properties: [],
+      ...opts
+   };
+}
+
+export function createRelation(
+   container: ArchiMateRoot,
+   id: string,
+   name: string,
+   type: RelationType,
+   source: Reference<Element>,
+   target: Reference<Element>,
+   opts?: Partial<Omit<Relation, '$container' | '$type' | 'id' | 'name' | 'type' | 'source' | 'target'>>
+): Relation {
+   return {
+      $container: container,
+      $type: 'Relation',
+      id,
+      name,
+      type,
+      source,
+      target,
+      properties: [],
+      ...opts
+   };
+}
+
+export function createJunction(
+   container: ArchiMateRoot,
+   id: string,
+   name: string,
+   opts?: Partial<Omit<Junction, '$container' | '$type' | 'id' | 'name'>>
+): Junction {
+   return {
+      $container: container,
+      $type: 'Junction',
+      id,
+      name,
+      properties: [],
+      ...opts
+   };
+}
+
+export function createArchiMateDiagram(
+   container: ArchiMateRoot,
+   id: string,
+   opts?: Partial<Omit<ArchiMateDiagram, '$container' | '$type' | 'id'>>
+): ArchiMateDiagram {
+   return {
+      $container: container,
+      $type: 'ArchiMateDiagram',
+      id,
+      nodes: [],
+      edges: [],
+      properties: [],
+      ...opts
+   };
+}
+
+export function createElementNode(
+   container: ArchiMateDiagram,
+   id: string,
+   element: Reference<Element>,
+   position: Point,
+   dimension: Dimension,
+   opts?: Partial<Omit<ElementNode, '$container' | '$type' | 'id' | 'element'>>
+): ElementNode {
+   return {
+      $container: container,
+      $type: 'ElementNode',
+      id,
+      element,
+      ...position,
+      ...dimension,
+      ...opts
+   };
+}
+
+export function createJunctionNode(
+   container: ArchiMateDiagram,
+   id: string,
+   junction: Reference<Junction>,
+   dimension: Dimension,
+   position: Point,
+   opts?: Partial<Omit<JunctionNode, '$container' | '$type' | 'id' | 'element'>>
+): JunctionNode {
+   return {
+      $container: container,
+      $type: 'JunctionNode',
+      id,
+      junction,
+      ...position,
+      ...dimension,
+      ...opts
+   };
+}
+
+export function createRelationEdge(
+   container: ArchiMateDiagram,
+   id: string,
+   relation: Reference<Relation>,
+   sourceNode: Reference<ElementNode>,
+   targetNode: Reference<ElementNode>,
+   opts?: Partial<Omit<RelationEdge, '$container' | '$type' | 'id' | 'relation' | 'sourceNode' | 'targetNode'>>
+): RelationEdge {
+   return {
+      $container: container,
+      $type: 'RelationEdge',
+      id,
+      relation,
+      sourceNode,
+      targetNode,
+      routingPoints: [],
+      ...opts
+   };
 }

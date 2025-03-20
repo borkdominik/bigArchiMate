@@ -1,11 +1,11 @@
-import { Property, PropertyType, findNextUnique, toId } from '@big-archimate/protocol';
+import { Property, PropertyType, findNextUnique } from '@big-archimate/protocol';
 import { GridColDef } from '@mui/x-data-grid';
 import * as React from 'react';
 import { useModelDispatch, useReadonly, useRelation } from '../../ModelContext';
 import { ErrorView } from '../ErrorView';
 import GridComponent, { GridComponentRow, ValidationFunction } from './GridComponent';
 
-export type PropertyRow = GridComponentRow<Property>;
+export type RelationPropertyRow = GridComponentRow<Property>;
 
 export function RelationPropertiesDataGrid(): React.ReactElement {
    const relation = useRelation();
@@ -14,7 +14,7 @@ export function RelationPropertiesDataGrid(): React.ReactElement {
 
    // Callback for when the user stops editing a cell.
    const handleRowUpdate = React.useCallback(
-      (property: PropertyRow): PropertyRow => {
+      (property: RelationPropertyRow): RelationPropertyRow => {
          dispatch({
             type: 'relation:property:update',
             propertyIdx: property.idx,
@@ -26,11 +26,11 @@ export function RelationPropertiesDataGrid(): React.ReactElement {
    );
 
    const handleAddProperty = React.useCallback(
-      (property: PropertyRow): void => {
+      (property: RelationPropertyRow): void => {
          if (property.name) {
             dispatch({
                type: 'relation:property:add-property',
-               property: { ...property, id: findNextUnique(toId(property.name), relation.properties, attr => attr.id!) }
+               property: { ...property, id: findNextUnique(property.id, relation.properties, attr => attr.id!) }
             });
          }
       },
@@ -38,7 +38,7 @@ export function RelationPropertiesDataGrid(): React.ReactElement {
    );
 
    const handlePropertyUpward = React.useCallback(
-      (property: PropertyRow): void => {
+      (property: RelationPropertyRow): void => {
          dispatch({
             type: 'relation:property:move-property-up',
             propertyIdx: property.idx
@@ -48,7 +48,7 @@ export function RelationPropertiesDataGrid(): React.ReactElement {
    );
 
    const handlePropertyDownward = React.useCallback(
-      (property: PropertyRow): void => {
+      (property: RelationPropertyRow): void => {
          dispatch({
             type: 'relation:property:move-property-down',
             propertyIdx: property.idx
@@ -58,7 +58,7 @@ export function RelationPropertiesDataGrid(): React.ReactElement {
    );
 
    const handlePropertyDelete = React.useCallback(
-      (property: PropertyRow): void => {
+      (property: RelationPropertyRow): void => {
          dispatch({
             type: 'relation:property:delete-property',
             propertyIdx: property.idx
@@ -96,7 +96,7 @@ export function RelationPropertiesDataGrid(): React.ReactElement {
          $type: PropertyType,
          id: findNextUnique('Property', relation.properties, attr => attr.id!),
          $globalId: 'toBeAssigned',
-         name: findNextUnique('New Property', relation.properties, attr => attr.name!)
+         name: ''
       }),
       [relation.properties]
    );

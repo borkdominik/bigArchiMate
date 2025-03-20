@@ -1,4 +1,4 @@
-import { Property, PropertyType, findNextUnique, toId } from '@big-archimate/protocol';
+import { Property, PropertyType, findNextUnique } from '@big-archimate/protocol';
 import { GridColDef } from '@mui/x-data-grid';
 import * as React from 'react';
 import { useElement, useModelDispatch, useReadonly } from '../../ModelContext';
@@ -30,7 +30,7 @@ export function ElementPropertiesDataGrid(): React.ReactElement {
          if (property.name) {
             dispatch({
                type: 'element:property:add-property',
-               property: { ...property, id: findNextUnique(toId(property.name), element.properties, attr => attr.id!) }
+               property: { ...property, id: findNextUnique(property.id, element.properties, attr => attr.id!) }
             });
          }
       },
@@ -96,7 +96,7 @@ export function ElementPropertiesDataGrid(): React.ReactElement {
          $type: PropertyType,
          id: findNextUnique('Property', element.properties, attr => attr.id!),
          $globalId: 'toBeAssigned',
-         name: findNextUnique('New Property', element.properties, attr => attr.name!)
+         name: ''
       }),
       [element.properties]
    );

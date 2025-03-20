@@ -1,4 +1,4 @@
-import { Property, PropertyType, findNextUnique, toId } from '@big-archimate/protocol';
+import { Property, PropertyType, findNextUnique } from '@big-archimate/protocol';
 import { GridColDef } from '@mui/x-data-grid';
 import * as React from 'react';
 import { useJunction, useModelDispatch, useReadonly } from '../../ModelContext';
@@ -30,7 +30,7 @@ export function JunctionPropertiesDataGrid(): React.ReactElement {
          if (property.name) {
             dispatch({
                type: 'junction:property:add-property',
-               property: { ...property, id: findNextUnique(toId(property.name), junction.properties, attr => attr.id!) }
+               property: { ...property, id: findNextUnique(property.id, junction.properties, attr => attr.id!) }
             });
          }
       },
@@ -96,7 +96,7 @@ export function JunctionPropertiesDataGrid(): React.ReactElement {
          $type: PropertyType,
          id: findNextUnique('Property', junction.properties, attr => attr.id!),
          $globalId: 'toBeAssigned',
-         name: findNextUnique('New Property', junction.properties, attr => attr.name!)
+         name: ''
       }),
       [junction.properties]
    );
