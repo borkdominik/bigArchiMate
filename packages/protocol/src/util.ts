@@ -126,3 +126,6 @@ export class ReversibleMap<K extends string, V extends string> {
 export function toKebabCase(input: string): string {
    return input.replace(/([A-Z])/g, (match, offset) => (offset === 0 ? match.toLowerCase() : '-' + match.toLowerCase())).replace(/^-/, '');
 }
+
+/** The name of the output channel that the VS Code language extension will write its logs to. */
+export const LanguageExtensionChannelName = 'bigArchiMate';

@@ -70,8 +70,7 @@
       {
         "id": "archimate",
         "aliases": [
-          "CrossModel",
-          "cross-model",
+          "ArchiMate",
           "archimate"
         ],
         "extensions": [

@@ -1,3 +1,4 @@
+import { LanguageExtensionChannelName } from '@big-archimate/protocol';
 import { Action, ActionMessage, ActionMessageHandler, ConnectionProvider, GLSPClient, JsonrpcGLSPClient } from '@eclipse-glsp/client';
 import { BaseGLSPClientContribution, TheiaJsonrpcGLSPClient } from '@eclipse-glsp/theia-integration';
 import { Emitter } from '@theia/core';
@@ -23,13 +24,13 @@ export class ClientConribution extends BaseGLSPClientContribution {
    readonly id = ArchiMateLanguageContributionId;
 
    protected async waitForBackendConnected(): Promise<void> {
-      // We know that our VS Code extension outputs any log on a channel called 'CrossModel'
+      // We know that our VS Code extension outputs any log on a channel called 'bigArchiMate' (see extensions/big-archimate-lang/src/extension.ts)
       // So we check whether our expected message is already part of the channel's text or otherwise listen to any new content
 
       // While a socket connection to the server can be established earlier, the server might still do some internal initialization
       // So we wait for it to report that client connections can be accepted
       // Only then we actually start and initialize our client connection with the server
-      const channel = this.outputChannelManager.getChannel('CrossModel');
+      const channel = this.outputChannelManager.getChannel(LanguageExtensionChannelName);
       if (channel['resource'].textModel?.getValue().includes(CLIENT_CONNECTION_READY_MSG)) {
          return;
       }

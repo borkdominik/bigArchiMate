@@ -1,4 +1,4 @@
-import { GLSP_PORT_COMMAND, MODELSERVER_PORT_COMMAND } from '@big-archimate/protocol';
+import { GLSP_PORT_COMMAND, LanguageExtensionChannelName, MODELSERVER_PORT_COMMAND } from '@big-archimate/protocol';
 import * as path from 'path';
 import * as vscode from 'vscode';
 import { LanguageClient, LanguageClientOptions, ServerOptions, TransportKind } from 'vscode-languageclient/node.js';
@@ -25,7 +25,7 @@ function launchLanguageClient(context: vscode.ExtensionContext): LanguageClient 
    const clientOptions: LanguageClientOptions = createClientOptions(context);
 
    // Start the client. This will also launch the server
-   const languageClient = new LanguageClient('archimate', 'CrossModel', serverOptions, clientOptions);
+   const languageClient = new LanguageClient('big-archimate', LanguageExtensionChannelName, serverOptions, clientOptions);
    languageClient.start();
    vscode.commands.registerCommand(MODELSERVER_PORT_COMMAND, () => languageClient.sendRequest(MODELSERVER_PORT_COMMAND));
    vscode.commands.registerCommand(GLSP_PORT_COMMAND, () => languageClient.sendRequest(GLSP_PORT_COMMAND));
