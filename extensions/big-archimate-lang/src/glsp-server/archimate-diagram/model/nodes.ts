@@ -21,7 +21,7 @@ export class GElementNode extends GNode {
 }
 
 const ICON_SIZE = 16;
-const H_GAP = 3;
+const H_GAP = 5;
 
 export class GElementNodeBuilder extends GNodeBuilder<GElementNode> {
    set(node: ElementNode, index: ArchiMateGModelIndex): this {
