@@ -120,17 +120,17 @@ describe('Lexer', () => {
 
 const expected_result = `element:
     id: testId
+    type: ApplicationCollaboration
     name: "test Name"
-    documentation: "Test documentation"
-    type: ApplicationCollaboration`;
+    documentation: "Test documentation"`;
 
 const expected_result1 = `relation:
     id: testId
-    name: "test Name"
-    documentation: "Test documentation"
     type: Association
     source: Ref1
-    target: Ref2`;
+    target: Ref2
+    name: "test Name"
+    documentation: "Test documentation"`;
 
 const expected_result2 = `archiMateDiagram:
     id: testId

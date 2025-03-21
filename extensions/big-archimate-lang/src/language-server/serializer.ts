@@ -24,7 +24,7 @@ import { isImplicitProperty } from './util/ast-util.js';
  * It cannot be derived for interfaces as the interface order does not reflect property order in grammar due to inheritance.
  */
 const PROPERTY_ORDER = new Map<string, string[]>([
-   [Element, ['id', , 'type', 'name', 'documentation', 'properties']],
+   [Element, ['id', 'type', 'name', 'documentation', 'properties']],
    [Junction, ['id', 'name', 'documentation', 'properties']],
    [Relation, ['id', 'type', 'source', 'target', 'name', 'documentation', 'properties']],
    [ArchiMateDiagram, ['id', 'name', 'nodes', 'edges', 'properties']],

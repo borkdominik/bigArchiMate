@@ -21,10 +21,6 @@ export class ArchiMateNodeCreationTool extends NodeCreationTool {
 }
 
 export class ArchiMateNodeCreationToolMouseListener extends NodeCreationToolMouseListener {
-   protected override isContinuousMode(_ctx: GModelElement, _event: MouseEvent): boolean {
-      return true;
-   }
-
    protected override getCreateOperation(ctx: GModelElement, event: MouseEvent, insert: TrackedInsert): Action {
       if (this.triggerAction.args?.type === 'show') {
          return SetUIExtensionVisibilityAction.create({
