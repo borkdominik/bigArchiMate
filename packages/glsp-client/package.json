@@ -1,21 +1,17 @@
 {
-  "name": "@crossbreeze/glsp-client",
+  "name": "@big-archimate/glsp-client",
   "version": "0.0.0",
   "private": true,
-  "description": "CrossModel Viewer Contribution",
+  "description": "bigArchiMate Viewer Contribution",
   "keywords": [
     "theia-extension"
   ],
-  "homepage": "https://github.com/CrossBreezeNL/crossmodel",
+  "homepage": "https://github.com/borkdominik/bigArchiMate",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CrossBreezeNL/crossmodel"
+    "url": "git+https://github.com/borkdominik/bigArchiMate"
   },
   "license": "AGPL-3.0-or-later",
-  "author": {
-    "name": "CrossBreeze",
-    "email": "devops@crossbreeze.nl"
-  },
   "files": [
     "lib",
     "src",
@@ -29,9 +25,9 @@
     "watch": "tsc -w"
   },
   "dependencies": {
-    "@crossbreeze/core": "0.0.0",
-    "@crossbreeze/protocol": "0.0.0",
-    "@crossbreeze/react-model-ui": "0.0.0",
+    "@big-archimate/core": "0.0.0",
+    "@big-archimate/protocol": "0.0.0",
+    "@big-archimate/react-model-ui": "0.0.0",
     "@eclipse-glsp/client": "2.3.0",
     "@eclipse-glsp/theia-integration": "2.3.0",
     "@theia/core": "1.57.1",
@@ -45,11 +41,8 @@
   },
   "theiaExtensions": [
     {
-      "frontend": "lib/browser/system-diagram/system-diagram-frontend-module",
-      "backend": "lib/node/crossmodel-backend-module"
-    },
-    {
-      "frontend": "lib/browser/mapping-diagram/mapping-diagram-frontend-module"
+      "frontend": "lib/browser/archimate-diagram/archimate-diagram-frontend-module",
+      "backend": "lib/node/glsp-client-backend-module"
     }
   ]
 }

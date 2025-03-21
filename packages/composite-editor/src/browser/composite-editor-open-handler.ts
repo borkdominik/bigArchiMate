@@ -1,8 +1,4 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
-import { ModelFileExtensions, ModelFileType } from '@crossbreeze/protocol';
+import { ModelFileExtensions, ModelFileType } from '@big-archimate/protocol';
 import { RecursivePartial, URI } from '@theia/core';
 import {
    FrontendApplicationContribution,
@@ -19,7 +15,7 @@ import { CompositeEditor } from './composite-editor';
 export interface CompositeEditorOptions extends NavigatableWidgetOptions {
    widgetId: string;
    selection?: RecursivePartial<Range>;
-   fileType: Exclude<ModelFileType, 'Generic'>;
+   fileType: ModelFileType;
 }
 
 @injectable()
@@ -27,7 +23,7 @@ export class CompositeEditorOpenHandler
    extends NavigatableWidgetOpenHandler<CompositeEditor>
    implements OpenWithHandler, FrontendApplicationContribution
 {
-   static readonly ID = 'cm-composite-editor-handler';
+   static readonly ID = 'composite-editor-handler';
    static readonly PRIORITY = 2000;
 
    @inject(OpenWithService)
@@ -50,7 +46,7 @@ export class CompositeEditorOpenHandler
       const { kind, uri } = super.createWidgetOptions(resourceUri, options);
       const widgetId = createCompositeEditorId(uri);
       const fileType = ModelFileExtensions.getFileType(uri);
-      if (fileType === undefined || fileType === 'Generic') {
+      if (fileType === undefined) {
          throw new Error(`Cannot open a composite editor for the file type ${fileType}`);
       }
       return {
@@ -71,7 +67,7 @@ export class CompositeEditorOpenHandler
 
    canHandle(uri: URI, _options?: EditorOpenerOptions): number {
       const fileType = ModelFileExtensions.getFileType(uri.path.base);
-      return fileType !== undefined && fileType !== 'Generic' ? CompositeEditorOpenHandler.PRIORITY : -1;
+      return fileType !== undefined ? CompositeEditorOpenHandler.PRIORITY : -1;
    }
 }
 

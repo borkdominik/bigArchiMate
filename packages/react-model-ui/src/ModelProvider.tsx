@@ -1,8 +1,4 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
-
-import { CrossModelRoot } from '@crossbreeze/protocol';
+import { ArchiMateRoot } from '@big-archimate/protocol';
 import * as React from 'react';
 import { useImmerReducer } from 'use-immer';
 import {
@@ -17,7 +13,7 @@ import {
 import { DispatchAction, ModelReducer, ModelState } from './ModelReducer';
 import { ModelProviderProps } from './ModelViewer';
 
-export type UpdateCallback = (model: CrossModelRoot) => void;
+export type UpdateCallback = (model: ArchiMateRoot) => void;
 
 /**
  * Represents the properties required by the ModelProvider component.

@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
 /* eslint-disable max-len */
 
 import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';

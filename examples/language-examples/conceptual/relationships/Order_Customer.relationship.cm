@@ -1,7 +1,0 @@
-relationship: 
-    id: Order_Customer
-    name: "Order - Customer"
-    parent: Customer
-    parentCardinality: one
-    child: Order
-    childCardinality: multiple

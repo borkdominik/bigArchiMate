@@ -12,27 +12,26 @@
     "build": "lerna run build",
     "build:browser": "yarn build:packages && yarn build:extensions && yarn symlink:browser && yarn theia:browser build",
     "build:electron": "yarn build:packages && yarn build:extensions && yarn symlink:electron && yarn theia:electron build",
-    "build:extensions": "lerna run --scope={crossmodel-lang,crossmodel-theme} build",
-    "build:packages": "lerna run --scope=\"@crossbreeze/*\" build",
+    "build:extensions": "lerna run --scope={big-archimate-lang,big-archimate-theme} build",
+    "build:packages": "lerna run --scope=\"@big-archimate/*\" build",
     "clean": "lerna run clean",
     "format": "yarn prettier-eslint --write '**/*.{ts,tsx,js,cjs,mjs,css}' '**/package.json'",
     "postinstall": "theia check:theia-version",
     "lint": "lerna run lint",
-    "package:extensions": "lerna run --scope={crossmodel-lang,crossmodel-theme} package:vsix",
+    "package:extensions": "lerna run --scope={big-archimate-lang,big-archimate-theme} package:vsix",
     "start:browser": "yarn theia:browser start",
     "start:electron": "yarn theia:electron start",
-    "start:verdaccio": "yarn verdaccio --config verdaccio-config.yaml",
-    "symlink:browser": "lerna run --scope={crossmodel-lang,crossmodel-theme} symlink:browser",
-    "symlink:electron": "lerna run --scope={crossmodel-lang,crossmodel-theme} symlink:electron",
+    "symlink:browser": "lerna run --scope={big-archimate-lang,big-archimate-theme} symlink:browser",
+    "symlink:electron": "lerna run --scope={big-archimate-lang,big-archimate-theme} symlink:electron",
     "test": "rimraf unit-test-results && yarn run test:cjs && yarn run test:esm",
     "test:cjs": "jest --config=configs/jest.config.js --passWithNoTests",
-    "test:esm": "yarn --cwd extensions/crossmodel-lang test",
+    "test:esm": "yarn --cwd extensions/big-archimate-lang test",
     "theia:browser": "yarn --cwd applications/browser-app",
     "theia:bundle": "yarn theia:electron bundle && yarn theia:browser bundle",
     "theia:electron": "yarn --cwd applications/electron-app",
     "ui-test": "yarn --cwd e2e-tests ui-test",
-    "watch:browser": "lerna run --parallel --ignore=\"crossmodel-app\" watch",
-    "watch:electron": "lerna run --parallel --ignore=\"crossmodel-browser-app\" watch"
+    "watch:browser": "lerna run --parallel --ignore=\"big-archimate-app\" watch",
+    "watch:electron": "lerna run --parallel --ignore=\"big-archimate-browser-app\" watch"
   },
   "resolutions": {
     "node-abi": "^3.71.0"
@@ -63,8 +62,7 @@
     "symlink-dir": "^5.1.0",
     "ts-jest": "^29.1.1",
     "ts-node": "^10.9.1",
-    "typescript": ">=4.9.3",
-    "verdaccio": "^5.23.1"
+    "typescript": ">=4.9.3"
   },
   "engines": {
     "node": ">=16",

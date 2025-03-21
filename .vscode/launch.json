@@ -8,7 +8,7 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch CrossModel Electron",
+      "name": "Launch bigArchiMate Electron",
       "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
       "windows": {
         "name": "Launch Electron",
@@ -22,7 +22,7 @@
         "--log-level=debug",
         "--hostname=localhost",
         "--no-cluster",
-        "--root-dir=${workspaceRoot}/examples/mapping-example",
+        "--root-dir=${workspaceRoot}/examples",
         "--app-project-path=${workspaceFolder}/applications/electron-app",
         "--remote-debugging-port=9222",
         "--no-app-auto-install",
@@ -50,7 +50,7 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch CrossModel Browser Backend",
+      "name": "Launch bigArchiMate Browser Backend",
       "program": "${workspaceRoot}/applications/browser-app/lib/backend/main.js",
       "cwd": "${workspaceFolder}/applications/browser-app",
       "protocol": "inspector",
@@ -60,7 +60,7 @@
         "--log-level=debug",
         "--hostname=localhost",
         "--no-cluster",
-        "--root-dir=${workspaceRoot}/examples/workspace",
+        "--root-dir=${workspaceRoot}/examples",
         "--app-project-path=${workspaceFolder}/applications/browser-app",
         "--no-app-auto-install",
         "--plugins=local-dir:${workspaceFolder}/applications/browser-app/plugins"
@@ -85,14 +85,14 @@
       "stopOnEntry": false
     },
     {
-      "name": "Run CrossModel Language in VS Code",
+      "name": "Run bigArchiMate Language in VS Code",
       "type": "extensionHost",
       "request": "launch",
       "env": {
         "NODE_ENV": "development"
       },
       "stopOnEntry": true,
-      "args": ["--extensionDevelopmentPath=${workspaceFolder}/extensions/crossmodel-lang"]
+      "args": ["--extensionDevelopmentPath=${workspaceFolder}/extensions/big-archimate-lang"]
     },
     {
       "name": "Attach to Language Server in VS Code",
@@ -105,7 +105,7 @@
       "skipFiles": ["<node_internals>/**"],
       "sourceMaps": true,
       "outFiles": [
-        "${workspaceFolder}/extensions/crossmodel-lang/out/**/*.js",
+        "${workspaceFolder}/extensions/big-archimate-lang/out/**/*.js",
         "${workspaceFolder}/node_modules/langium/**/*.js",
         "${workspaceFolder}/node_modules/vscode-languageclient/**/*.js",
         "${workspaceFolder}/node_modules/vscode-jsonrpc/**/*.js"
@@ -169,7 +169,7 @@
       "internalConsoleOptions": "neverOpen"
     },
     {
-      "name": "vscode-jest-tests.v2.crossmodel",
+      "name": "vscode-jest-tests.v2.big-archimate",
       "type": "node",
       "request": "launch",
       "cwd": "${workspaceRoot}",
@@ -195,10 +195,10 @@
       "disableOptimisticBPs": true
     },
     {
-      "name": "Debug CrossModel Theme",
+      "name": "Debug bigArchiMate Theme",
       "type": "extensionHost",
       "request": "launch",
-      "args": ["--extensionDevelopmentPath=${workspaceFolder}/extensions/crossmodel-theme"]
+      "args": ["--extensionDevelopmentPath=${workspaceFolder}/extensions/big-archimate-theme"]
     }
   ],
   "compounds": [

@@ -1,7 +1,0 @@
-relationship:
-    id: Address_Customer
-    name: "Address - Customer"
-    parent: Customer
-    parentCardinality: one
-    child: Address
-    childCardinality: multiple

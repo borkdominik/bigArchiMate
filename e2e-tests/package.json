@@ -1,12 +1,8 @@
 {
-  "name": "crossmodel-e2e-tests",
+  "name": "big-archimate-e2e-tests",
   "version": "0.0.0",
   "private": true,
   "license": "AGPL-3.0-or-later",
-  "author": {
-    "name": "CrossBreeze",
-    "email": "devops@crossbreeze.nl"
-  },
   "scripts": {
     "build": "yarn && yarn clean && tsc --incremental && yarn playwright:install",
     "clean": "rimraf lib *.tsbuildinfo .eslintcache",

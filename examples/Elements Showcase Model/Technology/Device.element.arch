@@ -1,0 +1,4 @@
+element:
+    id: Device
+    type: Device
+    name: "Device"

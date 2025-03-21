@@ -1,0 +1,28 @@
+diagram:
+    id: Strategy
+    name: "Strategy"
+    nodes:
+      - id: ResourceNode
+        element: Resource
+        x: 88
+        y: 132
+        width: 250
+        height: 50
+      - id: CapabilityNode
+        element: Capability
+        x: 385
+        y: 132
+        width: 250
+        height: 50
+      - id: ValueStreamNode
+        element: ValueStream
+        x: 682
+        y: 132
+        width: 250
+        height: 50
+      - id: CourseOfActionNode
+        element: CourseOfAction
+        x: 88
+        y: 231
+        width: 250
+        height: 50

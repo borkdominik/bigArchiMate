@@ -1,0 +1,4 @@
+element:
+    id: ValueStream
+    type: ValueStream
+    name: "ValueStream"

@@ -1,18 +1,14 @@
 {
-  "name": "crossmodel-app",
+  "name": "big-archimate-app",
   "version": "0.0.0",
   "private": true,
-  "description": "CrossModel Community Edition",
-  "homepage": "https://github.com/CrossBreezeNL/crossmodel",
+  "description": "bigArchiMate",
+  "homepage": "https://github.com/borkdominik/bigArchiMate",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CrossBreezeNL/crossmodel"
+    "url": "git+https://github.com/borkdominik/bigArchiMate"
   },
   "license": "AGPL-3.0-or-later",
-  "author": {
-    "name": "CrossBreeze",
-    "email": "devops@crossbreeze.nl"
-  },
   "main": "scripts/electron-main.js",
   "scripts": {
     "build": "yarn -s rebuild && theia build --app-target=\"electron\" --mode development && yarn download:plugins",
@@ -21,9 +17,9 @@
     "deploy": "rimraf dist && electron-builder -c.mac.identity=null --publish always",
     "download:plugins": "theia download:plugins",
     "package": "yarn package:pre && electron-builder -c.mac.identity=null --publish never && yarn package:post",
-    "package:extensions": "yarn --cwd ../../extensions/crossmodel-lang package -o ../../applications/electron-app/plugins/",
-    "package:post": "rimraf plugins/crossmodel-lang* && yarn --cwd ../../extensions/crossmodel-lang symlink",
-    "package:pre": "rimraf dist plugins/crossmodel-lang && yarn package:extensions",
+    "package:extensions": "yarn --cwd ../../extensions/big-archimate-lang package -o ../../applications/electron-app/plugins/",
+    "package:post": "rimraf plugins/big-archimate-lang* && yarn --cwd ../../extensions/big-archimate-lang symlink",
+    "package:pre": "rimraf dist plugins/big-archimate-lang && yarn package:extensions",
     "package:preview": "yarn package:pre && electron-builder -c.mac.identity=null --dir && yarn package:post",
     "rebuild": "theia rebuild:electron --cacheRoot ../..",
     "start": "cross-env NODE_ENV=development theia start --plugins=local-dir:plugins",
@@ -31,13 +27,13 @@
     "watch": "theia build --watch --mode development"
   },
   "dependencies": {
-    "@crossbreeze/composite-editor": "0.0.0",
-    "@crossbreeze/core": "0.0.0",
-    "@crossbreeze/form-client": "0.0.0",
-    "@crossbreeze/glsp-client": "0.0.0",
-    "@crossbreeze/model-service": "0.0.0",
-    "@crossbreeze/product": "0.0.0",
-    "@crossbreeze/property-view": "0.0.0",
+    "@big-archimate/composite-editor": "0.0.0",
+    "@big-archimate/core": "0.0.0",
+    "@big-archimate/form-client": "0.0.0",
+    "@big-archimate/glsp-client": "0.0.0",
+    "@big-archimate/model-service": "0.0.0",
+    "@big-archimate/product": "0.0.0",
+    "@big-archimate/property-view": "0.0.0",
     "@theia/core": "1.57.1",
     "@theia/editor": "1.57.1",
     "@theia/electron": "1.57.1",
@@ -59,15 +55,15 @@
     "electron": "30.1.2",
     "electron-builder": "^23.6.0"
   },
-  "productName": "CrossModel Community Edition",
+  "productName": "bigArchiMate",
   "theia": {
     "target": "electron",
     "frontend": {
       "config": {
-        "applicationName": "CrossModel Community Edition",
+        "applicationName": "bigArchiMate",
         "defaultTheme": {
-          "light": "crossmodel-light",
-          "dark": "crossmodel-dark"
+          "light": "big-archimate-light",
+          "dark": "big-archimate-dark"
         },
         "reloadOnReconnect": true,
         "preferences": {

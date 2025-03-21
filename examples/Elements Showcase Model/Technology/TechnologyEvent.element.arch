@@ -1,0 +1,4 @@
+element:
+    id: TechnologyEvent
+    type: TechnologyEvent
+    name: "TechnologyEvent"

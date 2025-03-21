@@ -1,0 +1,11 @@
+<svg id="root" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+    <path
+        d="M 0 16 L 11 5"
+        style="fill:none;stroke:#aaaaaa;stroke-width:1"
+        stroke-dasharray="2"
+    />
+    <path
+        d="M 16 0.5 L 7 0.5 L 15.5 9 L 15.5 0"
+        style="fill:none;stroke:#aaaaaa;stroke-width:1"
+    />
+</svg>

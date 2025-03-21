@@ -1,21 +1,14 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
-
-import { ModelService, ModelServiceClient } from '@crossbreeze/model-service/lib/common';
-import { CrossModelDocument, CrossModelRoot, ModelDiagnostic, ModelUpdatedEvent, RenderProps } from '@crossbreeze/protocol';
+import { ModelService, ModelServiceClient } from '@big-archimate/model-service/lib/common';
+import { ArchiMateDocument, ArchiMateRoot, ModelDiagnostic, ModelUpdatedEvent, RenderProps } from '@big-archimate/protocol';
 import {
-   EntityComponent,
+   ElementComponent,
    ErrorView,
-   MappingComponent,
-   MappingRenderProps,
+   JunctionComponent,
    ModelProviderProps,
    OpenCallback,
-   RelationshipComponent,
-   SaveCallback,
-   SourceObjectComponent,
-   SourceObjectRenderProps
-} from '@crossbreeze/react-model-ui';
+   RelationComponent,
+   SaveCallback
+} from '@big-archimate/react-model-ui';
 import { Emitter, Event } from '@theia/core';
 import { LabelProvider, Message, OpenerService, ReactWidget, Saveable, open } from '@theia/core/lib/browser';
 import { ThemeService } from '@theia/core/lib/browser/theming';
@@ -26,8 +19,8 @@ import { EditorPreferences } from '@theia/editor/lib/browser';
 import * as deepEqual from 'fast-deep-equal';
 import * as debounce from 'p-debounce';
 
-export const CrossModelWidgetOptions = Symbol('FormEditorWidgetOptions');
-export interface CrossModelWidgetOptions {
+export const CustomWidgetOptions = Symbol('CustomWidgetOptions');
+export interface CustomWidgetOptions {
    clientId: string;
    widgetId: string;
    uri?: string;
@@ -35,8 +28,8 @@ export interface CrossModelWidgetOptions {
 }
 
 @injectable()
-export class CrossModelWidget extends ReactWidget implements Saveable {
-   @inject(CrossModelWidgetOptions) protected options: CrossModelWidgetOptions;
+export class CustomWidget extends ReactWidget implements Saveable {
+   @inject(CustomWidgetOptions) protected options: CustomWidgetOptions;
    @inject(LabelProvider) protected labelProvider: LabelProvider;
    @inject(ModelService) protected readonly modelService: ModelService;
    @inject(ModelServiceClient) protected serviceClient: ModelServiceClient;
@@ -52,7 +45,7 @@ export class CrossModelWidget extends ReactWidget implements Saveable {
    autoSave: 'off' | 'afterDelay' | 'onFocusChange' | 'onWindowChange';
    autoSaveDelay: number;
 
-   protected document?: CrossModelDocument;
+   protected document?: ArchiMateDocument;
    protected error: string | undefined;
 
    @postConstruct()
@@ -98,7 +91,7 @@ export class CrossModelWidget extends ReactWidget implements Saveable {
       await this.modelService.close({ clientId: this.options.clientId, uri });
    }
 
-   protected async openModel(uri: string): Promise<CrossModelDocument | undefined> {
+   protected async openModel(uri: string): Promise<ArchiMateDocument | undefined> {
       try {
          const document = await this.modelService.open({ clientId: this.options.clientId, uri, version: this.options.version });
          return document;
@@ -130,7 +123,7 @@ export class CrossModelWidget extends ReactWidget implements Saveable {
       }
    }
 
-   protected async updateModel(root: CrossModelRoot): Promise<void> {
+   protected async updateModel(root: ArchiMateRoot): Promise<void> {
       if (this.document && !deepEqual(this.document.root, root)) {
          this.document.root = root;
          this.setDirty(true);
@@ -178,7 +171,7 @@ export class CrossModelWidget extends ReactWidget implements Saveable {
       };
    }
 
-   protected handleUpdateRequest = debounce(async (root: CrossModelRoot): Promise<void> => {
+   protected handleUpdateRequest = debounce(async (root: ArchiMateRoot): Promise<void> => {
       await this.updateModel(root);
    }, 200);
 
@@ -194,20 +187,14 @@ export class CrossModelWidget extends ReactWidget implements Saveable {
    }
 
    render(): React.ReactNode {
-      if (this.document?.root?.entity) {
-         return <EntityComponent {...this.getModelProviderProps()} {...this.getRenderProperties()} />;
+      if (this.document?.root?.element) {
+         return <ElementComponent {...this.getModelProviderProps()} {...this.getRenderProperties()} />;
       }
-      if (this.document?.root?.relationship) {
-         return <RelationshipComponent {...this.getModelProviderProps()} {...this.getRenderProperties()} />;
+      if (this.document?.root.junction) {
+         return <JunctionComponent {...this.getModelProviderProps()} {...this.getRenderProperties()} />;
       }
-      if (this.document?.root?.mapping) {
-         const renderProps = this.getRenderProperties() as RenderProps & MappingRenderProps & SourceObjectRenderProps;
-         if (renderProps?.mappingIndex >= 0) {
-            return <MappingComponent {...this.getModelProviderProps()} {...renderProps} />;
-         }
-         if (renderProps?.sourceObjectIndex >= 0) {
-            return <SourceObjectComponent {...this.getModelProviderProps()} {...renderProps} />;
-         }
+      if (this.document?.root?.relation) {
+         return <RelationComponent {...this.getModelProviderProps()} {...this.getRenderProperties()} />;
       }
       if (this.error) {
          return <ErrorView errorMessage={this.error} />;

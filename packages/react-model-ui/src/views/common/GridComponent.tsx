@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
 import { DeleteOutlined } from '@mui/icons-material';
 import AddIcon from '@mui/icons-material/Add';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';

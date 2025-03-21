@@ -1,0 +1,22 @@
+diagram:
+    id: Other
+    name: "Other"
+    nodes:
+      - id: GroupingNode
+        element: Grouping
+        x: 154
+        y: 220
+        width: 200
+        height: 50
+      - id: LocationNode
+        element: Location
+        x: 396
+        y: 220
+        width: 200
+        height: 50
+      - id: JunctionNode
+        junction: Junction
+        x: 693
+        y: 242
+        width: 25
+        height: 25

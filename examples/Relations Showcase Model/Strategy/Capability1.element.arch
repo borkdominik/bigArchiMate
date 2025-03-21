@@ -1,0 +1,4 @@
+element:
+    id: Capability1
+    type: Capability
+    name: "Capability"

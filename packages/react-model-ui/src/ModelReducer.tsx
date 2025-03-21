@@ -1,11 +1,7 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
-import { CrossModelRoot } from '@crossbreeze/protocol';
-import { EntityDispatchAction, EntityModelReducer, isEntityDispatchAction } from './EntityModelReducer';
-import { MappingSourcesDispatchAction, MappingSourcesModelReducer, isMappingSourcesDispatchAction } from './MappingSourcesReducer';
-import { MappingTargetDispatchAction, MappingTargetModelReducer, isMappingTargetDispatchAction } from './MappingTargetReducer';
-import { RelationshipDispatchAction, RelationshipModelReducer, isRelationshipDispatchAction } from './RelationshipModelReducer';
+import { ArchiMateRoot } from '@big-archimate/protocol';
+import { ElementDispatchAction, ElementModelReducer, isElementDispatchAction } from './ElementModelReducer';
+import { JunctionDispatchAction, JunctionModelReducer, isJunctionDispatchAction } from './JunctionModelReducer';
+import { RelationDispatchAction, RelationModelReducer, isRelationDispatchAction } from './RelationModelReducer';
 
 export interface ModelAction {
    type: string;
@@ -13,20 +9,15 @@ export interface ModelAction {
 
 export interface ModelUpdateAction extends ModelAction {
    type: 'model:update';
-   model: CrossModelRoot;
+   model: ArchiMateRoot;
 }
 
-export type DispatchAction =
-   | ModelUpdateAction
-   | EntityDispatchAction
-   | RelationshipDispatchAction
-   | MappingTargetDispatchAction
-   | MappingSourcesDispatchAction;
+export type DispatchAction = ModelUpdateAction | ElementDispatchAction | JunctionDispatchAction | RelationDispatchAction;
 
 export type ModelStateReason = DispatchAction['type'] | 'model:initial';
 
 export interface ModelState {
-   model: CrossModelRoot;
+   model: ArchiMateRoot;
    reason: ModelStateReason;
 }
 
@@ -40,17 +31,14 @@ export function ModelReducer(state: ModelState, action: DispatchAction): ModelSt
       state.model = action.model;
       return state;
    }
-   if (isEntityDispatchAction(action)) {
-      return EntityModelReducer(state, action);
+   if (isElementDispatchAction(action)) {
+      return ElementModelReducer(state, action);
    }
-   if (isRelationshipDispatchAction(action)) {
-      return RelationshipModelReducer(state, action);
+   if (isJunctionDispatchAction(action)) {
+      return JunctionModelReducer(state, action);
    }
-   if (isMappingTargetDispatchAction(action)) {
-      return MappingTargetModelReducer(state, action);
-   }
-   if (isMappingSourcesDispatchAction(action)) {
-      return MappingSourcesModelReducer(state, action);
+   if (isRelationDispatchAction(action)) {
+      return RelationModelReducer(state, action);
    }
    throw Error('Unknown ModelReducer action');
 }

@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
-
 import { nls } from '@theia/core';
 import { FrontendApplicationContribution, NavigatableWidgetOpenHandler, OpenWithHandler, OpenWithService } from '@theia/core/lib/browser';
 import URI from '@theia/core/lib/common/uri';
@@ -31,7 +27,7 @@ export class FormEditorOpenHandler
    }
 
    canHandle(uri: URI): number {
-      return uri.path.ext === '.cm' ? 1 : -1;
+      return uri.path.ext === '.arch' ? 1 : -1;
    }
 }
 

@@ -1,0 +1,82 @@
+diagram:
+    id: Business
+    name: "Business"
+    nodes:
+      - id: BusinessActorNode
+        element: BusinessActor
+        x: 121
+        y: 110
+        width: 250
+        height: 50
+      - id: BusinessRoleNode
+        element: BusinessRole
+        x: 418
+        y: 110
+        width: 250
+        height: 50
+      - id: BusinessCollaborationNode
+        element: BusinessCollaboration
+        x: 715
+        y: 110
+        width: 250
+        height: 50
+      - id: BusinessInterfaceNode
+        element: BusinessInterface
+        x: 121
+        y: 209
+        width: 250
+        height: 50
+      - id: BusinessProcessNode
+        element: BusinessProcess
+        x: 418
+        y: 209
+        width: 250
+        height: 50
+      - id: BusinessFunctionNode
+        element: BusinessFunction
+        x: 715
+        y: 209
+        width: 250
+        height: 50
+      - id: BusinessInteractionNode
+        element: BusinessInteraction
+        x: 121
+        y: 308
+        width: 250
+        height: 50
+      - id: BusinessEventNode
+        element: BusinessEvent
+        x: 418
+        y: 308
+        width: 250
+        height: 50
+      - id: BusinessServiceNode
+        element: BusinessService
+        x: 715
+        y: 308
+        width: 250
+        height: 50
+      - id: BusinessObjectNode
+        element: BusinessObject
+        x: 121
+        y: 407
+        width: 250
+        height: 50
+      - id: ContractNode
+        element: Contract
+        x: 418
+        y: 407
+        width: 250
+        height: 50
+      - id: RepresentationNode
+        element: Representation
+        x: 715
+        y: 407
+        width: 250
+        height: 50
+      - id: ProductNode
+        element: Product
+        x: 121
+        y: 506
+        width: 250
+        height: 50

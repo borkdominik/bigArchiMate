@@ -1,0 +1,4 @@
+element:
+    id: Contract
+    type: Contract
+    name: "Contract"

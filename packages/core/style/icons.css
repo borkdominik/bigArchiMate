@@ -1,0 +1,395 @@
+/********************************************************************************
+ * Copyright (c) 2025 EclipseSource and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+
+:root .theia-light {
+   --archimate-icon-access: url('./icons/default/access.svg');
+   --archimate-icon-aggregation: url('./icons/default/aggregation.svg');
+   --archimate-icon-application-collaboration: url('./icons/default/application-collaboration.svg');
+   --archimate-icon-application-component: url('./icons/default/application-component.svg');
+   --archimate-icon-application-event: url('./icons/default/application-event.svg');
+   --archimate-icon-application-function: url('./icons/default/application-function.svg');
+   --archimate-icon-application-interface: url('./icons/default/application-interface.svg');
+   --archimate-icon-application-interaction: url('./icons/default/application-interaction.svg');
+   --archimate-icon-application-process: url('./icons/default/application-process.svg');
+   --archimate-icon-application-service: url('./icons/default/application-service.svg');
+   --archimate-icon-artifact: url('./icons/default/artifact.svg');
+   --archimate-icon-assessment: url('./icons/default/assessment.svg');
+   --archimate-icon-assignment: url('./icons/default/assignment.svg');
+   --archimate-icon-association: url('./icons/default/association.svg');
+   --archimate-icon-business-actor: url('./icons/default/business-actor.svg');
+   --archimate-icon-business-collaboration: url('./icons/default/business-collaboration.svg');
+   --archimate-icon-business-event: url('./icons/default/business-event.svg');
+   --archimate-icon-business-function: url('./icons/default/business-function.svg');
+   --archimate-icon-business-interaction: url('./icons/default/business-interaction.svg');
+   --archimate-icon-business-interface: url('./icons/default/business-interface.svg');
+   --archimate-icon-business-object: url('./icons/default/business-object.svg');
+   --archimate-icon-business-process: url('./icons/default/business-process.svg');
+   --archimate-icon-business-role: url('./icons/default/business-role.svg');
+   --archimate-icon-business-service: url('./icons/default/business-service.svg');
+   --archimate-icon-capability: url('./icons/default/capability.svg');
+   --archimate-icon-communication-network: url('./icons/default/communication-network.svg');
+   --archimate-icon-composition: url('./icons/default/composition.svg');
+   --archimate-icon-constraint: url('./icons/default/constraint.svg');
+   --archimate-icon-contract: url('./icons/default/contract.svg');
+   --archimate-icon-course-of-action: url('./icons/default/course-of-action.svg');
+   --archimate-icon-data-object: url('./icons/default/data-object.svg');
+   --archimate-icon-deliverable: url('./icons/default/deliverable.svg');
+   --archimate-icon-device: url('./icons/default/device.svg');
+   --archimate-icon-distribution-network: url('./icons/default/distribution-network.svg');
+   --archimate-icon-driver: url('./icons/default/driver.svg');
+   --archimate-icon-equipment: url('./icons/default/equipment.svg');
+   --archimate-icon-facility: url('./icons/default/facility.svg');
+   --archimate-icon-flow: url('./icons/default/flow.svg');
+   --archimate-icon-gap: url('./icons/default/gap.svg');
+   --archimate-icon-goal: url('./icons/default/goal.svg');
+   --archimate-icon-grouping: url('./icons/default/grouping.svg');
+   --archimate-icon-implementation-event: url('./icons/default/implementation-event.svg');
+   --archimate-icon-influence: url('./icons/default/influence.svg');
+   --archimate-icon-junction: url('./icons/default/junction.svg');
+   --archimate-icon-location: url('./icons/default/location.svg');
+   --archimate-icon-material: url('./icons/default/material.svg');
+   --archimate-icon-meaning: url('./icons/default/meaning.svg');
+   --archimate-icon-node: url('./icons/default/node.svg');
+   --archimate-icon-outcome: url('./icons/default/outcome.svg');
+   --archimate-icon-path: url('./icons/default/path.svg');
+   --archimate-icon-plateau: url('./icons/default/plateau.svg');
+   --archimate-icon-principle: url('./icons/default/principle.svg');
+   --archimate-icon-product: url('./icons/default/product.svg');
+   --archimate-icon-realization: url('./icons/default/realization.svg');
+   --archimate-icon-representation: url('./icons/default/representation.svg');
+   --archimate-icon-requirement: url('./icons/default/requirement.svg');
+   --archimate-icon-resource: url('./icons/default/resource.svg');
+   --archimate-icon-serving: url('./icons/default/serving.svg');
+   --archimate-icon-specialization: url('./icons/default/specialization.svg');
+   --archimate-icon-stakeholder: url('./icons/default/stakeholder.svg');
+   --archimate-icon-system-software: url('./icons/default/system-software.svg');
+   --archimate-icon-technology-collaboration: url('./icons/default/technology-collaboration.svg');
+   --archimate-icon-technology-event: url('./icons/default/technology-event.svg');
+   --archimate-icon-technology-function: url('./icons/default/technology-function.svg');
+   --archimate-icon-technology-interaction: url('./icons/default/technology-interaction.svg');
+   --archimate-icon-technology-interface: url('./icons/default/technology-interface.svg');
+   --archimate-icon-technology-process: url('./icons/default/technology-process.svg');
+   --archimate-icon-technology-service: url('./icons/default/technology-service.svg');
+   --archimate-icon-triggering: url('./icons/default/triggering.svg');
+   --archimate-icon-value: url('./icons/default/value.svg');
+   --archimate-icon-value-stream: url('./icons/default/value-stream.svg');
+   --archimate-icon-work-package: url('./icons/default/work-package.svg');
+}
+
+:root .theia-dark {
+   --archimate-icon-access: url('./icons/dark/access.svg');
+   --archimate-icon-aggregation: url('./icons/dark/aggregation.svg');
+   --archimate-icon-application-collaboration: url('./icons/default/application-collaboration.svg');
+   --archimate-icon-application-component: url('./icons/default/application-component.svg');
+   --archimate-icon-application-event: url('./icons/default/application-event.svg');
+   --archimate-icon-application-function: url('./icons/default/application-function.svg');
+   --archimate-icon-application-interface: url('./icons/default/application-interface.svg');
+   --archimate-icon-application-interaction: url('./icons/default/application-interaction.svg');
+   --archimate-icon-application-process: url('./icons/default/application-process.svg');
+   --archimate-icon-application-service: url('./icons/default/application-service.svg');
+   --archimate-icon-artifact: url('./icons/default/artifact.svg');
+   --archimate-icon-assessment: url('./icons/default/assessment.svg');
+   --archimate-icon-assignment: url('./icons/dark/assignment.svg');
+   --archimate-icon-association: url('./icons/dark/association.svg');
+   --archimate-icon-business-actor: url('./icons/default/business-actor.svg');
+   --archimate-icon-business-collaboration: url('./icons/default/business-collaboration.svg');
+   --archimate-icon-business-event: url('./icons/default/business-event.svg');
+   --archimate-icon-business-function: url('./icons/default/business-function.svg');
+   --archimate-icon-business-interaction: url('./icons/default/business-interaction.svg');
+   --archimate-icon-business-interface: url('./icons/default/business-interface.svg');
+   --archimate-icon-business-object: url('./icons/default/business-object.svg');
+   --archimate-icon-business-process: url('./icons/default/business-process.svg');
+   --archimate-icon-business-role: url('./icons/default/business-role.svg');
+   --archimate-icon-business-service: url('./icons/default/business-service.svg');
+   --archimate-icon-capability: url('./icons/default/capability.svg');
+   --archimate-icon-communication-network: url('./icons/default/communication-network.svg');
+   --archimate-icon-composition: url('./icons/dark/composition.svg');
+   --archimate-icon-constraint: url('./icons/default/constraint.svg');
+   --archimate-icon-contract: url('./icons/default/contract.svg');
+   --archimate-icon-course-of-action: url('./icons/default/course-of-action.svg');
+   --archimate-icon-data-object: url('./icons/default/data-object.svg');
+   --archimate-icon-deliverable: url('./icons/default/deliverable.svg');
+   --archimate-icon-device: url('./icons/default/device.svg');
+   --archimate-icon-distribution-network: url('./icons/default/distribution-network.svg');
+   --archimate-icon-driver: url('./icons/default/driver.svg');
+   --archimate-icon-equipment: url('./icons/default/equipment.svg');
+   --archimate-icon-facility: url('./icons/default/facility.svg');
+   --archimate-icon-flow: url('./icons/dark/flow.svg');
+   --archimate-icon-gap: url('./icons/default/gap.svg');
+   --archimate-icon-goal: url('./icons/default/goal.svg');
+   --archimate-icon-grouping: url('./icons/default/grouping.svg');
+   --archimate-icon-implementation-event: url('./icons/default/implementation-event.svg');
+   --archimate-icon-influence: url('./icons/dark/influence.svg');
+   --archimate-icon-junction: url('./icons/dark/junction.svg');
+   --archimate-icon-location: url('./icons/default/location.svg');
+   --archimate-icon-material: url('./icons/default/material.svg');
+   --archimate-icon-meaning: url('./icons/default/meaning.svg');
+   --archimate-icon-node: url('./icons/default/node.svg');
+   --archimate-icon-outcome: url('./icons/default/outcome.svg');
+   --archimate-icon-path: url('./icons/default/path.svg');
+   --archimate-icon-plateau: url('./icons/default/plateau.svg');
+   --archimate-icon-principle: url('./icons/default/principle.svg');
+   --archimate-icon-product: url('./icons/default/product.svg');
+   --archimate-icon-realization: url('./icons/dark/realization.svg');
+   --archimate-icon-representation: url('./icons/default/representation.svg');
+   --archimate-icon-requirement: url('./icons/default/requirement.svg');
+   --archimate-icon-resource: url('./icons/default/resource.svg');
+   --archimate-icon-serving: url('./icons/dark/serving.svg');
+   --archimate-icon-specialization: url('./icons/dark/specialization.svg');
+   --archimate-icon-stakeholder: url('./icons/default/stakeholder.svg');
+   --archimate-icon-system-software: url('./icons/default/system-software.svg');
+   --archimate-icon-technology-collaboration: url('./icons/default/technology-collaboration.svg');
+   --archimate-icon-technology-event: url('./icons/default/technology-event.svg');
+   --archimate-icon-technology-function: url('./icons/default/technology-function.svg');
+   --archimate-icon-technology-interaction: url('./icons/default/technology-interaction.svg');
+   --archimate-icon-technology-interface: url('./icons/default/technology-interface.svg');
+   --archimate-icon-technology-process: url('./icons/default/technology-process.svg');
+   --archimate-icon-technology-service: url('./icons/default/technology-service.svg');
+   --archimate-icon-triggering: url('./icons/dark/triggering.svg');
+   --archimate-icon-value: url('./icons/default/value.svg');
+   --archimate-icon-value-stream: url('./icons/default/value-stream.svg');
+   --archimate-icon-work-package: url('./icons/default/work-package.svg');
+}
+
+:root {
+   --archimate-icon-size: 1em;
+}
+
+.codicon[class*='codicon-archimate']:before {
+   content: '' !important;
+   display: block;
+   width: var(--archimate-icon-size);
+   height: var(--archimate-icon-size);
+   background-repeat: no-repeat;
+   background-position: center;
+}
+
+.codicon-archimate-access:before {
+   background-image: var(--archimate-icon-access);
+}
+.codicon-archimate-aggregation:before {
+   background-image: var(--archimate-icon-aggregation);
+}
+.codicon-archimate-application-collaboration:before {
+   background-image: var(--archimate-icon-application-collaboration);
+}
+.codicon-archimate-application-component:before {
+   background-image: var(--archimate-icon-application-component);
+}
+.codicon-archimate-application-event:before {
+   background-image: var(--archimate-icon-application-event);
+}
+.codicon-archimate-application-function:before {
+   background-image: var(--archimate-icon-application-function);
+}
+.codicon-archimate-application-interface:before {
+   background-image: var(--archimate-icon-application-interface);
+}
+.codicon-archimate-application-interaction:before {
+   background-image: var(--archimate-icon-application-interaction);
+}
+.codicon-archimate-application-process:before {
+   background-image: var(--archimate-icon-application-process);
+}
+.codicon-archimate-application-service:before {
+   background-image: var(--archimate-icon-application-service);
+}
+.codicon-archimate-artifact:before {
+   background-image: var(--archimate-icon-artifact);
+}
+.codicon-archimate-assessment:before {
+   background-image: var(--archimate-icon-assessment);
+}
+.codicon-archimate-assignment:before {
+   background-image: var(--archimate-icon-assignment);
+}
+.codicon-archimate-association:before {
+   background-image: var(--archimate-icon-association);
+}
+.codicon-archimate-business-actor:before {
+   background-image: var(--archimate-icon-business-actor);
+}
+.codicon-archimate-business-collaboration:before {
+   background-image: var(--archimate-icon-business-collaboration);
+}
+.codicon-archimate-business-event:before {
+   background-image: var(--archimate-icon-business-event);
+}
+.codicon-archimate-business-function:before {
+   background-image: var(--archimate-icon-business-function);
+}
+.codicon-archimate-business-interaction:before {
+   background-image: var(--archimate-icon-business-interaction);
+}
+.codicon-archimate-business-interface:before {
+   background-image: var(--archimate-icon-business-interface);
+}
+.codicon-archimate-business-object:before {
+   background-image: var(--archimate-icon-business-object);
+}
+.codicon-archimate-business-process:before {
+   background-image: var(--archimate-icon-business-process);
+}
+.codicon-archimate-business-role:before {
+   background-image: var(--archimate-icon-business-role);
+}
+.codicon-archimate-business-service:before {
+   background-image: var(--archimate-icon-business-service);
+}
+.codicon-archimate-capability:before {
+   background-image: var(--archimate-icon-capability);
+}
+.codicon-archimate-communication-network:before {
+   background-image: var(--archimate-icon-communication-network);
+}
+.codicon-archimate-composition:before {
+   background-image: var(--archimate-icon-composition);
+}
+.codicon-archimate-constraint:before {
+   background-image: var(--archimate-icon-constraint);
+}
+.codicon-archimate-contract:before {
+   background-image: var(--archimate-icon-contract);
+}
+.codicon-archimate-course-of-action:before {
+   background-image: var(--archimate-icon-course-of-action);
+}
+.codicon-archimate-data-object:before {
+   background-image: var(--archimate-icon-data-object);
+}
+.codicon-archimate-deliverable:before {
+   background-image: var(--archimate-icon-deliverable);
+}
+.codicon-archimate-device:before {
+   background-image: var(--archimate-icon-device);
+}
+.codicon-archimate-distribution-network:before {
+   background-image: var(--archimate-icon-distribution-network);
+}
+.codicon-archimate-driver:before {
+   background-image: var(--archimate-icon-driver);
+}
+.codicon-archimate-equipment:before {
+   background-image: var(--archimate-icon-equipment);
+}
+.codicon-archimate-facility:before {
+   background-image: var(--archimate-icon-facility);
+}
+.codicon-archimate-flow:before {
+   background-image: var(--archimate-icon-flow);
+}
+.codicon-archimate-gap:before {
+   background-image: var(--archimate-icon-gap);
+}
+.codicon-archimate-goal:before {
+   background-image: var(--archimate-icon-goal);
+}
+.codicon-archimate-grouping:before {
+   background-image: var(--archimate-icon-grouping);
+}
+.codicon-archimate-implementation-event:before {
+   background-image: var(--archimate-icon-implementation-event);
+}
+.codicon-archimate-influence:before {
+   background-image: var(--archimate-icon-influence);
+}
+.codicon-archimate-junction:before {
+   background-image: var(--archimate-icon-junction);
+}
+.codicon-archimate-location:before {
+   background-image: var(--archimate-icon-location);
+}
+.codicon-archimate-material:before {
+   background-image: var(--archimate-icon-material);
+}
+.codicon-archimate-meaning:before {
+   background-image: var(--archimate-icon-meaning);
+}
+.codicon-archimate-node:before {
+   background-image: var(--archimate-icon-node);
+}
+.codicon-archimate-outcome:before {
+   background-image: var(--archimate-icon-outcome);
+}
+.codicon-archimate-path:before {
+   background-image: var(--archimate-icon-path);
+}
+.codicon-archimate-plateau:before {
+   background-image: var(--archimate-icon-plateau);
+}
+.codicon-archimate-principle:before {
+   background-image: var(--archimate-icon-principle);
+}
+.codicon-archimate-product:before {
+   background-image: var(--archimate-icon-product);
+}
+.codicon-archimate-realization:before {
+   background-image: var(--archimate-icon-realization);
+}
+.codicon-archimate-representation:before {
+   background-image: var(--archimate-icon-representation);
+}
+.codicon-archimate-requirement:before {
+   background-image: var(--archimate-icon-requirement);
+}
+.codicon-archimate-resource:before {
+   background-image: var(--archimate-icon-resource);
+}
+.codicon-archimate-serving:before {
+   background-image: var(--archimate-icon-serving);
+}
+.codicon-archimate-specialization:before {
+   background-image: var(--archimate-icon-specialization);
+}
+.codicon-archimate-stakeholder:before {
+   background-image: var(--archimate-icon-stakeholder);
+}
+.codicon-archimate-system-software:before {
+   background-image: var(--archimate-icon-system-software);
+}
+.codicon-archimate-technology-collaboration:before {
+   background-image: var(--archimate-icon-technology-collaboration);
+}
+.codicon-archimate-technology-event:before {
+   background-image: var(--archimate-icon-technology-event);
+}
+.codicon-archimate-technology-function:before {
+   background-image: var(--archimate-icon-technology-function);
+}
+.codicon-archimate-technology-interaction:before {
+   background-image: var(--archimate-icon-technology-interaction);
+}
+.codicon-archimate-technology-interface:before {
+   background-image: var(--archimate-icon-technology-interface);
+}
+.codicon-archimate-technology-process:before {
+   background-image: var(--archimate-icon-technology-process);
+}
+.codicon-archimate-technology-service:before {
+   background-image: var(--archimate-icon-technology-service);
+}
+.codicon-archimate-triggering:before {
+   background-image: var(--archimate-icon-triggering);
+}
+.codicon-archimate-value:before {
+   background-image: var(--archimate-icon-value);
+}
+.codicon-archimate-value-stream:before {
+   background-image: var(--archimate-icon-value-stream);
+}
+.codicon-archimate-work-package:before {
+   background-image: var(--archimate-icon-work-package);
+}

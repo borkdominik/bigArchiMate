@@ -1,10 +1,6 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
-
 import {
+   ArchiMateDocument,
    CloseModelArgs,
-   CrossModelDocument,
    CrossReference,
    CrossReferenceContext,
    ModelUpdatedEvent,
@@ -16,7 +12,7 @@ import {
    SystemInfoArgs,
    SystemUpdatedEvent,
    UpdateModelArgs
-} from '@crossbreeze/protocol';
+} from '@big-archimate/protocol';
 import { Event, RpcServer } from '@theia/core';
 
 /** Path used to communicate between the Theia frontend and backend */
@@ -35,13 +31,13 @@ export interface ModelService
 export const ModelServiceServer = Symbol('ModelServiceServer');
 export interface ModelServiceServer extends RpcServer<ModelServiceClient> {
    // Model API
-   open(args: OpenModelArgs): Promise<CrossModelDocument | undefined>;
+   open(args: OpenModelArgs): Promise<ArchiMateDocument | undefined>;
    close(args: CloseModelArgs): Promise<void>;
-   update(args: UpdateModelArgs): Promise<CrossModelDocument>;
+   update(args: UpdateModelArgs): Promise<ArchiMateDocument>;
    save(args: SaveModelArgs): Promise<void>;
 
    // Query API
-   request(uri: string): Promise<CrossModelDocument | undefined>;
+   request(uri: string): Promise<ArchiMateDocument | undefined>;
    findReferenceableElements(args: CrossReferenceContext): Promise<ReferenceableElement[]>;
    resolveReference(reference: CrossReference): Promise<ResolvedElement | undefined>;
 

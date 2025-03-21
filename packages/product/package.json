@@ -1,21 +1,17 @@
 {
-  "name": "@crossbreeze/product",
+  "name": "@big-archimate/product",
   "version": "0.0.0",
   "private": true,
-  "description": "CrossModel Product Branding",
+  "description": "bigArchiMate Product Branding",
   "keywords": [
     "theia-extension"
   ],
-  "homepage": "https://github.com/CrossBreezeNL/crossmodel",
+  "homepage": "https://github.com/borkdominik/bigArchiMate",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CrossBreezeNL/crossmodel"
+    "url": "git+https://github.com/borkdominik/bigArchiMate"
   },
   "license": "AGPL-3.0-or-later",
-  "author": {
-    "name": "CrossBreeze",
-    "email": "devops@crossbreeze.nl"
-  },
   "files": [
     "lib",
     "src",

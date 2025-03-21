@@ -1,0 +1,4 @@
+element:
+    id: Stakeholder
+    type: Stakeholder
+    name: "Stakeholder"

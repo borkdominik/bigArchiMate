@@ -1,20 +1,16 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
-
 import { ApplicationShell, ShouldSaveDialog } from '@theia/core/lib/browser';
 import { PropertyDataService } from '@theia/property-view/lib/browser/property-data-service';
 import { PropertyViewContentWidget } from '@theia/property-view/lib/browser/property-view-content-widget';
 
-import { CrossModelWidget } from '@crossbreeze/core/lib/browser';
-import { RenderProps } from '@crossbreeze/protocol';
+import { CustomWidget } from '@big-archimate/core/lib/browser';
+import { RenderProps } from '@big-archimate/protocol';
 import { GLSPDiagramWidget, GlspSelection, getDiagramWidget } from '@eclipse-glsp/theia-integration';
 import { inject, injectable } from '@theia/core/shared/inversify';
 import * as deepEqual from 'fast-deep-equal';
 import { PropertiesRenderData } from './model-data-service';
 
 @injectable()
-export class ModelPropertyWidget extends CrossModelWidget implements PropertyViewContentWidget {
+export class ModelPropertyWidget extends CustomWidget implements PropertyViewContentWidget {
    @inject(ApplicationShell) protected shell: ApplicationShell;
 
    protected renderData?: PropertiesRenderData;

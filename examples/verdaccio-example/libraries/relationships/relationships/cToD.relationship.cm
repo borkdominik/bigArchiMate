@@ -1,5 +1,0 @@
-relationship cToD {
-    source := entities/C with entities/C.name;
-    target := entities/D;
-    type := 1:n;
-} 
