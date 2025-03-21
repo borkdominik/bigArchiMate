@@ -71,20 +71,6 @@ Short steps:
 
 We package bigArchiMate either for the browser (Docker) or desktop application (Electron).
 
-### Docker
-
-To package the web application we build a docker image. There are currently two Dockerfile definitions, one based on [Alpine Linux](./Dockerfile) and one based on [Debian](./Dockerfile.debian). Some users might prefer Debian over Alpine as based, which is why we have both options.
-
-To create the Alpine based image, execute the following command:
-
-    docker build -t big-archimate:0.0.0-alpine -f .\Dockerfile .
-
-To create the Debian based image, execute the following command:
-
-    docker build -t big-archimate:0.0.0-debian -f .\Dockerfile.debian .
-
-In the main build action we build and publish the Alpine version.
-
 ### Electron
 
 To package bigArchiMate as a desktop application, execute the following command:
