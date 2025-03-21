@@ -61,8 +61,8 @@ RUN apk add \
     libsecret \
     git
 
-# Copy the archimate-example workspace into the project folder.
-COPY examples/archimate-example /home/project
+# Copy the example workspace into the project folder.
+COPY examples /home/project
 
 # Set the permission of the project folder.
 RUN chown -R big-archimate:big-archimate /home/project

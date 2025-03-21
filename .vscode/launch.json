@@ -22,7 +22,7 @@
         "--log-level=debug",
         "--hostname=localhost",
         "--no-cluster",
-        "--root-dir=${workspaceRoot}/examples/archimate-example",
+        "--root-dir=${workspaceRoot}/examples",
         "--app-project-path=${workspaceFolder}/applications/electron-app",
         "--remote-debugging-port=9222",
         "--no-app-auto-install",
@@ -60,7 +60,7 @@
         "--log-level=debug",
         "--hostname=localhost",
         "--no-cluster",
-        "--root-dir=${workspaceRoot}/examples/workspace",
+        "--root-dir=${workspaceRoot}/examples",
         "--app-project-path=${workspaceFolder}/applications/browser-app",
         "--no-app-auto-install",
         "--plugins=local-dir:${workspaceFolder}/applications/browser-app/plugins"

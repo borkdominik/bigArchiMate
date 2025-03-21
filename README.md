@@ -26,10 +26,10 @@ This will build and start bigArchiMate as a native desktop application for the O
     yarn build:electron &&
     yarn start:electron
 
-## Example Workspace
+## Example ArchiMate Models
 
-Under `examples/verdaccio-example/workspace` we provide an example workspace with some demo packages containing entities, relationships and system diagrams.
-Each package represents a dedicated system or library and may depend on other packages.
+Under `examples` we provide an example workspace with some demo models containing elements, relations, junctions and diagrams.
+Each package represents a dedicated model and may depend on other packages.
 
 Using a known package structure - npm in our case - we can re-use large parts of the package management to download dependencies that are not locally available from an external package registry.
 In order to test this behavior, we use verdaccio as a local npm registry that provides some models that are needed by our workspace packages.
