@@ -15,7 +15,7 @@ export class ElementNodeView extends DiagramNodeView {}
 export class JunctionNodeView extends CircularNodeView {}
 
 @injectable()
-export class RelationshipEdgeView extends GEdgeView {
+export class RelationEdgeView extends GEdgeView {
    protected override renderAdditionals(edge: GEdge, segments: Point[], context: RenderingContext): VNode[] {
       const additionals = super.renderAdditionals(edge, segments, context);
       const p1 = segments[segments.length - 2];
@@ -36,17 +36,17 @@ export class RelationshipEdgeView extends GEdgeView {
 
    private getTargetMarker(edge: GEdge, p1: Point, p2: Point): VNode | undefined {
       let targetMarkerPath = '';
-      const relationshipType = ARCHIMATE_RELATION_TYPE_MAP.getReverse(edge.type);
+      const relationType = ARCHIMATE_RELATION_TYPE_MAP.getReverse(edge.type);
 
-      if (relationshipType === 'Specialization' || relationshipType === 'Realization') {
+      if (relationType === 'Specialization' || relationType === 'Realization') {
          targetMarkerPath = 'M 20 -10 L 2 0 L 20 10 Z';
-      } else if (relationshipType === 'Triggering' || relationshipType === 'Flow' || relationshipType === 'Assignment') {
+      } else if (relationType === 'Triggering' || relationType === 'Flow' || relationType === 'Assignment') {
          targetMarkerPath = 'M 14 -7 L 2 0 L 14 7 Z';
-      } else if (relationshipType === 'Serving') {
+      } else if (relationType === 'Serving') {
          targetMarkerPath = 'M 18 9 L 2 0 L 18 -9';
-      } else if (relationshipType === 'Access' || relationshipType === 'Influence') {
+      } else if (relationType === 'Access' || relationType === 'Influence') {
          targetMarkerPath = 'M 14 -7 L 2 0 L 14 7';
-      } else if (relationshipType === 'Composition' || relationshipType === 'Aggregation') {
+      } else if (relationType === 'Composition' || relationType === 'Aggregation') {
          targetMarkerPath = 'M 14 -7 L 2 0 L 14 7 L 26 0 Z';
       }
 
@@ -66,9 +66,9 @@ export class RelationshipEdgeView extends GEdgeView {
 
    private getSourceMarker(edge: GEdge, p1: Point, p2: Point): VNode | undefined {
       let sourceMarkerPath = '';
-      const relationshipType = ARCHIMATE_RELATION_TYPE_MAP.getReverse(edge.type);
+      const relationType = ARCHIMATE_RELATION_TYPE_MAP.getReverse(edge.type);
 
-      if (relationshipType === 'Assignment') {
+      if (relationType === 'Assignment') {
          sourceMarkerPath = 'M 0 0 A 1 1 0 0 0 -14 0 A 1 1 0 0 0 0 0';
       }
 

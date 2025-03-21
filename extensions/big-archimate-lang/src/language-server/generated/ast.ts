@@ -105,7 +105,7 @@ export type ArchiMateLanguageKeywordNames =
     | "name"
     | "nodes"
     | "properties"
-    | "relationship"
+    | "relation"
     | "routingPoints"
     | "source"
     | "sourceNode"
@@ -141,10 +141,10 @@ export function isElementType(item: unknown): item is ElementType {
     return item === 'ApplicationCollaboration' || item === 'ApplicationComponent' || item === 'ApplicationEvent' || item === 'ApplicationFunction' || item === 'ApplicationInterface' || item === 'ApplicationInteraction' || item === 'ApplicationProcess' || item === 'ApplicationService' || item === 'Artifact' || item === 'Assessment' || item === 'BusinessActor' || item === 'BusinessCollaboration' || item === 'BusinessEvent' || item === 'BusinessFunction' || item === 'BusinessInteraction' || item === 'BusinessInterface' || item === 'BusinessObject' || item === 'BusinessProcess' || item === 'BusinessRole' || item === 'BusinessService' || item === 'Capability' || item === 'Constraint' || item === 'CommunicationNetwork' || item === 'Contract' || item === 'CourseOfAction' || item === 'DataObject' || item === 'Deliverable' || item === 'Device' || item === 'DistributionNetwork' || item === 'Driver' || item === 'Equipment' || item === 'Facility' || item === 'Gap' || item === 'Goal' || item === 'Grouping' || item === 'ImplementationEvent' || item === 'Location' || item === 'Material' || item === 'Meaning' || item === 'Node' || item === 'Outcome' || item === 'Path' || item === 'Plateau' || item === 'Principle' || item === 'Product' || item === 'Requirement' || item === 'Representation' || item === 'Resource' || item === 'Stakeholder' || item === 'SystemSoftware' || item === 'TechnologyCollaboration' || item === 'TechnologyEvent' || item === 'TechnologyFunction' || item === 'TechnologyInteraction' || item === 'TechnologyInterface' || item === 'TechnologyProcess' || item === 'TechnologyService' || item === 'Value' || item === 'ValueStream' || item === 'WorkPackage';
 }
 
-export type ID = ElementType | RelationshipType | string;
+export type ID = ElementType | RelationType | string;
 
 export function isID(item: unknown): item is ID {
-    return isRelationshipType(item) || isElementType(item) || (typeof item === 'string' && (/[_a-zA-Z][\w_\-~$#@/\d]*/.test(item)));
+    return isRelationType(item) || isElementType(item) || (typeof item === 'string' && (/[_a-zA-Z][\w_\-~$#@/\d]*/.test(item)));
 }
 
 export type IDReference = string;
@@ -153,9 +153,9 @@ export function isIDReference(item: unknown): item is IDReference {
     return typeof item === 'string';
 }
 
-export type RelationshipType = 'Access' | 'Aggregation' | 'Assignment' | 'Association' | 'Composition' | 'Flow' | 'Influence' | 'Realization' | 'Serving' | 'Specialization' | 'Triggering';
+export type RelationType = 'Access' | 'Aggregation' | 'Assignment' | 'Association' | 'Composition' | 'Flow' | 'Influence' | 'Realization' | 'Serving' | 'Specialization' | 'Triggering';
 
-export function isRelationshipType(item: unknown): item is RelationshipType {
+export function isRelationType(item: unknown): item is RelationType {
     return item === 'Access' || item === 'Aggregation' || item === 'Association' || item === 'Assignment' || item === 'Composition' || item === 'Flow' || item === 'Influence' || item === 'Realization' || item === 'Serving' || item === 'Specialization' || item === 'Triggering';
 }
 
@@ -164,7 +164,7 @@ export interface ArchiMateRoot extends AstNode {
     diagram?: Diagram;
     element?: Element;
     junction?: Junction;
-    relationship?: Relationship;
+    relation?: Relation;
 }
 
 export const ArchiMateRoot = 'ArchiMateRoot';
@@ -176,7 +176,7 @@ export function isArchiMateRoot(item: unknown): item is ArchiMateRoot {
 export interface Diagram extends AstNode {
     readonly $container: ArchiMateRoot;
     readonly $type: 'Diagram';
-    edges: Array<RelationshipEdge>;
+    edges: Array<RelationEdge>;
     id?: ID;
     name?: string;
     nodes: Array<ElementNode | JunctionNode>;
@@ -255,7 +255,7 @@ export function isJunctionNode(item: unknown): item is JunctionNode {
 }
 
 export interface Property extends AstNode {
-    readonly $container: Diagram | Element | Junction | Relationship;
+    readonly $container: Diagram | Element | Junction | Relation;
     readonly $type: 'Property';
     id: ID;
     name: string;
@@ -268,51 +268,51 @@ export function isProperty(item: unknown): item is Property {
     return reflection.isInstance(item, Property);
 }
 
-export interface Relationship extends AstNode {
+export interface Relation extends AstNode {
     readonly $container: ArchiMateRoot;
-    readonly $type: 'Relationship';
+    readonly $type: 'Relation';
     documentation?: string;
     id: ID;
     name?: string;
     properties: Array<Property>;
     source: Reference<ElementOrJunction>;
     target: Reference<ElementOrJunction>;
-    type: RelationshipType;
+    type: RelationType;
 }
 
-export const Relationship = 'Relationship';
+export const Relation = 'Relation';
 
-export function isRelationship(item: unknown): item is Relationship {
-    return reflection.isInstance(item, Relationship);
+export function isRelation(item: unknown): item is Relation {
+    return reflection.isInstance(item, Relation);
 }
 
-export interface RelationshipEdge extends AstNode {
+export interface RelationEdge extends AstNode {
     readonly $container: Diagram;
-    readonly $type: 'RelationshipEdge';
+    readonly $type: 'RelationEdge';
     id: ID;
-    relationship: Reference<Relationship>;
-    routingPoints: Array<RelationshipRoutingPoint>;
+    relation: Reference<Relation>;
+    routingPoints: Array<RelationRoutingPoint>;
     sourceNode: Reference<ElementNodeOrJunctionNode>;
     targetNode: Reference<ElementNodeOrJunctionNode>;
 }
 
-export const RelationshipEdge = 'RelationshipEdge';
+export const RelationEdge = 'RelationEdge';
 
-export function isRelationshipEdge(item: unknown): item is RelationshipEdge {
-    return reflection.isInstance(item, RelationshipEdge);
+export function isRelationEdge(item: unknown): item is RelationEdge {
+    return reflection.isInstance(item, RelationEdge);
 }
 
-export interface RelationshipRoutingPoint extends AstNode {
-    readonly $container: RelationshipEdge;
-    readonly $type: 'RelationshipRoutingPoint';
+export interface RelationRoutingPoint extends AstNode {
+    readonly $container: RelationEdge;
+    readonly $type: 'RelationRoutingPoint';
     x: number;
     y: number;
 }
 
-export const RelationshipRoutingPoint = 'RelationshipRoutingPoint';
+export const RelationRoutingPoint = 'RelationRoutingPoint';
 
-export function isRelationshipRoutingPoint(item: unknown): item is RelationshipRoutingPoint {
-    return reflection.isInstance(item, RelationshipRoutingPoint);
+export function isRelationRoutingPoint(item: unknown): item is RelationRoutingPoint {
+    return reflection.isInstance(item, RelationRoutingPoint);
 }
 
 export type ArchiMateLanguageAstType = {
@@ -325,15 +325,15 @@ export type ArchiMateLanguageAstType = {
     Junction: Junction
     JunctionNode: JunctionNode
     Property: Property
-    Relationship: Relationship
-    RelationshipEdge: RelationshipEdge
-    RelationshipRoutingPoint: RelationshipRoutingPoint
+    Relation: Relation
+    RelationEdge: RelationEdge
+    RelationRoutingPoint: RelationRoutingPoint
 }
 
 export class ArchiMateLanguageAstReflection extends AbstractAstReflection {
 
     getAllTypes(): string[] {
-        return [ArchiMateRoot, Diagram, Element, ElementNode, ElementNodeOrJunctionNode, ElementOrJunction, Junction, JunctionNode, Property, Relationship, RelationshipEdge, RelationshipRoutingPoint];
+        return [ArchiMateRoot, Diagram, Element, ElementNode, ElementNodeOrJunctionNode, ElementOrJunction, Junction, JunctionNode, Property, Relation, RelationEdge, RelationRoutingPoint];
     }
 
     protected override computeIsSubtype(subtype: string, supertype: string): boolean {
@@ -361,15 +361,15 @@ export class ArchiMateLanguageAstReflection extends AbstractAstReflection {
             case 'JunctionNode:junction': {
                 return Junction;
             }
-            case 'Relationship:source':
-            case 'Relationship:target': {
+            case 'Relation:source':
+            case 'Relation:target': {
                 return ElementOrJunction;
             }
-            case 'RelationshipEdge:relationship': {
-                return Relationship;
+            case 'RelationEdge:relation': {
+                return Relation;
             }
-            case 'RelationshipEdge:sourceNode':
-            case 'RelationshipEdge:targetNode': {
+            case 'RelationEdge:sourceNode':
+            case 'RelationEdge:targetNode': {
                 return ElementNodeOrJunctionNode;
             }
             default: {
@@ -387,7 +387,7 @@ export class ArchiMateLanguageAstReflection extends AbstractAstReflection {
                         { name: 'diagram' },
                         { name: 'element' },
                         { name: 'junction' },
-                        { name: 'relationship' }
+                        { name: 'relation' }
                     ]
                 };
             }
@@ -462,9 +462,9 @@ export class ArchiMateLanguageAstReflection extends AbstractAstReflection {
                     ]
                 };
             }
-            case Relationship: {
+            case Relation: {
                 return {
-                    name: Relationship,
+                    name: Relation,
                     properties: [
                         { name: 'documentation' },
                         { name: 'id' },
@@ -476,21 +476,21 @@ export class ArchiMateLanguageAstReflection extends AbstractAstReflection {
                     ]
                 };
             }
-            case RelationshipEdge: {
+            case RelationEdge: {
                 return {
-                    name: RelationshipEdge,
+                    name: RelationEdge,
                     properties: [
                         { name: 'id' },
-                        { name: 'relationship' },
+                        { name: 'relation' },
                         { name: 'routingPoints', defaultValue: [] },
                         { name: 'sourceNode' },
                         { name: 'targetNode' }
                     ]
                 };
             }
-            case RelationshipRoutingPoint: {
+            case RelationRoutingPoint: {
                 return {
-                    name: RelationshipRoutingPoint,
+                    name: RelationRoutingPoint,
                     properties: [
                         { name: 'x' },
                         { name: 'y' }

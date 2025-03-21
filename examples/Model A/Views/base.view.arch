@@ -34,14 +34,14 @@ diagram:
         height: 50
     edges:
       - id: Association_Outcome1-ValueStream2Edge
-        relationship: ModelA.Association_Outcome1-ValueStream2
+        relation: ModelA.Association_Outcome1-ValueStream2
         sourceNode: OutcomeNode
         targetNode: ValueStreamNode
       - id: Association_Junction1-BusinessRole1Edge
-        relationship: Association_Junction1-BusinessRole1
+        relation: Association_Junction1-BusinessRole1
         sourceNode: JunctionNode
         targetNode: BusinessRoleNode
       - id: Association_Junction1-Location1Edge
-        relationship: Association_Junction1-Location1
+        relation: Association_Junction1-Location1
         sourceNode: JunctionNode
         targetNode: LocationNode

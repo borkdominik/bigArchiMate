@@ -1,11 +1,11 @@
 import {
-    ArchiMateRoot,
-    CrossReferenceContext,
-    Element,
-    Junction,
-    ModelDiagnostic,
-    ReferenceableElement,
-    Relationship
+   ArchiMateRoot,
+   CrossReferenceContext,
+   Element,
+   Junction,
+   ModelDiagnostic,
+   ReferenceableElement,
+   Relation
 } from '@big-archimate/protocol';
 import * as React from 'react';
 import { DispatchAction, ModelReducer } from './ModelReducer';
@@ -77,6 +77,6 @@ export function useJunction(): Junction {
    return useModel().junction!;
 }
 
-export function useRelationship(): Relationship {
-   return useModel().relationship!;
+export function useRelation(): Relation {
+   return useModel().relation!;
 }

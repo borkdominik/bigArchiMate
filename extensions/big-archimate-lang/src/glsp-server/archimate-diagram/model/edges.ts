@@ -1,28 +1,28 @@
 import { ARCHIMATE_RELATION_TYPE_MAP, REFERENCE_CONTAINER_TYPE, REFERENCE_PROPERTY, REFERENCE_VALUE } from '@big-archimate/protocol';
 import { GEdge, GEdgeBuilder, Point } from '@eclipse-glsp/server';
-import { RelationshipEdge, RelationshipRoutingPoint } from '../../../language-server/generated/ast.js';
+import { RelationEdge, RelationRoutingPoint } from '../../../language-server/generated/ast.js';
 import { ArchiMateGModelIndex } from '../../common/gmodel-index.js';
 
-export class GRelationshipEdge extends GEdge {
-   static override builder(): GRelationshipEdgeBuilder {
-      return new GRelationshipEdgeBuilder(GRelationshipEdge);
+export class GRelationEdge extends GEdge {
+   static override builder(): GRelationEdgeBuilder {
+      return new GRelationEdgeBuilder(GRelationEdge);
    }
 }
 
-export class GRelationshipEdgeBuilder extends GEdgeBuilder<GRelationshipEdge> {
-   set(edge: RelationshipEdge, index: ArchiMateGModelIndex): this {
-      const type = edge.relationship.ref?.type;
+export class GRelationEdgeBuilder extends GEdgeBuilder<GRelationEdge> {
+   set(edge: RelationEdge, index: ArchiMateGModelIndex): this {
+      const type = edge.relation.ref?.type;
 
       if (type) {
          this.type(ARCHIMATE_RELATION_TYPE_MAP.get(type));
       }
 
       this.id(index.createId(edge));
-      this.addCssClasses('diagram-edge', 'relationship');
+      this.addCssClasses('diagram-edge', 'relation');
       this.addArg('edgePadding', 5);
-      this.addArg(REFERENCE_CONTAINER_TYPE, RelationshipEdge);
-      this.addArg(REFERENCE_PROPERTY, 'relationship');
-      this.addArg(REFERENCE_VALUE, edge.relationship.$refText);
+      this.addArg(REFERENCE_CONTAINER_TYPE, RelationEdge);
+      this.addArg(REFERENCE_PROPERTY, 'relation');
+      this.addArg(REFERENCE_VALUE, edge.relation.$refText);
 
       const sourceId = index.createId(edge.sourceNode?.ref);
       const targetId = index.createId(edge.targetNode?.ref);
@@ -30,11 +30,11 @@ export class GRelationshipEdgeBuilder extends GEdgeBuilder<GRelationshipEdge> {
       this.sourceId(sourceId || '');
       this.targetId(targetId || '');
 
-      this.addRoutingPoints(edge.routingPoints.map(this.relationshipEdgeRoutingPointToPoint));
+      this.addRoutingPoints(edge.routingPoints.map(this.relationEdgeRoutingPointToPoint));
       return this;
    }
 
-   private relationshipEdgeRoutingPointToPoint(routingPoint: RelationshipRoutingPoint): Point {
+   private relationEdgeRoutingPointToPoint(routingPoint: RelationRoutingPoint): Point {
       return { x: routingPoint.x, y: routingPoint.y };
    }
 }

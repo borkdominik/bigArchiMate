@@ -1,5 +1,5 @@
 import 'terminals'
-import 'relationship'
+import 'relation'
 
 Junction:
     'junction' ':'

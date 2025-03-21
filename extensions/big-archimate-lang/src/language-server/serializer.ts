@@ -8,13 +8,13 @@ import {
    ElementNode,
    isElement,
    isJunction,
-   isRelationship,
+   isRelation,
    Junction,
    JunctionNode,
    reflection,
-   Relationship,
-   RelationshipEdge,
-   RelationshipRoutingPoint
+   Relation,
+   RelationEdge,
+   RelationRoutingPoint
 } from './generated/ast.js';
 import { isImplicitProperty } from './util/ast-util.js';
 
@@ -26,12 +26,12 @@ import { isImplicitProperty } from './util/ast-util.js';
 const PROPERTY_ORDER = new Map<string, string[]>([
    [Element, ['id', 'type', 'name', 'documentation', 'properties']],
    [Junction, ['id', 'name', 'documentation', 'properties']],
-   [Relationship, ['id', 'type', 'source', 'target', 'name', 'documentation', 'properties']],
+   [Relation, ['id', 'type', 'source', 'target', 'name', 'documentation', 'properties']],
    [Diagram, ['id', 'name', 'nodes', 'edges', 'properties']],
    [ElementNode, ['id', 'element', 'x', 'y', 'width', 'height']],
    [JunctionNode, ['id', 'junction', 'x', 'y', 'width', 'height']],
-   [RelationshipEdge, ['id', 'relationship', 'sourceNode', 'targetNode', 'routingPoints']],
-   [RelationshipRoutingPoint, ['x', 'y']]
+   [RelationEdge, ['id', 'relation', 'sourceNode', 'targetNode', 'routingPoints']],
+   [RelationRoutingPoint, ['x', 'y']]
 ]);
 
 /**
@@ -71,7 +71,7 @@ export class Serializer implements ModelSerializer<ArchiMateRoot> {
          key === 'id' ||
          (!Array.isArray(value) && this.isValidReference(parent, key, value)) ||
          (isElement(parent) && key === 'type') ||
-         (isRelationship(parent) && key === 'type') ||
+         (isRelation(parent) && key === 'type') ||
          (isJunction(parent) && key === 'type')
       ) {
          // values that we do not want to quote because they are ids or references

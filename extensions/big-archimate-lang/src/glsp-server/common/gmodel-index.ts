@@ -10,11 +10,11 @@ import {
    isElement,
    isElementNode,
    isJunctionNode,
-   isRelationship,
-   isRelationshipEdge,
+   isRelation,
+   isRelationEdge,
    JunctionNode,
-   Relationship,
-   RelationshipEdge
+   Relation,
+   RelationEdge
 } from '../../language-server/generated/ast.js';
 
 /**
@@ -94,8 +94,8 @@ export class ArchiMateGModelIndex extends GModelIndex {
       return this.findSemanticElement(id, isElement);
    }
 
-   findRelationship(id: string): Relationship | undefined {
-      return this.findSemanticElement(id, isRelationship);
+   findRelation(id: string): Relation | undefined {
+      return this.findSemanticElement(id, isRelation);
    }
 
    findElementNode(id: string): ElementNode | undefined {
@@ -106,7 +106,7 @@ export class ArchiMateGModelIndex extends GModelIndex {
       return this.findSemanticElement(id, isJunctionNode);
    }
 
-   findRelationshipEdge(id: string): RelationshipEdge | undefined {
-      return this.findSemanticElement(id, isRelationshipEdge);
+   findRelationEdge(id: string): RelationEdge | undefined {
+      return this.findSemanticElement(id, isRelationEdge);
    }
 }

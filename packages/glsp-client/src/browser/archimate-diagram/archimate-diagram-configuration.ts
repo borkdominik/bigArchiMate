@@ -28,10 +28,10 @@ import { createDiagramModule } from '../diagram-module';
 import { CutOffCornerNodeView } from './cut-off-corner-view';
 import { archiMateEdgeCreationToolModule } from './edge-creation-tool/edge-creation-tool-module';
 import { IconView } from './icon-view';
-import { ElementNode, GEditableLabel, Icon, JunctionNode, RelationshipEdge } from './model';
+import { ElementNode, GEditableLabel, Icon, JunctionNode, RelationEdge } from './model';
 import { archiMateNodeCreationModule } from './node-creation-tool/node-creation-tool-module';
 import { archiMateSelectModule } from './select-tool/select-tool-module';
-import { ElementNodeView, JunctionNodeView, RelationshipEdgeView } from './views';
+import { ElementNodeView, JunctionNodeView, RelationEdgeView } from './views';
 
 export class ArchiMateDiagramConfiguration extends GLSPDiagramConfiguration {
    diagramType: string = ArchiMateDiagramLanguage.diagramType;
@@ -76,7 +76,7 @@ const diagramModule = createDiagramModule((bind, unbind, isBound, rebind) => {
    });
 
    ARCHIMATE_RELATION_TYPE_MAP.values().forEach(edgeType => {
-      configureModelElement(context, edgeType, RelationshipEdge, RelationshipEdgeView);
+      configureModelElement(context, edgeType, RelationEdge, RelationEdgeView);
    });
 
    configureModelElement(context, ARCHIMATE_CONCEPT_TYPE_MAP.get('Junction'), JunctionNode, JunctionNodeView);

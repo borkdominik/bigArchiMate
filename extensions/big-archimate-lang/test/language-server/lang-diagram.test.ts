@@ -104,8 +104,8 @@ describe('Language diagram', () => {
 
          const edge1 = diagram.edges[0];
          expect(edge1.id).toBe('Edge1Id');
-         expect(isReference(edge1.relationship)).toBe(true);
-         expect(edge1.relationship.$refText).toBe('Relationship1Id');
+         expect(isReference(edge1.relation)).toBe(true);
+         expect(edge1.relation.$refText).toBe('Relation1Id');
          expect(isReference(edge1.sourceNode)).toBe(true);
          expect(edge1.sourceNode.$refText).toBe('Element1IdNode');
          expect(isReference(edge1.targetNode)).toBe(true);

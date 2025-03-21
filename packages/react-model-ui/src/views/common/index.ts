@@ -3,5 +3,4 @@ export * from './EditorError';
 export * from './ElementPropertiesDataGrid';
 export * from './GridComponent';
 export * from './JunctionPropertiesDataGrid';
-export * from './RelationshipPropertiesDataGrid';
-
+export * from './RelationPropertiesDataGrid';

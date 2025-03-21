@@ -6,7 +6,7 @@ import {
    JunctionComponent,
    ModelProviderProps,
    OpenCallback,
-   RelationshipComponent,
+   RelationComponent,
    SaveCallback
 } from '@big-archimate/react-model-ui';
 import { Emitter, Event } from '@theia/core';
@@ -193,8 +193,8 @@ export class CustomWidget extends ReactWidget implements Saveable {
       if (this.document?.root.junction) {
          return <JunctionComponent {...this.getModelProviderProps()} {...this.getRenderProperties()} />;
       }
-      if (this.document?.root?.relationship) {
-         return <RelationshipComponent {...this.getModelProviderProps()} {...this.getRenderProperties()} />;
+      if (this.document?.root?.relation) {
+         return <RelationComponent {...this.getModelProviderProps()} {...this.getRenderProperties()} />;
       }
       if (this.error) {
          return <ErrorView errorMessage={this.error} />;

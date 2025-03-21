@@ -63,7 +63,7 @@ ElementType returns string:
     'ValueStream' |
     'WorkPackage';
 
-RelationshipType returns string:
+RelationType returns string:
     'Access' |
     'Aggregation' |
     'Association' |
@@ -83,7 +83,7 @@ terminal _ID: /[_a-zA-Z][\w_\-~$#@/\d]*/;
 
 // See https://langium.org/docs/recipes/keywords-as-identifiers/
 ID returns string:
-    _ID | RelationshipType | ElementType;
+    _ID | RelationType | ElementType;
 
 // Identification for cross references
 IDReference returns string:

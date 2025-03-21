@@ -37,7 +37,7 @@ export function isJunctionNode(junction: GModelElement): junction is JunctionNod
    return junction instanceof JunctionNode || false;
 }
 
-export class RelationshipEdge extends GEdge {}
+export class RelationEdge extends GEdge {}
 
 export class GEditableLabel extends GLabel implements EditableLabel {
    editControlPositionCorrection = {

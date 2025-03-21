@@ -8,11 +8,11 @@ import {
    Diagram,
    Element,
    Junction,
-   Relationship,
+   Relation,
    isDiagram,
    isElement,
    isJunction,
-   isRelationship
+   isRelation
 } from '../../../src/language-server/generated/ast.js';
 import { Services, createServices } from '../../../src/language-server/module.js';
 import { SemanticRoot, TypeGuard, WithDocument, findSemanticRoot } from '../../../src/language-server/util/ast-util.js';
@@ -91,8 +91,8 @@ export async function parseJunction(input: DocumentInput, assert: ParseAssert = 
    return parseSemanticRoot(input, assert, isJunction);
 }
 
-export async function parseRelationship(input: DocumentInput, assert: ParseAssert = {}): Promise<WithDocument<Relationship>> {
-   return parseSemanticRoot(input, assert, isRelationship);
+export async function parseRelation(input: DocumentInput, assert: ParseAssert = {}): Promise<WithDocument<Relation>> {
+   return parseSemanticRoot(input, assert, isRelation);
 }
 
 export async function parseDiagram(input: DocumentInput, assert: ParseAssert = {}): Promise<WithDocument<Diagram>> {

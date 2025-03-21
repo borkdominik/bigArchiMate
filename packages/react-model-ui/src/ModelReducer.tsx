@@ -1,7 +1,7 @@
 import { ArchiMateRoot } from '@big-archimate/protocol';
 import { ElementDispatchAction, ElementModelReducer, isElementDispatchAction } from './ElementModelReducer';
 import { JunctionDispatchAction, JunctionModelReducer, isJunctionDispatchAction } from './JunctionModelReducer';
-import { RelationshipDispatchAction, RelationshipModelReducer, isRelationshipDispatchAction } from './RelationshipModelReducer';
+import { RelationDispatchAction, RelationModelReducer, isRelationDispatchAction } from './RelationModelReducer';
 
 export interface ModelAction {
    type: string;
@@ -12,7 +12,7 @@ export interface ModelUpdateAction extends ModelAction {
    model: ArchiMateRoot;
 }
 
-export type DispatchAction = ModelUpdateAction | ElementDispatchAction | JunctionDispatchAction | RelationshipDispatchAction;
+export type DispatchAction = ModelUpdateAction | ElementDispatchAction | JunctionDispatchAction | RelationDispatchAction;
 
 export type ModelStateReason = DispatchAction['type'] | 'model:initial';
 
@@ -37,8 +37,8 @@ export function ModelReducer(state: ModelState, action: DispatchAction): ModelSt
    if (isJunctionDispatchAction(action)) {
       return JunctionModelReducer(state, action);
    }
-   if (isRelationshipDispatchAction(action)) {
-      return RelationshipModelReducer(state, action);
+   if (isRelationDispatchAction(action)) {
+      return RelationModelReducer(state, action);
    }
    throw Error('Unknown ModelReducer action');
 }

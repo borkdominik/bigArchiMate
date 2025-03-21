@@ -3,7 +3,7 @@ import { codiconCSSString } from './util';
 const ModelFileTypeValues = {
    Element: 'Element',
    Junction: 'Junction',
-   Relationship: 'Relationship',
+   Relation: 'Relation',
    Diagram: 'Diagram'
 } as const;
 
@@ -23,8 +23,8 @@ export const ModelFileType = {
             return ModelFileExtensions.Element;
          case 'Junction':
             return ModelFileExtensions.Junction;
-         case 'Relationship':
-            return ModelFileExtensions.Relationship;
+         case 'Relation':
+            return ModelFileExtensions.Relation;
          case 'Diagram':
             return ModelFileExtensions.Diagram;
       }
@@ -35,7 +35,7 @@ export type ModelFileType = (typeof ModelFileTypeValues)[keyof typeof ModelFileT
 export const ModelFileExtensions = {
    Element: '.element.arch',
    Junction: '.junction.arch',
-   Relationship: '.relationship.arch',
+   Relation: '.relation.arch',
    Diagram: '.view.arch',
 
    isElementFile(uri: string): boolean {
@@ -46,8 +46,8 @@ export const ModelFileExtensions = {
       return uri.endsWith(this.Junction);
    },
 
-   isRelationshipFile(uri: string): boolean {
-      return uri.endsWith(this.Relationship);
+   isRelationFile(uri: string): boolean {
+      return uri.endsWith(this.Relation);
    },
 
    isDiagramFile(uri: string): boolean {
@@ -59,8 +59,8 @@ export const ModelFileExtensions = {
       if (uri.endsWith(this.Element)) {
          return uri.substring(0, uri.length - this.Element.length);
       }
-      if (uri.endsWith(this.Relationship)) {
-         return uri.substring(0, uri.length - this.Relationship.length);
+      if (uri.endsWith(this.Relation)) {
+         return uri.substring(0, uri.length - this.Relation.length);
       }
       if (uri.endsWith(this.Diagram)) {
          return uri.substring(0, uri.length - this.Diagram.length);
@@ -77,8 +77,8 @@ export const ModelFileExtensions = {
       if (this.isJunctionFile(uri)) {
          return 'Junction';
       }
-      if (this.isRelationshipFile(uri)) {
-         return 'Relationship';
+      if (this.isRelationFile(uri)) {
+         return 'Relation';
       }
       if (this.isDiagramFile(uri)) {
          return 'Diagram';
@@ -111,8 +111,8 @@ export const ModelFileExtensions = {
       if (content.startsWith('junction')) {
          return 'Junction';
       }
-      if (content.startsWith('relationship')) {
-         return 'Relationship';
+      if (content.startsWith('relation')) {
+         return 'Relation';
       }
       if (content.startsWith('diagram')) {
          return 'Diagram';

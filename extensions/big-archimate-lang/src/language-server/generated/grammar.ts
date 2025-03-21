@@ -34,7 +34,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
           },
           {
             "$type": "Assignment",
-            "feature": "relationship",
+            "feature": "relation",
             "operator": "=",
             "terminal": {
               "$type": "RuleCall",
@@ -466,7 +466,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
     },
     {
       "$type": "ParserRule",
-      "name": "RelationshipType",
+      "name": "RelationType",
       "dataType": "string",
       "definition": {
         "$type": "Alternatives",
@@ -878,13 +878,13 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
     },
     {
       "$type": "ParserRule",
-      "name": "Relationship",
+      "name": "Relation",
       "definition": {
         "$type": "Group",
         "elements": [
           {
             "$type": "Keyword",
-            "value": "relationship"
+            "value": "relation"
           },
           {
             "$type": "Keyword",
@@ -1714,7 +1714,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
     },
     {
       "$type": "ParserRule",
-      "name": "RelationshipRoutingPoint",
+      "name": "RelationRoutingPoint",
       "definition": {
         "$type": "Group",
         "elements": [
@@ -1769,7 +1769,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
     },
     {
       "$type": "ParserRule",
-      "name": "RelationshipEdge",
+      "name": "RelationEdge",
       "definition": {
         "$type": "Group",
         "elements": [
@@ -1795,7 +1795,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
           },
           {
             "$type": "Keyword",
-            "value": "relationship"
+            "value": "relation"
           },
           {
             "$type": "Keyword",
@@ -1803,7 +1803,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
           },
           {
             "$type": "Assignment",
-            "feature": "relationship",
+            "feature": "relation",
             "operator": "=",
             "terminal": {
               "$type": "CrossReference",

@@ -1,12 +1,12 @@
 import { Command, DeleteElementOperation, JsonOperationHandler, ModelState, remove } from '@eclipse-glsp/server';
 import { inject, injectable } from 'inversify';
 import {
-   ElementNode,
-   JunctionNode,
-   RelationshipEdge,
-   isElementNode,
-   isJunctionNode,
-   isRelationshipEdge
+    ElementNode,
+    JunctionNode,
+    RelationEdge,
+    isElementNode,
+    isJunctionNode,
+    isRelationEdge
 } from '../../../language-server/generated/ast.js';
 import { ArchiMateCommand } from '../../common/command.js';
 import { ArchiMateModelState } from '../../common/model-state.js';
@@ -46,7 +46,7 @@ export class DeleteOperationHandler extends JsonOperationHandler {
                   edge => edge.sourceNode?.ref === diagramComponent || edge.targetNode?.ref === diagramComponent
                )
             );
-         } else if (isRelationshipEdge(diagramComponent)) {
+         } else if (isRelationEdge(diagramComponent)) {
             deleteInfo.edges.push(diagramComponent);
          }
       }
@@ -54,11 +54,11 @@ export class DeleteOperationHandler extends JsonOperationHandler {
    }
 }
 
-function isDiagramComponent(item: unknown): item is RelationshipEdge | ElementNode | JunctionNode {
-   return isRelationshipEdge(item) || isElementNode(item) || isJunctionNode(item);
+function isDiagramComponent(item: unknown): item is RelationEdge | ElementNode | JunctionNode {
+   return isRelationEdge(item) || isElementNode(item) || isJunctionNode(item);
 }
 
 interface DeleteInfo {
    nodes: (ElementNode | JunctionNode)[];
-   edges: RelationshipEdge[];
+   edges: RelationEdge[];
 }

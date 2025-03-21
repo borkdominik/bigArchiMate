@@ -1,5 +1,0 @@
-relationship:
-    id: Flow_Node1-ApplicationProcess1
-    type: Flow
-    source: Node1
-    target: ApplicationProcess1

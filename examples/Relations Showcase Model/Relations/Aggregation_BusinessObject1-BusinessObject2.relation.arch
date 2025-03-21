@@ -1,0 +1,5 @@
+relation:
+    id: Aggregation_BusinessObject1-BusinessObject2
+    type: Aggregation
+    source: BusinessObject1
+    target: BusinessObject2

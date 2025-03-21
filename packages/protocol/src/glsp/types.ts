@@ -107,9 +107,9 @@ const ARCHIMATE_ELEMENT_TO_NODE_MAP: Record<ElementType, string> = elementTypes.
 export const ARCHIMATE_ELEMENT_TYPE_MAP = new ReversibleMap(ARCHIMATE_ELEMENT_TO_NODE_MAP);
 
 /**
- * A list of all ArchiMate relationship types.
+ * A list of all ArchiMate relation types.
  */
-export const relationshipTypes = [
+export const relationTypes = [
    'Access',
    'Aggregation',
    'Assignment',
@@ -124,37 +124,37 @@ export const relationshipTypes = [
 ] as const;
 
 /**
- * A type of an ArchiMate relationship.
+ * A type of an ArchiMate relation.
  */
-export type RelationshipType = (typeof relationshipTypes)[number];
+export type RelationType = (typeof relationTypes)[number];
 
 /**
- * A map of ArchiMate relationship types to GLSP edge types.
+ * A map of ArchiMate relation types to GLSP edge types.
  * The edge type is prefixed with the default edge type.
- * For example, the relationship type 'Access' is mapped to 'edge:access'.
+ * For example, the relation type 'Access' is mapped to 'edge:access'.
  */
-const ARCHIMATE_RELATION_TO_EDGE_MAP: Record<RelationshipType, string> = relationshipTypes.reduce(
-   (map, relationshipType) => {
-      map[relationshipType] = DefaultTypes.EDGE + ':' + toKebabCase(relationshipType);
+const ARCHIMATE_RELATION_TO_EDGE_MAP: Record<RelationType, string> = relationTypes.reduce(
+   (map, relationType) => {
+      map[relationType] = DefaultTypes.EDGE + ':' + toKebabCase(relationType);
       return map;
    },
-   {} as Record<RelationshipType, string>
+   {} as Record<RelationType, string>
 );
 
 /**
- * A reversible map of ArchiMate relationship types to GLSP edge types.
+ * A reversible map of ArchiMate relation types to GLSP edge types.
  */
 export const ARCHIMATE_RELATION_TYPE_MAP = new ReversibleMap(ARCHIMATE_RELATION_TO_EDGE_MAP);
 
 /**
- * A list of all ArchiMate concept types that are not relationships or elements.
+ * A list of all ArchiMate concept types that are not relations or elements.
  */
 export const otherConcepts = ['Junction'] as const;
 
 export type OtherConceptType = (typeof otherConcepts)[number];
 
 /**
- * A map of ArchiMate concepts that are not relationships or elements to GLSP node types.
+ * A map of ArchiMate concepts that are not relations or elements to GLSP node types.
  * The node type is prefixed with the default node type.
  * For example, the concept type 'Junction' is mapped to 'node:junction'.
  */
@@ -170,12 +170,12 @@ export const ARCHIMATE_NODE_TYPE_MAP = new ReversibleMap({
 /**
  * A list of all ArchiMate concepts.
  */
-export const concepts = [...elementTypes, ...relationshipTypes, ...otherConcepts] as const;
+export const concepts = [...elementTypes, ...relationTypes, ...otherConcepts] as const;
 
 /**
  * A type of an ArchiMate concept.
  */
-export type ConceptType = ElementType | RelationshipType | OtherConceptType;
+export type ConceptType = ElementType | RelationType | OtherConceptType;
 
 /**
  * A reversible map of ArchiMate concept types to GLSP edge types.

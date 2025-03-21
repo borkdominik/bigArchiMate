@@ -27,13 +27,13 @@ import { ArchiMateDiagramConfiguration } from './diagram-configuration.js';
 import { AddElementOperationHandler } from './handler/add-element-operation-handler.js';
 import { ApplyLabelEditOperationHandler } from './handler/apply-label-edit-operation-handler.js';
 import { ChangeBoundsOperationHandler } from './handler/change-bounds-operation-handler.js';
-import { ChangeRelationshipRoutingPointsOperationHandler } from './handler/change-relationship-routing-points.js';
+import { ChangeRelationRoutingPointsOperationHandler } from './handler/change-relation-routing-points.js';
 import { CreateElementOperationHandler } from './handler/create-element-operation-handler.js';
 import { CreateJunctionOperationHandler } from './handler/create-junction-operation-handler.js';
-import { CreateRelationshipOperationHandler } from './handler/create-relationship-operation-handler.js';
+import { CreateRelationOperationHandler } from './handler/create-relation-operation-handler.js';
 import { DeleteOperationHandler } from './handler/delete-operation-handler.js';
 import { DropElementOperationHandler } from './handler/drop-element-operation-handler.js';
-import { ValidateRelationshipActionHandler } from './handler/validate-relationship-action-handler.js';
+import { ValidateRelationActionHandler } from './handler/validate-relation-action-handler.js';
 import { ArchiMateDiagramGModelFactory } from './model/gmodel-factory.js';
 import { ArchiMateToolPaletteProvider } from './tool-palette/tool-palette-provider.js';
 
@@ -59,8 +59,8 @@ export class ArchiMateDiagramModule extends DiagramModule {
    protected override configureOperationHandlers(binding: InstanceMultiBinding<OperationHandlerConstructor>): void {
       super.configureOperationHandlers(binding);
       binding.add(ChangeBoundsOperationHandler); // move + resize behavior
-      binding.add(CreateRelationshipOperationHandler); // create 1:1 relationship
-      binding.add(ChangeRelationshipRoutingPointsOperationHandler); // change routing points of a relationship
+      binding.add(CreateRelationOperationHandler); // create 1:1 relation
+      binding.add(ChangeRelationRoutingPointsOperationHandler); // change routing points of a relation
       binding.add(DeleteOperationHandler); // delete elements
       binding.add(DropElementOperationHandler);
       binding.add(AddElementOperationHandler);
@@ -76,7 +76,7 @@ export class ArchiMateDiagramModule extends DiagramModule {
 
    protected override configureActionHandlers(binding: InstanceMultiBinding<ActionHandlerConstructor>): void {
       super.configureActionHandlers(binding);
-      binding.rebind(RequestCheckEdgeActionHandler, ValidateRelationshipActionHandler);
+      binding.rebind(RequestCheckEdgeActionHandler, ValidateRelationActionHandler);
    }
 
    protected override bindGModelIndex(): BindingTarget<GModelIndex> {
