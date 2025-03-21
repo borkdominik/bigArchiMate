@@ -1,5 +1,0 @@
-relation:
-    id: Assignment_Path1-BusinessService1
-    type: Assignment
-    source: Path1
-    target: BusinessService1

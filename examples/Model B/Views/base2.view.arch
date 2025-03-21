@@ -22,14 +22,14 @@ diagram:
         height: 50
     edges:
       - id: Association_ValueStream2-BusinessRole1Edge
-        relation: Association_ValueStream2-BusinessRole1
+        relationship: Association_ValueStream2-BusinessRole1
         sourceNode: ValueStream2Node
         targetNode: BusinessRole1Node
       - id: Association_ValueStream2-BusinessObject3Edge
-        relation: Association_ValueStream2-BusinessObject3
+        relationship: Association_ValueStream2-BusinessObject3
         sourceNode: ValueStream2Node
         targetNode: BusinessObjectNode
       - id: Association_BusinessObject3-BusinessRole1Edge
-        relation: Association_BusinessObject3-BusinessRole1
+        relationship: Association_BusinessObject3-BusinessRole1
         sourceNode: BusinessObjectNode
         targetNode: BusinessRole1Node

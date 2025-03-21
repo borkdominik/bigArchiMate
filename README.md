@@ -28,7 +28,7 @@ This will build and start bigArchiMate as a web application. When the web applic
 
 ## Example ArchiMate Models
 
-Under `examples` we provide an example workspace with some demo ArchiMate models containing elements, relations, junctions and diagrams.
+Under `examples` we provide an example workspace with some demo ArchiMate models containing elements, relationships, junctions and diagrams.
 Each package represents a dedicated ArchiMate model and may depend on other packages.
 
 ## Developing

@@ -1,14 +1,14 @@
 import { beforeAll, describe, expect, test } from '@jest/globals';
 import { Reference } from 'langium';
 
-import { ArchiMateRoot, Element, Relation } from '../../../src/language-server/generated/ast.js';
+import { ArchiMateRoot, Element, Relationship } from '../../../src/language-server/generated/ast.js';
 import { Serializer } from '../../../src/language-server/serializer.js';
 import {
-    createDiagram,
-    createElement,
-    createElementNode,
-    createRelation,
-    createRelationEdge
+   createDiagram,
+   createElement,
+   createElementNode,
+   createRelationship,
+   createRelationshipEdge
 } from '../../../src/language-server/util/ast-util.js';
 import { createTestServices } from '../test-utils/utils.js';
 
@@ -37,7 +37,7 @@ describe('Lexer', () => {
       });
    });
 
-   describe('Serialize relation', () => {
+   describe('Serialize relationship', () => {
       let archiMateRoot: ArchiMateRoot;
 
       beforeAll(() => {
@@ -59,12 +59,12 @@ describe('Lexer', () => {
             })
          };
 
-         archiMateRoot.relation = createRelation(archiMateRoot, 'testId', 'test Name', 'Association', ref1, ref2, {
+         archiMateRoot.relationship = createRelationship(archiMateRoot, 'testId', 'test Name', 'Association', ref1, ref2, {
             documentation: 'Test documentation'
          });
       });
 
-      test('serialize relation', () => {
+      test('serialize relationship', () => {
          const parseResult = serializer.serialize(archiMateRoot);
          expect(parseResult).toBe(expected_result1);
       });
@@ -92,9 +92,9 @@ describe('Lexer', () => {
             })
          };
 
-         const ref3: Reference<Relation> = {
+         const ref3: Reference<Relationship> = {
             $refText: 'Ref3',
-            ref: createRelation(archiMateRoot, 'testId', 'test Name', 'Association', ref1, ref2, {
+            ref: createRelationship(archiMateRoot, 'testId', 'test Name', 'Association', ref1, ref2, {
                documentation: 'Test documentation'
             })
          };
@@ -106,9 +106,7 @@ describe('Lexer', () => {
             createElementNode(archiMateRoot.diagram, 'Node2', ref2, { x: 100, y: 101 }, { width: 102, height: 102 })
          ];
 
-         archiMateRoot.diagram.edges = [
-            createRelationEdge(archiMateRoot.diagram, 'Edge1', ref3, { $refText: 'A' }, { $refText: 'B' })
-         ];
+         archiMateRoot.diagram.edges = [createRelationshipEdge(archiMateRoot.diagram, 'Edge1', ref3, { $refText: 'A' }, { $refText: 'B' })];
       });
 
       test('serialize diagram', () => {
@@ -124,7 +122,7 @@ const expected_result = `element:
     name: "test Name"
     documentation: "Test documentation"`;
 
-const expected_result1 = `relation:
+const expected_result1 = `relationship:
     id: testId
     type: Association
     source: Ref1
@@ -149,6 +147,6 @@ const expected_result2 = `diagram:
         height: 102
     edges:
       - id: Edge1
-        relation: Ref3
+        relationship: Ref3
         sourceNode: A
         targetNode: B`;

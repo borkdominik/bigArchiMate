@@ -8,18 +8,18 @@ import {
    ElementType,
    Junction,
    JunctionNode,
-   Relation,
-   RelationEdge,
-   RelationType,
+   Relationship,
+   RelationshipEdge,
+   RelationshipType,
    isArchiMateRoot,
    isDiagram,
    isElement,
    isJunction,
-   isRelation
+   isRelationship
 } from '../generated/ast.js';
 import { ID_PROPERTY } from '../naming.js';
 
-export type SemanticRoot = Element | Junction | Relation | Diagram;
+export type SemanticRoot = Element | Junction | Relationship | Diagram;
 
 export const IMPLICIT_OWNER_PROPERTY = '$owner';
 export const IMPLICIT_ID_PROPERTY = '$id';
@@ -93,14 +93,14 @@ export type DocumentContent = LangiumDocument | AstNode;
 export type TypeGuard<T> = (item: unknown) => item is T;
 
 export function isSemanticRoot(element: unknown): element is SemanticRoot {
-   return isElement(element) || isJunction(element) || isRelation(element) || isDiagram(element);
+   return isElement(element) || isJunction(element) || isRelationship(element) || isDiagram(element);
 }
 
 export function findSemanticRoot(input: DocumentContent): SemanticRoot | undefined;
 export function findSemanticRoot<T extends SemanticRoot>(input: DocumentContent, guard: TypeGuard<T>): T | undefined;
 export function findSemanticRoot<T extends SemanticRoot>(input: DocumentContent, guard?: TypeGuard<T>): SemanticRoot | T | undefined {
    const root = isAstNode(input) ? input.$document?.parseResult?.value ?? AstUtils.findRootNode(input) : input.parseResult?.value;
-   const semanticRoot = isArchiMateRoot(root) ? root.element ?? root.junction ?? root.relation ?? root.diagram : undefined;
+   const semanticRoot = isArchiMateRoot(root) ? root.element ?? root.junction ?? root.relationship ?? root.diagram : undefined;
    return !semanticRoot ? undefined : !guard ? semanticRoot : guard(semanticRoot) ? semanticRoot : undefined;
 }
 
@@ -112,8 +112,8 @@ export function findJunction(input: DocumentContent): Junction | undefined {
    return findSemanticRoot(input, isJunction);
 }
 
-export function findRelation(input: DocumentContent): Relation | undefined {
-   return findSemanticRoot(input, isRelation);
+export function findRelationship(input: DocumentContent): Relationship | undefined {
+   return findSemanticRoot(input, isRelationship);
 }
 
 export function findDiagram(input: DocumentContent): Diagram | undefined {
@@ -142,18 +142,18 @@ export function createElement(
    };
 }
 
-export function createRelation(
+export function createRelationship(
    container: ArchiMateRoot,
    id: string,
    name: string,
-   type: RelationType,
+   type: RelationshipType,
    source: Reference<Element>,
    target: Reference<Element>,
-   opts?: Partial<Omit<Relation, '$container' | '$type' | 'id' | 'name' | 'type' | 'source' | 'target'>>
-): Relation {
+   opts?: Partial<Omit<Relationship, '$container' | '$type' | 'id' | 'name' | 'type' | 'source' | 'target'>>
+): Relationship {
    return {
       $container: container,
-      $type: 'Relation',
+      $type: 'Relationship',
       id,
       name,
       type,
@@ -180,11 +180,7 @@ export function createJunction(
    };
 }
 
-export function createDiagram(
-   container: ArchiMateRoot,
-   id: string,
-   opts?: Partial<Omit<Diagram, '$container' | '$type' | 'id'>>
-): Diagram {
+export function createDiagram(container: ArchiMateRoot, id: string, opts?: Partial<Omit<Diagram, '$container' | '$type' | 'id'>>): Diagram {
    return {
       $container: container,
       $type: 'Diagram',
@@ -234,19 +230,19 @@ export function createJunctionNode(
    };
 }
 
-export function createRelationEdge(
+export function createRelationshipEdge(
    container: Diagram,
    id: string,
-   relation: Reference<Relation>,
+   relationship: Reference<Relationship>,
    sourceNode: Reference<ElementNode>,
    targetNode: Reference<ElementNode>,
-   opts?: Partial<Omit<RelationEdge, '$container' | '$type' | 'id' | 'relation' | 'sourceNode' | 'targetNode'>>
-): RelationEdge {
+   opts?: Partial<Omit<RelationshipEdge, '$container' | '$type' | 'id' | 'relationship' | 'sourceNode' | 'targetNode'>>
+): RelationshipEdge {
    return {
       $container: container,
-      $type: 'RelationEdge',
+      $type: 'RelationshipEdge',
       id,
-      relation,
+      relationship,
       sourceNode,
       targetNode,
       routingPoints: [],

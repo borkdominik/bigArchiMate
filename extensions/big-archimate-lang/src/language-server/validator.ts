@@ -1,11 +1,11 @@
 import { ModelFileExtensions } from '@big-archimate/protocol';
 import { AstNode, UriUtils, ValidationAcceptor, ValidationChecks } from 'langium';
 import { Diagnostic } from 'vscode-languageserver-protocol';
-import { ArchiMateLanguageAstType, Element, isDiagram, isElement, isRelation, Relation } from './generated/ast.js';
+import { ArchiMateLanguageAstType, Element, isDiagram, isElement, isRelationship, Relationship } from './generated/ast.js';
 import type { Services } from './module.js';
 import { ID_PROPERTY, IdentifiableAstNode } from './naming.js';
 import { findDocument, isSemanticRoot } from './util/ast-util.js';
-import { RelationValidator } from './util/validation/relation-validator.js';
+import { RelationshipValidator } from './util/validation/relationship-validator.js';
 
 export namespace IssueCodes {
    export const FilenameNotMatching = 'filename-not-matching';
@@ -32,7 +32,7 @@ export function registerValidationChecks(services: Services): void {
 
    const checks: ValidationChecks<ArchiMateLanguageAstType> = {
       AstNode: validator.checkNode,
-      Relation: validator.checkRelation,
+      Relationship: validator.checkRelationship,
       Element: validator.checkElement
    };
    registry.register(checks, validator);
@@ -91,7 +91,7 @@ export class Validator {
    }
 
    protected isExportedGlobally(node: AstNode): boolean {
-      return isElement(node) || isRelation(node) || isDiagram(node);
+      return isElement(node) || isRelationship(node) || isDiagram(node);
    }
 
    protected checkUniqueNodeId(node: AstNode, accept: ValidationAcceptor): void {
@@ -118,12 +118,12 @@ export class Validator {
       }
    }
 
-   checkRelation(relation: Relation, accept: ValidationAcceptor): void {
-      const sourceNodeType = relation.source.ref?.$type === 'Element' ? relation.source.ref?.type : 'Junction';
-      const targetNodeType = relation.target.ref?.$type === 'Element' ? relation.target.ref?.type : 'Junction';
+   checkRelationship(relationship: Relationship, accept: ValidationAcceptor): void {
+      const sourceNodeType = relationship.source.ref?.$type === 'Element' ? relationship.source.ref?.type : 'Junction';
+      const targetNodeType = relationship.target.ref?.$type === 'Element' ? relationship.target.ref?.type : 'Junction';
 
-      if (!RelationValidator.isValidTarget(relation.type, sourceNodeType, targetNodeType)) {
-         accept('error', 'Invalid relation.', { node: relation, property: 'type' });
+      if (!RelationshipValidator.isValidTarget(relationship.type, sourceNodeType, targetNodeType)) {
+         accept('error', 'Invalid relationship.', { node: relationship, property: 'type' });
       }
    }
 }

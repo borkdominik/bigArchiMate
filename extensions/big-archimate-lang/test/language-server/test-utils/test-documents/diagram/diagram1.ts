@@ -42,6 +42,6 @@ export const diagram1_with_two_nodes_and_one_edge = `diagram:
         height: 100
     edges:
       - id: Edge1Id
-        relation: Relation1Id
+        relationship: Relationship1Id
         sourceNode: Element1IdNode
         targetNode: Junction1IdNode`;

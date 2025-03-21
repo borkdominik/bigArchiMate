@@ -1,5 +1,5 @@
 import { ModelService } from '@big-archimate/model-service/lib/common';
-import { codiconCSSString, elementTypes, getIcon, ModelFileExtensions, ModelStructure, relationTypes } from '@big-archimate/protocol';
+import { codiconCSSString, elementTypes, getIcon, ModelFileExtensions, ModelStructure, relationshipTypes } from '@big-archimate/protocol';
 import { Emitter, MaybePromise } from '@theia/core';
 import { DepthFirstTreeIterator, LabelProvider, LabelProviderContribution, Tree, TreeDecorator, TreeNode } from '@theia/core/lib/browser';
 import { WidgetDecoration } from '@theia/core/lib/browser/widget-decoration';
@@ -46,9 +46,9 @@ export class CustomLabelProvider implements LabelProviderContribution, TreeDecor
             }
          }
 
-         if (ModelFileExtensions.isRelationFile(node.fileStat.name)) {
-            const derivedRelationTypeFromFileName = node.fileStat.resource.path.name.split('.')[0].split('_')[0];
-            const matchingType = relationTypes.find(relationType => derivedRelationTypeFromFileName === relationType);
+         if (ModelFileExtensions.isRelationshipFile(node.fileStat.name)) {
+            const derivedRelationshipTypeFromFileName = node.fileStat.resource.path.name.split('.')[0].split('_')[0];
+            const matchingType = relationshipTypes.find(relationshipType => derivedRelationshipTypeFromFileName === relationshipType);
             if (matchingType) {
                return codiconCSSString(getIcon(matchingType)) + ' default-file-icon';
             }

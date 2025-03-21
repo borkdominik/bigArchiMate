@@ -1,4 +1,4 @@
-import { ConceptType, ElementType, LayerType, OtherConceptType, RelationType } from './glsp/types';
+import { ConceptType, ElementType, LayerType, OtherConceptType, RelationshipType } from './glsp/types';
 
 type CornerType = 'round' | 'square' | 'diamond';
 
@@ -33,9 +33,9 @@ interface ElementMetaData extends ConceptMetaData {
 }
 
 /**
- * Metadata of an ArchiMate relation type.
+ * Metadata of an ArchiMate relationship type.
  */
-interface RelationMetaData extends ConceptMetaData {}
+interface RelationshipMetaData extends ConceptMetaData {}
 
 /**
  * A mapping of element types to their respective metadata.
@@ -464,9 +464,9 @@ const elementMetadataMap: Record<ElementType, ElementMetaData> = {
 };
 
 /**
- * A mapping of relation types to their respective metadata.
+ * A mapping of relationship types to their respective metadata.
  */
-const relationMetadataMap: Record<RelationType, RelationMetaData> = {
+const relationshipMetadataMap: Record<RelationshipType, RelationshipMetaData> = {
    Access: {
       icon: 'archimate-access',
       label: 'Access',
@@ -537,7 +537,7 @@ const otherConceptMetaDataMap: Record<OtherConceptType, ConceptMetaData> = {
  */
 const conceptMetaDataMap = {
    ...elementMetadataMap,
-   ...relationMetadataMap,
+   ...relationshipMetadataMap,
    ...otherConceptMetaDataMap
 };
 

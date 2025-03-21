@@ -1,11 +1,11 @@
 grammar ArchiMate
 
 import 'element'
-import 'relation'
+import 'relationship'
 import 'diagram'
 
 entry ArchiMateRoot:
     (element=Element |
-    relation=Relation |
+    relationship=Relationship |
     junction=Junction |
     diagram=Diagram)?;

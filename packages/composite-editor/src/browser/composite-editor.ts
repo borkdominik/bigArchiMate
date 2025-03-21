@@ -208,7 +208,7 @@ export class CompositeEditor extends BaseWidget implements SaveableSource, Navig
             return this.createFormWidget(options);
          case 'Junction':
             return this.createFormWidget(options);
-         case 'Relation':
+         case 'Relationship':
             return this.createFormWidget(options);
          case 'Diagram':
             return this.createDiagramWidget();

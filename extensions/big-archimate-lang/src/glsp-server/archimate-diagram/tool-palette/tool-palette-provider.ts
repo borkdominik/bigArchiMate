@@ -9,7 +9,7 @@ import {
    getLabel,
    getSpecificationSection,
    LayerType,
-   relationTypes,
+   relationshipTypes,
    toKebabCase
 } from '@big-archimate/protocol';
 import {
@@ -21,7 +21,7 @@ import {
    TriggerNodeCreationAction
 } from '@eclipse-glsp/server';
 import { injectable } from 'inversify';
-import { ElementType, RelationType } from '../../../language-server/generated/ast.js';
+import { ElementType, RelationshipType } from '../../../language-server/generated/ast.js';
 import { getObjectKeys } from '../../../util.js';
 
 @injectable()
@@ -43,11 +43,14 @@ export class ArchiMateToolPaletteProvider extends ToolPaletteItemProvider {
             actions: [activateDeleteToolAction()]
          },
          {
-            id: 'relations-group',
+            id: 'relationships-group',
             icon: 'chevron-down',
             sortString: 'B',
             label: 'Relationship',
-            children: [...relationTypes.map(relationType => getRelationPaletteItem(relationType, 'B')), getJunctionPaletteItem('B')],
+            children: [
+               ...relationshipTypes.map(relationshipType => getRelationshipPaletteItem(relationshipType, 'B')),
+               getJunctionPaletteItem('B')
+            ],
             actions: []
          },
          getElementGroupPaletteItem('Application', 'U'),
@@ -76,17 +79,17 @@ const getElementPaletteItem = (elementType: ElementType, groupSortString: string
 });
 
 /**
- * Returns a palette item for the given relation type.
- * @param relationType The relation type.
+ * Returns a palette item for the given relationship type.
+ * @param relationshipType The relationship type.
  * @param groupSortString The sort string of the group.
  * @returns The palette item.
  */
-const getRelationPaletteItem = (relationType: RelationType, groupSortString: string): PaletteItem => ({
-   id: `${relationType}-create-tool`,
-   sortString: `${groupSortString}-${getSpecificationSection(relationType)}`,
-   label: `${getLabel(relationType)}`,
-   icon: getIcon(relationType),
-   actions: [TriggerEdgeCreationAction.create(ARCHIMATE_RELATION_TYPE_MAP.get(relationType), { args: { type: 'create' } })]
+const getRelationshipPaletteItem = (relationshipType: RelationshipType, groupSortString: string): PaletteItem => ({
+   id: `${relationshipType}-create-tool`,
+   sortString: `${groupSortString}-${getSpecificationSection(relationshipType)}`,
+   label: `${getLabel(relationshipType)}`,
+   icon: getIcon(relationshipType),
+   actions: [TriggerEdgeCreationAction.create(ARCHIMATE_RELATION_TYPE_MAP.get(relationshipType), { args: { type: 'create' } })]
 });
 
 /**

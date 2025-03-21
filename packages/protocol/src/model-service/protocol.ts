@@ -1,5 +1,5 @@
 import * as rpc from 'vscode-jsonrpc/node';
-import { ElementType, RelationType } from '../glsp/types';
+import { ElementType, RelationshipType } from '../glsp/types';
 
 export const ArchiMateLanguageRegex = {
    STRING: /^"[^"]*"$|^'[^']*'$/,
@@ -42,7 +42,7 @@ export interface ArchiMateDocument<T = ArchiMateRoot, D = ModelDiagnostic> {
 export interface ArchiMateRoot extends ArchiMateObject {
    readonly $type: 'ArchiMateRoot';
    element?: Element;
-   relation?: Relation;
+   relationship?: Relationship;
    junction?: Junction;
 }
 
@@ -73,11 +73,11 @@ export interface Junction extends ArchiMateObject, Identifiable {
    properties: Array<Property>;
 }
 
-export interface Relation extends ArchiMateObject, Identifiable {
-   readonly $type: 'Relation';
+export interface Relationship extends ArchiMateObject, Identifiable {
+   readonly $type: 'Relationship';
    name?: string;
    documentation?: string;
-   type: RelationType;
+   type: RelationshipType;
    source: Reference<Element>;
    target: Reference<Element>;
    properties: Array<Property>;

@@ -1,7 +1,7 @@
 import 'terminals'
 import 'common'
 import 'element'
-import 'relation'
+import 'relationship'
 
 // Diagram defintion
 Diagram:
@@ -17,7 +17,7 @@ Diagram:
             )?
             ('edges' ':'
                 INDENT 
-                    (LIST_ITEM edges+=RelationEdge)+
+                    (LIST_ITEM edges+=RelationshipEdge)+
                 DEDENT
             )?
             Properties?
@@ -46,18 +46,18 @@ JunctionNode:
 ElementNodeOrJunctionNode:
     ElementNode | JunctionNode;
 
-RelationRoutingPoint:
+RelationshipRoutingPoint:
     'x' ':' x=NUMBER
     'y' ':' y=NUMBER;
 
-RelationEdge:
+RelationshipEdge:
     'id' ':' id=ID
-    'relation' ':' relation=[Relation:IDReference]
+    'relationship' ':' relationship=[Relationship:IDReference]
     'sourceNode' ':' sourceNode=[ElementNodeOrJunctionNode:IDReference]
     'targetNode' ':' targetNode=[ElementNodeOrJunctionNode:IDReference]
     ('routingPoints' ':'
         INDENT
-            (LIST_ITEM routingPoints+=RelationRoutingPoint)+
+            (LIST_ITEM routingPoints+=RelationshipRoutingPoint)+
         DEDENT
     )?
 ;
