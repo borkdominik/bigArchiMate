@@ -38,7 +38,7 @@ describe('CompletionProvider', () => {
    test('Completion for element references in project A', async () => {
       await assertCompletion({
          text,
-         parseOptions: { documentUri: testUri('projectA', 'rel.relation.archi') },
+         parseOptions: { documentUri: testUri('projectA', 'rel.relation.arch') },
          index: 0,
          expectedItems: ['Element1Id', 'Element2Id'],
          disposeAfterCheck: true
@@ -48,7 +48,7 @@ describe('CompletionProvider', () => {
    test('Completion for element references in project B', async () => {
       await assertCompletion({
          text,
-         parseOptions: { documentUri: testUri('projectB', 'rel.relation.archi') },
+         parseOptions: { documentUri: testUri('projectB', 'rel.relation.arch') },
          index: 0,
          expectedItems: ['Element3Id', 'ProjectA.Element1Id', 'ProjectA.Element2Id'],
          disposeAfterCheck: true
