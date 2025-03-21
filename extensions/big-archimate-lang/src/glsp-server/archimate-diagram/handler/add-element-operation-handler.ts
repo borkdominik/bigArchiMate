@@ -19,12 +19,12 @@ export class AddElementOperationHandler extends JsonOperationHandler {
 
    protected async createElementNode(operation: AddElementOperation): Promise<void> {
       const scope = this.modelState.services.language.references.ScopeProvider.getCompletionScope({
-         container: { globalId: this.modelState.archiMateDiagram.id! },
+         container: { globalId: this.modelState.diagram.id! },
          syntheticElements: [{ property: 'nodes', type: ElementNode }],
          property: 'element'
       });
 
-      const container = this.modelState.archiMateDiagram;
+      const container = this.modelState.diagram;
       const elementDescription = scope.elementScope.getElement(operation.elementName);
 
       if (elementDescription) {

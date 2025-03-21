@@ -1,7 +1,7 @@
 import { describe, expect, test } from '@jest/globals';
 
 import { isReference } from 'langium';
-import { ArchiMateDiagram, ElementNode, JunctionNode } from '../../src/language-server/generated/ast.js';
+import { Diagram, ElementNode, JunctionNode } from '../../src/language-server/generated/ast.js';
 import { WithDocument } from '../../src/language-server/util/ast-util.js';
 import {
    diagram1,
@@ -10,19 +10,19 @@ import {
    diagram1_with_name,
    diagram1_with_two_nodes_and_one_edge
 } from './test-utils/test-documents/diagram/index.js';
-import { createTestServices, parseArchiMateDiagram } from './test-utils/utils.js';
+import { createTestServices, parseDiagram } from './test-utils/utils.js';
 
 const services = createTestServices();
 
 describe('Language diagram', () => {
    describe('Valid diagram files', () => {
-      const testValidArchiMateDiagram = async (diagram: WithDocument<ArchiMateDiagram>) => {
-         expect(diagram.id).toBe('ArchiMateDiagram1Id');
+      const testValidDiagram = async (diagram: WithDocument<Diagram>) => {
+         expect(diagram.id).toBe('Diagram1Id');
       };
 
       test('Valid diagram file', async () => {
-         const diagram = await parseArchiMateDiagram({ services, text: diagram1 });
-         testValidArchiMateDiagram(diagram);
+         const diagram = await parseDiagram({ services, text: diagram1 });
+         testValidDiagram(diagram);
          expect(diagram.name).toBeUndefined();
          expect(diagram.nodes).toHaveLength(0);
          expect(diagram.edges).toHaveLength(0);
@@ -30,17 +30,17 @@ describe('Language diagram', () => {
       });
 
       test('Valid diagram file with name', async () => {
-         const diagram = await parseArchiMateDiagram({ services, text: diagram1_with_name });
-         testValidArchiMateDiagram(diagram);
-         expect(diagram.name).toBe('ArchiMateDiagram1 Name');
+         const diagram = await parseDiagram({ services, text: diagram1_with_name });
+         testValidDiagram(diagram);
+         expect(diagram.name).toBe('Diagram1 Name');
          expect(diagram.nodes).toHaveLength(0);
          expect(diagram.edges).toHaveLength(0);
          expect(diagram.properties).toHaveLength(0);
       });
 
       test('Valid diagram file with element node', async () => {
-         const diagram = await parseArchiMateDiagram({ services, text: diagram1_with_element_node });
-         testValidArchiMateDiagram(diagram);
+         const diagram = await parseDiagram({ services, text: diagram1_with_element_node });
+         testValidDiagram(diagram);
          expect(diagram.name).toBeUndefined();
          expect(diagram.nodes).toHaveLength(1);
 
@@ -58,8 +58,8 @@ describe('Language diagram', () => {
       });
 
       test('Valid diagram file with junction node', async () => {
-         const diagram = await parseArchiMateDiagram({ services, text: diagram1_with_junction_node });
-         testValidArchiMateDiagram(diagram);
+         const diagram = await parseDiagram({ services, text: diagram1_with_junction_node });
+         testValidDiagram(diagram);
          expect(diagram.name).toBeUndefined();
          expect(diagram.nodes).toHaveLength(1);
 
@@ -77,8 +77,8 @@ describe('Language diagram', () => {
       });
 
       test('Valid diagram file with two nodes and one edge connecting them', async () => {
-         const diagram = await parseArchiMateDiagram({ services, text: diagram1_with_two_nodes_and_one_edge });
-         testValidArchiMateDiagram(diagram);
+         const diagram = await parseDiagram({ services, text: diagram1_with_two_nodes_and_one_edge });
+         testValidDiagram(diagram);
          expect(diagram.name).toBeUndefined();
          expect(diagram.nodes).toHaveLength(2);
 

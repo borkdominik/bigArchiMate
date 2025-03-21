@@ -4,12 +4,12 @@ import { ParseHelperOptions, parseDocument as langiumParseDocument } from 'langi
 import path from 'path';
 import { PackageJson } from 'type-fest';
 import {
-   ArchiMateDiagram,
    ArchiMateRoot,
+   Diagram,
    Element,
    Junction,
    Relation,
-   isArchiMateDiagram,
+   isDiagram,
    isElement,
    isJunction,
    isRelation
@@ -95,8 +95,8 @@ export async function parseRelation(input: DocumentInput, assert: ParseAssert = 
    return parseSemanticRoot(input, assert, isRelation);
 }
 
-export async function parseArchiMateDiagram(input: DocumentInput, assert: ParseAssert = {}): Promise<WithDocument<ArchiMateDiagram>> {
-   return parseSemanticRoot(input, assert, isArchiMateDiagram);
+export async function parseDiagram(input: DocumentInput, assert: ParseAssert = {}): Promise<WithDocument<Diagram>> {
+   return parseSemanticRoot(input, assert, isDiagram);
 }
 
 export const MockFileSystem: DefaultSharedModuleContext = {

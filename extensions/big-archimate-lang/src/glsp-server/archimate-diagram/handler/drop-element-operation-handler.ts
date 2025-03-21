@@ -22,7 +22,7 @@ export class DropElementOperationHandler extends JsonOperationHandler {
    }
 
    protected async createElementNode(operation: DropElementOperation): Promise<void> {
-      const container = this.modelState.archiMateDiagram;
+      const container = this.modelState.diagram;
       let x = operation.position.x;
       let y = operation.position.y;
       for (const filePath of operation.filePaths) {
@@ -33,7 +33,7 @@ export class DropElementOperationHandler extends JsonOperationHandler {
             const node: ElementNode = {
                $type: ElementNode,
                $container: container,
-               id: this.modelState.idProvider.findNextId(ElementNode, element.id + 'Node', this.modelState.archiMateDiagram),
+               id: this.modelState.idProvider.findNextId(ElementNode, element.id + 'Node', this.modelState.diagram),
                element: {
                   $refText: this.modelState.idProvider.getGlobalId(element) || element.id || '',
                   ref: element

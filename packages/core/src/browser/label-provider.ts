@@ -32,8 +32,8 @@ export class CustomLabelProvider implements LabelProviderContribution, TreeDecor
       }
 
       if (FileNode.is(node)) {
-         if (ModelFileExtensions.isArchiMateDiagramFile(node.fileStat.name)) {
-            return ModelStructure.ArchiMateDiagram.ICON_CLASS + ' default-file-icon';
+         if (ModelFileExtensions.isDiagramFile(node.fileStat.name)) {
+            return ModelStructure.Diagram.ICON_CLASS + ' default-file-icon';
          }
 
          // very simple name-based matching so we do not have to look into the file

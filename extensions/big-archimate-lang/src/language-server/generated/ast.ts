@@ -95,7 +95,7 @@ export type ArchiMateLanguageKeywordNames =
     | "Value"
     | "ValueStream"
     | "WorkPackage"
-    | "archiMateDiagram"
+    | "diagram"
     | "documentation"
     | "edges"
     | "element"
@@ -159,25 +159,9 @@ export function isRelationType(item: unknown): item is RelationType {
     return item === 'Access' || item === 'Aggregation' || item === 'Association' || item === 'Assignment' || item === 'Composition' || item === 'Flow' || item === 'Influence' || item === 'Realization' || item === 'Serving' || item === 'Specialization' || item === 'Triggering';
 }
 
-export interface ArchiMateDiagram extends AstNode {
-    readonly $container: ArchiMateRoot;
-    readonly $type: 'ArchiMateDiagram';
-    edges: Array<RelationEdge>;
-    id?: ID;
-    name?: string;
-    nodes: Array<ElementNode | JunctionNode>;
-    properties: Array<Property>;
-}
-
-export const ArchiMateDiagram = 'ArchiMateDiagram';
-
-export function isArchiMateDiagram(item: unknown): item is ArchiMateDiagram {
-    return reflection.isInstance(item, ArchiMateDiagram);
-}
-
 export interface ArchiMateRoot extends AstNode {
     readonly $type: 'ArchiMateRoot';
-    archiMateDiagram?: ArchiMateDiagram;
+    diagram?: Diagram;
     element?: Element;
     junction?: Junction;
     relation?: Relation;
@@ -187,6 +171,22 @@ export const ArchiMateRoot = 'ArchiMateRoot';
 
 export function isArchiMateRoot(item: unknown): item is ArchiMateRoot {
     return reflection.isInstance(item, ArchiMateRoot);
+}
+
+export interface Diagram extends AstNode {
+    readonly $container: ArchiMateRoot;
+    readonly $type: 'Diagram';
+    edges: Array<RelationEdge>;
+    id?: ID;
+    name?: string;
+    nodes: Array<ElementNode | JunctionNode>;
+    properties: Array<Property>;
+}
+
+export const Diagram = 'Diagram';
+
+export function isDiagram(item: unknown): item is Diagram {
+    return reflection.isInstance(item, Diagram);
 }
 
 export interface Element extends AstNode {
@@ -206,7 +206,7 @@ export function isElement(item: unknown): item is Element {
 }
 
 export interface ElementNode extends AstNode {
-    readonly $container: ArchiMateDiagram;
+    readonly $container: Diagram;
     readonly $type: 'ElementNode';
     element: Reference<Element>;
     height: number;
@@ -238,7 +238,7 @@ export function isJunction(item: unknown): item is Junction {
 }
 
 export interface JunctionNode extends AstNode {
-    readonly $container: ArchiMateDiagram;
+    readonly $container: Diagram;
     readonly $type: 'JunctionNode';
     height: number;
     id: ID;
@@ -255,7 +255,7 @@ export function isJunctionNode(item: unknown): item is JunctionNode {
 }
 
 export interface Property extends AstNode {
-    readonly $container: ArchiMateDiagram | Element | Junction | Relation;
+    readonly $container: Diagram | Element | Junction | Relation;
     readonly $type: 'Property';
     id: ID;
     name: string;
@@ -287,7 +287,7 @@ export function isRelation(item: unknown): item is Relation {
 }
 
 export interface RelationEdge extends AstNode {
-    readonly $container: ArchiMateDiagram;
+    readonly $container: Diagram;
     readonly $type: 'RelationEdge';
     id: ID;
     relation: Reference<Relation>;
@@ -316,8 +316,8 @@ export function isRelationRoutingPoint(item: unknown): item is RelationRoutingPo
 }
 
 export type ArchiMateLanguageAstType = {
-    ArchiMateDiagram: ArchiMateDiagram
     ArchiMateRoot: ArchiMateRoot
+    Diagram: Diagram
     Element: Element
     ElementNode: ElementNode
     ElementNodeOrJunctionNode: ElementNodeOrJunctionNode
@@ -333,7 +333,7 @@ export type ArchiMateLanguageAstType = {
 export class ArchiMateLanguageAstReflection extends AbstractAstReflection {
 
     getAllTypes(): string[] {
-        return [ArchiMateDiagram, ArchiMateRoot, Element, ElementNode, ElementNodeOrJunctionNode, ElementOrJunction, Junction, JunctionNode, Property, Relation, RelationEdge, RelationRoutingPoint];
+        return [ArchiMateRoot, Diagram, Element, ElementNode, ElementNodeOrJunctionNode, ElementOrJunction, Junction, JunctionNode, Property, Relation, RelationEdge, RelationRoutingPoint];
     }
 
     protected override computeIsSubtype(subtype: string, supertype: string): boolean {
@@ -380,26 +380,26 @@ export class ArchiMateLanguageAstReflection extends AbstractAstReflection {
 
     getTypeMetaData(type: string): TypeMetaData {
         switch (type) {
-            case ArchiMateDiagram: {
+            case ArchiMateRoot: {
                 return {
-                    name: ArchiMateDiagram,
+                    name: ArchiMateRoot,
+                    properties: [
+                        { name: 'diagram' },
+                        { name: 'element' },
+                        { name: 'junction' },
+                        { name: 'relation' }
+                    ]
+                };
+            }
+            case Diagram: {
+                return {
+                    name: Diagram,
                     properties: [
                         { name: 'edges', defaultValue: [] },
                         { name: 'id' },
                         { name: 'name' },
                         { name: 'nodes', defaultValue: [] },
                         { name: 'properties', defaultValue: [] }
-                    ]
-                };
-            }
-            case ArchiMateRoot: {
-                return {
-                    name: ArchiMateRoot,
-                    properties: [
-                        { name: 'archiMateDiagram' },
-                        { name: 'element' },
-                        { name: 'junction' },
-                        { name: 'relation' }
                     ]
                 };
             }

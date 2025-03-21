@@ -1,4 +1,4 @@
-archiMateDiagram:
+diagram:
     id: Business
     name: "Business"
     nodes:

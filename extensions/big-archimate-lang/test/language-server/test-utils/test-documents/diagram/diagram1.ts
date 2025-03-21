@@ -1,12 +1,12 @@
-export const diagram1 = `archiMateDiagram:  
-    id: ArchiMateDiagram1Id`;
+export const diagram1 = `diagram:  
+    id: Diagram1Id`;
 
-export const diagram1_with_name = `archiMateDiagram:
-    id: ArchiMateDiagram1Id
-    name: "ArchiMateDiagram1 Name"`;
+export const diagram1_with_name = `diagram:
+    id: Diagram1Id
+    name: "Diagram1 Name"`;
 
-export const diagram1_with_element_node = `archiMateDiagram:
-    id: ArchiMateDiagram1Id
+export const diagram1_with_element_node = `diagram:
+    id: Diagram1Id
     nodes:
       - id: Element1IdNode
         element: Element1Id
@@ -15,8 +15,8 @@ export const diagram1_with_element_node = `archiMateDiagram:
         width: 100
         height: 100`;
 
-export const diagram1_with_junction_node = `archiMateDiagram:
-    id: ArchiMateDiagram1Id
+export const diagram1_with_junction_node = `diagram:
+    id: Diagram1Id
     nodes:
       - id: Junction1IdNode
         junction: Junction1Id
@@ -25,8 +25,8 @@ export const diagram1_with_junction_node = `archiMateDiagram:
         width: 100
         height: 100`;
 
-export const diagram1_with_two_nodes_and_one_edge = `archiMateDiagram:
-    id: ArchiMateDiagram1Id
+export const diagram1_with_two_nodes_and_one_edge = `diagram:
+    id: Diagram1Id
     nodes:
       - id: Element1IdNode
         element: Element1Id

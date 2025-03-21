@@ -16,7 +16,7 @@ export class AddElementActionProvider implements ContextActionsProvider {
 
    async getActions(editorContext: EditorContext): Promise<LabeledAction[]> {
       const completionItems = this.state.services.language.references.ScopeProvider.complete({
-         container: { globalId: this.state.archiMateDiagram.id! },
+         container: { globalId: this.state.diagram.id! },
          syntheticElements: [{ property: 'nodes', type: ElementNode }],
          property: 'element'
       });

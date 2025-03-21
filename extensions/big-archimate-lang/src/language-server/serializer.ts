@@ -2,8 +2,8 @@ import { AstNode, GenericAstNode, Grammar, isAstNode, isReference } from 'langiu
 import { collectAst } from 'langium/grammar';
 import { ModelSerializer } from '../model-server/model-serializer.js';
 import {
-   ArchiMateDiagram,
    ArchiMateRoot,
+   Diagram,
    Element,
    ElementNode,
    isElement,
@@ -27,7 +27,7 @@ const PROPERTY_ORDER = new Map<string, string[]>([
    [Element, ['id', 'type', 'name', 'documentation', 'properties']],
    [Junction, ['id', 'name', 'documentation', 'properties']],
    [Relation, ['id', 'type', 'source', 'target', 'name', 'documentation', 'properties']],
-   [ArchiMateDiagram, ['id', 'name', 'nodes', 'edges', 'properties']],
+   [Diagram, ['id', 'name', 'nodes', 'edges', 'properties']],
    [ElementNode, ['id', 'element', 'x', 'y', 'width', 'height']],
    [JunctionNode, ['id', 'junction', 'x', 'y', 'width', 'height']],
    [RelationEdge, ['id', 'relation', 'sourceNode', 'targetNode', 'routingPoints']],

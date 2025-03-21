@@ -58,7 +58,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
           },
           {
             "$type": "Assignment",
-            "feature": "archiMateDiagram",
+            "feature": "diagram",
             "operator": "=",
             "terminal": {
               "$type": "RuleCall",
@@ -1186,13 +1186,13 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
     },
     {
       "$type": "ParserRule",
-      "name": "ArchiMateDiagram",
+      "name": "Diagram",
       "definition": {
         "$type": "Group",
         "elements": [
           {
             "$type": "Keyword",
-            "value": "archiMateDiagram"
+            "value": "diagram"
           },
           {
             "$type": "Keyword",

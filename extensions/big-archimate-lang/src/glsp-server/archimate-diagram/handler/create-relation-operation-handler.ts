@@ -1,11 +1,11 @@
 import { ARCHIMATE_RELATION_TYPE_MAP } from '@big-archimate/protocol';
 import {
-   ActionDispatcher,
-   Command,
-   CreateEdgeOperation,
-   JsonCreateEdgeOperationHandler,
-   ModelState,
-   SelectAction
+    ActionDispatcher,
+    Command,
+    CreateEdgeOperation,
+    JsonCreateEdgeOperationHandler,
+    ModelState,
+    SelectAction
 } from '@eclipse-glsp/server';
 import { inject, injectable } from 'inversify';
 import { URI, Utils as UriUtils } from 'vscode-uri';
@@ -40,8 +40,8 @@ export class CreateRelationOperationHandler extends JsonCreateEdgeOperationHandl
          if (relation) {
             const edge: RelationEdge = {
                $type: RelationEdge,
-               $container: this.modelState.archiMateDiagram,
-               id: this.modelState.idProvider.findNextId(RelationEdge, relation.id + 'Edge', this.modelState.archiMateDiagram),
+               $container: this.modelState.diagram,
+               id: this.modelState.idProvider.findNextId(RelationEdge, relation.id + 'Edge', this.modelState.diagram),
                relation: {
                   ref: relation,
                   $refText: this.modelState.idProvider.getNodeId(relation) || relation.id || ''
@@ -56,7 +56,7 @@ export class CreateRelationOperationHandler extends JsonCreateEdgeOperationHandl
                },
                routingPoints: []
             };
-            this.modelState.archiMateDiagram.edges.push(edge);
+            this.modelState.diagram.edges.push(edge);
             this.actionDispatcher.dispatchAfterNextUpdate(
                SelectAction.create({ selectedElementsIDs: [this.modelState.idProvider.getLocalId(edge) ?? edge.id] })
             );

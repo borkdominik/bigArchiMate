@@ -23,7 +23,7 @@ export class ArchiMateDiagramGModelFactory implements GModelFactory {
    }
 
    protected createGraph(): GGraph | undefined {
-      const diagramRoot = this.modelState.archiMateDiagram;
+      const diagramRoot = this.modelState.diagram;
       if (!diagramRoot) {
          return;
       }

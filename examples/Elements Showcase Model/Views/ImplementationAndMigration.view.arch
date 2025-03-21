@@ -1,4 +1,4 @@
-archiMateDiagram:
+diagram:
     id: ImplementationAndMigration
     name: "ImplementationAndMigration"
     nodes:

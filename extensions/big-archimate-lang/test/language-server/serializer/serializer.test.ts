@@ -4,11 +4,11 @@ import { Reference } from 'langium';
 import { ArchiMateRoot, Element, Relation } from '../../../src/language-server/generated/ast.js';
 import { Serializer } from '../../../src/language-server/serializer.js';
 import {
-   createArchiMateDiagram,
-   createElement,
-   createElementNode,
-   createRelation,
-   createRelationEdge
+    createDiagram,
+    createElement,
+    createElementNode,
+    createRelation,
+    createRelationEdge
 } from '../../../src/language-server/util/ast-util.js';
 import { createTestServices } from '../test-utils/utils.js';
 
@@ -99,15 +99,15 @@ describe('Lexer', () => {
             })
          };
 
-         archiMateRoot.archiMateDiagram = createArchiMateDiagram(archiMateRoot, 'testId');
+         archiMateRoot.diagram = createDiagram(archiMateRoot, 'testId');
 
-         archiMateRoot.archiMateDiagram.nodes = [
-            createElementNode(archiMateRoot.archiMateDiagram, 'Node1', ref1, { x: 100, y: 101 }, { width: 102, height: 102 }),
-            createElementNode(archiMateRoot.archiMateDiagram, 'Node2', ref2, { x: 100, y: 101 }, { width: 102, height: 102 })
+         archiMateRoot.diagram.nodes = [
+            createElementNode(archiMateRoot.diagram, 'Node1', ref1, { x: 100, y: 101 }, { width: 102, height: 102 }),
+            createElementNode(archiMateRoot.diagram, 'Node2', ref2, { x: 100, y: 101 }, { width: 102, height: 102 })
          ];
 
-         archiMateRoot.archiMateDiagram.edges = [
-            createRelationEdge(archiMateRoot.archiMateDiagram, 'Edge1', ref3, { $refText: 'A' }, { $refText: 'B' })
+         archiMateRoot.diagram.edges = [
+            createRelationEdge(archiMateRoot.diagram, 'Edge1', ref3, { $refText: 'A' }, { $refText: 'B' })
          ];
       });
 
@@ -132,7 +132,7 @@ const expected_result1 = `relation:
     name: "test Name"
     documentation: "Test documentation"`;
 
-const expected_result2 = `archiMateDiagram:
+const expected_result2 = `diagram:
     id: testId
     nodes:
       - id: Node1

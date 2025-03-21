@@ -1,7 +1,7 @@
 import { ModelFileExtensions } from '@big-archimate/protocol';
 import { AstNode, UriUtils, ValidationAcceptor, ValidationChecks } from 'langium';
 import { Diagnostic } from 'vscode-languageserver-protocol';
-import { ArchiMateLanguageAstType, Element, isArchiMateDiagram, isElement, isRelation, Relation } from './generated/ast.js';
+import { ArchiMateLanguageAstType, Element, isDiagram, isElement, isRelation, Relation } from './generated/ast.js';
 import type { Services } from './module.js';
 import { ID_PROPERTY, IdentifiableAstNode } from './naming.js';
 import { findDocument, isSemanticRoot } from './util/ast-util.js';
@@ -92,11 +92,11 @@ export class Validator {
 
    protected isExportedGlobally(node: AstNode): boolean {
       // we export anything with an id from entities and relationships and all root nodes, see ScopeComputation
-      return isElement(node) || isRelation(node) || isArchiMateDiagram(node);
+      return isElement(node) || isRelation(node) || isDiagram(node);
    }
 
    protected checkUniqueNodeId(node: AstNode, accept: ValidationAcceptor): void {
-      if (isArchiMateDiagram(node)) {
+      if (isDiagram(node)) {
          this.markDuplicateIds(node.edges, accept);
          this.markDuplicateIds(node.nodes, accept);
       }

@@ -18,7 +18,7 @@ interface NewElementTemplate extends Command {
    content: string | ((name: string) => string);
 }
 
-const INITIAL_ARCHIMATE_DIAGRAM_CONTENT = `archiMateDiagram:
+const INITIAL_ARCHIMATE_DIAGRAM_CONTENT = `diagram:
    id: \${id}
    name: \${name}`;
 
@@ -27,10 +27,10 @@ const TEMPLATE_CATEGORY = 'New';
 const NEW_FILE_TEMPLATES: NewElementTemplate[] = [
    {
       id: 'new.archimate-diagram',
-      label: 'ArchiMateDiagram',
-      fileExtension: ModelFileExtensions.ArchiMateDiagram,
+      label: 'Diagram',
+      fileExtension: ModelFileExtensions.Diagram,
       category: TEMPLATE_CATEGORY,
-      iconClass: ModelStructure.ArchiMateDiagram.ICON_CLASS,
+      iconClass: ModelStructure.Diagram.ICON_CLASS,
       content: name => INITIAL_ARCHIMATE_DIAGRAM_CONTENT.replace(/\$\{name\}/gi, quote(name)).replace(/\$\{id\}/gi, toId(name))
    }
 ];

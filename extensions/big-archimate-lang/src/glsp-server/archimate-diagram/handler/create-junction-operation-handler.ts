@@ -33,7 +33,7 @@ export class CreateJunctionOperationHandler extends JsonCreateNodeOperationHandl
       if (!junction) {
          return;
       }
-      const container = this.modelState.archiMateDiagram;
+      const container = this.modelState.diagram;
       const location = this.getLocation(operation) ?? Point.ORIGIN;
       const node: JunctionNode = {
          $type: JunctionNode,

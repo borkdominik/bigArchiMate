@@ -4,15 +4,15 @@ const ModelFileTypeValues = {
    Element: 'Element',
    Junction: 'Junction',
    Relation: 'Relation',
-   ArchiMateDiagram: 'ArchiMateDiagram'
+   Diagram: 'Diagram'
 } as const;
 
 export const ModelFileType = {
    ...ModelFileTypeValues,
    getIconClass: (type: ModelFileType) => {
       switch (type) {
-         case 'ArchiMateDiagram':
-            return ModelStructure.ArchiMateDiagram.ICON_CLASS;
+         case 'Diagram':
+            return ModelStructure.Diagram.ICON_CLASS;
          default:
             return undefined;
       }
@@ -25,8 +25,8 @@ export const ModelFileType = {
             return ModelFileExtensions.Junction;
          case 'Relation':
             return ModelFileExtensions.Relation;
-         case 'ArchiMateDiagram':
-            return ModelFileExtensions.ArchiMateDiagram;
+         case 'Diagram':
+            return ModelFileExtensions.Diagram;
       }
    }
 } as const;
@@ -36,7 +36,7 @@ export const ModelFileExtensions = {
    Element: '.element.arch',
    Junction: '.junction.arch',
    Relation: '.relation.arch',
-   ArchiMateDiagram: '.view.arch',
+   Diagram: '.view.arch',
 
    isElementFile(uri: string): boolean {
       return uri.endsWith(this.Element);
@@ -50,8 +50,8 @@ export const ModelFileExtensions = {
       return uri.endsWith(this.Relation);
    },
 
-   isArchiMateDiagramFile(uri: string): boolean {
-      return uri.endsWith(this.ArchiMateDiagram);
+   isDiagramFile(uri: string): boolean {
+      return uri.endsWith(this.Diagram);
    },
 
    getName(uri: string): string {
@@ -62,8 +62,8 @@ export const ModelFileExtensions = {
       if (uri.endsWith(this.Relation)) {
          return uri.substring(0, uri.length - this.Relation.length);
       }
-      if (uri.endsWith(this.ArchiMateDiagram)) {
-         return uri.substring(0, uri.length - this.ArchiMateDiagram.length);
+      if (uri.endsWith(this.Diagram)) {
+         return uri.substring(0, uri.length - this.Diagram.length);
       }
       const lastIndex = uri.lastIndexOf('/');
       const extIndex = uri.lastIndexOf('.');
@@ -80,8 +80,8 @@ export const ModelFileExtensions = {
       if (this.isRelationFile(uri)) {
          return 'Relation';
       }
-      if (this.isArchiMateDiagramFile(uri)) {
-         return 'ArchiMateDiagram';
+      if (this.isDiagramFile(uri)) {
+         return 'Diagram';
       }
       return undefined;
    },
@@ -97,8 +97,8 @@ export const ModelFileExtensions = {
          return undefined;
       }
       switch (fileType) {
-         case 'ArchiMateDiagram':
-            return ModelStructure.ArchiMateDiagram.ICON_CLASS;
+         case 'Diagram':
+            return ModelStructure.Diagram.ICON_CLASS;
          default:
             return '';
       }
@@ -114,8 +114,8 @@ export const ModelFileExtensions = {
       if (content.startsWith('relation')) {
          return 'Relation';
       }
-      if (content.startsWith('archiMateDiagram')) {
-         return 'ArchiMateDiagram';
+      if (content.startsWith('diagram')) {
+         return 'Diagram';
       }
       return undefined;
    },
@@ -131,7 +131,7 @@ export const ModelStructure = {
       ICON_CLASS: codiconCSSString('list-tree')
    },
 
-   ArchiMateDiagram: {
+   Diagram: {
       FOLDER: 'Views',
       ICON_CLASS: codiconCSSString('type-hierarchy-sub')
    }

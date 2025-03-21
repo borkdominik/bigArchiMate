@@ -1,4 +1,4 @@
-archiMateDiagram:
+diagram:
     id: base
     name: "base"
     nodes:

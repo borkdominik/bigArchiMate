@@ -8,4 +8,4 @@ entry ArchiMateRoot:
     (element=Element |
     relation=Relation |
     junction=Junction |
-    archiMateDiagram=ArchiMateDiagram)?;
+    diagram=Diagram)?;

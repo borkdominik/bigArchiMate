@@ -44,14 +44,14 @@ export class ArchiMateDiagramConfiguration extends GLSPDiagramConfiguration {
          },
          ...containerConfiguration,
          gridModule,
-         archiMateDiagramModule,
+         diagramModule,
          archiMateNodeCreationModule,
          archiMateEdgeCreationToolModule
       );
    }
 }
 
-const archiMateDiagramModule = createDiagramModule((bind, unbind, isBound, rebind) => {
+const diagramModule = createDiagramModule((bind, unbind, isBound, rebind) => {
    const context = { bind, unbind, isBound, rebind };
 
    // Use GLSP default model elements and their views

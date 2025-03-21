@@ -1,8 +1,8 @@
 import { Dimension, Point } from '@eclipse-glsp/server';
 import { AstNode, AstUtils, LangiumDocument, Reference, isAstNode } from 'langium';
 import {
-   ArchiMateDiagram,
    ArchiMateRoot,
+   Diagram,
    Element,
    ElementNode,
    ElementType,
@@ -11,15 +11,15 @@ import {
    Relation,
    RelationEdge,
    RelationType,
-   isArchiMateDiagram,
    isArchiMateRoot,
+   isDiagram,
    isElement,
    isJunction,
    isRelation
 } from '../generated/ast.js';
 import { ID_PROPERTY } from '../naming.js';
 
-export type SemanticRoot = Element | Junction | Relation | ArchiMateDiagram;
+export type SemanticRoot = Element | Junction | Relation | Diagram;
 
 export const IMPLICIT_OWNER_PROPERTY = '$owner';
 export const IMPLICIT_ID_PROPERTY = '$id';
@@ -93,14 +93,14 @@ export type DocumentContent = LangiumDocument | AstNode;
 export type TypeGuard<T> = (item: unknown) => item is T;
 
 export function isSemanticRoot(element: unknown): element is SemanticRoot {
-   return isElement(element) || isJunction(element) || isRelation(element) || isArchiMateDiagram(element);
+   return isElement(element) || isJunction(element) || isRelation(element) || isDiagram(element);
 }
 
 export function findSemanticRoot(input: DocumentContent): SemanticRoot | undefined;
 export function findSemanticRoot<T extends SemanticRoot>(input: DocumentContent, guard: TypeGuard<T>): T | undefined;
 export function findSemanticRoot<T extends SemanticRoot>(input: DocumentContent, guard?: TypeGuard<T>): SemanticRoot | T | undefined {
    const root = isAstNode(input) ? input.$document?.parseResult?.value ?? AstUtils.findRootNode(input) : input.parseResult?.value;
-   const semanticRoot = isArchiMateRoot(root) ? root.element ?? root.junction ?? root.relation ?? root.archiMateDiagram : undefined;
+   const semanticRoot = isArchiMateRoot(root) ? root.element ?? root.junction ?? root.relation ?? root.diagram : undefined;
    return !semanticRoot ? undefined : !guard ? semanticRoot : guard(semanticRoot) ? semanticRoot : undefined;
 }
 
@@ -116,8 +116,8 @@ export function findRelation(input: DocumentContent): Relation | undefined {
    return findSemanticRoot(input, isRelation);
 }
 
-export function findArchiMateDiagram(input: DocumentContent): ArchiMateDiagram | undefined {
-   return findSemanticRoot(input, isArchiMateDiagram);
+export function findDiagram(input: DocumentContent): Diagram | undefined {
+   return findSemanticRoot(input, isDiagram);
 }
 
 export function hasSemanticRoot<T extends SemanticRoot>(document: LangiumDocument<any>, guard: (item: unknown) => item is T): boolean {
@@ -180,14 +180,14 @@ export function createJunction(
    };
 }
 
-export function createArchiMateDiagram(
+export function createDiagram(
    container: ArchiMateRoot,
    id: string,
-   opts?: Partial<Omit<ArchiMateDiagram, '$container' | '$type' | 'id'>>
-): ArchiMateDiagram {
+   opts?: Partial<Omit<Diagram, '$container' | '$type' | 'id'>>
+): Diagram {
    return {
       $container: container,
-      $type: 'ArchiMateDiagram',
+      $type: 'Diagram',
       id,
       nodes: [],
       edges: [],
@@ -197,7 +197,7 @@ export function createArchiMateDiagram(
 }
 
 export function createElementNode(
-   container: ArchiMateDiagram,
+   container: Diagram,
    id: string,
    element: Reference<Element>,
    position: Point,
@@ -216,7 +216,7 @@ export function createElementNode(
 }
 
 export function createJunctionNode(
-   container: ArchiMateDiagram,
+   container: Diagram,
    id: string,
    junction: Reference<Junction>,
    dimension: Dimension,
@@ -235,7 +235,7 @@ export function createJunctionNode(
 }
 
 export function createRelationEdge(
-   container: ArchiMateDiagram,
+   container: Diagram,
    id: string,
    relation: Reference<Relation>,
    sourceNode: Reference<ElementNode>,

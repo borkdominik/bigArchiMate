@@ -210,8 +210,8 @@ export class CompositeEditor extends BaseWidget implements SaveableSource, Navig
             return this.createFormWidget(options);
          case 'Relation':
             return this.createFormWidget(options);
-         case 'ArchiMateDiagram':
-            return this.createArchiMateDiagramWidget();
+         case 'Diagram':
+            return this.createDiagramWidget();
       }
    }
 
@@ -231,7 +231,7 @@ export class CompositeEditor extends BaseWidget implements SaveableSource, Navig
       return formEditor;
    }
 
-   protected async createArchiMateDiagramWidget(): Promise<Widget> {
+   protected async createDiagramWidget(): Promise<Widget> {
       const diagramOptions = this.createDiagramWidgetOptions(ArchiMateDiagramLanguage, 'ArchiMate Diagram');
       const widget = await this.widgetManager.getOrCreateWidget<GLSPDiagramWidget>(ArchiMateDiagramManager.ID, diagramOptions);
       widget.title.closable = false;

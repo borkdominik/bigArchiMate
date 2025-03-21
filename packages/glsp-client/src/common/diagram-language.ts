@@ -8,5 +8,5 @@ export const ArchiMateDiagramLanguage: GLSPDiagramLanguage = {
    contributionId: ArchiMateLanguageContributionId,
    label: 'ArchiMate Diagram',
    diagramType: 'archimate-diagram',
-   fileExtensions: [ModelFileExtensions.ArchiMateDiagram]
+   fileExtensions: [ModelFileExtensions.Diagram]
 };

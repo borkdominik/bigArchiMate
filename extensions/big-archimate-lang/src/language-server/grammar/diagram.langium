@@ -4,8 +4,8 @@ import 'element'
 import 'relation'
 
 // Diagram defintion
-ArchiMateDiagram:
-    ('archiMateDiagram') ':' 
+Diagram:
+    ('diagram') ':' 
     (
         INDENT
             'id' ':' id=ID

@@ -3,7 +3,7 @@ import { inject, injectable } from 'inversify';
 import { DocumentState } from 'langium';
 import { URI } from 'vscode-uri';
 import { LSPServices } from '../../integration.js';
-import { ArchiMateDiagram, ArchiMateRoot } from '../../language-server/generated/ast.js';
+import { ArchiMateRoot, Diagram } from '../../language-server/generated/ast.js';
 import { IdProvider } from '../../language-server/naming.js';
 import { ModelSerializer } from '../../model-server/model-serializer.js';
 import { ModelService } from '../../model-server/model-service.js';
@@ -61,8 +61,8 @@ export class ArchiMateModelState extends DefaultModelState implements JsonModelS
       return { text: this.semanticText() };
    }
 
-   get archiMateDiagram(): ArchiMateDiagram {
-      return this.semanticRoot.archiMateDiagram!;
+   get diagram(): Diagram {
+      return this.semanticRoot.diagram!;
    }
 
    async updateSourceModel(sourceModel: SourceModel): Promise<void> {
