@@ -3,13 +3,13 @@ archiMateDiagram:
     name: "Base"
     nodes:
       - id: BusinessRole1Node
-        element: BaseModel.BusinessRole1
+        element: ModelA.BusinessRole1
         x: -638.6655271268261
         y: 9.203132940059676
         width: 200
         height: 50
       - id: ValueStream2Node
-        element: BaseModel.ValueStream2
+        element: ModelA.ValueStream2
         x: -652.3164838806138
         y: 184.39041128033432
         width: 200

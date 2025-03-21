@@ -2,4 +2,4 @@ relation:
     id: Association_BusinessObject3-BusinessRole1
     type: Association
     source: BusinessObject3
-    target: BaseModel.BusinessRole1
+    target: ModelA.BusinessRole1

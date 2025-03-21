@@ -1,5 +1,5 @@
 relation:
     id: Association_ValueStream2-BusinessRole1
     type: Association
-    source: BaseModel.ValueStream2
-    target: BaseModel.BusinessRole1
+    source: ModelA.ValueStream2
+    target: ModelA.BusinessRole1
