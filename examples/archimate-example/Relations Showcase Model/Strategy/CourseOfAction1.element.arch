@@ -1,4 +1,4 @@
 element:
     id: CourseOfAction1
-    name: "CourseOfAction"
     type: CourseOfAction
+    name: "CourseOfAction"

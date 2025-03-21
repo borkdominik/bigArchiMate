@@ -1,4 +1,4 @@
 element:
     id: ApplicationCollaboration
-    name: "ApplicationCollaboration"
     type: ApplicationCollaboration
+    name: "ApplicationCollaboration"

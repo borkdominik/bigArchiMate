@@ -1,4 +1,4 @@
 element:
     id: DataObject
-    name: "DataObject"
     type: DataObject
+    name: "DataObject"

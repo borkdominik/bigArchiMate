@@ -1,4 +1,4 @@
 element:
     id: Outcome
-    name: "Outcome"
     type: Outcome
+    name: "Outcome"

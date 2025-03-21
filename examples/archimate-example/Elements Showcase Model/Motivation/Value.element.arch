@@ -1,4 +1,4 @@
 element:
     id: Value
-    name: "Value"
     type: Value
+    name: "Value"

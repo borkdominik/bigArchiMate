@@ -1,4 +1,4 @@
 element:
     id: ValueStream1
-    name: "ValueStream"
     type: ValueStream
+    name: "ValueStream"

@@ -1,4 +1,4 @@
 element:
     id: Material
-    name: "Material"
     type: Material
+    name: "Material"

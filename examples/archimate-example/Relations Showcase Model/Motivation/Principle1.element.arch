@@ -1,4 +1,4 @@
 element:
     id: Principle1
-    name: "Principle"
     type: Principle
+    name: "Principle"

@@ -1,4 +1,4 @@
 element:
     id: ApplicationComponent
-    name: "ApplicationComponent"
     type: ApplicationComponent
+    name: "ApplicationComponent"

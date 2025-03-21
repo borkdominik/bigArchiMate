@@ -1,4 +1,4 @@
 element:
     id: Device
-    name: "Device"
     type: Device
+    name: "Device"

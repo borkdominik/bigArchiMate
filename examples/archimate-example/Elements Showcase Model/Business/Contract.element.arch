@@ -1,4 +1,4 @@
 element:
     id: Contract
-    name: "Contract"
     type: Contract
+    name: "Contract"

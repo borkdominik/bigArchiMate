@@ -1,4 +1,4 @@
 element:
     id: TechnologyEvent
-    name: "TechnologyEvent"
     type: TechnologyEvent
+    name: "TechnologyEvent"

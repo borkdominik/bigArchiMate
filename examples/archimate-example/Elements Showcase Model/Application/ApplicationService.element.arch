@@ -1,4 +1,4 @@
 element:
     id: ApplicationService
-    name: "ApplicationService"
     type: ApplicationService
+    name: "ApplicationService"

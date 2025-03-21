@@ -1,4 +1,4 @@
 element:
     id: CommunicationNetwork
-    name: "CommunicationNetwork"
     type: CommunicationNetwork
+    name: "CommunicationNetwork"

@@ -1,4 +1,4 @@
 element:
     id: ApplicationInteraction
-    name: "ApplicationInteraction"
     type: ApplicationInteraction
+    name: "ApplicationInteraction"

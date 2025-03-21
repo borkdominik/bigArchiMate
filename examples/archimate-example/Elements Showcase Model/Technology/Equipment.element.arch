@@ -1,4 +1,4 @@
 element:
     id: Equipment
-    name: "Equipment"
     type: Equipment
+    name: "Equipment"

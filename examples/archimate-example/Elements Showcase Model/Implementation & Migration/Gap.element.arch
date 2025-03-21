@@ -1,4 +1,4 @@
 element:
     id: Gap
-    name: "Gap"
     type: Gap
+    name: "Gap"

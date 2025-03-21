@@ -1,4 +1,4 @@
 element:
     id: Product
-    name: "Product"
     type: Product
+    name: "Product"

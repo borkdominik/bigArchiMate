@@ -1,4 +1,4 @@
 element:
     id: TechnologyInteraction
-    name: "TechnologyInteraction"
     type: TechnologyInteraction
+    name: "TechnologyInteraction"

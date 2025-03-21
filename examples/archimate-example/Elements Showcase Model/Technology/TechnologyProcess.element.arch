@@ -1,4 +1,4 @@
 element:
     id: TechnologyProcess
-    name: "TechnologyProcess"
     type: TechnologyProcess
+    name: "TechnologyProcess"

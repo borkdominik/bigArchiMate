@@ -1,4 +1,4 @@
 element:
     id: BusinessObject2
-    name: "BusinessObject"
     type: BusinessObject
+    name: "BusinessObject"

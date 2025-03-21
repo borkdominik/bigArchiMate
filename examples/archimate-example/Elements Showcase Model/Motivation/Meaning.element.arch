@@ -1,4 +1,4 @@
 element:
     id: Meaning
-    name: "Meaning"
     type: Meaning
+    name: "Meaning"

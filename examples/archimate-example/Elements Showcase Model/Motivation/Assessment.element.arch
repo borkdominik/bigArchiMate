@@ -1,4 +1,4 @@
 element:
     id: Assessment
-    name: "Assessment"
     type: Assessment
+    name: "Assessment"

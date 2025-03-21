@@ -1,4 +1,4 @@
 element:
     id: Stakeholder
-    name: "Stakeholder"
     type: Stakeholder
+    name: "Stakeholder"

@@ -1,4 +1,4 @@
 element:
     id: Path
-    name: "Path"
     type: Path
+    name: "Path"

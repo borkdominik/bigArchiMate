@@ -1,4 +1,4 @@
 element:
     id: WorkPackage
-    name: "WorkPackage"
     type: WorkPackage
+    name: "WorkPackage"

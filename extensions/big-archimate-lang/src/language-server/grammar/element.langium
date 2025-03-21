@@ -5,9 +5,9 @@ Element:
     'element' ':'
         INDENT
             'id' ':' id=ID
+            'type' ':'  type=ElementType
             'name' ':' name=STRING
             ('documentation' ':' documentation=STRING)?
-            'type' ':'  type=ElementType
             Properties?
         DEDENT
 ;

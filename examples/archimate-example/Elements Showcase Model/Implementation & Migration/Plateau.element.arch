@@ -1,4 +1,4 @@
 element:
     id: Plateau
-    name: "Plateau"
     type: Plateau
+    name: "Plateau"

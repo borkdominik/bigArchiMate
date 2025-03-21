@@ -1,4 +1,4 @@
 element:
     id: ApplicationProcess1
-    name: "ApplicationInterface"
     type: ApplicationInterface
+    name: "ApplicationInterface"

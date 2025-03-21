@@ -1,4 +1,4 @@
 element:
     id: DistributionNetwork
-    name: "DistributionNetwork"
     type: DistributionNetwork
+    name: "DistributionNetwork"

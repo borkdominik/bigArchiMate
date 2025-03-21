@@ -1,4 +1,4 @@
 element:
     id: Location
-    name: "Location"
     type: Location
+    name: "Location"
