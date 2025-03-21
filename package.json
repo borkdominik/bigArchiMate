@@ -21,7 +21,6 @@
     "package:extensions": "lerna run --scope={big-archimate-lang,big-archimate-theme} package:vsix",
     "start:browser": "yarn theia:browser start",
     "start:electron": "yarn theia:electron start",
-    "start:verdaccio": "yarn verdaccio --config verdaccio-config.yaml",
     "symlink:browser": "lerna run --scope={big-archimate-lang,big-archimate-theme} symlink:browser",
     "symlink:electron": "lerna run --scope={big-archimate-lang,big-archimate-theme} symlink:electron",
     "test": "rimraf unit-test-results && yarn run test:cjs && yarn run test:esm",
@@ -63,8 +62,7 @@
     "symlink-dir": "^5.1.0",
     "ts-jest": "^29.1.1",
     "ts-node": "^10.9.1",
-    "typescript": ">=4.9.3",
-    "verdaccio": "^5.23.1"
+    "typescript": ">=4.9.3"
   },
   "engines": {
     "node": ">=16",
