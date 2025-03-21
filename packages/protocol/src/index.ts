@@ -1,9 +1,7 @@
 import 'reflect-metadata';
 export * from './archimate-metadata';
-export * from './expression';
 export * from './glsp/actions';
 export * from './glsp/grid';
-export * from './glsp/id-util';
 export * from './glsp/types';
 export * from './integration';
 export * from './model';

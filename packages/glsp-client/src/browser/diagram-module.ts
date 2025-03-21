@@ -2,7 +2,6 @@ import { GRID } from '@big-archimate/protocol';
 import {
    ConsoleLogger,
    GLSPMousePositionTracker,
-   GlspCommandPalette,
    LogLevel,
    MetadataPlacer,
    MouseDeleteTool,
@@ -14,7 +13,6 @@ import {
 } from '@eclipse-glsp/client';
 import { GlspSelectionDataService } from '@eclipse-glsp/theia-integration';
 import { ContainerModule, injectable, interfaces } from '@theia/core/shared/inversify';
-import { CustomCommandPalette } from './command-palette';
 import { CustomMouseDeleteTool } from './delete-tool';
 import { DiagramStartup } from './diagram-startup';
 import { ErrorExtension } from './error-extension';
@@ -36,8 +34,8 @@ export function createDiagramModule(registry: interfaces.ContainerModuleCallBack
       bindAsService(context, GlspSelectionDataService, SelectionDataService);
       bindAsService(context, TYPES.IDiagramStartup, DiagramStartup);
       registry(bind, unbind, isBound, rebind, unbindAsync, onActivation, onDeactivation);
-      bind(CustomCommandPalette).toSelf().inSingletonScope();
-      rebind(GlspCommandPalette).toService(CustomCommandPalette);
+      // bind(CustomCommandPalette).toSelf().inSingletonScope();
+      // rebind(GlspCommandPalette).toService(CustomCommandPalette);
 
       bind(MousePositionTracker).toSelf().inSingletonScope();
       bindOrRebind(context, GLSPMousePositionTracker).toService(MousePositionTracker);
