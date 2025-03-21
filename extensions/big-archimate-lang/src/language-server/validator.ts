@@ -91,7 +91,6 @@ export class Validator {
    }
 
    protected isExportedGlobally(node: AstNode): boolean {
-      // we export anything with an id from entities and relationships and all root nodes, see ScopeComputation
       return isElement(node) || isRelation(node) || isDiagram(node);
    }
 
