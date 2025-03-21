@@ -44,7 +44,7 @@ export class CreateRelationOperationHandler extends JsonCreateEdgeOperationHandl
                id: this.modelState.idProvider.findNextId(RelationEdge, relation.id + 'Edge', this.modelState.archiMateDiagram),
                relation: {
                   ref: relation,
-                  $refText: this.modelState.idProvider.getGlobalId(relation) || relation.id || ''
+                  $refText: this.modelState.idProvider.getNodeId(relation) || relation.id || ''
                },
                sourceNode: {
                   ref: sourceNode,

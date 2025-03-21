@@ -10,7 +10,7 @@ import { AbstractAstReflection } from 'langium';
 export const ArchiMateLanguageTerminals = {
     STRING: /"[^"]*"|'[^']*'/,
     NUMBER: /(-)?[0-9]+(\.[0-9]+)?/,
-    ID: /[_a-zA-Z][\w_\-~$#@/\d]*/,
+    _ID: /[_a-zA-Z][\w_\-~$#@/\d]*/,
     SL_COMMENT: /#[^\n\r]*/,
     INDENT: /:synthetic-indent:/,
     DEDENT: /:synthetic-dedent:/,
@@ -119,18 +119,6 @@ export type ArchiMateLanguageKeywordNames =
 
 export type ArchiMateLanguageTokenNames = ArchiMateLanguageTerminalNames | ArchiMateLanguageKeywordNames;
 
-export type ElementID = ElementType | string;
-
-export function isElementID(item: unknown): item is ElementID {
-    return isElementType(item) || (typeof item === 'string' && (/[_a-zA-Z][\w_\-~$#@/\d]*/.test(item)));
-}
-
-export type ElementIDReference = string;
-
-export function isElementIDReference(item: unknown): item is ElementIDReference {
-    return typeof item === 'string';
-}
-
 export type ElementNodeOrJunctionNode = ElementNode | JunctionNode;
 
 export const ElementNodeOrJunctionNode = 'ElementNodeOrJunctionNode';
@@ -147,28 +135,22 @@ export function isElementOrJunction(item: unknown): item is ElementOrJunction {
     return reflection.isInstance(item, ElementOrJunction);
 }
 
-export type ElementOrJunctionID = ElementID | string;
-
-export function isElementOrJunctionID(item: unknown): item is ElementOrJunctionID {
-    return isElementID(item) || (typeof item === 'string' && (/[_a-zA-Z][\w_\-~$#@/\d]*/.test(item)));
-}
-
 export type ElementType = 'ApplicationCollaboration' | 'ApplicationComponent' | 'ApplicationEvent' | 'ApplicationFunction' | 'ApplicationInteraction' | 'ApplicationInterface' | 'ApplicationProcess' | 'ApplicationService' | 'Artifact' | 'Assessment' | 'BusinessActor' | 'BusinessCollaboration' | 'BusinessEvent' | 'BusinessFunction' | 'BusinessInteraction' | 'BusinessInterface' | 'BusinessObject' | 'BusinessProcess' | 'BusinessRole' | 'BusinessService' | 'Capability' | 'CommunicationNetwork' | 'Constraint' | 'Contract' | 'CourseOfAction' | 'DataObject' | 'Deliverable' | 'Device' | 'DistributionNetwork' | 'Driver' | 'Equipment' | 'Facility' | 'Gap' | 'Goal' | 'Grouping' | 'ImplementationEvent' | 'Location' | 'Material' | 'Meaning' | 'Node' | 'Outcome' | 'Path' | 'Plateau' | 'Principle' | 'Product' | 'Representation' | 'Requirement' | 'Resource' | 'Stakeholder' | 'SystemSoftware' | 'TechnologyCollaboration' | 'TechnologyEvent' | 'TechnologyFunction' | 'TechnologyInteraction' | 'TechnologyInterface' | 'TechnologyProcess' | 'TechnologyService' | 'Value' | 'ValueStream' | 'WorkPackage';
 
 export function isElementType(item: unknown): item is ElementType {
     return item === 'ApplicationCollaboration' || item === 'ApplicationComponent' || item === 'ApplicationEvent' || item === 'ApplicationFunction' || item === 'ApplicationInterface' || item === 'ApplicationInteraction' || item === 'ApplicationProcess' || item === 'ApplicationService' || item === 'Artifact' || item === 'Assessment' || item === 'BusinessActor' || item === 'BusinessCollaboration' || item === 'BusinessEvent' || item === 'BusinessFunction' || item === 'BusinessInteraction' || item === 'BusinessInterface' || item === 'BusinessObject' || item === 'BusinessProcess' || item === 'BusinessRole' || item === 'BusinessService' || item === 'Capability' || item === 'Constraint' || item === 'CommunicationNetwork' || item === 'Contract' || item === 'CourseOfAction' || item === 'DataObject' || item === 'Deliverable' || item === 'Device' || item === 'DistributionNetwork' || item === 'Driver' || item === 'Equipment' || item === 'Facility' || item === 'Gap' || item === 'Goal' || item === 'Grouping' || item === 'ImplementationEvent' || item === 'Location' || item === 'Material' || item === 'Meaning' || item === 'Node' || item === 'Outcome' || item === 'Path' || item === 'Plateau' || item === 'Principle' || item === 'Product' || item === 'Requirement' || item === 'Representation' || item === 'Resource' || item === 'Stakeholder' || item === 'SystemSoftware' || item === 'TechnologyCollaboration' || item === 'TechnologyEvent' || item === 'TechnologyFunction' || item === 'TechnologyInteraction' || item === 'TechnologyInterface' || item === 'TechnologyProcess' || item === 'TechnologyService' || item === 'Value' || item === 'ValueStream' || item === 'WorkPackage';
 }
 
+export type ID = ElementType | RelationType | string;
+
+export function isID(item: unknown): item is ID {
+    return isRelationType(item) || isElementType(item) || (typeof item === 'string' && (/[_a-zA-Z][\w_\-~$#@/\d]*/.test(item)));
+}
+
 export type IDReference = string;
 
 export function isIDReference(item: unknown): item is IDReference {
     return typeof item === 'string';
-}
-
-export type RelationID = RelationType | string;
-
-export function isRelationID(item: unknown): item is RelationID {
-    return isRelationType(item) || (typeof item === 'string' && (/[_a-zA-Z][\w_\-~$#@/\d]*/.test(item)));
 }
 
 export type RelationType = 'Access' | 'Aggregation' | 'Assignment' | 'Association' | 'Composition' | 'Flow' | 'Influence' | 'Realization' | 'Serving' | 'Specialization' | 'Triggering';
@@ -181,7 +163,7 @@ export interface ArchiMateDiagram extends AstNode {
     readonly $container: ArchiMateRoot;
     readonly $type: 'ArchiMateDiagram';
     edges: Array<RelationEdge>;
-    id?: string;
+    id?: ID;
     name?: string;
     nodes: Array<ElementNode | JunctionNode>;
     properties: Array<Property>;
@@ -211,7 +193,7 @@ export interface Element extends AstNode {
     readonly $container: ArchiMateRoot;
     readonly $type: 'Element';
     documentation?: string;
-    id: ElementID;
+    id: ID;
     name: string;
     properties: Array<Property>;
     type: ElementType;
@@ -228,7 +210,7 @@ export interface ElementNode extends AstNode {
     readonly $type: 'ElementNode';
     element: Reference<Element>;
     height: number;
-    id: string;
+    id: ID;
     width: number;
     x: number;
     y: number;
@@ -244,7 +226,7 @@ export interface Junction extends AstNode {
     readonly $container: ArchiMateRoot;
     readonly $type: 'Junction';
     documentation?: string;
-    id: string;
+    id: ID;
     name?: string;
     properties: Array<Property>;
 }
@@ -259,7 +241,7 @@ export interface JunctionNode extends AstNode {
     readonly $container: ArchiMateDiagram;
     readonly $type: 'JunctionNode';
     height: number;
-    id: string;
+    id: ID;
     junction: Reference<Junction>;
     width: number;
     x: number;
@@ -275,7 +257,7 @@ export function isJunctionNode(item: unknown): item is JunctionNode {
 export interface Property extends AstNode {
     readonly $container: ArchiMateDiagram | Element | Junction | Relation;
     readonly $type: 'Property';
-    id: string;
+    id: ID;
     name: string;
     value?: string;
 }
@@ -290,7 +272,7 @@ export interface Relation extends AstNode {
     readonly $container: ArchiMateRoot;
     readonly $type: 'Relation';
     documentation?: string;
-    id: string;
+    id: ID;
     name?: string;
     properties: Array<Property>;
     source: Reference<ElementOrJunction>;
@@ -307,7 +289,7 @@ export function isRelation(item: unknown): item is Relation {
 export interface RelationEdge extends AstNode {
     readonly $container: ArchiMateDiagram;
     readonly $type: 'RelationEdge';
-    id: string;
+    id: ID;
     relation: Reference<Relation>;
     routingPoints: Array<RelationRoutingPoint>;
     sourceNode: Reference<ElementNodeOrJunctionNode>;

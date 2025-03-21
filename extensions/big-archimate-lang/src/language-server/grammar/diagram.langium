@@ -25,12 +25,9 @@ ArchiMateDiagram:
     )*
 ;
 
-ElementIDReference returns string:
-    ElementID ('.' ElementID)*;
-
 ElementNode:
     'id' ':' id=ID
-    'element' ':' element=[Element:ElementIDReference]
+    'element' ':' element=[Element:IDReference]
     'x' ':' x=NUMBER
     'y' ':' y=NUMBER
     'width' ':' width=NUMBER

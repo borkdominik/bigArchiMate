@@ -51,7 +51,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
             "terminal": {
               "$type": "RuleCall",
               "rule": {
-                "$ref": "#/rules@21"
+                "$ref": "#/rules@19"
               },
               "arguments": []
             }
@@ -63,7 +63,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
             "terminal": {
               "$type": "RuleCall",
               "rule": {
-                "$ref": "#/rules@22"
+                "$ref": "#/rules@20"
               },
               "arguments": []
             }
@@ -94,7 +94,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
           {
             "$type": "RuleCall",
             "rule": {
-              "$ref": "#/rules@9"
+              "$ref": "#/rules@10"
             },
             "arguments": []
           },
@@ -113,7 +113,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
             "terminal": {
               "$type": "RuleCall",
               "rule": {
-                "$ref": "#/rules@2"
+                "$ref": "#/rules@7"
               },
               "arguments": []
             }
@@ -179,7 +179,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
             "terminal": {
               "$type": "RuleCall",
               "rule": {
-                "$ref": "#/rules@3"
+                "$ref": "#/rules@2"
               },
               "arguments": []
             }
@@ -187,7 +187,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
           {
             "$type": "RuleCall",
             "rule": {
-              "$ref": "#/rules@14"
+              "$ref": "#/rules@15"
             },
             "arguments": [],
             "cardinality": "?"
@@ -195,37 +195,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
           {
             "$type": "RuleCall",
             "rule": {
-              "$ref": "#/rules@10"
-            },
-            "arguments": []
-          }
-        ]
-      },
-      "definesHiddenTokens": false,
-      "entry": false,
-      "fragment": false,
-      "hiddenTokens": [],
-      "parameters": [],
-      "wildcard": false
-    },
-    {
-      "$type": "ParserRule",
-      "name": "ElementID",
-      "dataType": "string",
-      "definition": {
-        "$type": "Alternatives",
-        "elements": [
-          {
-            "$type": "RuleCall",
-            "rule": {
-              "$ref": "#/rules@6"
-            },
-            "arguments": []
-          },
-          {
-            "$type": "RuleCall",
-            "rule": {
-              "$ref": "#/rules@3"
+              "$ref": "#/rules@11"
             },
             "arguments": []
           }
@@ -495,6 +465,66 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
       "wildcard": false
     },
     {
+      "$type": "ParserRule",
+      "name": "RelationType",
+      "dataType": "string",
+      "definition": {
+        "$type": "Alternatives",
+        "elements": [
+          {
+            "$type": "Keyword",
+            "value": "Access"
+          },
+          {
+            "$type": "Keyword",
+            "value": "Aggregation"
+          },
+          {
+            "$type": "Keyword",
+            "value": "Association"
+          },
+          {
+            "$type": "Keyword",
+            "value": "Assignment"
+          },
+          {
+            "$type": "Keyword",
+            "value": "Composition"
+          },
+          {
+            "$type": "Keyword",
+            "value": "Flow"
+          },
+          {
+            "$type": "Keyword",
+            "value": "Influence"
+          },
+          {
+            "$type": "Keyword",
+            "value": "Realization"
+          },
+          {
+            "$type": "Keyword",
+            "value": "Serving"
+          },
+          {
+            "$type": "Keyword",
+            "value": "Specialization"
+          },
+          {
+            "$type": "Keyword",
+            "value": "Triggering"
+          }
+        ]
+      },
+      "definesHiddenTokens": false,
+      "entry": false,
+      "fragment": false,
+      "hiddenTokens": [],
+      "parameters": [],
+      "wildcard": false
+    },
+    {
       "$type": "TerminalRule",
       "name": "STRING",
       "definition": {
@@ -520,13 +550,50 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
     },
     {
       "$type": "TerminalRule",
-      "name": "ID",
+      "name": "_ID",
       "definition": {
         "$type": "RegexToken",
         "regex": "/[_a-zA-Z][\\\\w_\\\\-~$#@/\\\\d]*/"
       },
       "fragment": false,
       "hidden": false
+    },
+    {
+      "$type": "ParserRule",
+      "name": "ID",
+      "dataType": "string",
+      "definition": {
+        "$type": "Alternatives",
+        "elements": [
+          {
+            "$type": "RuleCall",
+            "rule": {
+              "$ref": "#/rules@6"
+            },
+            "arguments": []
+          },
+          {
+            "$type": "RuleCall",
+            "rule": {
+              "$ref": "#/rules@3"
+            },
+            "arguments": []
+          },
+          {
+            "$type": "RuleCall",
+            "rule": {
+              "$ref": "#/rules@2"
+            },
+            "arguments": []
+          }
+        ]
+      },
+      "definesHiddenTokens": false,
+      "entry": false,
+      "fragment": false,
+      "hiddenTokens": [],
+      "parameters": [],
+      "wildcard": false
     },
     {
       "$type": "ParserRule",
@@ -538,7 +605,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
           {
             "$type": "RuleCall",
             "rule": {
-              "$ref": "#/rules@6"
+              "$ref": "#/rules@7"
             },
             "arguments": []
           },
@@ -552,7 +619,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
               {
                 "$type": "RuleCall",
                 "rule": {
-                  "$ref": "#/rules@6"
+                  "$ref": "#/rules@7"
                 },
                 "arguments": []
               }
@@ -655,7 +722,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
           {
             "$type": "RuleCall",
             "rule": {
-              "$ref": "#/rules@9"
+              "$ref": "#/rules@10"
             },
             "arguments": []
           },
@@ -665,7 +732,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
               {
                 "$type": "RuleCall",
                 "rule": {
-                  "$ref": "#/rules@11"
+                  "$ref": "#/rules@12"
                 },
                 "arguments": []
               },
@@ -676,7 +743,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
                 "terminal": {
                   "$type": "RuleCall",
                   "rule": {
-                    "$ref": "#/rules@15"
+                    "$ref": "#/rules@16"
                   },
                   "arguments": []
                 }
@@ -687,7 +754,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
           {
             "$type": "RuleCall",
             "rule": {
-              "$ref": "#/rules@10"
+              "$ref": "#/rules@11"
             },
             "arguments": []
           }
@@ -720,7 +787,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
             "terminal": {
               "$type": "RuleCall",
               "rule": {
-                "$ref": "#/rules@6"
+                "$ref": "#/rules@7"
               },
               "arguments": []
             }
@@ -796,37 +863,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
           {
             "$type": "RuleCall",
             "rule": {
-              "$ref": "#/rules@21"
-            },
-            "arguments": []
-          }
-        ]
-      },
-      "definesHiddenTokens": false,
-      "entry": false,
-      "fragment": false,
-      "hiddenTokens": [],
-      "parameters": [],
-      "wildcard": false
-    },
-    {
-      "$type": "ParserRule",
-      "name": "ElementOrJunctionID",
-      "dataType": "string",
-      "definition": {
-        "$type": "Alternatives",
-        "elements": [
-          {
-            "$type": "RuleCall",
-            "rule": {
-              "$ref": "#/rules@2"
-            },
-            "arguments": []
-          },
-          {
-            "$type": "RuleCall",
-            "rule": {
-              "$ref": "#/rules@6"
+              "$ref": "#/rules@19"
             },
             "arguments": []
           }
@@ -856,7 +893,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
           {
             "$type": "RuleCall",
             "rule": {
-              "$ref": "#/rules@9"
+              "$ref": "#/rules@10"
             },
             "arguments": []
           },
@@ -875,7 +912,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
             "terminal": {
               "$type": "RuleCall",
               "rule": {
-                "$ref": "#/rules@6"
+                "$ref": "#/rules@7"
               },
               "arguments": []
             }
@@ -947,7 +984,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
             "terminal": {
               "$type": "RuleCall",
               "rule": {
-                "$ref": "#/rules@20"
+                "$ref": "#/rules@3"
               },
               "arguments": []
             }
@@ -967,12 +1004,12 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
             "terminal": {
               "$type": "CrossReference",
               "type": {
-                "$ref": "#/rules@16"
+                "$ref": "#/rules@17"
               },
               "terminal": {
                 "$type": "RuleCall",
                 "rule": {
-                  "$ref": "#/rules@17"
+                  "$ref": "#/rules@8"
                 },
                 "arguments": []
               },
@@ -994,12 +1031,12 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
             "terminal": {
               "$type": "CrossReference",
               "type": {
-                "$ref": "#/rules@16"
+                "$ref": "#/rules@17"
               },
               "terminal": {
                 "$type": "RuleCall",
                 "rule": {
-                  "$ref": "#/rules@17"
+                  "$ref": "#/rules@8"
                 },
                 "arguments": []
               },
@@ -1009,7 +1046,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
           {
             "$type": "RuleCall",
             "rule": {
-              "$ref": "#/rules@14"
+              "$ref": "#/rules@15"
             },
             "arguments": [],
             "cardinality": "?"
@@ -1017,99 +1054,9 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
           {
             "$type": "RuleCall",
             "rule": {
-              "$ref": "#/rules@10"
+              "$ref": "#/rules@11"
             },
             "arguments": []
-          }
-        ]
-      },
-      "definesHiddenTokens": false,
-      "entry": false,
-      "fragment": false,
-      "hiddenTokens": [],
-      "parameters": [],
-      "wildcard": false
-    },
-    {
-      "$type": "ParserRule",
-      "name": "RelationID",
-      "dataType": "string",
-      "definition": {
-        "$type": "Alternatives",
-        "elements": [
-          {
-            "$type": "RuleCall",
-            "rule": {
-              "$ref": "#/rules@6"
-            },
-            "arguments": []
-          },
-          {
-            "$type": "RuleCall",
-            "rule": {
-              "$ref": "#/rules@20"
-            },
-            "arguments": []
-          }
-        ]
-      },
-      "definesHiddenTokens": false,
-      "entry": false,
-      "fragment": false,
-      "hiddenTokens": [],
-      "parameters": [],
-      "wildcard": false
-    },
-    {
-      "$type": "ParserRule",
-      "name": "RelationType",
-      "dataType": "string",
-      "definition": {
-        "$type": "Alternatives",
-        "elements": [
-          {
-            "$type": "Keyword",
-            "value": "Access"
-          },
-          {
-            "$type": "Keyword",
-            "value": "Aggregation"
-          },
-          {
-            "$type": "Keyword",
-            "value": "Association"
-          },
-          {
-            "$type": "Keyword",
-            "value": "Assignment"
-          },
-          {
-            "$type": "Keyword",
-            "value": "Composition"
-          },
-          {
-            "$type": "Keyword",
-            "value": "Flow"
-          },
-          {
-            "$type": "Keyword",
-            "value": "Influence"
-          },
-          {
-            "$type": "Keyword",
-            "value": "Realization"
-          },
-          {
-            "$type": "Keyword",
-            "value": "Serving"
-          },
-          {
-            "$type": "Keyword",
-            "value": "Specialization"
-          },
-          {
-            "$type": "Keyword",
-            "value": "Triggering"
           }
         ]
       },
@@ -1137,7 +1084,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
           {
             "$type": "RuleCall",
             "rule": {
-              "$ref": "#/rules@9"
+              "$ref": "#/rules@10"
             },
             "arguments": []
           },
@@ -1156,7 +1103,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
             "terminal": {
               "$type": "RuleCall",
               "rule": {
-                "$ref": "#/rules@6"
+                "$ref": "#/rules@7"
               },
               "arguments": []
             }
@@ -1216,7 +1163,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
           {
             "$type": "RuleCall",
             "rule": {
-              "$ref": "#/rules@14"
+              "$ref": "#/rules@15"
             },
             "arguments": [],
             "cardinality": "?"
@@ -1224,7 +1171,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
           {
             "$type": "RuleCall",
             "rule": {
-              "$ref": "#/rules@10"
+              "$ref": "#/rules@11"
             },
             "arguments": []
           }
@@ -1257,7 +1204,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
               {
                 "$type": "RuleCall",
                 "rule": {
-                  "$ref": "#/rules@9"
+                  "$ref": "#/rules@10"
                 },
                 "arguments": []
               },
@@ -1276,7 +1223,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
                 "terminal": {
                   "$type": "RuleCall",
                   "rule": {
-                    "$ref": "#/rules@6"
+                    "$ref": "#/rules@7"
                   },
                   "arguments": []
                 }
@@ -1321,7 +1268,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
                   {
                     "$type": "RuleCall",
                     "rule": {
-                      "$ref": "#/rules@9"
+                      "$ref": "#/rules@10"
                     },
                     "arguments": []
                   },
@@ -1331,7 +1278,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
                       {
                         "$type": "RuleCall",
                         "rule": {
-                          "$ref": "#/rules@11"
+                          "$ref": "#/rules@12"
                         },
                         "arguments": []
                       },
@@ -1345,14 +1292,14 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
                             {
                               "$type": "RuleCall",
                               "rule": {
-                                "$ref": "#/rules@24"
+                                "$ref": "#/rules@21"
                               },
                               "arguments": []
                             },
                             {
                               "$type": "RuleCall",
                               "rule": {
-                                "$ref": "#/rules@25"
+                                "$ref": "#/rules@22"
                               },
                               "arguments": []
                             }
@@ -1365,7 +1312,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
                   {
                     "$type": "RuleCall",
                     "rule": {
-                      "$ref": "#/rules@10"
+                      "$ref": "#/rules@11"
                     },
                     "arguments": []
                   }
@@ -1386,7 +1333,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
                   {
                     "$type": "RuleCall",
                     "rule": {
-                      "$ref": "#/rules@9"
+                      "$ref": "#/rules@10"
                     },
                     "arguments": []
                   },
@@ -1396,7 +1343,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
                       {
                         "$type": "RuleCall",
                         "rule": {
-                          "$ref": "#/rules@11"
+                          "$ref": "#/rules@12"
                         },
                         "arguments": []
                       },
@@ -1407,7 +1354,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
                         "terminal": {
                           "$type": "RuleCall",
                           "rule": {
-                            "$ref": "#/rules@28"
+                            "$ref": "#/rules@25"
                           },
                           "arguments": []
                         }
@@ -1418,7 +1365,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
                   {
                     "$type": "RuleCall",
                     "rule": {
-                      "$ref": "#/rules@10"
+                      "$ref": "#/rules@11"
                     },
                     "arguments": []
                   }
@@ -1428,7 +1375,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
               {
                 "$type": "RuleCall",
                 "rule": {
-                  "$ref": "#/rules@14"
+                  "$ref": "#/rules@15"
                 },
                 "arguments": [],
                 "cardinality": "?"
@@ -1436,47 +1383,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
               {
                 "$type": "RuleCall",
                 "rule": {
-                  "$ref": "#/rules@10"
-                },
-                "arguments": []
-              }
-            ],
-            "cardinality": "*"
-          }
-        ]
-      },
-      "definesHiddenTokens": false,
-      "entry": false,
-      "fragment": false,
-      "hiddenTokens": [],
-      "parameters": [],
-      "wildcard": false
-    },
-    {
-      "$type": "ParserRule",
-      "name": "ElementIDReference",
-      "dataType": "string",
-      "definition": {
-        "$type": "Group",
-        "elements": [
-          {
-            "$type": "RuleCall",
-            "rule": {
-              "$ref": "#/rules@2"
-            },
-            "arguments": []
-          },
-          {
-            "$type": "Group",
-            "elements": [
-              {
-                "$type": "Keyword",
-                "value": "."
-              },
-              {
-                "$type": "RuleCall",
-                "rule": {
-                  "$ref": "#/rules@2"
+                  "$ref": "#/rules@11"
                 },
                 "arguments": []
               }
@@ -1513,7 +1420,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
             "terminal": {
               "$type": "RuleCall",
               "rule": {
-                "$ref": "#/rules@6"
+                "$ref": "#/rules@7"
               },
               "arguments": []
             }
@@ -1538,7 +1445,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
               "terminal": {
                 "$type": "RuleCall",
                 "rule": {
-                  "$ref": "#/rules@23"
+                  "$ref": "#/rules@8"
                 },
                 "arguments": []
               },
@@ -1655,7 +1562,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
             "terminal": {
               "$type": "RuleCall",
               "rule": {
-                "$ref": "#/rules@6"
+                "$ref": "#/rules@7"
               },
               "arguments": []
             }
@@ -1675,12 +1582,12 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
             "terminal": {
               "$type": "CrossReference",
               "type": {
-                "$ref": "#/rules@21"
+                "$ref": "#/rules@19"
               },
               "terminal": {
                 "$type": "RuleCall",
                 "rule": {
-                  "$ref": "#/rules@7"
+                  "$ref": "#/rules@8"
                 },
                 "arguments": []
               },
@@ -1785,14 +1692,14 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
           {
             "$type": "RuleCall",
             "rule": {
-              "$ref": "#/rules@24"
+              "$ref": "#/rules@21"
             },
             "arguments": []
           },
           {
             "$type": "RuleCall",
             "rule": {
-              "$ref": "#/rules@25"
+              "$ref": "#/rules@22"
             },
             "arguments": []
           }
@@ -1881,7 +1788,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
             "terminal": {
               "$type": "RuleCall",
               "rule": {
-                "$ref": "#/rules@6"
+                "$ref": "#/rules@7"
               },
               "arguments": []
             }
@@ -1906,7 +1813,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
               "terminal": {
                 "$type": "RuleCall",
                 "rule": {
-                  "$ref": "#/rules@7"
+                  "$ref": "#/rules@8"
                 },
                 "arguments": []
               },
@@ -1928,12 +1835,12 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
             "terminal": {
               "$type": "CrossReference",
               "type": {
-                "$ref": "#/rules@26"
+                "$ref": "#/rules@23"
               },
               "terminal": {
                 "$type": "RuleCall",
                 "rule": {
-                  "$ref": "#/rules@7"
+                  "$ref": "#/rules@8"
                 },
                 "arguments": []
               },
@@ -1955,12 +1862,12 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
             "terminal": {
               "$type": "CrossReference",
               "type": {
-                "$ref": "#/rules@26"
+                "$ref": "#/rules@23"
               },
               "terminal": {
                 "$type": "RuleCall",
                 "rule": {
-                  "$ref": "#/rules@7"
+                  "$ref": "#/rules@8"
                 },
                 "arguments": []
               },
@@ -1981,7 +1888,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
               {
                 "$type": "RuleCall",
                 "rule": {
-                  "$ref": "#/rules@9"
+                  "$ref": "#/rules@10"
                 },
                 "arguments": []
               },
@@ -1991,7 +1898,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
                   {
                     "$type": "RuleCall",
                     "rule": {
-                      "$ref": "#/rules@11"
+                      "$ref": "#/rules@12"
                     },
                     "arguments": []
                   },
@@ -2002,7 +1909,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
                     "terminal": {
                       "$type": "RuleCall",
                       "rule": {
-                        "$ref": "#/rules@27"
+                        "$ref": "#/rules@24"
                       },
                       "arguments": []
                     }
@@ -2013,7 +1920,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
               {
                 "$type": "RuleCall",
                 "rule": {
-                  "$ref": "#/rules@10"
+                  "$ref": "#/rules@11"
                 },
                 "arguments": []
               }
