@@ -20,12 +20,6 @@ archiMateDiagram:
         y: 33
         width: 200
         height: 50
-      - id: GapNode
-        element: Gap1
-        x: -286
-        y: 242
-        width: 200
-        height: 50
     edges:
       - id: Association_ValueStream2-BusinessRole1Edge
         relation: Association_ValueStream2-BusinessRole1
