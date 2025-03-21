@@ -12,19 +12,19 @@ For detailed instructions for a Windows machine, follow [this](./docs/Prerequisi
 
 ## Running the application
 
-### Browser
-
-This will build and start bigArchiMate as a web application. When the web application is running you can open <http://localhost:3000> in your browser to use bigArchiMate.
-
-    yarn build:browser &&
-    yarn start:browser
-
 ### Electron (desktop application)
 
 This will build and start bigArchiMate as a native desktop application for the OS (Windows, Linux or MacOS) where the command is started.
 
     yarn build:electron &&
     yarn start:electron
+
+### Browser
+
+This will build and start bigArchiMate as a web application. When the web application is running you can open <http://localhost:3000> in your browser to use bigArchiMate.
+
+    yarn build:browser &&
+    yarn start:browser
 
 ## Example ArchiMate Models
 
