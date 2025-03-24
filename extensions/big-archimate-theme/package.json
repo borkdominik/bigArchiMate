@@ -13,7 +13,7 @@
     "url": "git+https://github.com/borkdominik/bigArchiMate"
   },
   "license": "AGPL-3.0-or-later",
-  "publisher": "Vienna University of Technology",
+  "publisher": "BIGModelingTools",
   "scripts": {
     "build": "echo \"Nothing to build\"",
     "clean": "rimraf out *.vsix",

@@ -105,10 +105,8 @@ The repository itself contains the following components structured as follows:
     │   └── electron-app             # Electron application
     ├── configs
     ├── docs                         # Documentation
-    ├── examples
-    │   ├── libraries                # Example libraries referenced in the local npm registry
-    │   ├── registry                 # Local npm registry using Verdaccio
-    │   └── workspace                # Workspace that can be opened in the tool
+    ├── e2e-tests                    # Playwright End-To-End-Tests
+    ├── examples                     # ArchiMate Model examples
     ├── extensions                   # VS Code extensions
     │   └── big-archimate-lang          # bigArchiMate language support (through three servers)
     │       └── src
@@ -117,6 +115,7 @@ The repository itself contains the following components structured as follows:
     │           ├── model-server     # Custom model server to provide access to the semantic models
     │           ├── extension.ts     # Extension starting the server process and the language client
     │           └── main.ts          # Server process starting up all servers
+    │   └── big-archimate-theme      # bigArchiMate Theia theme
     └── packages                     # Theia extensions
             ├── core                 # Core customizations
             ├── form-client          # Form editor widget connecting to the model server

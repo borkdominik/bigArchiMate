@@ -6,7 +6,8 @@ import { ArchiMateCommand } from '../../common/command.js';
 import { ArchiMateModelState } from '../../common/model-state.js';
 
 /**
- * An operation handler for the 'AddElementOperation' that resolves the referenced element by name and places it in a new node on the diagram.
+ * An operation handler for the 'AddElementOperation' that resolves the referenced element by name
+ * and places it in a new node on the diagram.
  */
 @injectable()
 export class AddElementOperationHandler extends JsonOperationHandler {

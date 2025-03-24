@@ -80,7 +80,8 @@ export class PackageInfo {
 /**
  * A manager that builds up a system of packages on top of a given workspace.
  * Directories with a 'package.json' file represent a closed system (ArchiMate model) that can only reference itself.
- * However, dependencies may be explicitly given as part of the 'package.json' in which case other systems (ArchiMate models) may become visible/referable.
+ * However, dependencies may be explicitly given as part of the 'package.json' in which case
+ * other systems (ArchiMate models) may become visible/referable.
  */
 export class PackageManager {
    protected uriToPackage = new Map<string, PackageInfo>();

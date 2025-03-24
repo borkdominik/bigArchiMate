@@ -1,6 +1,6 @@
 appId: big-archimate
 productName: bigArchiMate
-copyright: Copyright © 2025 Vienna University of Technology
+copyright: Copyright © 2025 BIGModelingTools
 executableName: big-archimate-app
 electronDist: ../../node_modules/electron/dist
 electronVersion: 30.1.2

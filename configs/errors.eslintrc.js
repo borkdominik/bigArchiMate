@@ -48,7 +48,7 @@ module.exports = {
          }
       ],
       // eslint-plugin-header
-      'header/header': [],
+      // 'header/header': [],
       // eslint-plugin-import
       'import/export': 'off', // we have multiple exports due to namespaces, enums and classes that share the same name
       'import/no-deprecated': 'error',
