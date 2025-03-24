@@ -1,38 +1,31 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
-import { CommandContribution, MenuContribution } from '@theia/core';
+import { MenuContribution } from '@theia/core';
 import { LabelProviderContribution } from '@theia/core/lib/browser';
 import { ContainerModule } from '@theia/core/shared/inversify';
 import { SaveFileDialog, SaveFileDialogFactory, SaveFileDialogProps } from '@theia/filesystem/lib/browser';
 import { FileNavigatorWidget, NavigatorTreeDecorator } from '@theia/navigator/lib/browser';
 import { FileNavigatorContribution } from '@theia/navigator/lib/browser/navigator-contribution';
 import { WorkspaceCommandContribution } from '@theia/workspace/lib/browser/workspace-commands';
+import '../../style/icons.css';
 import '../../style/index.css';
-import { CrossModelLabelProvider } from './cm-file-label-provider';
-import { createCrossModelFileNavigatorWidget } from './cm-file-navigator-tree-widget';
-import { createCrossModelSaveFileDialogContainer } from './cm-save-file-dialog';
-import { ImportExportContribution } from './import-export-contribution';
-import { CrossModelFileNavigatorContribution, CrossModelWorkspaceContribution } from './new-element-contribution';
+import { createFileNavigatorWidget } from './file-navigator-tree-widget';
+import { CustomLabelProvider } from './label-provider';
+import { CustomFileNavigatorContribution, CustomWorkspaceCommandContribution } from './new-file-contribution';
+import { createCustomSaveFileDialogContainer } from './save-file-dialog';
 
 export default new ContainerModule((bind, _unbind, _isBound, rebind) => {
-   bind(CrossModelWorkspaceContribution).toSelf().inSingletonScope();
-   rebind(WorkspaceCommandContribution).toService(CrossModelWorkspaceContribution);
-   bind(MenuContribution).toService(CrossModelWorkspaceContribution);
+   bind(CustomWorkspaceCommandContribution).toSelf().inSingletonScope();
+   rebind(WorkspaceCommandContribution).toService(CustomWorkspaceCommandContribution);
+   bind(MenuContribution).toService(CustomWorkspaceCommandContribution);
 
-   bind(CrossModelFileNavigatorContribution).toSelf().inSingletonScope();
-   rebind(FileNavigatorContribution).toService(CrossModelFileNavigatorContribution);
+   bind(CustomFileNavigatorContribution).toSelf().inSingletonScope();
+   rebind(FileNavigatorContribution).toService(CustomFileNavigatorContribution);
 
-   rebind(FileNavigatorWidget).toDynamicValue(ctx => createCrossModelFileNavigatorWidget(ctx.container));
-   bind(CrossModelLabelProvider).toSelf().inSingletonScope();
-   bind(LabelProviderContribution).toService(CrossModelLabelProvider);
-   bind(NavigatorTreeDecorator).toService(CrossModelLabelProvider);
-
-   bind(ImportExportContribution).toSelf().inSingletonScope();
-   bind(CommandContribution).toService(ImportExportContribution);
-   bind(MenuContribution).toService(ImportExportContribution);
+   rebind(FileNavigatorWidget).toDynamicValue(ctx => createFileNavigatorWidget(ctx.container));
+   bind(CustomLabelProvider).toSelf().inSingletonScope();
+   bind(LabelProviderContribution).toService(CustomLabelProvider);
+   bind(NavigatorTreeDecorator).toService(CustomLabelProvider);
 
    rebind(SaveFileDialogFactory).toFactory(
-      ctx => (props: SaveFileDialogProps) => createCrossModelSaveFileDialogContainer(ctx.container, props).get(SaveFileDialog)
+      ctx => (props: SaveFileDialogProps) => createCustomSaveFileDialogContainer(ctx.container, props).get(SaveFileDialog)
    );
 });

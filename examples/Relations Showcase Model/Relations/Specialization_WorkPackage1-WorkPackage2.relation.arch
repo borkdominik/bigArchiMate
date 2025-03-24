@@ -1,0 +1,5 @@
+relation:
+    id: Specialization_WorkPackage1-WorkPackage2
+    type: Specialization
+    source: WorkPackage1
+    target: WorkPackage2

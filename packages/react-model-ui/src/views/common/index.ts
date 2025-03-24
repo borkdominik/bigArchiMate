@@ -1,9 +1,6 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
 export * from './AsyncAutoComplete';
 export * from './EditorError';
-export * from './EntityAttributesDataGrid';
+export * from './ElementPropertiesDataGrid';
 export * from './GridComponent';
-export * from './RelationshipAttributesDataGrid';
-export * from './SourceObjectDependencyDataGrid';
+export * from './JunctionPropertiesDataGrid';
+export * from './RelationPropertiesDataGrid';

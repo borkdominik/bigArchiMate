@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
 import { Box } from '@mui/material';
 import * as React from 'react';
 import { Header, HeaderProps } from './Header';

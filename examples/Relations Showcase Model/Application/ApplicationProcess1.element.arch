@@ -1,0 +1,4 @@
+element:
+    id: ApplicationProcess1
+    type: ApplicationInterface
+    name: "ApplicationInterface"

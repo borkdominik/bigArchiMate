@@ -1,0 +1,10 @@
+<svg id="root" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+    <path
+        d="M 6 10 L 16 0"
+        style="fill:none;stroke:#0d0d0d;stroke-width:1"
+    />
+    <path
+        d="M 0.5 16 L 0.5 10 L 6 10 L 6 15.5 L 0.5 15.5"
+        style="fill:none;stroke:#0d0d0d;stroke-width:1"
+    />
+</svg>

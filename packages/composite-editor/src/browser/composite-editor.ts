@@ -1,12 +1,8 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
-import { CrossModelWidget, CrossModelWidgetOptions } from '@crossbreeze/core/lib/browser';
-import { FormEditorOpenHandler, FormEditorWidget } from '@crossbreeze/form-client/lib/browser';
-import { MappingDiagramManager, SystemDiagramManager } from '@crossbreeze/glsp-client/lib/browser/';
-import { MappingDiagramLanguage, SystemDiagramLanguage } from '@crossbreeze/glsp-client/lib/common';
-import { ModelFileType, codiconCSSString } from '@crossbreeze/protocol';
+import { CustomWidget, CustomWidgetOptions } from '@big-archimate/core/lib/browser';
+import { FormEditorOpenHandler, FormEditorWidget } from '@big-archimate/form-client/lib/browser';
+import { ArchiMateDiagramManager } from '@big-archimate/glsp-client/lib/browser/';
+import { ArchiMateDiagramLanguage } from '@big-archimate/glsp-client/lib/common';
+import { codiconCSSString, ModelFileType } from '@big-archimate/protocol';
 import { FocusStateChangedAction, SetDirtyStateAction, toTypeGuard } from '@eclipse-glsp/client';
 import { GLSPDiagramWidget, GLSPDiagramWidgetContainer, GLSPDiagramWidgetOptions, GLSPSaveable } from '@eclipse-glsp/theia-integration';
 import { GLSPDiagramLanguage } from '@eclipse-glsp/theia-integration/lib/common';
@@ -19,9 +15,9 @@ import {
    Message,
    Navigatable,
    NavigatableWidgetOptions,
-   SaveOptions,
    Saveable,
    SaveableSource,
+   SaveOptions,
    TabPanel,
    Widget,
    WidgetManager
@@ -33,13 +29,13 @@ import { EditorOpenerOptions, EditorWidget } from '@theia/editor/lib/browser';
 import * as monaco from '@theia/monaco-editor-core';
 import { MonacoEditorModel } from '@theia/monaco/lib/browser/monaco-editor-model';
 import { CompositeEditorOptions } from './composite-editor-open-handler';
-import { CrossModelEditorManager } from './cross-model-editor-manager';
-import { CrossModelFileResourceResolver } from './cross-model-file-resource-resolver';
+import { CustomEditorPreviewManager } from './editor-manager';
+import { CustomFileResourceResolver } from './file-resource-resolver';
 
 export class ReverseCompositeSaveable extends CompositeSaveable {
    constructor(
       protected editor: CompositeEditor,
-      protected fileResourceResolver: CrossModelFileResourceResolver
+      protected fileResourceResolver: CustomFileResourceResolver
    ) {
       super();
    }
@@ -83,7 +79,7 @@ export class ReverseCompositeSaveable extends CompositeSaveable {
                saveable['setDirty'](false);
             } else if (saveable instanceof GLSPSaveable) {
                saveable['actionDispatcher'].dispatch(SetDirtyStateAction.create(false));
-            } else if (saveable instanceof CrossModelWidget) {
+            } else if (saveable instanceof CustomWidget) {
                saveable.setDirty(false);
             }
          });
@@ -96,11 +92,11 @@ export interface CompositeWidgetOptions extends NavigatableWidgetOptions {
 
 @injectable()
 export class CompositeEditor extends BaseWidget implements SaveableSource, Navigatable, Partial<GLSPDiagramWidgetContainer> {
-   @inject(CrossModelWidgetOptions) protected options: CompositeEditorOptions;
+   @inject(CustomWidgetOptions) protected options: CompositeEditorOptions;
    @inject(LabelProvider) protected labelProvider: LabelProvider;
    @inject(WidgetManager) protected widgetManager: WidgetManager;
-   @inject(CrossModelEditorManager) protected editorManager: CrossModelEditorManager;
-   @inject(CrossModelFileResourceResolver) protected fileResourceResolver: CrossModelFileResourceResolver;
+   @inject(CustomEditorPreviewManager) protected editorManager: CustomEditorPreviewManager;
+   @inject(CustomFileResourceResolver) protected fileResourceResolver: CustomFileResourceResolver;
 
    protected tabPanel: TabPanel;
    saveable: CompositeSaveable;
@@ -117,7 +113,7 @@ export class CompositeEditor extends BaseWidget implements SaveableSource, Navig
       return this.options.uri;
    }
 
-   get fileType(): Exclude<ModelFileType, 'Generic'> {
+   get fileType(): ModelFileType {
       return this.options.fileType;
    }
 
@@ -131,7 +127,7 @@ export class CompositeEditor extends BaseWidget implements SaveableSource, Navig
    @postConstruct()
    protected init(): void {
       this.id = this.options.widgetId;
-      this.addClass('cm-composite-editor');
+      this.addClass('composite-editor');
       this.title.closable = true;
       this.title.label = this.labelProvider.getName(this.resourceUri);
       this.title.iconClass = ModelFileType.getIconClass(this.fileType) ?? '';
@@ -208,14 +204,14 @@ export class CompositeEditor extends BaseWidget implements SaveableSource, Navig
 
    protected async createPrimaryWidget(options: CompositeWidgetOptions): Promise<Widget> {
       switch (this.fileType) {
-         case 'Entity':
+         case 'Element':
             return this.createFormWidget(options);
-         case 'Relationship':
+         case 'Junction':
             return this.createFormWidget(options);
-         case 'SystemDiagram':
-            return this.createSystemDiagramWidget();
-         case 'Mapping':
-            return this.createMappingDiagramWidget();
+         case 'Relation':
+            return this.createFormWidget(options);
+         case 'Diagram':
+            return this.createDiagramWidget();
       }
    }
 
@@ -235,16 +231,9 @@ export class CompositeEditor extends BaseWidget implements SaveableSource, Navig
       return formEditor;
    }
 
-   protected async createSystemDiagramWidget(): Promise<Widget> {
-      const diagramOptions = this.createDiagramWidgetOptions(SystemDiagramLanguage, 'System Diagram');
-      const widget = await this.widgetManager.getOrCreateWidget<GLSPDiagramWidget>(SystemDiagramManager.ID, diagramOptions);
-      widget.title.closable = false;
-      return widget;
-   }
-
-   protected async createMappingDiagramWidget(): Promise<Widget> {
-      const diagramOptions = this.createDiagramWidgetOptions(MappingDiagramLanguage, 'Mapping Diagram');
-      const widget = await this.widgetManager.getOrCreateWidget<GLSPDiagramWidget>(MappingDiagramManager.ID, diagramOptions);
+   protected async createDiagramWidget(): Promise<Widget> {
+      const diagramOptions = this.createDiagramWidgetOptions(ArchiMateDiagramLanguage, 'ArchiMate Diagram');
+      const widget = await this.widgetManager.getOrCreateWidget<GLSPDiagramWidget>(ArchiMateDiagramManager.ID, diagramOptions);
       widget.title.closable = false;
       return widget;
    }

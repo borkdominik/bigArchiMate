@@ -1,0 +1,4 @@
+element:
+    id: ApplicationComponent
+    type: ApplicationComponent
+    name: "ApplicationComponent"

@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import { Theme, ThemeOptions, ThemeProvider, createTheme } from '@mui/material';
 import React = require('react');
@@ -145,7 +142,7 @@ const darkTheme = createTheme({
          paper: '#1e1e1e' /* --theia-editor-background */
       },
       text: {
-         primary: '#d4d4d4' /* --theia-editor-foreground */
+         primary: '#ffffff' /* --theia-editor-foreground */
       }
    },
    ...sharedThemeOptions

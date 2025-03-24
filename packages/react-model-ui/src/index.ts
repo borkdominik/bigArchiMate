@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
 export * from './ModelContext';
 export * from './ModelProvider';
 export * from './ModelReducer';

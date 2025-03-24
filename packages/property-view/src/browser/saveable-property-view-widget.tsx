@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
 import { DelegatingSaveable, Saveable, SaveableSource } from '@theia/core/lib/browser';
 import { injectable } from '@theia/core/shared/inversify';
 import { PropertyViewContentWidget } from '@theia/property-view/lib/browser/property-view-content-widget';

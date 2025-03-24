@@ -1,0 +1,5 @@
+relation:
+    id: Association_Junction1-Location1
+    type: Association
+    source: Junction1
+    target: Location1

@@ -1,8 +1,4 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
-
-import { ModelUpdatedEvent, SystemUpdatedEvent } from '@crossbreeze/protocol';
+import { ModelUpdatedEvent, SystemUpdatedEvent } from '@big-archimate/protocol';
 import { Emitter } from '@theia/core';
 import { injectable } from '@theia/core/shared/inversify';
 import { ModelServiceClient } from '../common/model-service-rpc';

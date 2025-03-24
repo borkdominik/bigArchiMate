@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
 import * as React from 'react';
 
 export interface ErrorMessageProps extends React.HTMLProps<HTMLDivElement> {

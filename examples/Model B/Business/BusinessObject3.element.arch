@@ -1,0 +1,4 @@
+element:
+    id: BusinessObject3
+    type: BusinessObject
+    name: "BusinessObject"

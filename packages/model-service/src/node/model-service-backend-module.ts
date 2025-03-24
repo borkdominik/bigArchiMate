@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
-
 import { ConnectionContainerModule } from '@theia/core/lib/node/messaging/connection-container-module';
 import { ContainerModule } from '@theia/core/shared/inversify';
 import { MODEL_SERVICE_PATH, ModelServiceClient, ModelServiceServer } from '../common/model-service-rpc';

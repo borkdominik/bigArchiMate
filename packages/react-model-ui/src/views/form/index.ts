@@ -1,8 +1,4 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
-export * from './EntityForm';
+export * from './ElementForm';
 export * from './Header';
-export * from './MappingForm';
-export * from './RelationshipForm';
-export * from './SourceObjectForm';
+export * from './JunctionForm';
+export * from './RelationForm';

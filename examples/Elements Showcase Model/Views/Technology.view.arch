@@ -1,0 +1,106 @@
+diagram:
+    id: Technology
+    name: "Technology"
+    nodes:
+      - id: NodeNode
+        element: Node
+        x: 121
+        y: 88
+        width: 250
+        height: 50
+      - id: DeviceNode
+        element: Device
+        x: 418
+        y: 88
+        width: 250
+        height: 50
+      - id: SystemSoftwareNode
+        element: SystemSoftware
+        x: 715
+        y: 88
+        width: 250
+        height: 50
+      - id: TechnologyCollaborationNode
+        element: TechnologyCollaboration
+        x: 1012
+        y: 88
+        width: 250
+        height: 50
+      - id: TechnologyInterfaceNode
+        element: TechnologyInterface
+        x: 121
+        y: 187
+        width: 250
+        height: 50
+      - id: PathNode
+        element: Path
+        x: 418
+        y: 187
+        width: 250
+        height: 50
+      - id: CommunicationNetworkNode
+        element: CommunicationNetwork
+        x: 715
+        y: 187
+        width: 250
+        height: 50
+      - id: TechnologyFunctionNode
+        element: TechnologyFunction
+        x: 1012
+        y: 187
+        width: 250
+        height: 50
+      - id: TechnologyProcessNode
+        element: TechnologyProcess
+        x: 121
+        y: 286
+        width: 250
+        height: 50
+      - id: TechnologyInteractionNode
+        element: TechnologyInteraction
+        x: 418
+        y: 286
+        width: 250
+        height: 50
+      - id: TechnologyEventNode
+        element: TechnologyEvent
+        x: 715
+        y: 286
+        width: 250
+        height: 50
+      - id: TechnologyServiceNode
+        element: TechnologyService
+        x: 1012
+        y: 286
+        width: 250
+        height: 50
+      - id: ArtifactNode
+        element: Artifact
+        x: 121
+        y: 385
+        width: 250
+        height: 50
+      - id: EquipmentNode
+        element: Equipment
+        x: 418
+        y: 385
+        width: 250
+        height: 50
+      - id: FacilityNode
+        element: Facility
+        x: 715
+        y: 385
+        width: 250
+        height: 50
+      - id: DistributionNetworkNode
+        element: DistributionNetwork
+        x: 1012
+        y: 385
+        width: 250
+        height: 50
+      - id: MaterialNode
+        element: Material
+        x: 121
+        y: 484
+        width: 250
+        height: 50

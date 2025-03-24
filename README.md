@@ -1,4 +1,4 @@
-# CrossModel Community Edition
+# bigArchiMate
 
 ## Getting started
 
@@ -12,40 +12,24 @@ For detailed instructions for a Windows machine, follow [this](./docs/Prerequisi
 
 ## Running the application
 
-### Browser
-
-This will build and start CrossModel as a web application. When the web application is running you can open <http://localhost:3000> in your browser to use CrossModel.
-
-    yarn build:browser &&
-    yarn start:browser
-
 ### Electron (desktop application)
 
-This will build and start CrossModel as a native desktop application for the OS (Windows, Linux or MacOS) where the command is started.
+This will build and start bigArchiMate as a native desktop application for the OS (Windows, Linux or MacOS) where the command is started.
 
     yarn build:electron &&
     yarn start:electron
 
-## Example Workspace
+### Browser
 
-Under `examples/verdaccio-example/workspace` we provide an example workspace with some demo packages containing entities, relationships and system diagrams.
-Each package represents a dedicated system or library and may depend on other packages.
+This will build and start bigArchiMate as a web application. When the web application is running you can open <http://localhost:3000> in your browser to use bigArchiMate.
 
-Using a known package structure - npm in our case - we can re-use large parts of the package management to download dependencies that are not locally available from an external package registry.
-In order to test this behavior, we use verdaccio as a local npm registry that provides some models that are needed by our workspace packages.
-You can start verdaccio using
+    yarn build:browser &&
+    yarn start:browser
 
-    yarn start:verdaccio
+## Example ArchiMate Models
 
-The local npm registry will be available under `http://localhost:4873/` where we already provide four packages by default.
-
-After opening the workspace, you can install the necessary dependencies in the example workspace by opening a terminal in `examples/verdaccio-example/workspace` and execute
-
-    npm install
-
-This should download all dependencies into dedicated `node_modules` directories within the workspace.
-
-Currently there is still an issue where new files are not recognized automatically, so you need to reload your workspace once for all the dependencies to be properly recognized.
+Under `examples` we provide an example workspace with some demo ArchiMate models containing elements, relations, junctions and diagrams.
+Each package represents a dedicated ArchiMate model and may depend on other packages.
 
 ## Developing
 
@@ -75,7 +59,7 @@ If you also made changes to the backend, you can close and restart the applicati
 
 ### Developing in Dev Container
 
-You can work on CrossModel from within a Dev Container. The best way to do so is create a new Dev Container and cloning the repository in there. For instructions please consult [this](https://code.visualstudio.com/docs/devcontainers/containers#_quick-start-open-a-git-repository-or-github-pr-in-an-isolated-container-volume) page.
+You can work on bigArchiMate from within a Dev Container. The best way to do so is create a new Dev Container and cloning the repository in there. For instructions please consult [this](https://code.visualstudio.com/docs/devcontainers/containers#_quick-start-open-a-git-repository-or-github-pr-in-an-isolated-container-volume) page.
 
 Short steps:
 
@@ -85,7 +69,7 @@ Short steps:
 
 ## Packaging
 
-We package CrossModel either for the browser (Docker) or desktop application (Electron).
+We package bigArchiMate either for the browser (Docker) or desktop application (Electron).
 
 ### Docker
 
@@ -93,17 +77,17 @@ To package the web application we build a docker image. There are currently two 
 
 To create the Alpine based image, execute the following command:
 
-    docker build -t crossmodel:0.0.0-alpine -f .\Dockerfile .
+    docker build -t big-archimate:0.0.0-alpine -f .\Dockerfile .
 
 To create the Debian based image, execute the following command:
 
-    docker build -t crossmodel:0.0.0-debian -f .\Dockerfile.debian .
+    docker build -t big-archimate:0.0.0-debian -f .\Dockerfile.debian .
 
 In the main build action we build and publish the Alpine version.
 
 ### Electron
 
-To package CrossModel as a desktop application, execute the following command:
+To package bigArchiMate as a desktop application, execute the following command:
 
     yarn theia:electron package
 
@@ -121,18 +105,17 @@ The repository itself contains the following components structured as follows:
     │   └── electron-app             # Electron application
     ├── configs
     ├── docs                         # Documentation
-    ├── examples
-    │   ├── libraries                # Example libraries referenced in the local npm registry
-    │   ├── registry                 # Local npm registry using Verdaccio
-    │   └── workspace                # Workspace that can be opened in the tool
+    ├── e2e-tests                    # Playwright End-To-End-Tests
+    ├── examples                     # ArchiMate Model examples
     ├── extensions                   # VS Code extensions
-    │   └── crossmodel-lang          # CrossModel language support (through three servers)
+    │   └── big-archimate-lang          # bigArchiMate language support (through three servers)
     │       └── src
     │           ├── glsp-server      # Graphical modelling server based on GLSP
     │           ├── language-server  # Textual modelling server based on Langium
     │           ├── model-server     # Custom model server to provide access to the semantic models
     │           ├── extension.ts     # Extension starting the server process and the language client
     │           └── main.ts          # Server process starting up all servers
+    │   └── big-archimate-theme      # bigArchiMate Theia theme
     └── packages                     # Theia extensions
             ├── core                 # Core customizations
             ├── form-client          # Form editor widget connecting to the model server
@@ -143,6 +126,6 @@ The repository itself contains the following components structured as follows:
 
 -  mui-x : MUI X is open core—base components are MIT-licensed, while more advanced features require a Pro or Premium commercial license. We are currently only using core-base
 -  react-tabs: MIT
--  chevrotain: This library is a dependency of langium. To get the Yaml language working in crossmodel an example implementation of the python language of chevrotain has been used. This example has been modified to make it work for the yaml language.
+-  chevrotain: This library is a dependency of langium. To get the Yaml language working in bigArchiMate an example implementation of the python language of chevrotain has been used. This example has been modified to make it work for the yaml language.
    -  <https://github.com/Chevrotain/chevrotain>
    -  example that has been used: <https://github.com/Chevrotain/chevrotain/tree/master/examples/lexer/python_indentation>

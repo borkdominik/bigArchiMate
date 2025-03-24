@@ -1,8 +1,5 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-export * from './cm-file-navigator-tree-widget';
 export * from './core-frontend-module';
+export * from './file-navigator-tree-widget';
 export * from './model-widget';
-export * from './new-element-contribution';
+export * from './new-file-contribution';
 export * from './preferences-monaco-contribution';

@@ -1,0 +1,34 @@
+diagram:
+    id: ImplementationAndMigration
+    name: "ImplementationAndMigration"
+    nodes:
+      - id: WorkPackageNode
+        element: WorkPackage
+        x: 143
+        y: 176
+        width: 250
+        height: 50
+      - id: DeliverableNode
+        element: Deliverable
+        x: 440
+        y: 176
+        width: 250
+        height: 50
+      - id: ImplementationEventNode
+        element: ImplementationEvent
+        x: 737
+        y: 176
+        width: 250
+        height: 50
+      - id: PlateauNode
+        element: Plateau
+        x: 440
+        y: 275
+        width: 250
+        height: 50
+      - id: GapNode
+        element: Gap
+        x: 143
+        y: 275
+        width: 250
+        height: 50

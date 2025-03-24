@@ -5,6 +5,8 @@
 // @ts-check
 const configs = require('./gen-webpack.config.js');
 const nodeConfig = require('./gen-webpack.node.config.js');
+const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 /**
  * Expose bundled modules on window.theia.moduleName namespace, e.g.
@@ -14,8 +16,16 @@ configs[0].module.rules.push({
     test: /\.js$/,
     loader: require.resolve('@theia/application-manager/lib/expose-loader')
 }); */
-
-module.exports = [
-    ...configs,
-    nodeConfig.config
-];
+// @ts-ignore
+configs[0].plugins.push(
+   // @ts-ignore
+   new CopyWebpackPlugin({
+      patterns: [
+         {
+            from: path.resolve('.', '..', '..', 'packages', 'core', 'style', 'icons'),
+            to: 'icons'
+         }
+      ]
+   })
+);
+module.exports = [...configs, nodeConfig.config];

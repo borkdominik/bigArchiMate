@@ -1,0 +1,64 @@
+diagram:
+    id: Motivation
+    name: "Motivation"
+    nodes:
+      - id: StakeholderNode
+        element: Stakeholder
+        x: 110
+        y: 143
+        width: 250
+        height: 50
+      - id: DriverNode
+        element: Driver
+        x: 407
+        y: 143
+        width: 250
+        height: 50
+      - id: AssessmentNode
+        element: Assessment
+        x: 704
+        y: 143
+        width: 250
+        height: 50
+      - id: GoalNode
+        element: Goal
+        x: 110
+        y: 242
+        width: 250
+        height: 50
+      - id: OutcomeNode
+        element: Outcome
+        x: 407
+        y: 242
+        width: 250
+        height: 50
+      - id: PrincipleNode
+        element: Principle
+        x: 704
+        y: 242
+        width: 250
+        height: 50
+      - id: RequirementNode
+        element: Requirement
+        x: 110
+        y: 341
+        width: 250
+        height: 50
+      - id: ConstraintNode
+        element: Constraint
+        x: 407
+        y: 341
+        width: 250
+        height: 50
+      - id: MeaningNode
+        element: Meaning
+        x: 704
+        y: 341
+        width: 250
+        height: 50
+      - id: ValueNode
+        element: Value
+        x: 110
+        y: 429
+        width: 250
+        height: 50

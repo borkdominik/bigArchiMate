@@ -1,10 +1,6 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
-
-import { CrossModelSelectionData, GModelElementInfo } from '@crossbreeze/glsp-client/lib/browser/crossmodel-selection-data-service';
-import { ModelService } from '@crossbreeze/model-service/lib/common';
-import { RenderProps } from '@crossbreeze/protocol';
+import { GModelElementInfo, SelectionData } from '@big-archimate/glsp-client/lib/browser/selection-data-service';
+import { ModelService } from '@big-archimate/model-service/lib/common';
+import { RenderProps } from '@big-archimate/protocol';
 import { GlspSelection } from '@eclipse-glsp/theia-integration';
 import { inject, injectable } from '@theia/core/shared/inversify';
 import { PropertyDataService } from '@theia/property-view/lib/browser/property-data-service';
@@ -31,7 +27,7 @@ export class ModelDataService implements PropertyDataService {
       if (!selection || !GlspSelection.is(selection) || !selection.sourceUri || selection.selectedElementsIDs.length === 0) {
          return undefined;
       }
-      const selectionData = selection.additionalSelectionData as CrossModelSelectionData;
+      const selectionData = selection.additionalSelectionData as SelectionData;
       for (const selectedElementId of selection.selectedElementsIDs) {
          const renderData = await this.getPropertyData(selection, selectionData?.selectionDataMap.get(selectedElementId));
          if (renderData) {

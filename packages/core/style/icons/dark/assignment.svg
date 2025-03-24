@@ -1,0 +1,14 @@
+<svg id="root" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+    <path
+        d="M 2 14 L 12 4"
+        style="fill:none;stroke:#aaaaaa;stroke-width:1"
+    />
+    <path
+        d="M 16 0.5 L 9 0.5 L 15.5 7 L 15.5 0"
+        style="fill:#aaaaaa;stroke:#aaaaaa;stroke-width:1"
+    />
+    <path
+        d="M 6 10 A 1 1 0 0 0 1.5 14.5 A 1 1 0 0 0 6 10"
+        style="fill:#aaaaaa;stroke:#aaaaaa;stroke-width:1"
+    />
+</svg>

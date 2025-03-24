@@ -1,90 +1,66 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
+import { codiconCSSString } from './util';
 
 const ModelFileTypeValues = {
-   Generic: 'Generic',
-   Entity: 'Entity',
-   Relationship: 'Relationship',
-   Mapping: 'Mapping',
-   SystemDiagram: 'SystemDiagram'
+   Element: 'Element',
+   Junction: 'Junction',
+   Relation: 'Relation',
+   Diagram: 'Diagram'
 } as const;
 
 export const ModelFileType = {
    ...ModelFileTypeValues,
    getIconClass: (type: ModelFileType) => {
       switch (type) {
-         case 'Entity':
-            return ModelStructure.Entity.ICON_CLASS;
-         case 'Relationship':
-            return ModelStructure.Relationship.ICON_CLASS;
-         case 'SystemDiagram':
-            return ModelStructure.SystemDiagram.ICON_CLASS;
-         case 'Mapping':
-            return ModelStructure.Mapping.ICON_CLASS;
+         case 'Diagram':
+            return ModelStructure.Diagram.ICON_CLASS;
          default:
             return undefined;
       }
    },
    getFileExtension(type: ModelFileType): string | undefined {
       switch (type) {
-         case 'Entity':
-            return ModelFileExtensions.Entity;
-         case 'Generic':
-            return ModelFileExtensions.Generic;
-         case 'Mapping':
-            return ModelFileExtensions.Mapping;
-         case 'Relationship':
-            return ModelFileExtensions.Relationship;
-         case 'SystemDiagram':
-            return ModelFileExtensions.SystemDiagram;
+         case 'Element':
+            return ModelFileExtensions.Element;
+         case 'Junction':
+            return ModelFileExtensions.Junction;
+         case 'Relation':
+            return ModelFileExtensions.Relation;
+         case 'Diagram':
+            return ModelFileExtensions.Diagram;
       }
    }
 } as const;
 export type ModelFileType = (typeof ModelFileTypeValues)[keyof typeof ModelFileTypeValues];
 
 export const ModelFileExtensions = {
-   Generic: '.cm',
-   Entity: '.entity.cm',
-   Relationship: '.relationship.cm',
-   Mapping: '.mapping.cm',
-   SystemDiagram: '.system-diagram.cm',
-   /* @deprecated Use SystemDiagram instead */
-   Diagram: '.diagram.cm',
+   Element: '.element.arch',
+   Junction: '.junction.arch',
+   Relation: '.relation.arch',
+   Diagram: '.view.arch',
 
-   isModelFile(uri: string): boolean {
-      return uri.endsWith(this.Generic);
+   isElementFile(uri: string): boolean {
+      return uri.endsWith(this.Element);
    },
 
-   isEntityFile(uri: string): boolean {
-      return uri.endsWith(this.Entity);
+   isJunctionFile(uri: string): boolean {
+      return uri.endsWith(this.Junction);
    },
 
-   isRelationshipFile(uri: string): boolean {
-      return uri.endsWith(this.Relationship);
+   isRelationFile(uri: string): boolean {
+      return uri.endsWith(this.Relation);
    },
 
-   isMappingFile(uri: string): boolean {
-      return uri.endsWith(this.Mapping);
-   },
-
-   isSystemDiagramFile(uri: string): boolean {
-      return uri.endsWith(this.SystemDiagram) || uri.endsWith(this.Diagram);
+   isDiagramFile(uri: string): boolean {
+      return uri.endsWith(this.Diagram);
    },
 
    getName(uri: string): string {
       // since we have file extensions with two '.', we cannot use the default implementation that only works for one '.'
-      if (uri.endsWith(this.Entity)) {
-         return uri.substring(0, uri.length - this.Entity.length);
+      if (uri.endsWith(this.Element)) {
+         return uri.substring(0, uri.length - this.Element.length);
       }
-      if (uri.endsWith(this.Relationship)) {
-         return uri.substring(0, uri.length - this.Relationship.length);
-      }
-      if (uri.endsWith(this.Mapping)) {
-         return uri.substring(0, uri.length - this.Mapping.length);
-      }
-      if (uri.endsWith(this.SystemDiagram)) {
-         return uri.substring(0, uri.length - this.SystemDiagram.length);
+      if (uri.endsWith(this.Relation)) {
+         return uri.substring(0, uri.length - this.Relation.length);
       }
       if (uri.endsWith(this.Diagram)) {
          return uri.substring(0, uri.length - this.Diagram.length);
@@ -95,20 +71,17 @@ export const ModelFileExtensions = {
    },
 
    getFileType(uri: string): ModelFileType | undefined {
-      if (this.isMappingFile(uri)) {
-         return 'Mapping';
+      if (this.isElementFile(uri)) {
+         return 'Element';
       }
-      if (this.isSystemDiagramFile(uri)) {
-         return 'SystemDiagram';
+      if (this.isJunctionFile(uri)) {
+         return 'Junction';
       }
-      if (this.isRelationshipFile(uri)) {
-         return 'Relationship';
+      if (this.isRelationFile(uri)) {
+         return 'Relation';
       }
-      if (this.isEntityFile(uri)) {
-         return 'Entity';
-      }
-      if (this.isModelFile(uri)) {
-         return 'Generic';
+      if (this.isDiagramFile(uri)) {
+         return 'Diagram';
       }
       return undefined;
    },
@@ -124,31 +97,25 @@ export const ModelFileExtensions = {
          return undefined;
       }
       switch (fileType) {
-         case 'Entity':
-            return ModelStructure.Entity.ICON_CLASS;
-         case 'Relationship':
-            return ModelStructure.Relationship.ICON_CLASS;
-         case 'SystemDiagram':
-            return ModelStructure.SystemDiagram.ICON_CLASS;
-         case 'Mapping':
-            return ModelStructure.Mapping.ICON_CLASS;
+         case 'Diagram':
+            return ModelStructure.Diagram.ICON_CLASS;
          default:
             return '';
       }
    },
 
    detectFileType(content: string): ModelFileType | undefined {
-      if (content.startsWith('entity')) {
-         return 'Entity';
+      if (content.startsWith('element')) {
+         return 'Element';
       }
-      if (content.startsWith('relationship')) {
-         return 'Relationship';
+      if (content.startsWith('junction')) {
+         return 'Junction';
       }
-      if (content.startsWith('systemDiagram') || content.startsWith('diagram')) {
-         return 'SystemDiagram';
+      if (content.startsWith('relation')) {
+         return 'Relation';
       }
-      if (content.startsWith('mapping')) {
-         return 'Mapping';
+      if (content.startsWith('diagram')) {
+         return 'Diagram';
       }
       return undefined;
    },
@@ -160,31 +127,12 @@ export const ModelFileExtensions = {
 } as const;
 
 export const ModelStructure = {
-   System: {
-      ICON_CLASS: 'codicon codicon-globe',
-      ICON: 'globe'
-   },
-   Entity: {
-      FOLDER: 'entities',
-      ICON_CLASS: 'codicon codicon-git-commit',
-      ICON: 'git-commit'
+   ArchiMateModel: {
+      ICON_CLASS: codiconCSSString('list-tree')
    },
 
-   Relationship: {
-      FOLDER: 'relationships',
-      ICON_CLASS: 'codicon codicon-git-compare',
-      ICON: 'git-compare'
-   },
-
-   SystemDiagram: {
-      FOLDER: 'diagrams',
-      ICON_CLASS: 'codicon codicon-type-hierarchy-sub',
-      ICON: 'type-hierarchy-sub'
-   },
-
-   Mapping: {
-      FOLDER: 'mappings',
-      ICON_CLASS: 'codicon codicon-group-by-ref-type',
-      ICON: 'group-by-ref-type'
+   Diagram: {
+      FOLDER: 'Views',
+      ICON_CLASS: codiconCSSString('type-hierarchy-sub')
    }
 };

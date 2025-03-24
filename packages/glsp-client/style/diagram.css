@@ -1,21 +1,30 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
-
 :root {
    --sprotty-background: var(--theia-editor-background);
    --sprotty-edge: #6d6d6d;
    --sprotty-edge-selected: var(--theia-focusBorder);
    --sprotty-border: var(--theia-editor-foreground);
+
+   --node-stroke: var(--sprotty-edge);
+   --arrow-empty-fill: var(--sprotty-background);
+   --arrow-filled-fill: var(--sprotty-edge);
+
+   /* Color codes adapted from https://www.archimatetool.com/downloads/colour-schemes/ArchiMate%20Standard%20-%203.2.prefs */
+   --bg-application: #b5ffff;
+   --bg-business: #ffffb5;
+   --bg-implementation-and-migration: #ffe0e0;
+   --bg-motivation: #ccccff;
+   --bg-strategy: #f5deaa;
+   --bg-technology: #c9e7b7;
+   --bg-location: #edcfe2;
+   --bg-default: #ffffff;
 }
 
-/* Standard sprotty */
-.sprotty {
-   height: 100%;
-}
-
-.feedback-edge {
-   pointer-events: none;
+.grid-background .sprotty-graph,
+.grid-background.sprotty-graph {
+   --background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><g><line x1="10" y1="15" x2="20" y2="15" stroke="black" stroke-width="1" stroke-linecap="round" stroke-opacity="0.15" /><line x1="15" y1="10" x2="15" y2="20" stroke="black" stroke-width="1" stroke-linecap="round" stroke-opacity="0.15" /></g></svg>');
+   background-image: var(--background-image);
+   background-size: var(--grid-background-width) var(--grid-background-height);
+   background-position: var(--grid-background-x) var(--grid-background-y);
 }
 
 .sprotty-graph {
@@ -23,20 +32,6 @@
    height: 100%;
    background-size: 11px;
    background: var(--sprotty-background);
-}
-
-.sprotty
-   .edge-creation:not(.edge-check-pending-mode):not(.edge-creation-select-source-mode):not(.edge-creation-select-target-mode):not(
-      .edge-reconnect-select-target-mode
-   ):not(.edge-modification-not-allowed-mode) {
-   cursor: ew-resize;
-}
-
-.sprotty
-   .mapping-creation:not(.edge-check-pending-mode):not(.edge-creation-select-source-mode):not(.edge-creation-select-target-mode):not(
-      .edge-reconnect-select-target-mode
-   ):not(.edge-modification-not-allowed-mode) {
-   cursor: ew-resize;
 }
 
 .sprotty text {
@@ -48,137 +43,33 @@
    stroke-width: 2px;
 }
 
-.sprotty-edge.selected {
-   stroke: var(--sprotty-edge-selected);
-}
-
-/* Nodes */
 .sprotty-node:not(.selected, .mouseover) {
-   fill: #fbfaff;
-   stroke: #a8a1c5;
+   stroke: var(--node-stroke);
    stroke-width: 2px;
-   /* filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.8)); */
 }
 
-.source-object .sprotty-node:not(.selected, .mouseover) {
-   stroke: #a1c5a5;
-   fill: #fefffe;
-}
-
-.header-label {
-   font-weight: bold;
-   letter-spacing: 0.5px;
-}
-
-.attribute-compartment {
-   stroke: none;
-   fill: transparent;
-}
-
-.attribute-compartment.mouseover,
 .sprotty-node.mouseover:not(.selected),
 .sprotty-edge.mouseover:not(.selected),
-.source-highlight > .sprotty-node {
+.sprotty-edge.mouseover:not(.selected) .arrow,
+.sprotty-edge.mouseover:not(.selected) .circle {
    stroke: var(--theia-focusBorder);
    stroke-width: 2px;
    opacity: 1;
 }
 
-.attribute-compartment.selected,
 .sprotty-node.selected,
 .sprotty-edge.selected {
    stroke: var(--theia-focusBorder);
    stroke-width: 2px;
+}
+
+.sprotty-node.selected {
    stroke-dasharray: 6px 3px;
 }
 
-.attribute-compartment.mouseover,
-.attribute-compartment.selected,
-.sprotty-node.mouseover:not(.selected),
-.sprotty-node.selected,
-.source-highlight > .sprotty-node {
-   fill: #f3faff;
-   stroke-width: 2px;
-}
-
-.sprotty .attribute_expression_marker {
-   text-anchor: start;
-   fill: #666666;
-   baseline-shift: 2px;
-}
-
-.sprotty line.identifier {
-   stroke: black;
-   stroke-width: 0.75px;
-   stroke-dasharray: none;
-   stroke-linecap: round;
-}
-
-/* .sprotty[id^='system-diagram'] .tool-palette {
-   top: 11px;
-   right: 11px;
-   width: 150px;
-   border: 1px solid #d7d7d7;
-}
-
-.sprotty[id^='system-diagram'] .tool-palette .palette-header,
-.sprotty[id^='system-diagram'] .tool-palette .group-header,
-.sprotty[id^='system-diagram'] .minimize-palette-button {
-   display: none;
-}
-
-.sprotty[id^='system-diagram'] .tool-palette .tool-button {
-   outline-width: 0;
-}
-
-.sprotty[id^='system-diagram'] .tool-palette .tool-button::before {
-   margin-right: var(--theia-ui-padding);
-   font-size: var(--theia-icon-size);
-   font: normal normal normal 16px/1 codicon;
-   content: '\eafd';
-   -webkit-font-smoothing: antialiased;
-   -moz-osx-font-smoothing: grayscale;
-}
-
-.sprotty[id^='system-diagram'] .tool-palette .tool-button.clicked {
-   background: var(--theia-activityBarBadge-background);
-   color: var(--theia-activityBarBadge-foreground);
-} */
-
-.tool-palette .group-header {
-   display: none;
-}
-.command-palette {
-   animation: none;
-}
-
-.attribute.identifier .icon-path {
-   transform: scale(0.0105) translate(-400px, 1375px);
-   fill: #000;
-}
-
-.grid-background .sprotty-graph,
-.grid-background.sprotty-graph {
-   --background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><g><line x1="10" y1="15" x2="20" y2="15" stroke="black" stroke-width="1" stroke-linecap="round" stroke-opacity="0.15" /><line x1="15" y1="10" x2="15" y2="20" stroke="black" stroke-width="1" stroke-linecap="round" stroke-opacity="0.15" /></g></svg>');
-   background-image: var(--background-image);
-   background-size: var(--grid-background-width) var(--grid-background-height);
-   background-position: var(--grid-background-x) var(--grid-background-y);
-}
-
-.sprotty .header-icon {
-   display: flex;
-}
-
-.sprotty .header-icon i {
-   display: none;
-}
-
-.sprotty .header-icon i {
-   margin-right: 0.2em;
-}
-
-.sprotty .palette-header {
-   flex-direction: row;
+.diagram-node .header-label {
+   font-weight: bold;
+   letter-spacing: 0.5px;
 }
 
 .label-edit input {
@@ -189,16 +80,79 @@
    letter-spacing: 0.9px;
 }
 
-.error-extension {
-   position: absolute;
-   width: 100%;
+.diagram-node.bg-application > rect,
+.diagram-node.bg-application > path {
+   fill: var(--bg-application);
 }
 
-.diagram-edge.inheritance {
-   marker-end: var(--svg-def-marker-inheritance);
+.diagram-node.bg-business > rect,
+.diagram-node.bg-business > path {
+   fill: var(--bg-business);
 }
 
-.diagram-edge.inheritance.selected,
-.diagram-edge.inheritance.mouseover {
-   marker-end: var(--svg-def-marker-inheritance-selected);
+.diagram-node.bg-implementation-and-migration > rect,
+.diagram-node.bg-implementation-and-migration > path {
+   fill: var(--bg-implementation-and-migration);
+}
+
+.diagram-node.bg-motivation > rect,
+.diagram-node.bg-motivation > path {
+   fill: var(--bg-motivation);
+}
+
+.diagram-node.bg-strategy > rect,
+.diagram-node.bg-strategy > path {
+   fill: var(--bg-strategy);
+}
+
+.diagram-node.bg-technology > rect,
+.diagram-node.bg-technology > path {
+   fill: var(--bg-technology);
+}
+
+.diagram-node.bg-location > rect,
+.diagram-node.bg-location > path {
+   fill: var(--bg-location);
+}
+
+.diagram-node.bg-default > rect,
+.diagram-node.bg-default > path {
+   fill: var(--bg-default);
+}
+
+.sprotty-edge.realization :not(.arrow),
+.sprotty-edge.access :not(.arrow) {
+   stroke-dasharray: 3px 3px;
+}
+
+.sprotty-edge.influence :not(.arrow),
+.sprotty-edge.flow :not(.arrow) {
+   stroke-dasharray: 10px 3px;
+}
+
+.sprotty-edge .arrow,
+.sprotty-edge .circle {
+   fill: var(--arrow-filled-fill);
+   color: var(--arrow-filled-fill);
+}
+
+.sprotty-edge.aggregation .arrow,
+.sprotty-edge.realization .arrow,
+.sprotty-edge.specialization .arrow {
+   fill: var(--arrow-empty-fill);
+   color: var(--arrow-empty-fill);
+}
+
+.sprotty-edge.serving .arrow,
+.sprotty-edge.access .arrow,
+.sprotty-edge.influence .arrow {
+   fill: none;
+   color: transparent;
+}
+
+.sprotty-edge.mouseover .arrow,
+.sprotty-edge.mouseover .circle,
+.sprotty-edge.selected .arrow,
+.sprotty-edge.selected .circle {
+   fill: currentColor !important;
 }

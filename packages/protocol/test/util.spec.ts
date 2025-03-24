@@ -1,6 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
 import { describe, expect, test } from '@jest/globals';
 import { codiconCSSString, findNextUnique, identity, quote, toId, unquote } from '../src/util';
 

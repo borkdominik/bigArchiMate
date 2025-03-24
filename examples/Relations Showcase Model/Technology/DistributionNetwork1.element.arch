@@ -1,0 +1,4 @@
+element:
+    id: DistributionNetwork1
+    type: DistributionNetwork
+    name: "DistributionNetwork"

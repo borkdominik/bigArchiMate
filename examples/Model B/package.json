@@ -1,0 +1,7 @@
+{ 
+    "name": "ModelB",
+    "version": "1.0.0",
+    "dependencies": {
+        "ModelA": "1.0.0"
+    }
+}

@@ -1,0 +1,4 @@
+element:
+    id: ApplicationInteraction
+    type: ApplicationInteraction
+    name: "ApplicationInteraction"

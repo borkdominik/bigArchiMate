@@ -48,18 +48,7 @@ module.exports = {
          }
       ],
       // eslint-plugin-header
-      'header/header': [
-         2,
-         'block',
-         [
-            {
-               pattern: '[\n\r]+ \\* Copyright \\([cC]\\) \\d{4}(-\\d{4})? .*[\n\r]+',
-               template: `*******************************************************************************
- * Copyright (c) ${year} CrossBreeze.
- *******************************************************************************`
-            }
-         ]
-      ],
+      // 'header/header': [],
       // eslint-plugin-import
       'import/export': 'off', // we have multiple exports due to namespaces, enums and classes that share the same name
       'import/no-deprecated': 'error',

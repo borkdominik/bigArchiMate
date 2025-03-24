@@ -1,4 +1,4 @@
-# CrossModel on Windows
+# bigArchiMate on Windows
 
 ## Pre-requisites for Windows
 
@@ -6,21 +6,21 @@ To install the pre-requisites on Windows, follow the steps below.
 
 ### Install Visual Studio 2022
 
-In order to build CrossModel for Windows you need to have Visual Studio installed with the workload "Desktop development with C++".
+In order to build bigArchiMate for Windows you need to have Visual Studio installed with the workload "Desktop development with C++".
 
 #### If you already have a Visual Studio 2022 installed
 
--   Start the "Visual Studio Installer"
--   Choose "Modify" on the Visual Studio 2022 installation
--   Enable the workload "Desktop development with C++" and click "Modify" so your existing Visual Studio installation is extended with the dependencies for CrossModel.
+-  Start the "Visual Studio Installer"
+-  Choose "Modify" on the Visual Studio 2022 installation
+-  Enable the workload "Desktop development with C++" and click "Modify" so your existing Visual Studio installation is extended with the dependencies for bigArchiMate.
 
 #### If you don't have Visual Studio 2022 installed
 
--   Download and install the installer from on the following page:
+-  Download and install the installer from on the following page:
 
-    -   <https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022>
+   -  <https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022>
 
--   Make sure to enable "Desktop development with C++" during the installation.
+-  Make sure to enable "Desktop development with C++" during the installation.
 
 ### Setup Scoop
 

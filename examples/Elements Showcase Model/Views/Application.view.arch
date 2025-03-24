@@ -1,0 +1,58 @@
+diagram:
+    id: Application
+    name: "Application"
+    nodes:
+      - id: ApplicationComponentNode
+        element: ApplicationComponent
+        x: -231
+        y: -198
+        width: 200
+        height: 50
+      - id: ApplicationCollaborationNode
+        element: ApplicationCollaboration
+        x: 11
+        y: -198
+        width: 200
+        height: 50
+      - id: ApplicationInterfaceNode
+        element: ApplicationInterface
+        x: 253
+        y: -198
+        width: 200
+        height: 50
+      - id: ApplicationFunctionNode
+        element: ApplicationFunction
+        x: 11
+        y: -99
+        width: 200
+        height: 50
+      - id: ApplicationInteractionNode
+        element: ApplicationInteraction
+        x: -231
+        y: -99
+        width: 200
+        height: 50
+      - id: ApplicationProcessNode
+        element: ApplicationProcess
+        x: 253
+        y: -99
+        width: 200
+        height: 50
+      - id: ApplicationEventNode
+        element: ApplicationEvent
+        x: -231
+        y: -11
+        width: 200
+        height: 50
+      - id: ApplicationServiceNode
+        element: ApplicationService
+        x: 11
+        y: -11
+        width: 200
+        height: 50
+      - id: DataObjectNode
+        element: DataObject
+        x: 253
+        y: -11
+        width: 200
+        height: 50

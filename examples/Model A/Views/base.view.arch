@@ -1,0 +1,47 @@
+diagram:
+    id: base
+    name: "base"
+    nodes:
+      - id: BusinessRoleNode
+        element: BusinessRole1
+        x: -253
+        y: -308
+        width: 200
+        height: 50
+      - id: JunctionNode
+        junction: Junction1
+        x: -363
+        y: -418
+        width: 25
+        height: 25
+      - id: LocationNode
+        element: Location1
+        x: -638
+        y: -330
+        width: 200
+        height: 50
+      - id: OutcomeNode
+        element: Outcome1
+        x: -660
+        y: -484
+        width: 200
+        height: 50
+      - id: ValueStreamNode
+        element: ValueStream2
+        x: -242
+        y: -495
+        width: 200
+        height: 50
+    edges:
+      - id: Association_Outcome1-ValueStream2Edge
+        relation: ModelA.Association_Outcome1-ValueStream2
+        sourceNode: OutcomeNode
+        targetNode: ValueStreamNode
+      - id: Association_Junction1-BusinessRole1Edge
+        relation: Association_Junction1-BusinessRole1
+        sourceNode: JunctionNode
+        targetNode: BusinessRoleNode
+      - id: Association_Junction1-Location1Edge
+        relation: Association_Junction1-Location1
+        sourceNode: JunctionNode
+        targetNode: LocationNode

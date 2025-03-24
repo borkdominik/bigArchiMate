@@ -1,7 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2024 CrossBreeze.
- ********************************************************************************/
-
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material';
 import * as React from 'react';
 

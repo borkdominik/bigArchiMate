@@ -1,0 +1,47 @@
+{
+  "name": "big-archimate-theme",
+  "displayName": "big-archimate-theme",
+  "version": "0.0.0",
+  "private": true,
+  "description": "bigArchiMate Theme",
+  "categories": [
+    "Themes"
+  ],
+  "homepage": "https://github.com/borkdominik/bigArchiMate",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/borkdominik/bigArchiMate"
+  },
+  "license": "AGPL-3.0-or-later",
+  "publisher": "BIGModelingTools",
+  "scripts": {
+    "build": "echo \"Nothing to build\"",
+    "clean": "rimraf out *.vsix",
+    "package:vsix": "vsce package --yarn",
+    "symlink": "yarn symlink:browser && yarn symlink:electron",
+    "symlink:browser": "symlink-dir . ../../applications/browser-app/plugins/big-archimate-theme",
+    "symlink:electron": "symlink-dir . ../../applications/electron-app/plugins/big-archimate-theme"
+  },
+  "contributes": {
+    "themes": [
+      {
+        "id": "big-archimate-light",
+        "label": "bigArchiMate Light",
+        "uiTheme": "vs",
+        "path": "./themes/light-color-theme.json"
+      },
+      {
+        "id": "big-archimate-dark",
+        "label": "bigArchiMate Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/dark-color-theme.json"
+      }
+    ]
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^2.32.1-0"
+  },
+  "engines": {
+    "vscode": "^1.95.0"
+  }
+}

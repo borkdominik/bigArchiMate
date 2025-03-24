@@ -1,0 +1,76 @@
+.collapsible-palette {
+   transition: transform 0.2s ease-in-out;
+}
+
+.minimize-palette-button {
+   top: 10px;
+   right: 10px;
+}
+
+.minimize-palette-button i {
+   cursor: pointer;
+   border-radius: 4px;
+   padding: 2px;
+}
+
+.minimize-palette-button i:hover {
+   background-color: var(--theia-list-hoverBackground);
+}
+
+.minimize-palette-button i:active {
+   background-color: var(--theia-list-activeSelectionBackground);
+}
+
+.tool-palette {
+   width: 220px;
+   top: 10px;
+   border: 1px solid var(--theia-activityBar-border);
+   background-color: var(--theia-titleBar-activeBackground);
+}
+
+.tool-palette .palette-header {
+   flex-direction: row;
+}
+
+.tool-palette .header-tools > i {
+   cursor: pointer;
+}
+
+.inactive .tool-palette .palette-header,
+.tool-palette .palette-header {
+   border-top: none;
+}
+
+.tool-palette .palette-body .group-header,
+.tool-palette .palette-body .tool-button {
+   height: 30px;
+   padding-block: 0;
+   padding-inline: 8px;
+   cursor: pointer;
+}
+
+.tool-palette .palette-body .group-header {
+   background-color: var(--theia-list-hoverBackground);
+}
+
+.tool-palette .palette-body .group-header:hover {
+   background-color: var(--theia-list-activeSelectionBackground);
+}
+
+.tool-palette .palette-body .tool-button:hover:not(.clicked) {
+   background-color: var(--theia-list-hoverBackground);
+}
+
+.tool-palette .palette-body .tool-button.clicked {
+   background-color: var(--theia-list-activeSelectionBackground);
+}
+
+.tool-palette .group-header i {
+   padding: 0;
+   margin-left: -1px;
+   margin-right: 10px;
+}
+
+.tool-palette .group-header.collapsed i {
+   transform: rotate(-90deg);
+}

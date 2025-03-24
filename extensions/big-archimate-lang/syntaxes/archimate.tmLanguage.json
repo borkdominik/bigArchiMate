@@ -1,0 +1,56 @@
+{
+  "name": "archimate",
+  "scopeName": "source.archimate",
+  "fileTypes": [
+    ".arch"
+  ],
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "name": "keyword.control.archimate",
+      "match": "\\b(Access|Aggregation|ApplicationCollaboration|ApplicationComponent|ApplicationEvent|ApplicationFunction|ApplicationInteraction|ApplicationInterface|ApplicationProcess|ApplicationService|Artifact|Assessment|Assignment|Association|BusinessActor|BusinessCollaboration|BusinessEvent|BusinessFunction|BusinessInteraction|BusinessInterface|BusinessObject|BusinessProcess|BusinessRole|BusinessService|Capability|CommunicationNetwork|Composition|Constraint|Contract|CourseOfAction|DataObject|Deliverable|Device|DistributionNetwork|Driver|Equipment|Facility|Flow|Gap|Goal|Grouping|ImplementationEvent|Influence|Location|Material|Meaning|Node|Outcome|Path|Plateau|Principle|Product|Realization|Representation|Requirement|Resource|Serving|Specialization|Stakeholder|SystemSoftware|TechnologyCollaboration|TechnologyEvent|TechnologyFunction|TechnologyInteraction|TechnologyInterface|TechnologyProcess|TechnologyService|Triggering|Value|ValueStream|WorkPackage|diagram|documentation|edges|element|height|id|junction|name|nodes|properties|relation|routingPoints|source|sourceNode|target|targetNode|type|value|width|x|y)\\b"
+    },
+    {
+      "name": "string.quoted.double.archimate",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "include": "#string-character-escape"
+        }
+      ]
+    },
+    {
+      "name": "string.quoted.single.archimate",
+      "begin": "'",
+      "end": "'",
+      "patterns": [
+        {
+          "include": "#string-character-escape"
+        }
+      ]
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "begin": "#",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.whitespace.comment.leading.archimate"
+            }
+          },
+          "end": "(?=$)",
+          "name": "comment.line.archimate"
+        }
+      ]
+    },
+    "string-character-escape": {
+      "name": "constant.character.escape.archimate",
+      "match": "\\\\(x[0-9A-Fa-f]{2}|u[0-9A-Fa-f]{4}|u\\{[0-9A-Fa-f]+\\}|[0-2][0-7]{0,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.|$)"
+    }
+  }
+}

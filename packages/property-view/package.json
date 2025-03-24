@@ -1,21 +1,17 @@
 {
-  "name": "@crossbreeze/property-view",
+  "name": "@big-archimate/property-view",
   "version": "0.0.0",
   "private": true,
-  "description": "Property view for crossmodel",
+  "description": "bigArchiMate Property View",
   "keywords": [
     "theia-extension"
   ],
-  "homepage": "https://github.com/CrossBreezeNL/crossmodel",
+  "homepage": "https://github.com/borkdominik/bigArchiMate",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CrossBreezeNL/crossmodel"
+    "url": "git+https://github.com/borkdominik/bigArchiMate"
   },
   "license": "AGPL-3.0-or-later",
-  "author": {
-    "name": "CrossBreeze",
-    "email": "devops@crossbreeze.nl"
-  },
   "main": "index.js",
   "files": [
     "lib",
@@ -30,10 +26,10 @@
     "watch": "tsc -w"
   },
   "dependencies": {
-    "@crossbreeze/glsp-client": "0.0.0",
-    "@crossbreeze/model-service": "0.0.0",
-    "@crossbreeze/protocol": "0.0.0",
-    "@crossbreeze/react-model-ui": "0.0.0",
+    "@big-archimate/glsp-client": "0.0.0",
+    "@big-archimate/model-service": "0.0.0",
+    "@big-archimate/protocol": "0.0.0",
+    "@big-archimate/react-model-ui": "0.0.0",
     "@eclipse-glsp/theia-integration": "2.3.0",
     "@theia/core": "1.57.1",
     "@theia/filesystem": "1.57.1",

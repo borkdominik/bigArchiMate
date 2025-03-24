@@ -1,0 +1,4 @@
+element:
+    id: Equipment
+    type: Equipment
+    name: "Equipment"

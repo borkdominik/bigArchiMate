@@ -1,0 +1,14 @@
+{
+  "projectName": "ArchiMateLanguage",
+  "languages": [
+    {
+      "id": "archimate",
+      "grammar": "src/language-server/grammar/archimate.langium",
+      "fileExtensions": [".arch"],
+      "textMate": {
+        "out": "syntaxes/archimate.tmLanguage.json"
+      }
+    }
+  ],
+  "out": "src/language-server/generated"
+}

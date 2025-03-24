@@ -1,15 +1,12 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
 import {
-   CrossModelRoot,
+   ArchiMateRoot,
    CrossReferenceContext,
-   Entity,
-   Mapping,
+   Element,
+   Junction,
    ModelDiagnostic,
    ReferenceableElement,
-   Relationship
-} from '@crossbreeze/protocol';
+   Relation
+} from '@big-archimate/protocol';
 import * as React from 'react';
 import { DispatchAction, ModelReducer } from './ModelReducer';
 
@@ -20,7 +17,7 @@ export interface ModelQueryApi {
    findReferenceableElements(args: CrossReferenceContext): Promise<ReferenceableElement[]>;
 }
 
-const DEFAULT_MODEL_ROOT: CrossModelRoot = { $type: 'CrossModelRoot' };
+const DEFAULT_MODEL_ROOT: ArchiMateRoot = { $type: 'ArchiMateRoot' };
 export const ModelContext = React.createContext(DEFAULT_MODEL_ROOT);
 
 export type ActionDispatcher = React.Dispatch<React.ReducerAction<typeof ModelReducer>>;
@@ -40,7 +37,7 @@ export const ModelDirtyContext = React.createContext<boolean>(false);
 
 export const ModelDiagnosticsContext = React.createContext<ModelDiagnostic[]>([]);
 
-export function useModel(): CrossModelRoot {
+export function useModel(): ArchiMateRoot {
    return React.useContext(ModelContext);
 }
 
@@ -72,14 +69,14 @@ export function useReadonly(): boolean {
    return ModelDiagnostic.hasErrors(useDiagnostics());
 }
 
-export function useEntity(): Entity {
-   return useModel().entity!;
+export function useElement(): Element {
+   return useModel().element!;
 }
 
-export function useRelationship(): Relationship {
-   return useModel().relationship!;
+export function useJunction(): Junction {
+   return useModel().junction!;
 }
 
-export function useMapping(): Mapping {
-   return useModel().mapping!;
+export function useRelation(): Relation {
+   return useModel().relation!;
 }

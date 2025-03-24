@@ -1,5 +1,0 @@
-relationship:
-    id: TestRelationship
-    name: "Test Relationship"
-    parent: Customer
-    child: Order

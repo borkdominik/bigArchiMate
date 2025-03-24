@@ -1,0 +1,35 @@
+diagram:
+    id: Base2
+    name: "Base"
+    nodes:
+      - id: BusinessRole1Node
+        element: ModelA.BusinessRole1
+        x: -638.6655271268261
+        y: 9.203132940059676
+        width: 200
+        height: 50
+      - id: ValueStream2Node
+        element: ModelA.ValueStream2
+        x: -652.3164838806138
+        y: 184.39041128033432
+        width: 200
+        height: 50
+      - id: BusinessObjectNode
+        element: BusinessObject3
+        x: -308
+        y: 33
+        width: 200
+        height: 50
+    edges:
+      - id: Association_ValueStream2-BusinessRole1Edge
+        relation: Association_ValueStream2-BusinessRole1
+        sourceNode: ValueStream2Node
+        targetNode: BusinessRole1Node
+      - id: Association_ValueStream2-BusinessObject3Edge
+        relation: Association_ValueStream2-BusinessObject3
+        sourceNode: ValueStream2Node
+        targetNode: BusinessObjectNode
+      - id: Association_BusinessObject3-BusinessRole1Edge
+        relation: Association_BusinessObject3-BusinessRole1
+        sourceNode: BusinessObjectNode
+        targetNode: BusinessRole1Node

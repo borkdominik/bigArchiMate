@@ -1,18 +1,14 @@
 {
-  "name": "@crossbreeze/protocol",
+  "name": "@big-archimate/protocol",
   "version": "0.0.0",
   "private": true,
-  "description": "CrossModel Protocol Extensions between Server and Client",
-  "homepage": "https://github.com/CrossBreezeNL/crossmodel",
+  "description": "bigArchiMate Protocol Extensions between Server and Client",
+  "homepage": "https://github.com/borkdominik/bigArchiMate",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CrossBreezeNL/crossmodel"
+    "url": "git+https://github.com/borkdominik/bigArchiMate"
   },
   "license": "AGPL-3.0-or-later",
-  "author": {
-    "name": "CrossBreeze",
-    "email": "devops@crossbreeze.nl"
-  },
   "main": "lib/index",
   "types": "lib/index",
   "files": [

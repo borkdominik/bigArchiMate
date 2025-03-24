@@ -1,0 +1,4 @@
+element:
+    id: BusinessEvent
+    type: BusinessEvent
+    name: "BusinessEvent"

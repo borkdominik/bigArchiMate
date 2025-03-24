@@ -1,11 +1,8 @@
-/********************************************************************************
- * Copyright (c) 2023 CrossBreeze.
- ********************************************************************************/
 import {
+   ArchiMateDocument,
+   ArchiMateRoot,
    CloseModel,
    CloseModelArgs,
-   CrossModelDocument,
-   CrossModelRoot,
    CrossReference,
    CrossReferenceContext,
    FindReferenceableElements,
@@ -27,7 +24,7 @@ import {
    SystemInfoArgs,
    UpdateModel,
    UpdateModelArgs
-} from '@crossbreeze/protocol';
+} from '@big-archimate/protocol';
 import { CommandService, MessageService } from '@theia/core';
 import { Deferred } from '@theia/core/lib/common/promise-util';
 import { inject, injectable } from '@theia/core/shared/inversify';
@@ -136,7 +133,7 @@ export class ModelServiceServerImpl implements ModelServiceServer {
       return pendingContent.promise;
    }
 
-   async open(args: OpenModelArgs): Promise<CrossModelDocument | undefined> {
+   async open(args: OpenModelArgs): Promise<ArchiMateDocument | undefined> {
       await this.initializeServerConnection();
       return this.connection.sendRequest(OpenModel, args);
    }
@@ -146,17 +143,17 @@ export class ModelServiceServerImpl implements ModelServiceServer {
       await this.connection.sendRequest(CloseModel, args);
    }
 
-   async request(uri: string): Promise<CrossModelDocument | undefined> {
+   async request(uri: string): Promise<ArchiMateDocument | undefined> {
       await this.initializeServerConnection();
       return this.connection.sendRequest(RequestModel, uri);
    }
 
-   async update(args: UpdateModelArgs<CrossModelRoot>): Promise<CrossModelDocument> {
+   async update(args: UpdateModelArgs<ArchiMateRoot>): Promise<ArchiMateDocument> {
       await this.initializeServerConnection();
       return this.connection.sendRequest(UpdateModel, args);
    }
 
-   async save(args: SaveModelArgs<CrossModelRoot>): Promise<void> {
+   async save(args: SaveModelArgs<ArchiMateRoot>): Promise<void> {
       await this.initializeServerConnection();
       return this.connection.sendRequest(SaveModel, args);
    }
