@@ -1233,32 +1233,6 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
                 "elements": [
                   {
                     "$type": "Keyword",
-                    "value": "name"
-                  },
-                  {
-                    "$type": "Keyword",
-                    "value": ":"
-                  },
-                  {
-                    "$type": "Assignment",
-                    "feature": "name",
-                    "operator": "=",
-                    "terminal": {
-                      "$type": "RuleCall",
-                      "rule": {
-                        "$ref": "#/rules@4"
-                      },
-                      "arguments": []
-                    }
-                  }
-                ],
-                "cardinality": "?"
-              },
-              {
-                "$type": "Group",
-                "elements": [
-                  {
-                    "$type": "Keyword",
                     "value": "nodes"
                   },
                   {
@@ -1368,6 +1342,58 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
                       "$ref": "#/rules@11"
                     },
                     "arguments": []
+                  }
+                ],
+                "cardinality": "?"
+              },
+              {
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "Keyword",
+                    "value": "name"
+                  },
+                  {
+                    "$type": "Keyword",
+                    "value": ":"
+                  },
+                  {
+                    "$type": "Assignment",
+                    "feature": "name",
+                    "operator": "=",
+                    "terminal": {
+                      "$type": "RuleCall",
+                      "rule": {
+                        "$ref": "#/rules@4"
+                      },
+                      "arguments": []
+                    }
+                  }
+                ],
+                "cardinality": "?"
+              },
+              {
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "Keyword",
+                    "value": "documentation"
+                  },
+                  {
+                    "$type": "Keyword",
+                    "value": ":"
+                  },
+                  {
+                    "$type": "Assignment",
+                    "feature": "documentation",
+                    "operator": "=",
+                    "terminal": {
+                      "$type": "RuleCall",
+                      "rule": {
+                        "$ref": "#/rules@4"
+                      },
+                      "arguments": []
+                    }
                   }
                 ],
                 "cardinality": "?"

@@ -1,6 +1,5 @@
 diagram:
     id: Relations
-    name: "Relations"
     nodes:
       - id: ApplicationCollaboration1Node
         element: ApplicationCollaboration1

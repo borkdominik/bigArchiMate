@@ -1,6 +1,5 @@
 diagram:
     id: Technology
-    name: "Technology"
     nodes:
       - id: NodeNode
         element: Node

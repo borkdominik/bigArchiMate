@@ -1,6 +1,5 @@
 diagram:
     id: Business
-    name: "Business"
     nodes:
       - id: BusinessActorNode
         element: BusinessActor

@@ -1,6 +1,5 @@
 diagram:
     id: ImplementationAndMigration
-    name: "ImplementationAndMigration"
     nodes:
       - id: WorkPackageNode
         element: WorkPackage

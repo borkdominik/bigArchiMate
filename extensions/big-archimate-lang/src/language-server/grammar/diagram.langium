@@ -9,7 +9,6 @@ Diagram:
     (
         INDENT
             'id' ':' id=ID
-            ('name' ':'  name=STRING)?
             ('nodes' ':'
                 INDENT 
                     (LIST_ITEM nodes+=(ElementNode|JunctionNode))+
@@ -20,6 +19,8 @@ Diagram:
                     (LIST_ITEM edges+=RelationEdge)+
                 DEDENT
             )?
+            ('name' ':' name=STRING)?
+            ('documentation' ':' documentation=STRING)?
             Properties?
         DEDENT
     )*

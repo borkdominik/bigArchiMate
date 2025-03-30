@@ -1,6 +1,5 @@
 diagram:
     id: Application
-    name: "Application"
     nodes:
       - id: ApplicationComponentNode
         element: ApplicationComponent

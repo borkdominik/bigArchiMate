@@ -1,6 +1,5 @@
 diagram:
     id: Other
-    name: "Other"
     nodes:
       - id: GroupingNode
         element: Grouping

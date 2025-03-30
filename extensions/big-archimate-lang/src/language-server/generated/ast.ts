@@ -176,6 +176,7 @@ export function isArchiMateRoot(item: unknown): item is ArchiMateRoot {
 export interface Diagram extends AstNode {
     readonly $container: ArchiMateRoot;
     readonly $type: 'Diagram';
+    documentation?: string;
     edges: Array<RelationEdge>;
     id?: ID;
     name?: string;
@@ -395,6 +396,7 @@ export class ArchiMateLanguageAstReflection extends AbstractAstReflection {
                 return {
                     name: Diagram,
                     properties: [
+                        { name: 'documentation' },
                         { name: 'edges', defaultValue: [] },
                         { name: 'id' },
                         { name: 'name' },

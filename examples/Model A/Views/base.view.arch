@@ -1,6 +1,5 @@
 diagram:
     id: base
-    name: "base"
     nodes:
       - id: BusinessRoleNode
         element: BusinessRole1
