@@ -1,4 +1,4 @@
 element:
     id: BusinessActor1
     type: BusinessActor
-    name: "BusinessActor 1"
+    name: "User"
