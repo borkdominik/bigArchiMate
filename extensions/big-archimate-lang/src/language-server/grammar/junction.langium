@@ -4,9 +4,8 @@ import 'relation'
 Junction:
     'junction' ':'
         INDENT
-            'id' ':' id=ID
-            ('name' ':' name=STRING)?
-            ('documentation' ':' documentation=STRING)?
-            Properties?
+            IDProperty
+            'type' ':' type=JunctionType
+            Optionals?
         DEDENT
 ;

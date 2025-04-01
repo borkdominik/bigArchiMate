@@ -19,8 +19,7 @@ interface NewElementTemplate extends Command {
 }
 
 const INITIAL_ARCHIMATE_DIAGRAM_CONTENT = `diagram:
-   id: \${id}
-   name: \${name}`;
+   id: \${id}`;
 
 const TEMPLATE_CATEGORY = 'New';
 

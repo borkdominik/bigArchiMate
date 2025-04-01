@@ -16,8 +16,8 @@ export function JunctionForm(): React.ReactElement {
    return (
       <Form
          id={junction.id}
-         name={junction.name ? `${junction.name} (${getLabel(junction.$type)})` : getLabel(junction.$type)}
-         iconClass={codiconCSSString(getIcon('Junction'))}
+         name={junction.name ? `${junction.name} (${getLabel(junction.type)})` : getLabel(junction.type)}
+         iconClass={codiconCSSString(getIcon(junction.type))}
       >
          <FormSection label='General'>
             <TextField

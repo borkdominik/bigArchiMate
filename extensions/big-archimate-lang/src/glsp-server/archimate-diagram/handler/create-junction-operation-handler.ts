@@ -1,4 +1,4 @@
-import { ARCHIMATE_CONCEPT_TYPE_MAP } from '@big-archimate/protocol';
+import { ARCHIMATE_JUNCTION_TYPE_MAP } from '@big-archimate/protocol';
 import {
    Action,
    ActionDispatcher,
@@ -19,7 +19,7 @@ import { ArchiMateModelState } from '../../common/model-state.js';
 @injectable()
 export class CreateJunctionOperationHandler extends JsonCreateNodeOperationHandler {
    override label = 'Create Junction';
-   elementTypeIds = [ARCHIMATE_CONCEPT_TYPE_MAP.get('Junction')];
+   elementTypeIds = [...ARCHIMATE_JUNCTION_TYPE_MAP.values()];
 
    @inject(ModelState) protected declare modelState: ArchiMateModelState;
    @inject(ActionDispatcher) protected actionDispatcher!: ActionDispatcher;
@@ -38,7 +38,7 @@ export class CreateJunctionOperationHandler extends JsonCreateNodeOperationHandl
       const node: JunctionNode = {
          $type: JunctionNode,
          $container: container,
-         id: this.modelState.idProvider.findNextId(JunctionNode, junction.name + 'Node', container),
+         id: this.modelState.idProvider.findNextId(JunctionNode, junction.type + 'Node', container),
          junction: {
             $refText: this.modelState.idProvider.getNodeId(junction) || junction.id || '',
             ref: junction
@@ -59,17 +59,17 @@ export class CreateJunctionOperationHandler extends JsonCreateNodeOperationHandl
     * Creates a new junction and stores it on a file on the file system.
     */
    protected async createAndSaveJunction(operation: CreateNodeOperation): Promise<Junction | undefined> {
-      const junctionType = 'Junction';
+      const junctionType = ARCHIMATE_JUNCTION_TYPE_MAP.getReverse(operation.elementTypeId);
 
       // create junction, serialize and re-read to ensure everything is up to date and linked properly
       const root: ArchiMateRoot = { $type: 'ArchiMateRoot' };
-      const id = this.modelState.idProvider.findNextId(Junction, `${junctionType}`);
+      const id = this.modelState.idProvider.findNextId(Junction, `${junctionType}_Junction`);
 
       const junction: Junction = {
          $type: 'Junction',
          $container: root,
          id,
-         name: junctionType,
+         type: junctionType,
          properties: []
       };
 

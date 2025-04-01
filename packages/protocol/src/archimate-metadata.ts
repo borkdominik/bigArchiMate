@@ -1,4 +1,4 @@
-import { ConceptType, ElementType, LayerType, OtherConceptType, RelationType } from './glsp/types';
+import { ConceptType, ElementType, JunctionType, LayerType, RelationType } from './glsp/types';
 
 type CornerType = 'round' | 'square' | 'diamond';
 
@@ -524,10 +524,15 @@ const relationMetadataMap: Record<RelationType, RelationMetaData> = {
    }
 };
 
-const otherConceptMetaDataMap: Record<OtherConceptType, ConceptMetaData> = {
-   Junction: {
-      icon: 'archimate-junction',
-      label: 'Junction',
+const junctionMetadataMap: Record<JunctionType, ConceptMetaData> = {
+   And: {
+      icon: 'archimate-junction-and',
+      label: '(And) Junction',
+      specificationSection: '5.5.1.'
+   },
+   Or: {
+      icon: 'archimate-junction-or',
+      label: 'Or Junction',
       specificationSection: '5.5.1.'
    }
 };
@@ -538,7 +543,7 @@ const otherConceptMetaDataMap: Record<OtherConceptType, ConceptMetaData> = {
 const conceptMetaDataMap = {
    ...elementMetadataMap,
    ...relationMetadataMap,
-   ...otherConceptMetaDataMap
+   ...junctionMetadataMap
 };
 
 /**

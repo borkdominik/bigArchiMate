@@ -26,6 +26,7 @@ export type ArchiMateLanguageKeywordNames =
     | ":"
     | "Access"
     | "Aggregation"
+    | "And"
     | "ApplicationCollaboration"
     | "ApplicationComponent"
     | "ApplicationEvent"
@@ -71,6 +72,7 @@ export type ArchiMateLanguageKeywordNames =
     | "Material"
     | "Meaning"
     | "Node"
+    | "Or"
     | "Outcome"
     | "Path"
     | "Plateau"
@@ -153,6 +155,12 @@ export function isIDReference(item: unknown): item is IDReference {
     return typeof item === 'string';
 }
 
+export type JunctionType = 'And' | 'Or';
+
+export function isJunctionType(item: unknown): item is JunctionType {
+    return item === 'And' || item === 'Or';
+}
+
 export type RelationType = 'Access' | 'Aggregation' | 'Assignment' | 'Association' | 'Composition' | 'Flow' | 'Influence' | 'Realization' | 'Serving' | 'Specialization' | 'Triggering';
 
 export function isRelationType(item: unknown): item is RelationType {
@@ -176,6 +184,7 @@ export function isArchiMateRoot(item: unknown): item is ArchiMateRoot {
 export interface Diagram extends AstNode {
     readonly $container: ArchiMateRoot;
     readonly $type: 'Diagram';
+    documentation?: string;
     edges: Array<RelationEdge>;
     id?: ID;
     name?: string;
@@ -194,7 +203,7 @@ export interface Element extends AstNode {
     readonly $type: 'Element';
     documentation?: string;
     id: ID;
-    name: string;
+    name?: string;
     properties: Array<Property>;
     type: ElementType;
 }
@@ -229,6 +238,7 @@ export interface Junction extends AstNode {
     id: ID;
     name?: string;
     properties: Array<Property>;
+    type: JunctionType;
 }
 
 export const Junction = 'Junction';
@@ -395,6 +405,7 @@ export class ArchiMateLanguageAstReflection extends AbstractAstReflection {
                 return {
                     name: Diagram,
                     properties: [
+                        { name: 'documentation' },
                         { name: 'edges', defaultValue: [] },
                         { name: 'id' },
                         { name: 'name' },
@@ -435,7 +446,8 @@ export class ArchiMateLanguageAstReflection extends AbstractAstReflection {
                         { name: 'documentation' },
                         { name: 'id' },
                         { name: 'name' },
-                        { name: 'properties', defaultValue: [] }
+                        { name: 'properties', defaultValue: [] },
+                        { name: 'type' }
                     ]
                 };
             }

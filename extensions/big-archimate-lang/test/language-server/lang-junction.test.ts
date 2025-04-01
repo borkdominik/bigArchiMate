@@ -24,8 +24,9 @@ describe('Language junction', () => {
    });
 
    describe('Valid junction files', () => {
-      const testValidJunction = async (junction: WithDocument<Junction>) => {
+      const testValidJunction = (junction: WithDocument<Junction>) => {
          expect(junction.id).toBe('Junction1Id');
+         expect(junction.type).toBe('And');
       };
 
       test('Valid junction file', async () => {

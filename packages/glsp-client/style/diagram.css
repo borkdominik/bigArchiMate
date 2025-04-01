@@ -17,6 +17,8 @@
    --bg-technology: #c9e7b7;
    --bg-location: #edcfe2;
    --bg-default: #ffffff;
+   --bg-junction-and: #000000;
+   --bg-junction-or: #ffffff;
 }
 
 .grid-background .sprotty-graph,
@@ -118,6 +120,14 @@
 .diagram-node.bg-default > rect,
 .diagram-node.bg-default > path {
    fill: var(--bg-default);
+}
+
+.diagram-node.bg-junction-and > circle {
+   fill: var(--bg-junction-and);
+}
+
+.diagram-node.bg-junction-or > circle {
+   fill: var(--bg-junction-or);
 }
 
 .sprotty-edge.realization :not(.arrow),

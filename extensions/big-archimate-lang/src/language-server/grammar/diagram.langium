@@ -8,8 +8,7 @@ Diagram:
     ('diagram') ':' 
     (
         INDENT
-            'id' ':' id=ID
-            ('name' ':'  name=STRING)?
+            IDProperty
             ('nodes' ':'
                 INDENT 
                     (LIST_ITEM nodes+=(ElementNode|JunctionNode))+
@@ -20,38 +19,43 @@ Diagram:
                     (LIST_ITEM edges+=RelationEdge)+
                 DEDENT
             )?
-            Properties?
+            Optionals?
         DEDENT
     )*
 ;
 
-ElementNode:
-    'id' ':' id=ID
-    'element' ':' element=[Element:IDReference]
+fragment Coordinates:
     'x' ':' x=NUMBER
     'y' ':' y=NUMBER
+;
+
+fragment Dimensions:
     'width' ':' width=NUMBER
     'height' ':' height=NUMBER
 ;
 
+ElementNode:
+    IDProperty
+    'element' ':' element=[Element:IDReference]
+    Coordinates
+    Dimensions
+;
+
 JunctionNode:
-    'id' ':' id=ID
+    IDProperty
     'junction' ':' junction=[Junction:IDReference]
-    'x' ':' x=NUMBER
-    'y' ':' y=NUMBER
-    'width' ':' width=NUMBER
-    'height' ':' height=NUMBER
+    Coordinates
+    Dimensions
 ;
 
 ElementNodeOrJunctionNode:
     ElementNode | JunctionNode;
 
 RelationRoutingPoint:
-    'x' ':' x=NUMBER
-    'y' ':' y=NUMBER;
+    Coordinates;
 
 RelationEdge:
-    'id' ':' id=ID
+    IDProperty
     'relation' ':' relation=[Relation:IDReference]
     'sourceNode' ':' sourceNode=[ElementNodeOrJunctionNode:IDReference]
     'targetNode' ':' targetNode=[ElementNodeOrJunctionNode:IDReference]

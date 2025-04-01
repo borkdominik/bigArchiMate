@@ -1,6 +1,5 @@
 diagram:
     id: Motivation
-    name: "Motivation"
     nodes:
       - id: StakeholderNode
         element: Stakeholder

@@ -1,6 +1,5 @@
 diagram:
     id: Base2
-    name: "Base"
     nodes:
       - id: BusinessRole1Node
         element: ModelA.BusinessRole1

@@ -1,5 +1,5 @@
 import * as rpc from 'vscode-jsonrpc/node';
-import { ElementType, RelationType } from '../glsp/types';
+import { ElementType, JunctionType, RelationType } from '../glsp/types';
 
 export const ArchiMateLanguageRegex = {
    STRING: /^"[^"]*"$|^'[^']*'$/,
@@ -23,16 +23,6 @@ export interface Identifiable {
    id: string;
    $globalId: string;
 }
-
-export interface WithCustomProperties {
-   customProperties?: Array<CustomProperty>;
-}
-
-export interface CustomProperty {
-   name: string;
-   value?: string;
-}
-
 export interface ArchiMateDocument<T = ArchiMateRoot, D = ModelDiagnostic> {
    uri: string;
    root: T;
@@ -58,29 +48,27 @@ export interface Property extends ArchiMateObject, Identifiable {
    name?: string;
 }
 
-export interface Element extends ArchiMateObject, Identifiable {
+export interface WithOptionals {
+   name?: string;
+   documentation?: string;
+   properties: Array<Property>;
+}
+export interface WithType<T> {
+   type: T;
+}
+
+export interface Element extends ArchiMateObject, Identifiable, WithOptionals, WithType<ElementType> {
    readonly $type: 'Element';
-   name?: string;
-   documentation?: string;
-   type: ElementType;
-   properties: Array<Property>;
 }
 
-export interface Junction extends ArchiMateObject, Identifiable {
+export interface Junction extends ArchiMateObject, Identifiable, WithOptionals, WithType<JunctionType> {
    readonly $type: 'Junction';
-   name?: string;
-   documentation?: string;
-   properties: Array<Property>;
 }
 
-export interface Relation extends ArchiMateObject, Identifiable {
+export interface Relation extends ArchiMateObject, Identifiable, WithOptionals, WithType<RelationType> {
    readonly $type: 'Relation';
-   name?: string;
-   documentation?: string;
-   type: RelationType;
    source: Reference<Element>;
    target: Reference<Element>;
-   properties: Array<Property>;
 }
 
 export interface ClientModelArgs {

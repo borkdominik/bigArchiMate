@@ -1,0 +1,5 @@
+relation:
+    id: Triggering_BusinessActor1-ApplicationEvent1
+    type: Triggering
+    source: BusinessActor1
+    target: ApplicationEvent1

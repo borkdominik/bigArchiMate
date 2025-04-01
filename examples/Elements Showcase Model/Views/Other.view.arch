@@ -1,6 +1,5 @@
 diagram:
     id: Other
-    name: "Other"
     nodes:
       - id: GroupingNode
         element: Grouping
@@ -14,9 +13,15 @@ diagram:
         y: 220
         width: 200
         height: 50
-      - id: JunctionNode
-        junction: Junction
-        x: 693
-        y: 242
+      - id: AndNode
+        junction: And_Junction
+        x: 253
+        y: 319
+        width: 25
+        height: 25
+      - id: OrNode
+        junction: Or_Junction
+        x: 473
+        y: 317.0075722239262
         width: 25
         height: 25

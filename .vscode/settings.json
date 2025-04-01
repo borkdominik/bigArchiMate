@@ -83,5 +83,16 @@
     "typescript",
     "typescriptreact"
   ],
-  "cSpell.ignoreRegExpList": ["/^\\s*import.*from.*/gm"]
+  "cSpell.ignoreRegExpList": [
+    "/^\\s*import.*from.*/gm"
+  ],
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/*.unotation": true
+  },
+  "bigUML.hideUnotation": true
 }

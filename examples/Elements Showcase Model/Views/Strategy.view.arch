@@ -1,6 +1,5 @@
 diagram:
     id: Strategy
-    name: "Strategy"
     nodes:
       - id: ResourceNode
         element: Resource

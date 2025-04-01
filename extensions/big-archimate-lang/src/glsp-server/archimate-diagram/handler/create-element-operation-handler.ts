@@ -1,13 +1,13 @@
 import { ARCHIMATE_ELEMENT_TYPE_MAP, getLabel, getLayer } from '@big-archimate/protocol';
 import {
-    Action,
-    ActionDispatcher,
-    Command,
-    CreateNodeOperation,
-    JsonCreateNodeOperationHandler,
-    MaybePromise,
-    ModelState,
-    Point
+   Action,
+   ActionDispatcher,
+   Command,
+   CreateNodeOperation,
+   JsonCreateNodeOperationHandler,
+   MaybePromise,
+   ModelState,
+   Point
 } from '@eclipse-glsp/server';
 import { inject, injectable } from '@theia/core/shared/inversify';
 import { URI, Utils as UriUtils } from 'vscode-uri';

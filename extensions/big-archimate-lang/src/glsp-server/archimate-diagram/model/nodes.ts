@@ -1,6 +1,6 @@
 import {
-   ARCHIMATE_CONCEPT_TYPE_MAP,
    ARCHIMATE_ELEMENT_TYPE_MAP,
+   ARCHIMATE_JUNCTION_TYPE_MAP,
    ELEMENT_ICON_TYPE,
    ELEMENT_LABEL_TYPE,
    getCornerType,
@@ -95,11 +95,17 @@ export class GJunctionNode extends GNode {
 
 export class GJunctionNodeBuilder extends GNodeBuilder<GJunctionNode> {
    set(node: JunctionNode, index: ArchiMateGModelIndex): this {
+      const junctionType = node.junction.ref?.type;
+
+      if (junctionType === undefined) {
+         return this;
+      }
+
       this.id(index.createId(node));
-      this.type(ARCHIMATE_CONCEPT_TYPE_MAP.get('Junction'));
+      this.type(ARCHIMATE_JUNCTION_TYPE_MAP.get(junctionType));
 
       // Options which are the same for every node
-      this.addCssClasses('diagram-node', 'junction', 'bg-junction');
+      this.addCssClasses('diagram-node', 'junction', `bg-junction-${toKebabCase(junctionType)}`);
       this.addArg(REFERENCE_CONTAINER_TYPE, JunctionNode);
       this.addArg(REFERENCE_PROPERTY, 'junction');
       this.addArg(REFERENCE_VALUE, node.junction.$refText);

@@ -4,10 +4,8 @@ import 'common'
 Element:
     'element' ':'
         INDENT
-            'id' ':' id=ID
+            IDProperty
             'type' ':'  type=ElementType
-            'name' ':' name=STRING
-            ('documentation' ':' documentation=STRING)?
-            Properties?
+            Optionals?
         DEDENT
 ;

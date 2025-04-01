@@ -1,7 +1,7 @@
-import { ElementType, RelationType } from '../../generated/ast.js';
+import { ElementType, JunctionType, RelationType } from '../../generated/ast.js';
 import { relationConstraints, relationKeyMap } from './relation-constraints.js';
 
-type NodeType = ElementType | 'Junction';
+type NodeType = ElementType | JunctionType;
 
 export namespace RelationValidator {
    /**
@@ -15,7 +15,7 @@ export namespace RelationValidator {
          return false;
       }
 
-      const relationKeyList = Object.values(relationConstraints[sourceNodeType]);
+      const relationKeyList = Object.values(relationConstraints[getFinalNodeType(sourceNodeType)]);
 
       for (let i = 0; i < relationKeyList.length; i++) {
          if (relationKeyList[i].includes(relationKeyMap.getReverse(relationType))) {
@@ -38,7 +38,7 @@ export namespace RelationValidator {
          return false;
       }
 
-      const validRelationKeys = relationConstraints[sourceNodeType][targetNodeType];
+      const validRelationKeys = relationConstraints[getFinalNodeType(sourceNodeType)][getFinalNodeType(targetNodeType)];
 
       for (let i = 0; i < validRelationKeys.length; i++) {
          if (relationKeyMap.get(validRelationKeys[i]) === relationType) {
@@ -48,4 +48,12 @@ export namespace RelationValidator {
 
       return false;
    }
+}
+
+function getFinalNodeType(nodeType: NodeType): ElementType | 'Junction' {
+   if (nodeType === 'And' || nodeType === 'Or') {
+      return 'Junction';
+   }
+
+   return nodeType;
 }

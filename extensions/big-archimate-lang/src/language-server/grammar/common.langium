@@ -1,13 +1,17 @@
 import 'terminals'
 
-fragment Properties:
-    'properties' ':'
-        INDENT
-            (LIST_ITEM properties+=Property)+
-        DEDENT
-;
+fragment IDProperty:
+    'id' ':' id=ID;
 
 Property:
-    'id' ':' id=ID
+    IDProperty
     'name' ':'  name=STRING
     ('value' ':' value=STRING)?;
+
+fragment Optionals:
+    ('name' ':' name=STRING)?
+    ('documentation' ':' documentation=STRING)?
+    ('properties' ':'
+        INDENT
+            (LIST_ITEM properties+=Property)+
+        DEDENT)?;

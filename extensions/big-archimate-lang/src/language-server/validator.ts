@@ -1,7 +1,16 @@
 import { ModelFileExtensions } from '@big-archimate/protocol';
 import { AstNode, UriUtils, ValidationAcceptor, ValidationChecks } from 'langium';
 import { Diagnostic } from 'vscode-languageserver-protocol';
-import { ArchiMateLanguageAstType, Element, isDiagram, isElement, isRelation, Relation } from './generated/ast.js';
+import {
+   ArchiMateLanguageAstType,
+   isDiagram,
+   isElement,
+   isElementType,
+   isJunction,
+   isJunctionType,
+   isRelation,
+   Relation
+} from './generated/ast.js';
 import type { Services } from './module.js';
 import { ID_PROPERTY, IdentifiableAstNode } from './naming.js';
 import { findDocument, isSemanticRoot } from './util/ast-util.js';
@@ -32,8 +41,7 @@ export function registerValidationChecks(services: Services): void {
 
    const checks: ValidationChecks<ArchiMateLanguageAstType> = {
       AstNode: validator.checkNode,
-      Relation: validator.checkRelation,
-      Element: validator.checkElement
+      Relation: validator.checkRelation
    };
    registry.register(checks, validator);
 }
@@ -47,6 +55,7 @@ export class Validator {
    checkNode(node: AstNode, accept: ValidationAcceptor): void {
       this.checkUniqueGlobalId(node, accept);
       this.checkUniqueNodeId(node, accept);
+      this.checkUniquePropertyId(node, accept);
       this.checkMatchingFilename(node, accept);
    }
 
@@ -86,7 +95,7 @@ export class Validator {
       const allElements = Array.from(this.services.shared.workspace.IndexManager.allElements());
       const duplicates = allElements.filter(description => description.name === globalId);
       if (duplicates.length > 1) {
-         accept('error', 'Must provide a unique id.', { node, property: ID_PROPERTY });
+         accept('error', 'Must provide id that is unique in this model.', { node, property: ID_PROPERTY });
       }
    }
 
@@ -96,34 +105,78 @@ export class Validator {
 
    protected checkUniqueNodeId(node: AstNode, accept: ValidationAcceptor): void {
       if (isDiagram(node)) {
-         this.markDuplicateIds(node.edges, accept);
-         this.markDuplicateIds(node.nodes, accept);
+         this.markDuplicateIds(node.edges, accept, {
+            property: 'edge',
+            type: 'Diagram'
+         });
+         this.markDuplicateIds(node.nodes, accept, {
+            property: 'node',
+            type: 'Diagram'
+         });
       }
    }
 
-   protected markDuplicateIds(nodes: IdentifiableAstNode[], accept: ValidationAcceptor): void {
+   protected checkUniquePropertyId(node: AstNode, accept: ValidationAcceptor): void {
+      if (isDiagram(node) || isElement(node) || isRelation(node) || isJunction(node)) {
+         this.markDuplicateIds(node.properties, accept, {
+            property: 'property',
+            type: node.$type
+         });
+      }
+   }
+
+   protected markDuplicateIds(
+      nodes: IdentifiableAstNode[],
+      accept: ValidationAcceptor,
+      { property, type }: { property: string; type: 'Element' | 'Relation' | 'Junction' | 'Diagram' }
+   ): void {
       const knownIds: string[] = [];
       for (const node of nodes) {
          if (node.id && knownIds.includes(node.id)) {
-            accept('error', 'Must provide a unique id.', { node, property: ID_PROPERTY });
+            accept('error', `Must provide ${property} id that is unique for this ${type}.`, { node, property: ID_PROPERTY });
          } else if (node.id) {
             knownIds.push(node.id);
          }
       }
    }
 
-   checkElement(element: Element, accept: ValidationAcceptor): void {
-      if (!element.name) {
-         accept('error', 'The name of an element cannot be empty', { node: element, property: 'name' });
-      }
-   }
-
    checkRelation(relation: Relation, accept: ValidationAcceptor): void {
-      const sourceNodeType = relation.source.ref?.$type === 'Element' ? relation.source.ref?.type : 'Junction';
-      const targetNodeType = relation.target.ref?.$type === 'Element' ? relation.target.ref?.type : 'Junction';
+      if (!relation.type) {
+         accept('error', 'The type of a relation must not be empty', { node: relation, property: 'type' });
+      } else if (!relation.source) {
+         accept('error', 'The source of a relation must not be empty', { node: relation, property: 'source' });
+      } else if (!relation.target) {
+         accept('error', 'The target of a relation must not be empty', { node: relation, property: 'target' });
+      } else {
+         const relationType = relation.type;
+         const sourceType = relation.source.ref?.type;
+         const targetType = relation.target.ref?.type;
 
-      if (!RelationValidator.isValidTarget(relation.type, sourceNodeType, targetNodeType)) {
-         accept('error', 'Invalid relation.', { node: relation, property: 'type' });
+         if (!isElementType(sourceType) && !isJunctionType(sourceType)) {
+            accept('error', 'Invalid relation source. The source of a relation must be an element or a junction', {
+               node: relation,
+               property: 'source'
+            });
+         }
+
+         if (!RelationValidator.isValidSource(relationType, sourceType)) {
+            accept(
+               'error',
+               `Invalid relation source. ${
+                  isElementType(sourceType) ? `An element of type ${sourceType}` : 'A junction'
+               } cannot be assigned as a source ` + `to a relation of type ${relationType}`,
+               { node: relation, property: 'source' }
+            );
+         } else if (!RelationValidator.isValidTarget(relationType, sourceType, targetType)) {
+            accept(
+               'error',
+               `Invalid relation target. ${
+                  isElementType(targetType) ? `An element of type ${targetType}` : 'A junction'
+               } cannot be assigned to a relation of type ${relationType} ` +
+                  `with ${isElementType(sourceType) ? `an element of type ${sourceType}` : 'a junction'} as source.`,
+               { node: relation, property: 'target' }
+            );
+         }
       }
    }
 }

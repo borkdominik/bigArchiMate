@@ -1,5 +1,13 @@
 import { ModelService } from '@big-archimate/model-service/lib/common';
-import { codiconCSSString, elementTypes, getIcon, ModelFileExtensions, ModelStructure, relationTypes } from '@big-archimate/protocol';
+import {
+   codiconCSSString,
+   elementTypes,
+   getIcon,
+   junctionTypes,
+   ModelFileExtensions,
+   ModelStructure,
+   relationTypes
+} from '@big-archimate/protocol';
 import { Emitter, MaybePromise } from '@theia/core';
 import { DepthFirstTreeIterator, LabelProvider, LabelProviderContribution, Tree, TreeDecorator, TreeNode } from '@theia/core/lib/browser';
 import { WidgetDecoration } from '@theia/core/lib/browser/widget-decoration';
@@ -55,7 +63,11 @@ export class CustomLabelProvider implements LabelProviderContribution, TreeDecor
          }
 
          if (ModelFileExtensions.isJunctionFile(node.fileStat.name)) {
-            return codiconCSSString(getIcon('Junction')) + ' default-file-icon';
+            const derivedJunctionTypeFromFileName = node.fileStat.resource.path.name.split('.')[0].split('_')[0];
+            const matchingType = junctionTypes.find(junctionType => derivedJunctionTypeFromFileName === junctionType);
+            if (matchingType) {
+               return codiconCSSString(getIcon(matchingType)) + ' default-file-icon';
+            }
          }
       }
       return this.labelProvider.getIcon(node.fileStat);
