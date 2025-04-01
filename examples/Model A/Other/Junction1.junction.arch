@@ -1,2 +1,7 @@
 junction:
     id: Junction1
+    name: "Cross section"
+    properties:
+      - id: Property1
+        name: "Flow mode"
+        value: "Converge"

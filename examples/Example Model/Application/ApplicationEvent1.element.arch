@@ -2,7 +2,7 @@ element:
     id: ApplicationEvent1
     type: ApplicationEvent
     name: "AppDataUpdate"
-    documentation: "Indicates an event where application data is modified"
+    documentation: "Indicates a modicifation"
     properties:
       - id: Property1
         name: "Priority"
