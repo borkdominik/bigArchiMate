@@ -12,8 +12,6 @@ Relation:
             'type' ':'  type=RelationType
             'source' ':'  source=[ElementOrJunction:IDReference]
             'target' ':'  target=[ElementOrJunction:IDReference]
-            ('name' ':' name=STRING)?
-            ('documentation' ':' documentation=STRING)?
-            Properties?
+            Optionals?
         DEDENT
 ;

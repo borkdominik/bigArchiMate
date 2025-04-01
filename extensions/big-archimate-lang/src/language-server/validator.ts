@@ -1,16 +1,7 @@
 import { ModelFileExtensions } from '@big-archimate/protocol';
 import { AstNode, UriUtils, ValidationAcceptor, ValidationChecks } from 'langium';
 import { Diagnostic } from 'vscode-languageserver-protocol';
-import {
-   ArchiMateLanguageAstType,
-   Element,
-   isDiagram,
-   isElement,
-   isElementType,
-   isJunctionType,
-   isRelation,
-   Relation
-} from './generated/ast.js';
+import { ArchiMateLanguageAstType, isDiagram, isElement, isElementType, isJunctionType, isRelation, Relation } from './generated/ast.js';
 import type { Services } from './module.js';
 import { ID_PROPERTY, IdentifiableAstNode } from './naming.js';
 import { findDocument, isSemanticRoot } from './util/ast-util.js';
@@ -41,8 +32,7 @@ export function registerValidationChecks(services: Services): void {
 
    const checks: ValidationChecks<ArchiMateLanguageAstType> = {
       AstNode: validator.checkNode,
-      Relation: validator.checkRelation,
-      Element: validator.checkElement
+      Relation: validator.checkRelation
    };
    registry.register(checks, validator);
 }
@@ -118,12 +108,6 @@ export class Validator {
          } else if (node.id) {
             knownIds.push(node.id);
          }
-      }
-   }
-
-   checkElement(element: Element, accept: ValidationAcceptor): void {
-      if (!element.name) {
-         accept('error', 'The name of an element must not be empty', { node: element, property: 'name' });
       }
    }
 

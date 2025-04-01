@@ -19,9 +19,7 @@ Diagram:
                     (LIST_ITEM edges+=RelationEdge)+
                 DEDENT
             )?
-            ('name' ':' name=STRING)?
-            ('documentation' ':' documentation=STRING)?
-            Properties?
+            Optionals?
         DEDENT
     )*
 ;

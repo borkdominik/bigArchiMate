@@ -203,7 +203,7 @@ export interface Element extends AstNode {
     readonly $type: 'Element';
     documentation?: string;
     id: ID;
-    name: string;
+    name?: string;
     properties: Array<Property>;
     type: ElementType;
 }
