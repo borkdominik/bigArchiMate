@@ -14,13 +14,13 @@ diagram:
         width: 200
         height: 50
       - id: AndNode
-        junction: And_Junction
+        junction: AndJunction
         x: 253
         y: 319
         width: 25
         height: 25
       - id: OrNode
-        junction: Or_Junction
+        junction: OrJunction
         x: 473
         y: 317.0075722239262
         width: 25

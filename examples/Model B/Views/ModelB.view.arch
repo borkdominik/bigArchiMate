@@ -1,5 +1,5 @@
 diagram:
-    id: Base2
+    id: ModelB
     nodes:
       - id: BusinessRole1Node
         element: ModelA.BusinessRole1
@@ -19,6 +19,12 @@ diagram:
         y: 33
         width: 200
         height: 50
+      - id: AndNode
+        junction: AndJunction2
+        x: -187
+        y: 209
+        width: 25
+        height: 25
     edges:
       - id: Association_ValueStream2-BusinessRole1Edge
         relation: Association_ValueStream2-BusinessRole1

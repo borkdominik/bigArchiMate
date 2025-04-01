@@ -63,8 +63,8 @@ export class CustomLabelProvider implements LabelProviderContribution, TreeDecor
          }
 
          if (ModelFileExtensions.isJunctionFile(node.fileStat.name)) {
-            const derivedJunctionTypeFromFileName = node.fileStat.resource.path.name.split('.')[0].split('_')[0];
-            const matchingType = junctionTypes.find(junctionType => derivedJunctionTypeFromFileName === junctionType);
+            const derivedJunctionTypeFromFileName = node.fileStat.resource.path.name.split('.')[0].replace(/\d+$/, '');
+            const matchingType = junctionTypes.find(junctionType => derivedJunctionTypeFromFileName === junctionType + 'Junction');
             if (matchingType) {
                return codiconCSSString(getIcon(matchingType)) + ' default-file-icon';
             }
