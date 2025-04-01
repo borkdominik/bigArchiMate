@@ -63,6 +63,10 @@ ElementType returns string:
     'ValueStream' |
     'WorkPackage';
 
+JunctionType returns string:
+    'And' |
+    'Or';
+
 RelationType returns string:
     'Access' |
     'Aggregation' |

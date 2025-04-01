@@ -8,6 +8,7 @@ import {
    ElementType,
    Junction,
    JunctionNode,
+   JunctionType,
    Relation,
    RelationEdge,
    RelationType,
@@ -127,16 +128,16 @@ export function hasSemanticRoot<T extends SemanticRoot>(document: LangiumDocumen
 export function createElement(
    container: ArchiMateRoot,
    id: string,
-   name: string,
    type: ElementType,
+   name: string,
    opts?: Partial<Omit<Element, '$container' | '$type' | 'id' | 'name' | 'type'>>
 ): Element {
    return {
       $container: container,
       $type: 'Element',
       id,
-      name,
       type,
+      name,
       properties: [],
       ...opts
    };
@@ -145,8 +146,8 @@ export function createElement(
 export function createRelation(
    container: ArchiMateRoot,
    id: string,
-   name: string,
    type: RelationType,
+   name: string,
    source: Reference<Element>,
    target: Reference<Element>,
    opts?: Partial<Omit<Relation, '$container' | '$type' | 'id' | 'name' | 'type' | 'source' | 'target'>>
@@ -155,8 +156,8 @@ export function createRelation(
       $container: container,
       $type: 'Relation',
       id,
-      name,
       type,
+      name,
       source,
       target,
       properties: [],
@@ -167,6 +168,7 @@ export function createRelation(
 export function createJunction(
    container: ArchiMateRoot,
    id: string,
+   type: JunctionType,
    name: string,
    opts?: Partial<Omit<Junction, '$container' | '$type' | 'id' | 'name'>>
 ): Junction {
@@ -174,17 +176,14 @@ export function createJunction(
       $container: container,
       $type: 'Junction',
       id,
+      type,
       name,
       properties: [],
       ...opts
    };
 }
 
-export function createDiagram(
-   container: ArchiMateRoot,
-   id: string,
-   opts?: Partial<Omit<Diagram, '$container' | '$type' | 'id'>>
-): Diagram {
+export function createDiagram(container: ArchiMateRoot, id: string, opts?: Partial<Omit<Diagram, '$container' | '$type' | 'id'>>): Diagram {
    return {
       $container: container,
       $type: 'Diagram',

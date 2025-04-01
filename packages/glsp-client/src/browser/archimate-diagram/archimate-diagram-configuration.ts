@@ -1,6 +1,6 @@
 import {
-   ARCHIMATE_CONCEPT_TYPE_MAP,
    ARCHIMATE_ELEMENT_TYPE_MAP,
+   ARCHIMATE_JUNCTION_TYPE_MAP,
    ARCHIMATE_RELATION_TYPE_MAP,
    ELEMENT_ICON_TYPE,
    ELEMENT_LABEL_TYPE,
@@ -79,7 +79,9 @@ const diagramModule = createDiagramModule((bind, unbind, isBound, rebind) => {
       configureModelElement(context, edgeType, RelationEdge, RelationEdgeView);
    });
 
-   configureModelElement(context, ARCHIMATE_CONCEPT_TYPE_MAP.get('Junction'), JunctionNode, JunctionNodeView);
+   ARCHIMATE_JUNCTION_TYPE_MAP.values().forEach(junctionType => {
+      configureModelElement(context, junctionType, JunctionNode, JunctionNodeView);
+   });
 
    configureModelElement(context, ELEMENT_LABEL_TYPE, GEditableLabel, GLabelView, { enable: [editLabelFeature] });
    configureModelElement(context, ELEMENT_ICON_TYPE, Icon, IconView);

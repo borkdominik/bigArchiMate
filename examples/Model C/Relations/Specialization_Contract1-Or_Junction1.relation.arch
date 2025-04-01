@@ -1,0 +1,5 @@
+relation:
+    id: Specialization_Contract1-Or_Junction1
+    type: Specialization
+    source: Contract1
+    target: Or_Junction1

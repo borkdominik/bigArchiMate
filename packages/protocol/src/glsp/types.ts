@@ -107,6 +107,34 @@ const ARCHIMATE_ELEMENT_TO_NODE_MAP: Record<ElementType, string> = elementTypes.
 export const ARCHIMATE_ELEMENT_TYPE_MAP = new ReversibleMap(ARCHIMATE_ELEMENT_TO_NODE_MAP);
 
 /**
+ * A list of all ArchiMate junction types.
+ */
+export const junctionTypes = ['And', 'Or'] as const;
+
+/**
+ * A type of an ArchiMate junction.
+ */
+export type JunctionType = (typeof junctionTypes)[number];
+
+/**
+ * A map of ArchiMate junction types to GLSP node types.
+ * The node type is prefixed with the default node type.
+ * For example, the junction type 'AND' is mapped to 'node:and'.
+ */
+const ARCHIMATE_JUNCTION_TO_NODE_MAP: Record<JunctionType, string> = junctionTypes.reduce(
+   (map, junctionType) => {
+      map[junctionType] = DefaultTypes.NODE_CIRCLE + ':' + toKebabCase(junctionType);
+      return map;
+   },
+   {} as Record<JunctionType, string>
+);
+
+/**
+ * A reversible map of ArchiMate junction types to GLSP node types.
+ */
+export const ARCHIMATE_JUNCTION_TYPE_MAP = new ReversibleMap(ARCHIMATE_JUNCTION_TO_NODE_MAP);
+
+/**
  * A list of all ArchiMate relation types.
  */
 export const relationTypes = [
@@ -146,36 +174,20 @@ const ARCHIMATE_RELATION_TO_EDGE_MAP: Record<RelationType, string> = relationTyp
  */
 export const ARCHIMATE_RELATION_TYPE_MAP = new ReversibleMap(ARCHIMATE_RELATION_TO_EDGE_MAP);
 
-/**
- * A list of all ArchiMate concept types that are not relations or elements.
- */
-export const otherConcepts = ['Junction'] as const;
-
-export type OtherConceptType = (typeof otherConcepts)[number];
-
-/**
- * A map of ArchiMate concepts that are not relations or elements to GLSP node types.
- * The node type is prefixed with the default node type.
- * For example, the concept type 'Junction' is mapped to 'node:junction'.
- */
-const ARCHIMATE_CONCEPT_TO_NODE_MAP = {
-   Junction: DefaultTypes.NODE_CIRCLE + ':junction'
-};
-
 export const ARCHIMATE_NODE_TYPE_MAP = new ReversibleMap({
    ...ARCHIMATE_ELEMENT_TO_NODE_MAP,
-   ...ARCHIMATE_CONCEPT_TO_NODE_MAP
+   ...ARCHIMATE_JUNCTION_TO_NODE_MAP
 });
 
 /**
  * A list of all ArchiMate concepts.
  */
-export const concepts = [...elementTypes, ...relationTypes, ...otherConcepts] as const;
+export const concepts = [...elementTypes, ...relationTypes, ...junctionTypes] as const;
 
 /**
  * A type of an ArchiMate concept.
  */
-export type ConceptType = ElementType | RelationType | OtherConceptType;
+export type ConceptType = ElementType | RelationType | JunctionType;
 
 /**
  * A reversible map of ArchiMate concept types to GLSP edge types.
@@ -183,7 +195,7 @@ export type ConceptType = ElementType | RelationType | OtherConceptType;
 export const ARCHIMATE_CONCEPT_TYPE_MAP = new ReversibleMap({
    ...ARCHIMATE_RELATION_TO_EDGE_MAP,
    ...ARCHIMATE_ELEMENT_TO_NODE_MAP,
-   ...ARCHIMATE_CONCEPT_TO_NODE_MAP
+   ...ARCHIMATE_JUNCTION_TO_NODE_MAP
 });
 
 // Args

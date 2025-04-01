@@ -3,5 +3,3 @@ relation:
     type: Triggering
     source: BusinessActor1
     target: ApplicationEvent1
-    name: "UserDataRequest"
-    documentation: "Represents a request from a User"

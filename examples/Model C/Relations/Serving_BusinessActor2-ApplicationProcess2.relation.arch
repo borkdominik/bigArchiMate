@@ -1,0 +1,5 @@
+relation:
+    id: Serving_BusinessActor2-ApplicationProcess2
+    type: Serving
+    source: BusinessActor2
+    target: ApplicationProcess2

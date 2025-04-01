@@ -1,0 +1,4 @@
+element:
+    id: ApplicationProcess2
+    type: ApplicationProcess
+    name: "ApplicationProcess"

@@ -25,7 +25,7 @@ import { isImplicitProperty } from './util/ast-util.js';
  */
 const PROPERTY_ORDER = new Map<string, string[]>([
    [Element, ['id', 'type', 'name', 'documentation', 'properties']],
-   [Junction, ['id', 'name', 'documentation', 'properties']],
+   [Junction, ['id', 'type', 'name', 'documentation', 'properties']],
    [Relation, ['id', 'type', 'source', 'target', 'name', 'documentation', 'properties']],
    [Diagram, ['id', 'nodes', 'edges', 'name', 'documentation', 'properties']],
    [ElementNode, ['id', 'element', 'x', 'y', 'width', 'height']],

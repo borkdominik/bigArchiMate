@@ -1,13 +1,14 @@
 import {
    activateDefaultToolsAction,
    activateDeleteToolAction,
-   ARCHIMATE_CONCEPT_TYPE_MAP,
    ARCHIMATE_ELEMENT_TYPE_MAP,
+   ARCHIMATE_JUNCTION_TYPE_MAP,
    ARCHIMATE_RELATION_TYPE_MAP,
    getChildren,
    getIcon,
    getLabel,
    getSpecificationSection,
+   junctionTypes,
    LayerType,
    relationTypes,
    toKebabCase
@@ -21,7 +22,7 @@ import {
    TriggerNodeCreationAction
 } from '@eclipse-glsp/server';
 import { injectable } from 'inversify';
-import { ElementType, RelationType } from '../../../language-server/generated/ast.js';
+import { ElementType, JunctionType, RelationType } from '../../../language-server/generated/ast.js';
 import { getObjectKeys } from '../../../util.js';
 
 @injectable()
@@ -47,7 +48,10 @@ export class ArchiMateToolPaletteProvider extends ToolPaletteItemProvider {
             icon: 'chevron-down',
             sortString: 'B',
             label: 'Relationship',
-            children: [...relationTypes.map(relationType => getRelationPaletteItem(relationType, 'B')), getJunctionPaletteItem('B')],
+            children: [
+               ...relationTypes.map(relationType => getRelationPaletteItem(relationType, 'B')),
+               ...junctionTypes.map(junctionType => getJunctionPaletteItem(junctionType, 'B'))
+            ],
             actions: []
          },
          getElementGroupPaletteItem('Application', 'U'),
@@ -91,15 +95,16 @@ const getRelationPaletteItem = (relationType: RelationType, groupSortString: str
 
 /**
  * Returns a palette item for a junction.
+ * @param junctionType The junction type.
  * @param groupSortString The sort string of the group.
  * @returns The palette item.
  */
-const getJunctionPaletteItem = (groupSortString: string): PaletteItem => ({
+const getJunctionPaletteItem = (junctionType: JunctionType, groupSortString: string): PaletteItem => ({
    id: 'junction-create-tool',
-   sortString: `${groupSortString}-${getSpecificationSection('Junction')}`,
-   label: `${getLabel('Junction')}`,
-   icon: getIcon('Junction'),
-   actions: [TriggerNodeCreationAction.create(ARCHIMATE_CONCEPT_TYPE_MAP.get('Junction'), { args: { type: 'create' } })]
+   sortString: `${groupSortString}-${getSpecificationSection(junctionType)}`,
+   label: `${getLabel(junctionType)}`,
+   icon: getIcon(junctionType),
+   actions: [TriggerNodeCreationAction.create(ARCHIMATE_JUNCTION_TYPE_MAP.get(junctionType), { args: { type: 'create' } })]
 });
 
 /**

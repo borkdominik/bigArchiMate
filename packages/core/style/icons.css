@@ -58,7 +58,8 @@
    --archimate-icon-grouping: url('./icons/default/grouping.svg');
    --archimate-icon-implementation-event: url('./icons/default/implementation-event.svg');
    --archimate-icon-influence: url('./icons/default/influence.svg');
-   --archimate-icon-junction: url('./icons/default/junction.svg');
+   --archimate-icon-junction-and: url('./icons/default/junction-and.svg');
+   --archimate-icon-junction-or: url('./icons/default/junction-or.svg');
    --archimate-icon-location: url('./icons/default/location.svg');
    --archimate-icon-material: url('./icons/default/material.svg');
    --archimate-icon-meaning: url('./icons/default/meaning.svg');
@@ -133,7 +134,8 @@
    --archimate-icon-grouping: url('./icons/default/grouping.svg');
    --archimate-icon-implementation-event: url('./icons/default/implementation-event.svg');
    --archimate-icon-influence: url('./icons/dark/influence.svg');
-   --archimate-icon-junction: url('./icons/dark/junction.svg');
+   --archimate-icon-junction-and: url('./icons/dark/junction-and.svg');
+   --archimate-icon-junction-or: url('./icons/dark/junction-or.svg');
    --archimate-icon-location: url('./icons/default/location.svg');
    --archimate-icon-material: url('./icons/default/material.svg');
    --archimate-icon-meaning: url('./icons/default/meaning.svg');
@@ -306,8 +308,11 @@
 .codicon-archimate-influence:before {
    background-image: var(--archimate-icon-influence);
 }
-.codicon-archimate-junction:before {
-   background-image: var(--archimate-icon-junction);
+.codicon-archimate-junction-and:before {
+   background-image: var(--archimate-icon-junction-and);
+}
+.codicon-archimate-junction-or:before {
+   background-image: var(--archimate-icon-junction-or);
 }
 .codicon-archimate-location:before {
    background-image: var(--archimate-icon-location);
