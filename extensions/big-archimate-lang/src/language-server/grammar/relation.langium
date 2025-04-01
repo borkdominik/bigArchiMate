@@ -8,7 +8,7 @@ ElementOrJunction:
 Relation:
     'relation' ':'
         INDENT
-            'id' ':' id=ID
+            IDProperty
             'type' ':'  type=RelationType
             'source' ':'  source=[ElementOrJunction:IDReference]
             'target' ':'  target=[ElementOrJunction:IDReference]

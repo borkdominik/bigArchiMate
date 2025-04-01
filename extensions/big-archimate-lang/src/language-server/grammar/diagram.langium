@@ -8,7 +8,7 @@ Diagram:
     ('diagram') ':' 
     (
         INDENT
-            'id' ':' id=ID
+            IDProperty
             ('nodes' ':'
                 INDENT 
                     (LIST_ITEM nodes+=(ElementNode|JunctionNode))+
@@ -35,14 +35,14 @@ fragment Dimensions:
 ;
 
 ElementNode:
-    'id' ':' id=ID
+    IDProperty
     'element' ':' element=[Element:IDReference]
     Coordinates
     Dimensions
 ;
 
 JunctionNode:
-    'id' ':' id=ID
+    IDProperty
     'junction' ':' junction=[Junction:IDReference]
     Coordinates
     Dimensions
@@ -55,7 +55,7 @@ RelationRoutingPoint:
     Coordinates;
 
 RelationEdge:
-    'id' ':' id=ID
+    IDProperty
     'relation' ':' relation=[Relation:IDReference]
     'sourceNode' ':' sourceNode=[ElementNodeOrJunctionNode:IDReference]
     'targetNode' ':' targetNode=[ElementNodeOrJunctionNode:IDReference]

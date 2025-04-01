@@ -4,7 +4,7 @@ import 'common'
 Element:
     'element' ':'
         INDENT
-            'id' ':' id=ID
+            IDProperty
             'type' ':'  type=ElementType
             Optionals?
         DEDENT

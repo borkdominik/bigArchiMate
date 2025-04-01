@@ -1,7 +1,10 @@
 import 'terminals'
 
+fragment IDProperty:
+    'id' ':' id=ID;
+
 Property:
-    'id' ':' id=ID
+    IDProperty
     'name' ':'  name=STRING
     ('value' ':' value=STRING)?;
 

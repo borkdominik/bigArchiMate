@@ -4,7 +4,7 @@ import 'relation'
 Junction:
     'junction' ':'
         INDENT
-            'id' ':' id=ID
+            IDProperty
             'type' ':' type=JunctionType
             Optionals?
         DEDENT

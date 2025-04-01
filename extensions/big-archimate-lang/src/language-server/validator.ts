@@ -1,7 +1,16 @@
 import { ModelFileExtensions } from '@big-archimate/protocol';
 import { AstNode, UriUtils, ValidationAcceptor, ValidationChecks } from 'langium';
 import { Diagnostic } from 'vscode-languageserver-protocol';
-import { ArchiMateLanguageAstType, isDiagram, isElement, isElementType, isJunctionType, isRelation, Relation } from './generated/ast.js';
+import {
+   ArchiMateLanguageAstType,
+   isDiagram,
+   isElement,
+   isElementType,
+   isJunction,
+   isJunctionType,
+   isRelation,
+   Relation
+} from './generated/ast.js';
 import type { Services } from './module.js';
 import { ID_PROPERTY, IdentifiableAstNode } from './naming.js';
 import { findDocument, isSemanticRoot } from './util/ast-util.js';
@@ -46,6 +55,7 @@ export class Validator {
    checkNode(node: AstNode, accept: ValidationAcceptor): void {
       this.checkUniqueGlobalId(node, accept);
       this.checkUniqueNodeId(node, accept);
+      this.checkUniquePropertyId(node, accept);
       this.checkMatchingFilename(node, accept);
    }
 
@@ -85,7 +95,7 @@ export class Validator {
       const allElements = Array.from(this.services.shared.workspace.IndexManager.allElements());
       const duplicates = allElements.filter(description => description.name === globalId);
       if (duplicates.length > 1) {
-         accept('error', 'Must provide a unique id.', { node, property: ID_PROPERTY });
+         accept('error', 'Must provide id that is unique in this model.', { node, property: ID_PROPERTY });
       }
    }
 
@@ -95,16 +105,35 @@ export class Validator {
 
    protected checkUniqueNodeId(node: AstNode, accept: ValidationAcceptor): void {
       if (isDiagram(node)) {
-         this.markDuplicateIds(node.edges, accept);
-         this.markDuplicateIds(node.nodes, accept);
+         this.markDuplicateIds(node.edges, accept, {
+            property: 'edge',
+            type: 'Diagram'
+         });
+         this.markDuplicateIds(node.nodes, accept, {
+            property: 'node',
+            type: 'Diagram'
+         });
       }
    }
 
-   protected markDuplicateIds(nodes: IdentifiableAstNode[], accept: ValidationAcceptor): void {
+   protected checkUniquePropertyId(node: AstNode, accept: ValidationAcceptor): void {
+      if (isDiagram(node) || isElement(node) || isRelation(node) || isJunction(node)) {
+         this.markDuplicateIds(node.properties, accept, {
+            property: 'property',
+            type: node.$type
+         });
+      }
+   }
+
+   protected markDuplicateIds(
+      nodes: IdentifiableAstNode[],
+      accept: ValidationAcceptor,
+      { property, type }: { property: string; type: 'Element' | 'Relation' | 'Junction' | 'Diagram' }
+   ): void {
       const knownIds: string[] = [];
       for (const node of nodes) {
          if (node.id && knownIds.includes(node.id)) {
-            accept('error', 'Must provide a unique id.', { node, property: ID_PROPERTY });
+            accept('error', `Must provide ${property} id that is unique for this ${type}.`, { node, property: ID_PROPERTY });
          } else if (node.id) {
             knownIds.push(node.id);
          }
