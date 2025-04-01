@@ -1266,14 +1266,14 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
                             {
                               "$type": "RuleCall",
                               "rule": {
-                                "$ref": "#/rules@21"
+                                "$ref": "#/rules@23"
                               },
                               "arguments": []
                             },
                             {
                               "$type": "RuleCall",
                               "rule": {
-                                "$ref": "#/rules@22"
+                                "$ref": "#/rules@24"
                               },
                               "arguments": []
                             }
@@ -1328,7 +1328,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
                         "terminal": {
                           "$type": "RuleCall",
                           "rule": {
-                            "$ref": "#/rules@25"
+                            "$ref": "#/rules@27"
                           },
                           "arguments": []
                         }
@@ -1427,6 +1427,116 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
     },
     {
       "$type": "ParserRule",
+      "name": "Coordinates",
+      "fragment": true,
+      "definition": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Keyword",
+            "value": "x"
+          },
+          {
+            "$type": "Keyword",
+            "value": ":"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "x",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "rule": {
+                "$ref": "#/rules@5"
+              },
+              "arguments": []
+            }
+          },
+          {
+            "$type": "Keyword",
+            "value": "y"
+          },
+          {
+            "$type": "Keyword",
+            "value": ":"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "y",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "rule": {
+                "$ref": "#/rules@5"
+              },
+              "arguments": []
+            }
+          }
+        ]
+      },
+      "definesHiddenTokens": false,
+      "entry": false,
+      "hiddenTokens": [],
+      "parameters": [],
+      "wildcard": false
+    },
+    {
+      "$type": "ParserRule",
+      "name": "Dimensions",
+      "fragment": true,
+      "definition": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Keyword",
+            "value": "width"
+          },
+          {
+            "$type": "Keyword",
+            "value": ":"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "width",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "rule": {
+                "$ref": "#/rules@5"
+              },
+              "arguments": []
+            }
+          },
+          {
+            "$type": "Keyword",
+            "value": "height"
+          },
+          {
+            "$type": "Keyword",
+            "value": ":"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "height",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "rule": {
+                "$ref": "#/rules@5"
+              },
+              "arguments": []
+            }
+          }
+        ]
+      },
+      "definesHiddenTokens": false,
+      "entry": false,
+      "hiddenTokens": [],
+      "parameters": [],
+      "wildcard": false
+    },
+    {
+      "$type": "ParserRule",
       "name": "ElementNode",
       "definition": {
         "$type": "Group",
@@ -1479,84 +1589,18 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
             }
           },
           {
-            "$type": "Keyword",
-            "value": "x"
+            "$type": "RuleCall",
+            "rule": {
+              "$ref": "#/rules@21"
+            },
+            "arguments": []
           },
           {
-            "$type": "Keyword",
-            "value": ":"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "x",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "rule": {
-                "$ref": "#/rules@5"
-              },
-              "arguments": []
-            }
-          },
-          {
-            "$type": "Keyword",
-            "value": "y"
-          },
-          {
-            "$type": "Keyword",
-            "value": ":"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "y",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "rule": {
-                "$ref": "#/rules@5"
-              },
-              "arguments": []
-            }
-          },
-          {
-            "$type": "Keyword",
-            "value": "width"
-          },
-          {
-            "$type": "Keyword",
-            "value": ":"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "width",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "rule": {
-                "$ref": "#/rules@5"
-              },
-              "arguments": []
-            }
-          },
-          {
-            "$type": "Keyword",
-            "value": "height"
-          },
-          {
-            "$type": "Keyword",
-            "value": ":"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "height",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "rule": {
-                "$ref": "#/rules@5"
-              },
-              "arguments": []
-            }
+            "$type": "RuleCall",
+            "rule": {
+              "$ref": "#/rules@22"
+            },
+            "arguments": []
           }
         ]
       },
@@ -1621,101 +1665,6 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
             }
           },
           {
-            "$type": "Keyword",
-            "value": "x"
-          },
-          {
-            "$type": "Keyword",
-            "value": ":"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "x",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "rule": {
-                "$ref": "#/rules@5"
-              },
-              "arguments": []
-            }
-          },
-          {
-            "$type": "Keyword",
-            "value": "y"
-          },
-          {
-            "$type": "Keyword",
-            "value": ":"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "y",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "rule": {
-                "$ref": "#/rules@5"
-              },
-              "arguments": []
-            }
-          },
-          {
-            "$type": "Keyword",
-            "value": "width"
-          },
-          {
-            "$type": "Keyword",
-            "value": ":"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "width",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "rule": {
-                "$ref": "#/rules@5"
-              },
-              "arguments": []
-            }
-          },
-          {
-            "$type": "Keyword",
-            "value": "height"
-          },
-          {
-            "$type": "Keyword",
-            "value": ":"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "height",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "rule": {
-                "$ref": "#/rules@5"
-              },
-              "arguments": []
-            }
-          }
-        ]
-      },
-      "definesHiddenTokens": false,
-      "entry": false,
-      "fragment": false,
-      "hiddenTokens": [],
-      "parameters": [],
-      "wildcard": false
-    },
-    {
-      "$type": "ParserRule",
-      "name": "ElementNodeOrJunctionNode",
-      "definition": {
-        "$type": "Alternatives",
-        "elements": [
-          {
             "$type": "RuleCall",
             "rule": {
               "$ref": "#/rules@21"
@@ -1740,51 +1689,42 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
     },
     {
       "$type": "ParserRule",
-      "name": "RelationRoutingPoint",
+      "name": "ElementNodeOrJunctionNode",
       "definition": {
-        "$type": "Group",
+        "$type": "Alternatives",
         "elements": [
           {
-            "$type": "Keyword",
-            "value": "x"
+            "$type": "RuleCall",
+            "rule": {
+              "$ref": "#/rules@23"
+            },
+            "arguments": []
           },
           {
-            "$type": "Keyword",
-            "value": ":"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "x",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "rule": {
-                "$ref": "#/rules@5"
-              },
-              "arguments": []
-            }
-          },
-          {
-            "$type": "Keyword",
-            "value": "y"
-          },
-          {
-            "$type": "Keyword",
-            "value": ":"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "y",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "rule": {
-                "$ref": "#/rules@5"
-              },
-              "arguments": []
-            }
+            "$type": "RuleCall",
+            "rule": {
+              "$ref": "#/rules@24"
+            },
+            "arguments": []
           }
         ]
+      },
+      "definesHiddenTokens": false,
+      "entry": false,
+      "fragment": false,
+      "hiddenTokens": [],
+      "parameters": [],
+      "wildcard": false
+    },
+    {
+      "$type": "ParserRule",
+      "name": "RelationRoutingPoint",
+      "definition": {
+        "$type": "RuleCall",
+        "rule": {
+          "$ref": "#/rules@21"
+        },
+        "arguments": []
       },
       "definesHiddenTokens": false,
       "entry": false,
@@ -1861,7 +1801,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
             "terminal": {
               "$type": "CrossReference",
               "type": {
-                "$ref": "#/rules@23"
+                "$ref": "#/rules@25"
               },
               "terminal": {
                 "$type": "RuleCall",
@@ -1888,7 +1828,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
             "terminal": {
               "$type": "CrossReference",
               "type": {
-                "$ref": "#/rules@23"
+                "$ref": "#/rules@25"
               },
               "terminal": {
                 "$type": "RuleCall",
@@ -1935,7 +1875,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
                     "terminal": {
                       "$type": "RuleCall",
                       "rule": {
-                        "$ref": "#/rules@24"
+                        "$ref": "#/rules@26"
                       },
                       "arguments": []
                     }

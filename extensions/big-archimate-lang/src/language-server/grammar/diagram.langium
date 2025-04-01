@@ -26,30 +26,35 @@ Diagram:
     )*
 ;
 
+fragment Coordinates:
+    'x' ':' x=NUMBER
+    'y' ':' y=NUMBER
+;
+
+fragment Dimensions:
+    'width' ':' width=NUMBER
+    'height' ':' height=NUMBER
+;
+
 ElementNode:
     'id' ':' id=ID
     'element' ':' element=[Element:IDReference]
-    'x' ':' x=NUMBER
-    'y' ':' y=NUMBER
-    'width' ':' width=NUMBER
-    'height' ':' height=NUMBER
+    Coordinates
+    Dimensions
 ;
 
 JunctionNode:
     'id' ':' id=ID
     'junction' ':' junction=[Junction:IDReference]
-    'x' ':' x=NUMBER
-    'y' ':' y=NUMBER
-    'width' ':' width=NUMBER
-    'height' ':' height=NUMBER
+    Coordinates
+    Dimensions
 ;
 
 ElementNodeOrJunctionNode:
     ElementNode | JunctionNode;
 
 RelationRoutingPoint:
-    'x' ':' x=NUMBER
-    'y' ':' y=NUMBER;
+    Coordinates;
 
 RelationEdge:
     'id' ':' id=ID
