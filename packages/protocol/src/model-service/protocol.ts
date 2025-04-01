@@ -48,32 +48,24 @@ export interface Property extends ArchiMateObject, Identifiable {
    name?: string;
 }
 
-export interface WithProperties {
+export interface WithOptionals {
+   name?: string;
+   documentation?: string;
    properties: Array<Property>;
 }
-
-export interface WithName {
-   name?: string;
-}
-
-export interface WithDocumentation {
-   documentation?: string;
-}
-
 export interface WithType<T> {
    type: T;
 }
 
-export interface Element extends ArchiMateObject, Identifiable, WithDocumentation, WithProperties, WithType<ElementType> {
+export interface Element extends ArchiMateObject, Identifiable, WithOptionals, WithType<ElementType> {
    readonly $type: 'Element';
-   name: string;
 }
 
-export interface Junction extends ArchiMateObject, Identifiable, WithName, WithDocumentation, WithProperties, WithType<JunctionType> {
+export interface Junction extends ArchiMateObject, Identifiable, WithOptionals, WithType<JunctionType> {
    readonly $type: 'Junction';
 }
 
-export interface Relation extends ArchiMateObject, Identifiable, WithName, WithDocumentation, WithProperties, WithType<RelationType> {
+export interface Relation extends ArchiMateObject, Identifiable, WithOptionals, WithType<RelationType> {
    readonly $type: 'Relation';
    source: Reference<Element>;
    target: Reference<Element>;
