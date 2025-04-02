@@ -117,10 +117,12 @@ export class CustomWorkspaceCommandContribution extends WorkspaceCommandContribu
          order: '0'
       });
 
+      const NAV_MENU_ADD_NEW_ELEMENT = [...NAV_MENU_ADD_NEW, 'Element'];
+      registry.registerSubmenu(NAV_MENU_ADD_NEW_ELEMENT, 'Element'.replace('&', 'And'));
       layerTypes.forEach((layerType, i) => {
-         registry.registerSubmenu([...NAV_MENU_ADD_NEW, layerType], getLabel(layerType).replace('&', 'And'));
+         registry.registerSubmenu([...NAV_MENU_ADD_NEW_ELEMENT, layerType], getLabel(layerType).replace('&', 'And'));
          getObjectKeys(getLayerElements(layerType)).forEach(elementType => {
-            registry.registerMenuAction([...NAV_MENU_ADD_NEW, layerType], {
+            registry.registerMenuAction([...NAV_MENU_ADD_NEW_ELEMENT, layerType], {
                commandId: elementType,
                label: getLabel(elementType) + '...',
                order: getSpecificationSection(elementType)
@@ -143,10 +145,12 @@ export class CustomWorkspaceCommandContribution extends WorkspaceCommandContribu
          order: '0'
       });
 
+      const MAIN_MENU_ADD_NEW_ELEMENT = [...MAIN_MENU_ADD_NEW, 'Element'];
+      registry.registerSubmenu(MAIN_MENU_ADD_NEW_ELEMENT, 'Element'.replace('&', 'And'));
       layerTypes.forEach((layerType, i) => {
-         registry.registerSubmenu([...MAIN_MENU_ADD_NEW, layerType], getLabel(layerType).replace('&', 'And'));
+         registry.registerSubmenu([...MAIN_MENU_ADD_NEW_ELEMENT, layerType], getLabel(layerType).replace('&', 'And'));
          getObjectKeys(getLayerElements(layerType)).forEach(elementType => {
-            registry.registerMenuAction([...MAIN_MENU_ADD_NEW, layerType], {
+            registry.registerMenuAction([...MAIN_MENU_ADD_NEW_ELEMENT, layerType], {
                commandId: elementType,
                label: getLabel(elementType) + '...',
                order: getSpecificationSection(elementType)
