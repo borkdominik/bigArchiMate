@@ -1,4 +1,5 @@
-import { ConceptType, ElementType, JunctionType, LayerType, RelationType } from './glsp/types';
+import { ConceptType, ElementType, isElementType, JunctionType, LayerType, RelationType } from './glsp/types';
+import { getObjectEntries } from './util';
 
 type CornerType = 'round' | 'square' | 'diamond';
 
@@ -18,19 +19,27 @@ interface ConceptMetaData {
    specificationSection: `${number}.${number}.${number}.`;
 }
 
+interface LayeredConceptMetaData extends ConceptMetaData {
+   /**
+    * The layer the concept belongs to.
+    */
+   layer: LayerType;
+}
+
 /**
  * Metadata of an element.
  */
-interface ElementMetaData extends ConceptMetaData {
-   /**
-    * The layer the element belongs to.
-    */
-   layer: LayerType;
+interface ElementMetaData extends LayeredConceptMetaData {
    /**
     * The corner type of the element.
     */
    cornerType: CornerType;
 }
+
+/**
+ * Metadata of a junction.
+ */
+interface JunctionMetaData extends LayeredConceptMetaData {}
 
 /**
  * Metadata of an ArchiMate relation type.
@@ -524,15 +533,17 @@ const relationMetadataMap: Record<RelationType, RelationMetaData> = {
    }
 };
 
-const junctionMetadataMap: Record<JunctionType, ConceptMetaData> = {
+const junctionMetadataMap: Record<JunctionType, JunctionMetaData> = {
    And: {
       icon: 'archimate-junction-and',
       label: '(And) Junction',
+      layer: 'Other',
       specificationSection: '5.5.1.'
    },
    Or: {
       icon: 'archimate-junction-or',
       label: 'Or Junction',
+      layer: 'Other',
       specificationSection: '5.5.1.'
    }
 };
@@ -546,17 +557,19 @@ const conceptMetaDataMap = {
    ...junctionMetadataMap
 };
 
+type LayeredConceptType = ElementType | JunctionType;
+
 /**
  * Returns the elements that belong to the given layer.
  * @param layerType The layerType.
  * @returns The elements that belong to the layer.
  */
-export const getLayerElements = (layerType: LayerType): Partial<Record<ElementType, ElementMetaData>> => {
-   const filtered: Partial<Record<ElementType, ElementMetaData>> = {};
+export const getLayerConcepts = (layerType: LayerType): Partial<Record<LayeredConceptType, LayeredConceptMetaData>> => {
+   const filtered: Partial<Record<LayeredConceptType, LayeredConceptMetaData>> = {};
 
-   Object.entries(elementMetadataMap).forEach(([elementType, elementInfo]) => {
-      if (elementInfo.layer === layerType) {
-         filtered[elementType as ElementType] = elementInfo;
+   getObjectEntries({ ...elementMetadataMap, ...junctionMetadataMap }).forEach(([conceptType, conceptInfo]) => {
+      if (conceptInfo.layer === layerType) {
+         filtered[conceptType] = conceptInfo;
       }
    });
 
@@ -566,7 +579,7 @@ export const getLayerElements = (layerType: LayerType): Partial<Record<ElementTy
 /**
  * Information about a layer.
  */
-interface ElementLayerInfo {
+interface LayerInfo {
    /**
     * The label to display for the layer.
     */
@@ -574,40 +587,40 @@ interface ElementLayerInfo {
    /**
     * The children elements of the layer.
     */
-   children: Partial<Record<ElementType, ElementMetaData>>;
+   children: Partial<Record<LayeredConceptType, LayeredConceptMetaData>>;
 }
 
 /**
  * The layers and their children elements.
  */
-export const layers: Record<LayerType, ElementLayerInfo> = {
+export const layers: Record<LayerType, LayerInfo> = {
    Application: {
       label: 'Application',
-      children: getLayerElements('Application')
+      children: getLayerConcepts('Application')
    },
    Business: {
       label: 'Business',
-      children: getLayerElements('Business')
+      children: getLayerConcepts('Business')
    },
    ImplementationAndMigration: {
       label: 'Implementation & Migration',
-      children: getLayerElements('ImplementationAndMigration')
+      children: getLayerConcepts('ImplementationAndMigration')
    },
    Motivation: {
       label: 'Motivation',
-      children: getLayerElements('Motivation')
+      children: getLayerConcepts('Motivation')
    },
    Strategy: {
       label: 'Strategy',
-      children: getLayerElements('Strategy')
+      children: getLayerConcepts('Strategy')
    },
    Technology: {
       label: 'Technology',
-      children: getLayerElements('Technology')
+      children: getLayerConcepts('Technology')
    },
    Other: {
       label: 'Other',
-      children: getLayerElements('Other')
+      children: getLayerConcepts('Other')
    }
 };
 
@@ -620,6 +633,7 @@ export const getLabel = (conceptOrLayer: ConceptType | LayerType): string => {
 };
 export const getIcon = (concept: ConceptType): string => conceptMetaDataMap[concept].icon;
 export const getSpecificationSection = (concept: ConceptType): string => conceptMetaDataMap[concept].specificationSection;
-export const getLayer = (element: ElementType): LayerType => elementMetadataMap[element].layer;
+export const getLayer = (concept: LayeredConceptType): LayerType =>
+   isElementType(concept) ? elementMetadataMap[concept].layer : junctionMetadataMap[concept].layer;
 export const getCornerType = (element: ElementType): CornerType => elementMetadataMap[element].cornerType;
-export const getChildren = (layer: LayerType): Partial<Record<ElementType, ElementMetaData>> => layers[layer].children;
+export const getChildren = (layer: LayerType): Partial<Record<LayeredConceptType, LayeredConceptMetaData>> => layers[layer].children;

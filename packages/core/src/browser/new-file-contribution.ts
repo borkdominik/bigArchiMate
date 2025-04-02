@@ -2,12 +2,12 @@ import { ModelService } from '@big-archimate/model-service/lib/common';
 import {
    elementTypes,
    getLabel,
-   getLayerElements,
-   getObjectKeys,
+   getLayer,
    getSpecificationSection,
-   layerTypes,
+   junctionTypes,
    ModelFileExtensions,
    ModelStructure,
+   relationTypes,
    toId
 } from '@big-archimate/protocol';
 import { Command, CommandContribution, CommandRegistry, MaybePromise, MenuContribution, MenuModelRegistry, nls, URI } from '@theia/core';
@@ -20,8 +20,8 @@ import { WorkspaceCommandContribution } from '@theia/workspace/lib/browser/works
 import { WorkspaceInputDialog } from '@theia/workspace/lib/browser/workspace-input-dialog';
 
 // Menu placement constants
-const NAV_MENU_ADD_NEW = [...NavigatorContextMenu.NAVIGATION, '0_new'];
-const MAIN_MENU_ADD_NEW = [...CommonMenus.FILE, '0_new'];
+const NAV_MENU_GROUP = [...NavigatorContextMenu.NAVIGATION, '0_new'];
+const MAIN_MENU_GROUP = [...CommonMenus.FILE, '0_new'];
 
 interface NewFileTemplate extends Command {
    label: string;
@@ -30,22 +30,34 @@ interface NewFileTemplate extends Command {
 }
 
 const INITIAL_ARCHIMATE_VIEW_CONTENT = `diagram:
-   id: \${id}`;
+    id: \${id}`;
 
 const INITIAL_ARCHIMATE_ELEMENT_CONTENT = `element:
-   id: \${id}
-   type: \${type}`;
+    id: \${id}
+    type: \${type}`;
+
+const INITIAL_ARCHIMATE_JUNCTION_CONTENT = `junction:
+    id: \${id}
+    type: \${type}`;
+
+const INITIAL_ARCHIMATE_RELATION_CONTENT = `relation:
+    id: \${id}
+    type: \${type}
+    source:
+    target:`;
 
 const TEMPLATE_CATEGORY = 'New';
 
-const NEW_VIEW_TEMPLATE: NewFileTemplate = {
-   id: 'new.archimate-diagram',
-   label: 'View',
-   fileExtension: ModelFileExtensions.Diagram,
-   category: TEMPLATE_CATEGORY,
-   iconClass: ModelStructure.Diagram.ICON_CLASS,
-   content: name => INITIAL_ARCHIMATE_VIEW_CONTENT.replace(/\$\{id\}/gi, toId(name))
-};
+const NEW_FILE_TEMPLATES: NewFileTemplate[] = [
+   {
+      id: 'new.archimate-diagram',
+      label: 'View',
+      fileExtension: ModelFileExtensions.Diagram,
+      category: TEMPLATE_CATEGORY,
+      iconClass: ModelStructure.Diagram.ICON_CLASS,
+      content: name => INITIAL_ARCHIMATE_VIEW_CONTENT.replace(/\$\{id\}/gi, toId(name))
+   }
+];
 
 // New constant for package.json content used when creating models.
 const INITIAL_PACKAGE_JSON_CONTENT = `{
@@ -72,11 +84,27 @@ export class CustomWorkspaceCommandContribution extends WorkspaceCommandContribu
 
    override registerCommands(commands: CommandRegistry): void {
       super.registerCommands(commands);
-      // Register view creation command.
+
+      // Register model creation commands.
       commands.registerCommand(
-         { ...NEW_VIEW_TEMPLATE, label: NEW_VIEW_TEMPLATE.label + '...' },
-         this.newWorkspaceRootUriAwareCommandHandler({ execute: uri => this.createNewFile(uri, NEW_VIEW_TEMPLATE) })
+         { ...NEW_MODEL_TEMPLATE, label: NEW_MODEL_TEMPLATE.label + '...' },
+         this.newWorkspaceRootUriAwareCommandHandler({
+            execute: uri => this.createNewModel(uri, NEW_MODEL_TEMPLATE),
+            isVisible: uri => this.isWorkspaceRoot(uri)
+         })
       );
+
+      // Register view
+      NEW_FILE_TEMPLATES.forEach((template, i) => {
+         commands.registerCommand(
+            { ...template, label: template.label + '...' },
+            this.newWorkspaceRootUriAwareCommandHandler({
+               execute: uri => this.createNewFile(uri, template),
+               // Only show the view creation command if the current folder is a view folder.
+               isVisible: uri => ModelStructure.Diagram.folderName === this.getFolderName(uri)
+            })
+         );
+      });
 
       // Register element creation commands.
       elementTypes.forEach(elementType => {
@@ -90,72 +118,107 @@ export class CustomWorkspaceCommandContribution extends WorkspaceCommandContribu
                      fileExtension: ModelFileExtensions.Element,
                      content: name =>
                         INITIAL_ARCHIMATE_ELEMENT_CONTENT.replace(/\$\{id\}/gi, toId(name)).replace(/\$\{type\}/gi, elementType)
-                  })
+                  }),
+               // Only show the element creation command if the current folder is a layer folder.
+               isVisible: uri => getLayer(elementType).replace('&', 'And') === this.getFolderName(uri)
             })
          );
       });
-      // Register model creation command.
-      commands.registerCommand(
-         { ...NEW_MODEL_TEMPLATE, label: NEW_MODEL_TEMPLATE.label + '...' },
-         this.newWorkspaceRootUriAwareCommandHandler({ execute: uri => this.createNewModel(uri, NEW_MODEL_TEMPLATE) })
-      );
+
+      // Register relation creation commands.
+      relationTypes.forEach(relationType => {
+         commands.registerCommand(
+            { id: relationType, label: relationType + '...' },
+            this.newWorkspaceRootUriAwareCommandHandler({
+               execute: uri =>
+                  this.createNewFile(uri, {
+                     id: relationType,
+                     label: relationType,
+                     fileExtension: ModelFileExtensions.Relation,
+                     content: name =>
+                        INITIAL_ARCHIMATE_RELATION_CONTENT.replace(/\$\{id\}/gi, toId(name)).replace(/\$\{type\}/gi, relationType)
+                  }),
+               // Only show the relation creation command if the current folder is a relation folder.
+               isVisible: uri => ModelStructure.Relation.folderName === this.getFolderName(uri)
+            })
+         );
+      });
+
+      // Register junction creation commands.
+      junctionTypes.forEach(junctionType => {
+         commands.registerCommand(
+            { id: junctionType + 'Junction', label: junctionType + 'Junction...' },
+            this.newWorkspaceRootUriAwareCommandHandler({
+               execute: uri =>
+                  this.createNewFile(uri, {
+                     id: junctionType + 'Junction',
+                     label: junctionType + 'Junction',
+                     fileExtension: ModelFileExtensions.Junction,
+                     content: name =>
+                        INITIAL_ARCHIMATE_JUNCTION_CONTENT.replace(/\$\{id\}/gi, toId(name)).replace(/\$\{type\}/gi, junctionType)
+                  }),
+               // Only show the junction creation command if the current folder is a folder of layer 'Other'.
+               isVisible: uri => getLayer(junctionType) === this.getFolderName(uri)
+            })
+         );
+      });
    }
 
    registerMenus(registry: MenuModelRegistry): void {
       // Explorer context menu
-      registry.registerSubmenu(NAV_MENU_ADD_NEW, TEMPLATE_CATEGORY);
+      registry.registerSubmenu(NAV_MENU_GROUP, TEMPLATE_CATEGORY);
 
-      registry.registerMenuAction(NAV_MENU_ADD_NEW, {
+      // Register explorer context menu moodel creation.
+      registry.registerMenuAction(NAV_MENU_GROUP, {
          commandId: NEW_MODEL_TEMPLATE.id,
          label: NEW_MODEL_TEMPLATE.label + '...',
          order: '-1'
       });
 
-      registry.registerMenuAction(NAV_MENU_ADD_NEW, {
-         commandId: NEW_VIEW_TEMPLATE.id,
-         label: NEW_VIEW_TEMPLATE.label + '...',
-         order: '0'
+      // Register explorer context menu view creation.
+      NEW_FILE_TEMPLATES.forEach((template, i) => {
+         registry.registerMenuAction(NAV_MENU_GROUP, {
+            commandId: template.id,
+            label: template.label + '...',
+            order: i.toString()
+         });
       });
 
-      const NAV_MENU_ADD_NEW_ELEMENT = [...NAV_MENU_ADD_NEW, 'Element'];
-      registry.registerSubmenu(NAV_MENU_ADD_NEW_ELEMENT, 'Element'.replace('&', 'And'));
-      layerTypes.forEach((layerType, i) => {
-         registry.registerSubmenu([...NAV_MENU_ADD_NEW_ELEMENT, layerType], getLabel(layerType).replace('&', 'And'));
-         getObjectKeys(getLayerElements(layerType)).forEach(elementType => {
-            registry.registerMenuAction([...NAV_MENU_ADD_NEW_ELEMENT, layerType], {
-               commandId: elementType,
-               label: getLabel(elementType) + '...',
-               order: getSpecificationSection(elementType)
-            });
+      // Register explorer context menu element creation.
+      elementTypes.forEach(elementType => {
+         registry.registerMenuAction(NAV_MENU_GROUP, {
+            commandId: elementType,
+            label: getLabel(elementType) + '...',
+            order: getSpecificationSection(elementType)
+         });
+      });
+
+      // Register explorer context menu relation creation.
+      relationTypes.forEach((relationType, i) => {
+         registry.registerMenuAction(NAV_MENU_GROUP, {
+            commandId: relationType,
+            label: relationType + '...',
+            order: i.toString()
+         });
+      });
+
+      // Register explorer context menu junction creation.
+      junctionTypes.forEach((junctionType, i) => {
+         registry.registerMenuAction(NAV_MENU_GROUP, {
+            commandId: junctionType + 'Junction',
+            label: junctionType + 'Junction...',
+            order: i.toString()
          });
       });
 
       // Main menu
-      registry.registerSubmenu(MAIN_MENU_ADD_NEW, TEMPLATE_CATEGORY);
+      registry.registerSubmenu(MAIN_MENU_GROUP, TEMPLATE_CATEGORY);
 
-      registry.registerMenuAction(MAIN_MENU_ADD_NEW, {
+      // Register main menu model creation.
+      registry.registerMenuAction(MAIN_MENU_GROUP, {
          commandId: NEW_MODEL_TEMPLATE.id,
          label: NEW_MODEL_TEMPLATE.label + '...',
          order: '-1'
-      });
-
-      registry.registerMenuAction(MAIN_MENU_ADD_NEW, {
-         commandId: NEW_VIEW_TEMPLATE.id,
-         label: NEW_VIEW_TEMPLATE.label + '...',
-         order: '0'
-      });
-
-      const MAIN_MENU_ADD_NEW_ELEMENT = [...MAIN_MENU_ADD_NEW, 'Element'];
-      registry.registerSubmenu(MAIN_MENU_ADD_NEW_ELEMENT, 'Element'.replace('&', 'And'));
-      layerTypes.forEach((layerType, i) => {
-         registry.registerSubmenu([...MAIN_MENU_ADD_NEW_ELEMENT, layerType], getLabel(layerType).replace('&', 'And'));
-         getObjectKeys(getLayerElements(layerType)).forEach(elementType => {
-            registry.registerMenuAction([...MAIN_MENU_ADD_NEW_ELEMENT, layerType], {
-               commandId: elementType,
-               label: getLabel(elementType) + '...',
-               order: getSpecificationSection(elementType)
-            });
-         });
       });
    }
 
@@ -209,7 +272,7 @@ export class CustomWorkspaceCommandContribution extends WorkspaceCommandContribu
             const packageJsonContent = typeof template.content === 'string' ? template.content : template.content(name);
             await this.fileService.create(packageFileUri, packageJsonContent);
 
-            const viewsFolderUri = modelUri.resolve('Views');
+            const viewsFolderUri = modelUri.resolve(ModelStructure.Diagram.folderName);
             await this.fileService.createFolder(viewsFolderUri);
 
             const viewFileName = `${name}.view.arch`;
@@ -221,6 +284,10 @@ export class CustomWorkspaceCommandContribution extends WorkspaceCommandContribu
             open(this.openerService, viewFileUri);
          }
       }
+   }
+
+   protected getFolderName(uri: URI): string | undefined {
+      return uri.path.toString().split('/').pop();
    }
 
    protected customValidateFileName(name: string, parent: FileStat, fileExtension: string): MaybePromise<DialogError> {
@@ -250,15 +317,7 @@ export class CustomFileNavigatorContribution extends FileNavigatorContribution {
    override registerCommands(registry: CommandRegistry): void {
       super.registerCommands(registry);
 
-      registry.registerCommand(
-         { ...NEW_VIEW_TEMPLATE, label: undefined, id: NEW_VIEW_TEMPLATE.id + '.toolbar' },
-         {
-            execute: (...args) => registry.executeCommand(NEW_VIEW_TEMPLATE.id, ...args),
-            isEnabled: widget => this.withWidget(widget, () => this.workspaceService.opened),
-            isVisible: widget => this.withWidget(widget, () => this.workspaceService.opened)
-         }
-      );
-
+      // Register model creation command.
       registry.registerCommand(
          { ...NEW_MODEL_TEMPLATE, label: undefined, id: NEW_MODEL_TEMPLATE.id + '.toolbar' },
          {
@@ -272,18 +331,12 @@ export class CustomFileNavigatorContribution extends FileNavigatorContribution {
    override async registerToolbarItems(toolbarRegistry: TabBarToolbarRegistry): Promise<void> {
       await super.registerToolbarItems(toolbarRegistry);
 
-      toolbarRegistry.registerItem({
-         id: NEW_VIEW_TEMPLATE.id + '.toolbar',
-         command: NEW_VIEW_TEMPLATE.id + '.toolbar',
-         tooltip: NEW_VIEW_TEMPLATE.label + '...',
-         priority: 2,
-         order: '0'
-      });
-
+      // Register model creation toolbar item.
       toolbarRegistry.registerItem({
          id: NEW_MODEL_TEMPLATE.id + '.toolbar',
          command: NEW_MODEL_TEMPLATE.id + '.toolbar',
-         tooltip: NEW_MODEL_TEMPLATE.label + '...',
+         tooltip: 'New ' + NEW_MODEL_TEMPLATE.label + '...',
+         icon: NEW_MODEL_TEMPLATE.iconClass,
          priority: 2,
          order: '-1'
       });

@@ -13,7 +13,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
-import { ARCHIMATE_ELEMENT_TYPE_MAP, getLabel, getLayerElements, getObjectKeys, layerTypes } from '@big-archimate/protocol';
+import { ARCHIMATE_NODE_TYPE_MAP, getLabel, getLayerConcepts, getObjectKeys, layerTypes } from '@big-archimate/protocol';
 import { Args, ContextMenuItemProvider, CreateNodeOperation, MenuItem, ModelState, Point } from '@eclipse-glsp/server';
 import { inject, injectable } from 'inversify';
 import { ArchiMateGrid } from '../../common/grid.js';
@@ -32,12 +32,12 @@ export class ArchiMateContextMenuItemProvider extends ContextMenuItemProvider {
          const addNewLayerElementMenuItem: MenuItem = {
             id: `new${layerType}`,
             label: `${getLabel(layerType).replace('&', 'And')}`,
-            children: getObjectKeys(getLayerElements(layerType)).map(elementType => {
+            children: getObjectKeys(getLayerConcepts(layerType)).map(conceptType => {
                const addNewElementMenuItem: MenuItem = {
-                  id: `new${elementType}`,
-                  label: `${getLabel(elementType)}`,
+                  id: `new${conceptType}`,
+                  label: `${getLabel(conceptType)}`,
                   actions: [
-                     CreateNodeOperation.create(ARCHIMATE_ELEMENT_TYPE_MAP.get(elementType), {
+                     CreateNodeOperation.create(ARCHIMATE_NODE_TYPE_MAP.get(conceptType), {
                         location: ArchiMateGrid.snap(position)
                      })
                   ]

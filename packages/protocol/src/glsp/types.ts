@@ -86,6 +86,7 @@ export const elementTypes = [
  * A type of an ArchiMate element.
  */
 export type ElementType = (typeof elementTypes)[number];
+export const isElementType = (type: string): type is ElementType => elementTypes.includes(type as ElementType);
 
 /**
  * A map of ArchiMate element types to GLSP node types.
@@ -114,6 +115,7 @@ export const junctionTypes = ['And', 'Or'] as const;
  * A type of an ArchiMate junction.
  */
 export type JunctionType = (typeof junctionTypes)[number];
+export const isJunctionType = (type: string): type is JunctionType => junctionTypes.includes(type as JunctionType);
 
 /**
  * A map of ArchiMate junction types to GLSP node types.
@@ -154,6 +156,7 @@ export const relationTypes = [
  * A type of an ArchiMate relation.
  */
 export type RelationType = (typeof relationTypes)[number];
+export const isRelationType = (type: string): type is RelationType => relationTypes.includes(type as RelationType);
 
 /**
  * A map of ArchiMate relation types to GLSP edge types.

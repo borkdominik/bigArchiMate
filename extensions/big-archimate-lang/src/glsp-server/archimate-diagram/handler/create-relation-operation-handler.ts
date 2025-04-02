@@ -1,11 +1,11 @@
-import { ARCHIMATE_RELATION_TYPE_MAP } from '@big-archimate/protocol';
+import { ARCHIMATE_RELATION_TYPE_MAP, ModelStructure } from '@big-archimate/protocol';
 import {
-    ActionDispatcher,
-    Command,
-    CreateEdgeOperation,
-    JsonCreateEdgeOperationHandler,
-    ModelState,
-    SelectAction
+   ActionDispatcher,
+   Command,
+   CreateEdgeOperation,
+   JsonCreateEdgeOperationHandler,
+   ModelState,
+   SelectAction
 } from '@eclipse-glsp/server';
 import { inject, injectable } from 'inversify';
 import { URI, Utils as UriUtils } from 'vscode-uri';
@@ -92,7 +92,7 @@ export class CreateRelationOperationHandler extends JsonCreateEdgeOperationHandl
 
       // search for unique file name for the relation and use file base name as relation name
       // if the user doesn't rename any files we should end up with unique names ;-)
-      const dirName = UriUtils.joinPath(UriUtils.dirname(URI.parse(this.modelState.semanticUri)), '..', 'Relations');
+      const dirName = UriUtils.joinPath(UriUtils.dirname(URI.parse(this.modelState.semanticUri)), '..', ModelStructure.Relation.folderName);
       const targetUri = UriUtils.joinPath(dirName, relation.id + '.relation.arch');
       const uri = Utils.findNewUri(targetUri);
 

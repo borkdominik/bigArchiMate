@@ -132,7 +132,11 @@ export const ModelStructure = {
    },
 
    Diagram: {
-      FOLDER: 'Views',
-      ICON_CLASS: codiconCSSString('type-hierarchy-sub')
+      ICON_CLASS: codiconCSSString('type-hierarchy-sub'),
+      folderName: 'Views'
+   },
+
+   Relation: {
+      folderName: 'Relations'
    }
 };
