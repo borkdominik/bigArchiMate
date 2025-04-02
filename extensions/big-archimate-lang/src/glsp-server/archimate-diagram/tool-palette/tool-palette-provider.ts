@@ -7,6 +7,7 @@ import {
    getChildren,
    getIcon,
    getLabel,
+   getObjectKeys,
    getSpecificationSection,
    junctionTypes,
    LayerType,
@@ -23,7 +24,6 @@ import {
 } from '@eclipse-glsp/server';
 import { injectable } from 'inversify';
 import { ElementType, JunctionType, RelationType } from '../../../language-server/generated/ast.js';
-import { getObjectKeys } from '../../../util.js';
 
 @injectable()
 export class ArchiMateToolPaletteProvider extends ToolPaletteItemProvider {

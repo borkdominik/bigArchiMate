@@ -232,7 +232,7 @@ export class CompositeEditor extends BaseWidget implements SaveableSource, Navig
    }
 
    protected async createDiagramWidget(): Promise<Widget> {
-      const diagramOptions = this.createDiagramWidgetOptions(ArchiMateDiagramLanguage, 'ArchiMate Diagram');
+      const diagramOptions = this.createDiagramWidgetOptions(ArchiMateDiagramLanguage, 'Diagram Editor');
       const widget = await this.widgetManager.getOrCreateWidget<GLSPDiagramWidget>(ArchiMateDiagramManager.ID, diagramOptions);
       widget.title.closable = false;
       return widget;

@@ -42,7 +42,7 @@ import { ArchiMateToolPaletteProvider } from './tool-palette/tool-palette-provid
  */
 @injectable()
 export class ArchiMateDiagramModule extends DiagramModule {
-   readonly diagramType = 'archimate-diagram';
+   readonly diagramType = 'archimate-view';
 
    protected bindDiagramConfiguration(): BindingTarget<DiagramConfiguration> {
       return ArchiMateDiagramConfiguration;

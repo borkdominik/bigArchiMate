@@ -6,7 +6,7 @@ export const ArchiMateLanguageContributionId = 'archimate-contribution';
 
 export const ArchiMateDiagramLanguage: GLSPDiagramLanguage = {
    contributionId: ArchiMateLanguageContributionId,
-   label: 'ArchiMate Diagram',
-   diagramType: 'archimate-diagram',
+   label: 'ArchiMate View',
+   diagramType: 'archimate-view',
    fileExtensions: [ModelFileExtensions.Diagram]
 };

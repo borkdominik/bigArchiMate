@@ -13,10 +13,9 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
-import { ARCHIMATE_ELEMENT_TYPE_MAP, getLabel, getLayerElements, layerTypes } from '@big-archimate/protocol';
+import { ARCHIMATE_ELEMENT_TYPE_MAP, getLabel, getLayerElements, getObjectKeys, layerTypes } from '@big-archimate/protocol';
 import { Args, ContextMenuItemProvider, CreateNodeOperation, MenuItem, ModelState, Point } from '@eclipse-glsp/server';
 import { inject, injectable } from 'inversify';
-import { getObjectKeys } from '../../../util.js';
 import { ArchiMateGrid } from '../../common/grid.js';
 import { ArchiMateModelState } from '../../common/model-state.js';
 
@@ -32,7 +31,7 @@ export class ArchiMateContextMenuItemProvider extends ContextMenuItemProvider {
       const items = layerTypes.map(layerType => {
          const addNewLayerElementMenuItem: MenuItem = {
             id: `new${layerType}`,
-            label: `${getLabel(layerType)}`,
+            label: `${getLabel(layerType).replace('&', 'And')}`,
             children: getObjectKeys(getLayerElements(layerType)).map(elementType => {
                const addNewElementMenuItem: MenuItem = {
                   id: `new${elementType}`,

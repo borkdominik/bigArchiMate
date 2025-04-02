@@ -1,7 +1,6 @@
 import { DefaultTypes } from '@eclipse-glsp/protocol';
 import { ReversibleMap, toKebabCase } from '../util';
 
-// ArchiMate Diagram
 export const ELEMENT_LABEL_TYPE = DefaultTypes.LABEL + ':element';
 export const ELEMENT_ICON_TYPE = 'icon';
 
