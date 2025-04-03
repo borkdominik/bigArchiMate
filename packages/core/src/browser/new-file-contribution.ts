@@ -24,7 +24,6 @@ const NAV_MENU_GROUP = [...NavigatorContextMenu.NAVIGATION, '0_new'];
 const MAIN_MENU_GROUP = [...CommonMenus.FILE, '0_new'];
 
 interface NewFileTemplate extends Command {
-   label: string;
    fileExtension: string;
    content: string | ((name: string) => string);
 }
@@ -46,18 +45,15 @@ const INITIAL_ARCHIMATE_RELATION_CONTENT = `relation:
     source:
     target:`;
 
-const TEMPLATE_CATEGORY = 'New';
+const NEW_GROUP = 'New';
 
-const NEW_FILE_TEMPLATES: NewFileTemplate[] = [
-   {
-      id: 'new.archimate-diagram',
-      label: 'View',
-      fileExtension: ModelFileExtensions.Diagram,
-      category: TEMPLATE_CATEGORY,
-      iconClass: ModelStructure.Diagram.ICON_CLASS,
-      content: name => INITIAL_ARCHIMATE_VIEW_CONTENT.replace(/\$\{id\}/gi, toId(name))
-   }
-];
+const NEW_VIEW_TEMPLATE: NewFileTemplate = {
+   id: 'new.archimate-diagram',
+   label: 'View',
+   fileExtension: ModelFileExtensions.Diagram,
+   iconClass: ModelStructure.Diagram.ICON_CLASS,
+   content: name => INITIAL_ARCHIMATE_VIEW_CONTENT.replace(/\$\{id\}/gi, toId(name))
+};
 
 // New constant for package.json content used when creating models.
 const INITIAL_PACKAGE_JSON_CONTENT = `{
@@ -70,7 +66,6 @@ const NEW_MODEL_TEMPLATE: NewFileTemplate = {
    id: 'new.model',
    label: 'Model',
    fileExtension: '',
-   category: TEMPLATE_CATEGORY,
    iconClass: ModelStructure.ArchiMateModel.ICON_CLASS,
    content: name => INITIAL_PACKAGE_JSON_CONTENT.replace(/\$\{name\}/gi, name)
 };
@@ -95,16 +90,14 @@ export class CustomWorkspaceCommandContribution extends WorkspaceCommandContribu
       );
 
       // Register view
-      NEW_FILE_TEMPLATES.forEach((template, i) => {
-         commands.registerCommand(
-            { ...template, label: template.label + '...' },
-            this.newWorkspaceRootUriAwareCommandHandler({
-               execute: uri => this.createNewFile(uri, template),
-               // Only show the view creation command if the current folder is a view folder.
-               isVisible: uri => ModelStructure.Diagram.folderName === this.getFolderName(uri)
-            })
-         );
-      });
+      commands.registerCommand(
+         { ...NEW_VIEW_TEMPLATE, label: NEW_VIEW_TEMPLATE.label + '...' },
+         this.newWorkspaceRootUriAwareCommandHandler({
+            execute: uri => this.createNewFile(uri, NEW_VIEW_TEMPLATE),
+            // Only show the view creation command if the current folder is a view folder.
+            isVisible: uri => ModelStructure.Diagram.folderName === this.getFolderName(uri)
+         })
+      );
 
       // Register element creation commands.
       elementTypes.forEach(elementType => {
@@ -166,29 +159,27 @@ export class CustomWorkspaceCommandContribution extends WorkspaceCommandContribu
 
    registerMenus(registry: MenuModelRegistry): void {
       // Explorer context menu
-      registry.registerSubmenu(NAV_MENU_GROUP, TEMPLATE_CATEGORY);
+      registry.registerSubmenu(NAV_MENU_GROUP, NEW_GROUP);
 
       // Register explorer context menu moodel creation.
       registry.registerMenuAction(NAV_MENU_GROUP, {
          commandId: NEW_MODEL_TEMPLATE.id,
-         label: NEW_MODEL_TEMPLATE.label + '...',
+         label: this.getNewLabel(NEW_MODEL_TEMPLATE.label),
          order: '-1'
       });
 
       // Register explorer context menu view creation.
-      NEW_FILE_TEMPLATES.forEach((template, i) => {
-         registry.registerMenuAction(NAV_MENU_GROUP, {
-            commandId: template.id,
-            label: template.label + '...',
-            order: i.toString()
-         });
+      registry.registerMenuAction(NAV_MENU_GROUP, {
+         commandId: NEW_VIEW_TEMPLATE.id,
+         label: this.getNewLabel(NEW_VIEW_TEMPLATE.label),
+         order: '0'
       });
 
       // Register explorer context menu element creation.
       elementTypes.forEach(elementType => {
          registry.registerMenuAction(NAV_MENU_GROUP, {
             commandId: elementType,
-            label: getLabel(elementType) + '...',
+            label: this.getNewLabel(getLabel(elementType)),
             order: getSpecificationSection(elementType)
          });
       });
@@ -197,7 +188,7 @@ export class CustomWorkspaceCommandContribution extends WorkspaceCommandContribu
       relationTypes.forEach((relationType, i) => {
          registry.registerMenuAction(NAV_MENU_GROUP, {
             commandId: relationType,
-            label: relationType + '...',
+            label: this.getNewLabel(getLabel(relationType)),
             order: i.toString()
          });
       });
@@ -206,18 +197,18 @@ export class CustomWorkspaceCommandContribution extends WorkspaceCommandContribu
       junctionTypes.forEach((junctionType, i) => {
          registry.registerMenuAction(NAV_MENU_GROUP, {
             commandId: junctionType + 'Junction',
-            label: junctionType + 'Junction...',
+            label: this.getNewLabel(getLabel(junctionType)),
             order: i.toString()
          });
       });
 
       // Main menu
-      registry.registerSubmenu(MAIN_MENU_GROUP, TEMPLATE_CATEGORY);
+      registry.registerSubmenu(MAIN_MENU_GROUP, NEW_GROUP);
 
       // Register main menu model creation.
       registry.registerMenuAction(MAIN_MENU_GROUP, {
          commandId: NEW_MODEL_TEMPLATE.id,
-         label: NEW_MODEL_TEMPLATE.label + '...',
+         label: this.getNewLabel(NEW_MODEL_TEMPLATE.label),
          order: '-1'
       });
    }
@@ -228,7 +219,7 @@ export class CustomWorkspaceCommandContribution extends WorkspaceCommandContribu
          const parentUri = parent.resource;
          const dialog = new WorkspaceInputDialog(
             {
-               title: 'New ' + template.label + '...',
+               title: this.getNewLabel(template.label, { dots: false, new: true }),
                parentUri: parentUri,
                initialValue: template.label,
                placeholder: template.label,
@@ -256,7 +247,7 @@ export class CustomWorkspaceCommandContribution extends WorkspaceCommandContribu
          const parentUri = parent.resource;
          const dialog = new WorkspaceInputDialog(
             {
-               title: 'New ' + template.label + '...',
+               title: this.getNewLabel(template.label, { dots: false, new: true }),
                parentUri: parentUri,
                initialValue: template.label,
                placeholder: template.label,
@@ -288,6 +279,10 @@ export class CustomWorkspaceCommandContribution extends WorkspaceCommandContribu
 
    protected getFolderName(uri: URI): string | undefined {
       return uri.path.toString().split('/').pop();
+   }
+
+   protected getNewLabel(label?: string, options?: { dots?: boolean; new?: boolean }): string {
+      return `${options?.new ? 'New ' : ''}${label}${options?.dots === false ? '' : '...'}`;
    }
 
    protected customValidateFileName(name: string, parent: FileStat, fileExtension: string): MaybePromise<DialogError> {
