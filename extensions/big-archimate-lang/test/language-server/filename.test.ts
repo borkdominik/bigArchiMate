@@ -14,6 +14,6 @@ describe('Filename Validation', () => {
       });
       expect(element.id).toBe('Element1Id');
       expect(element.$document.diagnostics).toHaveLength(1);
-      expect(element.$document.diagnostics![0].message).toContain('Filename should match element id');
+      expect(element.$document.diagnostics![0].message).toContain('Filename should match id');
    });
 });
