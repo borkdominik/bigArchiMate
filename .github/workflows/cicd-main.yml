@@ -15,6 +15,8 @@ jobs:
 
   # Publish a test report using the playwright result files published in the previous step (execute in Linux only).
   publish-playwright-test-report:
+    # Skip for now because repository currently does not support GitHub pages.
+    if: false
     name: Publish PlayWright Test Report
     needs: build-and-test
     permissions:

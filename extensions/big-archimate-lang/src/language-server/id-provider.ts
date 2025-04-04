@@ -105,7 +105,7 @@ export class IdProvider implements NameProvider {
       return GrammarUtils.findNodeForProperty(node.$cstNode, ID_PROPERTY);
    }
 
-   findNextId(type: string, proposal: string, container: AstNode | string) {
+   findNextId(type: string, proposal: string, container: AstNode | string): string {
       const idProposal = proposal?.replaceAll('.', '_');
       return isAstNode(container) ? this.findNextLocalId(type, idProposal, container) : this.findNextGlobalId(type, idProposal, container);
    }
