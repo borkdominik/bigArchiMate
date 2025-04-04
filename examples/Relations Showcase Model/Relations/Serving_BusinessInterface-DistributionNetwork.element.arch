@@ -1,0 +1,5 @@
+relation:
+    id: Serving_BusinessInterface-DistributionNetwork
+    type: Serving
+    source: BusinessInterface
+    target: DistributionNetwork

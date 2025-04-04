@@ -1,0 +1,5 @@
+relation:
+    id: Flow_Device-BusinessActor-User
+    type: Flow
+    source: Device
+    target: BusinessActor-User

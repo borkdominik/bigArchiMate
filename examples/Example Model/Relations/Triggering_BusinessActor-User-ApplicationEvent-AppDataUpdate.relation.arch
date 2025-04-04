@@ -1,0 +1,5 @@
+relation:
+    id: Triggering_BusinessActor-User-ApplicationEvent-AppDataUpdate
+    type: Triggering
+    source: BusinessActor-User
+    target: ApplicationEvent-AppDataUpdate

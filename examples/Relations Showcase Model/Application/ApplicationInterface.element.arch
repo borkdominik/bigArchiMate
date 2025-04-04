@@ -1,0 +1,4 @@
+element:
+    id: ApplicationInterface
+    type: ApplicationInterface
+    name: "ApplicationInterface"

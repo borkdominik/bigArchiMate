@@ -2,45 +2,45 @@ diagram:
     id: ModelA
     nodes:
       - id: BusinessRoleNode
-        element: BusinessRole1
+        element: BusinessRole
         x: -253
         y: -308
         width: 200
         height: 50
       - id: LocationNode
-        element: Location1
+        element: Location
         x: -638
         y: -330
         width: 200
         height: 50
       - id: OutcomeNode
-        element: Outcome1
+        element: Outcome
         x: -660
         y: -484
         width: 200
         height: 50
       - id: ValueStreamNode
-        element: ValueStream2
+        element: ValueStream
         x: -242
         y: -495
         width: 200
         height: 50
       - id: AndNode
-        junction: AndJunction1
+        junction: AndJunction
         x: -352
         y: -374
         width: 25
         height: 25
     edges:
-      - id: Association_Outcome1-ValueStream2Edge
-        relation: ModelA.Association_Outcome1-ValueStream2
+      - id: Association_Outcome-ValueStreamEdge
+        relation: Association_Outcome-ValueStream
         sourceNode: OutcomeNode
         targetNode: ValueStreamNode
-      - id: Association_BusinessRole1-And1Edge
-        relation: Association_BusinessRole1-AndJunction1
+      - id: Association_BusinessRole-AndEdge
+        relation: Association_BusinessRole-AndJunction
         sourceNode: BusinessRoleNode
         targetNode: AndNode
-      - id: Association_And1-Location1Edge
-        relation: Association_AndJunction1-Location1
+      - id: Association_AndJunction-LocationEdge
+        relation: Association_AndJunction-Location
         sourceNode: AndNode
         targetNode: LocationNode

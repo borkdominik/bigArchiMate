@@ -45,26 +45,24 @@ export class CustomLabelProvider implements LabelProviderContribution, TreeDecor
          }
 
          // very simple name-based matching so we do not have to look into the file
+         const fileName = node.fileStat.resource.path.name;
 
          if (ModelFileExtensions.isElementFile(node.fileStat.name)) {
-            const derivedElementTypeFromFileName = node.fileStat.resource.path.name.split('.')[0].replace(/\d+$/, '');
-            const matchingType = elementTypes.find(elementType => derivedElementTypeFromFileName === elementType);
+            const matchingType = elementTypes.find(elementType => fileName.startsWith(elementType));
             if (matchingType) {
                return codiconCSSString(getIcon(matchingType)) + ' default-file-icon';
             }
          }
 
          if (ModelFileExtensions.isRelationFile(node.fileStat.name)) {
-            const derivedRelationTypeFromFileName = node.fileStat.resource.path.name.split('.')[0].split('_')[0];
-            const matchingType = relationTypes.find(relationType => derivedRelationTypeFromFileName === relationType);
+            const matchingType = relationTypes.find(relationType => fileName.startsWith(relationType));
             if (matchingType) {
                return codiconCSSString(getIcon(matchingType)) + ' default-file-icon';
             }
          }
 
          if (ModelFileExtensions.isJunctionFile(node.fileStat.name)) {
-            const derivedJunctionTypeFromFileName = node.fileStat.resource.path.name.split('.')[0].replace(/\d+$/, '');
-            const matchingType = junctionTypes.find(junctionType => derivedJunctionTypeFromFileName === junctionType + 'Junction');
+            const matchingType = junctionTypes.find(junctionType => fileName.startsWith(junctionType + 'Junction'));
             if (matchingType) {
                return codiconCSSString(getIcon(matchingType)) + ' default-file-icon';
             }

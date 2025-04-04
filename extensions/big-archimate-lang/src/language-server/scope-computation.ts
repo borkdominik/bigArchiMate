@@ -1,7 +1,7 @@
 import { AstNode, AstNodeDescription, AstUtils, DefaultScopeComputation, LangiumDocument, PrecomputedScopes } from 'langium';
 import { CancellationToken } from 'vscode-jsonrpc';
+import { IdProvider } from './id-provider.js';
 import { Services } from './module.js';
-import { DefaultIdProvider } from './naming.js';
 import { PackageManager, UNKNOWN_PROJECT_ID, UNKNOWN_PROJECT_REFERENCE } from './package-manager.js';
 
 /**
@@ -54,7 +54,7 @@ export function getLocalName(description: AstNodeDescription): string {
  * - Export nodes twice: Once for external usage with the fully-qualified name and once for package-local usage.
  */
 export class ScopeComputation extends DefaultScopeComputation {
-   protected idProvider: DefaultIdProvider;
+   protected idProvider: IdProvider;
    protected packageManager: PackageManager;
 
    constructor(services: Services) {

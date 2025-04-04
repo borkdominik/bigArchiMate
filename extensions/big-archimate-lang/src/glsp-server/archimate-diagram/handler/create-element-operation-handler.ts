@@ -1,4 +1,4 @@
-import { ARCHIMATE_ELEMENT_TYPE_MAP, getLabel, getLayer } from '@big-archimate/protocol';
+import { ARCHIMATE_ELEMENT_TYPE_MAP, getLabel, getLayer, getSuggestedElementId } from '@big-archimate/protocol';
 import {
    Action,
    ActionDispatcher,
@@ -63,13 +63,13 @@ export class CreateElementOperationHandler extends JsonCreateNodeOperationHandle
 
       // create element, serialize and re-read to ensure everything is up to date and linked properly
       const elementRoot: ArchiMateRoot = { $type: 'ArchiMateRoot' };
-      const id = this.modelState.idProvider.findNextId(Element, `${elementType}`);
+      const id = this.modelState.idProvider.findNextId(Element, getSuggestedElementId(elementType, elementType), this.modelState.packageId);
 
       const element: Element = {
-         $type: 'Element',
+         $type: Element,
          $container: elementRoot,
          id,
-         name: elementType,
+         name: id,
          type: elementType,
          properties: []
       };

@@ -1,0 +1,5 @@
+relation:
+    id: Realization_Capability-Constraint
+    type: Realization
+    source: Capability
+    target: Constraint

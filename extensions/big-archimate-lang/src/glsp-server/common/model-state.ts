@@ -4,7 +4,7 @@ import { DocumentState } from 'langium';
 import { URI } from 'vscode-uri';
 import { LSPServices } from '../../integration.js';
 import { ArchiMateRoot, Diagram } from '../../language-server/generated/ast.js';
-import { IdProvider } from '../../language-server/naming.js';
+import { IdProvider } from '../../language-server/id-provider.js';
 import { ModelSerializer } from '../../model-server/model-serializer.js';
 import { ModelService } from '../../model-server/model-service.js';
 import { ArchiMateGModelIndex } from './gmodel-index.js';

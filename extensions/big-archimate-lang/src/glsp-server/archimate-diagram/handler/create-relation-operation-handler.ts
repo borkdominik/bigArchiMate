@@ -1,4 +1,4 @@
-import { ARCHIMATE_RELATION_TYPE_MAP, ModelStructure } from '@big-archimate/protocol';
+import { ARCHIMATE_RELATION_TYPE_MAP, getSuggestedRelationId, ModelStructure } from '@big-archimate/protocol';
 import {
    ActionDispatcher,
    Command,
@@ -77,13 +77,18 @@ export class CreateRelationOperationHandler extends JsonCreateEdgeOperationHandl
       const source = sourceConcept.ref?.id || sourceConcept.$refText;
       const target = targetConcept.ref?.id || targetConcept.$refText;
       const relationType = ARCHIMATE_RELATION_TYPE_MAP.getReverse(operation.elementTypeId);
+      const id = this.modelState.idProvider.findNextId(
+         Relation,
+         getSuggestedRelationId(relationType, undefined, source, target),
+         this.modelState.packageId
+      );
 
       // create relation, serialize and re-read to ensure everything is up to date and linked properly
       const relationRoot: ArchiMateRoot = { $type: 'ArchiMateRoot' };
       const relation: Relation = {
          $type: Relation,
          $container: relationRoot,
-         id: this.modelState.idProvider.findNextId(Relation, `${relationType}_${source}-${target}`),
+         id,
          type: relationType,
          source: { $refText: sourceConcept.$refText || '' },
          target: { $refText: targetConcept.$refText || '' },

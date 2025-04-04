@@ -21,10 +21,10 @@ import { CompletionProvider } from './completion-provider.js';
 import { DocumentBuilder } from './document-builder.js';
 import { Formatter } from './formatter.js';
 import { ArchiMateGeneratedModule, ArchiMateLanguageGeneratedSharedModule } from './generated/module.js';
+import { IdProvider } from './id-provider.js';
 import { IndexManager } from './index-manager.js';
 import { LangiumDocuments } from './langium-documents.js';
 import { LanguageServer } from './language-server.js';
-import { DefaultIdProvider } from './naming.js';
 import { PackageManager } from './package-manager.js';
 import { TokenBuilder } from './parser/token-builder.js';
 import { Linker } from './references/linker.js';
@@ -129,7 +129,7 @@ export interface ModuleContext {
  */
 export interface AddedServices {
    references: {
-      IdProvider: DefaultIdProvider;
+      IdProvider: IdProvider;
       Linker: Linker;
       ScopeProvider: ScopeProvider;
    };
@@ -166,7 +166,7 @@ export function createModule(context: ModuleContext): Module<Services, PartialLa
       references: {
          ScopeComputation: services => new ScopeComputation(services),
          ScopeProvider: services => new ScopeProvider(services),
-         IdProvider: services => new DefaultIdProvider(services),
+         IdProvider: services => new IdProvider(services),
          NameProvider: services => services.references.IdProvider,
          Linker: services => new Linker(services)
       },

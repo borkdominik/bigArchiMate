@@ -1,0 +1,5 @@
+relation:
+    id: Influence_Principle-Assessment
+    type: Influence
+    source: Principle
+    target: Assessment

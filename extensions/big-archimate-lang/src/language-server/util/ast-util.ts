@@ -18,7 +18,7 @@ import {
    isJunction,
    isRelation
 } from '../generated/ast.js';
-import { ID_PROPERTY } from '../naming.js';
+import { ID_PROPERTY } from '../id-provider.js';
 
 export type SemanticRoot = Element | Junction | Relation | Diagram;
 

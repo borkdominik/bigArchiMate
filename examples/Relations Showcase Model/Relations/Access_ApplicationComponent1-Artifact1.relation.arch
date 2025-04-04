@@ -1,5 +1,0 @@
-relation:
-    id: Access_ApplicationComponent1-Artifact1
-    type: Access
-    source: ApplicationComponent1
-    target: Artifact1

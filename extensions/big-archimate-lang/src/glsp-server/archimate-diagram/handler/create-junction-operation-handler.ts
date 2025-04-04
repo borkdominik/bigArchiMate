@@ -1,4 +1,4 @@
-import { ARCHIMATE_JUNCTION_TYPE_MAP } from '@big-archimate/protocol';
+import { ARCHIMATE_JUNCTION_TYPE_MAP, getSuggestedJunctionId } from '@big-archimate/protocol';
 import {
    Action,
    ActionDispatcher,
@@ -63,10 +63,10 @@ export class CreateJunctionOperationHandler extends JsonCreateNodeOperationHandl
 
       // create junction, serialize and re-read to ensure everything is up to date and linked properly
       const root: ArchiMateRoot = { $type: 'ArchiMateRoot' };
-      const id = this.modelState.idProvider.findNextId(Junction, `${junctionType}Junction`);
+      const id = this.modelState.idProvider.findNextId(Junction, getSuggestedJunctionId(junctionType), this.modelState.packageId);
 
       const junction: Junction = {
-         $type: 'Junction',
+         $type: Junction,
          $container: root,
          id,
          type: junctionType,

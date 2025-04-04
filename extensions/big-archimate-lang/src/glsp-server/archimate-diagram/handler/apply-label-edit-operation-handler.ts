@@ -1,4 +1,4 @@
-import { toId } from '@big-archimate/protocol';
+import { getSuggestedElementId, toId } from '@big-archimate/protocol';
 import { ApplyLabelEditOperation, Command, getOrThrow, JsonOperationHandler, ModelState } from '@eclipse-glsp/server';
 import { inject, injectable } from 'inversify';
 import { ArchiMateRoot, Element, ElementNode } from '../../../language-server/generated/ast.js';
@@ -22,7 +22,7 @@ export class ApplyLabelEditOperationHandler extends JsonOperationHandler {
             this.renameElement(
                getOrThrow(this.modelState.index.findElementNode(operation.labelId), 'Element node not found'),
                getOrThrow(elementNode.element.ref, 'Element not found'),
-               oldName ?? this.modelState.idProvider.findNextId(Element, 'NewElement')
+               oldName ?? this.modelState.idProvider.findNextId(Element, 'NewElement', this.modelState.packageId)
             ),
          () =>
             this.renameElement(
@@ -39,12 +39,18 @@ export class ApplyLabelEditOperationHandler extends JsonOperationHandler {
       const references = Array.from(
          this.modelState.services.language.references.References.findReferences(element, { includeDeclaration: false })
       );
+
+      // If the current diagram is the only reference to the element, we can safely change its id.
+      // Otherwise we need to ensure to implement proper rename behavior.
       if (references.length === 0 || (references.length === 1 && references[0].sourceUri.fsPath === this.modelState.sourceUri)) {
-         // if the diagram is the only reference to the element, we can safely rename it
-         // otherwise we need to ensure to implement proper rename behavior
-         element.id = this.modelState.idProvider.findNextGlobalId(Element, toId(element.name));
+         element.id = this.modelState.idProvider.findNextId(
+            Element,
+            toId(getSuggestedElementId(element.type, element.name)),
+            this.modelState.packageId
+         );
          elementNode.element = { $refText: element.id, ref: element };
       }
+
       await this.modelState.modelService.save({
          uri: document.uri.toString(),
          model: document.parseResult.value,

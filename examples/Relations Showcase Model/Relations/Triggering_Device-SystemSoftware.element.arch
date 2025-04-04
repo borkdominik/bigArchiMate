@@ -1,0 +1,5 @@
+relation:
+    id: Triggering_Device-SystemSoftware
+    type: Triggering
+    source: Device
+    target: SystemSoftware

@@ -1,0 +1,5 @@
+relation:
+    id: Association_ValueStream-BusinessObject
+    type: Association
+    source: ModelA.ValueStream
+    target: BusinessObject

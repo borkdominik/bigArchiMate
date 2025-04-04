@@ -1,0 +1,5 @@
+relation:
+    id: Realization_BusinessActor-User-Goal
+    type: Realization
+    source: BusinessActor-User
+    target: Goal

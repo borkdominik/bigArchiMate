@@ -1,5 +1,0 @@
-relation:
-    id: Association_Outcome1-ValueStream2
-    type: Association
-    source: Outcome1
-    target: ValueStream2

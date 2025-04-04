@@ -1,0 +1,5 @@
+relation:
+    id: Aggregation_Product-ApplicationService
+    type: Aggregation
+    source: RelationsShowCaseModel.Product
+    target: RelationsShowCaseModel.ApplicationService

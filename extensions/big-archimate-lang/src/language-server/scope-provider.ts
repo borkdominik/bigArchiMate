@@ -22,8 +22,8 @@ import {
    StreamScope,
    URI
 } from 'langium';
+import { QUALIFIED_ID_SEPARATOR } from './id-provider.js';
 import { Services } from './module.js';
-import { QUALIFIED_ID_SEPARATOR } from './naming.js';
 import { GlobalAstNodeDescription, isGlobalDescriptionForLocalPackage, PackageAstNodeDescription } from './scope-computation.js';
 import { findDocument, fixDocument } from './util/ast-util.js';
 
@@ -46,7 +46,7 @@ export class PackageScopeProvider extends DefaultScopeProvider {
     * @param description node description
     * @returns package identifier
     */
-   protected getPackageId(description: AstNodeDescription): string {
+   getPackageId(description: AstNodeDescription): string {
       return description instanceof PackageAstNodeDescription
          ? description.packageId
          : this.packageManager.getPackageIdByUri(description.documentUri);

@@ -1,4 +1,4 @@
-import { ModelFileExtensions } from '@big-archimate/protocol';
+import { getSuggestedElementId, getSuggestedJunctionId, getSuggestedRelationId, ModelFileExtensions } from '@big-archimate/protocol';
 import { AstNode, UriUtils, ValidationAcceptor, ValidationChecks } from 'langium';
 import { Diagnostic } from 'vscode-languageserver-protocol';
 import {
@@ -11,13 +11,14 @@ import {
    isRelation,
    Relation
 } from './generated/ast.js';
+import { ID_PROPERTY, IdentifiableAstNode } from './id-provider.js';
 import type { Services } from './module.js';
-import { ID_PROPERTY, IdentifiableAstNode } from './naming.js';
 import { findDocument, isSemanticRoot } from './util/ast-util.js';
 import { RelationValidator } from './util/validation/relation-validator.js';
 
 export namespace IssueCodes {
    export const FilenameNotMatching = 'filename-not-matching';
+   export const IdCompoistion = 'id-composition';
 }
 
 export interface FilenameNotMatchingDiagnostic extends Diagnostic {
@@ -56,7 +57,9 @@ export class Validator {
       this.checkUniqueGlobalId(node, accept);
       this.checkUniqueNodeId(node, accept);
       this.checkUniquePropertyId(node, accept);
-      this.checkMatchingFilename(node, accept);
+      if (this.checkIdComposition(node, accept)) {
+         this.checkMatchingFilename(node, accept);
+      }
    }
 
    protected checkMatchingFilename(node: AstNode, accept: ValidationAcceptor): void {
@@ -64,7 +67,6 @@ export class Validator {
          return;
       }
       if (!node.id) {
-         // diagrams may not have ids set and therefore are not required to match the filename
          return;
       }
       const document = findDocument(node);
@@ -74,13 +76,47 @@ export class Validator {
       const basename = UriUtils.basename(document.uri);
       const extname = ModelFileExtensions.getFileExtension(basename) ?? UriUtils.extname(document.uri);
       const basenameWithoutExt = basename.slice(0, -extname.length);
-      if (basenameWithoutExt.toLowerCase() !== node.id.toLocaleLowerCase()) {
-         accept('warning', `Filename should match element id: ${node.id}`, {
+      if (basenameWithoutExt !== node.id) {
+         accept('warning', `Filename should match id: ${node.id}`, {
             node,
             property: ID_PROPERTY,
             data: { code: IssueCodes.FilenameNotMatching }
          });
       }
+   }
+
+   protected checkIdComposition(node: AstNode, accept: ValidationAcceptor): boolean {
+      if (!isElement(node) && !isRelation(node) && !isJunction(node)) {
+         return true;
+      }
+      if (!node.id) {
+         return true;
+      }
+      const document = findDocument(node);
+      if (!document) {
+         return true;
+      }
+
+      let suggestedId: string | undefined;
+
+      if (isElement(node) && node.type && node.name) {
+         suggestedId = getSuggestedElementId(node.type, node.name);
+      } else if (isJunction(node) && node.type && node.name) {
+         suggestedId = getSuggestedJunctionId(node.type, node.name);
+      } else if (isRelation(node) && node.type && node.name && node.source.ref?.id && node.target.ref?.id) {
+         suggestedId = getSuggestedRelationId(node.type, node.name, node.source.ref?.id, node.target.ref?.id);
+      }
+
+      if (suggestedId && node.id !== suggestedId) {
+         accept('warning', `id should be be: ${suggestedId}`, {
+            node,
+            property: ID_PROPERTY,
+            data: { code: IssueCodes.IdCompoistion }
+         });
+         return false;
+      }
+
+      return true;
    }
 
    protected checkUniqueGlobalId(node: AstNode, accept: ValidationAcceptor): void {

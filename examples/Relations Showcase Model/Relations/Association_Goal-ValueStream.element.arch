@@ -1,0 +1,5 @@
+relation:
+    id: Association_Goal-ValueStream
+    type: Association
+    source: Goal
+    target: ValueStream

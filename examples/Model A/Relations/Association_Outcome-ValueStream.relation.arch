@@ -1,0 +1,5 @@
+relation:
+    id: Association_Outcome-ValueStream
+    type: Association
+    source: Outcome
+    target: ValueStream

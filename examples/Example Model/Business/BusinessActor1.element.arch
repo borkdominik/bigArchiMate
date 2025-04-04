@@ -1,8 +1,0 @@
-element:
-    id: BusinessActor1
-    type: BusinessActor
-    name: "User"
-    properties:
-     - id: Property1
-       name: "Skill level"
-       value: "Advanced"

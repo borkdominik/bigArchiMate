@@ -1,6 +1,6 @@
 import { AstNode, AstNodeDescription, DefaultIndexManager, URI } from 'langium';
 import { SharedServices } from './module.js';
-import { SemanticRoot, findSemanticRoot } from './util/ast-util.js';
+import { findSemanticRoot, SemanticRoot } from './util/ast-util.js';
 
 export class IndexManager extends DefaultIndexManager {
    constructor(protected services: SharedServices) {

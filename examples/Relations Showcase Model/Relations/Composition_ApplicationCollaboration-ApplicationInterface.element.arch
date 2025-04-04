@@ -1,0 +1,5 @@
+relation:
+    id: Composition_ApplicationCollaboration-ApplicationInterface
+    type: Composition
+    source: ApplicationCollaboration
+    target: ApplicationInterface

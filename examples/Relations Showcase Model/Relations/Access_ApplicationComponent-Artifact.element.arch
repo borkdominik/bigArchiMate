@@ -1,0 +1,5 @@
+relation:
+    id: Access_ApplicationComponent-Artifact
+    type: Access
+    source: ApplicationComponent
+    target: Artifact

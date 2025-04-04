@@ -2,179 +2,179 @@ diagram:
     id: Relations
     nodes:
       - id: ApplicationCollaboration1Node
-        element: ApplicationCollaboration1
+        element: ApplicationCollaboration
         x: 110
         y: 418
         width: 250
         height: 50
       - id: ApplicationInterface1Node
-        element: ApplicationInterface1
+        element: ApplicationInterface
         x: 110
         y: 231
         width: 250
         height: 50
-      - id: BusinessObjectNode
-        element: BusinessObject1
+      - id: ProductNode
+        element: RelationsShowCaseModel.Product
         x: 407
         y: 418
         width: 250
         height: 50
-      - id: BusinessObjectNode1
-        element: BusinessObject2
+      - id: ApplicationServiceNode
+        element: RelationsShowCaseModel.ApplicationService
         x: 407
         y: 231
         width: 250
         height: 50
       - id: Path1Node
-        element: Path1
+        element: Path
         x: 704
         y: 418
         width: 250
         height: 50
       - id: BusinessService1Node
-        element: BusinessService1
+        element: BusinessService
         x: 704
         y: 231
         width: 250
         height: 50
       - id: CapabilityNode
-        element: Capability1
+        element: Capability
         x: 1001
         y: 418
         width: 250
         height: 50
       - id: ConstraintNode
-        element: Constraint1
+        element: Constraint
         x: 1001
         y: 231
         width: 250
         height: 50
       - id: BusinessInterfaceNode
-        element: BusinessInterface1
+        element: BusinessInterface
         x: 110
         y: 781
         width: 250
         height: 50
       - id: DistributionNetworkNode
-        element: DistributionNetwork1
+        element: DistributionNetwork
         x: 110
         y: 594
         width: 250
         height: 50
       - id: ApplicationComponentNode
-        element: ApplicationComponent1
+        element: ApplicationComponent
         x: 407
         y: 781
         width: 250
         height: 50
       - id: ArtifactNode
-        element: Artifact1
+        element: Artifact
         x: 407
         y: 594
         width: 250
         height: 50
       - id: GoalNode
-        element: Goal1
+        element: Goal
         x: 704
         y: 781
         width: 250
         height: 50
       - id: ValueStreamNode
-        element: ValueStream1
+        element: ValueStream
         x: 704
         y: 594
         width: 250
         height: 50
       - id: PrincipleNode
-        element: Principle1
+        element: Principle
         x: 1001
         y: 781
         width: 250
         height: 50
       - id: AssessmentNode
-        element: Assessment1
+        element: Assessment
         x: 1001
         y: 594
         width: 250
         height: 50
       - id: DeviceNode
-        element: Device1
+        element: Device
         x: 110
         y: 1100
         width: 250
         height: 50
       - id: SystemSoftwareNode
-        element: SystemSoftware1
+        element: SystemSoftware
         x: 110
         y: 946
         width: 250
         height: 50
       - id: NodeNode
-        element: Node1
+        element: Node
         x: 407
         y: 1100
         width: 250
         height: 50
       - id: ApplicationProcessNode
-        element: ApplicationProcess1
+        element: ApplicationProcess
         x: 407
         y: 946
         width: 250
         height: 50
       - id: WorkPackageNode
-        element: WorkPackage1
+        element: WorkPackage
         x: 704
         y: 1100
         width: 250
         height: 50
       - id: WorkPackageNode1
-        element: WorkPackage2
+        element: WorkPackage1
         x: 704
         y: 946
         width: 250
         height: 50
     edges:
-      - id: Composition_ApplicationCollaboration1-ApplicationInterface1Edge
-        relation: RelationsShowCaseModel.Composition_ApplicationCollaboration1-ApplicationInterface1
+      - id: Composition_ApplicationCollaboration-ApplicationInterfaceEdge
+        relation: Composition_ApplicationCollaboration-ApplicationInterface
         sourceNode: ApplicationCollaboration1Node
         targetNode: ApplicationInterface1Node
-      - id: Aggregation_BusinessObject1-BusinessObject2Edge
-        relation: RelationsShowCaseModel.Aggregation_BusinessObject1-BusinessObject2
-        sourceNode: BusinessObjectNode
-        targetNode: BusinessObjectNode1
-      - id: Assignment_Path1-BusinessService1Edge
-        relation: RelationsShowCaseModel.Assignment_Path1-BusinessService1
+      - id: Aggregation_Product-ApplicationServiceEdge
+        relation: Aggregation_Product-ApplicationService
+        sourceNode: ProductNode
+        targetNode: ApplicationServiceNode
+      - id: Assignment_Path-BusinessServiceEdge
+        relation: Assignment_Path-BusinessService
         sourceNode: Path1Node
         targetNode: BusinessService1Node
-      - id: Realization_Capability1-Constraint1Edge
-        relation: RelationsShowCaseModel.Realization_Capability1-Constraint1
+      - id: Realization_Capability-ConstraintEdge
+        relation: Realization_Capability-Constraint
         sourceNode: CapabilityNode
         targetNode: ConstraintNode
-      - id: Serving_BusinessInterface1-DistributionNetwork1Edge
-        relation: RelationsShowCaseModel.Serving_BusinessInterface1-DistributionNetwork1
+      - id: Serving_BusinessInterface-DistributionNetworkEdge
+        relation: Serving_BusinessInterface-DistributionNetwork
         sourceNode: BusinessInterfaceNode
         targetNode: DistributionNetworkNode
-      - id: Access_ApplicationComponent1-Artifact1Edge
-        relation: RelationsShowCaseModel.Access_ApplicationComponent1-Artifact1
+      - id: Access_ApplicationComponent-ArtifactEdge
+        relation: Access_ApplicationComponent-Artifact
         sourceNode: ApplicationComponentNode
         targetNode: ArtifactNode
-      - id: Association_Goal1-ValueStream1Edge
-        relation: RelationsShowCaseModel.Association_Goal1-ValueStream1
+      - id: Association_Goal-ValueStreamEdge
+        relation: Association_Goal-ValueStream
         sourceNode: GoalNode
         targetNode: ValueStreamNode
-      - id: Influence_Principle1-Assessment1Edge
-        relation: RelationsShowCaseModel.Influence_Principle1-Assessment1
+      - id: Influence_Principle-AssessmentEdge
+        relation: Influence_Principle-Assessment
         sourceNode: PrincipleNode
         targetNode: AssessmentNode
-      - id: Triggering_Device1-SystemSoftware1Edge
-        relation: RelationsShowCaseModel.Triggering_Device1-SystemSoftware1
+      - id: Triggering_Device-SystemSoftwareEdge
+        relation: Triggering_Device-SystemSoftware
         sourceNode: DeviceNode
         targetNode: SystemSoftwareNode
-      - id: Flow_Node1-ApplicationProcess1Edge
-        relation: RelationsShowCaseModel.Flow_Node1-ApplicationProcess1
+      - id: Flow_Node-ApplicationProcessEdge
+        relation: Flow_Node-ApplicationProcess
         sourceNode: NodeNode
         targetNode: ApplicationProcessNode
       - id: Specialization_WorkPackage1-WorkPackage2Edge
-        relation: RelationsShowCaseModel.Specialization_WorkPackage1-WorkPackage2
+        relation: Specialization_WorkPackage-WorkPackage1
         sourceNode: WorkPackageNode
         targetNode: WorkPackageNode1

@@ -35,7 +35,12 @@ export class DropElementOperationHandler extends JsonOperationHandler {
                $container: container,
                id: this.modelState.idProvider.findNextId(ElementNode, element.id + 'Node', this.modelState.diagram),
                element: {
-                  $refText: this.modelState.idProvider.getGlobalId(element) || element.id || '',
+                  $refText:
+                     (this.modelState.idProvider.getPackageName(container) === this.modelState.idProvider.getPackageName(element)
+                        ? this.modelState.idProvider.getLocalId(element)
+                        : this.modelState.idProvider.getGlobalId(element)) ||
+                     element.id ||
+                     '',
                   ref: element
                },
                x: (x += 10),

@@ -1,0 +1,5 @@
+relation:
+    id: Association_BusinessObject-BusinessRole
+    type: Association
+    source: BusinessObject
+    target: ModelA.BusinessRole

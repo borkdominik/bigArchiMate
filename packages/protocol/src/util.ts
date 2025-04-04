@@ -1,3 +1,4 @@
+import { ElementType, JunctionType, RelationType } from './glsp/types';
 import { ArchiMateLanguageRegex } from './model-service/protocol';
 
 export function quote(text: string, quoteChar = '"', replaceChar = "'"): string {
@@ -43,6 +44,27 @@ export function toId(text: string): string {
    }
    // prefix with '_' if necessary
    return '_' + id;
+}
+
+export function getSuggestedElementId(type: ElementType, name?: string): string {
+   if (!name) {
+      return toId(type);
+   }
+   return toId(name.startsWith(type) ? name : type + '-' + name);
+}
+
+export function getSuggestedJunctionId(type: JunctionType, name?: string): string {
+   if (!name) {
+      return toId(`${type}Junction`);
+   }
+   return toId(name.startsWith(`${type}Junction`) ? name : `${type}Junction` + '-' + name);
+}
+
+export function getSuggestedRelationId(type: RelationType, name: string | undefined, source: string, target: string): string {
+   if (!name) {
+      return toId(`${type}_${source}-${target}`);
+   }
+   return toId(`${type}_${name}`);
 }
 
 export function codiconCSSString(icon: string): string {

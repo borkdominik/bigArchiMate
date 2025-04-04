@@ -2,39 +2,39 @@ diagram:
     id: Example
     nodes:
       - id: BusinessActorNode
-        element: BusinessActor1
+        element: BusinessActor-User
         x: 132
         y: 198
         width: 200
         height: 50
       - id: ApplicationEventNode
-        element: ApplicationEvent1
+        element: ApplicationEvent-AppDataUpdate
         x: 418
         y: 198
         width: 200
         height: 50
       - id: GoalNode
-        element: Goal1
+        element: Goal
         x: 132
         y: 66
         width: 200
         height: 50
       - id: DeviceNode
-        element: Device1
+        element: Device
         x: 132
         y: 330
         width: 200
         height: 50
     edges:
-      - id: Triggering_BusinessActor-ApplicationEventEdge
-        relation: Triggering_BusinessActor1-ApplicationEvent1
+      - id: Triggering_BusinessActor-User-ApplicationEvent-AppDataUpdateEdge
+        relation: Triggering_BusinessActor-User-ApplicationEvent-AppDataUpdate
         sourceNode: BusinessActorNode
         targetNode: ApplicationEventNode
       - id: Realization_BusinessActor-GoalEdge
-        relation: Realization_BusinessActor1-Goal1
+        relation: Realization_BusinessActor-User-Goal
         sourceNode: BusinessActorNode
         targetNode: GoalNode
       - id: Flow_Device-BusinessActorEdge
-        relation: Flow_Device1-BusinessActor1
+        relation: Flow_Device-BusinessActor-User
         sourceNode: DeviceNode
         targetNode: BusinessActorNode

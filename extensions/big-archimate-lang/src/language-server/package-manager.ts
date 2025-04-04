@@ -4,8 +4,8 @@ import { SystemInfo, SystemUpdatedEvent, SystemUpdateListener } from '@big-archi
 import { PackageJson } from 'type-fest';
 import { CancellationToken, WorkspaceFolder } from 'vscode-languageserver';
 import { URI, Utils as UriUtils } from 'vscode-uri';
+import { QUALIFIED_ID_SEPARATOR } from './id-provider.js';
 import { SharedServices } from './module.js';
-import { QUALIFIED_ID_SEPARATOR } from './naming.js';
 import { PackageAstNodeDescription } from './scope-computation.js';
 import { Utils } from './util/uri-util.js';
 

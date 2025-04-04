@@ -1,0 +1,12 @@
+element:
+    id: ApplicationEvent-AppDataUpdate
+    type: ApplicationEvent
+    name: "AppDataUpdate"
+    documentation: "Indicates a modicifation"
+    properties:
+      - id: Property1
+        name: "Priority"
+        value: "High"
+      - id: Property2
+        name: "Risk"
+        value: "Low"

@@ -113,7 +113,7 @@ export class CustomWorkspaceCommandContribution extends WorkspaceCommandContribu
                         INITIAL_ARCHIMATE_ELEMENT_CONTENT.replace(/\$\{id\}/gi, toId(name)).replace(/\$\{type\}/gi, elementType)
                   }),
                // Only show the element creation command if the current folder is a layer folder.
-               isVisible: uri => getLayer(elementType).replace('&', 'And') === this.getFolderName(uri)
+               isVisible: uri => getLabel(getLayer(elementType)) === this.getFolderName(uri)
             })
          );
       });
