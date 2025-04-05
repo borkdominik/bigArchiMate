@@ -14,13 +14,13 @@ diagram:
         width: 250
         height: 50
       - id: ProductNode
-        element: RelationsShowCaseModel.Product
+        element: Product
         x: 407
         y: 418
         width: 250
         height: 50
       - id: ApplicationServiceNode
-        element: RelationsShowCaseModel.ApplicationService
+        element: ApplicationService
         x: 407
         y: 231
         width: 250
