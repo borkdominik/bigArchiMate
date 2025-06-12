@@ -17,6 +17,7 @@
   "scripts": {
     "build": "echo \"Nothing to build\"",
     "clean": "rimraf out *.vsix",
+    "package": "rimraf out && yarn build && yarn package:vsix",
     "package:vsix": "vsce package --yarn",
     "symlink": "yarn symlink:browser && yarn symlink:electron",
     "symlink:browser": "symlink-dir . ../../applications/browser-app/plugins/big-archimate-theme",
@@ -39,7 +40,7 @@
     ]
   },
   "devDependencies": {
-    "@vscode/vsce": "^2.32.1-0"
+    "@vscode/vsce": "^3.5.0"
   },
   "engines": {
     "vscode": "^1.95.0"

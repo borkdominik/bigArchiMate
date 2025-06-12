@@ -17,9 +17,11 @@
     "deploy": "rimraf dist && electron-builder -c.mac.identity=null --publish always",
     "download:plugins": "theia download:plugins",
     "package": "yarn package:pre && electron-builder -c.mac.identity=null --publish never && yarn package:post",
-    "package:extensions": "yarn --cwd ../../extensions/big-archimate-lang package -o ../../applications/electron-app/plugins/",
-    "package:post": "rimraf plugins/big-archimate-lang* && yarn --cwd ../../extensions/big-archimate-lang symlink",
-    "package:pre": "rimraf dist plugins/big-archimate-lang && yarn package:extensions",
+    "package:post": "rimraf plugins/big-archimate-lang* && yarn --cwd ../../extensions/big-archimate-lang symlink && rimraf plugins/big-archimate-theme* && yarn --cwd ../../extensions/big-archimate-theme symlink",
+    "package:pre": "rimraf dist plugins/big-archimate-lang && rimraf dist plugins/big-archimate-theme && yarn package:pre:extensions:build && yarn package:pre:extensions:extract && yarn package:pre:extensions:delete",
+    "package:pre:extensions:build": "yarn --cwd ../../extensions/big-archimate-lang package -o ../../applications/electron-app/plugins/ && yarn --cwd ../../extensions/big-archimate-theme package -o ../../applications/electron-app/plugins/",
+    "package:pre:extensions:delete": "rimraf plugins/big-archimate-lang-0.0.0.vsix && rimraf plugins/big-archimate-theme-0.0.0.vsix",
+    "package:pre:extensions:extract": "yarn decompress plugins/big-archimate-lang-0.0.0.vsix -o plugins/big-archimate-lang-0.0.0 && yarn decompress plugins/big-archimate-theme-0.0.0.vsix -o plugins/big-archimate-theme-0.0.0",
     "package:preview": "yarn package:pre && electron-builder -c.mac.identity=null --dir && yarn package:post",
     "rebuild": "theia rebuild:electron --cacheRoot ../..",
     "start": "cross-env NODE_ENV=development theia start --plugins=local-dir:plugins",
@@ -52,6 +54,7 @@
   },
   "devDependencies": {
     "@theia/cli": "1.57.1",
+    "decompress-cli": "^2.0.0",
     "electron": "30.1.2",
     "electron-builder": "^23.6.0"
   },
