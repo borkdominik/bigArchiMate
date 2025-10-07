@@ -1,5 +1,19 @@
 # bigArchiMate
 
+## About
+
+[ArchiMate](https://en.wikipedia.org/wiki/ArchiMate) is a widely adopted framework that provides a standardized modeling language for representing the structure and behavior of enterprise architectures. However, traditional ArchiMate modeling tools are often proprietary, platform-dependent, and limited in extensibility.
+
+We introduce bigArchiMate, a flexible, open-source ArchiMate modeling tool built on [Eclipse Theia](https://theia-ide.org/theia-platform/), leveraging the [Graphical Language Server Protocol (GLSP)](https://eclipse.dev/glsp/) and the [Langium](https://langium.org/) language engineering tool to provide an integrated modeling experience.
+
+bigArchiMate supports textual, graphical, and form-based modeling, ensuring synchronization across different perspectives through a shared semantic model. Key features include a package-based project system, a custom model service facade, and automated syncing mechanisms for multi-client environments.
+
+As the first open-source ArchiMate tool to incorporate GLSP, bigArchiMate offers an extensible and user-friendly alternative to traditional ArchiMate modeling solutions.
+
+![bigArchiMate in Dark Mode](docs/screenshots/bigArchiMate-relations-dark.png)
+
+For more information see our corresponding [paper](https://model-engineering.info/publications/theses/thesis-winder.pdf).
+
 ## Getting started
 
 Please install all necessary [prerequisites](https://github.com/eclipse-theia/theia/blob/master/doc/Developing.md#prerequisites) on your system.
