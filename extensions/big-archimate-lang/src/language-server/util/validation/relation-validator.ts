@@ -51,7 +51,7 @@ export namespace RelationValidator {
 }
 
 function getFinalNodeType(nodeType: NodeType): ElementType | 'Junction' {
-   if (nodeType === 'And' || nodeType === 'Or') {
+   if (nodeType === 'And' || nodeType === 'Or' || nodeType === 'Xor') {
       return 'Junction';
    }
 

@@ -546,6 +546,13 @@ const junctionMetadataMap: Record<JunctionType, JunctionMetaData> = {
       layer: 'Other',
       specificationSection: '5.5.1.'
    }
+   ,
+   Xor: {
+      icon: 'archimate-junction-xor',
+      label: 'Xor Junction',
+      layer: 'Other',
+      specificationSection: '5.5.1.'
+   }
 };
 
 /**

@@ -65,7 +65,8 @@ ElementType returns string:
 
 JunctionType returns string:
     'And' |
-    'Or';
+    'Or' |
+    'Xor';
 
 RelationType returns string:
     'Access' |
@@ -101,4 +102,4 @@ terminal INDENT: ':synthetic-indent:';
 terminal DEDENT: ':synthetic-dedent:';
 terminal LIST_ITEM: '- '; // block sequence entry
 hidden terminal NEWLINE: /[/\r\n|\r|\n/]+/;
-hidden terminal WS: /[ \t]+/; 
+hidden terminal WS: /[ \t]+/;

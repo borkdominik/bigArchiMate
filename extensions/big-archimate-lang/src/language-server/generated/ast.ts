@@ -97,6 +97,7 @@ export type ArchiMateLanguageKeywordNames =
     | "Value"
     | "ValueStream"
     | "WorkPackage"
+    | "Xor"
     | "diagram"
     | "documentation"
     | "edges"
@@ -155,10 +156,10 @@ export function isIDReference(item: unknown): item is IDReference {
     return typeof item === 'string';
 }
 
-export type JunctionType = 'And' | 'Or';
+export type JunctionType = 'And' | 'Or' | 'Xor';
 
 export function isJunctionType(item: unknown): item is JunctionType {
-    return item === 'And' || item === 'Or';
+    return item === 'And' || item === 'Or' || item === 'Xor';
 }
 
 export type RelationType = 'Access' | 'Aggregation' | 'Assignment' | 'Association' | 'Composition' | 'Flow' | 'Influence' | 'Realization' | 'Serving' | 'Specialization' | 'Triggering';

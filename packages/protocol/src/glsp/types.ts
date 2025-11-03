@@ -109,7 +109,7 @@ export const ARCHIMATE_ELEMENT_TYPE_MAP = new ReversibleMap(ARCHIMATE_ELEMENT_TO
 /**
  * A list of all ArchiMate junction types.
  */
-export const junctionTypes = ['And', 'Or'] as const;
+export const junctionTypes = ['And', 'Or', 'Xor'] as const;
 
 /**
  * A type of an ArchiMate junction.

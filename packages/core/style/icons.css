@@ -60,6 +60,7 @@
    --archimate-icon-influence: url('./icons/default/influence.svg');
    --archimate-icon-junction-and: url('./icons/default/junction-and.svg');
    --archimate-icon-junction-or: url('./icons/default/junction-or.svg');
+   --archimate-icon-junction-xor: url('./icons/default/junction-xor.svg');
    --archimate-icon-location: url('./icons/default/location.svg');
    --archimate-icon-material: url('./icons/default/material.svg');
    --archimate-icon-meaning: url('./icons/default/meaning.svg');
@@ -136,6 +137,7 @@
    --archimate-icon-influence: url('./icons/dark/influence.svg');
    --archimate-icon-junction-and: url('./icons/dark/junction-and.svg');
    --archimate-icon-junction-or: url('./icons/dark/junction-or.svg');
+   --archimate-icon-junction-xor: url('./icons/dark/junction-xor.svg');
    --archimate-icon-location: url('./icons/default/location.svg');
    --archimate-icon-material: url('./icons/default/material.svg');
    --archimate-icon-meaning: url('./icons/default/meaning.svg');
@@ -314,6 +316,11 @@
 .codicon-archimate-junction-or:before {
    background-image: var(--archimate-icon-junction-or);
 }
+
+.codicon-archimate-junction-xor:before {
+   background-image: var(--archimate-icon-junction-xor);
+}
+
 .codicon-archimate-location:before {
    background-image: var(--archimate-icon-location);
 }

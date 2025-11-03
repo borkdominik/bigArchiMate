@@ -104,7 +104,9 @@ const getJunctionPaletteItem = (junctionType: JunctionType, groupSortString: str
    sortString: `${groupSortString}-${getSpecificationSection(junctionType)}`,
    label: `${getLabel(junctionType)}`,
    icon: getIcon(junctionType),
-   actions: [TriggerNodeCreationAction.create(ARCHIMATE_JUNCTION_TYPE_MAP.get(junctionType), { args: { type: 'create' } })]
+   actions: [TriggerNodeCreationAction.create(
+      ARCHIMATE_JUNCTION_TYPE_MAP.get(junctionType),
+      { args: { type: 'create' } })]
 });
 
 /**
