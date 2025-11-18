@@ -419,10 +419,6 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
           {
             "$type": "Keyword",
             "value": "Or"
-          },
-          {
-            "$type": "Keyword",
-            "value": "Xor"
           }
         ]
       },

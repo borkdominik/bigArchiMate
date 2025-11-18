@@ -19,7 +19,6 @@
    --bg-default: #ffffff;
    --bg-junction-and: #000000;
    --bg-junction-or: #ffffff;
-   --bg-junction-xor: #808080;
 }
 
 .grid-background .sprotty-graph,
@@ -129,10 +128,6 @@
 
 .diagram-node.bg-junction-or > circle {
    fill: var(--bg-junction-or);
-}
-
-.diagram-node.bg-junction-xor > circle {
-   fill: var(--bg-junction-xor);
 }
 
 .sprotty-edge.realization :not(.arrow),
