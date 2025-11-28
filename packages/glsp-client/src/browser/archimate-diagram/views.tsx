@@ -51,6 +51,18 @@ export class RelationEdgeView extends GEdgeView {
       }
 
       if (targetMarkerPath !== '') {
+          // For Composition and Aggregation, the icon points towards p1
+         if(relationType === 'Composition' || relationType === 'Aggregation') {
+             return(
+                 <path
+                    class-sprotty-edge={true}
+                    class-arrow={true}
+                    d={targetMarkerPath}
+                    transform={`rotate(${toDegrees(angleOfPoint(Point.subtract(p2, p1)))} ${p1.x} ${p1.y}) translate(${p1.x} ${p1.y})`}
+                 />
+             ) as any;
+         }
+         // For other types, the icon points towards p2
          return (
             <path
                class-sprotty-edge={true}
