@@ -12,7 +12,8 @@ import {
    junctionTypes,
    LayerType,
    relationTypes,
-   toKebabCase
+   toKebabCase,
+   activateMagicConnectorToolAction,
 } from '@big-archimate/protocol';
 import {
    Args,
@@ -49,6 +50,13 @@ export class ArchiMateToolPaletteProvider extends ToolPaletteItemProvider {
             sortString: 'B',
             label: 'Relationship',
             children: [
+               {
+                  id: 'magic-connector-tool',
+                  sortString: '0',
+                  label: 'Magic Connector',
+                  icon: 'wand',
+                  actions: [activateMagicConnectorToolAction()]
+               },
                ...relationTypes.map(relationType => getRelationPaletteItem(relationType, 'B')),
                ...junctionTypes.map(junctionType => getJunctionPaletteItem(junctionType, 'B'))
             ],

@@ -15,8 +15,10 @@ import {
    changeCodiconClass,
    compare,
    createIcon
+   // SetUIExtensionVisibilityAction
 } from '@eclipse-glsp/client';
 import { injectable } from '@theia/core/shared/inversify';
+// import { EdgeConnectorPalette } from './edge-connector-palette';
 
 const CLICKED_CSS_CLASS = 'clicked';
 const PALETTE_ICON_ID = 'tools';
@@ -171,6 +173,16 @@ export class CustomToolPalette extends ToolPalette {
             // if focus was deliberately taken do not restore focus to the palette
             this.focusTracker.diagramElement?.focus();
          }
+         /*
+         this.actionDispatcher.dispatch(
+            SetUIExtensionVisibilityAction.create({
+               extensionId: EdgeConnectorPalette.ID,
+               visible: false,
+               contextElementsId: []
+            })
+         );
+
+          */
       }
    }
 
