@@ -1,0 +1,6 @@
+.edge-connector-palette {
+    width: 220px;
+    top: 10px;
+    border: 1px solid var(--theia-activityBar-border);
+    background-color: var(--theia-titleBar-activeBackground);
+}
