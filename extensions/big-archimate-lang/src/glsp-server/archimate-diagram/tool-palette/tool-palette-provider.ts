@@ -12,8 +12,7 @@ import {
    junctionTypes,
    LayerType,
    relationTypes,
-   toKebabCase,
-   activateMagicConnectorToolAction,
+   toKebabCase
 } from '@big-archimate/protocol';
 import {
    Args,
