@@ -1,4 +1,4 @@
-import { Action, Operation, Point, hasArrayProp, hasObjectProp, hasStringProp, TriggerEdgeCreationAction } from '@eclipse-glsp/protocol';
+import { Action, Operation, Point, hasArrayProp, hasObjectProp, hasStringProp } from '@eclipse-glsp/protocol';
 
 export interface DropElementOperation extends Operation {
    kind: typeof DropElementOperation.KIND;
@@ -129,9 +129,3 @@ export function activateDeleteToolAction(): Action {
    return EnableToolsAction.create(['glsp.delete-mouse']);
 }
 
-export function activateMagicConnectorToolAction(): Action {
-   return TriggerEdgeCreationAction.create(
-      'magic-connector-edge', // Proxy-Edge-Type
-      { args: { mode: 'magic' } }
-   );
-}
