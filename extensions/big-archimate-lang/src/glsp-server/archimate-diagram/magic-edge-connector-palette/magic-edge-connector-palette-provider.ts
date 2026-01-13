@@ -1,19 +1,25 @@
-import { injectable } from 'inversify';
+import { injectable, inject } from 'inversify';
 import {
    MaybePromise,
    PaletteItem,
    TriggerEdgeCreationAction,
    ContextActionsProvider,
-   EditorContext
+   EditorContext,
+   GModelElement,
+   ModelState
 } from '@eclipse-glsp/server';
 import {
    ARCHIMATE_RELATION_TYPE_MAP,
+   ElementType,
    getIcon,
    getLabel,
-   getSpecificationSection,
-   RelationType,
-   relationTypes
+   getSpecificationSection, isElementType,
+   JunctionType,
+   RelationType
 } from '@big-archimate/protocol';
+import { RelationValidator } from '../../../language-server/util/validation/relation-validator.js';
+
+type NodeType = ElementType | JunctionType;
 
 export const MAGIC_CONNECTOR_CONTEXT_ID = 'archimate.magic-edge-connector';
 
@@ -21,18 +27,43 @@ export const MAGIC_CONNECTOR_CONTEXT_ID = 'archimate.magic-edge-connector';
 export class ArchiMateMagicEdgeConnectorPaletteProvider implements ContextActionsProvider {
    readonly contextId = MAGIC_CONNECTOR_CONTEXT_ID;
 
-   getActions(editorContext: EditorContext): MaybePromise<PaletteItem[]> {
-      const args = (editorContext.args ?? {}) as Partial<{ sourceId: string; targetId: string }>;
-      const sourceId = args.sourceId;
-      const targetId = args.targetId;
-      console.log('MagicEdgeConnectorPaletteProvider getActions for sourceId:', sourceId, 'targetId:', targetId);
+   @inject(ModelState)
+   protected readonly modelState: ModelState;
 
-      // TODO: filtering
-      return this.getItems();
+   getActions(editorContext: EditorContext): MaybePromise<PaletteItem[]> {
+      const [sourceId, targetId] = (editorContext.selectedElementIds ?? []) as string[];
+      if (!sourceId || !targetId) {
+         return [];
+      }
+
+      const sourceNodeType = this.getNodeType(sourceId);
+      const targetNodeType = this.getNodeType(targetId);
+
+      if (!sourceNodeType || !targetNodeType) {
+         return [];
+      }
+
+      const validRelations = RelationValidator.getValidRelations(sourceNodeType, targetNodeType);
+      return validRelations.map(relationType => this.getRelationPaletteItem(relationType, 'B'));
    }
 
-   getItems(): MaybePromise<PaletteItem[]> {
-      return [...relationTypes.map(relationType => this.getRelationPaletteItem(relationType, 'B'))];
+   protected getNodeType(elementId: string): NodeType | undefined {
+      const indexAny = (this.modelState as any).index;
+      const element = indexAny?.idToElement?.get(elementId) as GModelElement | undefined;
+
+      if (!element) {
+         return undefined;
+      }
+
+      const refValue = (element as any).args?.['reference-value'];
+      if (typeof refValue === 'string' && isElementType(refValue)) {
+         return refValue;
+      }
+
+      if (refValue === 'And' || refValue === 'Or') {
+         return refValue as JunctionType;
+      }
+      return undefined;
    }
 
    /**

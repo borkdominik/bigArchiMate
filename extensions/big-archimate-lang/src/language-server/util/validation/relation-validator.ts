@@ -48,6 +48,35 @@ export namespace RelationValidator {
 
       return false;
    }
+
+   /**
+    * Returns a list of valid relation types between the given source and target element types.
+    * @param sourceNodeType
+    * @param targetNodeType
+    * @returns a list of valid relation types
+    */
+   export function getValidRelations(sourceNodeType: NodeType, targetNodeType: NodeType): RelationType[] {
+      if (sourceNodeType === undefined || targetNodeType === undefined) {
+         return [];
+      }
+
+      const validRelationKeys = relationConstraints[getFinalNodeType(sourceNodeType)][getFinalNodeType(targetNodeType)];
+      if (!validRelationKeys || validRelationKeys.length === 0) {
+         return [];
+      }
+
+      const result: RelationType[] = [];
+      const seen = new Set<RelationType>();
+
+      for (let i = 0; i < validRelationKeys.length; i++) {
+         const relationType = relationKeyMap.get(validRelationKeys[i]);
+         if (relationType && !seen.has(relationType)) {
+            seen.add(relationType);
+            result.push(relationType);
+         }
+      }
+      return result;
+   }
 }
 
 function getFinalNodeType(nodeType: NodeType): ElementType | 'Junction' {

@@ -117,7 +117,7 @@ export class ArchimateMagicEdgeConnectorPalette extends AbstractUIExtension {
       this.sourceElementId = this.targetElementId;
       this.targetElementId = oldSourceId;
       if (this.debugElement) {
-         this.debugElement.textContent = `Source: ${this.sourceElementId} | Target: ${this.targetElementId}`;
+         this.debugElement.textContent = `Source : ${this.sourceElementId} | Target: ${this.targetElementId}`;
       }
 
       await this.setPaletteItems(this.sourceElementId, this.targetElementId);
