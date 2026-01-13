@@ -20,7 +20,7 @@ import { CustomMetadataPlacer } from './metadata-placer';
 import { MousePositionTracker } from './mouse-position-tracker';
 import { SelectionDataService } from './selection-data-service';
 import { CustomToolPalette } from './tool-palette';
-import { EdgeConnectorPalette } from './edge-connector-palette';
+import { ArchimateMagicEdgeConnectorPalette } from './archimate-magic-edge-connector-palette';
 import { ArchiMateMagicConnectorTool } from './archimate-diagram/magic-connector-tool/archimate-magic-connector-tool';
 
 export function createDiagramModule(registry: interfaces.ContainerModuleCallBack): ContainerModule {
@@ -30,9 +30,9 @@ export function createDiagramModule(registry: interfaces.ContainerModuleCallBack
       rebind(TYPES.LogLevel).toConstantValue(LogLevel.warn);
       rebind(TYPES.Grid).toConstantValue(GRID);
       bind(CustomToolPalette).toSelf().inSingletonScope();
-      bind(EdgeConnectorPalette).toSelf().inSingletonScope();
+      bind(ArchimateMagicEdgeConnectorPalette).toSelf().inSingletonScope();
       bind(CustomMouseDeleteTool).toSelf().inSingletonScope();
-      bind(TYPES.IUIExtension).toService(EdgeConnectorPalette);
+      bind(TYPES.IUIExtension).toService(ArchimateMagicEdgeConnectorPalette);
       // bind(TYPES.IDiagramStartup).toService(EdgeConnectorPalette);
       bind(ArchiMateMagicConnectorTool).toSelf().inSingletonScope();
       bind(TYPES.ITool).toService(ArchiMateMagicConnectorTool);

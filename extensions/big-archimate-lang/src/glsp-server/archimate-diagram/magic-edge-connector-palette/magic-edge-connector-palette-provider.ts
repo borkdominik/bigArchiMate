@@ -1,5 +1,11 @@
 import { injectable } from 'inversify';
-import { MaybePromise, ToolPaletteItemProvider, PaletteItem, TriggerEdgeCreationAction } from '@eclipse-glsp/server';
+import {
+   MaybePromise,
+   PaletteItem,
+   TriggerEdgeCreationAction,
+   ContextActionsProvider,
+   EditorContext
+} from '@eclipse-glsp/server';
 import {
    ARCHIMATE_RELATION_TYPE_MAP,
    getIcon,
@@ -9,12 +15,24 @@ import {
    relationTypes
 } from '@big-archimate/protocol';
 
+export const MAGIC_CONNECTOR_CONTEXT_ID = 'archimate.magic-edge-connector';
+
 @injectable()
-export class ArchiMateMagicEdgeConnectorPaletteProvider extends ToolPaletteItemProvider {
-   override getItems(): MaybePromise<PaletteItem[]> {
-      return [
-         ...relationTypes.map(relationType => this.getRelationPaletteItem(relationType, 'B'))
-      ];
+export class ArchiMateMagicEdgeConnectorPaletteProvider implements ContextActionsProvider {
+   readonly contextId = MAGIC_CONNECTOR_CONTEXT_ID;
+
+   getActions(editorContext: EditorContext): MaybePromise<PaletteItem[]> {
+      const args = (editorContext.args ?? {}) as Partial<{ sourceId: string; targetId: string }>;
+      const sourceId = args.sourceId;
+      const targetId = args.targetId;
+      console.log('MagicEdgeConnectorPaletteProvider getActions for sourceId:', sourceId, 'targetId:', targetId);
+
+      // TODO: filtering
+      return this.getItems();
+   }
+
+   getItems(): MaybePromise<PaletteItem[]> {
+      return [...relationTypes.map(relationType => this.getRelationPaletteItem(relationType, 'B'))];
    }
 
    /**
