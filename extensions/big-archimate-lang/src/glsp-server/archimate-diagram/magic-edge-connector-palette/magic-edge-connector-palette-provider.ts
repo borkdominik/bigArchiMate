@@ -8,11 +8,13 @@ import {
    ModelState, CreateEdgeOperation
 } from '@eclipse-glsp/server';
 import {
+   ARCHIMATE_NODE_TYPE_MAP,
    ARCHIMATE_RELATION_TYPE_MAP,
    ElementType,
    getIcon,
    getLabel,
-   getSpecificationSection, isElementType,
+   getSpecificationSection,
+   isElementType,
    JunctionType,
    RelationType
 } from '@big-archimate/protocol';
@@ -54,13 +56,17 @@ export class ArchiMateMagicEdgeConnectorPaletteProvider implements ContextAction
          return undefined;
       }
 
-      const refValue = (element as any).args?.['reference-value'];
-      if (typeof refValue === 'string' && isElementType(refValue)) {
-         return refValue;
-      }
+      const elementTypeId = (element as any).type;
 
-      if (refValue === 'And' || refValue === 'Or') {
-         return refValue as JunctionType;
+      const nodeType = ARCHIMATE_NODE_TYPE_MAP.getReverse(elementTypeId);
+      if (!nodeType) {
+         return undefined;
+      }
+      if (isElementType(nodeType)) {
+         return nodeType as ElementType;
+      }
+      if (nodeType === 'And' || nodeType === 'Or') {
+         return nodeType as JunctionType;
       }
       return undefined;
    }
