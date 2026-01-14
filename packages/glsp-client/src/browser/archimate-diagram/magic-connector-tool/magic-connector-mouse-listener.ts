@@ -1,7 +1,4 @@
-import {
-   EdgeCreationToolMouseListener,
-   Action, SetUIExtensionVisibilityAction
-} from '@eclipse-glsp/client';
+import { EdgeCreationToolMouseListener, Action, SetUIExtensionVisibilityAction } from '@eclipse-glsp/client';
 import { GModelElement } from '@eclipse-glsp/sprotty';
 
 const EDGE_CONNECTOR_PALETTE_ID = 'archimate.magic-edge-connector-palette';
@@ -18,7 +15,6 @@ export class MagicConnectorMouseListener extends EdgeCreationToolMouseListener {
       sourceElementId: string,
       targetElementId: string
    ): Action {
-      console.log('MagicConnectorMouseListener:' + sourceElementId, targetElementId);
       this.actionDispatcher.dispatch(
          SetUIExtensionVisibilityAction.create({
             extensionId: EDGE_CONNECTOR_PALETTE_ID,

@@ -11,7 +11,9 @@ import {
    SetContextActions,
    PaletteItem,
    compare,
-   EnableDefaultToolsAction
+   EnableDefaultToolsAction,
+   DrawFeedbackEdgeAction,
+   RemoveFeedbackEdgeAction
 } from '@eclipse-glsp/client';
 import { inject } from '@theia/core/shared/inversify';
 
@@ -79,6 +81,16 @@ export class ArchimateMagicEdgeConnectorPalette extends AbstractUIExtension {
       await this.setPaletteItems(this.sourceElementId, this.targetElementId);
       this.renderBody();
       this.positionPalette(this.sourceElementId, this.targetElementId);
+      this.actionDispatcher.dispatch(
+         DrawFeedbackEdgeAction.create({
+            elementTypeId: 'magic-connector-edge',
+            sourceId: sourceId,
+            edgeSchema: {
+               sourceId: sourceId,
+               targetId: targetId
+            }
+         })
+      );
    }
 
    protected createHeaderTools(): HTMLElement {
@@ -123,9 +135,22 @@ export class ArchimateMagicEdgeConnectorPalette extends AbstractUIExtension {
       if (!this.sourceElementId || !this.targetElementId) {
          return;
       }
+      await this.actionDispatcher.dispatch(RemoveFeedbackEdgeAction.create());
+
       const oldSourceId = this.sourceElementId;
       this.sourceElementId = this.targetElementId;
       this.targetElementId = oldSourceId;
+
+      await this.actionDispatcher.dispatch(
+         DrawFeedbackEdgeAction.create({
+            elementTypeId: 'magic-connector-edge',
+            sourceId: this.sourceElementId,
+            edgeSchema: {
+               sourceId: this.sourceElementId,
+               targetId: this.targetElementId
+            }
+         })
+      );
 
       await this.setPaletteItems(this.sourceElementId, this.targetElementId);
       this.renderBody();
@@ -217,6 +242,7 @@ export class ArchimateMagicEdgeConnectorPalette extends AbstractUIExtension {
       if (enableDefaultTools) {
          this.actionDispatcher.dispatch(EnableDefaultToolsAction.create());
       }
+      this.actionDispatcher.dispatch(RemoveFeedbackEdgeAction.create());
    }
 
    protected async setPaletteItems(sourceId: string, targetId: string): Promise<void> {
@@ -252,16 +278,26 @@ export class ArchimateMagicEdgeConnectorPalette extends AbstractUIExtension {
       const screen = this.diagramToScreen(mid);
 
       const element = this.containerElement;
+
+      const offsetParent = (element.offsetParent as HTMLElement) ?? element.parentElement;
+      if (!offsetParent) {
+         return;
+      }
+      const parentRect = offsetParent.getBoundingClientRect();
+
+      const left = screen.x - parentRect.left;
+      const top = screen.y - parentRect.top;
+
       element.style.position = 'absolute';
-      element.style.left = `${screen.x}px`;
-      element.style.top = `${screen.y}px`;
+      element.style.left = `${left}px`;
+      element.style.top = `${top}px`;
       element.style.transform = 'translate(-50%, -50%)';
       element.style.zIndex = '9999';
 
-      requestAnimationFrame(() => this.clampToCanvasBounds());
+      requestAnimationFrame(() => this.clampToCanvasBounds(parentRect));
    }
 
-   private clampToCanvasBounds(): void {
+   private clampToCanvasBounds(parentRect: DOMRect): void {
       const root = this.editorContextService.modelRoot as any;
       const canvasBounds = root?.canvasBounds;
       if (!canvasBounds) {
@@ -271,10 +307,13 @@ export class ArchimateMagicEdgeConnectorPalette extends AbstractUIExtension {
       const element = this.containerElement;
       const rect = element.getBoundingClientRect();
 
-      const minX = canvasBounds.x + rect.width / 2;
-      const maxX = canvasBounds.x + canvasBounds.width - rect.width / 2;
-      const minY = canvasBounds.y + rect.height / 2;
-      const maxY = canvasBounds.y + canvasBounds.height - rect.height / 2;
+      const canvasLeft = canvasBounds.x - parentRect.left;
+      const canvasTop = canvasBounds.y - parentRect.top;
+
+      const minX = canvasLeft + rect.width / 2;
+      const maxX = canvasLeft + canvasBounds.width - rect.width / 2;
+      const minY = canvasTop + rect.height / 2;
+      const maxY = canvasTop + canvasBounds.height - rect.height / 2;
 
       const currentLeft = parseFloat(element.style.left || '0');
       const currentTop = parseFloat(element.style.top || '0');
@@ -308,7 +347,6 @@ export class ArchimateMagicEdgeConnectorPalette extends AbstractUIExtension {
       if (!a || !b) {
          return undefined;
       }
-      console.log('getMid: x=', (a.x + b.x) / 2, ', y=', (a.y + b.y) / 2);
       return {
          x: (a.x + b.x) / 2,
          y: (a.y + b.y) / 2
@@ -330,7 +368,6 @@ export class ArchimateMagicEdgeConnectorPalette extends AbstractUIExtension {
       };
    }
 }
-
 
 function isPaletteItem(x: any): x is PaletteItem {
    return !!x && typeof x.label === 'string' && Array.isArray(x.actions);

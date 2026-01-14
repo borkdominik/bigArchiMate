@@ -36,6 +36,20 @@ export class RelationEdgeView extends GEdgeView {
 
    private getTargetMarker(edge: GEdge, p1: Point, p2: Point): VNode | undefined {
       let targetMarkerPath = '';
+      if (edge.type === 'magic-connector-edge') {
+         targetMarkerPath = 'M 14 -7 L 2 0 L 14 7 Z';
+
+         return (
+            <path
+               class-sprotty-edge={true}
+               class-arrow={true}
+               class-magic-connector-arrow={true}
+               d={targetMarkerPath}
+               transform={`rotate(${toDegrees(angleOfPoint(Point.subtract(p1, p2)))} ${p2.x} ${p2.y}) translate(${p2.x} ${p2.y})`}
+            />
+         ) as any;
+      }
+
       const relationType = ARCHIMATE_RELATION_TYPE_MAP.getReverse(edge.type);
 
       if (relationType === 'Specialization' || relationType === 'Realization') {
@@ -51,16 +65,16 @@ export class RelationEdgeView extends GEdgeView {
       }
 
       if (targetMarkerPath !== '') {
-          // For Composition and Aggregation, the icon points towards p1
-         if(relationType === 'Composition' || relationType === 'Aggregation') {
-             return(
-                 <path
-                    class-sprotty-edge={true}
-                    class-arrow={true}
-                    d={targetMarkerPath}
-                    transform={`rotate(${toDegrees(angleOfPoint(Point.subtract(p2, p1)))} ${p1.x} ${p1.y}) translate(${p1.x} ${p1.y})`}
-                 />
-             ) as any;
+         // For Composition and Aggregation, the icon points towards p1
+         if (relationType === 'Composition' || relationType === 'Aggregation') {
+            return (
+               <path
+                  class-sprotty-edge={true}
+                  class-arrow={true}
+                  d={targetMarkerPath}
+                  transform={`rotate(${toDegrees(angleOfPoint(Point.subtract(p2, p1)))} ${p1.x} ${p1.y}) translate(${p1.x} ${p1.y})`}
+               />
+            ) as any;
          }
          // For other types, the icon points towards p2
          return (
