@@ -1,5 +1,6 @@
 .archimate\.magic-edge-connector-palette {
     width: 150px;
+    top: 10px;
     border: 1px solid var(--theia-activityBar-border);
     border-radius: 4px;
     background-color: var(--theia-titleBar-activeBackground);
