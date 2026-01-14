@@ -12,8 +12,6 @@ import { MagicConnectorMouseListener } from '../magic-connector-tool/magic-conne
 export class ArchiMateEdgeCreationTool extends EdgeCreationTool {
    protected override creationListener(): void {
       if(this.triggerAction?.elementTypeId === 'magic-connector-edge') {
-         console.log('[MagicConnectorTool] creationListener');
-
          const creationListener = new MagicConnectorMouseListener(
             this.triggerAction,
             this.actionDispatcher,
@@ -22,6 +20,7 @@ export class ArchiMateEdgeCreationTool extends EdgeCreationTool {
          );
          this.toDisposeOnDisable.push(creationListener, this.mouseTool.registerListener(creationListener)
          );
+         return;
       }
       const creationListener = new ArchiMateEdgeCreationToolMouseListener(
          this.triggerAction,
