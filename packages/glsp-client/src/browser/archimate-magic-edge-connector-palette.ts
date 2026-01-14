@@ -10,7 +10,8 @@ import {
    RequestContextActions,
    SetContextActions,
    PaletteItem,
-   compare
+   compare,
+   EnableDefaultToolsAction
 } from '@eclipse-glsp/client';
 import { inject } from '@theia/core/shared/inversify';
 
@@ -33,7 +34,6 @@ export class ArchimateMagicEdgeConnectorPalette extends AbstractUIExtension {
 
    private headerElement?: HTMLElement;
    private bodyElement?: HTMLElement;
-   private debugElement?: HTMLElement;
 
    private root: any;
 
@@ -57,14 +57,8 @@ export class ArchimateMagicEdgeConnectorPalette extends AbstractUIExtension {
       this.bodyElement = document.createElement('div');
       this.bodyElement.classList.add('palette-body');
 
-      this.debugElement = document.createElement('div');
-      this.debugElement.classList.add('palette-debug');
-
       this.containerElement.appendChild(this.headerElement);
       this.containerElement.appendChild(this.bodyElement);
-      this.containerElement.appendChild(this.debugElement);
-
-      this.registerEscListener();
    }
 
    override async show(...args: any[]): Promise<void> {
@@ -78,47 +72,60 @@ export class ArchimateMagicEdgeConnectorPalette extends AbstractUIExtension {
       if (!this.sourceElementId || !this.targetElementId) {
          return;
       }
-
       super.show(root);
 
-      if (this.debugElement) {
-         this.debugElement.textContent = `Source : ${this.sourceElementId} | Target: ${this.targetElementId}`;
-      }
+      this.registerEscListener();
 
       await this.setPaletteItems(this.sourceElementId, this.targetElementId);
       this.renderBody();
-
       this.positionPalette(this.sourceElementId, this.targetElementId);
    }
 
    protected createHeaderTools(): HTMLElement {
       const headerTools = document.createElement('div');
       headerTools.classList.add('header-tools');
-      headerTools.appendChild(this.changeDirectionButton());
+
+      const left = document.createElement('div');
+      left.classList.add('left');
+      left.appendChild(this.changeDirectionButton());
+
+      const right = document.createElement('div');
+      right.classList.add('right');
+      right.appendChild(this.closeButton());
+
+      headerTools.appendChild(left);
+      headerTools.appendChild(right);
+
       return headerTools;
    }
 
    private changeDirectionButton(): HTMLElement {
-      const btn = document.createElement('div');
-      // btn.type = 'button';
-      btn.classList.add('secondary-palette-button');
-      btn.textContent = 'Change Direction';
+      const btn = createIcon('arrow-swap');
+      btn.title = 'Change Direction';
+      btn.ariaLabel = btn.title;
       btn.onclick = async () => {
          await this.changeDirection();
       };
       return btn;
    }
 
+   private closeButton(): HTMLElement {
+      const btn = createIcon('close');
+      btn.title = 'Close Palette';
+      btn.ariaLabel = btn.title;
+      btn.onclick = () => {
+         this.closePalette(true);
+      };
+      return btn;
+   }
+
    private async changeDirection(): Promise<void> {
-      if (!this.debugElement || !this.sourceElementId) {
+      if (!this.sourceElementId || !this.targetElementId) {
          return;
       }
       const oldSourceId = this.sourceElementId;
       this.sourceElementId = this.targetElementId;
       this.targetElementId = oldSourceId;
-      if (this.debugElement) {
-         this.debugElement.textContent = `Source : ${this.sourceElementId} | Target: ${this.targetElementId}`;
-      }
 
       await this.setPaletteItems(this.sourceElementId, this.targetElementId);
       this.renderBody();
@@ -169,14 +176,9 @@ export class ArchimateMagicEdgeConnectorPalette extends AbstractUIExtension {
    }
 
    override hide(): void {
-      super.hide();
-      if (this.escListener) {
-         window.removeEventListener('keydown', this.escListener, true);
-         this.escListener = undefined;
-      }
-
+      this.unregisterEscListener();
       this.bodyElement?.replaceChildren();
-      this.debugElement && (this.debugElement.innerText = '');
+      super.hide();
    }
 
    protected registerEscListener(): void {
@@ -184,13 +186,23 @@ export class ArchimateMagicEdgeConnectorPalette extends AbstractUIExtension {
          return;
       }
       this.escListener = (e: KeyboardEvent) => {
-         if (e.key === 'Escape') {
-            e.preventDefault();
-            e.stopPropagation();
-            this.closePalette(true);
+         if (e.key !== 'Escape') {
+            return;
          }
+         e.stopPropagation();
+         e.preventDefault();
+         this.hide();
+         this.closePalette(true);
       };
       window.addEventListener('keydown', this.escListener, true);
+   }
+
+   protected unregisterEscListener(): void {
+      if (!this.escListener) {
+         return;
+      }
+      window.removeEventListener('keydown', this.escListener, true);
+      this.escListener = undefined;
    }
 
    private closePalette(enableDefaultTools: boolean): void {
@@ -203,7 +215,7 @@ export class ArchimateMagicEdgeConnectorPalette extends AbstractUIExtension {
       );
 
       if (enableDefaultTools) {
-         this.actionDispatcher.dispatch({ kind: 'enableDefaultTools' });
+         this.actionDispatcher.dispatch(EnableDefaultToolsAction.create());
       }
    }
 
