@@ -75,9 +75,12 @@
 }
 
 .label-edit input {
+   width: 100%;
    text-align: center;
+   box-sizing: border-box;
    background-color: transparent;
    outline-color: transparent;
+   font-weight: bold;
    border: 0;
    letter-spacing: 0.9px;
 }
