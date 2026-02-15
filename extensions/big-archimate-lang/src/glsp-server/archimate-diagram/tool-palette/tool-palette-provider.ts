@@ -54,12 +54,7 @@ export class ArchiMateToolPaletteProvider extends ToolPaletteItemProvider {
                   sortString: '0',
                   label: 'Magic Connector',
                   icon: 'wand',
-                  actions: [
-                     TriggerEdgeCreationAction.create(
-                        'magic-connector-edge',
-                        { args: { mode: 'magic'}}
-                     )
-                  ]
+                  actions: [TriggerEdgeCreationAction.create('magic-connector-edge', { args: { mode: 'magic' } })]
                },
                ...relationTypes.map(relationType => getRelationPaletteItem(relationType, 'B')),
                ...junctionTypes.map(junctionType => getJunctionPaletteItem(junctionType, 'B'))

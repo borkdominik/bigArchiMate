@@ -5,7 +5,8 @@ import {
    ContextActionsProvider,
    EditorContext,
    GModelElement,
-   ModelState, CreateEdgeOperation
+   ModelState,
+   CreateEdgeOperation
 } from '@eclipse-glsp/server';
 import {
    ARCHIMATE_NODE_TYPE_MAP,
