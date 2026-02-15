@@ -30,14 +30,14 @@
     "@big-archimate/react-model-ui": "0.0.0",
     "@eclipse-glsp/client": "2.3.0",
     "@eclipse-glsp/theia-integration": "2.3.0",
-    "@theia/core": "1.57.1",
-    "@theia/filesystem": "1.57.1",
-    "@theia/markers": "1.57.1",
-    "@theia/navigator": "1.57.1",
-    "@theia/outline-view": "1.57.1",
-    "@theia/output": "1.57.1",
-    "@theia/preferences": "1.57.1",
-    "@theia/task": "1.57.1"
+    "@theia/core": "1.60.2",
+    "@theia/filesystem": "1.60.2",
+    "@theia/markers": "1.60.2",
+    "@theia/navigator": "1.60.2",
+    "@theia/outline-view": "1.60.2",
+    "@theia/output": "1.60.2",
+    "@theia/preferences": "1.60.2",
+    "@theia/task": "1.60.2"
   },
   "theiaExtensions": [
     {

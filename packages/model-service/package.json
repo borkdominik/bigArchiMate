@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@big-archimate/protocol": "0.0.0",
-    "@theia/core": "1.57.1"
+    "@theia/core": "1.60.2"
   },
   "theiaExtensions": [
     {

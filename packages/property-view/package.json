@@ -31,9 +31,9 @@
     "@big-archimate/protocol": "0.0.0",
     "@big-archimate/react-model-ui": "0.0.0",
     "@eclipse-glsp/theia-integration": "2.3.0",
-    "@theia/core": "1.57.1",
-    "@theia/filesystem": "1.57.1",
-    "@theia/property-view": "1.57.1"
+    "@theia/core": "1.60.2",
+    "@theia/filesystem": "1.60.2",
+    "@theia/property-view": "1.60.2"
   },
   "theiaExtensions": [
     {
