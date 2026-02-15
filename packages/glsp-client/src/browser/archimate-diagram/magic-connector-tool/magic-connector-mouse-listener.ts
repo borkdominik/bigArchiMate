@@ -4,7 +4,6 @@ import { GModelElement } from '@eclipse-glsp/sprotty';
 const EDGE_CONNECTOR_PALETTE_ID = 'archimate.magic-edge-connector-palette';
 
 export class MagicConnectorMouseListener extends EdgeCreationToolMouseListener {
-
    protected override canConnect(): boolean {
       return true;
    }

@@ -1,55 +1,53 @@
 .archimate\.magic-edge-connector-palette {
-    width: 150px;
-    top: 10px;
-    border: 1px solid var(--theia-activityBar-border);
-    border-radius: 4px;
-    background-color: var(--theia-titleBar-activeBackground);
-    overflow: hidden;
+   width: 150px;
+   top: 10px;
+   border: 1px solid var(--theia-activityBar-border);
+   border-radius: 4px;
+   background-color: var(--theia-titleBar-activeBackground);
+   overflow: hidden;
 }
 
 .archimate\.magic-edge-connector-palette .palette-header {
-    display: flex;
-    align-items: center;
-    background-color: var(--theia-titleBar-activeBackground);
-    border: none;
+   display: flex;
+   align-items: center;
+   background-color: var(--theia-titleBar-activeBackground);
+   border: none;
 }
 
 .archimate\.magic-edge-connector-palette .header-tools > i {
-    cursor: pointer;
-    padding: 4px;
+   cursor: pointer;
+   padding: 4px;
 }
 
 .archimate\.magic-edge-connector-palette .header-tools i:hover {
-    background-color: var(--theia-list-hoverBackground);
-    border-radius: 3px;
+   background-color: var(--theia-list-hoverBackground);
+   border-radius: 3px;
 }
 
 .archimate\.magic-edge-connector-palette .header-tools {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
+   display: flex;
+   width: 100%;
+   justify-content: space-between;
 }
 
 .archimate\.magic-edge-connector-palette .palette-body {
-    display: flex;
-    flex-direction: column;
-    border: none;
+   display: flex;
+   flex-direction: column;
+   border: none;
 }
 
 .archimate\.magic-edge-connector-palette .palette-body .tool-button {
-    height: 30px;
-    padding-block: 0;
-    padding-inline: 8px;
-    cursor: pointer;
-    border: none;
+   height: 30px;
+   padding-block: 0;
+   padding-inline: 8px;
+   cursor: pointer;
+   border: none;
 }
 
 .archimate\.magic-edge-connector-palette .palette-body .tool-button:hover:not(.clicked) {
-    background-color: var(--theia-list-hoverBackground);
+   background-color: var(--theia-list-hoverBackground);
 }
 
 .archimate\.magic-edge-connector-palette .palette-body .tool-button.clicked {
-    background-color: var(--theia-list-activeSelectionBackground);
+   background-color: var(--theia-list-activeSelectionBackground);
 }
-
-

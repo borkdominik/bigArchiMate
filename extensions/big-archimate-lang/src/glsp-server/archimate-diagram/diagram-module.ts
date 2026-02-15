@@ -36,9 +36,7 @@ import { DropElementOperationHandler } from './handler/drop-element-operation-ha
 import { ValidateRelationActionHandler } from './handler/validate-relation-action-handler.js';
 import { ArchiMateDiagramGModelFactory } from './model/gmodel-factory.js';
 import { ArchiMateToolPaletteProvider } from './tool-palette/tool-palette-provider.js';
-import {
-   ArchiMateMagicEdgeConnectorPaletteProvider
-} from './magic-edge-connector-palette/magic-edge-connector-palette-provider.js';
+import { ArchiMateMagicEdgeConnectorPaletteProvider } from './magic-edge-connector-palette/magic-edge-connector-palette-provider.js';
 
 /**
  * Provides configuration about our archimate diagrams.
