@@ -11,18 +11,18 @@ import { MagicConnectorMouseListener } from '../magic-connector-tool/magic-conne
 @injectable()
 export class ArchiMateEdgeCreationTool extends EdgeCreationTool {
    protected override creationListener(): void {
+      let creationListener: EdgeCreationToolMouseListener;
       if(this.triggerAction?.elementTypeId === 'magic-connector-edge') {
-         const creationListener = new MagicConnectorMouseListener(
+         creationListener = new MagicConnectorMouseListener(
             this.triggerAction,
             this.actionDispatcher,
             this.typeHintProvider,
             this
          );
-         this.toDisposeOnDisable.push(creationListener, this.mouseTool.registerListener(creationListener)
-         );
+         this.toDisposeOnDisable.push(creationListener, this.mouseTool.registerListener(creationListener));
          return;
       }
-      const creationListener = new ArchiMateEdgeCreationToolMouseListener(
+      creationListener = new ArchiMateEdgeCreationToolMouseListener(
          this.triggerAction,
          this.actionDispatcher,
          this.typeHintProvider,

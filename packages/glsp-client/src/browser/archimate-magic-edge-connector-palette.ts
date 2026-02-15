@@ -39,11 +39,11 @@ export class ArchimateMagicEdgeConnectorPalette extends AbstractUIExtension {
 
    private root: any;
 
-   id() {
+   id(): string {
       return ArchimateMagicEdgeConnectorPalette.ID;
    }
 
-   containerClass() {
+   containerClass(): string {
       return ArchimateMagicEdgeConnectorPalette.ID;
    }
 
