@@ -1,12 +1,12 @@
 import { Command, DeleteElementOperation, JsonOperationHandler, ModelState, remove } from '@eclipse-glsp/server';
 import { inject, injectable } from 'inversify';
 import {
-    ElementNode,
-    JunctionNode,
-    RelationEdge,
-    isElementNode,
-    isJunctionNode,
-    isRelationEdge
+   ElementNode,
+   JunctionNode,
+   RelationEdge,
+   isElementNode,
+   isJunctionNode,
+   isRelationEdge
 } from '../../../language-server/generated/ast.js';
 import { ArchiMateCommand } from '../../common/command.js';
 import { ArchiMateModelState } from '../../common/model-state.js';

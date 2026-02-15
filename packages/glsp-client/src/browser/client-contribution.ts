@@ -25,7 +25,8 @@ export class ClientConribution extends BaseGLSPClientContribution {
    readonly id = ArchiMateLanguageContributionId;
 
    protected async waitForBackendConnected(): Promise<void> {
-      // We know that our VS Code extension outputs any log on a channel called 'bigArchiMate' (see extensions/big-archimate-lang/src/extension.ts)
+      // We know that our VS Code extension outputs any log on a channel called 'bigArchiMate'
+      // (see extensions/big-archimate-lang/src/extension.ts)
       // So we check whether our expected message is already part of the channel's text or otherwise listen to any new content
 
       // While a socket connection to the server can be established earlier, the server might still do some internal initialization
