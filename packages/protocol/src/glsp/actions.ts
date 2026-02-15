@@ -128,3 +128,4 @@ export function activateDefaultToolsAction(): Action {
 export function activateDeleteToolAction(): Action {
    return EnableToolsAction.create(['glsp.delete-mouse']);
 }
+

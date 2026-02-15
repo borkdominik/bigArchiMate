@@ -6,16 +6,18 @@ import {
    RequestCheckEdgeAction
 } from '@eclipse-glsp/client';
 import { injectable } from '@theia/core/shared/inversify';
+import { MagicConnectorMouseListener } from '../magic-connector-tool/magic-connector-mouse-listener';
 
 @injectable()
 export class ArchiMateEdgeCreationTool extends EdgeCreationTool {
    protected override creationListener(): void {
-      const creationListener = new ArchiMateEdgeCreationToolMouseListener(
-         this.triggerAction,
-         this.actionDispatcher,
-         this.typeHintProvider,
-         this
-      );
+      let creationListener: EdgeCreationToolMouseListener;
+      if (this.triggerAction?.elementTypeId === 'magic-connector-edge') {
+         creationListener = new MagicConnectorMouseListener(this.triggerAction, this.actionDispatcher, this.typeHintProvider, this);
+         this.toDisposeOnDisable.push(creationListener, this.mouseTool.registerListener(creationListener));
+         return;
+      }
+      creationListener = new ArchiMateEdgeCreationToolMouseListener(this.triggerAction, this.actionDispatcher, this.typeHintProvider, this);
       this.toDisposeOnDisable.push(creationListener, this.mouseTool.registerListener(creationListener));
    }
 }

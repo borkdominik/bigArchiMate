@@ -9,7 +9,7 @@
         style="fill:none;stroke:#aaaaaa;stroke-width:1"
     />
     <path
-        d="M 9 10 L 9 16 M 6 13 L 12 13"
+        d="M 3 0 L 3 6 M 0 3 L 6 3 M 0 8 L 6 8"
         style="fill:none;stroke:#aaaaaa;stroke-width:0.5"
     />
 </svg>

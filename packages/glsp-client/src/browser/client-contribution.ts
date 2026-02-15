@@ -8,6 +8,7 @@ import { Disposable, MessageConnection } from '@theia/core/shared/vscode-languag
 import { OutputChannelManager } from '@theia/output/lib/browser/output-channel';
 import '../../style/diagram.css';
 import '../../style/tool-palette.css';
+import '../../style/magic-edge-connector-palette.css';
 import { ArchiMateLanguageContributionId } from '../common/diagram-language';
 
 /** The message the GLSP server outputs as soon as it is properly connected through a socket. */

@@ -79,6 +79,8 @@ const diagramModule = createDiagramModule((bind, unbind, isBound, rebind) => {
       configureModelElement(context, edgeType, RelationEdge, RelationEdgeView);
    });
 
+   configureModelElement(context, 'magic-connector-edge', RelationEdge, RelationEdgeView);
+
    ARCHIMATE_JUNCTION_TYPE_MAP.values().forEach(junctionType => {
       configureModelElement(context, junctionType, JunctionNode, JunctionNodeView);
    });
