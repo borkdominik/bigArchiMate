@@ -48,7 +48,8 @@ export class ArchiMateModelStorage implements SourceModelStorage, ClientSessionL
    async loadSourceModel(action: RequestModelAction): Promise<void> {
       // load semantic model from document in language model service
       const sourceUri = this.getSourceUri(action);
-      const rootUri = URI.file(sourceUri).toString();
+      // Theia passes fsPath, VS Code passes file:// URIs. Normalize either to a canonical URI string.
+      const rootUri = sourceUri.startsWith('file:') ? URI.parse(sourceUri).toString() : URI.file(sourceUri).toString();
       const document = await this.update(rootUri);
       if (!document) {
          return;

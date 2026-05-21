@@ -14,7 +14,9 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-:root .theia-light {
+:root .theia-light,
+:root .vscode-light,
+:root .vscode-high-contrast-light {
    --archimate-icon-access: url('./icons/default/access.svg');
    --archimate-icon-aggregation: url('./icons/default/aggregation.svg');
    --archimate-icon-application-collaboration: url('./icons/default/application-collaboration.svg');
@@ -90,7 +92,9 @@
    --archimate-icon-work-package: url('./icons/default/work-package.svg');
 }
 
-:root .theia-dark {
+:root .theia-dark,
+:root .vscode-dark,
+:root .vscode-high-contrast {
    --archimate-icon-access: url('./icons/dark/access.svg');
    --archimate-icon-aggregation: url('./icons/dark/aggregation.svg');
    --archimate-icon-application-collaboration: url('./icons/default/application-collaboration.svg');

@@ -1,0 +1,12 @@
+{
+  "extends": "../../configs/base.tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "rootDir": "src",
+    "outDir": "lib",
+    "jsx": "react",
+    "reactNamespace": "JSX"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}

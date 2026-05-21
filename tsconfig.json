@@ -22,6 +22,9 @@
       "path": "packages/glsp-client"
     },
     {
+      "path": "packages/glsp-vscode-webview"
+    },
+    {
       "path": "packages/model-service"
     },
     {
