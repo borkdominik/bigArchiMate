@@ -9,12 +9,14 @@ import {
    createAppModule,
    defaultSocketLaunchOptions
 } from '@eclipse-glsp/server/node.js';
+import { NodeMcpServerModule } from '@eclipse-glsp/server-mcp/node.js';
 import { Container, ContainerModule } from 'inversify';
 import { AddressInfo } from 'net';
 import { URI } from 'vscode-uri';
 import { LSPServices } from '../integration.js';
 import { Services, SharedServices } from '../language-server/module.js';
 import { ArchiMateDiagramModule } from './archimate-diagram/diagram-module.js';
+import { ArchiMateMcpDiagramModule } from './archimate-diagram/mcp/archimate-mcp-diagram-module.js';
 
 /**
  * Launches a GLSP server with access to the given language services on the default port.
@@ -34,12 +36,13 @@ export function startGLSPServer(services: LSPServices, workspaceFolder: URI): Ma
    const appContainer = new Container();
    appContainer.load(appModule, lspModule);
 
-   // create server module with our cross model diagram
-   const serverModule = new ServerModule().configureDiagramModule(new ArchiMateDiagramModule());
+   // create server module with our cross model diagram + diagram-scope MCP module
+   const serverModule = new ServerModule().configureDiagramModule(new ArchiMateDiagramModule(), new ArchiMateMcpDiagramModule());
+   const mcpServerModule = new NodeMcpServerModule();
 
    const logger = appContainer.get<LoggerFactory>(LoggerFactory)('bigArchiMateServer');
    const launcher = appContainer.resolve<SocketServerLauncher>(SocketServerLauncher);
-   launcher.configure(serverModule);
+   launcher.configure(serverModule, mcpServerModule);
    try {
       const stop = launcher.start(launchOptions);
       launcher['netServer'].on(

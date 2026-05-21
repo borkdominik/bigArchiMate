@@ -1,5 +1,6 @@
 import { LanguageExtensionChannelName } from '@big-archimate/protocol';
 import { Action, ActionMessage, ActionMessageHandler, ConnectionProvider, GLSPClient, JsonrpcGLSPClient } from '@eclipse-glsp/client';
+import { McpInitializeParameters } from '@eclipse-glsp/protocol';
 import { BaseGLSPClientContribution, TheiaJsonrpcGLSPClient } from '@eclipse-glsp/theia-integration';
 import { Emitter } from '@theia/core';
 import { Deferred } from '@theia/core/lib/common/promise-util';
@@ -23,6 +24,13 @@ export class ClientConribution extends BaseGLSPClientContribution {
    @inject(OutputChannelManager) protected outputChannelManager: OutputChannelManager;
 
    readonly id = ArchiMateLanguageContributionId;
+
+   protected override async createInitializeParameters(): Promise<McpInitializeParameters> {
+      return {
+         ...(await super.createInitializeParameters()),
+         mcpServer: { name: 'glsp-archimate' }
+      };
+   }
 
    protected async waitForBackendConnected(): Promise<void> {
       // We know that our VS Code extension outputs any log on a channel called 'bigArchiMate'

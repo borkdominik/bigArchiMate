@@ -9,6 +9,7 @@ import {
    getLabel,
    getObjectKeys,
    getSpecificationSection,
+   isElementType,
    junctionTypes,
    LayerType,
    relationTypes,
@@ -125,6 +126,8 @@ const getElementGroupPaletteItem = (layerType: LayerType, groupSortString: strin
    icon: 'chevron-down',
    sortString: `${groupSortString}`,
    label: getLabel(layerType),
-   children: (() => getObjectKeys(getChildren(layerType)).map(elementType => getElementPaletteItem(elementType, groupSortString)))(),
+   children: getObjectKeys(getChildren(layerType))
+      .filter(isElementType)
+      .map(elementType => getElementPaletteItem(elementType, groupSortString)),
    actions: []
 });
