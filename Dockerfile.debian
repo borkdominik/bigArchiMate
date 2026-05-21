@@ -1,5 +1,5 @@
 # Stage 1: Builder stage
-FROM node:20-bookworm AS build-stage
+FROM node:22-bookworm AS build-stage
 
 # Install OS packages needed for building Theia.
 RUN apt-get update && \
@@ -41,7 +41,7 @@ RUN yarn --pure-lockfile --skip-integrity-check --network-timeout 100000 && \
     rm -rf .devcontainer .git .github .vscode applications/electron-app docs e2e-tests examples
 
 # Stage 2: Production stage, using a slim image
-FROM node:20-bookworm-slim AS production-stage
+FROM node:22-bookworm-slim AS production-stage
 
 # Create a non-root user with a fixed user id and setup the environment
 # Default workspace is located at /home/project

@@ -1,5 +1,5 @@
 # Stage 1: Builder stage
-FROM node:20-alpine AS build-stage
+FROM node:22-alpine AS build-stage
 
 # Install OS packages needed for building Theia.
 # Packages can be searched here: https://pkgs.alpinelinux.org/packages
@@ -42,7 +42,7 @@ RUN yarn --pure-lockfile --skip-integrity-check --network-timeout 100000 && \
     rm -rf .devcontainer .git .github .vscode applications/electron-app docs e2e-tests examples
 
 # Stage 2: Production stage, using a slim image
-FROM node:20-alpine AS production-stage
+FROM node:22-alpine AS production-stage
 
 # Create a non-root user with a fixed user id and setup the environment
 RUN addgroup -S big-archimate && \

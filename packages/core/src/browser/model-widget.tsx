@@ -15,7 +15,7 @@ import { ThemeService } from '@theia/core/lib/browser/theming';
 import URI from '@theia/core/lib/common/uri';
 import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
 import * as React from '@theia/core/shared/react';
-import { EditorPreferences } from '@theia/editor/lib/browser';
+import { EditorPreferences } from '@theia/editor/lib/common/editor-preferences';
 import * as deepEqual from 'fast-deep-equal';
 import * as debounce from 'p-debounce';
 

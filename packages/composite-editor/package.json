@@ -27,11 +27,12 @@
     "@big-archimate/core": "0.0.0",
     "@big-archimate/form-client": "0.0.0",
     "@big-archimate/glsp-client": "0.0.0",
-    "@eclipse-glsp/theia-integration": "2.3.0",
-    "@theia/core": "1.60.2",
-    "@theia/editor": "1.60.2",
-    "@theia/editor-preview": "1.60.2",
-    "@theia/filesystem": "1.60.2"
+    "@big-archimate/protocol": "0.0.0",
+    "@eclipse-glsp/theia-integration": "2.7.0-next.9",
+    "@theia/core": "~1.70.0",
+    "@theia/editor": "~1.70.0",
+    "@theia/editor-preview": "~1.70.0",
+    "@theia/filesystem": "~1.70.0"
   },
   "theiaExtensions": [
     {

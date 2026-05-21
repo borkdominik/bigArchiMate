@@ -2,7 +2,7 @@ on:
   workflow_call:
 
 env:
-  NODE_VERSION: 20.x
+  NODE_VERSION: 22.x
   PYTHON_VERSION: 3.11.4
 
 defaults:
