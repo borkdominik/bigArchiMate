@@ -16,6 +16,7 @@ import { URI } from 'vscode-uri';
 import { LSPServices } from '../integration.js';
 import { Services, SharedServices } from '../language-server/module.js';
 import { ArchiMateDiagramModule } from './archimate-diagram/diagram-module.js';
+import { ARCHIMATE_AGENT_PERSONA } from './archimate-diagram/mcp/archimate-agent-persona.js';
 import { ArchiMateMcpDiagramModule } from './archimate-diagram/mcp/archimate-mcp-diagram-module.js';
 
 /**
@@ -38,7 +39,7 @@ export function startGLSPServer(services: LSPServices, workspaceFolder: URI): Ma
 
    // create server module with our cross model diagram + diagram-scope MCP module
    const serverModule = new ServerModule().configureDiagramModule(new ArchiMateDiagramModule(), new ArchiMateMcpDiagramModule());
-   const mcpServerModule = new NodeMcpServerModule();
+   const mcpServerModule = new NodeMcpServerModule({ agentPersona: ARCHIMATE_AGENT_PERSONA });
 
    const logger = appContainer.get<LoggerFactory>(LoggerFactory)('bigArchiMateServer');
    const launcher = appContainer.resolve<SocketServerLauncher>(SocketServerLauncher);
