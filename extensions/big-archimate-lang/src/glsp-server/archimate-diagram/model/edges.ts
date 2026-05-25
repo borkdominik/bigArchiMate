@@ -1,4 +1,3 @@
-
 import { ARCHIMATE_RELATION_TYPE_MAP, REFERENCE_CONTAINER_TYPE, REFERENCE_PROPERTY, REFERENCE_VALUE } from '@big-archimate/protocol';
 import { GEdge, GEdgeBuilder } from '@eclipse-glsp/server';
 import { RelationEdge } from '../../../language-server/generated/ast.js';

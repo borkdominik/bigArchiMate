@@ -62,9 +62,7 @@ export class DeleteOperationHandler extends JsonOperationHandler {
    }
 
    private edgesConnectedTo(node: DiagramNode): RelationEdge[] {
-      return this.modelState.diagram.edges.filter(
-         edge => edge.sourceNode?.ref === node || edge.targetNode?.ref === node
-      );
+      return this.modelState.diagram.edges.filter(edge => edge.sourceNode?.ref === node || edge.targetNode?.ref === node);
    }
 }
 

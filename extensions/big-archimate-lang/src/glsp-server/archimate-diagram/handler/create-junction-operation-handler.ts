@@ -41,12 +41,8 @@ export class CreateJunctionOperationHandler extends JsonCreateNodeOperationHandl
 
       const parentGrouping = findGroupingContaining(location, diagram);
       const container = parentGrouping ?? diagram;
-      const x = parentGrouping
-         ? Math.max(0, Math.min(location.x - parentGrouping.x, parentGrouping.width - JUNCTION_SIZE))
-         : location.x;
-      const y = parentGrouping
-         ? Math.max(0, Math.min(location.y - parentGrouping.y, parentGrouping.height - JUNCTION_SIZE))
-         : location.y;
+      const x = parentGrouping ? Math.max(0, Math.min(location.x - parentGrouping.x, parentGrouping.width - JUNCTION_SIZE)) : location.x;
+      const y = parentGrouping ? Math.max(0, Math.min(location.y - parentGrouping.y, parentGrouping.height - JUNCTION_SIZE)) : location.y;
 
       const node: JunctionNode = {
          $type: JunctionNode,

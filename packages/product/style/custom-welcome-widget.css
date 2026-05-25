@@ -1,383 +1,406 @@
 .bam-welcome {
-    padding: 24px;
-    color: var(--theia-foreground);
-    background: var(--theia-editor-background);
-    height: 100%;
-    overflow: auto;
-    max-width: 1400px;
-    margin: 0 auto;
-    box-sizing: border-box;
+   padding: 24px;
+   color: var(--theia-foreground);
+   background: var(--theia-editor-background);
+   height: 100%;
+   overflow: auto;
+   max-width: 1400px;
+   margin: 0 auto;
+   box-sizing: border-box;
 }
 
 .bam-hero {
-    display: grid;
-    grid-template-columns: 3fr 1fr;
-    gap: 18px;
-    align-items: start;
-    margin-bottom: 22px;
+   display: grid;
+   grid-template-columns: 3fr 1fr;
+   gap: 18px;
+   align-items: start;
+   margin-bottom: 22px;
 }
 
 .bam-logo {
-    width: 96px;
-    height: 96px;
-    object-fit: contain;
-    border-radius: 15px;
-    border: 1px solid var(--theia-widget-border);
+   width: 96px;
+   height: 96px;
+   object-fit: contain;
+   border-radius: 15px;
+   border: 1px solid var(--theia-widget-border);
 }
 
 .bam-brand-row {
-    display: flex;
-    align-items: center;
-    gap: 16px;
+   display: flex;
+   align-items: center;
+   gap: 16px;
 }
 
 .bam-title {
-    font-size: 34px;
-    font-weight: 700;
-    letter-spacing: 0.2px;
-    margin-bottom: 6px;
+   font-size: 34px;
+   font-weight: 700;
+   letter-spacing: 0.2px;
+   margin-bottom: 6px;
 }
 
 .brand-prefix {
-    font-variant: small-caps;
+   font-variant: small-caps;
 }
 
 .bam-subtitle {
-    font-size: 14px;
-    opacity: 0.85;
-    line-height: 1.5;
-    margin-bottom: 14px;
+   font-size: 14px;
+   opacity: 0.85;
+   line-height: 1.5;
+   margin-bottom: 14px;
 }
 
 .bam-description p {
-    margin: 0 0 10px 0;
-    line-height: 1.6;
-    opacity: 0.92;
+   margin: 0 0 10px 0;
+   line-height: 1.6;
+   opacity: 0.92;
 }
 
 .bam-links {
-    margin-top: 14px;
-    opacity: 0.9;
-    font-size: 13px;
+   margin-top: 14px;
+   opacity: 0.9;
+   font-size: 13px;
 }
 
 .bam-link {
-    color: var(--theia-textLink-foreground);
-    text-decoration: none;
+   color: var(--theia-textLink-foreground);
+   text-decoration: none;
 }
 
 .bam-link:hover {
-    text-decoration: underline;
+   text-decoration: underline;
 }
 
 .bam-link-sep {
-    margin: 0 8px;
-    opacity: 0.6;
+   margin: 0 8px;
+   opacity: 0.6;
 }
 
 .bam-card {
-    border: 1px solid var(--theia-editorWidget-border);
-    background: var(--theia-editorWidget-background);
-    border-radius: 12px;
-    padding: 14px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.10);
+   border: 1px solid var(--theia-editorWidget-border);
+   background: var(--theia-editorWidget-background);
+   border-radius: 12px;
+   padding: 14px;
+   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .bam-card-title {
-    font-weight: 700;
-    margin-bottom: 10px;
-    font-size: 13px;
-    opacity: 0.95;
+   font-weight: 700;
+   margin-bottom: 10px;
+   font-size: 13px;
+   opacity: 0.95;
 }
 
 .bam-actions-row {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
+   display: flex;
+   align-items: center;
+   gap: 20px;
+   flex-wrap: wrap;
 }
 
 .bam-action-grid,
 .bam-actions-sub {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+   display: flex;
+   align-items: center;
+   gap: 12px;
 }
 
 .bam-actions-sub {
-    margin-left: auto;
-    font-size: 12px;
-    opacity: 0.8;
+   margin-left: auto;
+   font-size: 12px;
+   opacity: 0.8;
 }
 
-
 .bam-actions-hint {
-    margin-top: 10px;
-    font-size: 12px;
-    opacity: 0.75;
+   margin-top: 10px;
+   font-size: 12px;
+   opacity: 0.75;
 }
 
 .bam-btn {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 12px;
-    border-radius: 10px;
-    border: 1px solid var(--theia-button-border, var(--theia-editorWidget-border));
-    background: var(--theia-button-background);
-    color: var(--theia-button-foreground);
-    cursor: pointer;
-    text-align: left;
-    transition: transform 80ms ease, filter 80ms ease;
+   display: flex;
+   align-items: center;
+   gap: 10px;
+   padding: 10px 12px;
+   border-radius: 10px;
+   border: 1px solid var(--theia-button-border, var(--theia-editorWidget-border));
+   background: var(--theia-button-background);
+   color: var(--theia-button-foreground);
+   cursor: pointer;
+   text-align: left;
+   transition:
+      transform 80ms ease,
+      filter 80ms ease;
 }
 
 .bam-btn:hover {
-    filter: brightness(1.05);
+   filter: brightness(1.05);
 }
 
 .bam-btn:active {
-    transform: translateY(1px);
+   transform: translateY(1px);
 }
 
 .bam-btn-primary {
-    background: var(--theia-button-primaryBackground);
-    color: var(--theia-button-primaryForeground);
-    border-color: var(--theia-button-primaryBackground);
+   background: var(--theia-button-primaryBackground);
+   color: var(--theia-button-primaryForeground);
+   border-color: var(--theia-button-primaryBackground);
 }
 
 .bam-btn-icon {
-    width: 18px;
-    height: 18px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0.95;
+   width: 18px;
+   height: 18px;
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   opacity: 0.95;
 }
 
 .bam-btn-text {
-    font-size: 13px;
-    font-weight: 500;
+   font-size: 13px;
+   font-weight: 500;
 }
 
 .bam-recent {
-    margin-top: 22px;
+   margin-top: 22px;
 }
 
 .bam-section {
-    position: relative;
-    padding: 32px 24px 24px 24px;
-    margin-top: 40px;
-    border: 2px dashed var(--theia-descriptionForeground);
-    background: var(--theia-editorWidget-background);
-    box-sizing: border-box;
+   position: relative;
+   padding: 32px 24px 24px 24px;
+   margin-top: 40px;
+   border: 2px dashed var(--theia-descriptionForeground);
+   background: var(--theia-editorWidget-background);
+   box-sizing: border-box;
 }
 
 .bam-section-title {
-    position: absolute;
-    top: -28px;
-    left: -2px;
-    padding: 2px 10px;
-    font-size: 14px;
-    font-weight: 800;
-    letter-spacing: 0.5px;
-    border: 2px dashed var(--theia-descriptionForeground);
-    background: var(--theia-editorWidget-background);
-    border-bottom: none;
+   position: absolute;
+   top: -28px;
+   left: -2px;
+   padding: 2px 10px;
+   font-size: 14px;
+   font-weight: 800;
+   letter-spacing: 0.5px;
+   border: 2px dashed var(--theia-descriptionForeground);
+   background: var(--theia-editorWidget-background);
+   border-bottom: none;
 }
 
 .bam-feature-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+   gap: 12px;
 }
 
 .bam-feature {
-    padding: 18px 20px;
-    border: 2px solid;
-    border-radius: 8px;
-    background: var(--theia-editorWidget-background);
-    position: relative;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-    font-family: inherit;
+   padding: 18px 20px;
+   border: 2px solid;
+   border-radius: 8px;
+   background: var(--theia-editorWidget-background);
+   position: relative;
+   transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease;
+   font-family: inherit;
 }
 
 .bam-feature:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+   transform: translateY(-3px);
+   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .bam-feature-title {
-    font-weight: 700;
-    margin-bottom: 6px;
+   font-weight: 700;
+   margin-bottom: 6px;
 }
 
 .bam-feature-text {
-    font-size: 13px;
-    line-height: 1.5;
-    opacity: 0.9;
+   font-size: 13px;
+   line-height: 1.5;
+   opacity: 0.9;
 }
-
-
 
 /* Container bleibt gleich */
 .bam-gif-grid {
-    display: flex;
-    gap: 32px;
-    margin-top: 32px;
-    align-items: stretch;
+   display: flex;
+   gap: 32px;
+   margin-top: 32px;
+   align-items: stretch;
 }
 
 /* Card */
 .bam-gif-item {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    border: 2px solid;
-    border-radius: 12px;
-    padding: 20px;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    position: relative;
-    overflow: visible;
+   flex: 1;
+   display: flex;
+   flex-direction: column;
+   border: 2px solid;
+   border-radius: 12px;
+   padding: 20px;
+   transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+   position: relative;
+   overflow: visible;
 }
 
 .bam-gif-item:hover {
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
 /* Titel */
 .bam-gif-title {
-    font-size: 16px;
-    font-weight: 700;
-    text-transform: uppercase;
-    border-bottom: 2px solid;
-    padding-bottom: 6px;
-    margin-bottom: 16px;
-    min-height: 48px;
-    display: flex;
-    align-items: center;
+   font-size: 16px;
+   font-weight: 700;
+   text-transform: uppercase;
+   border-bottom: 2px solid;
+   padding-bottom: 6px;
+   margin-bottom: 16px;
+   min-height: 48px;
+   display: flex;
+   align-items: center;
 }
 
 /* GIF Wrapper */
 .bam-gif-item img {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    border: 1px solid var(--theia-widget-border);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    transform-origin: center center; /* wichtig */
+   width: 100%;
+   aspect-ratio: 16 / 9;
+   object-fit: cover;
+   border: 1px solid var(--theia-widget-border);
+   transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+   transform-origin: center center; /* wichtig */
 }
 
 /* Hover Zoom – zentriert */
 .bam-gif-item:hover img {
-    transform: scale(1.5);
-    position: relative;
-    z-index: 20;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+   transform: scale(1.5);
+   position: relative;
+   z-index: 20;
+   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
 }
 
 .bam-footer {
-    margin-top: 22px;
-    padding-top: 12px;
-    border-top: 1px solid var(--theia-editorWidget-border);
-    font-size: 12px;
-    opacity: 0.75;
+   margin-top: 22px;
+   padding-top: 12px;
+   border-top: 1px solid var(--theia-editorWidget-border);
+   font-size: 12px;
+   opacity: 0.75;
 }
 
 .bam-action-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   box-sizing: border-box;
 
-    width: 42px;
-    height: 42px;
-    padding: 10px 12px;
-    line-height: 1;
-    flex: 0 0 auto;
-    margin: 0;
+   width: 42px;
+   height: 42px;
+   padding: 10px 12px;
+   line-height: 1;
+   flex: 0 0 auto;
+   margin: 0;
 
-    border-radius: 10px;
-    border: 1px solid var(--theia-editorWidget-border);
+   border-radius: 10px;
+   border: 1px solid var(--theia-editorWidget-border);
 
-    background: var(--theia-button-background);
-    color: var(--theia-button-foreground);
+   background: var(--theia-button-background);
+   color: var(--theia-button-foreground);
 
-    cursor: pointer;
-    user-select: none;
-    text-decoration: none;
+   cursor: pointer;
+   user-select: none;
+   text-decoration: none;
 
-    transition: background 0.15s ease, transform 0.05s ease;
+   transition:
+      background 0.15s ease,
+      transform 0.05s ease;
 }
 
 .bam-recent .bam-action-link {
-    width: auto;
-    height: auto;
-    min-height: 30px;
-    font-weight: 500;
+   width: auto;
+   height: auto;
+   min-height: 30px;
+   font-weight: 500;
 }
 
-
 .bam-action-link--disabled {
-    opacity: 0.35;
-    pointer-events: none;
+   opacity: 0.35;
+   pointer-events: none;
 }
 
 .bam-action-link--disabled-wrapper {
-    cursor: not-allowed;
+   cursor: not-allowed;
 }
 
 /* Icon selbst */
 .bam-action-link .codicon {
-    font-size: 20px;
+   font-size: 20px;
 }
 
 /* Hover */
 .bam-action-link:hover {
-    background: var(--theia-button-hoverBackground);
+   background: var(--theia-button-hoverBackground);
 }
 
 /* Click Feedback */
 .bam-action-link:active {
-    transform: translateY(1px);
+   transform: translateY(1px);
 }
 
 /* Optional: Fokus für Accessibility */
 .bam-action-link:focus-visible {
-    outline: 1px solid var(--theia-focusBorder);
-    outline-offset: 2px;
+   outline: 1px solid var(--theia-focusBorder);
+   outline-offset: 2px;
 }
 
-
 .bam-shape-0 {
-    border-radius: 0;
-    clip-path: none;
+   border-radius: 0;
+   clip-path: none;
 }
 
 .bam-shape-1 {
-    border-radius: 12px;
-    clip-path: none;
+   border-radius: 12px;
+   clip-path: none;
 }
 
 /* Business Layer */
 .bam-layer-0 {
-    background: rgba(214, 182, 86, 0.15);
-    border-color: #d6b656;
+   background: rgba(214, 182, 86, 0.15);
+   border-color: #d6b656;
 }
 
 /* Application Layer */
 .bam-layer-1 {
-    background: rgba(91, 155, 213, 0.15);
-    border-color: #5b9bd5;
+   background: rgba(91, 155, 213, 0.15);
+   border-color: #5b9bd5;
 }
 
 /* Technology Layer */
 .bam-layer-2 {
-    background: rgba(112, 173, 71, 0.15);
-    border-color: #70ad47;
+   background: rgba(112, 173, 71, 0.15);
+   border-color: #70ad47;
 }
 
-.bam-recent-row { padding: 8px 0; border-top: 1px solid var(--theia-editorWidget-border); }
-.bam-recent-name { font-weight: 700; text-decoration: none; cursor: pointer; color: var(--theia-textLink-foreground); }
-.bam-recent-name:hover { text-decoration: underline; }
-.bam-recent-path { font-size: 12px; opacity: 0.75; margin-top: 2px; }
-.bam-empty-recent { font-size: 13px; opacity: 0.9; line-height: 1.5; }
+.bam-recent-row {
+   padding: 8px 0;
+   border-top: 1px solid var(--theia-editorWidget-border);
+}
+.bam-recent-name {
+   font-weight: 700;
+   text-decoration: none;
+   cursor: pointer;
+   color: var(--theia-textLink-foreground);
+}
+.bam-recent-name:hover {
+   text-decoration: underline;
+}
+.bam-recent-path {
+   font-size: 12px;
+   opacity: 0.75;
+   margin-top: 2px;
+}
+.bam-empty-recent {
+   font-size: 13px;
+   opacity: 0.9;
+   line-height: 1.5;
+}

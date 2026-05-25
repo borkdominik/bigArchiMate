@@ -61,7 +61,7 @@ export class GElementNodeBuilder extends GNodeBuilder<GElementNode> {
                .text(elementRef?.name || elementRef?.id || 'Grouping')
                .id(`${this.proxy.id}_label`)
                .addCssClass('grouping-label')
-               .position(10,5)
+               .position(10, 5)
                .build()
          );
 

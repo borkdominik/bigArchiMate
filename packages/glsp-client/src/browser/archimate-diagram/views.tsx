@@ -44,32 +44,20 @@ export class GroupingNodeView extends ShapeView {
       return (
          <g class-diagram-node={true} class-element={true} class-grouping={true} data-svg-metadata-type={node.type}>
             {hiddenBoundingRect(node, context) as any}
-            <rect class-sprotty-node={true} x={0} y={labelBackgroundHeight + 0.75} width={width} height={height - labelBackgroundHeight - 0.75} />
             <rect
-               class-grouping-label-background={true}
+               class-sprotty-node={true}
                x={0}
-               y={0}
-               width={labelBackgroundWidth}
-               height={labelBackgroundHeight}
+               y={labelBackgroundHeight + 0.75}
+               width={width}
+               height={height - labelBackgroundHeight - 0.75}
             />
+            <rect class-grouping-label-background={true} x={0} y={0} width={labelBackgroundWidth} height={labelBackgroundHeight} />
 
             {/* Top border of label */}
-            <line
-               class-grouping-label-border={true}
-               x1={0}
-               y1={0}
-               x2={labelBackgroundWidth}
-               y2={0}
-            />
+            <line class-grouping-label-border={true} x1={0} y1={0} x2={labelBackgroundWidth} y2={0} />
 
             {/* Left border of label */}
-            <line
-               class-grouping-label-border={true}
-               x1={0}
-               y1={0}
-               x2={0}
-               y2={labelBackgroundHeight}
-            />
+            <line class-grouping-label-border={true} x1={0} y1={0} x2={0} y2={labelBackgroundHeight} />
 
             {/* Right border of label */}
             <line
@@ -85,7 +73,6 @@ export class GroupingNodeView extends ShapeView {
          </g>
       ) as any;
    }
-
 }
 
 @injectable()

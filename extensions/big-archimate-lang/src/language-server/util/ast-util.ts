@@ -279,7 +279,7 @@ export function getParentElementNode(node: AstNode): ElementNode | undefined {
    let current: AstNode | undefined = node.$container;
 
    while (current) {
-      if(isElementNode(current)) {
+      if (isElementNode(current)) {
          return current;
       }
       current = current.$container;
@@ -287,7 +287,7 @@ export function getParentElementNode(node: AstNode): ElementNode | undefined {
    return undefined;
 }
 
-export function getAbsolutePosition(node: DiagramNode): Point{
+export function getAbsolutePosition(node: DiagramNode): Point {
    let x = node.x;
    let y = node.y;
 
@@ -298,7 +298,7 @@ export function getAbsolutePosition(node: DiagramNode): Point{
       parent = getParentElementNode(parent);
    }
 
-   return {x,y};
+   return { x, y };
 }
 
 export function isGroupingNode(node: ElementNode): boolean {
@@ -315,8 +315,7 @@ export function findGroupingContaining(position: Point, diagram: Diagram): Eleme
       if (!isElementNode(node) || !isGroupingNode(node)) {
          continue;
       }
-      if (position.x >= node.x && position.x <= node.x + node.width &&
-          position.y >= node.y && position.y <= node.y + node.height) {
+      if (position.x >= node.x && position.x <= node.x + node.width && position.y >= node.y && position.y <= node.y + node.height) {
          return node;
       }
    }

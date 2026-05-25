@@ -44,12 +44,8 @@ export class CreateElementOperationHandler extends JsonCreateNodeOperationHandle
       // Groupings are never placed inside other groupings.
       const parentGrouping = isGrouping ? undefined : findGroupingContaining(location, diagram);
       const container = parentGrouping ?? diagram;
-      const x = parentGrouping
-         ? Math.max(0, Math.min(location.x - parentGrouping.x, parentGrouping.width - width))
-         : location.x;
-      const y = parentGrouping
-         ? Math.max(0, Math.min(location.y - parentGrouping.y, parentGrouping.height - height))
-         : location.y;
+      const x = parentGrouping ? Math.max(0, Math.min(location.x - parentGrouping.x, parentGrouping.width - width)) : location.x;
+      const y = parentGrouping ? Math.max(0, Math.min(location.y - parentGrouping.y, parentGrouping.height - height)) : location.y;
 
       const node: ElementNode = {
          $type: ElementNode,

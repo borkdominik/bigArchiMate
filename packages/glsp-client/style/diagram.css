@@ -156,8 +156,8 @@
 }
 
 .sprotty-edge.aggregation .circle {
-    fill: var(--arrow-empty-fill);
-    color: var(--arrow-empty-fill);
+   fill: var(--arrow-empty-fill);
+   color: var(--arrow-empty-fill);
 }
 
 .sprotty-edge.serving .arrow,
@@ -183,9 +183,8 @@
 
 .grouping-label-background {
    fill: var(--bg-default);
-   stroke: none
+   stroke: none;
 }
-
 
 .grouping-label-border {
    fill: none;

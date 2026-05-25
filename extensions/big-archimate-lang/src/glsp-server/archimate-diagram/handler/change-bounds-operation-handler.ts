@@ -52,19 +52,17 @@ export class ChangeBoundsOperationHandler extends JsonOperationHandler {
             if (targetGrouping !== currentGrouping) {
                if (targetGrouping && this.hasCrossBoundaryEdges(node, targetGrouping, movingInto.get(targetGrouping))) {
                   await this.actionDispatcher.dispatch(
-                     MessageAction.create(
-                        'Cannot place element inside grouping: it has connections to elements outside the grouping.',
-                        { severity: 'WARNING' }
-                     )
+                     MessageAction.create('Cannot place element inside grouping: it has connections to elements outside the grouping.', {
+                        severity: 'WARNING'
+                     })
                   );
                   continue;
                }
                if (!targetGrouping && currentGrouping && this.hasInternalEdges(node, currentGrouping, movingOut.get(currentGrouping))) {
                   await this.actionDispatcher.dispatch(
-                     MessageAction.create(
-                        'Cannot remove element from grouping: it has connections to elements inside the grouping.',
-                        { severity: 'WARNING' }
-                     )
+                     MessageAction.create('Cannot remove element from grouping: it has connections to elements inside the grouping.', {
+                        severity: 'WARNING'
+                     })
                   );
                   continue;
                }
@@ -102,49 +100,47 @@ export class ChangeBoundsOperationHandler extends JsonOperationHandler {
 
       const processedNodes = new Set<DiagramNode>();
       for (const eb of operation.newBounds) {
-         const node =
-            this.modelState.index.findElementNode(eb.elementId) ??
-            this.modelState.index.findJunctionNode(eb.elementId);
-         if (node) {processedNodes.add(node);}
+         const node = this.modelState.index.findElementNode(eb.elementId) ?? this.modelState.index.findJunctionNode(eb.elementId);
+         if (node) {
+            processedNodes.add(node);
+         }
       }
 
       for (const eb of operation.newBounds) {
          const grouping = this.modelState.index.findElementNode(eb.elementId);
-         if (!grouping || !isGroupingNode(grouping)) {continue;}
+         if (!grouping || !isGroupingNode(grouping)) {
+            continue;
+         }
 
          const candidates = [
-            ...(diagram.nodes as DiagramNode[]).filter(n =>
-               !processedNodes.has(n) && !(isElementNode(n) && isGroupingNode(n))
-            ),
+            ...(diagram.nodes as DiagramNode[]).filter(n => !processedNodes.has(n) && !(isElementNode(n) && isGroupingNode(n))),
             ...(grouping.children as DiagramNode[]).filter(n => !processedNodes.has(n))
          ] as (ElementNode | JunctionNode)[];
 
          for (const node of candidates) {
             const currentParent = getParentElementNode(node);
-            const absPos: Point = currentParent
-               ? { x: currentParent.x + node.x, y: currentParent.y + node.y }
-               : { x: node.x, y: node.y };
+            const absPos: Point = currentParent ? { x: currentParent.x + node.x, y: currentParent.y + node.y } : { x: node.x, y: node.y };
             const size: Dimension = { width: node.width, height: node.height };
             const center: Point = { x: absPos.x + size.width / 2, y: absPos.y + size.height / 2 };
             const newParent = findGroupingContaining(center, diagram);
 
-            if (newParent === currentParent) {continue;}
+            if (newParent === currentParent) {
+               continue;
+            }
 
             if (newParent && this.hasCrossBoundaryEdges(node, newParent, undefined)) {
                await this.actionDispatcher.dispatch(
-                  MessageAction.create(
-                     'Cannot place element inside grouping: it has connections to elements outside the grouping.',
-                     { severity: 'WARNING' }
-                  )
+                  MessageAction.create('Cannot place element inside grouping: it has connections to elements outside the grouping.', {
+                     severity: 'WARNING'
+                  })
                );
                continue;
             }
             if (!newParent && currentParent && this.hasInternalEdges(node, currentParent, undefined)) {
                await this.actionDispatcher.dispatch(
-                  MessageAction.create(
-                     'Cannot remove element from grouping: it has connections to elements inside the grouping.',
-                     { severity: 'WARNING' }
-                  )
+                  MessageAction.create('Cannot remove element from grouping: it has connections to elements inside the grouping.', {
+                     severity: 'WARNING'
+                  })
                );
                continue;
             }

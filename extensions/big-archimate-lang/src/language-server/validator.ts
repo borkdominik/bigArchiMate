@@ -223,11 +223,11 @@ export class Validator {
    }
 
    protected checkGroupingChildren(node: AstNode, accept: ValidationAcceptor): void {
-      if(!isElementNode(node)) {
+      if (!isElementNode(node)) {
          return;
       }
 
-      if(node.children.length > 0 && !isGroupingNode(node)){
+      if (node.children.length > 0 && !isGroupingNode(node)) {
          accept('error', 'Only Grouping nodes may contain child nodes.', {
             node,
             property: 'children'
@@ -236,12 +236,12 @@ export class Validator {
    }
 
    protected checkNestedGroupings(node: AstNode, accept: ValidationAcceptor): void {
-      if(!isElementNode(node) || !isGroupingNode(node)) {
+      if (!isElementNode(node) || !isGroupingNode(node)) {
          return;
       }
 
-      for(const child of node.children) {
-         if(isElementNode(child) && isGroupingNode(child)) {
+      for (const child of node.children) {
+         if (isElementNode(child) && isGroupingNode(child)) {
             accept('error', 'Nestes groupings are not supported yet.', {
                node: child,
                property: 'children'
@@ -251,19 +251,19 @@ export class Validator {
    }
 
    protected checkGroupingChildBounds(node: AstNode, accept: ValidationAcceptor): void {
-      if(!isElementNode(node) || !isGroupingNode(node)) {
+      if (!isElementNode(node) || !isGroupingNode(node)) {
          return;
       }
 
-      for(const child of node.children) {
-         if(child.x < 0 || child.y < 0) {
+      for (const child of node.children) {
+         if (child.x < 0 || child.y < 0) {
             accept('warning', `Child node '${child.id}' has negative coordinates inside grouping '${node.id}'.`, {
                node: child,
                property: 'x'
             });
          }
 
-         if(child.x + child.width > node.width || child.y + child.height > node.height) {
+         if (child.x + child.width > node.width || child.y + child.height > node.height) {
             accept('warning', `Child node '${child.id}' exceeds the bounds of grouping '${node.id}'.`, {
                node: child,
                property: 'width'

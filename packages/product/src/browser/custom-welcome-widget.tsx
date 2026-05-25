@@ -1,14 +1,14 @@
-import * as React from '@theia/core/shared/react';
-import URI from '@theia/core/lib/common/uri';
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
-import { ReactWidget, LabelProvider, Key, KeyCode, codicon, CommonCommands } from '@theia/core/lib/browser';
-import { CommandRegistry,Path, environment, isOSX } from '@theia/core/lib/common';
-import { EnvVariablesServer } from '@theia/core/lib/common/env-variables';
+import { CommonCommands, Key, KeyCode, LabelProvider, ReactWidget, codicon } from '@theia/core/lib/browser';
 import { WindowService } from '@theia/core/lib/browser/window/window-service';
-import { WorkspaceCommands, WorkspaceService } from '@theia/workspace/lib/browser';
-import { KeymapsCommands } from '@theia/keymaps/lib/browser';
-import { GettingStartedWidget } from '@theia/getting-started/lib/browser/getting-started-widget';
+import { CommandRegistry, Path, environment, isOSX } from '@theia/core/lib/common';
+import { EnvVariablesServer } from '@theia/core/lib/common/env-variables';
+import URI from '@theia/core/lib/common/uri';
 import { Message } from '@theia/core/shared/@lumino/messaging';
+import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
+import * as React from '@theia/core/shared/react';
+import { GettingStartedWidget } from '@theia/getting-started/lib/browser/getting-started-widget';
+import { KeymapsCommands } from '@theia/keymaps/lib/browser';
+import { WorkspaceCommands, WorkspaceService } from '@theia/workspace/lib/browser';
 
 @injectable()
 export class CustomWelcomeWidget extends ReactWidget {
@@ -362,36 +362,38 @@ export class CustomWelcomeWidget extends ReactWidget {
    protected doOpenPreferences = (): Promise<unknown> => this.commandRegistry.executeCommand(CommonCommands.OPEN_PREFERENCES.id);
    protected doOpenKeyboardShortcuts = (): Promise<unknown> => this.commandRegistry.executeCommand(KeymapsCommands.OPEN_KEYMAPS.id);
 }
-   const FEATURES = [
-      {
-         title: 'Textual, Graphical & Form-based Modeling',
-         text: 'Work in the view you prefer. All editors stay synchronized through a shared semantic model.'
-      },
-      {
-         title: 'GLSP-powered Diagram Editor',
-         text: 'Modern, extensible diagramming based on the Graphical Language Server Protocol.'
-      },
-      {
-         title: 'Langium Language Engineering',
-         text: 'Strong parsing, validation, and language tooling for robust ArchiMate projects.'
-      },
-      {
-         title: 'Package-based Project System',
-         text: 'A scalable project structure for managing large architectures.'
-      },
-      {
-         title: 'Magic Edge Connector',
-         text: 'Intelligent edge creation that suggests valid relationships based on the model context.'
-      },
-      {
-         title: 'Libavoid Edge Routing',
-         text: 'High-quality orthogonal edge routing with obstacle avoidance, ' +
-            'segment nudging, and automatic path optimization for clean, professional diagrams.'
-      }
-   ];
+
+const FEATURES = [
+   {
+      title: 'Textual, Graphical & Form-based Modeling',
+      text: 'Work in the view you prefer. All editors stay synchronized through a shared semantic model.'
+   },
+   {
+      title: 'GLSP-powered Diagram Editor',
+      text: 'Modern, extensible diagramming based on the Graphical Language Server Protocol.'
+   },
+   {
+      title: 'Langium Language Engineering',
+      text: 'Strong parsing, validation, and language tooling for robust ArchiMate projects.'
+   },
+   {
+      title: 'Package-based Project System',
+      text: 'A scalable project structure for managing large architectures.'
+   },
+   {
+      title: 'Magic Edge Connector',
+      text: 'Intelligent edge creation that suggests valid relationships based on the model context.'
+   },
+   {
+      title: 'Libavoid Edge Routing',
+      text:
+         'High-quality orthogonal edge routing with obstacle avoidance, ' +
+         'segment nudging, and automatic path optimization for clean, professional diagrams.'
+   }
+];
 
 export const BigArchiMate = (): React.ReactElement => (
-      <>
-         <span className='brand-prefix'>big</span>ArchiMate
-      </>
+   <>
+      <span className='brand-prefix'>big</span>ArchiMate
+   </>
 );
