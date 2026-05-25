@@ -2,7 +2,10 @@ import { ApplicationShell, ApplicationShellOptions, FrontendApplication, WidgetF
 import { PreferenceContribution } from '@theia/core/lib/browser/preferences';
 import { ContainerModule } from '@theia/core/shared/inversify';
 import { ThemeServiceWithDB } from '@theia/monaco/lib/browser/monaco-indexed-db';
-import { GettingStartedPreferenceContribution, GettingStartedPreferenceSchema } from '@theia/getting-started/lib/browser/getting-started-preferences';
+import {
+   GettingStartedPreferenceContribution,
+   GettingStartedPreferenceSchema
+} from '@theia/getting-started/lib/browser/getting-started-preferences';
 import { CustomFrontendApplication } from './frontend-application';
 import { ThemeService } from './theme-service';
 import { CustomWelcomeWidget } from './custom-welcome-widget';

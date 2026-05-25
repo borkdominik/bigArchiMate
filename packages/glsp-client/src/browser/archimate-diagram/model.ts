@@ -55,11 +55,11 @@ export class GEditableLabel extends GLabel implements EditableLabel {
 
       const baseX = (nodeBounds?.x ?? 0) - (this.bounds?.x ?? 0);
 
-      if(this.parent?.type === 'node:grouping') {
+      if (this.parent?.type === 'node:grouping') {
          return {
             x: -4,
             y: -4
-         }
+         };
       }
       return {
          x: baseX + 5,
@@ -68,11 +68,11 @@ export class GEditableLabel extends GLabel implements EditableLabel {
    }
 
    get editControlDimension(): Dimension {
-      if(this.parent?.type === 'node:grouping') {
+      if (this.parent?.type === 'node:grouping') {
          return {
             width: Math.max(80, this.bounds?.width ?? 80),
             height: Math.max(20, this.bounds?.height ?? 20)
-         }
+         };
       }
       const nb = (this.parent as any).bounds;
       if (!nb) {

@@ -41,11 +41,11 @@ export class CustomWelcomeWidget extends ReactWidget {
       this.title.iconClass = 'fa fa-home';
 
       this.addClass('theia-welcome-view');
-      //this.recentWorkspaces = await this.workspaceService.recentWorkspaces();
-      //this.home = new URI(await this.environments.getHomeDirUri()).path.toString();
+      // this.recentWorkspaces = await this.workspaceService.recentWorkspaces();
+      // this.home = new URI(await this.environments.getHomeDirUri()).path.toString();
       this.node.tabIndex = 0;
 
-      void this.initializeData();
+      this.initializeData();
       this.update();
    }
 
@@ -390,8 +390,8 @@ export class CustomWelcomeWidget extends ReactWidget {
       }
    ];
 
-   export const BigArchiMate = () => (
+export const BigArchiMate = (): React.ReactElement => (
       <>
          <span className='brand-prefix'>big</span>ArchiMate
       </>
-   );
+);

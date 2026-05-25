@@ -565,7 +565,7 @@ type LayeredConceptType = ElementType | JunctionType;
 export const getLayerConcepts = (layerType: LayerType): Partial<Record<LayeredConceptType, LayeredConceptMetaData>> => {
    const filtered: Partial<Record<LayeredConceptType, LayeredConceptMetaData>> = {};
 
-   getObjectEntries({ ...elementMetadataMap, }).forEach(([conceptType, conceptInfo]) => {
+   getObjectEntries({ ...elementMetadataMap }).forEach(([conceptType, conceptInfo]) => {
       if (conceptInfo.layer === layerType) {
          filtered[conceptType] = conceptInfo;
       }
