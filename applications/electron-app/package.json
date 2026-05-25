@@ -24,7 +24,7 @@
     "package:pre:extensions:extract": "yarn decompress plugins/big-archimate-lang-0.0.0.vsix -o plugins/big-archimate-lang-0.0.0 && yarn decompress plugins/big-archimate-theme-0.0.0.vsix -o plugins/big-archimate-theme-0.0.0",
     "package:preview": "yarn package:pre && electron-builder -c.mac.identity=null --dir && yarn package:post",
     "rebuild": "theia rebuild:electron --cacheRoot ../..",
-    "start": "cross-env NODE_ENV=development theia start --plugins=local-dir:plugins",
+    "start": "cross-env NODE_ENV=development theia start ../../examples --plugins=local-dir:plugins",
     "test": "jest --passWithNoTests",
     "watch": "theia build --watch --mode development"
   },

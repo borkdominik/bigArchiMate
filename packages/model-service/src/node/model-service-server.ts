@@ -109,23 +109,28 @@ export class ModelServiceServerImpl implements ModelServiceServer {
       return connected.promise;
    }
 
-   protected async findPort(timeout = 500, attempts = -1): Promise<number> {
+   protected async findPort(timeout = 500, attempts = 240): Promise<number> {
       const pendingContent = new Deferred<number>();
       let counter = 0;
+      const retry = (error?: unknown): void => {
+         counter++;
+         if (attempts >= 0 && counter > attempts) {
+            pendingContent.reject(error ?? new Error('No port information received from the language extension.'));
+         } else {
+            tryQueryingPort();
+         }
+      };
       const tryQueryingPort = (): void => {
          setTimeout(async () => {
             try {
                const port = await this.commandService.executeCommand<number>(MODELSERVER_PORT_COMMAND);
                if (port) {
                   pendingContent.resolve(port);
+               } else {
+                  retry();
                }
             } catch (error) {
-               counter++;
-               if (attempts >= 0 && counter > attempts) {
-                  pendingContent.reject(error);
-               } else {
-                  tryQueryingPort();
-               }
+               retry(error);
             }
          }, timeout);
       };
