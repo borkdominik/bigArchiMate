@@ -27,9 +27,9 @@ const { shared, services } = createServices({ connection, ...NodeFileSystem });
 // Start the language server with the shared services
 startLanguageServer(shared);
 
-shared.workspace.WorkspaceManager.onWorkspaceInitialized(workspaceFolders => {
+shared.workspace.WorkspaceManager.onWorkspaceInitialized(() => {
    // Start the graphical language server with the shared services
-   startGLSPServer({ shared, language: services }, workspaceFolders[0]);
+   startGLSPServer({ shared, language: services });
    // Start the JSON server with the shared services
-   startModelServer({ shared, language: services }, workspaceFolders[0]);
+   startModelServer({ shared, language: services });
 });

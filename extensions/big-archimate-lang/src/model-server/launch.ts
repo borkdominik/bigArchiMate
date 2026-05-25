@@ -2,7 +2,6 @@ import { MODELSERVER_PORT_COMMAND } from '@big-archimate/protocol';
 import console from 'console';
 import * as net from 'net';
 import * as rpc from 'vscode-jsonrpc/node.js';
-import { URI } from 'vscode-uri';
 import { LSPServices } from '../integration.js';
 import { ModelServer } from './model-server.js';
 
@@ -14,7 +13,7 @@ const currentConnections: rpc.MessageConnection[] = [];
  * @param services language services
  * @returns a promise that is resolved as soon as the server is shut down or rejects if an error occurs
  */
-export function startModelServer(services: LSPServices, workspaceFolder: URI): Promise<void> {
+export function startModelServer(services: LSPServices): Promise<void> {
    const netServer = net.createServer(socket => createClientConnection(socket, services));
    netServer.listen(0);
    netServer.on('listening', () => {
