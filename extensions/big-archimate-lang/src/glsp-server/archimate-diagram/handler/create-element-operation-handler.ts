@@ -11,7 +11,8 @@ import {
 } from '@eclipse-glsp/server';
 import { inject, injectable } from '@theia/core/shared/inversify';
 import { URI, Utils as UriUtils } from 'vscode-uri';
-import { ArchiMateRoot, Element, ElementNode } from '../../../language-server/generated/ast.js';
+import { DiagramNode, ElementNode, ArchiMateRoot, Element } from '../../../language-server/generated/ast.js';
+import { findGroupingContaining } from '../../../language-server/util/ast-util.js';
 import { Utils } from '../../../language-server/util/uri-util.js';
 import { ArchiMateCommand } from '../../common/command.js';
 import { ArchiMateModelState } from '../../common/model-state.js';
@@ -33,22 +34,40 @@ export class CreateElementOperationHandler extends JsonCreateNodeOperationHandle
       if (!element) {
          return;
       }
-      const container = this.modelState.diagram;
+      const diagram = this.modelState.diagram;
       const location = this.getLocation(operation) ?? Point.ORIGIN;
+
+      const isGrouping = element.type === 'Grouping';
+      const width = isGrouping ? 400 : 200;
+      const height = isGrouping ? 250 : 50;
+
+      // Groupings are never placed inside other groupings.
+      const parentGrouping = isGrouping ? undefined : findGroupingContaining(location, diagram);
+      const container = parentGrouping ?? diagram;
+      const x = parentGrouping ? Math.max(0, Math.min(location.x - parentGrouping.x, parentGrouping.width - width)) : location.x;
+      const y = parentGrouping ? Math.max(0, Math.min(location.y - parentGrouping.y, parentGrouping.height - height)) : location.y;
+
       const node: ElementNode = {
          $type: ElementNode,
          $container: container,
-         id: this.modelState.idProvider.findNextId(ElementNode, element.name + 'Node', container),
+         id: this.modelState.idProvider.findNextId(ElementNode, element.name + 'Node', diagram),
          element: {
             $refText: this.modelState.idProvider.getNodeId(element) || element.id || '',
             ref: element
          },
-         x: location.x,
-         y: location.y,
-         width: 200,
-         height: 50
+         x,
+         y,
+         width,
+         height,
+         children: []
       };
-      container.nodes.push(node);
+
+      if (parentGrouping) {
+         (parentGrouping.children as DiagramNode[]).push(node);
+      } else {
+         diagram.nodes.push(node);
+      }
+
       this.actionDispatcher.dispatchAfterNextUpdate({
          kind: 'EditLabel',
          labelId: `${this.modelState.index.createId(node)}_label`

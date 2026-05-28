@@ -10731,6 +10731,11 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
+libavoid-js@^0.4.0-beta.1:
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/libavoid-js/-/libavoid-js-0.4.5.tgz#445f1f5efaaa0682972473e32b6de92d42f0664e"
+  integrity sha512-9BrYRXAQ+nmLuHZSqf4z52YN8TroBPxyqo6A6h6Pj03j5UYNx/Hhnd/rg+kiLVrE76wzBeBVO3OW7kaEpzYC9Q==
+
 lie@~3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/lie/-/lie-3.3.0.tgz#dcf82dee545f46074daf200c7c1c5a08e0f40f6a"
@@ -14197,6 +14202,13 @@ sprotty-protocol@1.4.0, sprotty-protocol@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/sprotty-protocol/-/sprotty-protocol-1.4.0.tgz#817d1fa4e6cc9300eda8ebfc29fa8976cb08aa0e"
   integrity sha512-+AAskW3Mzcq5UhMnummp4wwJ1dYdgT7/utmWoHtjfrK7JTJq9G/VWWlHnTnQGzHHyma03Loy2AozToXoArQuAQ==
+
+sprotty-routing-libavoid@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/sprotty-routing-libavoid/-/sprotty-routing-libavoid-1.4.1.tgz#761682d240ce64a9e407a8c4ceee08c14a8f0599"
+  integrity sha512-TYeAifvX9GIR2gmAhHbi825bijQfvZ9LJ2SPzb7CYoh/S7FIJH/iN+52SQvKIL24AbHNfPqCKbGcSOJTjhH3RQ==
+  dependencies:
+    libavoid-js "^0.4.0-beta.1"
 
 sprotty@1.4.0:
   version "1.4.0"

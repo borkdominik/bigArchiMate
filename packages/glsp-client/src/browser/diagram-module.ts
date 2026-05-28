@@ -1,15 +1,15 @@
 import { GRID } from '@big-archimate/protocol';
 import {
+   bindAsService,
+   bindOrRebind,
    ConsoleLogger,
    GLSPMousePositionTracker,
    LogLevel,
    MetadataPlacer,
    MouseDeleteTool,
-   TYPES,
    ToolManager,
    ToolPalette,
-   bindAsService,
-   bindOrRebind
+   TYPES
 } from '@eclipse-glsp/client';
 import { GlspSelectionDataService } from '@eclipse-glsp/theia-integration';
 import { ContainerModule, injectable, interfaces } from '@theia/core/shared/inversify';
@@ -20,6 +20,8 @@ import { CustomMetadataPlacer } from './metadata-placer';
 import { MousePositionTracker } from './mouse-position-tracker';
 import { SelectionDataService } from './selection-data-service';
 import { CustomToolPalette } from './tool-palette';
+import { TYPES as SPROTTY_TYPES } from 'sprotty';
+import { LibavoidDiamondAnchor, LibavoidEllipseAnchor, LibavoidRectangleAnchor, LibavoidRouter, RouteType } from 'sprotty-routing-libavoid';
 import { ArchimateMagicEdgeConnectorPalette } from './archimate-magic-edge-connector-palette';
 
 export function createDiagramModule(registry: interfaces.ContainerModuleCallBack): ContainerModule {
@@ -36,6 +38,26 @@ export function createDiagramModule(registry: interfaces.ContainerModuleCallBack
       rebind(ToolPalette).toService(CustomToolPalette);
       bindAsService(context, GlspSelectionDataService, SelectionDataService);
       bindAsService(context, TYPES.IDiagramStartup, DiagramStartup);
+      // --- libavoid routing ---
+      bind(LibavoidRouter)
+         .toSelf()
+         .inSingletonScope()
+         .onActivation((_ctx, router) => {
+            router.setOptions({
+               routingType: RouteType.Orthogonal,
+               segmentPenalty: 50,
+               idealNudgingDistance: 24,
+               shapeBufferDistance: 25,
+               nudgeOrthogonalSegmentsConnectedToShapes: true,
+               nudgeOrthogonalTouchingColinearSegments: false
+            });
+            return router;
+         });
+      bind(SPROTTY_TYPES.IEdgeRouter).toService(LibavoidRouter);
+      bind(SPROTTY_TYPES.IAnchorComputer).to(LibavoidDiamondAnchor).inSingletonScope();
+      bind(SPROTTY_TYPES.IAnchorComputer).to(LibavoidEllipseAnchor).inSingletonScope();
+      bind(SPROTTY_TYPES.IAnchorComputer).to(LibavoidRectangleAnchor).inSingletonScope();
+
       registry(bind, unbind, isBound, rebind, unbindAsync, onActivation, onDeactivation);
       // bind(CustomCommandPalette).toSelf().inSingletonScope();
       // rebind(GlspCommandPalette).toService(CustomCommandPalette);

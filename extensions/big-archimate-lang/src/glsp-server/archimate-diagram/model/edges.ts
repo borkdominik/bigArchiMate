@@ -1,6 +1,6 @@
 import { ARCHIMATE_RELATION_TYPE_MAP, REFERENCE_CONTAINER_TYPE, REFERENCE_PROPERTY, REFERENCE_VALUE } from '@big-archimate/protocol';
-import { GEdge, GEdgeBuilder, Point } from '@eclipse-glsp/server';
-import { RelationEdge, RelationRoutingPoint } from '../../../language-server/generated/ast.js';
+import { GEdge, GEdgeBuilder } from '@eclipse-glsp/server';
+import { RelationEdge } from '../../../language-server/generated/ast.js';
 import { ArchiMateGModelIndex } from '../../common/gmodel-index.js';
 
 export class GRelationEdge extends GEdge {
@@ -30,11 +30,12 @@ export class GRelationEdgeBuilder extends GEdgeBuilder<GRelationEdge> {
       this.sourceId(sourceId || '');
       this.targetId(targetId || '');
 
-      this.addRoutingPoints(edge.routingPoints.map(this.relationEdgeRoutingPointToPoint));
+      // this.addRoutingPoints(edge.routingPoints.map(this.relationEdgeRoutingPointToPoint));
       return this;
    }
-
+   /*
    private relationEdgeRoutingPointToPoint(routingPoint: RelationRoutingPoint): Point {
       return { x: routingPoint.x, y: routingPoint.y };
    }
+    */
 }

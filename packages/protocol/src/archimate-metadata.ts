@@ -1,6 +1,5 @@
-import { ConceptType, ElementType, isElementType, JunctionType, LayerType, RelationType } from './glsp/types';
+import { ConceptType, isElementType, ElementType, JunctionType, LayerType, RelationType } from './glsp/types';
 import { getObjectEntries } from './util';
-
 type CornerType = 'round' | 'square' | 'diamond';
 
 interface ConceptMetaData {

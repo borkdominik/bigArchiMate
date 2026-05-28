@@ -1183,23 +1183,11 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
                         "feature": "nodes",
                         "operator": "+=",
                         "terminal": {
-                          "$type": "Alternatives",
-                          "elements": [
-                            {
-                              "$type": "RuleCall",
-                              "rule": {
-                                "$ref": "#/rules@25"
-                              },
-                              "arguments": []
-                            },
-                            {
-                              "$type": "RuleCall",
-                              "rule": {
-                                "$ref": "#/rules@26"
-                              },
-                              "arguments": []
-                            }
-                          ]
+                          "$type": "RuleCall",
+                          "rule": {
+                            "$ref": "#/rules@27"
+                          },
+                          "arguments": []
                         }
                       }
                     ],
@@ -1458,6 +1446,59 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
               "$ref": "#/rules@24"
             },
             "arguments": []
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "children"
+              },
+              {
+                "$type": "Keyword",
+                "value": ":"
+              },
+              {
+                "$type": "RuleCall",
+                "rule": {
+                  "$ref": "#/rules@11"
+                },
+                "arguments": []
+              },
+              {
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "RuleCall",
+                    "rule": {
+                      "$ref": "#/rules@13"
+                    },
+                    "arguments": []
+                  },
+                  {
+                    "$type": "Assignment",
+                    "feature": "children",
+                    "operator": "+=",
+                    "terminal": {
+                      "$type": "RuleCall",
+                      "rule": {
+                        "$ref": "#/rules@27"
+                      },
+                      "arguments": []
+                    }
+                  }
+                ],
+                "cardinality": "+"
+              },
+              {
+                "$type": "RuleCall",
+                "rule": {
+                  "$ref": "#/rules@12"
+                },
+                "arguments": []
+              }
+            ],
+            "cardinality": "?"
           }
         ]
       },
@@ -1533,7 +1574,7 @@ export const ArchiMateGrammar = (): Grammar => loadedArchiMateGrammar ?? (loaded
     },
     {
       "$type": "ParserRule",
-      "name": "ElementNodeOrJunctionNode",
+      "name": "DiagramNode",
       "definition": {
         "$type": "Alternatives",
         "elements": [

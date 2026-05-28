@@ -28,7 +28,7 @@ const PROPERTY_ORDER = new Map<string, string[]>([
    [Junction, ['id', 'type', 'name', 'documentation', 'properties']],
    [Relation, ['id', 'type', 'source', 'target', 'name', 'documentation', 'properties']],
    [Diagram, ['id', 'nodes', 'edges', 'name', 'documentation', 'properties']],
-   [ElementNode, ['id', 'element', 'x', 'y', 'width', 'height']],
+   [ElementNode, ['id', 'element', 'x', 'y', 'width', 'height', 'children']],
    [JunctionNode, ['id', 'junction', 'x', 'y', 'width', 'height']],
    [RelationEdge, ['id', 'relation', 'sourceNode', 'targetNode', 'routingPoints']],
    [RelationRoutingPoint, ['x', 'y']]

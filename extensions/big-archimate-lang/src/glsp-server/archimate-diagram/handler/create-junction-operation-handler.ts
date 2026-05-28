@@ -11,10 +11,13 @@ import {
 } from '@eclipse-glsp/server';
 import { inject, injectable } from '@theia/core/shared/inversify';
 import { URI, Utils as UriUtils } from 'vscode-uri';
-import { ArchiMateRoot, Junction, JunctionNode } from '../../../language-server/generated/ast.js';
+import { ArchiMateRoot, DiagramNode, Junction, JunctionNode } from '../../../language-server/generated/ast.js';
+import { findGroupingContaining } from '../../../language-server/util/ast-util.js';
 import { Utils } from '../../../language-server/util/uri-util.js';
 import { ArchiMateCommand } from '../../common/command.js';
 import { ArchiMateModelState } from '../../common/model-state.js';
+
+const JUNCTION_SIZE = 25;
 
 @injectable()
 export class CreateJunctionOperationHandler extends JsonCreateNodeOperationHandler {
@@ -33,22 +36,34 @@ export class CreateJunctionOperationHandler extends JsonCreateNodeOperationHandl
       if (!junction) {
          return;
       }
-      const container = this.modelState.diagram;
+      const diagram = this.modelState.diagram;
       const location = this.getLocation(operation) ?? Point.ORIGIN;
+
+      const parentGrouping = findGroupingContaining(location, diagram);
+      const container = parentGrouping ?? diagram;
+      const x = parentGrouping ? Math.max(0, Math.min(location.x - parentGrouping.x, parentGrouping.width - JUNCTION_SIZE)) : location.x;
+      const y = parentGrouping ? Math.max(0, Math.min(location.y - parentGrouping.y, parentGrouping.height - JUNCTION_SIZE)) : location.y;
+
       const node: JunctionNode = {
          $type: JunctionNode,
          $container: container,
-         id: this.modelState.idProvider.findNextId(JunctionNode, junction.type + 'Node', container),
+         id: this.modelState.idProvider.findNextId(JunctionNode, junction.type + 'Node', diagram),
          junction: {
             $refText: this.modelState.idProvider.getNodeId(junction) || junction.id || '',
             ref: junction
          },
-         x: location.x,
-         y: location.y,
-         width: 25,
-         height: 25
+         x,
+         y,
+         width: JUNCTION_SIZE,
+         height: JUNCTION_SIZE
       };
-      container.nodes.push(node);
+
+      if (parentGrouping) {
+         (parentGrouping.children as DiagramNode[]).push(node);
+      } else {
+         diagram.nodes.push(node);
+      }
+
       this.actionDispatcher.dispatchAfterNextUpdate({
          kind: 'EditLabel',
          labelId: `${this.modelState.index.createId(node)}_label`

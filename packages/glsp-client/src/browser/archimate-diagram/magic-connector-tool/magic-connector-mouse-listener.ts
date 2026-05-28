@@ -1,4 +1,4 @@
-import { EdgeCreationToolMouseListener, Action, SetUIExtensionVisibilityAction } from '@eclipse-glsp/client';
+import { Action, EdgeCreationToolMouseListener, SetUIExtensionVisibilityAction } from '@eclipse-glsp/client';
 import { GModelElement } from '@eclipse-glsp/sprotty';
 
 const EDGE_CONNECTOR_PALETTE_ID = 'archimate.magic-edge-connector-palette';
@@ -22,9 +22,5 @@ export class MagicConnectorMouseListener extends EdgeCreationToolMouseListener {
          })
       );
       return super.getCreateOperation(element, event, sourceElementId, targetElementId);
-   }
-
-   override nonDraggingMouseUp(ele: GModelElement, event: MouseEvent): Action[] {
-      return super.nonDraggingMouseUp(ele, event);
    }
 }

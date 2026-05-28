@@ -3,6 +3,7 @@ import { AstNode, AstUtils, LangiumDocument, Reference, isAstNode } from 'langiu
 import {
    ArchiMateRoot,
    Diagram,
+   DiagramNode,
    Element,
    ElementNode,
    ElementType,
@@ -16,7 +17,8 @@ import {
    isDiagram,
    isElement,
    isJunction,
-   isRelation
+   isRelation,
+   isElementNode
 } from '../generated/ast.js';
 import { ID_PROPERTY } from '../id-provider.js';
 
@@ -196,12 +198,12 @@ export function createDiagram(container: ArchiMateRoot, id: string, opts?: Parti
 }
 
 export function createElementNode(
-   container: Diagram,
+   container: Diagram | ElementNode,
    id: string,
    element: Reference<Element>,
    position: Point,
    dimension: Dimension,
-   opts?: Partial<Omit<ElementNode, '$container' | '$type' | 'id' | 'element'>>
+   opts?: Partial<Omit<ElementNode, '$container' | '$type' | 'id' | 'element' | 'children'>>
 ): ElementNode {
    return {
       $container: container,
@@ -210,12 +212,13 @@ export function createElementNode(
       element,
       ...position,
       ...dimension,
-      ...opts
+      ...opts,
+      children: []
    };
 }
 
 export function createJunctionNode(
-   container: Diagram,
+   container: Diagram | ElementNode,
    id: string,
    junction: Reference<Junction>,
    dimension: Dimension,
@@ -237,8 +240,8 @@ export function createRelationEdge(
    container: Diagram,
    id: string,
    relation: Reference<Relation>,
-   sourceNode: Reference<ElementNode>,
-   targetNode: Reference<ElementNode>,
+   sourceNode: Reference<DiagramNode>,
+   targetNode: Reference<DiagramNode>,
    opts?: Partial<Omit<RelationEdge, '$container' | '$type' | 'id' | 'relation' | 'sourceNode' | 'targetNode'>>
 ): RelationEdge {
    return {
@@ -251,4 +254,70 @@ export function createRelationEdge(
       routingPoints: [],
       ...opts
    };
+}
+
+export function getAllDiagramNodes(diagram: Diagram): DiagramNode[] {
+   const result: DiagramNode[] = [];
+
+   for (const node of diagram.nodes) {
+      collectDiagramNode(node, result);
+   }
+
+   return result;
+}
+
+export function collectDiagramNode(node: DiagramNode, result: DiagramNode[]): void {
+   result.push(node);
+   if (isElementNode(node)) {
+      for (const children of node.children) {
+         collectDiagramNode(children, result);
+      }
+   }
+}
+
+export function getParentElementNode(node: AstNode): ElementNode | undefined {
+   let current: AstNode | undefined = node.$container;
+
+   while (current) {
+      if (isElementNode(current)) {
+         return current;
+      }
+      current = current.$container;
+   }
+   return undefined;
+}
+
+export function getAbsolutePosition(node: DiagramNode): Point {
+   let x = node.x;
+   let y = node.y;
+
+   let parent = getParentElementNode(node);
+   while (parent) {
+      x += parent.x;
+      y += parent.y;
+      parent = getParentElementNode(parent);
+   }
+
+   return { x, y };
+}
+
+export function isGroupingNode(node: ElementNode): boolean {
+   return node.element.ref?.type === 'Grouping';
+}
+
+/**
+ * Returns the first top-level grouping in the diagram whose bounds contain the given absolute point,
+ * or undefined if the point lies outside all groupings.
+ * Only top-level groupings are searched because nested groupings are not supported.
+ */
+export function findGroupingContaining(position: Point, diagram: Diagram): ElementNode | undefined {
+   for (const node of diagram.nodes) {
+      if (!isElementNode(node) || !isGroupingNode(node)) {
+         continue;
+      }
+      if (position.x >= node.x && position.x <= node.x + node.width && position.y >= node.y && position.y <= node.y + node.height) {
+         return node;
+      }
+   }
+   return undefined;
 }

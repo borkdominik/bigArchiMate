@@ -149,9 +149,13 @@
    color: var(--arrow-filled-fill);
 }
 
-.sprotty-edge.aggregation .arrow,
 .sprotty-edge.realization .arrow,
 .sprotty-edge.specialization .arrow {
+   fill: var(--arrow-empty-fill);
+   color: var(--arrow-empty-fill);
+}
+
+.sprotty-edge.aggregation .circle {
    fill: var(--arrow-empty-fill);
    color: var(--arrow-empty-fill);
 }
@@ -168,4 +172,38 @@
 .sprotty-edge.selected .arrow,
 .sprotty-edge.selected .circle {
    fill: currentColor !important;
+}
+
+.diagram-node.grouping > .sprotty-node {
+   fill: var(--bg-default);
+   stroke: var(--theia-editorWidget-border, #888);
+   stroke-dasharray: 6 4;
+   stroke-width: 1.5;
+}
+
+.grouping-label-background {
+   fill: var(--bg-default);
+   stroke: none;
+}
+
+.grouping-label-border {
+   fill: none;
+   stroke: var(--theia-editorWidget-border, #888);
+   stroke-dasharray: 6 4;
+   stroke-width: 1.5;
+}
+
+text.grouping-label {
+   font-weight: 600;
+   text-anchor: start;
+}
+
+.grouping-label input {
+   width: 100%;
+   text-align: left;
+   box-sizing: border-box;
+   background-color: transparent;
+   outline-color: transparent;
+   font-weight: 600;
+   border: 0;
 }

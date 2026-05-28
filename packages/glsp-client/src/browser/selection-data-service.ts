@@ -1,4 +1,11 @@
-import { CrossReference, REFERENCE_CONTAINER_TYPE, REFERENCE_PROPERTY, REFERENCE_VALUE, RenderProps } from '@big-archimate/protocol';
+import {
+   CrossReference,
+   REFERENCE_CONTAINER_ID,
+   REFERENCE_CONTAINER_TYPE,
+   REFERENCE_PROPERTY,
+   REFERENCE_VALUE,
+   RenderProps
+} from '@big-archimate/protocol';
 import { GModelElement, GModelRoot, hasArgs } from '@eclipse-glsp/client';
 import { GlspSelectionDataService } from '@eclipse-glsp/theia-integration';
 import { isDefined } from '@theia/core';
@@ -38,8 +45,9 @@ export function getCrossReference(element: GModelElement): CrossReference | unde
       const referenceProperty = element.args[REFERENCE_PROPERTY];
       const referenceValue = element.args[REFERENCE_VALUE];
       if (referenceProperty && referenceContainerType && referenceValue) {
+         const containerId = element.args[REFERENCE_CONTAINER_ID]?.toString() || element.id;
          return {
-            container: { globalId: element.id, type: referenceContainerType.toString() },
+            container: { globalId: containerId, type: referenceContainerType.toString() },
             property: referenceProperty.toString(),
             value: referenceValue.toString()
          };

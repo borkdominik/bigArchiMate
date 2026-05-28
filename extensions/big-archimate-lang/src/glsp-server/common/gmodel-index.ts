@@ -16,6 +16,7 @@ import {
    Relation,
    RelationEdge
 } from '../../language-server/generated/ast.js';
+import { getId } from '../../language-server/id-provider.js';
 
 /**
  * Custom model index that not only indexes the GModel elements but also the semantic elements (AstNodes) they represent.
@@ -33,6 +34,12 @@ export class ArchiMateGModelIndex extends GModelIndex {
    }
 
    protected doFindId(node?: AstNode): string | undefined {
+      // DiagramNodes (ElementNode, JunctionNode) use only their own id so the GModel ID
+      // stays stable when a node is reparented into or out of a grouping.
+      // All other nodes (RelationEdge, Element, …) keep the qualified local id.
+      if (isElementNode(node) || isJunctionNode(node)) {
+         return getId(node);
+      }
       return this.services.language.references.IdProvider.getLocalId(node);
    }
 

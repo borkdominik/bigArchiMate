@@ -5,17 +5,17 @@ import 'relation'
 
 // Diagram defintion
 Diagram:
-    ('diagram') ':' 
+    ('diagram') ':'
     (
         INDENT
             IDProperty
             ('nodes' ':'
-                INDENT 
-                    (LIST_ITEM nodes+=(ElementNode|JunctionNode))+
+                INDENT
+                    (LIST_ITEM nodes+=(DiagramNode))+
                 DEDENT
             )?
             ('edges' ':'
-                INDENT 
+                INDENT
                     (LIST_ITEM edges+=RelationEdge)+
                 DEDENT
             )?
@@ -39,6 +39,11 @@ ElementNode:
     'element' ':' element=[Element:IDReference]
     Coordinates
     Dimensions
+    ('children' ':'
+        INDENT
+            (LIST_ITEM children+=(DiagramNode))+
+        DEDENT
+    )?
 ;
 
 JunctionNode:
@@ -48,7 +53,7 @@ JunctionNode:
     Dimensions
 ;
 
-ElementNodeOrJunctionNode:
+DiagramNode:
     ElementNode | JunctionNode;
 
 RelationRoutingPoint:
@@ -57,8 +62,8 @@ RelationRoutingPoint:
 RelationEdge:
     IDProperty
     'relation' ':' relation=[Relation:IDReference]
-    'sourceNode' ':' sourceNode=[ElementNodeOrJunctionNode:IDReference]
-    'targetNode' ':' targetNode=[ElementNodeOrJunctionNode:IDReference]
+    'sourceNode' ':' sourceNode=[DiagramNode:IDReference]
+    'targetNode' ':' targetNode=[DiagramNode:IDReference]
     ('routingPoints' ':'
         INDENT
             (LIST_ITEM routingPoints+=RelationRoutingPoint)+

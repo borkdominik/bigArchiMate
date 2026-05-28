@@ -5,6 +5,7 @@ import {
    ELEMENT_LABEL_TYPE,
    getCornerType,
    getLayer,
+   REFERENCE_CONTAINER_ID,
    REFERENCE_CONTAINER_TYPE,
    REFERENCE_PROPERTY,
    REFERENCE_VALUE,
@@ -13,6 +14,7 @@ import {
 import { ArgsUtil, GCompartment, GLabel, GNode, GNodeBuilder } from '@eclipse-glsp/server';
 import { ElementNode, JunctionNode } from '../../../language-server/generated/ast.js';
 import { ArchiMateGModelIndex } from '../../common/gmodel-index.js';
+import { getAbsolutePosition } from '../../../language-server/util/ast-util.js';
 
 export class GElementNode extends GNode {
    static override builder(): GElementNodeBuilder {
@@ -39,6 +41,32 @@ export class GElementNodeBuilder extends GNodeBuilder<GElementNode> {
 
       // Get the reference that the DiagramNode holds to the Element in the .langium file.
       const elementRef = node.element?.ref;
+      const absolutePosition = getAbsolutePosition(node);
+
+      if (elementType === 'Grouping') {
+         this.id(index.createId(node));
+         this.type('node:grouping');
+         this.addCssClasses('diagram-node', 'element', 'grouping');
+         this.addArg(REFERENCE_CONTAINER_TYPE, ElementNode);
+         this.addArg(REFERENCE_CONTAINER_ID, index.services.language.references.IdProvider.getLocalId(node) ?? '');
+         this.addArg(REFERENCE_PROPERTY, 'element');
+         this.addArg(REFERENCE_VALUE, node.element.$refText);
+         this.addArg('label', elementRef?.name || elementRef?.id || 'Grouping');
+
+         this.size(node.width || 200, node.height || 120).position(absolutePosition.x || 100, absolutePosition.y || 100);
+
+         this.add(
+            GLabel.builder()
+               .type(ELEMENT_LABEL_TYPE)
+               .text(elementRef?.name || elementRef?.id || 'Grouping')
+               .id(`${this.proxy.id}_label`)
+               .addCssClass('grouping-label')
+               .position(10, 5)
+               .build()
+         );
+
+         return this;
+      }
 
       const getBackgroundCssClass = (): string => {
          if (elementLayer !== 'Other') {
@@ -52,6 +80,7 @@ export class GElementNodeBuilder extends GNodeBuilder<GElementNode> {
       // Options which are the same for every node
       this.addCssClasses('diagram-node', 'element', getBackgroundCssClass());
       this.addArg(REFERENCE_CONTAINER_TYPE, ElementNode);
+      this.addArg(REFERENCE_CONTAINER_ID, index.services.language.references.IdProvider.getLocalId(node) ?? '');
       this.addArg(REFERENCE_PROPERTY, 'element');
       this.addArg(REFERENCE_VALUE, node.element.$refText);
 
@@ -81,7 +110,7 @@ export class GElementNodeBuilder extends GNodeBuilder<GElementNode> {
          .addLayoutOption('hGap', H_GAP)
          .addLayoutOption('prefWidth', node.width || 100)
          .addLayoutOption('prefHeight', node.height || 100)
-         .position(node.x || 100, node.y || 100);
+         .position(absolutePosition.x || 100, absolutePosition.y || 100);
 
       return this;
    }
@@ -103,17 +132,19 @@ export class GJunctionNodeBuilder extends GNodeBuilder<GJunctionNode> {
 
       this.id(index.createId(node));
       this.type(ARCHIMATE_JUNCTION_TYPE_MAP.get(junctionType));
+      const absolutePosition = getAbsolutePosition(node);
 
       // Options which are the same for every node
       this.addCssClasses('diagram-node', 'junction', `bg-junction-${toKebabCase(junctionType)}`);
       this.addArg(REFERENCE_CONTAINER_TYPE, JunctionNode);
+      this.addArg(REFERENCE_CONTAINER_ID, index.services.language.references.IdProvider.getLocalId(node) ?? '');
       this.addArg(REFERENCE_PROPERTY, 'junction');
       this.addArg(REFERENCE_VALUE, node.junction.$refText);
 
       // The DiagramNode in the langium file holds the coordinates of node
       this.layout('vbox')
          .size(25, 25)
-         .position(node.x || 100, node.y || 100);
+         .position(absolutePosition.x || 100, absolutePosition.y || 100);
 
       return this;
    }

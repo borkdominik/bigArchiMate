@@ -5,6 +5,7 @@ import {
    ArchiMateLanguageAstType,
    isDiagram,
    isElement,
+   isElementNode,
    isElementType,
    isJunction,
    isJunctionType,
@@ -13,7 +14,7 @@ import {
 } from './generated/ast.js';
 import { ID_PROPERTY, IdentifiableAstNode } from './id-provider.js';
 import type { Services } from './module.js';
-import { findDocument, isSemanticRoot } from './util/ast-util.js';
+import { findDocument, getAllDiagramNodes, isGroupingNode, isSemanticRoot } from './util/ast-util.js';
 import { RelationValidator } from './util/validation/relation-validator.js';
 
 export namespace IssueCodes {
@@ -57,6 +58,11 @@ export class Validator {
       this.checkUniqueGlobalId(node, accept);
       this.checkUniqueNodeId(node, accept);
       this.checkUniquePropertyId(node, accept);
+
+      this.checkGroupingChildren(node, accept);
+      this.checkNestedGroupings(node, accept);
+      this.checkGroupingChildBounds(node, accept);
+
       if (this.checkIdComposition(node, accept)) {
          this.checkMatchingFilename(node, accept);
       }
@@ -145,7 +151,7 @@ export class Validator {
             property: 'edge',
             type: 'Diagram'
          });
-         this.markDuplicateIds(node.nodes, accept, {
+         this.markDuplicateIds(getAllDiagramNodes(node), accept, {
             property: 'node',
             type: 'Diagram'
          });
@@ -212,6 +218,56 @@ export class Validator {
                   `with ${isElementType(sourceType) ? `an element of type ${sourceType}` : 'a junction'} as source.`,
                { node: relation, property: 'target' }
             );
+         }
+      }
+   }
+
+   protected checkGroupingChildren(node: AstNode, accept: ValidationAcceptor): void {
+      if (!isElementNode(node)) {
+         return;
+      }
+
+      if (node.children.length > 0 && !isGroupingNode(node)) {
+         accept('error', 'Only Grouping nodes may contain child nodes.', {
+            node,
+            property: 'children'
+         });
+      }
+   }
+
+   protected checkNestedGroupings(node: AstNode, accept: ValidationAcceptor): void {
+      if (!isElementNode(node) || !isGroupingNode(node)) {
+         return;
+      }
+
+      for (const child of node.children) {
+         if (isElementNode(child) && isGroupingNode(child)) {
+            accept('error', 'Nestes groupings are not supported yet.', {
+               node: child,
+               property: 'children'
+            });
+         }
+      }
+   }
+
+   protected checkGroupingChildBounds(node: AstNode, accept: ValidationAcceptor): void {
+      if (!isElementNode(node) || !isGroupingNode(node)) {
+         return;
+      }
+
+      for (const child of node.children) {
+         if (child.x < 0 || child.y < 0) {
+            accept('warning', `Child node '${child.id}' has negative coordinates inside grouping '${node.id}'.`, {
+               node: child,
+               property: 'x'
+            });
+         }
+
+         if (child.x + child.width > node.width || child.y + child.height > node.height) {
+            accept('warning', `Child node '${child.id}' exceeds the bounds of grouping '${node.id}'.`, {
+               node: child,
+               property: 'width'
+            });
          }
       }
    }

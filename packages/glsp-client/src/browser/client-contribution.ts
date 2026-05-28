@@ -10,6 +10,7 @@ import '../../style/diagram.css';
 import '../../style/tool-palette.css';
 import '../../style/magic-edge-connector-palette.css';
 import { ArchiMateLanguageContributionId } from '../common/diagram-language';
+import { load as loadLibavoidRouter } from 'sprotty-routing-libavoid';
 
 /** The message the GLSP server outputs as soon as it is properly connected through a socket. */
 export const CLIENT_CONNECTION_READY_MSG = 'Starting GLSP server connection';
@@ -47,11 +48,13 @@ export class ClientConribution extends BaseGLSPClientContribution {
    }
 
    protected override async start(glspClient: GLSPClient): Promise<void> {
-      // While a socket connection to the server can be established earlier, the server might still do some internal initialization
-      // So we wait for it to report that client connections can be accepted
-      // Only then we actually start and initialize our client connection with the server
-      await this.waitForBackendConnected();
-      return super.start(glspClient);
+      return loadLibavoidRouter().then(async () => {
+         // While a socket connection to the server can be established earlier, the server might still do some internal initialization
+         // So we wait for it to report that client connections can be accepted
+         // Only then we actually start and initialize our client connection with the server
+         await this.waitForBackendConnected();
+         return super.start(glspClient);
+      });
    }
 
    protected override async createGLSPClient(connectionProvider: ConnectionProvider): Promise<GLSPClient> {

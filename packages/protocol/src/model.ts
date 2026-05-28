@@ -128,7 +128,7 @@ export const ModelFileExtensions = {
 
 export const ModelStructure = {
    ArchiMateModel: {
-      ICON_CLASS: codiconCSSString('list-tree')
+      ICON_CLASS: codiconCSSString('layers')
    },
 
    Diagram: {
