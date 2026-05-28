@@ -194,7 +194,6 @@
 }
 
 text.grouping-label {
-   fill: var(--theia-editor-foreground);
    font-weight: 600;
    text-anchor: start;
 }
