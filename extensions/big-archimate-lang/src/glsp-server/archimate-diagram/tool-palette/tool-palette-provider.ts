@@ -2,14 +2,12 @@ import {
    activateDefaultToolsAction,
    activateDeleteToolAction,
    ARCHIMATE_ELEMENT_TYPE_MAP,
-   ARCHIMATE_JUNCTION_TYPE_MAP,
    ARCHIMATE_RELATION_TYPE_MAP,
    getChildren,
    getIcon,
    getLabel,
    getObjectKeys,
    getSpecificationSection,
-   junctionTypes,
    LayerType,
    relationTypes,
    toKebabCase
@@ -23,7 +21,7 @@ import {
    TriggerNodeCreationAction
 } from '@eclipse-glsp/server';
 import { injectable } from 'inversify';
-import { ElementType, JunctionType, RelationType } from '../../../language-server/generated/ast.js';
+import { ElementType, RelationType } from '../../../language-server/generated/ast.js';
 
 @injectable()
 export class ArchiMateToolPaletteProvider extends ToolPaletteItemProvider {
@@ -56,8 +54,7 @@ export class ArchiMateToolPaletteProvider extends ToolPaletteItemProvider {
                   icon: 'wand',
                   actions: [TriggerEdgeCreationAction.create('magic-connector-edge', { args: { mode: 'magic' } })]
                },
-               ...relationTypes.map(relationType => getRelationPaletteItem(relationType, 'B')),
-               ...junctionTypes.map(junctionType => getJunctionPaletteItem(junctionType, 'B'))
+               ...relationTypes.map(relationType => getRelationPaletteItem(relationType, 'B'))
             ],
             actions: []
          },
@@ -106,6 +103,7 @@ const getRelationPaletteItem = (relationType: RelationType, groupSortString: str
  * @param groupSortString The sort string of the group.
  * @returns The palette item.
  */
+/*
 const getJunctionPaletteItem = (junctionType: JunctionType, groupSortString: string): PaletteItem => ({
    id: 'junction-create-tool',
    sortString: `${groupSortString}-${getSpecificationSection(junctionType)}`,
@@ -113,6 +111,7 @@ const getJunctionPaletteItem = (junctionType: JunctionType, groupSortString: str
    icon: getIcon(junctionType),
    actions: [TriggerNodeCreationAction.create(ARCHIMATE_JUNCTION_TYPE_MAP.get(junctionType), { args: { type: 'create' } })]
 });
+ */
 
 /**
  * Returns a palette item for the given layer.
