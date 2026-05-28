@@ -2,12 +2,14 @@ import {
    activateDefaultToolsAction,
    activateDeleteToolAction,
    ARCHIMATE_ELEMENT_TYPE_MAP,
+   ARCHIMATE_JUNCTION_TYPE_MAP,
    ARCHIMATE_RELATION_TYPE_MAP,
    getChildren,
    getIcon,
    getLabel,
    getObjectKeys,
    getSpecificationSection,
+   isJunctionType,
    LayerType,
    relationTypes,
    toKebabCase
@@ -21,7 +23,7 @@ import {
    TriggerNodeCreationAction
 } from '@eclipse-glsp/server';
 import { injectable } from 'inversify';
-import { ElementType, RelationType } from '../../../language-server/generated/ast.js';
+import { ElementType, JunctionType, RelationType } from '../../../language-server/generated/ast.js';
 
 @injectable()
 export class ArchiMateToolPaletteProvider extends ToolPaletteItemProvider {
@@ -103,15 +105,13 @@ const getRelationPaletteItem = (relationType: RelationType, groupSortString: str
  * @param groupSortString The sort string of the group.
  * @returns The palette item.
  */
-/*
 const getJunctionPaletteItem = (junctionType: JunctionType, groupSortString: string): PaletteItem => ({
-   id: 'junction-create-tool',
+   id: `${junctionType}-junction-create-tool`,
    sortString: `${groupSortString}-${getSpecificationSection(junctionType)}`,
    label: `${getLabel(junctionType)}`,
    icon: getIcon(junctionType),
    actions: [TriggerNodeCreationAction.create(ARCHIMATE_JUNCTION_TYPE_MAP.get(junctionType), { args: { type: 'create' } })]
 });
- */
 
 /**
  * Returns a palette item for the given layer.
@@ -124,6 +124,9 @@ const getElementGroupPaletteItem = (layerType: LayerType, groupSortString: strin
    icon: 'chevron-down',
    sortString: `${groupSortString}`,
    label: getLabel(layerType),
-   children: (() => getObjectKeys(getChildren(layerType)).map(elementType => getElementPaletteItem(elementType, groupSortString)))(),
+   children: (() =>
+      getObjectKeys(getChildren(layerType)).map(type =>
+         isJunctionType(type) ? getJunctionPaletteItem(type, groupSortString) : getElementPaletteItem(type, groupSortString)
+      ))(),
    actions: []
 });
