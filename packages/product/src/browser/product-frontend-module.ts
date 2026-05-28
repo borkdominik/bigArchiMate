@@ -1,5 +1,4 @@
 import { ApplicationShell, ApplicationShellOptions, FrontendApplication, WidgetFactory } from '@theia/core/lib/browser';
-import { PreferenceContribution } from '@theia/core/lib/browser/preferences';
 import { ContainerModule } from '@theia/core/shared/inversify';
 import { ThemeServiceWithDB } from '@theia/monaco/lib/browser/monaco-indexed-db';
 import {
@@ -35,7 +34,6 @@ export default new ContainerModule((bind, _unbind, _isBound, rebind) => {
    });
 
    rebind(GettingStartedPreferenceContribution).toConstantValue({ schema: welcomeAlwaysSchema });
-   rebind(PreferenceContribution).toService(GettingStartedPreferenceContribution);
 
    bind(CustomWelcomeWidget).toSelf();
 
