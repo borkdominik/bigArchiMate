@@ -1,8 +1,12 @@
 import {
+   Action,
+   DrawFeedbackEdgeAction,
    EdgeCreationTool,
    EdgeCreationToolMouseListener,
+   EnableDefaultToolsAction,
    GModelElement,
    isConnectable,
+   RemoveFeedbackEdgeAction,
    RequestCheckEdgeAction
 } from '@eclipse-glsp/client';
 import { injectable } from '@theia/core/shared/inversify';
@@ -48,5 +52,39 @@ export class ArchiMateEdgeCreationToolMouseListener extends EdgeCreationToolMous
       // Temporarily mark the target as invalid while we wait for the server response,
       // so a fast-clicking user doesn't get a chance to create the edge in the meantime.
       return false;
+   }
+
+   override nonDraggingMouseUp(element: GModelElement, event: MouseEvent): Action[] {
+      const result: Action[] = [];
+      if (event.button === 0) {
+         if (!this.isSourceSelected()) {
+            if (this.currentTarget && this.allowedTarget) {
+               this.source = this.currentTarget.id;
+               // add proxy- to the type to prevent the edge from being rendered as a full
+               // RelationEdge (with anchors and libavoid routing), which can cause anchoring issues during creation
+               const proxyType = `proxy-${this.proxyEdge.type}`;
+               this.feedbackEdgeFeedback
+                  .add(
+                     DrawFeedbackEdgeAction.create({ elementTypeId: proxyType, sourceId: this.source }),
+                     RemoveFeedbackEdgeAction.create()
+                  )
+                  .submit();
+            }
+         } else if (this.currentTarget && this.allowedTarget) {
+            this.target = this.currentTarget.id;
+         }
+         if (this.source && this.target) {
+            result.push(this.getCreateOperation(element, event, this.source, this.target));
+            if (!this.isContinuousMode(element, event)) {
+               result.push(EnableDefaultToolsAction.create());
+            } else {
+               this.dispose();
+            }
+         }
+      } else if (event.button === 2) {
+         this.dispose();
+         result.push(EnableDefaultToolsAction.create());
+      }
+      return result;
    }
 }

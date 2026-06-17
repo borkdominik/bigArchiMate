@@ -1,6 +1,7 @@
 import { Command, DeleteElementOperation, JsonOperationHandler, ModelState, remove } from '@eclipse-glsp/server';
 import { inject, injectable } from 'inversify';
 import {
+   DiagramNode,
    ElementNode,
    JunctionNode,
    RelationEdge,
@@ -8,6 +9,7 @@ import {
    isJunctionNode,
    isRelationEdge
 } from '../../../language-server/generated/ast.js';
+import { isGroupingNode } from '../../../language-server/util/ast-util.js';
 import { ArchiMateCommand } from '../../common/command.js';
 import { ArchiMateModelState } from '../../common/model-state.js';
 
@@ -26,11 +28,16 @@ export class DeleteOperationHandler extends JsonOperationHandler {
    }
 
    protected removeComponents(deleteInfo: DeleteInfo): void {
-      const nodes = this.modelState.diagram.nodes;
-      remove(nodes, ...deleteInfo.nodes);
-
-      const edges = this.modelState.diagram.edges;
-      remove(edges, ...deleteInfo.edges);
+      const diagram = this.modelState.diagram;
+      for (const node of deleteInfo.nodes) {
+         const container = node.$container;
+         if (isElementNode(container)) {
+            remove(container.children as DiagramNode[], node);
+         } else {
+            remove(diagram.nodes, node);
+         }
+      }
+      remove(diagram.edges, ...deleteInfo.edges);
    }
 
    protected findComponentsToRemove(operation: DeleteElementOperation): DeleteInfo {
@@ -38,19 +45,24 @@ export class DeleteOperationHandler extends JsonOperationHandler {
 
       for (const elementId of operation.elementIds) {
          const diagramComponent = this.modelState.index.findSemanticElement(elementId, isDiagramComponent);
-         // simply remove any diagram nodes or edges from the diagram
          if (isElementNode(diagramComponent) || isJunctionNode(diagramComponent)) {
             deleteInfo.nodes.push(diagramComponent);
-            deleteInfo.edges.push(
-               ...this.modelState.diagram.edges.filter(
-                  edge => edge.sourceNode?.ref === diagramComponent || edge.targetNode?.ref === diagramComponent
-               )
-            );
+            deleteInfo.edges.push(...this.edgesConnectedTo(diagramComponent));
+            // When deleting a grouping, also clean up edges connected to its children.
+            if (isElementNode(diagramComponent) && isGroupingNode(diagramComponent)) {
+               for (const child of diagramComponent.children) {
+                  deleteInfo.edges.push(...this.edgesConnectedTo(child));
+               }
+            }
          } else if (isRelationEdge(diagramComponent)) {
             deleteInfo.edges.push(diagramComponent);
          }
       }
       return deleteInfo;
+   }
+
+   private edgesConnectedTo(node: DiagramNode): RelationEdge[] {
+      return this.modelState.diagram.edges.filter(edge => edge.sourceNode?.ref === node || edge.targetNode?.ref === node);
    }
 }
 

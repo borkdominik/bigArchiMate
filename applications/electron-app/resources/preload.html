@@ -3,73 +3,59 @@
 
 <head>
     <style>
-        html,
-        body {
+        html, body {
+            height: 100%;
+            margin: 0;
             background-color: black;
         }
 
+        /* Override Theia's .theia-preload */
         .theia-preload {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            /* Above styles copied from https://github.com/eclipse-theia/theia/blob/5aeef6c0c683b4e91713ab736957e6655b486adc/packages/core/src/browser/style/index.css#L147-L151 */
-            /* Otherwise, there is a flickering when Theia's CSS loads. */
-
-            background-image: none;
+            background: black !important;
         }
 
+        /* Hide Theia's built-in loading spinner */
         .theia-preload::after {
-            /* remove default loading animation */
-            content: none;
+            display: none !important;
         }
 
-        .spinner-container {
-            display: flex;
-            flex-direction: center;
-            align-self: center;
-            justify-content: center;
-            height: 100vh;
-            width: 100vw;
+        .bam-splash {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
         }
 
-        .custom-spinner {
-            align-self: center;
+        .bam-spinner-wrap {
+            position: fixed;
+            left: 50%;
+            top: 87%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
         }
 
-        @keyframes pulse {
-            0% {
-                transform: scale(.8);
-            }
-
-            50% {
-                transform: scale(1);
-            }
-
-            100% {
-                transform: scale(.8);
-            }
+        .bam-spinner {
+            width: 52px;
+            height: 52px;
+            border: 4px solid rgba(50, 50, 255, 0.15);
+            border-top-color: #aaaaaa;
+            border-radius: 50%;
+            animation: bam-spin 0.75s linear infinite;
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
         }
 
-        .pulse {
-            -webkit-animation-name: pulse;
-            animation-name: pulse;
-            -webkit-animation-duration: 2.5s;
-            animation-duration: 2.5s;
-            -webkit-animation-fill-mode: both;
-            animation-fill-mode: both;
-            animation-iteration-count: infinite;
-            animation-timing-function: ease;
+        @keyframes bam-spin {
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
 
 <body>
-    <div class='spinner-container'>
-        <div class='custom-spinner'>
-            <!-- TODO: insert product image here -->
-        </div>
+    <img class="bam-splash" src="resources/preload-img.png" alt="" />
+    <div class="bam-spinner-wrap">
+        <div class="bam-spinner"></div>
     </div>
 </body>
 

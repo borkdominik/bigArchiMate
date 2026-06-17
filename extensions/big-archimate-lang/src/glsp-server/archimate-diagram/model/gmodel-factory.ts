@@ -1,6 +1,6 @@
 import { GEdge, GGraph, GModelFactory, GNode, ModelState } from '@eclipse-glsp/server';
 import { inject, injectable } from 'inversify';
-import { ElementNode, JunctionNode, RelationEdge } from '../../../language-server/generated/ast.js';
+import { DiagramNode, ElementNode, JunctionNode, RelationEdge } from '../../../language-server/generated/ast.js';
 import { ArchiMateModelState } from '../../common/model-state.js';
 import { GRelationEdge } from './edges.js';
 import { GElementNode, GJunctionNode } from './nodes.js';
@@ -29,7 +29,8 @@ export class ArchiMateDiagramGModelFactory implements GModelFactory {
       }
       const graphBuilder = GGraph.builder().id(this.modelState.semanticUri);
 
-      diagramRoot.nodes.map(node => this.createNode(node)).forEach(node => graphBuilder.add(node));
+      const flatNodes = this.flattenDiagramNodes(diagramRoot.nodes);
+      flatNodes.map(node => this.createNode(node)).forEach(node => graphBuilder.add(node));
       diagramRoot.edges.map(edge => this.createRelationEdge(edge)).forEach(edge => graphBuilder.add(edge));
 
       return graphBuilder.build();
@@ -44,5 +45,25 @@ export class ArchiMateDiagramGModelFactory implements GModelFactory {
 
    protected createRelationEdge(edge: RelationEdge): GEdge {
       return GRelationEdge.builder().set(edge, this.modelState.index).build();
+   }
+
+   protected flattenDiagramNodes(nodes: DiagramNode[]): DiagramNode[] {
+      const result: DiagramNode[] = [];
+
+      for (const node of nodes) {
+         this.collectFlattenedNodes(node, result);
+      }
+
+      return result;
+   }
+
+   protected collectFlattenedNodes(node: DiagramNode, result: DiagramNode[]): void {
+      result.push(node);
+
+      if (node.$type === 'ElementNode') {
+         for (const child of node.children) {
+            this.collectFlattenedNodes(child, result);
+         }
+      }
    }
 }

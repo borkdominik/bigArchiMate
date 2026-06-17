@@ -9,7 +9,7 @@ import {
    getLabel,
    getObjectKeys,
    getSpecificationSection,
-   junctionTypes,
+   isJunctionType,
    LayerType,
    relationTypes,
    toKebabCase
@@ -56,8 +56,7 @@ export class ArchiMateToolPaletteProvider extends ToolPaletteItemProvider {
                   icon: 'wand',
                   actions: [TriggerEdgeCreationAction.create('magic-connector-edge', { args: { mode: 'magic' } })]
                },
-               ...relationTypes.map(relationType => getRelationPaletteItem(relationType, 'B')),
-               ...junctionTypes.map(junctionType => getJunctionPaletteItem(junctionType, 'B'))
+               ...relationTypes.map(relationType => getRelationPaletteItem(relationType, 'B'))
             ],
             actions: []
          },
@@ -107,7 +106,7 @@ const getRelationPaletteItem = (relationType: RelationType, groupSortString: str
  * @returns The palette item.
  */
 const getJunctionPaletteItem = (junctionType: JunctionType, groupSortString: string): PaletteItem => ({
-   id: 'junction-create-tool',
+   id: `${junctionType}-junction-create-tool`,
    sortString: `${groupSortString}-${getSpecificationSection(junctionType)}`,
    label: `${getLabel(junctionType)}`,
    icon: getIcon(junctionType),
@@ -125,6 +124,9 @@ const getElementGroupPaletteItem = (layerType: LayerType, groupSortString: strin
    icon: 'chevron-down',
    sortString: `${groupSortString}`,
    label: getLabel(layerType),
-   children: (() => getObjectKeys(getChildren(layerType)).map(elementType => getElementPaletteItem(elementType, groupSortString)))(),
+   children: (() =>
+      getObjectKeys(getChildren(layerType)).map(type =>
+         isJunctionType(type) ? getJunctionPaletteItem(type, groupSortString) : getElementPaletteItem(type, groupSortString)
+      ))(),
    actions: []
 });

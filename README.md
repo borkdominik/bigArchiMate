@@ -1,4 +1,10 @@
-# bigArchiMate
+<!-- LOGO -->
+<p align="center">
+  <img src="./docs/BAM-Logo.png" alt="Logo" width="150" height="150" style="border-radius: 20px;"/>
+</p>
+
+<!-- TITLE -->
+<h1 align="center">bigArchiMate</h1>
 
 ## About
 
@@ -143,3 +149,5 @@ The repository itself contains the following components structured as follows:
 -  chevrotain: This library is a dependency of langium. To get the Yaml language working in bigArchiMate an example implementation of the python language of chevrotain has been used. This example has been modified to make it work for the yaml language.
    -  <https://github.com/Chevrotain/chevrotain>
    -  example that has been used: <https://github.com/Chevrotain/chevrotain/tree/master/examples/lexer/python_indentation>
+-  sprotty-routing-libavoid: MIT
+   -  https://github.com/vladyslav-hnatiuk/sprotty-routing-libavoid

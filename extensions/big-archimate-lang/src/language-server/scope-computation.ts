@@ -3,6 +3,7 @@ import { CancellationToken } from 'vscode-jsonrpc';
 import { IdProvider } from './id-provider.js';
 import { Services } from './module.js';
 import { PackageManager, UNKNOWN_PROJECT_ID, UNKNOWN_PROJECT_REFERENCE } from './package-manager.js';
+import { isDiagram, isElementNode, isJunctionNode } from './generated/ast.js';
 
 /**
  * Custom node description that wraps a given description under a potentially new name and also stores the package id for faster access.
@@ -96,11 +97,26 @@ export class ScopeComputation extends DefaultScopeComputation {
    }
 
    protected override processNode(node: AstNode, document: LangiumDocument, scopes: PrecomputedScopes): void {
-      const container = node.$container;
-      if (container) {
-         const id = this.idProvider.getNodeId(node);
-         if (id) {
-            scopes.add(container, this.descriptions.createDescription(node, id, document));
+      const id = this.idProvider.getNodeId(node);
+      if (!id) {
+         return;
+      }
+
+      const description = this.descriptions.createDescription(node, id, document);
+
+      const directContainer = node.$container;
+      if (directContainer) {
+         scopes.add(directContainer, description);
+      }
+
+      if (isElementNode(node) || isJunctionNode(node)) {
+         let current = node.$container;
+         while (current) {
+            if (isDiagram(current)) {
+               scopes.add(current, description);
+               break;
+            }
+            current = current.$container;
          }
       }
    }

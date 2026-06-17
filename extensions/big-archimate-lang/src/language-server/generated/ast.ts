@@ -97,6 +97,7 @@ export type ArchiMateLanguageKeywordNames =
     | "Value"
     | "ValueStream"
     | "WorkPackage"
+    | "children"
     | "diagram"
     | "documentation"
     | "edges"
@@ -121,12 +122,12 @@ export type ArchiMateLanguageKeywordNames =
 
 export type ArchiMateLanguageTokenNames = ArchiMateLanguageTerminalNames | ArchiMateLanguageKeywordNames;
 
-export type ElementNodeOrJunctionNode = ElementNode | JunctionNode;
+export type DiagramNode = ElementNode | JunctionNode;
 
-export const ElementNodeOrJunctionNode = 'ElementNodeOrJunctionNode';
+export const DiagramNode = 'DiagramNode';
 
-export function isElementNodeOrJunctionNode(item: unknown): item is ElementNodeOrJunctionNode {
-    return reflection.isInstance(item, ElementNodeOrJunctionNode);
+export function isDiagramNode(item: unknown): item is DiagramNode {
+    return reflection.isInstance(item, DiagramNode);
 }
 
 export type ElementOrJunction = Element | Junction;
@@ -188,7 +189,7 @@ export interface Diagram extends AstNode {
     edges: Array<RelationEdge>;
     id?: ID;
     name?: string;
-    nodes: Array<ElementNode | JunctionNode>;
+    nodes: Array<DiagramNode>;
     properties: Array<Property>;
 }
 
@@ -215,8 +216,9 @@ export function isElement(item: unknown): item is Element {
 }
 
 export interface ElementNode extends AstNode {
-    readonly $container: Diagram;
+    readonly $container: Diagram | ElementNode;
     readonly $type: 'ElementNode';
+    children: Array<DiagramNode>;
     element: Reference<Element>;
     height: number;
     id: ID;
@@ -248,7 +250,7 @@ export function isJunction(item: unknown): item is Junction {
 }
 
 export interface JunctionNode extends AstNode {
-    readonly $container: Diagram;
+    readonly $container: Diagram | ElementNode;
     readonly $type: 'JunctionNode';
     height: number;
     id: ID;
@@ -302,8 +304,8 @@ export interface RelationEdge extends AstNode {
     id: ID;
     relation: Reference<Relation>;
     routingPoints: Array<RelationRoutingPoint>;
-    sourceNode: Reference<ElementNodeOrJunctionNode>;
-    targetNode: Reference<ElementNodeOrJunctionNode>;
+    sourceNode: Reference<DiagramNode>;
+    targetNode: Reference<DiagramNode>;
 }
 
 export const RelationEdge = 'RelationEdge';
@@ -328,9 +330,9 @@ export function isRelationRoutingPoint(item: unknown): item is RelationRoutingPo
 export type ArchiMateLanguageAstType = {
     ArchiMateRoot: ArchiMateRoot
     Diagram: Diagram
+    DiagramNode: DiagramNode
     Element: Element
     ElementNode: ElementNode
-    ElementNodeOrJunctionNode: ElementNodeOrJunctionNode
     ElementOrJunction: ElementOrJunction
     Junction: Junction
     JunctionNode: JunctionNode
@@ -343,7 +345,7 @@ export type ArchiMateLanguageAstType = {
 export class ArchiMateLanguageAstReflection extends AbstractAstReflection {
 
     getAllTypes(): string[] {
-        return [ArchiMateRoot, Diagram, Element, ElementNode, ElementNodeOrJunctionNode, ElementOrJunction, Junction, JunctionNode, Property, Relation, RelationEdge, RelationRoutingPoint];
+        return [ArchiMateRoot, Diagram, DiagramNode, Element, ElementNode, ElementOrJunction, Junction, JunctionNode, Property, Relation, RelationEdge, RelationRoutingPoint];
     }
 
     protected override computeIsSubtype(subtype: string, supertype: string): boolean {
@@ -354,7 +356,7 @@ export class ArchiMateLanguageAstReflection extends AbstractAstReflection {
             }
             case ElementNode:
             case JunctionNode: {
-                return this.isSubtype(ElementNodeOrJunctionNode, supertype);
+                return this.isSubtype(DiagramNode, supertype);
             }
             default: {
                 return false;
@@ -380,7 +382,7 @@ export class ArchiMateLanguageAstReflection extends AbstractAstReflection {
             }
             case 'RelationEdge:sourceNode':
             case 'RelationEdge:targetNode': {
-                return ElementNodeOrJunctionNode;
+                return DiagramNode;
             }
             default: {
                 throw new Error(`${referenceId} is not a valid reference id.`);
@@ -430,6 +432,7 @@ export class ArchiMateLanguageAstReflection extends AbstractAstReflection {
                 return {
                     name: ElementNode,
                     properties: [
+                        { name: 'children', defaultValue: [] },
                         { name: 'element' },
                         { name: 'height' },
                         { name: 'id' },

@@ -202,6 +202,7 @@ export const ARCHIMATE_CONCEPT_TYPE_MAP = new ReversibleMap({
 
 // Args
 export const REFERENCE_CONTAINER_TYPE = 'reference-container-type';
+export const REFERENCE_CONTAINER_ID = 'reference-container-id';
 export const REFERENCE_PROPERTY = 'reference-property';
 export const REFERENCE_VALUE = 'reference-value';
 
